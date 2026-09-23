@@ -1,0 +1,3335 @@
+{
+ "model": "E:/Projects/VibeCoding/BiliSumerize/jyy-generatice-se/models/faster-whisper-large-v3-turbo",
+ "device": "cuda",
+ "compute_type": "float16",
+ "language": "zh",
+ "language_probability": 1,
+ "audio_duration": 1236.032,
+ "transcribe_seconds": 36.5,
+ "speedup": 33.85,
+ "segment_count": 415,
+ "last_segment_end": 1234.93,
+ "coverage_ratio": 0.9991,
+ "segments": [
+  {
+   "id": 0,
+   "start": 0.38,
+   "end": 33.5,
+   "text": "大家好,昨天我在b站上面看到一个视频,有一个人视频讲这个谭豪强的C语言变成的那个书是无能子弟,谭豪强是这个烂书之王,无能子弟都会中国大学的最悔获守。今天我又设了一下,这个已经收过了,设一下烂书之王,你看X2这个B站上面一大堆都是讲这个烂书之王,都是这个谭豪强作为头像。",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2454
+  },
+  {
+   "id": 1,
+   "start": 33.54,
+   "end": 35.51,
+   "text": "还能不起",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 2,
+   "start": 35.51,
+   "end": 38.71,
+   "text": "都会在中国大学生的最高货者",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 3,
+   "start": 38.71,
+   "end": 40.51,
+   "text": "你看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 4,
+   "start": 40.51,
+   "end": 45.22,
+   "text": "其实谭王高强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 5,
+   "start": 45.22,
+   "end": 47.26,
+   "text": "他这个书确实很难",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 6,
+   "start": 47.26,
+   "end": 49.48,
+   "text": "这个已经成了共识了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 7,
+   "start": 49.48,
+   "end": 51.2,
+   "text": "但是他这个书这么难",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 8,
+   "start": 51.2,
+   "end": 53.06,
+   "text": "为什么还在高校里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 9,
+   "start": 53.06,
+   "end": 54.64,
+   "text": "还普遍采用他的书呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 10,
+   "start": 54.64,
+   "end": 56.1,
+   "text": "包括这个基文记事",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 11,
+   "start": 56.1,
+   "end": 57.64,
+   "text": "也是采用他这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 12,
+   "start": 57.64,
+   "end": 60.35,
+   "text": "C语言的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 13,
+   "start": 60.35,
+   "end": 61.09,
+   "text": "他这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 14,
+   "start": 61.09,
+   "end": 63.07,
+   "text": "很多人都知道他是烂书大王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 15,
+   "start": 63.07,
+   "end": 65.29,
+   "text": "不知道他实际上还是超级大王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 16,
+   "start": 65.29,
+   "end": 67.47,
+   "text": "因为他这本书的内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 17,
+   "start": 67.47,
+   "end": 70.13,
+   "text": "可以说几乎都超至于",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2403
+  },
+  {
+   "id": 18,
+   "start": 70.13,
+   "end": 73.21,
+   "text": "国外世界语言发明者写的那本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 19,
+   "start": 73.21,
+   "end": 77.65,
+   "text": "那本书中国就是有人翻译了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 20,
+   "start": 77.65,
+   "end": 80.15,
+   "text": "就是什么这本书好像",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 21,
+   "start": 80.15,
+   "end": 82.59,
+   "text": "好像是这本书吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 22,
+   "start": 82.59,
+   "end": 83.97,
+   "text": "我也就清楚了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 23,
+   "start": 83.97,
+   "end": 85.76,
+   "text": "不知道是不是这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 24,
+   "start": 85.76,
+   "end": 88.69,
+   "text": "这个是翻译过来的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 25,
+   "start": 88.69,
+   "end": 91.93,
+   "text": "反正就是世界语言发明者写的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 26,
+   "start": 91.93,
+   "end": 94.95,
+   "text": "谭浩翔的书是完全抄去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 27,
+   "start": 94.95,
+   "end": 96.71,
+   "text": "抄去这个冷压的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 28,
+   "start": 96.71,
+   "end": 100.59,
+   "text": "可以说90%是抄的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 29,
+   "start": 100.59,
+   "end": 103.53,
+   "text": "就是谭浩翔很多人都知道他是烂是不知王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2083
+  },
+  {
+   "id": 30,
+   "start": 103.53,
+   "end": 112.92,
+   "text": "不知道他是抄袭大王 唐克强是个抄袭大王 但就是这样这么烂 这么烂的书 它是抄袭比较冷的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3728
+  },
+  {
+   "id": 31,
+   "start": 113.92,
+   "end": 124.04,
+   "text": "多少年来中国大学把它封成 封成是精灵的书 知语师学 知语师包括其他系学这个 知语语言都许他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3728
+  },
+  {
+   "id": 32,
+   "start": 124.97,
+   "end": 131.64,
+   "text": "你看 在中国这种不自动知识产权的这个 这种情况下面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3728
+  },
+  {
+   "id": 33,
+   "start": 131.64,
+   "end": 134.78,
+   "text": "哎呀这个我这样一说会不会把我视频给疯了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 34,
+   "start": 134.78,
+   "end": 139.74,
+   "text": "就是在中国维持这种抄袭大王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 35,
+   "start": 139.74,
+   "end": 142.03,
+   "text": "包括论文抄袭的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 36,
+   "start": 142.03,
+   "end": 144.67,
+   "text": "他绝合一混的风声水指",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 37,
+   "start": 144.67,
+   "end": 147.0,
+   "text": "这就是这种普遍形象",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 38,
+   "start": 147.0,
+   "end": 150.23,
+   "text": "并不是他在一个人手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 39,
+   "start": 150.23,
+   "end": 153.61,
+   "text": "而且他这个书还是畅销的不得了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 40,
+   "start": 153.61,
+   "end": 157.84,
+   "text": "据说卖了几千多万本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 41,
+   "start": 157.84,
+   "end": 160.92,
+   "text": "在中国之文之间统治了很多年",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 42,
+   "start": 160.92,
+   "end": 163.17,
+   "text": "他写这本书抄袭的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2732
+  },
+  {
+   "id": 43,
+   "start": 163.17,
+   "end": 167.69,
+   "text": "因为因为那个时候国外那个书住在1978年写的书嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 44,
+   "start": 167.69,
+   "end": 168.69,
+   "text": "1978年",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 45,
+   "start": 168.69,
+   "end": 171.73,
+   "text": "他抄袭的时候我估计是抄袭的英文嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 46,
+   "start": 171.73,
+   "end": 173.93,
+   "text": "因为那个时候还没中文中文能翻",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 47,
+   "start": 173.93,
+   "end": 175.05,
+   "text": "肯定是抄袭的英文",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 48,
+   "start": 175.05,
+   "end": 176.93,
+   "text": "把它翻成中文两盒",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 49,
+   "start": 176.93,
+   "end": 178.71,
+   "text": "完全抄袭过来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 50,
+   "start": 178.71,
+   "end": 179.91,
+   "text": "9%的抄袭过来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 51,
+   "start": 179.91,
+   "end": 181.37,
+   "text": "但是没有人记录他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 52,
+   "start": 181.37,
+   "end": 184.5,
+   "text": "他就打一个时间扎",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 53,
+   "start": 184.5,
+   "end": 186.92,
+   "text": "也没有人去绝合去深究",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 54,
+   "start": 186.92,
+   "end": 191.12,
+   "text": "其实只要有人看过那个诗语音发明者写的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 55,
+   "start": 191.12,
+   "end": 193.92,
+   "text": "就知道他那个书是全是抄了人家的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1877
+  },
+  {
+   "id": 56,
+   "start": 193.92,
+   "end": 195.65,
+   "text": "全是超了人家的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 57,
+   "start": 195.65,
+   "end": 197.88,
+   "text": "就这样的人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 58,
+   "start": 197.88,
+   "end": 200.06,
+   "text": "就是是质问机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 59,
+   "start": 200.06,
+   "end": 201.8,
+   "text": "中国这个质问机考试里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 60,
+   "start": 201.8,
+   "end": 202.94,
+   "text": "他这样的全文好像",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 61,
+   "start": 202.94,
+   "end": 205.62,
+   "text": "就是一个主席职业什么职业的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 62,
+   "start": 205.62,
+   "end": 206.54,
+   "text": "搞不清楚",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 63,
+   "start": 206.54,
+   "end": 209.21,
+   "text": "反正就是考质问机的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 64,
+   "start": 209.21,
+   "end": 211.16,
+   "text": "都要考他的书嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 65,
+   "start": 211.16,
+   "end": 212.4,
+   "text": "好我们看B站的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 66,
+   "start": 212.4,
+   "end": 215.16,
+   "text": "这是人很多了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 67,
+   "start": 215.16,
+   "end": 216.7,
+   "text": "这要是个难受之王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 68,
+   "start": 216.7,
+   "end": 217.78,
+   "text": "这里很多都是讲",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 69,
+   "start": 217.78,
+   "end": 219.1,
+   "text": "他这个书多么多么烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 70,
+   "start": 219.1,
+   "end": 221.72,
+   "text": "多么多么无人职业",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 71,
+   "start": 221.72,
+   "end": 223.06,
+   "text": "我们随便说一个无人职业",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 72,
+   "start": 223.06,
+   "end": 223.74,
+   "text": "好多人说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 73,
+   "start": 223.74,
+   "end": 225.62,
+   "text": "谭老的C语言教材很烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 74,
+   "start": 225.62,
+   "end": 227.32,
+   "text": "那么他的书为什么那么烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2953
+  },
+  {
+   "id": 75,
+   "start": 227.32,
+   "end": 229.56,
+   "text": "这一点很多人都没有去思考过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 76,
+   "start": 229.56,
+   "end": 231.5,
+   "text": "网上的评论都不在一个焦点上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 77,
+   "start": 231.5,
+   "end": 233.82,
+   "text": "把罪责归于谭老写的C程序设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 78,
+   "start": 233.82,
+   "end": 234.9,
+   "text": "实在是很滑稽",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 79,
+   "start": 234.9,
+   "end": 236.8,
+   "text": "许多人批评的一个重要理由是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 80,
+   "start": 236.8,
+   "end": 238.04,
+   "text": "不符合C99标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 81,
+   "start": 238.04,
+   "end": 239.32,
+   "text": "从这个方向怪谭老",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 82,
+   "start": 239.32,
+   "end": 240.66,
+   "text": "甚至各种讽刺谭老",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 83,
+   "start": 240.66,
+   "end": 242.46,
+   "text": "其实这真的是怪错了人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 84,
+   "start": 242.46,
+   "end": 244.26,
+   "text": "虽然我不太建议现在的初学者",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 85,
+   "start": 244.26,
+   "end": 246.28,
+   "text": "用红皮书学习这门计算机编程语言",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 86,
+   "start": 246.28,
+   "end": 248.7,
+   "text": "但是书的作者谭老是一个值得尊敬的人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 87,
+   "start": 248.7,
+   "end": 251.06,
+   "text": "1972年才推出C语言的第一个版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 88,
+   "start": 251.06,
+   "end": 252.26,
+   "text": "当时谭老38岁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0667
+  },
+  {
+   "id": 89,
+   "start": 252.26,
+   "end": 255.16,
+   "text": "1989年才完成C语言的第一次标准化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 90,
+   "start": 255.16,
+   "end": 256.26,
+   "text": "俗称C89",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 91,
+   "start": 256.26,
+   "end": 257.9,
+   "text": "当时谭浩强55岁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 92,
+   "start": 257.9,
+   "end": 259.06,
+   "text": "1991年",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 93,
+   "start": 259.06,
+   "end": 260.3,
+   "text": "谭老57岁的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 94,
+   "start": 260.3,
+   "end": 261.9,
+   "text": "C程序设计出版了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 95,
+   "start": 261.9,
+   "end": 263.0,
+   "text": "1999年",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 96,
+   "start": 263.0,
+   "end": 264.64,
+   "text": "C99标准诸于问世",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 97,
+   "start": 264.64,
+   "end": 266.34,
+   "text": "当时谭浩强65岁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 98,
+   "start": 266.34,
+   "end": 267.8,
+   "text": "计算机行业发展迅猛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 99,
+   "start": 267.8,
+   "end": 268.52,
+   "text": "新就更替",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 100,
+   "start": 268.52,
+   "end": 269.7,
+   "text": "2000年之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 101,
+   "start": 269.7,
+   "end": 270.26,
+   "text": "今天",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 102,
+   "start": 270.26,
+   "end": 271.98,
+   "text": "其实这个人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 103,
+   "start": 271.98,
+   "end": 274.0,
+   "text": "这个视频的主者",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 104,
+   "start": 274.0,
+   "end": 274.84,
+   "text": "他也不知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 105,
+   "start": 274.84,
+   "end": 277.06,
+   "text": "说谭浩强是什么书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 106,
+   "start": 277.06,
+   "end": 279.94,
+   "text": "C语言标准还没出来的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 107,
+   "start": 279.94,
+   "end": 280.62,
+   "text": "然后说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 108,
+   "start": 280.62,
+   "end": 282.5,
+   "text": "别人质疑他的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1588
+  },
+  {
+   "id": 109,
+   "start": 282.5,
+   "end": 284.68,
+   "text": "是因为他没有按照标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 110,
+   "start": 284.68,
+   "end": 287.68,
+   "text": "所以这个视频的播出这个书的话完全是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 111,
+   "start": 287.68,
+   "end": 288.68,
+   "text": "呃",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 112,
+   "start": 288.68,
+   "end": 290.68,
+   "text": "瞎说根本就不是这回事",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 113,
+   "start": 290.68,
+   "end": 293.86,
+   "text": "他的书难不是因为符合不符合他的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 114,
+   "start": 293.86,
+   "end": 294.86,
+   "text": "C语言标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 115,
+   "start": 294.86,
+   "end": 299.0,
+   "text": "标准写出",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 116,
+   "start": 299.0,
+   "end": 302.0,
+   "text": "有学举完全征兆标准的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 117,
+   "start": 302.0,
+   "end": 306.03,
+   "text": "主要是他的书写的太差了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 118,
+   "start": 306.03,
+   "end": 307.03,
+   "text": "里面这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 119,
+   "start": 307.03,
+   "end": 309.03,
+   "text": "四字幕集全讲这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 120,
+   "start": 309.03,
+   "end": 312.03,
+   "text": "路由图普普妈妈的那个试集讲的很实",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 121,
+   "start": 312.03,
+   "end": 315.03,
+   "text": "而且他的内容就是抄的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2833
+  },
+  {
+   "id": 122,
+   "start": 315.03,
+   "end": 319.48,
+   "text": "就能个外的是语音发明者的那个书操他也操不好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 123,
+   "start": 319.48,
+   "end": 322.24,
+   "text": "是吧 里面例子什么东西都用的 人家的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 124,
+   "start": 322.24,
+   "end": 327.34,
+   "text": "然后呢 操他还要发挥一下 发挥一下就是把人家书也不好好操",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 125,
+   "start": 327.34,
+   "end": 331.18,
+   "text": "因为他要完全操 完全翻译过来 肯定人家一下子看出来了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 126,
+   "start": 331.18,
+   "end": 333.92,
+   "text": "他说是操 也觉得狡猾",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 127,
+   "start": 333.92,
+   "end": 337.14,
+   "text": "就是操了之后 他两个有的就自己发挥",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 128,
+   "start": 337.14,
+   "end": 341.38,
+   "text": "把他每个讲的很实 好像自己很专营的很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.25
+  },
+  {
+   "id": 129,
+   "start": 341.38,
+   "end": 344.5,
+   "text": "其实他这个根本就不懂教育",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 130,
+   "start": 344.5,
+   "end": 346.66,
+   "text": "根本就不懂教学的一个人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 131,
+   "start": 346.66,
+   "end": 350.56,
+   "text": "所以他这写的书是误导中国人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 132,
+   "start": 350.56,
+   "end": 354.51,
+   "text": "其实一点话不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 133,
+   "start": 354.51,
+   "end": 358.94,
+   "text": "实际上和他的书符合不符合标准没关系",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 134,
+   "start": 358.94,
+   "end": 363.18,
+   "text": "也不和多少年多少年什么标准八九年才出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 135,
+   "start": 363.18,
+   "end": 364.06,
+   "text": "也没那么关系",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 136,
+   "start": 364.06,
+   "end": 367.28,
+   "text": "他的书比八九年还早",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 137,
+   "start": 367.28,
+   "end": 368.88,
+   "text": "这个人根本就不知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 138,
+   "start": 368.88,
+   "end": 372.08,
+   "text": "诗意语言发明在1978年就写出了书了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 139,
+   "start": 372.08,
+   "end": 373.68,
+   "text": "他好像肯定是看过了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2167
+  },
+  {
+   "id": 140,
+   "start": 373.68,
+   "end": 374.8,
+   "text": "所以他超过来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 141,
+   "start": 374.8,
+   "end": 377.76,
+   "text": "然后就打一个中英文的信息查",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 142,
+   "start": 377.76,
+   "end": 378.96,
+   "text": "因为中文人都不知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 143,
+   "start": 378.96,
+   "end": 383.14,
+   "text": "没看过那个英文书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 144,
+   "start": 383.14,
+   "end": 385.02,
+   "text": "所以他七八年就可以超了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 145,
+   "start": 385.02,
+   "end": 385.94,
+   "text": "所以他的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 146,
+   "start": 385.94,
+   "end": 387.94,
+   "text": "如果他的书是七八年之前呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 147,
+   "start": 387.94,
+   "end": 390.18,
+   "text": "那就是说明是他自己的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 148,
+   "start": 390.18,
+   "end": 391.1,
+   "text": "根本就不是啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 149,
+   "start": 391.1,
+   "end": 393.28,
+   "text": "因为他的书你看了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 150,
+   "start": 393.28,
+   "end": 393.88,
+   "text": "看了之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 151,
+   "start": 393.88,
+   "end": 397.76,
+   "text": "把他的书和国外住宅的书一比较",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 152,
+   "start": 397.76,
+   "end": 399.28,
+   "text": "你就发现完全是超的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 153,
+   "start": 399.28,
+   "end": 399.76,
+   "text": "然后呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 154,
+   "start": 399.76,
+   "end": 402.32,
+   "text": "他自己在发挥增加一些细节",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 155,
+   "start": 402.32,
+   "end": 404.04,
+   "text": "什么Primed,Scanf",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2264
+  },
+  {
+   "id": 156,
+   "start": 404.04,
+   "end": 406.28,
+   "text": "然后把这书写得越来越烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 157,
+   "start": 422.53,
+   "end": 426.13,
+   "text": "我觉得他这个人这句话讲的不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 158,
+   "start": 426.86,
+   "end": 428.82,
+   "text": "其实台湾讲习这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 159,
+   "start": 428.82,
+   "end": 430.62,
+   "text": "它虽然占据这个群威",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 160,
+   "start": 430.62,
+   "end": 433.5,
+   "text": "但是居中用不用还是在于美国大学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 161,
+   "start": 433.82,
+   "end": 436.42,
+   "text": "所以真正坑害中国大学生的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3263
+  },
+  {
+   "id": 162,
+   "start": 436.42,
+   "end": 438.46,
+   "text": "其实不是谭花祥",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 163,
+   "start": 438.46,
+   "end": 440.66,
+   "text": "他当年书写的很难",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 164,
+   "start": 440.66,
+   "end": 444.85,
+   "text": "当年他作为那个那个什么教材的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 165,
+   "start": 444.85,
+   "end": 446.94,
+   "text": "什么用他的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 166,
+   "start": 446.94,
+   "end": 449.04,
+   "text": "如果其他人反例也用不了啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 167,
+   "start": 449.04,
+   "end": 451.54,
+   "text": "还有高校里你们为什么要用他才",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 168,
+   "start": 451.54,
+   "end": 453.54,
+   "text": "所以这个归根具体",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 169,
+   "start": 453.54,
+   "end": 456.15,
+   "text": "还是这个人说的挺对的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 170,
+   "start": 456.15,
+   "end": 459.41,
+   "text": "都会中国学生的就是大学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 171,
+   "start": 459.41,
+   "end": 460.95,
+   "text": "还有教你们老师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 172,
+   "start": 460.95,
+   "end": 466.36,
+   "text": "其实大学老师选教材完全有自主权的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 173,
+   "start": 466.36,
+   "end": 468.26,
+   "text": "这个是很难的大学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2209
+  },
+  {
+   "id": 174,
+   "start": 468.26,
+   "end": 477.38,
+   "text": "可能这个领导啊就规定 必须用这本书 稍微相样一点大学 他的老师都有自主权的 不会强迫一个老师 必须用不教材",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2576
+  },
+  {
+   "id": 175,
+   "start": 477.92,
+   "end": 480.34,
+   "text": "你老师肯定要选择自己觉得比较好的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2576
+  },
+  {
+   "id": 176,
+   "start": 481.14,
+   "end": 488.74,
+   "text": "但中国这么多的济文基大学 呃 这么多大学 这么多济文基专业的老师 为什么就没有一个老师去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2576
+  },
+  {
+   "id": 177,
+   "start": 489.5,
+   "end": 493.5,
+   "text": "想一想就是不用他的书的 什么都在用他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2576
+  },
+  {
+   "id": 178,
+   "start": 493.5,
+   "end": 497.38,
+   "text": "说明这个真正都会的是大学师老师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 179,
+   "start": 497.38,
+   "end": 498.96,
+   "text": "大学规定要用这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 180,
+   "start": 498.96,
+   "end": 501.12,
+   "text": "老师也说我要用这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 181,
+   "start": 501.12,
+   "end": 502.3,
+   "text": "大家都用这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 182,
+   "start": 502.3,
+   "end": 503.7,
+   "text": "所以我也有这本书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 183,
+   "start": 503.7,
+   "end": 507.03,
+   "text": "从这里就看出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 184,
+   "start": 507.03,
+   "end": 511.43,
+   "text": "就是中国的大学都用这个很老套的故事的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 185,
+   "start": 511.43,
+   "end": 513.23,
+   "text": "在教支持大学生",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 186,
+   "start": 513.23,
+   "end": 516.45,
+   "text": "包括之前我视频讲的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 187,
+   "start": 516.45,
+   "end": 517.73,
+   "text": "那个卵精工程也是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 188,
+   "start": 517.73,
+   "end": 520.83,
+   "text": "中国大学那些老师根本就不懂卵精工程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 189,
+   "start": 520.83,
+   "end": 522.27,
+   "text": "巨大的部分",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 190,
+   "start": 522.27,
+   "end": 525.2,
+   "text": "我百分之多少不知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 191,
+   "start": 525.2,
+   "end": 526.16,
+   "text": "反正我知道的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1701
+  },
+  {
+   "id": 192,
+   "start": 526.16,
+   "end": 529.34,
+   "text": "我认识的那些老师根本就不懂乱用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 193,
+   "start": 529.34,
+   "end": 531.04,
+   "text": "也没在习业干过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 194,
+   "start": 531.04,
+   "end": 532.38,
+   "text": "他就是瞎吹一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 195,
+   "start": 532.38,
+   "end": 536.44,
+   "text": "用的书也是那个好多年轻故事的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 196,
+   "start": 536.44,
+   "end": 538.7,
+   "text": "根本就没用的那些书教材",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 197,
+   "start": 538.7,
+   "end": 540.16,
+   "text": "让他教",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 198,
+   "start": 540.16,
+   "end": 543.16,
+   "text": "中国的那个很多的教材都是很烂的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 199,
+   "start": 543.16,
+   "end": 546.22,
+   "text": "而且都是很老的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 200,
+   "start": 546.22,
+   "end": 548.18,
+   "text": "但是很老的故事教材",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 201,
+   "start": 548.18,
+   "end": 550.52,
+   "text": "总是占据这个统治地位",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 202,
+   "start": 550.52,
+   "end": 552.28,
+   "text": "多少年这是大学老师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 203,
+   "start": 552.28,
+   "end": 554.88,
+   "text": "这是大学都不应许去更换",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 204,
+   "start": 554.88,
+   "end": 557.88,
+   "text": "就是清拼的还是应用传统的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2161
+  },
+  {
+   "id": 205,
+   "start": 557.88,
+   "end": 565.14,
+   "text": "就是中国的大学这个这个太这个僵化了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 206,
+   "start": 565.14,
+   "end": 569.15,
+   "text": "太那个就是呃不许是这样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 207,
+   "start": 569.15,
+   "end": 573.71,
+   "text": "其实说到底说到底他就是根本就是对大学生不负责",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 208,
+   "start": 573.71,
+   "end": 577.0,
+   "text": "中国是大学大学老师对大学生不负责",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 209,
+   "start": 577.0,
+   "end": 580.27,
+   "text": "一路稍微负责一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 210,
+   "start": 580.27,
+   "end": 583.29,
+   "text": "那你就应该选择好的老师用心去讲",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 211,
+   "start": 583.29,
+   "end": 585.95,
+   "text": "中国的大学都忙去做科研",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 212,
+   "start": 585.95,
+   "end": 587.43,
+   "text": "呃发了文啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 213,
+   "start": 587.43,
+   "end": 589.21,
+   "text": "然后整天想说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2303
+  },
+  {
+   "id": 214,
+   "start": 589.21,
+   "end": 598.21,
+   "text": "如何如何 写什么资政 甚至什么固执 省之什么之类的 整天就想着这 根本就没有生死从事教学的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3215
+  },
+  {
+   "id": 215,
+   "start": 598.21,
+   "end": 608.25,
+   "text": "所以他能胡一下就胡一下 所以中国大学很多教科老子就胡弄一下 拉倒了 不过那个算法实质与分析",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3215
+  },
+  {
+   "id": 216,
+   "start": 608.25,
+   "end": 614.68,
+   "text": "因为我教的科长文本子 我觉得很清楚 算法实质与分析 你们去了解一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3215
+  },
+  {
+   "id": 217,
+   "start": 614.68,
+   "end": 622.07,
+   "text": "很多大学都是用了那个叫王晓东的那本烂书和台湾讲的书是一样烂的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3215
+  },
+  {
+   "id": 218,
+   "start": 622.07,
+   "end": 623.58,
+   "text": "这么说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 219,
+   "start": 623.58,
+   "end": 624.58,
+   "text": "他的书写的烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 220,
+   "start": 624.58,
+   "end": 626.98,
+   "text": "但是学科用他的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 221,
+   "start": 626.98,
+   "end": 630.78,
+   "text": "还不是由你们这大学老师去决定用的吗",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 222,
+   "start": 630.78,
+   "end": 631.08,
+   "text": "是吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 223,
+   "start": 631.08,
+   "end": 633.45,
+   "text": "为什么我就可以不用呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 224,
+   "start": 633.45,
+   "end": 636.25,
+   "text": "所以用这书都是在于老师本身",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 225,
+   "start": 636.25,
+   "end": 638.45,
+   "text": "因为这些老师他根本就不是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 226,
+   "start": 638.45,
+   "end": 639.65,
+   "text": "不想好好的教学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 227,
+   "start": 639.65,
+   "end": 641.05,
+   "text": "就生死不在教学上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 228,
+   "start": 641.05,
+   "end": 644.49,
+   "text": "整天想弄弄文啊弄基金啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 229,
+   "start": 644.49,
+   "end": 645.59,
+   "text": "他就看到破书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 230,
+   "start": 645.59,
+   "end": 647.19,
+   "text": "谁便招着书长糊弄糊弄",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 231,
+   "start": 647.19,
+   "end": 648.09,
+   "text": "就行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 232,
+   "start": 648.09,
+   "end": 650.29,
+   "text": "这个换了面做的也一塌糊涂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 233,
+   "start": 650.29,
+   "end": 651.29,
+   "text": "也不愣着准备",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 234,
+   "start": 651.29,
+   "end": 653.79,
+   "text": "你看很多中国大学的教授",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2976
+  },
+  {
+   "id": 235,
+   "start": 653.79,
+   "end": 656.05,
+   "text": "换了没做了一塌糊涂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 236,
+   "start": 656.05,
+   "end": 657.69,
+   "text": "连个本个人都不如",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 237,
+   "start": 657.69,
+   "end": 661.71,
+   "text": "他下面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 238,
+   "start": 661.71,
+   "end": 663.96,
+   "text": "入门C语言有很多种书籍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 239,
+   "start": 663.96,
+   "end": 666.32,
+   "text": "偏偏选择的是一本过时的应付考试的书籍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 240,
+   "start": 666.32,
+   "end": 667.7,
+   "text": "在一个快速发展的时代",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 241,
+   "start": 667.7,
+   "end": 668.34,
+   "text": "也不修改",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 242,
+   "start": 668.34,
+   "end": 669.68,
+   "text": "继续用这些过时的书籍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 243,
+   "start": 669.68,
+   "end": 671.0,
+   "text": "他下面一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 244,
+   "start": 671.0,
+   "end": 672.4,
+   "text": "提交他的什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 245,
+   "start": 672.4,
+   "end": 673.68,
+   "text": "哈输了这个一波",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 246,
+   "start": 673.68,
+   "end": 674.6,
+   "text": "还有什么C",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 247,
+   "start": 674.6,
+   "end": 676.22,
+   "text": "C什么prime",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 248,
+   "start": 676.22,
+   "end": 678.47,
+   "text": "还有很多人就是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 249,
+   "start": 678.47,
+   "end": 681.17,
+   "text": "吹捧好多大自己的Cprime",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 250,
+   "start": 681.17,
+   "end": 682.11,
+   "text": "C加2prime",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 251,
+   "start": 682.11,
+   "end": 683.97,
+   "text": "那些书这回看来也是非常",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 252,
+   "start": 683.97,
+   "end": 685.37,
+   "text": "非常差的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 253,
+   "start": 685.37,
+   "end": 687.01,
+   "text": "也不是非常差吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.238
+  },
+  {
+   "id": 254,
+   "start": 687.01,
+   "end": 696.54,
+   "text": "也是很一般 不怎么样 反正我是不会学这个编程语音是不会看那些书的 不会看那个知乎推荐的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.254
+  },
+  {
+   "id": 255,
+   "start": 696.54,
+   "end": 704.36,
+   "text": "哎 某某书我算法导乱 算法什么东西的 某某C++prime什么之类的 知识书根本就不要看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.254
+  },
+  {
+   "id": 256,
+   "start": 705.05,
+   "end": 716.0,
+   "text": "你看知识书好不如在网上去看看网上那些文章的 这是很烂的书 现在就是反而吃香 因为他有名了 是吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.254
+  },
+  {
+   "id": 257,
+   "start": 716.0,
+   "end": 721.2,
+   "text": "而像我写的书就是特别好的书就就是没人用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 258,
+   "start": 721.2,
+   "end": 726.14,
+   "text": "不过大学的我之前写的C加压是些从中门到京同里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 259,
+   "start": 726.14,
+   "end": 729.89,
+   "text": "讲语法方面我觉得讲的很好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 260,
+   "start": 729.89,
+   "end": 733.23,
+   "text": "然后呢还有很多实战的项目就非常多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 261,
+   "start": 733.23,
+   "end": 735.99,
+   "text": "但是呢就没有一个大学去采用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 262,
+   "start": 735.99,
+   "end": 739.47,
+   "text": "因为肯定很多大学也不知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 263,
+   "start": 739.47,
+   "end": 741.49,
+   "text": "关键是这些老师也不可能用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 264,
+   "start": 741.49,
+   "end": 743.97,
+   "text": "因为你不认识的你是什么人啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 265,
+   "start": 743.97,
+   "end": 746.01,
+   "text": "你写的书你认为好就好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2349
+  },
+  {
+   "id": 266,
+   "start": 746.01,
+   "end": 751.39,
+   "text": "就是这几人他根本看不看你的收,他也不会去用你的收,也不知道你的收",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2579
+  },
+  {
+   "id": 267,
+   "start": 751.39,
+   "end": 758.91,
+   "text": "数据导致我的收现在去版了,去版不了,我现在写了一个电子版,你看写了电子版放在网上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2579
+  },
+  {
+   "id": 268,
+   "start": 758.91,
+   "end": 769.65,
+   "text": "也没人关注,这几个人买了,这个收已经语发部分喜欢了,这个项目是暂时的,我还没有加上去的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2579
+  },
+  {
+   "id": 269,
+   "start": 769.65,
+   "end": 777.71,
+   "text": "因为买的人太少了,就是这几个,所以我暂时也没机器剩,但是我会不动的把这收进行更新的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2579
+  },
+  {
+   "id": 270,
+   "start": 777.71,
+   "end": 787.71,
+   "text": "包括这个书在写发上面如果有不太好的就是要调整的如果进入一共有反应我也会对他进行不断的这个修改",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2634
+  },
+  {
+   "id": 271,
+   "start": 787.71,
+   "end": 794.02,
+   "text": "因为现在这个书在C加仕器从京东的书基本上稍微改了一下嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2634
+  },
+  {
+   "id": 272,
+   "start": 794.02,
+   "end": 798.98,
+   "text": "改了一下两个当天使用它变得好一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2634
+  },
+  {
+   "id": 273,
+   "start": 798.98,
+   "end": 802.68,
+   "text": "主要是用反应更新的C加价2三的标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2634
+  },
+  {
+   "id": 274,
+   "start": 802.68,
+   "end": 805.78,
+   "text": "所以就不叫C加仕器叫C现在C加价",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2634
+  },
+  {
+   "id": 275,
+   "start": 805.78,
+   "end": 810.03,
+   "text": "讲到C++现在又说到这个老生常谈的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 276,
+   "start": 810.03,
+   "end": 811.55,
+   "text": "就是现在过来也是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 277,
+   "start": 811.55,
+   "end": 813.95,
+   "text": "普遍的采用是传统的C++",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 278,
+   "start": 813.95,
+   "end": 816.34,
+   "text": "这是大学老师也是的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 279,
+   "start": 816.34,
+   "end": 819.98,
+   "text": "他根本就不想用新的C++教学生",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 280,
+   "start": 819.98,
+   "end": 824.32,
+   "text": "就是我们多少年一直用这个传统C++",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 281,
+   "start": 824.32,
+   "end": 825.66,
+   "text": "我还是用传统C++",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 282,
+   "start": 825.66,
+   "end": 828.1,
+   "text": "和那个谭浩阳思义语音一样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 283,
+   "start": 828.1,
+   "end": 829.72,
+   "text": "还是在无人子弟",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 284,
+   "start": 829.72,
+   "end": 833.14,
+   "text": "行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 285,
+   "start": 833.14,
+   "end": 835.9,
+   "text": "就是我就是看到昨天那个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 286,
+   "start": 835.9,
+   "end": 837.22,
+   "text": "我想我要做个视频",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 287,
+   "start": 837.22,
+   "end": 839.44,
+   "text": "看看这个视频公开量",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2299
+  },
+  {
+   "id": 288,
+   "start": 839.44,
+   "end": 840.9,
+   "text": "那么有他的他们读",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 289,
+   "start": 840.9,
+   "end": 842.68,
+   "text": "我看他的观看量多少的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 290,
+   "start": 842.68,
+   "end": 844.01,
+   "text": "六千多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 291,
+   "start": 844.01,
+   "end": 846.31,
+   "text": "管这个是二十一点四万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 292,
+   "start": 846.31,
+   "end": 850.24,
+   "text": "他是什么语言池少女王",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 293,
+   "start": 850.24,
+   "end": 850.84,
+   "text": "我来看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 294,
+   "start": 850.84,
+   "end": 853.78,
+   "text": "这个都二十几万了嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 295,
+   "start": 853.78,
+   "end": 869.68,
+   "text": "你看你看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3812
+  },
+  {
+   "id": 296,
+   "start": 869.68,
+   "end": 872.86,
+   "text": "就是赵恩公这个知名帝也是的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 297,
+   "start": 872.86,
+   "end": 873.28,
+   "text": "明白吗",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 298,
+   "start": 873.28,
+   "end": 874.96,
+   "text": "都是后想抄来抄去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 299,
+   "start": 874.96,
+   "end": 877.08,
+   "text": "你看网上这是谭王江苏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 300,
+   "start": 877.08,
+   "end": 879.94,
+   "text": "但是我说这些都是同一个文案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 301,
+   "start": 879.94,
+   "end": 881.32,
+   "text": "然后后想抄来抄去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 302,
+   "start": 881.32,
+   "end": 883.28,
+   "text": "但是同一个文案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 303,
+   "start": 883.28,
+   "end": 885.34,
+   "text": "你男的讲的这六起都",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 304,
+   "start": 885.34,
+   "end": 887.84,
+   "text": "你看这个女的讲的就是24万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 305,
+   "start": 887.84,
+   "end": 891.42,
+   "text": "所以现在的人就是一个是看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 306,
+   "start": 891.42,
+   "end": 893.42,
+   "text": "是不是女的是不是美女",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 307,
+   "start": 893.42,
+   "end": 895.76,
+   "text": "然后呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 308,
+   "start": 895.76,
+   "end": 898.14,
+   "text": "他的观看量就多了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 309,
+   "start": 898.14,
+   "end": 899.6,
+   "text": "所以我经常说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 310,
+   "start": 899.6,
+   "end": 901.86,
+   "text": "女生做知名帝",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3048
+  },
+  {
+   "id": 311,
+   "start": 901.86,
+   "end": 914.44,
+   "text": "主要是女生是主餐长 其实自媒体的主要是女生搞比较好 男生不行 因为女生你不管是生人项目 你只要年轻的 你一上去 你就是在那",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.221
+  },
+  {
+   "id": 312,
+   "start": 915.08,
+   "end": 919.88,
+   "text": "你就是和谭豪翔 你的内容和谭豪翔的书一样的 但是还是很多人在看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.221
+  },
+  {
+   "id": 313,
+   "start": 920.76,
+   "end": 927.88,
+   "text": "就包括这个女生 你看 他完全和那个文案是一样的 也不知道他们是许超许的 但他的观看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.221
+  },
+  {
+   "id": 314,
+   "start": 927.88,
+   "end": 930.32,
+   "text": "公开量你看就24万多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 315,
+   "start": 930.32,
+   "end": 931.62,
+   "text": "就25万了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 316,
+   "start": 931.62,
+   "end": 932.58,
+   "text": "我们再听一听",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 317,
+   "start": 932.58,
+   "end": 933.9,
+   "text": "不符合C99标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 318,
+   "start": 933.9,
+   "end": 936.24,
+   "text": "1934年谭浩强老先生出生",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 319,
+   "start": 936.24,
+   "end": 938.34,
+   "text": "到现在已经88岁高龄了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 320,
+   "start": 938.34,
+   "end": 940.52,
+   "text": "网上有很多段子这样评论到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 321,
+   "start": 940.52,
+   "end": 943.08,
+   "text": "C语言支付死了我替安米为是谭浩强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 322,
+   "start": 943.08,
+   "end": 944.92,
+   "text": "但是很多人开始怪谭老",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 323,
+   "start": 944.92,
+   "end": 945.96,
+   "text": "这个方向就不对了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 324,
+   "start": 945.96,
+   "end": 947.44,
+   "text": "甚至各种讽刺谭老",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 325,
+   "start": 947.44,
+   "end": 948.68,
+   "text": "其实这真的是诚诚语言",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 326,
+   "start": 948.68,
+   "end": 950.26,
+   "text": "但是书的作者谭老",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 327,
+   "start": 950.26,
+   "end": 951.5,
+   "text": "是一个值得尊敬的人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 328,
+   "start": 951.5,
+   "end": 953.26,
+   "text": "他的意思差不多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 329,
+   "start": 953.26,
+   "end": 955.06,
+   "text": "可能收尾给了文案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 330,
+   "start": 955.06,
+   "end": 956.0,
+   "text": "收尾给了一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1898
+  },
+  {
+   "id": 331,
+   "start": 956.0,
+   "end": 958.0,
+   "text": "反正文案的意思都是差不多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 332,
+   "start": 958.0,
+   "end": 959.46,
+   "text": "谭浩强是很烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 333,
+   "start": 959.46,
+   "end": 960.8,
+   "text": "谭老是一个真正人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 334,
+   "start": 960.8,
+   "end": 961.96,
+   "text": "两个居后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 335,
+   "start": 961.96,
+   "end": 964.24,
+   "text": "最后是中国大学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 336,
+   "start": 964.24,
+   "end": 966.88,
+   "text": "1972年才推出C语言的第一个版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 337,
+   "start": 966.88,
+   "end": 968.72,
+   "text": "当时谭浩强38岁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 338,
+   "start": 968.72,
+   "end": 971.7,
+   "text": "1989年才完成C语言的第一次标准化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 339,
+   "start": 971.7,
+   "end": 972.72,
+   "text": "俗称C89",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 340,
+   "start": 972.72,
+   "end": 974.78,
+   "text": "当时谭浩强55岁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 341,
+   "start": 974.78,
+   "end": 976.5,
+   "text": "1991年7月1号",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 342,
+   "start": 976.5,
+   "end": 978.02,
+   "text": "谭浩57岁的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 343,
+   "start": 978.02,
+   "end": 979.12,
+   "text": "C程序设计出版",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 344,
+   "start": 979.12,
+   "end": 980.12,
+   "text": "行业发展迅猛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 345,
+   "start": 980.12,
+   "end": 982.16,
+   "text": "新旧更替年纪甚至一月",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 346,
+   "start": 982.16,
+   "end": 985.21,
+   "text": "所以自媒体上面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.195
+  },
+  {
+   "id": 347,
+   "start": 985.21,
+   "end": 991.21,
+   "text": "你看 就是这种抄袭 和大学那个台湾翔那些书一样 都是一个鸟样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2726
+  },
+  {
+   "id": 348,
+   "start": 991.21,
+   "end": 997.93,
+   "text": "越是抄袭得 它越火 越是你真正有干货的东西 越是无能问敬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2726
+  },
+  {
+   "id": 349,
+   "start": 997.93,
+   "end": 1007.21,
+   "text": "也就是人家说 欧和之众 很多都是欧和之众 能云也云",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2726
+  },
+  {
+   "id": 350,
+   "start": 1007.21,
+   "end": 1015.17,
+   "text": "就是大家都是崇拜权威 其实没有自己的相当于思考",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2726
+  },
+  {
+   "id": 351,
+   "start": 1015.17,
+   "end": 1019.51,
+   "text": "就是很多人以为自己的思考 我一直讲 很多人都以为自己思考",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2726
+  },
+  {
+   "id": 352,
+   "start": 1019.51,
+   "end": 1022.45,
+   "text": "这个理论什么各种书法一套一套的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 353,
+   "start": 1022.45,
+   "end": 1023.89,
+   "text": "你讲根本也讲不过它",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 354,
+   "start": 1023.89,
+   "end": 1026.99,
+   "text": "它的口才好得不得了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 355,
+   "start": 1026.99,
+   "end": 1029.58,
+   "text": "但是其实它的思想啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 356,
+   "start": 1029.58,
+   "end": 1033.22,
+   "text": "它的就是东西讲法实际上都是常识的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 357,
+   "start": 1033.22,
+   "end": 1034.68,
+   "text": "相当于微量的结果",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 358,
+   "start": 1034.68,
+   "end": 1036.56,
+   "text": "就是你你的人的思想",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 359,
+   "start": 1036.56,
+   "end": 1039.7,
+   "text": "是你受到的信息的始练的结果",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 360,
+   "start": 1039.7,
+   "end": 1046.48,
+   "text": "2000年之后经典的新语言书籍层出不穷",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 361,
+   "start": 1046.48,
+   "end": 1049.5,
+   "text": "甚至可以用百花期放百家争鸣来形容了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 362,
+   "start": 1049.5,
+   "end": 1051.54,
+   "text": "老台的书已经毫无竞争力了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2304
+  },
+  {
+   "id": 363,
+   "start": 1051.54,
+   "end": 1054.38,
+   "text": "治理安员还为大家准备了细架架学习资料",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 364,
+   "start": 1054.38,
+   "end": 1055.9,
+   "text": "希望能帮助大家在编程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 365,
+   "start": 1055.9,
+   "end": 1058.18,
+   "text": "他又开始来推荐他的教程了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 366,
+   "start": 1058.18,
+   "end": 1060.74,
+   "text": "你看这个和谭奥阳的书一样烂的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 367,
+   "start": 1060.74,
+   "end": 1062.5,
+   "text": "你这么多给人家看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 368,
+   "start": 1062.5,
+   "end": 1063.7,
+   "text": "人家看了过来吗",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 369,
+   "start": 1063.7,
+   "end": 1065.73,
+   "text": "就是中国很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 370,
+   "start": 1065.73,
+   "end": 1068.41,
+   "text": "过来我离去一大跌什么之类的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 371,
+   "start": 1068.41,
+   "end": 1073.87,
+   "text": "你看越是烂了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 372,
+   "start": 1073.87,
+   "end": 1075.13,
+   "text": "这个越是吃香",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 373,
+   "start": 1075.13,
+   "end": 1078.55,
+   "text": "我在看还有二十四顶九万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 374,
+   "start": 1078.55,
+   "end": 1080.51,
+   "text": "刚才是二十一顶四万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 375,
+   "start": 1080.51,
+   "end": 1081.63,
+   "text": "还有九顶三万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 376,
+   "start": 1081.63,
+   "end": 1083.27,
+   "text": "还有那个都差不多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 377,
+   "start": 1083.27,
+   "end": 1084.63,
+   "text": "后向都超来超去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.3
+  },
+  {
+   "id": 378,
+   "start": 1084.63,
+   "end": 1087.64,
+   "text": "这个179万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 379,
+   "start": 1087.64,
+   "end": 1091.5,
+   "text": "这个和谭老奖的关系不是很大的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 380,
+   "start": 1091.5,
+   "end": 1096.43,
+   "text": "那一年我们斗过的烂书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 381,
+   "start": 1096.43,
+   "end": 1104.24,
+   "text": "主要在情谊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 382,
+   "start": 1104.24,
+   "end": 1107.99,
+   "text": "情谊占据了很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 383,
+   "start": 1107.99,
+   "end": 1118.8,
+   "text": "这个不是胡彬的文章",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 384,
+   "start": 1118.8,
+   "end": 1120.52,
+   "text": "是抄的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 385,
+   "start": 1120.52,
+   "end": 1121.54,
+   "text": "抄也抄不好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 386,
+   "start": 1121.54,
+   "end": 1123.06,
+   "text": "抄了之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 387,
+   "start": 1123.06,
+   "end": 1125.34,
+   "text": "然后反而变得更糟了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 388,
+   "start": 1125.34,
+   "end": 1126.16,
+   "text": "你抄了之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 389,
+   "start": 1126.16,
+   "end": 1126.92,
+   "text": "模仿之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 390,
+   "start": 1126.92,
+   "end": 1128.74,
+   "text": "你要超越云竹在马",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 391,
+   "start": 1128.74,
+   "end": 1131.85,
+   "text": "你抄了人家的书之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 392,
+   "start": 1131.85,
+   "end": 1132.75,
+   "text": "你没有超越",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 393,
+   "start": 1132.75,
+   "end": 1134.15,
+   "text": "你反而变得更烂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2033
+  },
+  {
+   "id": 394,
+   "start": 1134.15,
+   "end": 1148.35,
+   "text": "那这个超级没意思的 其实我们有的时候模仿人家就是造一个桥梁 模仿了之后 然后我造的更好 那这个才行 既然那个马云说的现在假货比真户好 为什么呢 因为假货",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2498
+  },
+  {
+   "id": 395,
+   "start": 1149.65,
+   "end": 1155.45,
+   "text": "他可能去模仿真户 但是他质量 有的做的确实比真户还要",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2498
+  },
+  {
+   "id": 396,
+   "start": 1156.57,
+   "end": 1165.17,
+   "text": "还要好 或者说他的价格比较低 性价比真户要高的多 比如那个些什么之类的 有的有的模仿户 你比看了是模仿了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2498
+  },
+  {
+   "id": 397,
+   "start": 1165.17,
+   "end": 1167.54,
+   "text": "它的质量其实也可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 398,
+   "start": 1167.54,
+   "end": 1173.91,
+   "text": "但是你真的要几千块钱",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 399,
+   "start": 1173.91,
+   "end": 1176.99,
+   "text": "好 今天就是讲一下这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 400,
+   "start": 1176.99,
+   "end": 1177.95,
+   "text": "资文字专业",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 401,
+   "start": 1177.95,
+   "end": 1180.39,
+   "text": "很多的教材都是烂的教材",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 402,
+   "start": 1180.39,
+   "end": 1182.35,
+   "text": "都是多少年就是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 403,
+   "start": 1182.35,
+   "end": 1183.11,
+   "text": "就是不给",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 404,
+   "start": 1183.11,
+   "end": 1186.25,
+   "text": "其实除了住在写的书不好之外",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 405,
+   "start": 1186.25,
+   "end": 1187.15,
+   "text": "是更主要的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 406,
+   "start": 1187.15,
+   "end": 1189.29,
+   "text": "实际上是刚才第一个人讲的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 407,
+   "start": 1189.29,
+   "end": 1193.42,
+   "text": "更主要是在中国的大学",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 408,
+   "start": 1193.42,
+   "end": 1195.36,
+   "text": "和中国的大学老师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 409,
+   "start": 1195.36,
+   "end": 1197.52,
+   "text": "这是整天想着科研",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 410,
+   "start": 1197.52,
+   "end": 1200.94,
+   "text": "不认真教书的是大学老师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2184
+  },
+  {
+   "id": 411,
+   "start": 1200.94,
+   "end": 1209.17,
+   "text": "连换的面都不好做 连书都不知道选一个好的书 就把一个铺烂书随便拿来倒骨倒骨 把",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2684
+  },
+  {
+   "id": 412,
+   "start": 1209.67,
+   "end": 1217.2,
+   "text": "自行老师的科技或者拿过来就是贩卖 就了事了好 今天视频就到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2684
+  },
+  {
+   "id": 413,
+   "start": 1217.93,
+   "end": 1223.78,
+   "text": "感兴趣 你们在这买买我的书啊 这个信赖cr变成实战",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2684
+  },
+  {
+   "id": 414,
+   "start": 1225.49,
+   "end": 1234.93,
+   "text": "你买了这就觉得这本书到底好不好了 你们就可以去评价到底是不是烂书是不是烂书之王 谢谢大家",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2684
+  }
+ ]
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文字稿 · 谭浩强《C程序设计》为什么是烂书之王（hw-dong）</title>
+<style>
+  :root{
+    --bg:#f4f2ee; --panel:#fbfaf7; --panel2:#efede7;
+    --tx:#33393f; --tx2:#5c6570; --tx3:#8a939e;
+    --line:#d9d5cc; --line2:#c4bfb2;
+    --c1:#5f7a6f; --c2:#8a6d5c; --c3:#6d7b95; --c4:#96655f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--tx);
+    font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,serif;
+    font-size:16.5px; line-height:1.95;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:56px 32px 80px;}
+
+  /* ===== hero ===== */
+  .kicker{
+    font-family:"Segoe UI","Microsoft YaHei",sans-serif;
+    font-size:12.5px; letter-spacing:.25em; color:var(--tx3);
+    text-transform:uppercase; margin-bottom:18px;
+  }
+  .kicker b{color:var(--c1);font-weight:600;}
+  h1{
+    font-size:30px; font-weight:700; line-height:1.45;
+    letter-spacing:.02em; margin-bottom:20px;
+  }
+  .meta{
+    font-family:"Microsoft YaHei",sans-serif; font-size:13px; color:var(--tx2);
+    display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:26px;
+  }
+  .meta span b{color:var(--tx);font-weight:600;}
+  .meta a{color:var(--c3);text-decoration:none;border-bottom:1px dotted var(--line2);}
+  hr.top{border:none;border-top:1px solid var(--line);margin:0 0 30px;}
+
+  /* ===== 说明框 ===== */
+  .note{
+    background:var(--panel2); border:1px solid var(--line);
+    border-left:3px solid var(--c2); border-radius:6px;
+    padding:16px 22px; margin-bottom:36px;
+    font-family:"Microsoft YaHei",sans-serif; font-size:13.5px; color:var(--tx2);
+    line-height:1.9;
+  }
+  .note b{color:var(--tx);}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:22px 28px; margin-bottom:44px;
+    font-family:"Microsoft YaHei",sans-serif;
+  }
+  .toc h2{
+    font-size:13px; letter-spacing:.2em; color:var(--tx3); font-weight:600;
+    margin-bottom:12px;
+  }
+  .toc ol{list-style:none;counter-reset:toc;}
+  .toc li{counter-increment:toc; padding:5px 0; font-size:14.5px;}
+  .toc li::before{
+    content:counter(toc,decimal-leading-zero); color:var(--c1);
+    font-weight:700; margin-right:12px; font-size:13px;
+  }
+  .toc a{color:var(--tx2);text-decoration:none;}
+  .toc a:hover{color:var(--tx);}
+  .toc .t{
+    font-family:Consolas,monospace; font-size:12px; color:var(--tx3);
+    margin-left:8px;
+  }
+
+  /* ===== 章节 ===== */
+  section{margin-bottom:52px;}
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px;
+    border-bottom:2px solid var(--line); padding-bottom:10px; margin-bottom:18px;
+  }
+  .sec-num{
+    font-family:Consolas,monospace; font-size:13px; font-weight:700;
+    color:#fff; background:var(--c1); border-radius:4px; padding:2px 8px;
+    letter-spacing:.05em;
+  }
+  section:nth-of-type(2) .sec-num{background:var(--c2);}
+  section:nth-of-type(3) .sec-num{background:var(--c3);}
+  section:nth-of-type(4) .sec-num{background:var(--c4);}
+  section:nth-of-type(5) .sec-num{background:var(--c1);}
+  section:nth-of-type(6) .sec-num{background:var(--c2);}
+  section:nth-of-type(7) .sec-num{background:var(--c3);}
+  section:nth-of-type(8) .sec-num{background:var(--c4);}
+  section:nth-of-type(9) .sec-num{background:var(--c1);}
+  h2{
+    font-size:21px; font-weight:700; letter-spacing:.02em; flex:1;
+  }
+  .stamp{
+    font-family:Consolas,monospace; font-size:12.5px; color:var(--tx3);
+    text-decoration:none; white-space:nowrap;
+  }
+  .stamp:hover{color:var(--c3);}
+  section p{margin-bottom:16px; text-align:justify;}
+  section p .tt{
+    font-family:Consolas,monospace; font-size:12px; color:var(--tx3);
+    margin-right:6px; user-select:none;
+  }
+  em{font-style:normal; color:var(--c2); font-weight:600;}
+  .strong{color:var(--tx); font-weight:700;}
+
+  blockquote{
+    border-left:3px solid var(--line2); background:var(--panel);
+    padding:14px 22px; margin:6px 0 18px; border-radius:0 6px 6px 0;
+    color:var(--tx2); font-size:15.5px;
+  }
+  blockquote .q-src{
+    display:block; margin-top:8px; font-family:"Microsoft YaHei",sans-serif;
+    font-size:12px; color:var(--tx3);
+  }
+  .aside{
+    font-family:"Microsoft YaHei",sans-serif; font-size:13px; color:var(--tx3);
+    border-top:1px dotted var(--line2); padding-top:6px; margin-top:2px;
+  }
+
+  /* ===== footer ===== */
+  footer{border-top:1px solid var(--line); margin-top:20px; padding-top:30px;}
+  footer h2{font-size:16px;margin-bottom:14px;}
+  table{
+    width:100%; border-collapse:collapse;
+    font-family:"Microsoft YaHei",sans-serif; font-size:13px;
+  }
+  th,td{border:1px solid var(--line); padding:7px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--panel2); color:var(--tx2); font-weight:600; white-space:nowrap;}
+  td code{
+    font-family:Consolas,monospace; font-size:12px; color:var(--c2);
+    background:var(--panel); padding:1px 5px; border-radius:3px;
+  }
+  .colophon{
+    margin-top:28px; font-family:"Microsoft YaHei",sans-serif;
+    font-size:12px; color:var(--tx3); line-height:2;
+  }
+  @media print{
+    body{background:#fff;}
+    .wrap{max-width:100%;padding:20px;}
+    a{color:inherit;text-decoration:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">视频文字稿 <b>·</b> hw-dong</div>
+  <h1>烂书之王、抄袭大王、误人子弟——谭浩强《C程序设计》</h1>
+  <div class="meta">
+    <span>UP 主：<b>hw-dong</b></span>
+    <span>时长：<b>20:36</b></span>
+    <span>发布：<b>2025-03-10</b></span>
+    <span>播放 <b>15.6 万</b> / 点赞 <b>549</b></span>
+    <span><a href="https://www.bilibili.com/video/BV19jR3YAEVw/" target="_blank">BV19jR3YAEVw ↗</a></span>
+  </div>
+  <hr class="top">
+
+  <div class="note">
+    <b>整理说明。</b>本稿由视频口播转写（Whisper large-v3-turbo，覆盖率 99.91%）后做<b>书面化整理</b>：
+    修正转写错字与专有名词（见文末勘误表），合并口头重复，补全语境中被指代的内容；语气与论点保持原意，<b>不增删观点</b>。
+    文中「他」指本视频 UP 主本人；灰色引文块为他在视频中<b>引用/播放</b>的他人视频或评论原文（大意）。
+    视频为口播即兴评论，所有观点均系 UP 主个人言论。时间戳可点击回跳 B 站对应位置。
+  </div>
+
+  <nav class="toc">
+    <h2>目 录</h2>
+    <ol>
+      <li><a href="#s1">满屏的「烂书之王」，和没人追问的问题</a><span class="t">00:00</span></li>
+      <li><a href="#s2">更少人知道的头衔：抄袭大王</a><span class="t">01:00</span></li>
+      <li><a href="#s3">「怪他没跟进 C99 标准」是怪错了人吗</a><span class="t">03:31</span></li>
+      <li><a href="#s4">真正「毒害」大学生的是大学和老师</a><span class="t">07:00</span></li>
+      <li><a href="#s5">题外话：我的书为什么没人用</a><span class="t">11:56</span></li>
+      <li><a href="#s6">同样的文案：六千播放 vs 二十五万播放</a><span class="t">13:53</span></li>
+      <li><a href="#s7">借题发挥：抄袭的越火，干货越无人问津</a><span class="t">16:22</span></li>
+      <li><a href="#s8">「抄了就要超越」</a><span class="t">17:26</span></li>
+      <li><a href="#s9">收尾：锅最终回到大学</a><span class="t">19:30</span></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 1 ============ -->
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>满屏的「烂书之王」，和没人追问的问题</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=0" target="_blank">00:00 ↗</a>
+    </div>
+    <p><span class="tt">00:00</span>昨天我在 B 站刷到一个视频，讲的是谭浩强的《C程序设计》——说这本书误人子弟，作者是烂书之王，「毒害了中国大学生的罪魁祸首」。今天我再搜了一下「烂书之王」：<em>B 站上整个都是这类视频，头像清一色用的都是谭浩强</em>。看来「这本书很烂」，已经成了共识。</p>
+    <p><span class="tt">00:45</span>但有一个问题值得琢磨：这本书既然这么烂，为什么直到今天，高校里还在普遍采用它？连计算机等级考试，考的也是他这本 C 语言。</p>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>更少人知道的头衔：抄袭大王</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=60" target="_blank">01:00 ↗</a>
+    </div>
+    <p><span class="tt">01:00</span>很多人只知道谭浩强是「烂书之王」，不知道他实际上还是<em>「抄袭大王」</em>。他这本书的内容，可以说几乎全部抄袭自 C 语言发明者写的那本书——就是后来被翻译成中文的那本（K&amp;R 的《The C Programming Language》）。按他的判断：<span class="strong">谭浩强的书，90% 是抄的</span>。</p>
+    <p><span class="tt">01:53</span>多少年来，中国大学把这本书奉为经典：C 语言课用它，其他专业开 C 语言也用它。而在中国这种不重视知识产权的环境下——说到这里他还自嘲了一句「这样一说，会不会把我的视频给封了」——抄袭的教材、抄袭论文的人，照样混得风生水起。<span class="strong">这不是某一个人的问题，而是一种普遍现象</span>。这本书还畅销得不得了，据说卖了几千万册，在中国 C 语言教学界统治了很多年。</p>
+    <p><span class="tt">02:40</span>他推测抄袭的经过：原著是 1978 年出的，那时候还没有中文译本，所以谭浩强抄的只能是英文版——翻译过来据为己有，然后<em>打一个中英文的信息差</em>：中文读者没人看过英文原著，自然无从追究。其实只要有人读过 C 语言发明者写的那本书，一对比就知道全是抄的。可就是没有人去计较、去深究。连计算机等级考试，都在考他这本书的内容。</p>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>「怪他没跟进 C99 标准」是怪错了人吗</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=211" target="_blank">03:31 ↗</a>
+    </div>
+    <p><span class="tt">03:31</span>接下来他放出另一家视频的文案：</p>
+    <blockquote>
+      「好多人说谭老的 C 语言教材很烂，那么他的书为什么那么烂？这一点很多人都没思考过，网上的评论都不在一个焦点上。把罪责归于谭老写的《C程序设计》，实在是很滑稽。许多人批评的重要理由是『不符合 C99 标准』——从这个方向怪谭老、讽刺谭老，其实真的怪错了人。虽然我不太建议初学者用红皮书学这门语言，但书的作者谭老是一个值得尊敬的人：1972 年 C 语言才推出第一个版本，当时谭老 38 岁；1989 年才完成第一次标准化，俗称 C89，当时谭浩强 55 岁；1991 年，谭老 57 岁的时候《C程序设计》出版；1999 年 C99 标准问世时，他已经 65 岁。计算机行业发展迅猛、新旧更替……」
+      <span class="q-src">—— 其他 UP 主视频文案（由本视频播放，大意）</span>
+    </blockquote>
+    <p><span class="tt">04:30</span>对此他的态度是：这段文案的作者其实什么也没搞清楚——嘴上说「怪错了人」，自己连谭浩强的书和 C 语言标准的先后关系都没弄明白，属于瞎说。<span class="strong">这本书烂，和符不符合 C 语言标准根本没有关系</span>：标准还没出来的年代，谁也不可能「完全照着标准写」；拿「书比 1989 年的标准还早」说事，是连 C 语言发明者 1978 年就出了书都不知道。</p>
+    <p><span class="tt">05:02</span>书烂的真正原因就两条：一是<em>内容是抄的</em>，例子什么都是用人家的；二是<em>抄还抄不好</em>。他不可能老老实实全盘翻译——那样一眼就会被看出来。所以他抄一部分、自己「发挥」一部分，把人家原本讲得清楚的东西越讲越死、越讲越晦涩，还显得自己钻研得很深、很有料。实际上这是一个根本不懂教育、不懂教学的人，说他写的书误导中国学生，一点都不为过。</p>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>真正「毒害」大学生的是大学和老师</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=420" target="_blank">07:00 ↗</a>
+    </div>
+    <p><span class="tt">07:02</span>他认为那段文案里有句话说得不错：谭浩强这本书虽然占据着权威地位，但<em>用不用，最终还是取决于大学</em>。所以真正坑害中国大学生的，其实不是谭浩强——他当年把书写成那样，可当年选教材的空间就那么大，不用他的用谁的？关键在高校：大学为什么要用它？</p>
+    <p><span class="tt">07:40</span>大学老师选教材是完全有自主权的。稍微像样一点的大学，不会强迫老师必须用某本教材，老师理应挑选自己认为好的书。可是中国这么多大学、这么多计算机专业的老师，<span class="strong">为什么就没有一个不用这本书？全都在用</span>。学校规定要用，老师自己也说要用，大家都用，于是接着用。从这一点就能看出来：中国的大学就是拿着这种很老套、很烂的教材在教大学生。</p>
+    <p><span class="tt">08:33</span>由此延伸，之前视频里讲过的软件工程也一样：中国大学里教软件工程的老师，绝大部分根本不懂软件工程，也没在企业干过，只能瞎讲；用的教材还是多少年前那些根本没用的旧书。中国的很多教材都很烂、都很老，却总是占据统治地位，多少年也不允许更换，宁可一直用传统的。<span class="strong">中国的大学太僵化了</span>。说到底，就是根本对大学生不负责：老师的心思全在科研、发论文、评职称、申课题上，没有心思真正从事教学；课件做得一塌糊涂，连本科生都不如；上课拿着破书随便照本宣科、糊弄一下就完事。</p>
+    <p><span class="tt">10:08</span>顺带自荐：像他讲的《算法设计与分析》这门课，自认为讲得很清楚，大家可以了解一下。并点名很多大学在用的王晓东《计算机算法设计与分析》——在他嘴里，是「和谭浩强的书一样烂」的教材。</p>
+    <blockquote>
+      「入门 C 语言有很多种书籍，偏偏选择的是一本过时的、应付考试的书籍；在一个快速发展的时代，也不修改，继续用这些过时的书籍。」
+      <span class="q-src">—— 视频中引用的评论（大意）</span>
+    </blockquote>
+    <p><span class="tt">11:11</span>念完评论他又吐了个槽：视频下面还有人推荐《C Primer Plus》《C++ Primer》之类的书；网上也一大堆人吹捧《C Primer》、什么《算法导论》。他直言这些书「也很一般、不怎么样」，自己学编程语言不会看那些书，也劝人别看——与其看这些书，不如在网上看看文章。<em>越是烂的书反而越吃香，因为它有名了</em>。（此为 UP 主个人观点，原话如此。）</p>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>题外话：我的书为什么没人用</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=716" target="_blank">11:56 ↗</a>
+    </div>
+    <p><span class="tt">11:56</span>说到「烂书反而吃香」，他忍不住自嘲：像我写的这种「特别好的书」，就没人用。他之前写的《C++17从入门到精通》（清华大学出版社），自认为语法部分讲得很好，实战项目也非常多，却没有一个大学采用——因为那些老师根本不知道你的书，也不会去看你是什么人。</p>
+    <p><span class="tt">12:31</span>纸质书出版走不通，他就把内容做成电子版放在网上卖，买的人寥寥无几，所以暂时也没什么积极性把连载项目补完；但他表示会持续更新这本书，读者有反馈就会修改。新电子书是在《C++17从入门到精通》基础上修订的，主要是更新到 C++23 标准，所以不再叫《C++17》，而叫<em>《现代C++编程实战》</em>。</p>
+    <p><span class="tt">13:25</span>说到 C++，他又绕回老生常谈：现在大学里教的还普遍是「传统 C++」，多少年不变，根本不想用新的 C++ 教学生——和谭浩强的 C 语言一模一样，也是在误人子弟。</p>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>同样的文案：六千播放 vs 二十五万播放</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=833" target="_blank">13:53 ↗</a>
+    </div>
+    <p><span class="tt">13:53</span>他说自己就是昨天刷到那个视频才想做这一期的，顺手对比了播放量：讲同样文案的男 UP 主只有六千多播放，而一位女 UP 主的同类视频已经有 21.4 万，后来涨到 25 万。他的感叹是：<span class="strong">自媒体还是女生做占优势</span>——不管讲什么内容，只要年轻女生出镜，播放量就在那儿；就算内容和谭浩强的书一样「烂」，照样很多人看。</p>
+    <p><span class="tt">15:20</span>他点开那位女 UP 主的视频，承认两边文案几乎一样，也不知道是不是互相抄的，但人家的播放量就是 24 万+：</p>
+    <blockquote>
+      「不符合 C99 标准。1934 年谭浩强老先生出生，到今天已经 88 岁高龄。网上有很多段子这样评论，比如把 C 语言之父说成谭浩强……很多人开始怪谭老，这个方向就不对了，甚至各种讽刺谭老，其实这真的是怪错了人。但书的作者谭老，是一个值得尊敬的人。」
+      <span class="q-src">—— 其他 UP 主视频片段（由本视频播放，大意）</span>
+    </blockquote>
+    <p><span class="tt">15:51</span>他的评价：这些文案的意思大同小异，套路都是同一个——「谭浩强的书很烂，但谭老人是好人，最后把锅甩给中国大学」。</p>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section id="s7">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>借题发挥：抄袭的越火，干货越无人问津</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=982" target="_blank">16:22 ↗</a>
+    </div>
+    <p><span class="tt">16:25</span>他从这件事延伸开去：这些互相抄袭的视频，和谭浩强那些书一个样——<span class="strong">越是抄袭的越火，越是有真干货的，越是无人问津</span>。所谓「乌合之众」，大多数人都人云亦云，崇拜权威，其实没有自己的独立思考。</p>
+    <p><span class="tt">16:55</span>他又讲了一段自己的观察：很多人自以为在思考——理论、说法一套一套的，口才好得不得了，你根本讲不过他；但他讲的东西，其实都是常识，是长期被同质化信息喂养出来的结果。<em>人的思想，本质上就是所接收信息训练出来的结果</em>。</p>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section id="s8">
+    <div class="sec-head">
+      <span class="sec-num">08</span>
+      <h2>「抄了就要超越」</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=1046" target="_blank">17:26 ↗</a>
+    </div>
+    <p><span class="tt">17:26</span>被引用的视频里还有一段：「2000 年之后，经典的新语言书籍层出不穷，甚至可以用百花齐放、百家争鸣来形容了，谭老的书已经毫无竞争力了。」——紧接着那位 UP 主开始推荐自己的 C++ 学习资料和教程。他对此的吐槽是：你看，这个和谭浩强的书一样烂，给人家塞这么多东西，人家看得过来吗？<em>越是烂的，越是吃香。</em></p>
+    <p><span class="tt">17:55</span>他又刷了一圈同类视频：又一个 24.9 万播放的、一个 9.3 万的，还有一个 179 万的——那个 179 万的和谭浩强关系不大。随后翻到一篇类似「那些年我们读过的烂书」的讨论，说其中清华大学出版社的书占了不少；并判断这文章本身也不是原创，同样是抄来的，而且抄得比原作还糟。</p>
+    <p><span class="tt">18:45</span>他的观点：抄袭不可怕——<span class="strong">模仿本来就是造一座桥，抄了之后你要超越原作才行</span>；抄了人家的书，不但没超越反而变得更烂，那这个抄袭就没意思了。他还引了马云那句「现在假货比真货好」：仿品有的质量确实不差，或者价格低、性价比比真货高得多；对比之下，抄袭书抄完反而更烂，高下立判。</p>
+  </section>
+
+  <!-- ============ 9 ============ -->
+  <section id="s9">
+    <div class="sec-head">
+      <span class="sec-num">09</span>
+      <h2>收尾：锅最终回到大学</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV19jR3YAEVw/?t=1170" target="_blank">19:30 ↗</a>
+    </div>
+    <p><span class="tt">19:30</span>最后总结全片：计算机专业很多教材都是烂教材，多少年不更换。除了原著和书本身的问题，更主要的原因，还是开头第一个视频讲到的那件事——<span class="strong">在中国的大学，和中国的大学老师</span>：整天想着科研、不认真教书的大学老师，连课件都做不好，连一本好书都不会选，拿一本破烂书随便捣鼓，或者把别的老师的课件拿过来照搬了事。</p>
+    <p><span class="tt">20:09</span>照例是广告收尾：「感兴趣的可以买我的书，《现代C++编程实战》——买完你们就可以自己评价，它到底是不是烂书、是不是烂书之王。谢谢大家。」</p>
+  </section>
+
+  <!-- ============ footer ============ -->
+  <footer>
+    <h2>附录 · 转写勘误对照（主要项）</h2>
+    <table>
+      <tr><th>ASR 原文（示例）</th><th>修正为</th></tr>
+      <tr><td><code>谭豪强 / 谭浩翔 / 谭花祥 / 台湾讲 / 谭奥阳 / 谭王高强</code></td><td>谭浩强</td></tr>
+      <tr><td><code>无能子弟 / 无人子弟 / 无人职业</code></td><td>误人子弟</td></tr>
+      <tr><td><code>超级大王</code></td><td>抄袭大王</td></tr>
+      <tr><td><code>冷压 / 冷的</code></td><td>K&amp;R（《The C Programming Language》，C 语言发明者所著）</td></tr>
+      <tr><td><code>世界语言 / 诗语音 / 试语音 / 知语</code></td><td>C 语言</td></tr>
+      <tr><td><code>质问机 / 基文记事 / 济文基</code></td><td>计算机（等级考试）/ 计算机专业</td></tr>
+      <tr><td><code>卵精工程 / 乱用的</code></td><td>软件工程</td></tr>
+      <tr><td><code>换了面 / 换了没</code></td><td>课件</td></tr>
+      <tr><td><code>欧和之众 / 能云也云</code></td><td>乌合之众、人云亦云</td></tr>
+      <tr><td><code>中门到京同 / C加仕器从京东</code></td><td>《C++17从入门到精通》</td></tr>
+      <tr><td><code>信赖cr变成实战 / C现在C加价</code></td><td>《现代C++编程实战》</td></tr>
+      <tr><td><code>C加价2三</code></td><td>C++23</td></tr>
+      <tr><td><code>Primed / Scanf</code></td><td>printf、scanf</td></tr>
+      <tr><td><code>时间扎 / 信息查</code></td><td>时间差 / 信息差</td></tr>
+      <tr><td><code>群威</code></td><td>权威</td></tr>
+      <tr><td><code>百花期放</code></td><td>百花齐放</td></tr>
+      <tr><td><code>风声水指</code></td><td>风生水起</td></tr>
+      <tr><td><code>二十四顶九万 / 二十一顶四万</code></td><td>24.9 万 / 21.4 万（「顶」=「点」）</td></tr>
+    </table>
+    <div class="colophon">
+      音频：Bilibili 30280 音轨（AAC ≈126 kbps）→ MP3 192 kbps，时长偏差 0.007%。<br>
+      转写：faster-whisper large-v3-turbo / CUDA float16，415 段，文本覆盖率 99.91%，用时 36.5s（33.9× 实时）。<br>
+      本页为口播内容的书面化整理稿，观点归属原视频 UP 主 hw-dong，整理者仅做文字修订。
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
