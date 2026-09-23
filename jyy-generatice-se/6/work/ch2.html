@@ -1,0 +1,291 @@
+<div class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>需求工程</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=903" target="_blank"><span class="dot"></span>15:03 – 44:28</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这一章用南京大学教务系统做主线案例，把「需求工程」讲成了一个<strong>关于失控的故事</strong>：需求不断叠加、每加一条就固化一次设计、最终系统里充满无法解释的不一致。讲师的结论很锋利——<strong>需求永远不可能说清楚，而且它本身还会变</strong>，所以你一旦做了需求分析，就等于背上了技术债。同时他也演示了 AI 在这里能做到什么程度。</p>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>曾经为什么很难讲需求工程</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=903" target="_blank"><span class="tri"></span>15:03</a>
+      <p>讲师坦白了这门课的长期困境：<strong>曾经需求工程很难讲</strong>，因为学生不会去见真正的客户，也做不了需求级别的软件系统。</p>
+      <p>他给出了原因：从你刚入学学编程语言，到毕业的时候，<strong>你的能力增长不足以让你面对一个真正的软件客户</strong>。买你软件的人要签合同、要验收，而你给不出承诺。</p>
+      <p>但讲师说，<strong>现在这件事变了</strong>。</p>
+      <div class="kv">
+        <div>AI 之前</div><div>只有<strong>极少量</strong>的精英独立开发者，经过几年开源社区洗礼后觉得自己可以独立了，会有一些付费用户</div>
+        <div>现在</div><div>独立开发者<strong>爆炸式增长</strong>，而付费用户「瑟瑟发抖」——因为供给端的能力突然变得很充裕</div>
+        <div>反差</div><div>过去是「你不敢去跟学校签 20 万的合同」，现在是「AI 敢，你也可以跟着敢」</div>
+      </div>
+      <p>讲师说，所以今天有底气拿一个<strong>真实的、他自己每天都在用的系统</strong>来讲需求——不是编的案例，是真的。</p>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>教务系统：史诗级的需求爆炸</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=963" target="_blank"><span class="tri"></span>16:03</a>
+      <p>讲师现场登录教务系统，一边点一边讲。他称之为「<strong>史诗级的需求爆炸</strong>」——这个系统功能极多，而且很多是「曾经肯定没有、后来被加进去的」。</p>
+      <div class="blk q">
+        <span class="label">现场演示中出现的那些功能</span>
+        <ul>
+          <li><strong>一个 AI 搜索框</strong>：可以问「仙林教学楼的灯一直没解决，我应该打电话给谁」。讲师说这是个「史诗级的更新」，以前没有</li>
+          <li><strong>教师课表 / 教学任务 / 学生名单 / 教学周历 / 课程与大纲 / 教材选用</strong>：一层套一层，每一层还有下拉框选学年学期</li>
+          <li><strong>助教管理</strong>：还细分了「普通教学班助教」与「慕课助教」，是疫情时期加的需求</li>
+          <li><strong>期末考试签到表</strong>：在非期末时段点击会弹窗告诉你「无法打印」</li>
+        </ul>
+      </div>
+      <p>讲师顺手挑了几个毛病，而且都是有代表性的：</p>
+      <div class="blk pit">
+        <span class="label">现场抓到的三类问题</span>
+        <ul>
+          <li><strong>隐私边界不清</strong>：学生名单里能直接看到电话号码，讲师说这「显然是一个比较糟糕的 feature」</li>
+          <li><strong>没有审计</strong>：他用 AI 生成的 slop 直接把教学周历填满，<strong>没有任何人来审计他填的内容</strong></li>
+          <li><strong>状态与操作不匹配</strong>：点「新增助教」弹「请在可维护时段内操作」——已经不能申请了，但界面还在那里</li>
+        </ul>
+      </div>
+      <p>讲师还讲了一个关于需求如何「叠加」的经典例子：<strong>疫情之前没有慕课功能</strong>；疫情时领导说「要给老师加慕课」；加完之后又需要「慕课的助教」；而慕课助教不能当成普通教学班的助教处理——于是就有了这个「史诗级的 bug」。<strong>每一层需求都是在上一层的假设上长出来的</strong>。</p>
+      <p>他最后给了一个很狠的成本对比：这个系统肯定花了很多钱，而<strong>这些钱某种程度上还不如变成 token 的补贴发给大家</strong>——因为如果用一个 agent 去找「仙林教学楼的灯该找谁」，可能只需要一毛钱两毛钱。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>讲师在这里其实提出了一个关于「业务系统」的尖锐判断：<strong>当一个系统已经积累了这么多功能，它本身就已经进入了泥潭</strong>。不是因为它做得不好，而是因为需求这种「不断叠加」的生长方式，注定会把系统推向无法理解的状态。这个判断会在第 4 章被形式化。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>让 GPT 生成一份需求说明书</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=1380" target="_blank"><span class="tri"></span>23:00</a>
+      <p>讲师说他做了一件「Agent 敢就行」的事：<strong>让 GPT 去探索这个教务系统里和教师相关的功能，产出一份需求说明书</strong>。结果是一份正式的《南京大学本科教学服务平台需求说明书》。</p>
+      <p>讲师对这个结果的评价很有意思：<strong>GPT 是懂软件工程的</strong>。证据是它的目录结构。</p>
+      <div class="blk q">
+        <span class="label">这份自动生成的需求说明书长什么样</span>
+        <ul>
+          <li>有<strong>调研方法、证据、边界</strong>这类前置说明（不是一上来就堆功能）</li>
+          <li>有<strong>业务目标、成功标准</strong>（也就是验收依据）</li>
+          <li>有<strong>详细用例规约、功能需求目录</strong>（把每个需求点编号、标出角色与业务目标）</li>
+          <li>有<strong>验收场景</strong>与<strong>需求清单</strong></li>
+          <li>最后还有<strong>术语表与配套文件</strong>——讲师特别强调这一项的价值</li>
+        </ul>
+      </div>
+      <p>讲师自己也承认，从熟悉这个系统的人看来，一份已经做好的系统上再生成这么多东西「就完全是 slop」。但他还是给了公正评价：<strong>如果你要做一个真正的工程、面对的是客户，那么「一个术语」就很重要</strong>——因为客户/实现方在看不懂的时候可以去查术语，从而完成对齐。</p>
+      <figure>
+        <svg viewBox="0 0 1040 340" role="img" aria-label="需求说明书的结构与可追踪性">
+          <rect x="0" y="0" width="1040" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">需求说明书为什么能「被追踪」：靠的是形式化的编号与语义锚点</text>
+
+            <rect x="30" y="48" width="290" height="156" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="72" fill="#adbccd" font-size="12" font-weight="700">文档骨架</text>
+            <g font-size="10.5" fill="#77879a">
+              <text x="46" y="96">调研方法 · 证据 · 边界</text>
+              <text x="46" y="116">业务目标 · 成功标准</text>
+              <text x="46" y="136">用例规约（详细）</text>
+              <text x="46" y="156">功能需求目录</text>
+              <text x="46" y="176">验收场景 · 需求清单</text>
+              <text x="46" y="196">术语表 · 配套文件</text>
+            </g>
+            <text x="46" y="222" fill="#adbccd" font-size="10.5">→ 每一层都能往下追到具体条目</text>
+
+            <rect x="356" y="48" width="320" height="156" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="372" y="72" fill="#a98bfa" font-size="12" font-weight="700">单个需求点的形式语义</text>
+            <g font-family="Consolas, Cascadia Code, monospace" font-size="10.5" fill="#adbccd">
+              <text x="372" y="98">REQ-014 身份切换</text>
+              <text x="372" y="118">├ role: 教师 / 学生 / 教务员</text>
+              <text x="372" y="138">├ goal: 在多种身份间切换</text>
+              <text x="372" y="158">├ input: 授权范围内的身份</text>
+              <text x="372" y="178">└ accept: 显示当前身份</text>
+            </g>
+            <text x="372" y="198" fill="#77879a" font-size="10.5" text-anchor="start">↑ 有了 ID，就能被引用、被追踪</text>
+
+            <rect x="712" y="48" width="298" height="156" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="728" y="72" fill="#3fd68c" font-size="12" font-weight="700">于是可以做到</text>
+            <g font-size="10.5" fill="#adbccd">
+              <text x="728" y="98">· 改这条需求会影响哪些测试？</text>
+              <text x="728" y="118">· 哪个团队的需求落后于进度？</text>
+              <text x="728" y="138">· 前 20 条给一队、后 20 条给二队</text>
+              <text x="728" y="158">· 逐条核对验收场景</text>
+            </g>
+            <text x="728" y="184" fill="#77879a" font-size="10.5">→ 管理动作第一次有了依据</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="322" y1="126" x2="352" y2="126"/><polygon points="352,126 344,122 344,130"/>
+              <line x1="678" y1="126" x2="708" y2="126"/><polygon points="708,126 700,122 700,130"/>
+            </g>
+
+            <line x1="30" y1="222" x2="1010" y2="222" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="246" fill="#77879a" font-size="11.5">但讲师同时指出这份文档的三个「空转」之处</text>
+            <rect x="30" y="258" width="310" height="66" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="280" fill="#f8736e" font-size="11">① 系统已经做好了</text>
+            <text x="46" y="302" fill="#77879a" font-size="10.5">对熟悉它的人来说，这就是 slop</text>
+            <rect x="356" y="258" width="320" height="66" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="372" y="280" fill="#f0b429" font-size="11">② 有编号不等于有真相</text>
+            <text x="372" y="302" fill="#77879a" font-size="10.5">描述的是「现在长这样」，不是「为什么」</text>
+            <rect x="712" y="258" width="298" height="66" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="728" y="280" fill="#3fd68c" font-size="11">③ 但术语表是真的有用</text>
+            <text x="728" y="302" fill="#77879a" font-size="10.5">看不懂时去查，就完成了对齐</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜需求说明书为什么能追踪</b>　这张图想说明的重点是中间那个方块：<strong>可追踪性不是靠「写得详细」实现的，而是靠「每条需求有一个形式化的 ID 和语义锚点」</strong>。讲师举的例子是「教学班和学生管理是有关的」——你当然可以自然语言这么说，但如果给它一个编号和一个角色字段，它就能被程序引用、被团队分工、被逐条验收。这就是 pre-AI 时代 UML 想解决的问题，而现在 AI 一个下午就产出了。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>从需求文档到可运行的假系统</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=1800" target="_blank"><span class="tri"></span>30:00</a>
+      <p>接下来是这一章最震撼的演示。讲师又做了一件事：</p>
+      <blockquote>
+        <p>我让 GPT 起一个 subagent，然后这个 subagent 不要看任何其他的教务系统，只根据这个需求说明书来实现一个假的教务系统。</p>
+        <cite>讲师描述这次实验（约 30:20 处）</cite>
+      </blockquote>
+      <p>关键在于那个约束：<strong>不许看真实系统，只能看需求文档</strong>。这是对「需求文档是否充分」的一次真正的验收测试。</p>
+      <p>结果让讲师「突然又有信心了」——做出来的假系统和他刚才看的真系统「挺像的」，功能上（返回全部教学任务、我的教学任务、本科教材管理、编辑记录、保存记录）都能对上。</p>
+      <div class="blk q">
+        <span class="label">演示中的几个细节</span>
+        <ul>
+          <li><strong>GPT 给功能起名字很文雅</strong>：比如「软件工程实践者的研究方法」这类命名，讲师说「他认为在我的教务系统里面，他起的挺文雅的」</li>
+          <li><strong>它有前端校验</strong>：讲师输入一个非法值（比如负数的缺课次数），前端直接拒绝</li>
+          <li><strong>但它没做业务语义的校验</strong>：讲师记录了一个超过总课时数的缺课次数，系统<strong>没有阻止他</strong>。讲师点评：「这个其实也不合理，因为这个数字已经超过了所有学习上课次数的总和」</li>
+        </ul>
+      </div>
+      <p>讲师由此给出了这一章最重要的一句结论：</p>
+      <div class="blk concl">
+        <span class="label">这一节的核心判断</span>
+        <p><strong>当你的需求是清楚的、当你的需求文档已经写到那个程度的时候，那么编码的事情、traceability 的事情、测试的事情，其实 AI 都能帮你搞定了。你只需要一份需求。</strong></p>
+      </div>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>和客户沟通要的是同理心</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=1920" target="_blank"><span class="tri"></span>32:00</a>
+      <p>讲师从演示切回到方法论，讲了一件他认为工科学生最缺的东西：<strong>同理心</strong>。</p>
+      <p>他给了一个非常具体的用户画像，而这个画像是这一节的核心：</p>
+      <blockquote>
+        <p>那个教务员可能是本科学历，然后今年已经 53 岁，还有两年就要退休了——一个优雅的女士。那她在她上大学的时候，可能甚至都没有操作过电脑。</p>
+        <cite>讲师描述真实用户（约 33:30 处）</cite>
+      </blockquote>
+      <p>所以要设计一个教务系统，既要为她设计，也要为年轻人设计。讲师明确说这「完全是另外的一个问题」，不是这门课的重点，但它是做需求时的普遍现实。</p>
+      <div class="blk pit">
+        <span class="label">工科学生常见的三种错位</span>
+        <ul>
+          <li><strong>假设所有人都会写程序</strong>：以自己为原型设计界面，忘了用户不会</li>
+          <li><strong>追求技术上的最优</strong>：你的想法总是「最好的数据库、最高的性能」，但用户只是想<strong>字大一点、点鼠标时不要手滑到边上那个按钮</strong></li>
+          <li><strong>不敢承认自己是外行</strong>：你作为一个毛头小伙、本科生，不知道教务员到底想要什么，那你做出来的需求<strong>很有可能就是有偏差的</strong></li>
+        </ul>
+      </div>
+      <p>讲师由此引出了「行业壁垒」这件事：一个有 20 年行业经验的公司，它有很多<strong>领域知识</strong>——它知道教务员想要什么，对学位授予的流程比你清楚，所以知道这个流程应该怎么变成需求文档列表。<strong>这就是行业壁垒，也是它的价值。</strong></p>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>需求永远不可能说清楚</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=2100" target="_blank"><span class="tri"></span>35:00</a>
+      <p>这一节把整章的论证收成了一个「定律」。讲师说，软件从空项目开始的时候，没有任何东西是漂移的；但<strong>一旦你写出了一个需求列表，AI（或者人类）就立刻给你实现了一版</strong>——于是你就背上了技术债。</p>
+      <div class="blk q">
+        <span class="label">需求的两条铁律</span>
+        <ul>
+          <li><strong>第一，你永远不可能真的把用户的需求说清楚</strong>——不是能力问题，是本质问题</li>
+          <li><strong>第二，需求不是一成不变的</strong>——它会被外部世界改掉，而不是被你说得更清楚</li>
+        </ul>
+      </div>
+      <p>讲师说：「因为我们的定律是，需求永远不可能说清楚。」这句话是下一节那个离散数学案例的引子——那个例子专门用来展示<strong>第二律</strong>（需求会变）如何摧毁一个原本合理的设计。</p>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>离散数学拆课：一条需求引出的连锁反应</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=2160" target="_blank"><span class="tri"></span>36:00</a>
+      <p>讲师讲了一个真实发生的事：学院把<strong>离散数学拆成了上下学期两门课</strong>。（他还提到「软院好像还是一门离散数学课」，所以问题更复杂了。）这个教学上的决定，在教务系统里引发了一串连锁反应。</p>
+      <figure>
+        <svg viewBox="0 0 1040 360" role="img" aria-label="需求变更的连锁反应">
+          <rect x="0" y="0" width="1040" height="360" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">一条教学决定如何变成一张需求清单：每一层都在上一层的假设上长出来</text>
+
+            <rect x="30" y="46" width="230" height="72" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="46" y="68" fill="#46c6e0" font-size="11.5" font-weight="700">① 物理世界的决定</text>
+            <text x="46" y="88" fill="#adbccd" font-size="10.5">学院把离散数学拆成上下两门</text>
+            <text x="46" y="106" fill="#77879a" font-size="10.5">准出结果、保研要求都跟着变了</text>
+
+            <rect x="300" y="46" width="230" height="72" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="316" y="68" fill="#f0b429" font-size="11.5" font-weight="700">② 规则要改</text>
+            <text x="316" y="88" fill="#adbccd" font-size="10.5">原来：必须选修「离散数学」</text>
+            <text x="316" y="106" fill="#77879a" font-size="10.5">现在：选修「离散数学一」或「二」</text>
+
+            <rect x="570" y="46" width="230" height="72" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="586" y="68" fill="#f8736e" font-size="11.5" font-weight="700">③ 但系统里没有「或」</text>
+            <text x="586" y="88" fill="#adbccd" font-size="10.5">当年设计时：毕业要求＝选一门课</text>
+            <text x="586" y="106" fill="#77879a" font-size="10.5">下拉框选一个课程，就这么简单</text>
+
+            <rect x="840" y="46" width="170" height="72" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="856" y="68" fill="#3fd68c" font-size="11.5" font-weight="700">④ 只能重做</text>
+            <text x="856" y="88" fill="#adbccd" font-size="10.5">调出需求文档改设计</text>
+            <text x="856" y="106" fill="#77879a" font-size="10.5">下拉框里加一个「或」</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="262" y1="82" x2="296" y2="82"/><polygon points="296,82 288,78 288,86"/>
+              <line x1="532" y1="82" x2="566" y2="82"/><polygon points="566,82 558,78 558,86"/>
+              <line x1="802" y1="82" x2="836" y2="82"/><polygon points="836,82 828,78 828,86"/>
+            </g>
+
+            <rect x="30" y="140" width="490" height="98" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="162" fill="#f8736e" font-size="11.5" font-weight="700">越往后走越离谱：抵扣与特批</text>
+            <text x="46" y="184" fill="#77879a" font-size="10.5">· 别的院系也有一门离散数学，能不能抵扣计院的？</text>
+            <text x="46" y="202" fill="#77879a" font-size="10.5">· 抵扣「一和二」，还是只抵扣「一」、还要再上「二」？</text>
+            <text x="46" y="220" fill="#77879a" font-size="10.5">· 重修、交换、抵扣——每一条都是一个新需求</text>
+
+            <rect x="540" y="140" width="470" height="98" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="556" y="162" fill="#f0b429" font-size="11.5" font-weight="700">最后逃不掉的 override</text>
+            <text x="556" y="184" fill="#77879a" font-size="10.5">系统里没有的情况，一定还会真实发生（比如春季不开课）</text>
+            <text x="556" y="202" fill="#adbccd" font-size="10.5">→ 最终做法：打电话给工程师，直接改数据库</text>
+            <text x="556" y="220" fill="#77879a" font-size="10.5">→ 层层审批留档，在人类世界里它「合理」</text>
+
+            <line x1="30" y1="262" x2="1010" y2="262" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="286" fill="#77879a" font-size="11.5">于是「史山」就这样一层一层累积起来</text>
+            <rect x="30" y="298" width="960" height="46" rx="9" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.2"/>
+            <text x="46" y="320" fill="#adbccd" font-size="11">改需求之所以让人受不了，是因为它破坏了一个「整体上一致的设计」——裂缝会传递到系统的各个部分，</text>
+            <text x="46" y="337" fill="#adbccd" font-size="11">于是一个看似很小的需求要改，却牵动了整个系统。这就是所谓「屎山」的形成机制。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜需求变更的连锁反应</b>　这张图的重点在最上面那条链：<strong>①②③ 三步里没有任何一步是「工程师犯错」</strong>。学院拆课是合理的教学决定；规则要改成「或」是逻辑必然；当年设计的下拉框选一门课，在当时的语境下也是完全合理的需求。问题出在<strong>④——一旦旧设计固化了假设，新需求就得靠改设计来容纳</strong>。而现实世界里「能不能抵扣」这类问题会无穷无尽地长出来，最后总有一个 override 兜底。</figcaption>
+      </figure>
+      <p>讲师还讲了一个更微妙的点：<strong>最后系统中不会出现的东西，还是可以操作的</strong>。因为总会有人遇到特例（比如已经读到大六、马上要毕业、而春季又不开那门课），这时唯一的解法就是 <strong>override</strong>——打电话给工程师改数据库。而这恰恰是系统开始积累「无法解释的不一致」的起点。</p>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>我改一个负一，系统就 500 了</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=2520" target="_blank"><span class="tri"></span>42:00</a>
+      <p>这一节是第 2 章最有画面感的实验。讲师回忆 2018 年他第一次用教师端教务系统，发现可以给学生设置缺课次数，觉得很新鲜。但他立刻提出了一个设计质疑：</p>
+      <div class="blk q">
+        <span class="label">他对「缺课次数」这个 feature 的质疑</span>
+        <ul>
+          <li><strong>这个需求不该存在于教务系统里</strong>：同学缺课就缺课了，你留证据用签到表、点名表扫描一下就行，不需要在系统里建这个字段</li>
+          <li>而且学生手册里已经写明了：<strong>无故缺课达到多少次就可以除名</strong>，这套规则的执行不依赖这个字段</li>
+        </ul>
+      </div>
+      <p>然后他做了一次尝试——他自己形容是「试着绕过了前端的校验」，把一个同学的缺课次数<strong>从 0 改成了负 1</strong>。他的判断是「这好像也不是什么有害的操作」。结果：</p>
+      <blockquote>
+        <p>立马所有的只要能够选出这位同学的那个选课记录的页面，就全部 crash 了，直接 500。</p>
+        <cite>讲师描述实验结果（约 42:00 处）</cite>
+      </blockquote>
+      <p>最后他只好打电话给教务，第二天工程师登录数据库把那个负一的记录修掉了。讲师用这个例子做了双重论证：</p>
+      <div class="blk pit">
+        <span class="label">这个实验说明的两件事</span>
+        <ul>
+          <li><strong>关于代码</strong>：一个没有意义的负值可以让整条查询链崩掉——说明系统对「状态空间」的约束没有定义清楚</li>
+          <li><strong>关于需求</strong>：真实系统的需求就是这样的——它是在一个混乱的、不断叠加的生态里长出来的，不是设计出来的</li>
+        </ul>
+      </div>
+      <p>讲师随后把这一章收在一句很有分量的话上：<strong>Agentic AI 时代做 MVP 没问题、而且前所未有的容易</strong>，你优先实现最重要的功能，看到一个产品马上就知道哪里设计错了，<strong>这时候修改的成本是比较低的</strong>——但这也给你产生了一个「驾驭 AI 的错觉」。</p>
+      <p>因为 AI 确实可以往后修，迭代三个版本都行；<strong>但一旦这个系统在真实世界里运行得足够久</strong>（比如计算机系改成计算机学院、离散数学拆成两门），你原来的设计不起作用的时候，你就面临麻烦了。这就是软件工程里那个著名的论断——<strong>There is no silver bullet</strong>（没有银弹）。</p>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>需求工程是软件工程的上游，AI 时代它的权重更大了：<strong>需求清楚，编码/traceability/测试都能交给 AI</strong></li>
+          <li>但需求有两条铁律：<strong>说不清楚</strong>、<strong>而且会变</strong>。所以一旦做需求分析就背上了技术债</li>
+          <li>技术债的核心机制：<strong>早期决策固化了假设，后来的需求必须靠改设计来容纳</strong>，于是系统长成史山</li>
+          <li>MVP 能让你低成本试错，但它给你「驾驭 AI 的错觉」——真实系统跑久了，no silver bullet 就会现形</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

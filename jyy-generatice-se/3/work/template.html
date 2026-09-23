@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>软件仓库管理 · 南大《生成式软件工程》第03讲 — 视频精读笔记</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e13; --bg2:#0f151d; --panel:#141d28; --panel2:#18232f;
+  --line:#233240; --line2:#31465c;
+  --tx:#e9eff7; --tx2:#adbccd; --tx3:#77879a;
+  --cy:#46c6e0; --pu:#a98bfa; --am:#f0b429; --rd:#f8736e; --gn:#3fd68c; --bl:#5b9cf8;
+  --c1:#46c6e0; --c2:#a98bfa; --c3:#f0b429;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+  font-size:15px; line-height:1.78; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 40px}
+a{color:var(--cy);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line);background:
+  radial-gradient(900px 320px at 12% -10%,rgba(70,198,224,.13),transparent 62%),
+  radial-gradient(760px 300px at 88% 0%,rgba(169,139,250,.12),transparent 60%)}
+.kicker{font-size:12.5px;letter-spacing:.16em;color:var(--cy);text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:38px;line-height:1.28;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.hero h1 .sub{display:block;font-size:19px;color:var(--tx2);font-weight:400;margin-top:12px;letter-spacing:0}
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;margin-top:26px}
+.cover{border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:#000;line-height:0}
+.cover img{width:100%;display:block}
+.meta-list{list-style:none;display:grid;gap:9px;font-size:14px}
+.meta-list li{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:baseline}
+.meta-list .k{color:var(--tx3);font-size:12.5px}
+.meta-list .v{color:var(--tx)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chip{font-size:12px;color:var(--tx2);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+.chip.hot{color:var(--cy);border-color:rgba(70,198,224,.4);background:rgba(70,198,224,.08)}
+
+/* ---------- sections ---------- */
+section{padding:40px 0}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:26px;display:flex;align-items:baseline;gap:14px}
+.sec-head h2{font-size:21px;font-weight:650;letter-spacing:.01em}
+.sec-head .tag{font-size:12px;color:var(--tx3)}
+
+/* toc */
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.toc-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;border-top:3px solid var(--line2)}
+.toc-card.c1{border-top-color:var(--c1)}
+.toc-card.c2{border-top-color:var(--c2)}
+.toc-card.c3{border-top-color:var(--c3)}
+.toc-card .n{font-size:11.5px;letter-spacing:.14em;color:var(--tx3)}
+.toc-card .t{font-size:16px;font-weight:650;margin:7px 0 4px}
+.toc-card .r{font-size:12.5px;color:var(--tx3);margin-bottom:12px}
+.toc-card ol{list-style:none;display:grid;gap:6px;font-size:13.5px}
+.toc-card ol a{color:var(--tx2)}
+.toc-card ol a:hover{color:var(--cy)}
+.toc-card ol li::before{content:"· ";color:var(--tx3)}
+
+/* chapter */
+.chapter{padding-top:52px}
+.ch-head{display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:start;border-top:2px solid var(--c1);padding-top:22px;margin-bottom:8px}
+.chapter.ch2 .ch-head{border-top-color:var(--c2)}
+.chapter.ch3 .ch-head{border-top-color:var(--c3)}
+.ch-num{font-size:56px;font-weight:800;line-height:.9;color:var(--line2);letter-spacing:-.03em}
+.ch-title h2{font-size:27px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.ch-play{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:13px;color:var(--tx2);
+  background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 13px}
+.ch-play .dot{width:7px;height:7px;border-radius:50%;background:var(--c1)}
+.ch2 .ch-play .dot{background:var(--c2)} .ch3 .ch-play .dot{background:var(--c3)}
+.ch-abstract{color:var(--tx2);font-size:14.5px;margin-top:14px;max-width:900px}
+
+/* subsection */
+.sub{padding:34px 0 6px;border-bottom:1px dashed var(--line)}
+.sub:last-child{border-bottom:none}
+.sub h3{font-size:19px;font-weight:650;line-height:1.5;margin-bottom:4px}
+.sub h3 .idx{color:var(--tx3);font-weight:500;margin-right:8px;font-variant-numeric:tabular-nums}
+.tslink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx3);
+  border:1px solid var(--line);border-radius:6px;padding:1px 9px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.tslink:hover{color:var(--cy);border-color:rgba(70,198,224,.45);text-decoration:none}
+.tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.sub p{color:var(--tx2);margin:12px 0}
+.sub p strong,.sub li strong{color:var(--tx)}
+.lead{color:var(--tx);font-size:15.5px}
+
+/* blocks */
+.blk{border-radius:10px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--panel)}
+.blk .label{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin-bottom:8px;display:block}
+.blk ul,.blk ol{padding-left:20px}
+.blk ul{list-style:none;padding-left:0}
+.blk ul li{position:relative;padding-left:18px;margin:6px 0;color:var(--tx2)}
+.blk ul li::before{content:"";position:absolute;left:2px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--line2)}
+.blk ol li{margin:6px 0;color:var(--tx2)}
+
+.q{background:linear-gradient(180deg,rgba(70,198,224,.07),rgba(70,198,224,.02));border-left:3px solid var(--cy)}
+.q .label{color:var(--cy)}
+.pit{background:linear-gradient(180deg,rgba(248,115,110,.07),rgba(248,115,110,.02));border-left:3px solid var(--rd)}
+.pit .label{color:var(--rd)}
+.steps{background:linear-gradient(180deg,rgba(91,156,248,.07),rgba(91,156,248,.02));border-left:3px solid var(--bl)}
+.steps .label{color:var(--bl)}
+.steps ol{counter-reset:s;list-style:none;padding-left:0}
+.steps ol li{counter-increment:s;position:relative;padding-left:32px;margin:8px 0}
+.steps ol li::before{content:counter(s);position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:6px;
+  background:rgba(91,156,248,.16);color:var(--bl);font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.concl{background:linear-gradient(180deg,rgba(63,214,140,.07),rgba(63,214,140,.02));border-left:3px solid var(--gn)}
+.concl .label{color:var(--gn)}
+.eye{background:linear-gradient(180deg,rgba(240,180,41,.07),rgba(240,180,41,.02));border-left:3px solid var(--am)}
+.eye .label{color:var(--am)}
+blockquote{margin:16px 0;padding:14px 20px;border-left:3px solid var(--line2);background:var(--panel2);border-radius:0 10px 10px 0}
+blockquote p{color:var(--tx);font-size:15px;margin:0 0 6px}
+blockquote cite{font-style:normal;font-size:12.5px;color:var(--tx3)}
+
+.kv{display:grid;grid-template-columns:190px 1fr;gap:0;font-size:14px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kv>div{padding:9px 15px;border-bottom:1px solid var(--line)}
+.kv>div:nth-child(2n-1){background:var(--panel);color:var(--tx2);font-size:13px}
+.kv>div:nth-child(2n){color:var(--tx);background:var(--bg2)}
+.kv>div:nth-last-child(-n+2){border-bottom:none}
+
+/* figure */
+figure{margin:22px 0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 14px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:12.5px;color:var(--tx3);margin-top:12px;padding-top:11px;border-top:1px solid var(--line);line-height:1.65}
+figcaption b{color:var(--tx2);font-weight:600}
+
+/* verify table */
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--panel);color:var(--tx2);font-weight:600;font-size:12.5px}
+td{color:var(--tx2)}
+tr:last-child td{border-bottom:none}
+td.ok{color:var(--gn);font-weight:600}
+td.warn{color:var(--am)}
+code{font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:12.8px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--cy)}
+
+.foot{padding:44px 0 64px;color:var(--tx3);font-size:13px;border-top:1px solid var(--line);margin-top:34px}
+.foot .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.foot h4{color:var(--tx2);font-size:13.5px;margin-bottom:9px;font-weight:650}
+.foot ul{list-style:none;display:grid;gap:5px}
+.foot li::before{content:"· ";color:var(--line2)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">视频精读 · 单页离线笔记</div>
+    <h1>软件仓库管理
+      <span class="sub">南大《生成式软件工程》第 03 讲 · 从「作业 V1 / V2」到 Git，以及它水下那座冰山</span>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <ul class="meta-list">
+          <li><span class="k">标题</span><span class="v">软件仓库管理 [03-Raw/26生成式软件工程/NJU]</span></li>
+          <li><span class="k">UP 主</span><span class="v">绿导师原谅你了</span></li>
+          <li><span class="k">分 P</span><span class="v">单 P 视频（未分集），共 3 个官方章节</span></li>
+          <li><span class="k">时长</span><span class="v">100 分 13 秒（6013.205 s）</span></li>
+          <li><span class="k">发布</span><span class="v">2026-09-08</span></li>
+          <li><span class="k">标签</span><span class="v">软件工程 · Git · 版本管理 · 南京大学</span></li>
+          <li><span class="k">数据</span><span class="v">播放 22,633　点赞 618　（截至抓取时）</span></li>
+          <li><span class="k">简介</span><span class="v">UP 未填写简介（接口返回为空）</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip hot">Atomic change 推进的快照</span>
+          <span class="chip hot">惊人的注意力</span>
+          <span class="chip">SVN delta vs Git snapshot</span>
+          <span class="chip">Conventional Commits</span>
+          <span class="chip">git bisect / blame</span>
+          <span class="chip">.gitignore</span>
+        </div>
+      </div>
+      <div class="cover"><img src="__COVER_B64__" alt="视频封面：南大《生成式软件工程》第03讲"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>全片地图</h2><span class="tag">3 个官方章节 · 一节以 Git 为载体的软件工程课</span></div>
+
+    <figure>
+      <svg viewBox="0 0 1080 300" role="img" aria-label="全片时间线">
+        <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+        <g font-family="Segoe UI, Microsoft YaHei">
+          <text x="24" y="34" fill="#77879a" font-size="12.5">时间轴 · 100:13 总长 / 按官方章节等比铺开</text>
+
+          <line x1="40" y1="164" x2="1040" y2="164" stroke="#31465c" stroke-width="1"/>
+          <g font-size="11.5" fill="#77879a">
+            <text x="40" y="184">00:00</text>
+            <text x="262" y="184">24:40</text>
+            <text x="668" y="184">63:08</text>
+            <text x="1000" y="184">100:14</text>
+          </g>
+          <g stroke="#233240" stroke-width="1">
+            <line x1="40" y1="164" x2="40" y2="172"/>
+            <line x1="291" y1="164" x2="291" y2="172"/>
+            <line x1="697" y1="164" x2="697" y2="172"/>
+            <line x1="1040" y1="164" x2="1040" y2="172"/>
+          </g>
+
+          <rect x="40" y="110" width="251" height="48" rx="8" fill="rgba(70,198,224,.16)" stroke="#46c6e0" stroke-width="1.4"/>
+          <text x="56" y="130" fill="#46c6e0" font-size="12.5" font-weight="700">CH1　开场 &amp; 版本管理</text>
+          <text x="56" y="148" fill="#adbccd" font-size="11.5">00:00 – 24:40　·　注意力、GPT-6、怎么学</text>
+
+          <rect x="291" y="110" width="406" height="48" rx="8" fill="rgba(169,139,250,.16)" stroke="#a98bfa" stroke-width="1.4"/>
+          <text x="307" y="130" fill="#a98bfa" font-size="12.5" font-weight="700">CH2　Git 入门与一些最佳实践</text>
+          <text x="307" y="148" fill="#adbccd" font-size="11.5">24:40 – 63:08　·　冲突现场、为什么、commit message 怎么写</text>
+
+          <rect x="697" y="110" width="343" height="48" rx="8" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1.4"/>
+          <text x="713" y="130" fill="#f0b429" font-size="12.5" font-weight="700">CH3　学习 Git</text>
+          <text x="713" y="148" fill="#adbccd" font-size="11.5">63:08 – 100:14　·　底层对象、webcoding、原子变更</text>
+
+          <g font-size="11">
+            <circle cx="110" cy="204" r="4" fill="#46c6e0"/><text x="110" y="228" fill="#adbccd" text-anchor="middle">惊人的注意力</text>
+            <circle cx="230" cy="204" r="4" fill="#46c6e0"/><text x="230" y="250" fill="#adbccd" text-anchor="middle">U 盘丢数据</text>
+            <circle cx="400" cy="204" r="4" fill="#a98bfa"/><text x="400" y="228" fill="#adbccd" text-anchor="middle">merge 冲突现场</text>
+            <circle cx="560" cy="204" r="4" fill="#a98bfa"/><text x="560" y="250" fill="#adbccd" text-anchor="middle">Git 是怎么被发明出来的</text>
+            <circle cx="660" cy="204" r="4" fill="#a98bfa"/><text x="660" y="228" fill="#adbccd" text-anchor="middle">commit message</text>
+            <circle cx="800" cy="204" r="4" fill="#f0b429"/><text x="800" y="250" fill="#adbccd" text-anchor="middle">blob / tree / commit</text>
+            <circle cx="930" cy="204" r="4" fill="#f0b429"/><text x="930" y="228" fill="#adbccd" text-anchor="middle">webcoding 可视化</text>
+            <circle cx="1000" cy="204" r="4" fill="#f0b429"/><text x="1000" y="250" fill="#adbccd" text-anchor="middle">原子变更</text>
+          </g>
+          <g stroke="#233240" stroke-width="1" stroke-dasharray="3 3">
+            <line x1="110" y1="158" x2="110" y2="200"/><line x1="230" y1="158" x2="230" y2="200"/>
+            <line x1="400" y1="158" x2="400" y2="200"/><line x1="560" y1="158" x2="560" y2="200"/>
+            <line x1="660" y1="158" x2="660" y2="200"/><line x1="800" y1="158" x2="800" y2="200"/>
+            <line x1="930" y1="158" x2="930" y2="200"/><line x1="1000" y1="158" x2="1000" y2="200"/>
+          </g>
+        </g>
+      </svg>
+      <figcaption><b>视觉锚点｜时间线</b>　三段色带是视频自带的官方章节，原样取用未改写。这一讲名义上在讲 Git，<b>实际上是一节以 Git 为载体的软件工程课</b>——第 2 章的全过程实操与第 3 章的底层对象演示，共同支撑最后那句「把项目组织成用 atomic change 推进的快照」。</figcaption>
+    </figure>
+
+    <div class="toc">
+      <div class="toc-card c1">
+        <div class="n">CHAPTER 01 · 00:00–24:40</div>
+        <div class="t">开场 &amp; 版本管理</div>
+        <div class="r">从 GPT-6 的现场演示，讲到「怎么学」这件事</div>
+        <ol>
+          <li><a href="#s11">1.1 开头：一次 GPT-6 的现场演示</a></li>
+          <li><a href="#s12">1.2 代码正在变得不需要人读</a></li>
+          <li><a href="#s13">1.3 AI 时代还要不要学数据库和操作系统</a></li>
+          <li><a href="#s14">1.4 惊人的注意力</a></li>
+          <li><a href="#s15">1.5 第一个博士生的 U 盘事故</a></li>
+          <li><a href="#s16">1.6 我要的是对世界的感知能力</a></li>
+          <li><a href="#s17">1.7 香港与南京的地铁标识</a></li>
+          <li><a href="#s18">1.8 在脑中先实现一遍</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c2">
+        <div class="n">CHAPTER 02 · 24:40–63:08</div>
+        <div class="t">Git 入门与一些最佳实践</div>
+        <div class="r">GitHub 是怎么变成 AI 时代底层基础设施的</div>
+        <ol>
+          <li><a href="#s21">2.1 什么是 Git：从推免面试的一个问题说起</a></li>
+          <li><a href="#s22">2.2 merge 冲突现场长什么样</a></li>
+          <li><a href="#s23">2.3 Git 是怎么被发明出来的</a></li>
+          <li><a href="#s24">2.4 SVN 存 delta，Git 存快照</a></li>
+          <li><a href="#s25">2.5 第一次 git init</a></li>
+          <li><a href="#s26">2.6 commit message 为什么重要</a></li>
+          <li><a href="#s27">2.7 空提交：一个可以但不应做的事</a></li>
+          <li><a href="#s28">2.8 把 agent 当最好的软件工程老师</a></li>
+          <li><a href="#s29">2.9 .gitignore 与「不该进版本库的东西」</a></li>
+          <li><a href="#s210">2.10 导师的高血压时刻</a></li>
+          <li><a href="#s211">2.11 hook 与大写还是小写</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c3">
+        <div class="n">CHAPTER 03 · 63:08–100:14</div>
+        <div class="t">学习 Git</div>
+        <div class="r">从「不踏实」到把 .git 拆开看</div>
+        <ol>
+          <li><a href="#s31">3.1 Git 是一个持久化的数据结构</a></li>
+          <li><a href="#s32">3.2 三大对象：blob / tree / commit</a></li>
+          <li><a href="#s33">3.3 不踏实：真的是这样实现的吗</a></li>
+          <li><a href="#s34">3.4 webcoding 一个 Git 可视化工具</a></li>
+          <li><a href="#s35">3.5 现场看到 blob、tree 与 refs/heads</a></li>
+          <li><a href="#s36">3.6 merge 时 git 悄悄留下的三个版本</a></li>
+          <li><a href="#s37">3.7 给小朋友做一个 Python playground</a></li>
+          <li><a href="#s38">3.8 有价值的品质：愿意花时间学</a></li>
+          <li><a href="#s39">3.9 原子变更：为什么提交要小</a></li>
+          <li><a href="#s310">3.10 linear history 与工程细节</a></li>
+          <li><a href="#s311">3.11 我是怎么管理一个项目的</a></li>
+          <li><a href="#s312">3.12 结尾：agent 快 1000 倍之后</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>素材链路与校验</h2><span class="tag">全部结果可复核</span></div>
+    <p class="lead">这一节先交代笔记的「凭据」：音频怎么来的、转写怎么校验的、哪些数字是实测的。后面每一处结论都可以回到原始时间点复核。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 250" role="img" aria-label="音频到转写的处理链路">
+        <rect x="0" y="0" width="1080" height="250" fill="#0f151d"/>
+        <g font-family="Segoe UI, Microsoft YaHei">
+          <rect x="20" y="52" width="182" height="88" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+          <text x="36" y="78" fill="#46c6e0" font-size="12" font-weight="700">① yt-dlp</text>
+          <text x="36" y="99" fill="#adbccd" font-size="11">cookies + 完整元数据</text>
+          <text x="36" y="118" fill="#77879a" font-size="10.5">标题/UP/分P/标签/封面/章节</text>
+
+          <rect x="228" y="52" width="182" height="88" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="244" y="78" fill="#5b9cf8" font-size="12" font-weight="700">② 最佳音轨 m4a</text>
+          <text x="244" y="99" fill="#adbccd" font-size="11">format 30280 · AAC</text>
+          <text x="244" y="118" fill="#77879a" font-size="10.5">94,542,212 B ≈ 90.2 MiB</text>
+
+          <rect x="436" y="52" width="182" height="88" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="452" y="78" fill="#a98bfa" font-size="12" font-weight="700">③ 转 mp3</text>
+          <text x="452" y="99" fill="#adbccd" font-size="11">libmp3lame 192 kbps</text>
+          <text x="452" y="118" fill="#77879a" font-size="10.5">144,318,897 B · 44.1 kHz 立体声</text>
+
+          <rect x="644" y="52" width="182" height="88" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="660" y="78" fill="#f0b429" font-size="12" font-weight="700">④ Whisper 转写</text>
+          <text x="660" y="99" fill="#adbccd" font-size="11">large-v3-turbo · zh</text>
+          <text x="660" y="118" fill="#77879a" font-size="10.5">CUDA fp16 · 24.03× 实时</text>
+
+          <rect x="852" y="52" width="208" height="88" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="868" y="78" fill="#3fd68c" font-size="12" font-weight="700">⑤ 校验通过</text>
+          <text x="868" y="99" fill="#adbccd" font-size="11">3172 段 · 覆盖率 99.98%</text>
+          <text x="868" y="118" fill="#77879a" font-size="10.5">时长偏差 0.0000% &lt; 阈值 5%</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="202" y1="96" x2="224" y2="96"/><polygon points="224,96 216,92 216,100"/>
+            <line x1="410" y1="96" x2="432" y2="96"/><polygon points="432,96 424,92 424,100"/>
+            <line x1="618" y1="96" x2="640" y2="96"/><polygon points="640,96 632,92 632,100"/>
+            <line x1="826" y1="96" x2="848" y2="96"/><polygon points="848,96 840,92 840,100"/>
+          </g>
+
+          <text x="20" y="176" fill="#77879a" font-size="11.5">两道独立校验（任一不过就要重下或标记异常）：</text>
+          <rect x="20" y="188" width="500" height="42" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="36" y="206" fill="#3fd68c" font-size="11.5">✓ 时长校验</text>
+          <text x="118" y="206" fill="#adbccd" font-size="11">ffprobe mp3 = 6013.205351 s　vs 元数据 6013.205 s　→ 偏差 0.0000%</text>
+          <rect x="540" y="188" width="520" height="42" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="556" y="206" fill="#3fd68c" font-size="11.5">✓ 转写完整性</text>
+          <text x="654" y="206" fill="#adbccd" font-size="11">末段结束 6012.29 s ÷ 音频 6013.205 s = 99.98%　→ 无截断</text>
+        </g>
+      </svg>
+      <figcaption><b>视觉锚点｜流水线</b>　五个环节的实际参数与产物大小都写在节点里，不是示意。<b>关键判断</b>：时长偏差 0.0000%、转写尾段几乎贴住音频末尾，说明音频没被裁、转写没被截。</figcaption>
+    </figure>
+
+    <table>
+      <tr><th>校验项</th><th>实测值</th><th>基准</th><th>偏差</th><th>结论</th></tr>
+      <tr><td>m4a 时长</td><td>6013.205 s</td><td>元数据 6013.205 s</td><td>0.0000%</td><td class="ok">PASS</td></tr>
+      <tr><td>mp3 时长</td><td>6013.205351 s</td><td>元数据 6013.205 s</td><td>0.0000%</td><td class="ok">PASS（阈值 5%）</td></tr>
+      <tr><td>转写末段结束</td><td>6012.290 s</td><td>音频 6013.205 s</td><td>0.02%</td><td class="ok">PASS（覆盖率 99.98%）</td></tr>
+      <tr><td>转写语言判定</td><td>zh（中文）</td><td>—</td><td>—</td><td class="ok">走 turbo + 中文分支</td></tr>
+      <tr><td>官方章节</td><td>3 个</td><td>—</td><td>—</td><td class="ok">B 站章节接口返回，直接用作拆章骨架</td></tr>
+    </table>
+  </div>
+</section>
+__CHAPTERS__
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>ASR 明显误识别修正表</h4>
+        <ul>
+          <li>「get init / get add / get commit / get status / get blame / get bisect」→ <strong>git init / add / commit / status / blame / bisect</strong>（语音同音误写）</li>
+          <li>「get rebase 是零 off 十」→ <strong>git rebase 是 reflog 之外</strong>（讲师口语：rebase 比 reflog 更少见）</li>
+          <li>「Bitkeeper」→ <strong>BitKeeper</strong>（Linux 内核曾用的商业版本控制工具）</li>
+          <li>「Linux 的作者 Linux」→ <strong>Linux 的作者 Linus</strong>（Linus Torvalds）</li>
+          <li>「I did some cool steps / cool stuff」→ 讲师刻意演示的<strong>反面示范 commit message</strong>，保留原样</li>
+          <li>「DS store / 点 ds-store」→ <strong>.DS_Store</strong>（macOS Finder 生成的隐藏索引文件）</li>
+          <li>「agency.md / agent 的 MD」→ <strong>AGENTS.md</strong>（agent 协作规则文件）</li>
+          <li>「Avisa type」→ <strong>a verb / a type</strong>（Conventional Commits 规范原句）</li>
+          <li>「考案神」→ <strong>盘古之白</strong>（中英文之间加空格的排版惯例，讲师口语）</li>
+          <li>「incoming change」→ <strong>accept incoming change</strong>（IDE 冲突解决按钮）</li>
+          <li>「fixed 警三」→ <strong>fixed #3</strong>（GitHub issue 自动关闭语法）</li>
+          <li>「learn git branching.js.org」→ <strong>learngitbranching.js.org</strong>（Git 交互教学网站）</li>
+          <li>「code.cs61a.au」→ <strong>code.cs61a.org</strong>（UC Berkeley CS61A 在线 IDE）</li>
+          <li>「Deep Seek Flash Division 的版本」→ <strong>DeepSeek 的 Flash 档模型</strong>（讲师原话，指便宜档位）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>术语保持原样（未替换）</h4>
+        <ul>
+          <li>模型名按讲师课堂原话保留：GPT-6、GPT-5.6s、DeepSeek、Claude、Codex 等</li>
+          <li>工具名按原话：SICP、Electron、VS Code、QEMU、Vim、nano、Playwright</li>
+          <li>「webcoding」为讲师口语（= 用 AI 直接写应用），保留原样</li>
+          <li>「slop」为讲师口语（AI 直出的粗糙产物），保留原样</li>
+        </ul>
+        <h4 style="margin-top:16px">来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1kybV6DE47">BV1kybV6DE47</a>　·　UP：绿导师原谅你了</li>
+          <li>下载：yt-dlp 2026.08.19（Firefox 提取 cookies）</li>
+          <li>转码/切片：ffmpeg + ffprobe N-126755</li>
+          <li>转写：faster-whisper 1.2.1 / CTranslate2 4.8.2 · large-v3-turbo · CUDA fp16</li>
+          <li>渲染：Chrome headless（Playwright driver）</li>
+        </ul>
+        <h4 style="margin-top:16px">笔记性质</h4>
+        <ul>
+          <li>内容为对公开课程视频的听写整理与结构化，术语解释含整理者补充，非逐字稿出版物</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+          <li>页面内数字（播放量等）为抓取当日快照，会随时间变化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

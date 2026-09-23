@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>南大《生成式软件工程》· 视频精读笔记总目录</title>
+<style>
+:root{
+  --bg:#f1efeb; --bg2:#f8f7f4; --panel:#fbfaf7; --panel2:#eceae3;
+  --node:#f3f1ec; --line:#dcd7cc; --line2:#a89f8f;
+  --tx:#2e2c27; --tx2:#55504a; --tx3:#706b62; --cover:#e6e3db;
+  --c1:#5a757a; --c2:#81697f; --c3:#846d47; --c4:#64755f;
+  --c5:#93655c; --c6:#60718b;
+  --r:14px; --mw:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased; line-height:1.75;
+}
+.wrap{max-width:var(--mw);margin:0 auto;padding:0 32px}
+
+/* ── hero ── */
+.hero{background:var(--bg2);border-bottom:1px solid var(--line);padding:72px 0 56px}
+.kicker{font-size:12.5px;letter-spacing:.22em;color:var(--c1);font-weight:600;text-transform:uppercase}
+.hero h1{font-size:44px;line-height:1.2;letter-spacing:-.01em;margin:14px 0 0;font-weight:800}
+.hero h1 .sub{display:block;font-size:19px;font-weight:500;color:var(--tx2);margin-top:14px;letter-spacing:0;line-height:1.6}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pill{
+  font-size:12.5px;color:var(--tx2);background:var(--panel);
+  border:1px solid var(--line);border-radius:999px;padding:5px 13px;
+}
+.pill b{color:var(--tx);font-weight:700}
+.summary{
+  margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.stat .n{font-size:28px;font-weight:800;letter-spacing:-.02em;color:var(--c1)}
+.stat .l{font-size:12.5px;color:var(--tx3);margin-top:4px}
+
+/* ── section head ── */
+.sec-head{display:flex;align-items:baseline;gap:14px;margin:56px 0 26px;padding-bottom:14px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:24px;font-weight:800;letter-spacing:-.01em}
+.sec-head .tag{font-size:12.5px;color:var(--tx3);letter-spacing:.06em}
+
+/* ── episode grid ── */
+.eps{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.ep{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px 28px;display:flex;flex-direction:column;gap:14px;
+  border-top:4px solid var(--line2);transition:box-shadow .2s,transform .2s;
+}
+.ep:hover{box-shadow:0 8px 28px rgba(46,44,39,.09);transform:translateY(-2px)}
+.ep.e1{border-top-color:var(--c1)} .ep.e2{border-top-color:var(--c2)}
+.ep.e3{border-top-color:var(--c3)} .ep.e4{border-top-color:var(--c4)}
+.ep.e5{border-top-color:var(--c5)} .ep.e6{border-top-color:var(--c6)}
+.ep-top{display:flex;align-items:center;gap:12px}
+.ep-num{
+  font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--tx3);
+  font-variant-numeric:tabular-nums;line-height:1;
+}
+.ep-badge{
+  font-size:11.5px;font-weight:700;letter-spacing:.04em;color:var(--tx2);
+  background:var(--panel2);border-radius:6px;padding:3px 8px;
+}
+.ep h3{font-size:20px;font-weight:700;letter-spacing:-.005em;line-height:1.4}
+.ep .dur{font-size:13px;color:var(--tx3);font-variant-numeric:tabular-nums}
+.ep .desc{font-size:13.5px;color:var(--tx2);line-height:1.75}
+.ep-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+  text-decoration:none;border-radius:9px;padding:9px 16px;transition:filter .15s;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn-primary{background:var(--c1);color:#fff}
+.btn-ghost{background:var(--panel2);color:var(--tx);border:1px solid var(--line)}
+.btn .ico{font-size:14px;line-height:1}
+
+/* ── tables ── */
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+th,td{text-align:left;padding:11px 16px;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-weight:700;color:var(--tx2);font-size:12.5px;letter-spacing:.03em}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-variant-numeric:tabular-nums;color:var(--tx2)}
+td b{color:var(--tx)}
+
+/* ── footer ── */
+.foot{margin-top:64px;border-top:1px solid var(--line);background:var(--bg2);padding:40px 0 56px}
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.foot h4{font-size:12.5px;letter-spacing:.14em;color:var(--c1);font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.foot ul{list-style:none;font-size:13px;color:var(--tx2);line-height:2}
+.foot ul li{padding-left:16px;position:relative}
+.foot ul li::before{content:"·";position:absolute;left:2px;color:var(--tx3);font-weight:700}
+.foot .note{font-size:12.5px;color:var(--tx3);margin-top:34px;line-height:1.9}
+code{font-family:"JetBrains Mono",Consolas,monospace;font-size:12.5px;background:var(--panel2);padding:2px 6px;border-radius:5px;color:var(--tx2)}
+
+@media(max-width:860px){
+  .summary{grid-template-columns:repeat(2,1fr)}
+  .eps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">视频精读 · 单页离线笔记</div>
+    <h1>南大《生成式软件工程》
+      <span class="sub">2026 春季学期 · 绿导师原谅你了 · 全 6 讲已整理为可离线打开的单页精读笔记</span>
+    </h1>
+    <div class="hero-meta">
+      <span class="pill">UP 主 <b>绿导师原谅你了</b></span>
+      <span class="pill">课程 <b>26 生成式软件工程 / NJU</b></span>
+      <span class="pill">配色 <b>C 莫兰迪灰调</b></span>
+      <span class="pill">每讲含 <b>时间戳可跳转</b> · <b>动态 SVG 图解</b></span>
+    </div>
+    <div class="summary">
+      <div class="stat"><div class="n">6</div><div class="l">讲 · 全部完成</div></div>
+      <div class="stat"><div class="n">9.8h</div><div class="l">视频总时长</div></div>
+      <div class="stat"><div class="n">56</div><div class="l">张动态 SVG 图解</div></div>
+      <div class="stat"><div class="n">1.3M</div><div class="l">笔记总字节（含封面）</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="sec-head">
+    <h2>全部讲次</h2>
+    <span class="tag">按 urllist.txt 顺序 · 点击进入单页笔记</span>
+  </div>
+
+  <div class="eps">
+
+    <article class="ep e1">
+      <div class="ep-top"><span class="ep-num">01</span><span class="ep-badge">5 章</span><span class="dur">1:39:59</span></div>
+      <h3>欢迎来到未来</h3>
+      <p class="desc">全课开篇。从「生成式软件工程是什么」讲到为什么软件工程的方法论正在被重写，铺开整门课的问题意识与课程地图。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="1/bili_summary_BV1pb8o6yE8f.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1pb8o6yE8f/" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+    <article class="ep e2">
+      <div class="ep-top"><span class="ep-num">02</span><span class="ep-badge">3 章</span><span class="dur">1:38:25</span></div>
+      <h3>提示词工程</h3>
+      <p class="desc">上下文即接口 → CoT 把上下文当纸笔 → verifier 是杠杆 → 算力换智力。把「提示词」讲成一门可复用的工程方法。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="2/bili_summary_BV1CQt365EzW.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1CQt365EzW" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+    <article class="ep e3">
+      <div class="ep-top"><span class="ep-num">03</span><span class="ep-badge">3 章</span><span class="dur">1:40:13</span></div>
+      <h3>软件仓库管理</h3>
+      <p class="desc">把版本管理当成软件工程的基石来讲：为什么必须先从「空软件出发」、仓库管理解决的是什么问题，以及它对协作与演进的约束。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="3/bili_summary_BV1kybV6DE47.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1kybV6DE47/" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+    <article class="ep e4">
+      <div class="ep-top"><span class="ep-num">04</span><span class="ep-badge">3 章</span><span class="dur">1:38:29</span></div>
+      <h3>软件仓库管理 (2)</h3>
+      <p class="desc">承上一讲继续深入仓库管理：分支、合并、协作工作流与真实项目里的取舍，配素材链路与校验的完整复盘。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="4/bili_summary_BV1Q6en6NEUo.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1Q6en6NEUo" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+    <article class="ep e5">
+      <div class="ep-top"><span class="ep-num">05</span><span class="ep-badge">4 章 · 36 小节</span><span class="dur">1:39:59</span></div>
+      <h3>软件工程的来龙去脉</h3>
+      <p class="desc">从 Al 发展史一路讲到 1968 年 NATO 软件危机现场，再到 Dijkstra、Royce、Margaret Hamilton，讲清「软件工程为什么诞生」以及它给世界带来了什么。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="5/bili_summary_BV1Nyeq6qEt8.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1Nyeq6qEt8" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+    <article class="ep e6">
+      <div class="ep-top"><span class="ep-num">06</span><span class="ep-badge">4 章 · 34 小节</span><span class="dur">1:36:50</span></div>
+      <h3>需求和架构 (1)</h3>
+      <p class="desc">从「需求永远不可能说清楚」讲到「跳出问题看问题」。以教务系统为反面教材，从第一性原理推出 Event Sourcing。</p>
+      <div class="ep-links">
+        <a class="btn btn-primary" href="6/bili_summary_BV1Rch76WEfQ.html"><span class="ico">▸</span>打开笔记</a>
+        <a class="btn btn-ghost" href="https://www.bilibili.com/video/BV1Rch76WEfQ" target="_blank" rel="noopener">原视频</a>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="sec-head">
+    <h2>素材与校验</h2>
+    <span class="tag">每讲的音频与转写都通过了时长与覆盖率双重校验</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>讲次</th><th>BV 号</th><th>时长</th><th>官方章节</th><th>转写段数</th><th>覆盖率</th><th>播放 / 点赞</th><th>笔记</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>01</b> 欢迎来到未来</td><td class="num">BV1pb8o6yE8f</td><td class="num">1:39:59</td><td class="num">5</td><td class="num">—</td><td class="num">—</td><td class="num">91,599 / 3,324</td><td class="num">262 KB</td></tr>
+      <tr><td><b>02</b> 提示词工程</td><td class="num">BV1CQt365EzW</td><td class="num">1:38:25</td><td class="num">3</td><td class="num">3,161</td><td class="num">99.99%</td><td class="num">44,338 / 1,184</td><td class="num">247 KB</td></tr>
+      <tr><td><b>03</b> 软件仓库管理</td><td class="num">BV1kybV6DE47</td><td class="num">1:40:13</td><td class="num">3</td><td class="num">3,172</td><td class="num">99.98%</td><td class="num">22,633 / 618</td><td class="num">203 KB</td></tr>
+      <tr><td><b>04</b> 软件仓库管理 (2)</td><td class="num">BV1Q6en6NEUo</td><td class="num">1:38:29</td><td class="num">3</td><td class="num">3,013</td><td class="num">99.92%</td><td class="num">11,911 / 363</td><td class="num">171 KB</td></tr>
+      <tr><td><b>05</b> 软件工程的来龙去脉</td><td class="num">BV1Nyeq6qEt8</td><td class="num">1:39:59</td><td class="num">4</td><td class="num">3,335</td><td class="num">99.99%</td><td class="num">9,583 / 368</td><td class="num">194 KB</td></tr>
+      <tr><td><b>06</b> 需求和架构 (1)</td><td class="num">BV1Rch76WEfQ</td><td class="num">1:36:50</td><td class="num">4</td><td class="num">3,058</td><td class="num">100.00%</td><td class="num">4,265 / 169</td><td class="num">209 KB</td></tr>
+    </tbody>
+  </table>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>笔记是怎么做出来的</h4>
+        <ul>
+          <li>yt-dlp 抓最佳音轨（format 30280）+ 官方章节元数据</li>
+          <li>ffmpeg 转 192kbps mp3，与元数据时长双向校验（偏差 ≤0.0001%）</li>
+          <li>faster-whisper large-v3-turbo + CUDA fp16 中文转写，覆盖率校验 ≥99.9%</li>
+          <li>按官方章节拆章，逐段精读提炼为结构化小节</li>
+          <li>动态生成 SVG 图解（时间线 / 流水线 / 概念图 / 对比图）</li>
+          <li>拼装为内联 CSS + 内联 SVG + base64 封面的单文件 HTML</li>
+          <li>DOM 级体检 + 分段拼接整页截图 + 切片视觉抽查</li>
+        </ul>
+      </div>
+      <div>
+        <h4>使用说明</h4>
+        <ul>
+          <li>每个 HTML 都是<b>完全离线可用</b>的单文件，双击即可打开</li>
+          <li>章节标题旁的<b>播放按钮</b>与每个小节的<b>时间戳</b>可跳转到 B 站对应位置</li>
+          <li>笔记按<b>结构重排</b>，不是逐字稿；保留讲师的论证链条与例子</li>
+          <li>ASR 明显误识别已逐条校对并在每页页脚列出修正表</li>
+          <li>配色统一为 <code>C 莫兰迪灰调</code>，全部通过 WCAG 对比度 ≥4.5</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">
+      本页为学习笔记索引，课程内容的著作权归原作者所有；笔记为个人学习整理的二次加工，
+      可能存在理解偏差，关键内容请以原视频为准。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

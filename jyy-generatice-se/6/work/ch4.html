@@ -1,0 +1,289 @@
+<div class="chapter ch4" id="ch4">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">04</div>
+      <div class="ch-title">
+        <h2>回到教务系统</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4352" target="_blank"><span class="dot"></span>72:32 – 96:50</a>
+      </div>
+    </div>
+    <p class="ch-abstract">最后一章回到五十万行的量级。讲师先分析了 AI 交出的那份教务系统架构——<strong>它确实有软件工程的直觉，但它本质上是一个 CRUD 架构</strong>。然后他从第一性原理出发，论证 CRUD 在教务场景下一定会死：<strong>因为它丢掉了历史</strong>。最后他一步步推出 <strong>Event Sourcing</strong>，并说了一句很提气的话——<strong>这些流行词你都不需要先学，你只要回到第一性原理</strong>。</p>
+
+    <div class="sub" id="s41">
+      <h3><span class="idx">4.1</span>AI 交出的是一份什么架构</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4352" target="_blank"><span class="tri"></span>72:32</a>
+      <p>讲师先播放了 AI 生成教务系统时中间过程的一张截图，并说「当场我就发了一个小红书」。他先说了一下 GPT-6 的代码规模：<strong>一个 Monolithic（单体）53KB 的 TSX，加上一个 38KB 的 Services</strong>。讲师评价它「还是很有水准的」——虽然真的是单体，但<strong>这个东西能做对，真的蛮厉害的</strong>。</p>
+      <p>然后他做了一件很妙的实验：<strong>启动了另一个独立 session 去问「这个软件能维护吗」</strong>。答案很有意思——AI 说「能」：「现在只不过是把这个业务逻辑挤在几个大文件里，但是这个东西维护是完全没有问题的。」</p>
+      <p>讲师接着让另一个模型来评价这份架构，得到的判断如下。</p>
+      <figure>
+        <svg viewBox="0 0 1040 330" role="img" aria-label="AI 交出的 CRUD 架构评价">
+          <rect x="0" y="0" width="1040" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">AI 交出的教务系统架构：优点是真的，但有根本性的局限</text>
+
+            <rect x="30" y="48" width="470" height="180" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="46" y="72" fill="#3fd68c" font-size="12" font-weight="700">✓ 它做对的（有软件工程的直觉）</text>
+            <g font-size="10.5" fill="#adbccd">
+              <text x="46" y="96">· 经典三层单体架构</text>
+              <text x="46" y="116">· 前后端分离</text>
+              <text x="46" y="136">· 几个生产级横切设计：</text>
+              <text x="62" y="156" fill="#77879a">乐观锁（optimistic lock）</text>
+              <text x="62" y="174" fill="#77879a">幂等（idempotent）</text>
+              <text x="62" y="192" fill="#77879a">事务（transaction）· 审计 · 统一错误处理</text>
+              <text x="46" y="216" fill="#adbccd">· 数据驱动，横向扩展性很好</text>
+            </g>
+
+            <rect x="520" y="48" width="490" height="180" rx="9" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="536" y="72" fill="#f8736e" font-size="12" font-weight="700">✗ 但从「跳出问题看问题」的角度</text>
+            <text x="536" y="98" fill="#adbccd" font-size="11.5" font-weight="700">本质上这是一个 CRUD 的架构</text>
+            <text x="536" y="122" fill="#77879a" font-size="10.5">也就是「增删改查」的架构——</text>
+            <text x="536" y="142" fill="#77879a" font-size="10.5">它的世界模型是：一个当前状态 + 一组更新操作</text>
+            <text x="536" y="168" fill="#adbccd" font-size="11">讲师的态度是克制的：</text>
+            <text x="536" y="190" fill="#77879a" font-size="10.5">「如果我跳出问题看问题，我觉得这还不是一个非常好的架构」</text>
+            <text x="536" y="212" fill="#77879a" font-size="10.5">——注意他没有否定 AI，而是否定了这个架构范式</text>
+
+            <line x1="30" y1="252" x2="1010" y2="252" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="276" fill="#77879a" font-size="11.5">一个值得注意的细节：讲师说 AI 生产软件的方式「很快就要超过人类了」，</text>
+            <text x="24" y="296" fill="#77879a" font-size="11.5">但它做出来的架构仍然是「业内最常见的那一种」——因为它学的是这个世界的语料。</text>
+            <text x="24" y="318" fill="#3fd68c" font-size="11.5">这也解释了为什么第 3 章他强调「架构是一种品位」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜AI 的架构水平</b>　这张图要说明一个很重要的张力：<strong>AI 做对了很多「要摸爬滚打几年才能理解的设计」</strong>（乐观锁、幂等、事务、审计），所以它绝不是不懂软件工程；<strong>但它选的顶层架构是 CRUD</strong>，因为这是语料里最主流的答案。讲师由此把话题从「AI 强不强」转到「这个范式对不对」——这才是这一章真正要讨论的。</figcaption>
+      </figure>
+      <p>讲师还预告了一件事：「我肯定会在某一次课的时候来讲这些（乐观锁、幂等、事务审计、统一错误）」——也就是说这些生产级细节后面还会单独展开。</p>
+    </div>
+
+    <div class="sub" id="s42">
+      <h3><span class="idx">4.2</span>一切都是状态机</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4560" target="_blank"><span class="tri"></span>76:00</a>
+      <p>讲师开始讲这套架构背后的「第一性原理」。他的推理起点是这句：</p>
+      <blockquote>
+        <p>我们的软件是物理世界过程在信息世界里面的投影。然后我们的物理世界是有状态的——Everything is a state machine。我自己也是一个 state machine。</p>
+        <cite>讲师给出 CRUD 架构的第一性原理（约 76:50 处）</cite>
+      </blockquote>
+      <p>于是软件系统很容易被建模成 <strong>state transition system（状态迁移系统）</strong>：有一个状态，加上一组把状态从 A 变成 B 的操作。而这个「状态」通常就用<strong>数据库</strong>来持久化。</p>
+      <div class="kv">
+        <div>学生</div><div>一张表：学号、姓名、院系……</div>
+        <div>学院</div><div>一张表：院系编号、名称……</div>
+        <div>选课</div><div>一张表：学生 × 课程 × 学期……</div>
+        <div>共同点</div><div>各种各样的东西都可以用<strong>二维的表</strong>来表示——这就是数据库课上讲的东西</div>
+      </div>
+      <p>讲师还顺带解释了这个范式为什么「看起来完全正确」：在任何一个时间点上，这个状态都代表了「南大现在有哪些学生、谁选了哪些课、有哪些老师」。前后端分离之后，你在浏览器里打开教务系统，<strong>看到的就是这个状态的一个投影</strong>。这一切非常经典、非常一致、没有任何错误。</p>
+    </div>
+
+    <div class="sub" id="s43">
+      <h3><span class="idx">4.3</span>数据库为什么要消除冗余</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4620" target="_blank"><span class="tri"></span>77:00</a>
+      <p>讲师花了一点时间复习数据库范式，因为这是后面「历史丢失」论证的基础。</p>
+      <p>他说数据库要求你<strong>消除表里所有的冗余</strong>，把数据库 factor 成 normal form（范式）。举例：另外一张表要引用一个学生时，<strong>尽量不要用姓名来引用</strong>——因为会重名，而且就算不重名也会有别的麻烦。更好的做法是<strong>去掉姓名列，只放一个学生 ID</strong>，这个 ID 相当于一个链接，指向学生信息。</p>
+      <div class="blk q">
+        <span class="label">讲师用「改名」这件事解释范式的价值</span>
+        <ul>
+          <li>在中国，学生改名字<strong>是合法的</strong>——「不要笑，这件事情在中国是合法的」</li>
+          <li>如果用的是分解/引用的方式，改名字只需要改一处，再记一个曾用名</li>
+          <li>但如果存了两份名字，那对不起，<strong>你要知道这两个地方都要修改</strong>——这就是一个很大的代价</li>
+        </ul>
+      </div>
+      <p>讲师把范式的本质讲成一句话：<strong>铲除冗余的 dependency</strong>——「我一个地方改了以后，我不会需要改另外一个地方」。这是一个非常干净的定义，也为后面「为什么 CRUD 会死」埋下了伏笔：范式解决的是<strong>同一时刻的一致性</strong>，它完全不管<strong>时间上的一致性</strong>。</p>
+    </div>
+
+    <div class="sub" id="s44">
+      <h3><span class="idx">4.4</span>CRUD 丢掉的是历史</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4740" target="_blank"><span class="tri"></span>79:00</a>
+      <p>这一节是全片的理论核心。讲师先承认 CRUD 在它自己的假设下是「一个非常经典的价格（架构），没有任何的错误」，然后话锋一转：</p>
+      <blockquote>
+        <p>但是如果我们想一想教务系统为什么不适合这样的一个 CRUD 的架构？就是因为当前的状态里面，当我看这个当前状态的时候，我看到的是一片祥和的景象。但是这个当前状态所有的历史，它丢掉了。</p>
+        <cite>讲师论证 CRUD 为什么不适合教务系统（约 79:51 处）</cite>
+      </blockquote>
+      <p>他给了一个极其具体的例子来说明「历史丢掉」意味着什么。</p>
+      <div class="blk pit">
+        <span class="label">那个例子：一个「是否允许毕业」的字段</span>
+        <ul>
+          <li>学生表里有一个列，叫<strong>「是否允许毕业」</strong></li>
+          <li>这个值是由<strong>很多其他状态算出来的</strong>——每当你修了一个学分、毕业设计状态发生变化，系统就要重新计算一次</li>
+          <li>它是教务员、辅导员的核心需求：<strong>要能导出「现在还没法毕业的学生」名单，然后一个一个谈话</strong></li>
+          <li>问题在于：这个计算过程依赖的是<strong>历史上的计算 dependency</strong>，而它们<strong>随着当前状态一起没有了</strong></li>
+        </ul>
+      </div>
+      <p>于是就有了那两句话——这是全片被讲得最重的一段：</p>
+      <blockquote>
+        <p>你知道这个学生可以毕业，但是你不知道他为什么可以毕业。你知道他不能毕业，你不知道他为什么不能毕业。</p>
+        <cite>讲师点出 CRUD 的核心缺失（约 82:11 处）</cite>
+      </blockquote>
+      <p>讲师接着把这套推理推行到底：<strong>计算的过程丢掉，而软件又是现实物理过程的一个有损投影</strong>——那么结果就是，<strong>物理世界里所有建模不了的东西，全部需要通过其他途径来解决</strong>。</p>
+      <div class="blk steps">
+        <span class="label">「其他途径」长什么样（讲师举的三个真实场景）</span>
+        <ol>
+          <li><strong>政策更新了</strong>：领导批准了新的培养计划，但新的数据还没导入系统。学期已经开始了，你已经在用新计划上课，而系统里没有</li>
+          <li><strong>教室不能用</strong>：第一周整片教学楼在修，教务系统没有建模「教室不可用」这件事，最后靠<strong>手改重新安排教室</strong></li>
+          <li><strong>不一致堆积</strong>：随着时间积累，系统里会有大量不一致的数据，最终变成<strong>无法解释的黑洞</strong>——「明明这个同学没有交学费、应该毕不了业的，为什么他能毕业呢？」</li>
+        </ol>
+      </div>
+      <p>讲师由此给出了这一章的判词：<strong>「所以你们在面对这种需求的时候，CRUD 就会死。」</strong>而这恰恰解释了为什么 ERP 这类系统（包括教务系统）的设计实现维护，<strong>到今天为止都是一门手艺活</strong>。</p>
+    </div>
+
+    <div class="sub" id="s45">
+      <h3><span class="idx">4.5</span>计算机系改成计算机学院</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5100" target="_blank"><span class="tri"></span>85:00</a>
+      <p>讲师用「院系调整」这个真实事件，把 CRUD 的困境演示到了极致。他说南大院系发生调整的时候，<strong>教务系统就瑟瑟发抖了</strong>——因为 CRUD 是一个 <strong>single point of truth</strong>，所有的事实都在这一个地方。</p>
+      <p>问题看起来极简单：<strong>把 department 表里「计算机系」的 name 改成「计算机学院」吗？要，还是不要？</strong></p>
+      <div class="blk pit">
+        <span class="label">两个选择都是错的</span>
+        <ul>
+          <li><strong>如果改</strong>：你把这个 object 改了，现在确实是计算机学院了——但你的毕业记录会变成「2011 年毕业于南京大学计算机学院」。<strong>这与事实不符</strong>，因为 2011 年的时候还没有计算机学院。系统给校友打印证明的时候就会生成错误的信息</li>
+          <li><strong>如果不改</strong>：也很麻烦。因为现在所有的 department 都指向学生的 department ID，还是得把它改过来——于是你需要做一次<strong>数据库迁移</strong>：创建一个新对象，并且要想清楚新旧对象之间的关联关系</li>
+        </ul>
+      </div>
+      <p>讲师由此把问题上升到范式层面：</p>
+      <div class="blk q">
+        <span class="label">CRUD 成立的前提</span>
+        <p><strong>如果你假设这个世界的投影是不变的，CRUD 当然是一个完美的架构</strong>。但只要需求的假设发生在摧毁性变化，那么你每次都要涉及一次数据库迁移 + 业务逻辑重写。代码可以重写，<strong>但是你的历史消失了</strong>。</p>
+      </div>
+      <p>而做数据库迁移最可怕的地方在于：<strong>你必须考虑历史上所有可能发生的情况</strong>，而且这个数据库里<strong>已经有很多不一致了</strong>——你很难写出一个规则来迁移。更糟的是，你还要冒着「迁移完了之后数据库就坏掉了」的风险。讲师用第 2 章那个负一的例子做了类比：<strong>在测试环境做一次迁移，和把一个真实学校里所有数据都做一次迁移，难度是完全不一样的</strong>。</p>
+    </div>
+
+    <div class="sub" id="s46">
+      <h3><span class="idx">4.6</span>一门手艺活的三十年</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5280" target="_blank"><span class="tri"></span>88:00</a>
+      <p>讲师在这里切换了视角，从「批判」转向「理解」。他说自己调侃教务系统做得不好，但反过来想——<strong>它作为一个软件工程的实践者，可能在这家公司 2000 年成立的时候，唯一的选择就是参考一个已有的企业架构来做教育系统，抢占教育市场的第一桶金</strong>。</p>
+      <p>它把东西做出来了，它就是 CRUD 的。而它一旦背上这个技术债，<strong>就要在中国大学教育改革几十年的时间里不断地扛下所有</strong>。讲师说：<strong>这是一门手艺活。</strong></p>
+      <p>然后他讲了一个自己的故事，很能说明这门手艺的性质。</p>
+      <div class="blk steps">
+        <span class="label">他读 PhD 时隔壁组的故事</span>
+        <ol>
+          <li>他们隔壁的软件工程组，接了学校<strong>研究生院教务系统</strong>的订单，大概二三十万——在定制化软件里算是比较小的订单</li>
+          <li>他的室友就在那个组里，而讲师当时经常跟他抬杠，说这个 CRUD 架构以后会面临各种各样的问题</li>
+          <li>果然在那几年，研究生<strong>发生巨大扩招</strong>，多了很多培养类型，压力也大、经常有调整——<strong>这都是他们做需求设计时始料未及的</strong></li>
+          <li>最后那个系统<strong>彻底变成了史山，然后就不存在了</strong>，统一变成公司维护的那个系统</li>
+        </ol>
+      </div>
+      <p>讲师给了公司一个公允的评价：它们<strong>还是有一些领域知识</strong>，知道这些系统应该怎么「把 13 给浮起来」（把遗留系统用起来）。这再次呼应了第 2 章的「行业壁垒」——需求这件事，光有技术是不够的。</p>
+    </div>
+
+    <div class="sub" id="s47">
+      <h3><span class="idx">4.7</span>存状态、存操作、存 delta</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5360" target="_blank"><span class="tri"></span>89:20</a>
+      <p>讲师开始给解法。他的起点是：「如果我要重做一个教务系统的架构，我就会看到这个 <strong>single point of truth 太危险了</strong>」——因为它一旦出现任何不一致，你都不知道该怎么把它拿出来。</p>
+      <p>然后他想到数据结构课上讲过的一种很神奇的东西：<strong>persistent data structure</strong>——它可以得到这个数据结构的<strong>所有历史</strong>。这就引出了这一讲最重要的一个洞察。</p>
+      <figure>
+        <svg viewBox="0 0 1040 360" role="img" aria-label="三种等价的存储视角">
+          <rect x="0" y="0" width="1040" height="360" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">三种视角是等价的——但只有后两种保住了历史</text>
+
+            <rect x="30" y="48" width="310" height="130" rx="9" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="46" y="72" fill="#f8736e" font-size="12" font-weight="700">① 只存当前状态</text>
+            <text x="46" y="96" fill="#adbccd" font-size="10.5">数据库就是一个数据结构</text>
+            <text x="46" y="116" fill="#adbccd" font-size="10.5">对它做一个操作 → 到下一个状态</text>
+            <text x="46" y="140" fill="#77879a" font-size="10.5">update 完之后，旧状态彻底消失</text>
+            <text x="46" y="162" fill="#f8736e" font-size="11">＝ 经典 CRUD，历史不可回放</text>
+
+            <rect x="365" y="48" width="310" height="130" rx="9" fill="rgba(70,198,224,.08)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="381" y="72" fill="#46c6e0" font-size="12" font-weight="700">② 存操作日志</text>
+            <text x="381" y="96" fill="#adbccd" font-size="10.5">记录每一个操作（event）</text>
+            <text x="381" y="116" fill="#adbccd" font-size="10.5">＝ append-only 的 log</text>
+            <text x="381" y="140" fill="#77879a" font-size="10.5">数据库课上讲的 write-ahead journal</text>
+            <text x="381" y="162" fill="#46c6e0" font-size="11">→ 可以 replay 出任意时刻状态</text>
+
+            <rect x="700" y="48" width="310" height="130" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="716" y="72" fill="#3fd68c" font-size="12" font-weight="700">③ 存 delta（增量）</text>
+            <text x="716" y="96" fill="#adbccd" font-size="10.5">记录状态之间的差异</text>
+            <text x="716" y="116" fill="#adbccd" font-size="10.5">＝ git / svn 版本管理的思想</text>
+            <text x="716" y="140" fill="#77879a" font-size="10.5">数据结构课：persistent data structure</text>
+            <text x="716" y="162" fill="#3fd68c" font-size="11">→ 可以回到任意历史版本</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="342" y1="113" x2="361" y2="113"/><polygon points="361,113 353,109 353,117"/>
+              <line x1="677" y1="113" x2="696" y2="113"/><polygon points="696,113 688,109 688,117"/>
+            </g>
+            <text x="24" y="200" fill="#77879a" font-size="11.5">这三种视角是等价的：</text>
+            <text x="24" y="222" fill="#adbccd" font-size="11">你存状态 → 就是 CRUD；你存操作 → 就是 journal；你存 delta → 就是版本管理。</text>
+            <text x="24" y="244" fill="#adbccd" font-size="11">而它们都可以帮你「回放历史，得到当前状态」——</text>
+
+            <line x1="30" y1="262" x2="1010" y2="262" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="286" fill="#77879a" font-size="11.5">关键在于最后一句</text>
+            <rect x="30" y="298" width="960" height="46" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.2"/>
+            <text x="46" y="320" fill="#adbccd" font-size="11">事实是不可篡改的：世界上所有的东西都是对事实的投影。你只要先把干过的所有事情记下来，</text>
+            <text x="46" y="337" fill="#adbccd" font-size="11">任何一个做错了，你都可以很快退回到过去的一个快照，然后把逻辑修好再来。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜三种等价的存储视角</b>　这张图的三个方框看起来很学术，但它们其实是同一件事的三种说法：<strong>存「现在」/ 存「过程」/ 存「变化」</strong>。讲师的论证很干净——既然三者等价，那么<strong>没有任何理由选择那个会丢掉历史的表示</strong>。因为 CRUD 唯一多的「好处」是读得直接，而它付出的代价是「所有历史信息永久丢失」。而这个代价在教务场景下是致命的（第 4 节那个「为什么不能毕业」的问题）。</figcaption>
+      </figure>
+      <p>讲师把这条线落到了具体操作上：如果你想设计一个更好的架构，<strong>最好是先把干的所有事情都先记下来</strong>——今天张三退学了，今天张三又复学了。</p>
+      <p>他特别强调了一点：<strong>你的逻辑是不能减少的</strong>。即便你用记录日志的方式，比如「复学」这件事之前没有考虑过，你依然要为它写一个逻辑。但是——<strong>因为事实是不可篡改的、你世界里所有的东西都是对事实的投影，你就有底气了一些，你就不怕错了</strong>。你不再像前面那样，做一个数据库迁移的时候手在抖。</p>
+    </div>
+
+    <div class="sub" id="s48">
+      <h3><span class="idx">4.8</span>你就发明了 Event Sourcing</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5640" target="_blank"><span class="tri"></span>94:00</a>
+      <p>讲师把前面那套推理收到一个命名上。</p>
+      <blockquote>
+        <p>然后祝贺你，你就发明了一个叫 Event Sourcing 的非常经典的设计模式。它可以从历史事件生成状态，而不是直接维护这个 CRUD 的状态。</p>
+        <cite>讲师给这套设计命名（约 95:03 处）</cite>
+      </blockquote>
+      <p>他随即演示了这套设计如何优雅地解决第 5 节那个「计算机系改成计算机学院」的难题：</p>
+      <div class="blk q">
+        <span class="label">用历史事件处理院系调整</span>
+        <ul>
+          <li>你可以在某一个时刻插入一个事件，叫 <strong>院系调整</strong></li>
+          <li>查一个过去的人时，你查到的是<strong>他过去的版本</strong>（比如 2007 年入学、2011 年毕业，那时都是计算机系）</li>
+          <li>想看较新的信息时，你看到的是 <strong>计算机系在 2024 年改为计算机学院</strong> 这个事件之后的投影</li>
+          <li>于是你可以<strong>裁出和事实相关的历史</strong>，把它 replay 得到此刻要的状态——<strong>既可以查询过去，也可以查询现在</strong></li>
+        </ul>
+      </div>
+      <p>讲师也主动回应了必然会被问到的性能问题：「你马上会反应过来，哦是不是会有性能问题？因为要大量 replay。」他的回答是：<strong>这都不是很大的问题</strong>——我们总可以用快照、缓存各种各样的优化技巧。这是一个 tradeoff，但如果你<strong>从一开始就做 Event Sourcing 的设计，很多事情根本不会发生</strong>。</p>
+      <p>他还顺带点了两个相关但不相同的概念：<strong>CQRS</strong>（Command Query Responsibility Segregation）和 event sourcing 是<strong>独立</strong>的；还有 <strong>domain driven design</strong> 这类 buzzword。讲师的态度很一致：</p>
+      <blockquote>
+        <p>其实你们都不需要……你只要回到最初的 first principle。</p>
+        <cite>讲师对流行词的态度（约 96:31 处）</cite>
+      </blockquote>
+    </div>
+
+    <div class="sub" id="s49">
+      <h3><span class="idx">4.9</span>不需要流行词，回到第一性原理</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5760" target="_blank"><span class="tri"></span>96:00</a>
+      <p>讲师在这一节把整讲的方法论收成了一句可操作的话。</p>
+      <div class="blk concl">
+        <span class="label">面对五十万行的系统该怎么做</span>
+        <p><strong>你要设计一个 50 万行教育系统的时候，我们跳出这个问题，看到教育系统根源的问题在哪里，你就能做一个正确的架构设计——哪怕你没有听说过这些（流行词），你也能做一个正确的架构设计。</strong></p>
+      </div>
+      <p>这段话的分量在于它的顺序：讲师没有先讲 Event Sourcing、再讲它解决什么问题；他是<strong>先讲清楚 CRUD 为什么会在教务场景下失败，再从失败反推出解法，最后才发现「哦，这个东西有个名字叫 Event Sourcing」</strong>。这个顺序本身就是方法论——<strong>先有第一性原理，后有名词</strong>。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>把整讲串起来看，讲师其实一直在做同一件事：<strong>先还原问题的本质，再评价已有方案的适用边界</strong>。第 2 章对需求这样（说不清 + 会变）、第 3 章对架构这样（控制复杂性 + 中间表示）、第 4 章对数据库范式也这样（解决的是同时刻一致性，不管时间上的一致性）。这种「追问前提」的习惯，是这一讲最值得带走的东西。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s410">
+      <h3><span class="idx">4.10</span>结尾：跳出问题看问题</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=5790" target="_blank"><span class="tri"></span>96:30</a>
+      <p>讲师用第 3 章就提出过的那句话作为全片的收尾——它同时也是这一讲的方法论旗帜。</p>
+      <blockquote>
+        <p>架构就一件事：跳出问题，看问题。</p>
+        <cite>讲师在结尾对架构的总结（约 96:40 处）</cite>
+      </blockquote>
+      <p>这句话在这一讲里被验证了四次：</p>
+      <div class="blk steps">
+        <span class="label">「跳出问题看问题」在四处的应用</span>
+        <ol>
+          <li><strong>十行汉诺塔</strong>：不跳出去，你只能写出一道算法题的答案；跳出去，你能看见「递归 ↔ 非递归」背后的形式语义</li>
+          <li><strong>两千行二维码</strong>：不跳出去，你只会在 Excel 里硬拼公式；跳出去，你看到的是「Python 与 Excel 之间缺一座桥」</li>
+          <li><strong>五十万行教务系统</strong>：不跳出去，你只会讨论「用哪个框架」；跳出去，你看到的是「这个系统的根源问题是历史被投影丢掉了」</li>
+          <li><strong>需求本身</strong>：不跳出去，你会试图把需求一次说清楚；跳出去，你会承认它说不清且会变，然后用一个能容纳变化的架构来兜住它</li>
+        </ol>
+      </div>
+      <p>讲师最后没有再做总结，因为这一整章就是结论。全片在「跳出问题看问题」这六个字上收束——而下一讲（需求和架构 (2)）将继续沿着这条线，从「需求与架构」走向具体的落地。</p>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>AI 交出的教务系统架构有软件工程直觉（乐观锁、幂等、事务、审计、横向扩展），<strong>但顶层范式是 CRUD</strong></li>
+          <li>CRUD 的第一性原理是「一切都是状态机 + 一个当前状态」，它<strong>只保证同时刻一致性，不管时间上的一致性</strong></li>
+          <li>CRUD 的根本缺陷：<strong>知道结果，不知道原因</strong>——「你知道他不能毕业，你不知道他为什么不能毕业」</li>
+          <li>解法是从第一性原理推出的：<strong>先把发生过的事实全部记下来，让所有展示都是对事实的投影</strong>（＝ Event Sourcing）</li>
+          <li>最后落到方法：<strong>架构就一件事——跳出问题，看问题</strong></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

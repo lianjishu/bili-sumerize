@@ -1,0 +1,150 @@
+<div class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>引言</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=0" target="_blank"><span class="dot"></span>00:00 – 15:03</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这一章是过渡，也是整讲的地基。讲师先把上一讲的 <strong>data dependency graph</strong> 接过来，讲清「软件工程为什么诞生」；然后提出两个贯穿全课的问题：<strong>软件它不软</strong>（它是容不下任何细微差错的逻辑制品），以及<strong>你们为什么只能从最底下开始学</strong>。最后落到今天的主题——从 intent 到 spec 的阶段，也就是<strong>需求与架构</strong>。</p>
+
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>接着上一讲的依赖图往下走</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=0" target="_blank"><span class="tri"></span>00:00</a>
+      <p>开场复习上一讲：Royce 那篇老论文里的设想是 <strong>intent → specification → implementation</strong>，然后还需要维护，生命周期没有结束。讲师强调这一路向下的过程<strong>看起来像瀑布，但本质是一张依赖网络</strong>。</p>
+      <div class="blk q">
+        <span class="label">这条链上的三类依赖</span>
+        <ul>
+          <li>在 intent / 需求阶段，你得到的是<strong>对软件的认识</strong>，这些认识会逐渐进入 specification 的空间，并形成依赖关系</li>
+          <li>在实现阶段，你会产生模块、函数、代码、测试——各种 artifact，它们之间又有直接与间接的 data dependency</li>
+          <li>合起来就是一张<strong>错综交错的网络</strong>，这才是软件工程的真正起点</li>
+        </ul>
+      </div>
+      <p>所以 Royce 的批判逻辑就很清楚了：如果后面某处发现错了，这个错误会<strong>回溯到前面某个更早的决定</strong>。而那个决定一旦被证明不合理，它「污染」到的所有下游部分都会失效，需要重做——这就是返工成本的来源。</p>
+      <p>顺着这条线，讲师一口气点出了软件工程的全部内容：怎么做需求分析、怎么做系统设计、怎么做实现，以及<strong>用什么方法</strong>——包括「有人文关怀」的方法（比如 checklist、怎么管产品经理的人），也包括「技术化」的方法（怎么写测试、能不能做自动化测试与自动化分析）。</p>
+    </div>
+
+    <div class="sub" id="s12">
+      <h3><span class="idx">1.2</span>traceability 与 UML 的由来</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=150" target="_blank"><span class="tri"></span>02:30</a>
+      <p>讲师接着讲了一个「pre-AI 时代的有趣尝试」。出发点很朴素：<strong>人很难对齐</strong>，人和人很难对齐；而且如果不写文档、只剩一份代码，出了错你<strong>甚至不知道该追溯到过去的哪个时刻</strong>。</p>
+      <p>于是在那个年代，软件工程提出了一个非常重要的概念：<strong>traceability（可追踪性）</strong>。</p>
+      <div class="blk q">
+        <span class="label">traceability 想要达到的理想状态</span>
+        <ul>
+          <li>每一个<strong>测试用例</strong>、每一个<strong>代码片段</strong>，都能 trace 回一个过去做过的设计</li>
+          <li>于是「整个系统里到底发生了什么」可以被维护起来</li>
+          <li>改它会影响谁？改设计会影响哪些测试用例？这些问题都<strong>可以被回答</strong></li>
+        </ul>
+      </div>
+      <p>讲师说，如果想要表达这种关系，最理想的是<strong>有一个结构化的、有语意的语言</strong>来描述它——于是就有了 <strong>UML</strong>。它的野心是「对齐整个世界上面的软件工程实践」。讲师对此的评价很克制但很肯定：<strong>这当然都是有智慧的</strong>。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这一节其实是在给第 2 章埋伏笔。讲师讲 traceability 与 UML 时用的是「曾经的做法」，而第 2 章会让 GPT 现场生成一份<strong>带编号 ID、带语义关联</strong>的需求说明书——也就是说，AI 用一个下午把 pre-AI 时代要用一整套方法论才能做到的事情做了。讲师不说破，但这条对照线非常清楚。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s13">
+      <h3><span class="idx">1.3</span>软件它不软</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=210" target="_blank"><span class="tri"></span>03:30</a>
+      <p>这一节是全章最有画面感的一段。讲师问：<strong>什么东西是软的？</strong>教室里的椅背就是软的——你对它施加压力，它扁下去；你松开，它弹回来；下次坐，它还是好的。</p>
+      <p>但软件完全不同。它是<strong>纯粹的逻辑制品</strong>，<strong>容不下任何细微的差错</strong>。</p>
+      <div class="blk pit">
+        <span class="label">他用的那个例子：一个 bit 的翻转</span>
+        <ul>
+          <li>你写了一个程序：从 stdin 读入一个 n，然后循环从输入里读 n 个元素</li>
+          <li>假设这个软件跑在卫星上，一束宇宙射线打中内存，把 n=1 的最高位（符号位）翻成了 1</li>
+          <li>于是 n 突然变成一个<strong>巨大无比的数</strong>，程序开始无限地从输入里读数</li>
+          <li>表现出来就是「卡住了」，或者读了成千上万个元素之后产生 <strong>memory error</strong></li>
+        </ul>
+      </div>
+      <p>讲师承认这是个极端例子，但他紧接着举了一个更日常的：现在的数据中心里，随着制程越来越先进，<strong>高密度指令在热噪声下可能产生 silent error</strong>——同一条指令在这台机器和那台机器上执行，结果就不一样；甚至可能是<strong>制造时就有的缺陷</strong>，要跑一段时间才暴露。</p>
+      <p>结论很清楚：<strong>软件被认为是人类智慧的集成体，但它同时又承载着来自客户的全部需求</strong>。这种「既要求绝对精确，又必须应对开放的物理世界」的张力，就是软件工程困难的本质原因。今天的教务系统就是后者——讲师今天要花时间讲它应该怎么设计、怎么防止它堆积成「史山」。</p>
+    </div>
+
+    <div class="sub" id="s14">
+      <h3><span class="idx">1.4</span>你们只能从最底下开始学</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=360" target="_blank"><span class="tri"></span>06:00</a>
+      <p>讲师提出了一个关于教学的观察：软件工程是<strong>关乎整个软件生命周期</strong>的学科，但学生<strong>被迫只能从最底下开始学</strong>。</p>
+      <p>理由是一段很有说服力的因果链：</p>
+      <div class="blk steps">
+        <span class="label">为什么必须从最底下开始</span>
+        <ol>
+          <li>如果你不理解代码是什么、写不出代码</li>
+          <li>没有体会过「码农开发软件的痛苦」，那你不可能做好一个产品经理</li>
+          <li>因为你<strong>无法判断「这件事能不能做到」、「这件事要花多少成本」</strong>——这些判断全靠一手经验</li>
+          <li>所以你必须先学一门最基础的语言（哪怕它已经过时、没人用了），然后在这个基础上不断累积新知识</li>
+          <li>知道世界曾经怎么失败过、新的语言是为什么被创造出来的，才能一点一点往上走</li>
+        </ol>
+      </div>
+      <p>而今天要讲的「需求 / 产品 / 架构」，正是这条链的<strong>最上层</strong>——从 intent 到 spec 的阶段。讲师说，这恰恰是<strong>决定一个软件系统从零开始走向哪里</strong>的最关键部分。</p>
+    </div>
+
+    <div class="sub" id="s15">
+      <h3><span class="idx">1.5</span>为什么先讲版本管理</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=450" target="_blank"><span class="tri"></span>07:30</a>
+      <p>讲师解释了一下课程的编排逻辑：前面几讲先讲版本管理，是因为<strong>你总是要在一个空的软件上出发</strong>。你做 lab、做项目、做任何东西，起点都是「空的」。</p>
+      <p>先讲清楚「从空的地方出发，软件怎么往后走」，接下来就要<strong>把控软件执行的方向</strong>——讲师用了一个很好的比喻：</p>
+      <blockquote>
+        <p>你的船到底是往东南西北哪一个方向开。你一开始的方向选了以后，对后面的影响是非常大的。</p>
+        <cite>讲师解释为什么接下来要讲需求与架构（约 07:45 处）</cite>
+      </blockquote>
+      <p>他也坦白了教学上的一个困难：像需求、产品设计这种题目<strong>很难讲</strong>，因为你们不会去见真正的客户。所以今天只能用两种方式：<strong>借用真实案例</strong>，或者<strong>把概念本身讲清楚</strong>。他选择的是教务系统——一个他每天都在用、而且是真实存在的案例。</p>
+      <p>讲师还顺便提了一个现状：学校里做软件工程研究的人不少（他提到 CSRank 上按 ECSE 文章数排名靠前），但<strong>大部分集中在和编码相关、和 implementation 相关的问题上</strong>。有些人会说「traceability 很重要，我们能不能训练一个模型直接从数据里推导出来」——讲师的态度是「那也许 GPT-6 就可以做到」，但因此他更要讲一讲<strong>上游</strong>这件事。</p>
+    </div>
+
+    <div class="sub" id="s16">
+      <h3><span class="idx">1.6</span>做 MVP 时会踩的技术债</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=540" target="_blank"><span class="tri"></span>09:00</a>
+      <p>讲师给了一个自己的现状描述，很能说明 AI 时代的变化：<strong>我现在让 AI 生成代码，只要把边界划定清楚，我其实真的已经不看它的实现了</strong>。他甚至预告一会儿要展示 GPT-6 昨天写的代码——<strong>那个实现已经超越人类能够理解的范畴了，但 somehow 它是对的</strong>。</p>
+      <p>于是他提出了一个实践公式：<strong>把边界划定清楚 + 知道怎么做好的 validation = 可以把 agent swarm 铺开来做实现</strong>，而且还能有一定的质量保证。剩下的、真正决定软件能走多远的，就在上游。</p>
+      <div class="blk pit">
+        <span class="label">做 MVP 时最容易踩的三个坑</span>
+        <ul>
+          <li><strong>技术的决定会污染后续所有需求</strong>：同样一个 MVP 需求，加几个字的 prompt 就能得到完全不同的 MVP。你说「用 client-server」，它就会先去<strong>选数据库、设计存储</strong>；你说「做成 CLI」，它可能只依赖一个命令行的库</li>
+          <li><strong>写下的文件会进入 agent 的上下文</strong>：一旦 <code>db.ts</code> 这种文件被写出来，后面每一个新需求都会<strong>带上这整段历史</strong>——这就是技术债（technical debt）</li>
+          <li><strong>AI 不会主动打日志</strong>：讲师说得很直接——如果你不明确要求，它会生成一个<strong>没有任何日志的软件系统</strong>，而这也是一种技术债（第 7 节就是他自己被这件事坑到的现场）</li>
+        </ul>
+      </div>
+      <p>这段其实是整讲的隐含主线：<strong>MVP 是必要的（它能让你快速走通 intent→spec→implementation 的一个切片），但 MVP 的每一步都会留下不可逆的技术债</strong>。后面第 4 章讲的 Event Sourcing，就是「如何从一开始就避免背上最贵的那笔债」。</p>
+    </div>
+
+    <div class="sub" id="s17">
+      <h3><span class="idx">1.7</span>一次真实的直播翻车</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=840" target="_blank"><span class="tri"></span>14:00</a>
+      <p>这一节是意外，但讲师把它讲成了一个教学案例。直播中他的设备突然全部失灵。</p>
+      <blockquote>
+        <p>我的系统 UI 还在正常工作，我的 OBS 还在正常推流，但是我不知道发生什么，因为我所有的设备都不能用了。我鼠标键盘都没有用了，我插上一个新的鼠标也没有用。</p>
+        <cite>讲师描述直播翻车现场（约 14:17 处）</cite>
+      </blockquote>
+      <p>注意这个现场的特征：<strong>界面还在动，推流还在跑，但输入设备全死了</strong>。讲师说，这恰好是一个软件工程实践问题——<strong>出了问题你要去看日志</strong>。而这正 imply 了：你写软件时必须输出足够多的日志。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>讲师把这个事故和上一节的「技术债」接了起来：<strong>AI 也不会主动给你打日志</strong>。所以这个翻车现场同时说明了两件事——第一，日志是排障的唯一入口；第二，日志这件事<strong>必须在写代码的时候就要求</strong>，事后补不上。UP 在章节标题里写的「后半音频翻车」，指的就是这一段：约 12:00–14:30 的音频有明显空档，笔记如实标注、不做臆测。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s18">
+      <h3><span class="idx">1.8</span>今天的主题：需求与架构</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=900" target="_blank"><span class="tri"></span>15:00</a>
+      <p>讲师收束了引言，给出今天的路线图。</p>
+      <div class="kv">
+        <div>主题</div><div>软件设计阶段——从 intent 走向 spec 的那一段，也就是<strong>需求与架构</strong></div>
+        <div>为什么是它</div><div>AI 让「生产目标明确的代码」变得非常便宜，于是压力全部转移到<strong>上游</strong>：需求说清楚、边界划清楚</div>
+        <div>今天用什么材料</div><div>以<strong>教务系统</strong>为主线案例。讲师自称这是一个「史诗级的需求爆炸」的系统</div>
+        <div>会看到什么</div><div>真实系统现场演示 → 让 GPT 生成需求说明书 → 让 subagent 按说明书实现一个假系统 → 分析 AI 交出的架构 → 从第一性原理推出更好的架构</div>
+      </div>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>Royce 那条链的真相是<strong>依赖网络</strong>而非流水线；返工成本 = 错误下游已完成的工作量</li>
+          <li>软件工程是为了应对「软件不软」——它是逻辑制品，容不下任何细微差错，却又必须承载开放的客户需求</li>
+          <li>AI 时代上游更值钱：实现可以外包给 agent swarm，但<strong>边界与验证必须人来定</strong></li>
+          <li>MVP 会留下技术债（尤其是「用数据库还是不用」这种早期决定），而日志是最容易被 AI 漏掉的那一笔</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

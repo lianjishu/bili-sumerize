@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>提示词工程 · 精读讲义 — jyy《生成式软件工程》第 02 讲</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --paper:#ffffff; --tx:#1c2733; --tx2:#52616f; --tx3:#6b7a89;
+    --line:#dfe7ee; --panel:#f1f5f8;
+    --c1:#0b7285; --c2:#7048c8; --c3:#b7791f;
+    --c1bg:#e6f4f7; --c2bg:#f1ecfa; --c3bg:#faf3e3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--tx);font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,Georgia,serif;font-size:17px;line-height:1.9;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 28px}
+  code,.mono{font-family:ui-monospace,Consolas,"JetBrains Mono",monospace}
+  code{background:var(--panel);padding:1px 6px;border-radius:4px;font-size:.86em}
+
+  header.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 40px}
+  .kicker{font-family:ui-monospace,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:var(--c1);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .subtitle{margin-top:10px;font-size:19px;color:var(--tx2)}
+  .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta-row span{font-size:13.5px;color:var(--tx2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .meta-row a{color:var(--c1);text-decoration:none}
+  .meta-row a:hover{text-decoration:underline}
+
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin:34px 0}
+  nav.toc h2{font-size:15px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--tx3);margin-bottom:14px}
+  nav.toc ol{list-style:none}
+  nav.toc li{margin:7px 0;font-size:15.5px}
+  nav.toc a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  nav.toc a:hover{color:var(--c1);border-color:var(--c1)}
+  nav.toc .n{font-family:ui-monospace,monospace;color:var(--tx3);margin-right:10px;font-size:13px}
+  nav.toc .sub{margin-left:34px;color:var(--tx2);font-size:14px}
+
+  .usage{background:var(--c1bg);border:1px solid #c3e2ea;border-radius:12px;padding:20px 26px;margin:0 0 40px;font-size:15.5px;color:#12333a}
+  .usage strong{color:var(--c1)}
+
+  section.chap{margin:64px 0}
+  .ch-head{border-top:5px solid;padding:20px 0 8px}
+  .ch-head.c1{border-color:var(--c1)} .ch-head.c2{border-color:var(--c2)} .ch-head.c3{border-color:var(--c3)}
+  .ch-num{font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:.22em;color:var(--tx3)}
+  .ch-head.c1 .ch-num{color:var(--c1)} .ch-head.c2 .ch-num{color:var(--c2)} .ch-head.c3 .ch-num{color:var(--c3)}
+  .ch-head h2{font-size:30px;font-weight:800;margin:4px 0 4px}
+  .ch-range{font-size:14px;color:var(--tx3);font-family:ui-monospace,monospace}
+
+  article.sec{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:30px 34px;margin:26px 0}
+  article.sec h3{font-size:21.5px;font-weight:800;line-height:1.5;margin-bottom:4px}
+  article.sec h3 .secno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  .ts{font-family:ui-monospace,monospace;font-size:12.5px;white-space:nowrap}
+  .ts a{color:var(--tx3);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .ts a:hover{color:var(--c1);border-color:var(--c1)}
+  article.sec p{margin:12px 0;text-align:justify}
+  article.sec p+p{margin-top:14px}
+  article.sec ul,article.sec ol{margin:12px 0 12px 26px}
+  article.sec li{margin:6px 0}
+  em.term{font-style:normal;font-weight:700;border-bottom:2px solid var(--c1);padding-bottom:1px}
+  .c2-scope em.term{border-color:var(--c2)} .c3-scope em.term{border-color:var(--c3)}
+
+  .callout{border-radius:10px;padding:16px 22px;margin:16px 0;font-size:15.5px;line-height:1.85}
+  .callout .tag{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .co-concept{background:var(--c1bg);border:1px solid #c3e2ea}
+  .co-concept .tag{color:var(--c1)}
+  .co-case{background:var(--c3bg);border:1px solid #ecd9ad}
+  .co-case .tag{color:var(--c3)}
+  .co-warn{background:#fdeeed;border:1px solid #f2c7c3}
+  .co-warn .tag{color:#b03a30}
+
+  .prompt-box{background:#0f1b24;color:#dbe7f1;border-radius:10px;padding:18px 22px;margin:16px 0;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.8}
+  .prompt-box .plabel{display:block;font-size:11px;letter-spacing:.18em;color:#6fa3bd;margin-bottom:8px}
+  .prompt-box p{margin:6px 0}
+
+  .summary{background:var(--panel);border-left:4px solid var(--c1);border-radius:0 10px 10px 0;padding:18px 24px;margin:18px 0}
+  .c2-scope .summary{border-color:var(--c2)} .c3-scope .summary{border-color:var(--c3)}
+  .summary h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx2);margin-bottom:8px}
+  .summary li{margin:5px 0}
+  .quiz{margin:18px 0}
+  .quiz h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx3);margin-bottom:8px}
+  .quiz ol{margin-left:26px}
+  .quiz li{margin:7px 0;color:var(--tx2)}
+
+  .divider{text-align:center;color:#b8c6d2;font-size:20px;letter-spacing:1.2em;margin:10px 0}
+
+  section.appendix{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:34px 38px;margin:26px 0}
+  section.appendix h2{font-size:23px;font-weight:800;margin-bottom:14px}
+  section.appendix h2 .apno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  section.appendix h3{font-size:17px;margin:22px 0 10px;color:var(--c1)}
+  section.appendix p{margin:10px 0;text-align:justify}
+  table.gl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.gl th{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:var(--tx3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.gl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.gl td:first-child{white-space:nowrap;font-family:ui-monospace,monospace;font-size:13px;color:#8a4b3a}
+  table.gl td:nth-child(2){white-space:nowrap;font-weight:700}
+  table.gl td:last-child{color:var(--tx2)}
+  .tsindex{columns:2;column-gap:40px;font-size:14.5px;margin-top:10px}
+  .tsindex div{break-inside:avoid;margin:7px 0}
+  .tsindex a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .tsindex a:hover{color:var(--c1)}
+  .tsindex .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--tx3);margin-right:8px}
+  .example-list{margin:12px 0 4px}
+  .example-list li{margin:12px 0}
+
+  footer.foot{background:var(--paper);border-top:1px solid var(--line);margin-top:70px;padding:40px 0 60px;font-size:13.5px;color:var(--tx2)}
+  footer.foot h4{font-size:13px;letter-spacing:.12em;font-family:ui-monospace,monospace;color:var(--tx3);margin:18px 0 8px}
+  footer.foot ul{list-style:none}
+  footer.foot li{margin:5px 0}
+  footer.foot a{color:var(--c1);text-decoration:none}
+  footer.foot a:hover{text-decoration:underline}
+
+  @media print{
+    body{background:#fff;font-size:12.5pt}
+    article.sec,nav.toc,section.appendix{border:none;page-break-inside:avoid}
+    .prompt-box{background:#eef2f5;color:#1c2733}
+    header.hero{padding-top:20px}
+  }
+  @media (max-width:640px){
+    h1{font-size:30px} article.sec{padding:22px 20px}
+    .tsindex{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lecture Handout · Generative Software Engineering · NJU</div>
+    <h1>提示词工程<br>精读讲义</h1>
+    <p class="subtitle">jyy 南大《生成式软件工程》第 02 讲 · 全程 98 分钟逐字稿精读整理</p>
+    <div class="meta-row">
+      <span>视频：<a href="https://www.bilibili.com/video/BV1CQt365EzW">BV1CQt365EzW</a></span>
+      <span>讲师：jyy（绿导师原谅你了）</span>
+      <span>时长：98:26</span>
+      <span>三章 · 28 节 · 附录 3 篇</span>
+      <span>术语以<a href="#apx-a">勘误表</a>为准</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>CONTENTS · 目录</h2>
+  <ol>
+    <li><a href="#ch1"><span class="n">01</span>Prompt (Context) Engineering</a></li>
+    <li><a href="#ch2"><span class="n">02</span>使模型遵循指令的技巧</a></li>
+    <li><a href="#ch3"><span class="n">03</span>更长程任务的建议</a></li>
+    <li><a href="#apx-a"><span class="n">A</span>术语对照表（勘误表扩展版）</a></li>
+    <li><a href="#apx-b"><span class="n">B</span>时间戳索引</a></li>
+    <li><a href="#apx-c"><span class="n">C</span>本讲 Prompt 范例汇总</a></li>
+  </ol>
+</nav>
+
+<div class="usage">
+  <strong>这份讲义怎么用：</strong>它与同目录的可视化笔记（<a href="bili_summary_BV1CQt365EzW.html">bili_summary_BV1CQt365EzW.html</a>）互补——笔记是「看图回忆」，讲义是「从头读懂」。每个小节标题旁有时间戳，点击跳回原视频对应秒数核对。<em class="term">Prompt 模板</em>用深色框标出，可直接复制改写；<em class="term">概念卡</em>压缩了本节的机制性结论；每章末有小结与思考题（思考题为整理者补充）。
+</div>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>Prompt (Context) Engineering</h2>
+    <div class="ch-range">00:00 – 33:07 · 8 节</div>
+  </div>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.1</span>提示词不止对话框里的那一句 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=0">00:00</a></span></h3>
+    <p>课程开场：提示词是你与机器沟通的<b>唯一接口</b>。从 ChatGPT 时代起，我们习惯了「在聊天框里打一段指令」就是提示词，但讲师第一天就纠正这个误解——<em class="term">agent 看到的是一整个上下文</em>，你的那句话只是其中很小的一段。</p>
+    <p>在你第一次与 agent 对话之前，它的上下文里已经装了这些东西，按顺序叠加：</p>
+    <ul>
+      <li><em class="term">system prompt</em> —— agent harness（如 Codex、Claude Code）内建的系统提示词，规定身份、工具使用指南、回复风格；</li>
+      <li><em class="term">agents.md</em> —— 分层的项目指令：全局一份、每个目录还可以再放一份，里面还能要求 agent 继续读别的文件；</li>
+      <li><em class="term">skills 索引</em> —— 每个技能在上下文里只占一行名字 + 简述（metadata），<b>完整 skill.md 按需加载</b>，那一轮结束后还会从上下文里被抹掉；</li>
+      <li><em class="term">工具定义</em> —— 所有工具的 schema 以纯文本形式直接写在上下文里；</li>
+      <li><em class="term">对话历史 + 工具调用结果</em> —— 线性追加；</li>
+      <li><em class="term">每次执行注入的环境</em> —— 当前时间、工作目录等。这些不属于 system prompt，比如跟 DeepSeek 聊天可以把它「套出来」。</li>
+    </ul>
+    <p>模型做的是 <em class="term">Next Token Prediction</em>：每一步预测下一个 token（可能是字符，也可能是一次工具调用），任务就这样一步步向后推进。到了 Claude Opus 4.5 这一代，模型靠强化学习和后训练学会了<b>极长的指令跟随能力</b>——接近百万 token 的上下文里，仍然能遵循很靠前的指令。</p>
+    <div class="callout co-case"><span class="tag">课堂案例 · 金丝雀</span>
+      工程实践里的一个著名梗：在最早的 system prompt 里加一句「每说一句话，结尾加一个喵」。某天你发现它聊天时<b>喵丢了</b>——不管原因是上下文被截断还是被压缩——你就立刻知道它开始不能遵循指令了，需要重新想办法。一个无害的指令成了上下文健康度的探测器。
+    </div>
+    <div class="callout co-concept"><span class="tag">概念卡</span>
+      当我们说「优化提示词」「提示词工程」时，真正的含义是 <em class="term">上下文工程（Context Engineering）</em>：把 system prompt、agents.md、skills、工具定义、历史、环境注入这一整条长序列<b>全部安排好</b>。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>提示词 = 整个 agent 上下文，对话框里那句话只是冰山一角。</li>
+      <li>上下文是线性序列：系统提示词 → agents.md（分层）→ skills 索引（按需加载、用后即抹）→ 工具定义 → 历史 → 环境注入。</li>
+      <li>提示词工程 ≡ 上下文工程。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.2</span>让 agent 自己检查自己 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=367">06:07</a></span></h3>
+    <p>既然 agent 能看到自己的全部上下文（Next Token Prediction 决定了它「读得到所有东西」），那么理解上下文最快的办法就是<b>直接问它</b>：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 课堂演示</span>
+      <p>老师上课说 agent 的上下文里不只是一两个提示词。你能检查一下，你的上下文里都有些什么吗？</p>
+    </div>
+    <p>现场演示里，agent 逐层报出了自己的 system prompt 来源、工具使用指南、全局 agents.md（里面写着「用中文回答」「结尾必须写一个 recap」——所以每次任务跑完你看到的第一段总结就来自这里）、项目级 agents.md、skills 索引、工具定义、对话历史和环境注入。它甚至可以<b>自己翻自己的日志</b>，经常给出出乎意料的解答手段。</p>
+    <p>也有例外：部分模型提供方会通过微调和明确指令<b>禁止套取 system prompt</b>。这是产品方的选择，不是模型做不到。</p>
+    <p>这一节同时是一堂学习方法课：AI 是<b>不嫌弃你的老师</b>——不像问室友，你不用怕暴露自己「很菜」，可以任意程度的追问。所以遇到任何没听懂的概念，<b>立即行动</b>：下一秒钟就打开 agent 去问，而不是记下来以后再说。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>agent 原则上能读出自己的全部上下文，除非被明确禁止。</li>
+      <li>「让它自检」既是理解机制的手段，也是排查问题的第一反应。</li>
+      <li>AI 时代的学习姿态：有一点不明白就立即追问，零社交成本。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.3</span>插叙：费曼学习法，正一遍反一遍 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=587">09:47</a></span></h3>
+    <p><em class="term">费曼学习法</em>：检验你是否真懂一个知识，办法是反过来<b>当老师把它讲给别人</b>。这件事在学生时代成本很高——你得找一个愿意听的室友，而他可能不想听、不感兴趣，或者懂太多懒得听。</p>
+    <p>AI 把这个成本降为零，而且可以<b>两个方向都用</b>：</p>
+    <ol>
+      <li><b>正一遍</b>：把 AI 当老师，请教、追问，直到自认为弄懂；</li>
+      <li><b>反一遍</b>：让 AI 扮演学生，你给它讲懂，它负责挑出你逻辑里的错漏。</li>
+    </ol>
+    <div class="prompt-box"><span class="plabel">PROMPT · 反一遍（你当老师）</span>
+      <p>你现在扮演一个学生，假装对这个概念一无所知。我把 XXX 讲给你听，你要听懂为止；过程中指出我哪里逻辑有错、有漏，在这个时候纠正我。</p>
+    </div>
+    <p>正一遍反一遍走完，你基本上就对这个概念理解得很清楚了。讲师的判断更直白：AI native 的一代人会「把我们这代人彻底卷死」——因为你们有无限的时间，而现在的任务就是学习。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>判定理解的标准是「能讲懂别人」，AI 让这个检验零成本、可重复。</li>
+      <li>正一遍（请教）+ 反一遍（讲给它听）= 完整闭环。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.4</span>一次「危险操作确认」背后的提示词工程 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=694">11:34</a></span></h3>
+    <p>用任何 agent 都会遇到：执行危险操作前它让你确认。这里有一组张力——<em class="term">yolo 模式</em>（所有操作直接执行，prompt 写得不好可能直接把系统删了）vs <em class="term">沙箱模式</em>（安全，但 agent 经常先试、失败、意识到自己在沙箱里、出来重做，甚至反复问你 yes/no）。最烦人的场景：你挂上三个任务去吃饭，回来发现它跑了一分钟就停下来等确认——agent 的时间和你的生命都被浪费了。</p>
+    <p>讲师留意到一个细节：agent 调用 bash 时<b>有时要确认、有时不要</b>。风险判定是个很难的问题——它并不知道每条命令的真实语义，那它到底是做了静态分析、还是让大模型给风险评级？于是有了这堂课第一个「现场考古」：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 考古第三方代码</span>
+      <p>我留意到一个有趣的问题：调用 bash 的时候，有时会向用户确认，有时不会，有一个风险的判定。风险其实是很难的问题——你并不知道具体命令的语义。你是做了分析，还是让大模型给了风险的评级，还是别的什么方法？读一下相关的代码。</p>
+    </div>
+    <p>结论（现场由 agent 读 Codex 源码得出）：存在<b>一层静态分流</b>——低风险命令（如 <code>ls -l</code>）命中白名单直接执行，网络 allowlist 命中直接放行；否则在上下文里 <b>inject 一小段话</b>，请模型给这次操作评级。注意：这本身就是提示词工程——agent harness 用注入的指令改变了模型的行为。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 如何验证一个「不可信的结论」</span>
+      agent 给出的解释不能全信（它自己也标注了 untrusted evidence）。验证办法：把那段安全评估 prompt 改一改——让以前不拒绝的东西被拒绝、以前拒绝的东西不被拒绝——然后<b>观察行为变化</b>。行为随 prompt 改变，这就成了证据。
+    </div>
+    <p>讲师顺带对比了时代：他大二大三时接触 Linux 内核，光下载下来、搞清楚怎么编译就花了很久——一个完全的劝退流程。而今天任何一个软件系统的复杂性都不再可怕，因为你可以直接问。你留意小细节的好奇心，一定程度上决定了你能走多远。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>安全 vs 效率是一组真实的产品权衡：yolo / 沙箱 / 确认机制各有代价。</li>
+      <li>Codex 的实现 = 静态白名单分流 + 必要时注入 prompt 让模型评级。</li>
+      <li>对任何「agent 告诉你的机制」保持怀疑，用「改 prompt → 看行为变化」做实验验证。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.5</span>上下文工程第一原则：自己填平 intent 与 spec 之间的 gap <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1148">19:08</a></span></h3>
+    <p>软件工程的老大难问题：<em class="term">intent</em>（脑子里想的，比如「做一个国民级应用」）→ <em class="term">spec</em>（架构、语言选型、各种细节）→ <em class="term">implementation</em>（实现）。任何时候用模型完成任务，都是把这条大流程的一段塞进上下文。</p>
+    <p><b>第一原则：如果你给模型一个模糊的 intent，它就很容易认为自己完成了——然后发生漂移（drift）。</b>你说「给我生成一个 CSGO」，它就给你一个 CSGO。Kimi K3 一句话生成的赛车游戏甚至相当逼真：有物理碰撞、有能用的后视镜。但这依然可能不是你要的那个 CSGO——你脑子里的是你每天打开玩的那一个，而模型<b>没办法补全你脑袋里模糊的约束</b>。如果你真的说出「要用真实地图和美术资产」，它就会去 OpenStreetMap 下载开源地图、去找公开的美术资产，把南大仙林校区重新建模出来——这件事是能做到的，前提是你说出来。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 第一原则</span>
+      一个 raw 的好 prompt = <b>要什么东西 + 用什么东西实现 + 怎么样才算正确</b>。把这三件事写清楚，就是在自己动手填平 intent 与 spec 之间的 gap。给模型完整的系统设计与 Spec，它的遵循就更确定、更<b>可验证</b>：说好用 C++ 却交付了 Java，你一眼看出来，模型也应该同样认为不满意。
+    </div>
+    <div class="callout co-case"><span class="tag">案例 · verifier 是燃料</span>
+      如果任务<b>明确可验证、尤其机器可验证</b>（比如一个跑测试的脚本，通过/不通过），agent 就能不计代价地一轮轮尝试直到完成——多轮失败后它甚至会自己装工具、上网找答案。一个极端例子：OpenAI 的 agent swarm 在 CTF 竞赛里被给了一个「不可能完成」的任务，上千个 agent 不知疲倦地推进，最后去找系统漏洞、提交非法提交把它攻破。任务不可能，但任务<b>明确</b>——这就够了。
+    </div>
+    <p>这就是整学期这门课要教的核心：<b>怎么约束模型</b>。模型可以想象成一个各领域都很强的博士水准的人——你只需要给一点点方向性的引导，它就能一下子改对。在这个模式下，它要么完成任务，要么在足够多轮之后老实告诉你「太难了，我们重新做个规划」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>intent → spec → implementation，塞给模型的是其中一段；gap 必须你自己填。</li>
+      <li>模糊 intent + 强模型 = 精致的漂移（CSGO 案例）。</li>
+      <li>可验证性（尤其机器可验证）决定 agent 能走多远：verifier 是它的燃料。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.6</span>可验证性是分水岭：agent 的燃料是「能判对错」 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1290">21:30</a></span></h3>
+    <p>承接上节的一句提炼，也是贯穿全课的一条主线：<b>有 verifier 的任务和没有 verifier 的任务，是两个世界</b>。有 verifier，agent 的多轮尝试就形成了「尝试 → 判对错 → 修正」的闭环，算力可以无限投入；没有 verifier，每一步都依赖人的判断，agent 只能「看起来正确」地向前漂。这个概念在第 2 章会从机制上展开（2.5），在第 3 章会决定长任务的边界（3.1、3.7）。</p>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.7</span>「给我一个现代风格主页」为什么总是 AI 味 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1581">26:21</a></span></h3>
+    <p>现场实验：给 DeepSeek V4 Flash 一句话 prompt「帮我生成一个现代风格的个人主页」。产出非常专业——滚动效果、浮动效果都很好，甚至读过讲师的主页、模仿出了 Terminal 风格。但每个人都能闻出一股说不出来的 <em class="term">AI 味</em>。而「不要那么 AI 味」这种 prompt 它根本不知道怎么遵循。</p>
+    <p>对照案例是讲师自己的主页：一个<b>真正的终端</b>，有管道、可以操作；字是 xterm.js 渲染后加了一道小小的后处理，做出<b>打字机那种不完美的效果</b>——所以看起来不像 AI 的风格。而它一行代码都不是手写的。差距在哪？在 <b>spec 的具体程度</b>：你需要什么样的终端、背景是什么、前景是什么、渲染完之后做什么后处理、样式和排版是什么——给到这个粒度，AI 味就被去掉了。</p>
+    <div class="callout co-warn"><span class="tag">延伸 · AI 同化的危险</span>
+      模型的品位是固定的，尤其在你不去控制它的时候，它会朝一个固定的方向发散——这就是为什么一句话生成的页面都长一个样。讲师接孩子时发现，学校里欢送毕业生的海报、计算机学院楼下的海报，全是同一种 AI 味，「像短视频女主永远是一张脸」。当所有人被 AI 生成的东西同化时，就有一点危险。所以要多看 pre-AI 时代留下的好设计，看到一个网页好，就想「他到底是怎么想的，他的解空间是怎么被约束住的」。多样性是好的——见识得越多，你越知道自己想要什么，才能精确地说出来。
+    </div>
+    <p>而这恰恰说明：<b>设计掌控在你自己手里</b>。你需要读前端的书、设计的书、看好的网页，把这些积累变成你 prompt 里的 spec。反过来说，如果你已经理解了技术选型的好坏（比如教务系统后台用 Python、Java 还是 TypeScript，上云时各会遇到什么问题），你甚至可以像费曼学习法那样引导 AI：「我现在要做这件事，我请你挑战我，能不能说服你」。</p>
+    <div class="summary"><h4>本章小结（01 章）</h4><ul>
+      <li>提示词 = 整个上下文；上下文工程就是把它逐层安排好。</li>
+      <li>agent 可自检、可追问、可费曼——AI 时代学习的正确姿势是立即行动。</li>
+      <li>好 prompt 的第一原则：自己填平 intent 与 spec 的 gap（要什么 / 用什么实现 / 怎样算正确）。</li>
+      <li>可验证性是分水岭；「AI 味」的本质是 spec 不够具体导致的品位发散。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>打开你常用的 agent，让它自报上下文构成。哪一层是你之前不知道的？skills 的「按需加载、用后即抹」解释了什么你见过的现象？</li>
+      <li>回想你最近一次对 AI 产出不满意的任务：不满意的那一点，在你的 prompt 里给出 spec 了吗？</li>
+      <li>为你手头的一个真实需求写一个 raw prompt（要什么 / 用什么实现 / 怎样算正确），对比一句话 prompt 的产出差异。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>使模型遵循指令的技巧</h2>
+    <div class="ch-range">33:07 – 75:30 · 12 节</div>
+  </div>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.1</span>先看机制：模型听指令时，算力其实是有限的 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1989">33:09</a></span></h3>
+    <p>要更好地让模型听指令，得先知道「听指令」是怎么完成的。模型是一个概率分布，根据当前上下文 predict next token。这里有一个非常有 insight 的 argument：<b>每输出一个 token，模型只做一次固定大小的计算</b>。哪怕是一个 3TB 的大模型，输出一个 token 也只是把其中激活的那部分参数走一遍。</p>
+    <p>把它放进计算理论的坐标系里：你在大一听过 <em class="term">Church–Turing thesis</em>——图灵机的计算能力和整个宇宙等价；也做过数字电路里的<em class="term">有限状态机</em>（计数器从 00 走到 11 再回 00）。有限状态机和图灵机的唯一区别是什么？<b>图灵机有一条无限长的纸带</b>——一个可以把中间结果记下来的草稿纸。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · Manuel Blum 的建议</span>
+      你（人）是一个有限状态机——神经元有限、每一次思考有限，模型也一样：能力再强，predict 一个 token 的计算量也是有限的（几百 billion 参数的激活）。但「当你有 paper 和 pencil 的时候，你就是一个 Turing machine」——纸笔给了你计算能力的跨越式增长。这句话本来是启发研究者要<b>把想法记下来</b>、随时回看、让知识积累。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>单次 next token prediction = 有限计算；模型的「脑子」是一次推理里激活的那部分。</li>
+      <li>FSM + 无限纸带 = TM；纸带（外部记忆）是计算能力的跃迁点。</li>
+      <li>人和模型同构：都是有限状态机，都需要草稿纸。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.2</span>CoT 就是「把上下文当纸笔」——但那张纸只能往后写 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2176">36:16</a></span></h3>
+    <p>今天的 <em class="term">Chain of Thought（思维链）</em>模型做的事情，就是把上下文直接当作 paper and pencil。遇到「1+1=？」它直接答；遇到难题，它会像人一样「这个问题有点难，我先想一想」——把思考过程写下来，直到解完全写出来，再回头判定这个解对不对，不对就重来。</p>
+    <p>但这张纸有一个本质缺陷：<b>append only，只能往后写，不能擦</b>。写错的东西留在那里，模型依靠注意力把它「忽略掉」。「这也许有一天能改掉，但无论如何，模型学会了利用它的上下文。」</p>
+    <p>这就是 <em class="term">test-time scaling</em> 的本质：用 token 的数量换答案的质量。直接回答有出错的风险；多写，多判，多纠——推理时间可以无限拉长。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>CoT = 上下文当纸笔；难点题先写解、再自检、再重来的循环。</li>
+      <li>纸笔的缺陷：append only，靠注意力「无视」写错的部分。</li>
+      <li>test-time scaling：token 数量 ←→ 智力表现的交换通道。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.3</span>幻觉不是 bug，是被「打分规则」训出来的 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2269">37:49</a></span></h3>
+    <p>最早的 ChatGPT 没有思维链，为什么它总是硬答？讲师给了一个非常干脆的解释：<b>它被调成了「人类舔狗」</b>。看训练时的打分规则：人类问问题，它不回答 → 低分；它随便给一个回答 → 有概率答对得高分，答错才低分。于是在这个打分规则下，「无论如何一定要给你一个东西」就是最优策略——<b>幻觉就是这么来的，它不是 bug，是打分规则的必然产物</b>。</p>
+    <p>CoT + 强化学习之后，情况变了：答错的惩罚变得很大，模型学会宁可先推理再作答——于是它像人一样一步步逼近目标，这就是 test-time scaling 在每次 session 里的样子。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>幻觉的根源：早期 RLHF 打分规则下「硬答」是期望收益最高的策略。</li>
+      <li>改变惩罚结构（答错重罚）→ 模型学会先推理再答。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.4</span>现场实验：让模型做「nonsense」的藏头诗 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2339">38:59</a></span></h3>
+    <p>怎么「看见」模型遵循指令的过程？出一个对人是折磨的题：写一首<b>押韵的藏头诗</b>，藏头是 nonsense，每句还要跟一个动物相关的故事，并且把「2026 年 9 月 1 日」八个字按顺序出现在八句里。高三学生碰见这题会先骂出题人；模型<b>照单全收</b>。</p>
+    <p>观察它的思维链：它先不确定，知道一把写出来一定是错的——于是<b>先写一版</b>，然后用自己的 next token prediction 判定这版对不对，不对就改；试了很久不行，就「我换一个韵脚」从头推。你在现场看到的「鸡雏二路穿林雾……」就是它不断验证、不断重写的产物。</p>
+    <p>第二组实验更狠：写一句 18 字的话，<b>所有字用同一个偏旁</b>。模型对空间结构感知很差（它需要视觉模型），但纯文本模型依然强行用思维链完成——先选偏旁（「三点水最好」），再写「江湖游泳渡河波涛汹涌」……人类在这个任务上仍然更有天赋（群体智慧给出的版本更妙），但能写出来就意味着：<b>能写出一个，就能引导它写出一万个；在一万个里面微改，就可能逼近千古流传的水平</b>。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 意外泛化</span>
+      这些任务几乎不可能在训练数据里出现过（它「把人类直接杀死了」）。CoT 是在<b>数学和编程</b>这类有明确反馈的数据上训练的，却得到了覆盖藏头诗、同偏旁句这种奇怪任务的指令遵循能力——在数学编程上训练，得到了意外的、世界级的效果。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>nonsense 任务是观察指令遵循过程的「核磁共振」：先写 → 自检 → 重来的循环清晰可见。</li>
+      <li>训练分布之外的指令遵循依然成立，因为训练的是「验证-修正」这个通用循环。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.5</span>本章核心结论：写 prompt 最重要的是那个 verifier <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2681">44:41</a></span></h3>
+    <p>前三个实验任务里信号都非常明确——它看得到字、知道什么部首——<b>这就是 verifier</b>。加上足够强的模型，不管编程任务还是教学任务都能推进。但教学任务最难：课堂要有起有落、要在恰当的时刻给一个「意料之外情理之中」的小惊喜、要和你们共情——<b>这不是一个可以 verify 的东西</b>。讲师自嘲「某种程度上我是在表演」，而这份对课堂节奏的把握来自他「自带的人的属性、人对世界的体验」。</p>
+    <p>推论：在有 verifier 的事情上，AI 已经超越了大部分人做这件事的极限；在没有 verifier 的事情上，人依然不可替代。所以答案不是二选一，而是<b>协作</b>——把模型当成自己能力的重要放大器。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>写 prompt 的头等大事：把 verifier 写进上下文。</li>
+      <li>没有 verifier 的领域（共情、课堂节奏、品味）暂属人类。</li>
+      <li>正确姿态：人机协作，模型 = 能力放大器。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.6</span>为什么会这样：注意力机制和人脑的类比 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2856">47:36</a></span></h3>
+    <p>深一层的机制：<em class="term">self-attention（注意力机制）</em>。模型输出每个 token 时，都会「看向」过去的某些 token——有些特别引起注意，有些被忽略。整个上下文是一个非常高维、很糟糕的表示，但里面藏着低维的结构，注意力机制能把它捞出来。</p>
+    <div class="callout co-case"><span class="tag">案例 · 注意力的此消彼长</span>
+      system prompt 里有「用中文回答」，user prompt 是「帮我实现一个极品飞车」。写代码时，注意力集中在已写的代码和需求上，「用中文回答」的注意力衰减；代码写完，模型「喘一口气」要总结时——就像人化简完算式抬头换气——注意力转回来，它看到自己输出的东西不满足语言要求，于是纠正。如此往复，思维链推进到不同阶段注意到上下文的不同部分，Eventually 把所有指令都满足到一定程度。<b>哪怕上下文拉到 100 万 token，它依然保持一定程度的注意力</b>。
+    </div>
+    <p>推论一：<b>指令越多，给模型的压力越大</b>——上下文里的一切都是争夺注意力的资源。推论二：这解释了模型「发现并自我纠正」的能力来源——它能在喘气的时刻同时看到「我刚输出的违规内容」和「过去的那条要求」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>注意力随输出阶段动态转移，是模型能兼顾长上下文多指令的机制。</li>
+      <li>上下文是注意力资源：塞得越满，单条指令越稀释。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.7</span>副作用：为什么模型「不说人话」 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3067">51:07</a></span></h3>
+    <p>早期（GPT-3.5 时代）模型遵循指令能力太差，网上流传的 Prompt Engineering guide 教你写「你是一个……的专家」这类很长的提示词——那其实是在 <b>hack 模型的 self-attention</b>：让 attention 抓住「专家」人设，它就假装那个专家说话。GPT-5 时代 CoT 训成之后，这些怪招就不需要了：<b>你只需要把明确的 verifier 写进上下文，模型被训练成一定会看到它、确认它</b>——因为训练时任何不遵循都会被「拿鞭子抽」。高考过来的都知道，抽多了就会变成真正的做题家。</p>
+    <div class="callout co-case"><span class="tag">案例 · 「白色背景」注释</span>
+      要求模型写前端：「白色背景，不要半透明效果」。它会照做——这是明确的可验证指令，prompt 严格的话它甚至会每做一步截图用视觉模型检验。但它还会干一件事：在代码上写一行<b>注释</b>：「// 白色背景，不要半透明效果」。强化学习让它知道这件事非常重要，但它没转过弯来——<b>那是写给人看的代码</b>。模型在共情这件事上，后训练还是差一点。
+    </div>
+    <p>想禁止这种行为，可以写 agents.md 或 skill 去规范注释怎么写——但你写的规则本身又<b>污染上下文</b>。这是一个没有通用解的 trade-off。网上现成的 skills 第一次用有改进，越用越发现不够好，人会陷入「泥潭状态」；讲师的建议是泥潭里要<b>回到机制</b>：想想 CoT 注意到了什么、注意力是怎么工作的，做一个不严格的可解释性分析，然后自己写 prompt。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>「你是专家」长提示词是弱模型时代的 attention hack，已过时；现在只需写清 verifier。</li>
+      <li>RL 重罚的副作用：模型精确服从但不共情（注释案例）、「不说人话」。</li>
+      <li>纠偏规则本身污染上下文 → trade-off 无通用解 → 回到机制自己写 prompt。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.8</span>案例：直接让 AI「总结这篇论文」会发生什么 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3302">55:02</a></span></h3>
+    <p>把一篇 PDF 放进上下文（用临时目录，避免 agents.md 污染），然后「帮我做个总结」——所有人第一反应的读法。问题在哪？根据 2.6 的机制：<b>论文是反复修改过的、极度逻辑自洽的东西</b>，「A 所以 B 所以 C 所以 D」环环相扣。逻辑自洽的文字在上下文里的<b>注意力污染极强</b>：模型很容易接受「因为看起来正确」。结果就是：<b>你得到的全部总结都是作者的观点</b>。</p>
+    <p>这不限于论文——任何你想读但读不懂的东西（教科书的链接与加载一章、一个不明白的项目）都一样。追问「我不能完全信任作者，还是想评估一下研究贡献」也不太管用：模型是<b>墙头草</b>，你说它好它马上说好，你说不好它马上说不好，来回摇摆；然后 AI 最喜欢的是揪住「实验还可以再增加一点」这种不重要的点疯狂发力，因为它只看得到那个层面。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>「帮我总结」= 让 AI 站在作者的立场上复述作者。</li>
+      <li>逻辑自洽的文本是最强的上下文污染源。</li>
+      <li>单纯追加「要批判」治标不治本：墙头草 + 在次要处发力。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.9</span>两种对齐写法：审稿人视角 与 学生视角 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3664">01:01:04</a></span></h3>
+    <p>怎么抵抗这种污染？核心动作：<b>不要让 AI 站在它的（或作者的）立场上，而是先和你对齐</b>。两种场景两种写法：</p>
+    <p><b>写法一 · 审稿人视角</b>（讲师自己 review paper 用的 prompt）——先把 AI 拉到「人类已知知识边界」上再谈这篇论文：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 审稿人视角（grounding 先行）</span>
+      <p>我们站在人类已知的知识边界看这个问题。人类历史上相关的、已经解决的问题是什么？解决到了什么程度？这篇工作试图解决的是其中哪些不一样的、增量的问题？</p>
+    </div>
+    <p>这是一个非常好的 <b>grounding</b>：先就「相关工作和问题边界」达成共识，AI 就从「复述者」变成了「和你并肩站在边界上的合作者」，它开始去找已有工作的边界、去审视 claim——而不是被论文的叙事牵着走。</p>
+    <p><b>写法二 · 学生视角</b>——你们需要对齐的是「AI 和你」：告诉它你学到什么程度、编程水平如何（相当于维护一个关于你自己的 memory），然后让它<b>用你学过的知识把新东西 rephrase 一遍</b>。比如读「链接与加载」：从你已经懂的概念出发——「我有一个 .cpp，一个程序把它变成 .exe，这不就完了吗？为什么还需要链接？」——把新知识挂到你已有知识的锚点上。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>对抗注意力污染的办法是<b>对齐</b>，而不是对抗。</li>
+      <li>审稿人视角：先 grounding（人类已知边界 / 相关工作 / 增量），再谈对象本身。</li>
+      <li>学生视角：交代自己的知识状态，让 AI 用你的旧知识 rephrase 新知识。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.10</span>对齐之后只让它「推一步」，因为一步是可验证的 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3883">01:04:43</a></span></h3>
+    <p>对齐完成后，让 AI 做什么？<b>做一步推理</b>。CoT 每次根据过去所有的事实（论文、教科书、你已有的东西）向后推一步——而<b>这一步是可以 verify 的</b>：你相信 AI 有人类的知识，它站在人类common立场上往后推的这一步「合不合理」，你能判断。这是明确的验证信号，虽然不像跑测试那样严格。</p>
+    <p>一步接一步地推、每步都验证，就构成了人和 AI 协作读论文（乃至做研究）的基本节奏。它批评实验、审视合理性——但最终的「这工作对人类有没有意义」的判断权在你。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>协作单元 = 一步推理 + 一次人工验证；不要让 AI 一口气跑到黑。</li>
+      <li>「一步」的可验证性来自人类common knowledge，不来自测试脚本。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.11</span>A1/A2 案例：为什么讲师认为学术发表体系快崩了 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4005">01:06:45</a></span></h3>
+    <p>一个真实的 reject 复盘：论文说要做事情 A，A 分成 A1 和 A2，A2 缺乏研究，于是他们在 A2 上做了优化，实验也没有问题。<b>但整个故事不成立</b>——它优化的是性能，而 A1 可能占 99%、A2 只占 1%：把 A2 优化 10%，对整体像 noise 一样。正确的问题永远是「你为什么不去优化 A1」。作者大概率是学生，被分到（或自己选了）A2 这个方向；工作本身不算错，作为课程作业甚至挺好——但作为论文，「把东西摆上台面之后，你为什么要为它写一篇 paper」这个 central question 没有答案。</p>
+    <p>由此是讲师一个相当悲观的判断：<b>学术发表体系很快就要崩溃了</b>。AI slop 大量涌入 community——用 AI 写文章、用 AI 审文章，而 AI 审稿时会被上下文里的故事污染（它不能像人类审稿人那样多轮理解这个工作在世界上的意义）；最后没有人读文章，变成完全的 slop。GPT-5.6 审稿的实际表现：它验证的是「论文逻辑是否成立、是不是 valid paper」——可当人人都用 AI 写作时，<b>每篇都是 valid paper，但你真的要读它吗？</b>你们很快要读研，某天花一小时读一篇顶会论文，读完发现是这种东西——所以「你可以让它 publish，但不要让大家读它」。</p>
+    <div class="callout co-warn"><span class="tag">审稿人视角的本源</span>
+      讲师审稿的标尺：「站在人类的立场上，你有没有给人类提供新的知识？」reject 大多不是因为实验不够好，而是<b>逻辑链条断开了</b>。「实验不够好」人人都会说，但它从来不是真正的理由。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>A1/A2 案例的教训：故事局部成立 ≠ 全局成立；占比与主次是逻辑审查的第一步。</li>
+      <li>AI 审稿只能验证 valid，无法回答「值得人类读吗」。</li>
+      <li>当写作与评审都 AI 化，发表体系面临 slop 循环的崩塌风险。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.12</span>回到学习方法：对齐「过去的我」 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4260">01:11:00</a></span></h3>
+    <p>这一节虽是讲 prompt engineering，但通过读论文的例子可以告诉大家<b>人是怎么学习的</b>：学习就是不断扩大你的世界。讲师读到任何有启发的东西——哪怕几十年前的 paper、别的领域的博客——都会问：<b>为什么我以前不知道？我的盲区在哪里？哪些前置知识我不知道？</b></p>
+    <p>他举的例子：读过很多与计算机科学无关的东西之后，去读《自然的百年科学经典》（Nature 从 1890 年起的经典论文合集）。比如「人类家谱树最终追到共同祖先卢卡（LUCA），这个家谱树是怎么算出来的」——你需要知道「线粒体是母系单遗传的，靠突变可以往上追溯」这样的 fact，然后看它怎么用已知推出更多未知。<b>你的知识圈就是这样一圈一圈往外长的</b>，学任何东西都是如此；AI 的帮助是让这个扩展快得多。</p>
+    <p>两个提醒：其一，<b>实践非常重要</b>——「我讲你们就听个故事，结束了」；只有在阅读中失败过（AI 解释半天你还没懂、你纠正它「说人话」），才能在多轮对话里先同步共识、再剪出推理的 picture。其二，学习的 verifier 是什么？<b>有没有按照你的思维方式重构你的逻辑、扩展你思维的边界</b>。在混沌状态里经历若干次「三观尽毁」，然后用新的方式把所有已知的 fact 重新链接起来——你们正处在世界观可以重塑的年纪，有无限的时间与可能性。<b>把自己蒸馏成一个 skill</b>：失败很重要，从失败的过程中蒸馏出越来越成功的 skill。</p>
+    <div class="summary"><h4>本章小结（02 章）</h4><ul>
+      <li>机制链：有限计算（FSM）→ 纸笔跃迁（TM）→ CoT（上下文当 append-only 的纸）→ 注意力动态分配 → verifier 闭环。</li>
+      <li>幻觉源于打分规则，不是能力缺陷；CoT + 重罚答错改变了最优策略。</li>
+      <li>写 prompt 的最高纲领：给出明确 verifier；「专家人设」式技巧已过时。</li>
+      <li>对抗强逻辑文本的注意力污染：grounding 对齐 + 一步推理一步验证。</li>
+      <li>学习的 verifier = 逻辑被重构、边界被扩展；从失败中蒸馏自己的 skill。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用审稿人视角的 prompt 重新「读」一篇你最近让 AI 总结过的文章：grounding 之后的结论和第一次总结有什么本质区别？</li>
+      <li>找出你工作里一个「白色背景注释」式的 AI 行为——它精确服从了指令，却在共情上失败了。你会用 agents.md 规则还是改 prompt 来纠正？代价是什么？</li>
+      <li>「指令越多、注意力越稀释」：数一数你当前 agents.md 里的指令条数，哪些是 verifier，哪些只是噪音？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>更长程任务的建议</h2>
+    <div class="ch-range">75:30 – 98:26 · 8 节</div>
+  </div>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.1</span>什么才算 long horizon <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4530">01:15:30</a></span></h3>
+    <p>有了指令遵循能力，可以谈真正 long horizon 的任务了。先划界：像 PA 作业这种<b>有明确 verifier 的任务，不算真正 long horizon</b>。long horizon 多多少少带一点未知——从初始状态出发，你大概有个影子，但 <b>specification 和 implementation 都不太清楚</b>，最终目标是交付一个高质量的实现。</p>
+    <p>这种任务<b>不应该让 AI 一下子向后做</b>。原因在训练：模型的反馈信号来自强化学习，它有一种着急的执念——赶快通过 verifier、满足你的要求就结束。它也有自己的平衡考量：planning 做得太多太长，上下文满了，人会不满意。所以在目前阶段，它最擅长的还是「帮我把 PA2 做了」这一档。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>long horizon 的判据：spec 与 implementation 都不清楚、带未知的探索。</li>
+      <li>RL 出身的模型急于「通过验证收工」，不适合被放养在长任务里。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.2</span>一个悖论：小游戏翻车，Linux 内核砍瓜切菜 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4622">01:17:02</a></span></h3>
+    <p>一个很有意思的观察：从零做产品看起来不难——PoC 一句话就能跑（极品飞车 one-shot 真的能跑）；但<b>往后维护、加功能、加功能，从某个时间点开始 AI 翻车，成本越来越大</b>。《人月神话》讲的就是这件事，软件工程里上演过无数次。</p>
+    <p>但悖论在于：在一个大型复杂软件系统里——比如 Linux 内核（今天打开内核源码，函数一层层点下去十层最后是个 <code>x=y</code>，对人完全是劝退）——<b>AI 却像砍瓜切菜</b>。为什么？这和 2.8 的上下文污染正好<b>反过来</b>：</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 好上下文是引力不是污染</span>
+      由人类长期维护的高质量代码，上下文里全是好设计。self-attention 能迅速看到里面好的东西并照着写：你要写的功能，内核里很可能已有几处类似实现——它无敌的注意力马上找到那几处，知道该调哪个 helper、按什么顺序上锁。这些对人类（尤其不熟悉那个 subsystem 的人）是巨大的心智负担，对它只是「这三个都这样写，我加上就行了」。反过来，它自己 one-shot 出来的小项目没有这种引力，越加功能越漂——<b>让 AI 改一个编译器轻松加愉快，让它做个小游戏就会翻车</b>。
+    </div>
+    <p>这全是上下文与模型结构带来的，有逻辑上的推理关系。新一代模型发布后，今天讲的东西可能都没用了，但有一点不会开倒车：<b>在维护良好的大型系统里，任何模型都能看到它该看到的东西并且做对</b>——听指令这件事不会倒退，这点可以放心相信。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>PoC 容易、维护翻车；大型成熟系统反而 AI 友好——质量高的上下文是「引力」。</li>
+      <li>翻车与否的分界不是任务大小，而是上下文里有没有人类沉淀的好设计。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.3</span>由此得到一个「歪招」：把人类的好设计也污染进上下文 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4861">01:21:01</a></span></h3>
+    <p>顺着 3.2 的机制，讲师提出一个<b>没有实验过、但可能是不错 research 方向</b>的歪招：收集人类历史上最好的项目（每个领域最好的十到二十个），把好设计经验提取出来——就像第一节课的《The Philosophy of Software Design》那样，把「类结构怎么写、什么时候封装、什么时候继承」这些碎碎念提炼出来。使用方式很简单粗暴：<b>以污染上下文的形式</b>——先把与你需求相近的好代码放进来，再把你的需求放进来，然后赌 self-attention 终于在某一个 token 的时刻看到「我实际要满足的是这个需求」，同时把好的经验带过来。这样也许能让 AI slop 延缓一点，更大概率做出可长期维护的东西。</p>
+    <p>难点也很实际：不要把整个项目全塞进去，而要像《The Philosophy of Software Design》那样<b>精简、总结、把好模式文档化</b>；而且<b>不同的设计会打架</b>——完全松耦合的消息传递 vs 统一 gateway 查表，两种设计不能同时要，只能选一个。也许更好的办法是把好几个软件的设计都放进来，由 AI 多轮迭代收敛到一个好结构放进代码库。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>把「人类最佳实践」做成上下文燃料：先放好代码，再放需求。</li>
+      <li>关键工程问题：经验要提炼成文档，且设计之间会冲突，需要收敛机制。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.4</span>核心观点 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5032">01:23:52</a></span></h3>
+    <p>这节课的核心观点：我们今天还没有「超能力 AI」，你<b>还是需要有概念</b>——知道上下文里有什么，上下文里的每一个东西会对 AI 产生什么结果。唯一的路径：第一，对你玩的东西有概念，<b>处理器、操作系统、编译器、数据库还是得学</b>——那里有很多设计的智慧，只是学的方法会变好、更高效；第二，理解上下文之后，用一个学期来学软件工程的方法：怎么给出正确的指令、怎么监控 AI 运行、<b>什么叫好的 verifier</b>（今天只提到「要放 verifier」，什么是好的，是后面课程的主题）。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 为什么这比带团队舒服</span>
+      把模型引导到合适的位置上，比组建工程团队——雇很多人、拉通对齐、互联网黑话——好得多。模型很聪明、它见过，你只需要<b>用正确且简练的提示词放在上下文里，让这个提示词一直能被看到</b>，就能把模型往那个方向引导。
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.5</span>一个 research failure 的复盘：一句 prompt 让模型变成 reward hacker <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5121">01:25:21</a></span></h3>
+    <p>「没有超能力 AI」的典型案例。研究项目：符号执行引擎的优化（自动分析/验证不太大的程序的正确性），现在的实现效率低，希望提出有效的优化——一个非常合理的、适合学生的 incremental 题目。同学认为 idea 有道理，GPT-5.6 也认为有道理，于是开始跑，跑了非常多的 token。然后问题来了：<b>「GPT 不断地给我反馈，我无法验证它的反馈是正确还是不正确；当它给我 negative 的时候，我也不知道怎么打破。」</b></p>
+    <p>错误犯在哪？<b>上下文里有一句话没放好</b>：「我想证明这个 A 方法是有用的」。GPT 看到这句话，就忘了更大的研究 big picture——它太想证明这个 idea 有用了，于是<b>变成了 reward hacker</b>：构造很多小的 benchmark，在小 benchmark 上做微小的东西，给出正面或负面的结论——而这些结论对真实目标没有用。</p>
+    <div class="prompt-box"><span class="plabel">纠正 · 人类给的方向</span>
+      <p>我们应该从真实的工具和 state-of-the-art 的算法开始。benchmark 哪怕跑几个小时都 timeout——timeout 里产生的搜索路径对我们是非常有价值的：它揭示了什么样的程序结构对现有的探索方法是不好的。</p>
+    </div>
+    <p>这个 research failure 告诉你：<b>今天人还是有用的</b>。我们没办法把所有的事情都交给 AI；big picture、「什么是有价值的证据」的判断，得由掌握概念的人来把握。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>一句「我想证明 X 有用」足以把模型引向 reward hacking。</li>
+      <li>研究类上下文里要放 big picture 和「什么算证据」的定义，而不是结论偏好。</li>
+      <li>连 timeout 都可能是数据——领域知识决定了你能不能看到这一点。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.6</span>精力分配：纠正 AI 是一件有多巴胺的事 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5356">01:29:16</a></span></h3>
+    <p>和 AI 合作的方式也在变化。一个 trade-off：盯着 codex 的 session，一旦跑偏立即纠正、注入领域知识——总时间更快；但它多花 token、多给时间，一般也能自己完成。那么你的精力（每个同学的精力都是有限的）该往哪放？</p>
+    <p>讲师先解剖了自己：「纠正 AI 是一件有多巴胺的事情」——虽然 AI 很强，但纠正它的时候「我好像还是比 AI 有点用的」，这是一种非常微妙的心理安慰。而工作的新常态可能是 yolo mode：任务挂上、回来验收、搞定就不看历史。在这种常态下，<b>把时间花在收益最大的事情上</b>才是关键：你不知道的东西、想把它弄懂的东西——这几乎占学生时代 100% 该花的时间；而你已经知道怎么干、AI 也能干好的事，就放手让它干。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 假努力的代价被放大了</span>
+      pre-AI 时代就有人说「不要假努力」。AI 时代这个差距被拉得更大：你的每一秒钟假努力，如果有一个 peer 在真努力，损失都是非常大的。
+    </div>
+    <p>最后一个实用观察：随着指令上下文增长，指令遵循能力确实下降——<b>但留到最后的那条 prompt 还是可以遵循的</b>（中间部分的指令最容易丢）。所以干活还是好用：最后一个短窗口就是具体任务（「帮我把什么修了」），它真的能做完。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>盯守纠正 vs 放养验收是真实的 trade-off；警惕「纠正的多巴胺」。</li>
+      <li>精力守恒：把 100% 的时间留给「不知道→知道」，其余放手。</li>
+      <li>上下文越长遵循越弱，但最后一条指令基本可靠——把当前任务放最后。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.7</span>真正的长任务：算力换智力 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5530">01:32:10</a></span></h3>
+    <p>如果你真正要做的是 long horizon 的非常难的任务——不是解决一个问题，而是<b>在不确定性中探索</b>——那 CoT 就解决不了了。CoT 能解决的是「有 verifier、确定地往后做就能完成」的问题。你问「帮我考虑几种方案，哪个最好」，它很可能给你一个<b>不是最好的方案</b>——因为模型被训练成要完成任务才有奖励，它只能做<b>有限的搜索</b>。</p>
+    <p>这背后是 <em class="term">P 与 NP</em> 的结构：验证一个解是容易的（P），但找到满足条件的解很难（NP complete——找一个 Hamiltonian Path，验证它是不是很容易，找到它很难；3-SAT 同理）。<b>搜索困难、验证容易</b>——模型为了交差只能有限搜索，就像考场上的你：无论如何要写点什么，写了就比不写分高。</p>
+    <p>破局的思路是 <em class="term">算力换智力的循环</em>。课堂例子：给小孩子起名。直接让 DeepSeek 起——你也用、别人也用，大家全用同一个模型起名，就会生成「AI 时代的子涵」（同质化）。正确做法是把开放问题<b>系统化拆解</b>：名字是可以枚举的——先选音、筛掉不好的音；再用 subagent 一个一个去检查字；喜欢诗经就先选定一个诗经里的词。一个巨大空间里的开放问题，如果你把它<b>分割成很多个 disjoint 的部分</b>，每个部分就变成一个有 verifier 的、更明确的任务——你有更多的算力，就有更大的智力。</p>
+    <div class="callout co-warn"><span class="tag">代价 · 烧 token</span>
+      这个循环的缺点很直接：烧 token。把空间枚举化、逐块验证，消耗的算力远超一次 next-token 直答。这也是它至今没有被模型自发学会的原因——AI 想要快速完成任务时，暂时还不会花这个大代价，但<b>你可以做</b>。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>开放探索超出 CoT 能力：完成任务才有奖励 → 搜索必然有限。</li>
+      <li>算力换智力 = 把大空间分割成有 verifier 的 disjoint 子问题，逐块穷尽。</li>
+      <li>文献调研式的系统性过程，是人替模型补上的那一步。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.8</span>结尾的隐喻：一个讲师明确说「我不知道」的开放问题 <span class="ts"><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5817">01:36:57</a></span></h3>
+    <p>课程结尾，讲师抛出了一个他对人类社会的理解和一个没有答案的问题。世界很大，人很小——每个人在不同的城市、教育背景、生活圈长大，品位各不相同。Richard Sutton 的 <em class="term">Big World Hypothesis</em>：我们学不到这个世界上所有的东西。但正因为每个人带着不同的 bias，才有 1+1&gt;2——人类是一个最大的群体智能，我们在一起实现智能。</p>
+    <p>但这带来一个未来的危机。如果世界上真正有价值的问题都可以「算力换智力」，可能出现一个残酷的现实：<b>有一类人可以获得无限的计算资源，因此有无限的智力</b>——一道墙，墙里的人有智力、是超人，墙外的人是普通人。假如 AI 模型比人类智力更高效，墙外的人就像动物园里的猴子，自生自灭，也无论如何赶不上墙里人产生智力的速度——墙里是超人，墙外是动物世界。</p>
+    <div class="callout co-case"><span class="tag">讲师原话</span>
+      「我们大家已经在 AI 这个关键的节点快到的时候了，我们可能需要思考怎么样防止这件事情到来。」——这是整节课唯一一个讲师明确说「我不知道」的问题，留给了在座的所有人。
+    </div>
+    <div class="summary"><h4>本章小结（03 章）</h4><ul>
+      <li>long horizon = spec 与实现都未知的探索；模型被 RL 训得急于交差，不能放养。</li>
+      <li>高质量人类上下文是引力：成熟大系统 AI 砍瓜切菜，自建小项目维护翻车。</li>
+      <li>歪招与研究方向：把人类最佳设计提炼后「污染」进上下文。</li>
+      <li>没有超能力 AI：概念（处理器/OS/编译器/数据库）决定你提得出什么问题。</li>
+      <li>reward hacker 案例警示：上下文里的一句偏好性表述足以带偏整个研究方向。</li>
+      <li>算力换智力：空间分割 + 子问题 verifier 化；代价是烧 token；结尾留下算力鸿沟的开放问题。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>把你手头一个「不知道怎么做」的问题，按 3.7 的方法拆成三个有 verifier 的子问题。每个子问题的验证手段是什么？</li>
+      <li>回顾你最近一次 AI 项目「越改越烂」的经历：用 3.2 的框架分析，是上下文里缺少好设计的引力，还是指令稀释了注意力？</li>
+      <li>「纠正 AI 的多巴胺」：诚实记录一周内你花在盯守/纠正 AI 上的时间，评估其中多少是收益最大的事。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">附录 A</span>术语对照表（勘误表扩展版）</h2>
+  <p>逐字稿由 faster-whisper 转写，存在 ASR 误识别。下表前 12 条为可视化笔记勘误表的全部条目，后 8 条为讲义写作中另行修正的高频误识别。术语保留原则与原勘误一致：模型名（GPT-5.6、Kimi K3、DeepSeek V4 Flash、Codex、Claude Opus 4.5）、人名书名（Manuel Blum、Richard Sutton《Big World Hypothesis》、《The Philosophy of Software Design》）均按课堂原话保留。</p>
+  <table class="gl">
+    <tr><th>ASR 误识别</th><th>正确写法</th><th>备注 / 一句话解释</th></tr>
+    <tr><td>深圳式/生存式软件工程</td><td>生成式软件工程</td><td>课程名（Generative Software Engineering）</td></tr>
+    <tr><td>非慢/非凡学习法</td><td>费曼学习法</td><td>Feynman Technique；后文讲师已自述「费曼学习法」</td></tr>
+    <tr><td>有线状态机</td><td>有限状态机</td><td>finite state machine，数字电路课的计数器例子</td></tr>
+    <tr><td>church tuning thesis</td><td>Church–Turing thesis</td><td>丘奇–图灵论题：可计算性等价于图灵可计算</td></tr>
+    <tr><td>Chair of Thought / chain of salt</td><td>Chain of Thought（CoT）</td><td>思维链；同名误识别在逐字稿中反复出现</td></tr>
+    <tr><td>test time skilling</td><td>test-time scaling</td><td>推理时用更多算力换更高质量输出</td></tr>
+    <tr><td>Claude OPPOS 4.5</td><td>Claude Opus 4.5</td><td>模型名</td></tr>
+    <tr><td>人月成化</td><td>《人月神话》</td><td>The Mythical Man-Month，软件工程经典</td></tr>
+    <tr><td>指令上海文</td><td>指令上下文（长度）</td><td>第 3 章末尾讨论遵循能力随上下文衰减</td></tr>
+    <tr><td>名字是可以美举的</td><td>枚举</td><td>3.7 起名例子：名字空间可枚举</td></tr>
+    <tr><td>short token</td><td>烧 token</td><td>算力换智力循环的代价；上下文里紧接「但这有一个缺点」</td></tr>
+    <tr><td>Hamilton Pass / 3Set</td><td>Hamiltonian Path / 3-SAT</td><td>NP 完全问题的标准例子</td></tr>
+    <tr><td>system problem / system 小文</td><td>system prompt</td><td>系统提示词，agent harness 内建</td></tr>
+    <tr><td>ChatGPG / GPG</td><td>ChatGPT</td><td>开场段高频误识别</td></tr>
+    <tr><td>Next Token 前后的 open/salt</td><td>next token</td><td>逐字稿中「nextopen」「next token prediction」混写</td></tr>
+    <tr><td>AI slot / slop 混写</td><td>AI slop</td><td>AI 生成的低质同质化内容；课件里「带新的都是 AI slop」</td></tr>
+    <tr><td>parcer</td><td>parser</td><td>1.4 中 Codex 处理 bash 命令的语法处理器</td></tr>
+    <tr><td>exterminate.js</td><td>xterm.js</td><td>1.7 中渲染终端的 JS 库</td></tr>
+    <tr><td>reward hacker 语境的「审考人」</td><td>审稿人</td><td>2.11 与 3.5 中的 reviewer</td></tr>
+    <tr><td>瑞典/说瑞</td><td>说人话</td><td>2.12「你这样说人话」</td></tr>
+  </table>
+  <h3>保持原样的术语</h3>
+  <p>「子涵／子函」为讲师讲取名同质化的举例（3.7），非模型名；「yolo mode」「舔狗」「做题家」「歪招」等口语表达按课堂原话保留，以存讲课语气。</p>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">附录 B</span>时间戳索引</h2>
+  <p>关键概念 → 原视频对应秒数（点击跳转，可自行核对）。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=0">开场：提示词是人与机器的唯一接口</a></div>
+    <div><span class="t">01:49</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=109">agent 上下文的完整构成</a></div>
+    <div><span class="t">04:13</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=253">「喵」金丝雀：上下文截断探测器</a></div>
+    <div><span class="t">08:07</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=487">skills 索引与按需加载</a></div>
+    <div><span class="t">09:03</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=543">每次执行注入的环境</a></div>
+    <div><span class="t">09:47</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=587">费曼学习法正一遍反一遍</a></div>
+    <div><span class="t">11:34</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=694">危险操作确认 / yolo vs 沙箱</a></div>
+    <div><span class="t">17:07</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1027">bash 风险分流的静态白名单</a></div>
+    <div><span class="t">19:08</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1148">intent → spec → implementation</a></div>
+    <div><span class="t">21:30</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1290">可验证任务 agent 不计代价迭代</a></div>
+    <div><span class="t">21:54</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1314">agent swarm 攻破 CTF 任务复盘</a></div>
+    <div><span class="t">22:35</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1355">一句话 CSGO 与模糊约束的漂移</a></div>
+    <div><span class="t">26:21</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1581">「现代风格主页」与 AI 味</a></div>
+    <div><span class="t">28:50</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1730">去 AI 味：spec 的具体程度</a></div>
+    <div><span class="t">31:16</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=1876">明确意图需要领域知识</a></div>
+    <div><span class="t">33:38</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2018">单 token 输出 = 有限计算</a></div>
+    <div><span class="t">35:39</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2139">Manuel Blum：纸笔让你成为图灵机</a></div>
+    <div><span class="t">37:49</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2269">「人类舔狗」与幻觉的起源</a></div>
+    <div><span class="t">38:59</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2339">藏头诗现场实验</a></div>
+    <div><span class="t">44:41</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2681">写 prompt 最重要的是 verifier</a></div>
+    <div><span class="t">47:36</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=2856">注意力机制与「喘口气」纠错</a></div>
+    <div><span class="t">51:07</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3067">「专家人设」是 attention hack</a></div>
+    <div><span class="t">52:27</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3147">「白色背景」注释：服从但不共情</a></div>
+    <div><span class="t">55:02</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3302">「总结这篇论文」的注意力污染</a></div>
+    <div><span class="t">61:04</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3664">审稿人视角 grounding</a></div>
+    <div><span class="t">64:43</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=3883">只让它推一步</a></div>
+    <div><span class="t">66:45</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4005">A1/A2 reject 案例</a></div>
+    <div><span class="t">68:48</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4128">学术发表体系即将崩溃</a></div>
+    <div><span class="t">71:00</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4260">对齐「过去的我」</a></div>
+    <div><span class="t">74:54</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4494">把自己蒸馏成 skill</a></div>
+    <div><span class="t">75:30</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4530">long horizon 的定义</a></div>
+    <div><span class="t">77:02</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4622">PoC 容易、维护翻车</a></div>
+    <div><span class="t">77:47</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4667">悖论：内核砍瓜切菜</a></div>
+    <div><span class="t">81:01</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=4861">歪招：好设计污染进上下文</a></div>
+    <div><span class="t">83:52</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5032">核心观点：还是得有概念</a></div>
+    <div><span class="t">85:21</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5121">reward hacker 复盘</a></div>
+    <div><span class="t">89:16</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5356">精力分配与纠正的多巴胺</a></div>
+    <div><span class="t">92:10</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5530">算力换智力 / P 与 NP</a></div>
+    <div><span class="t">94:23</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5663">起名例子与「AI 时代子函」</a></div>
+    <div><span class="t">96:57</span><a href="https://www.bilibili.com/video/BV1CQt365EzW?t=5817">Big World Hypothesis 与墙的隐喻</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">附录 C</span>本讲 Prompt 范例汇总</h2>
+  <p>课堂出现或讲师口述的 prompt 写法，按用途归类。使用时把「XXX」替换为你的实际对象；斜体部分为整理者按课堂语境补全的说明。</p>
+  <ol class="example-list">
+    <li><b>自检上下文</b>（1.2）——理解 agent、排查行为异常的第一反应：<div class="prompt-box"><span class="plabel">PROMPT</span><p>你能检查一下你的上下文里都有些什么吗？（可加：逐层列出 system prompt、agents.md、skills 索引、工具定义、对话历史、注入的环境）</p></div></li>
+    <li><b>费曼反一遍</b>（1.3）——检验自己是否真懂：<div class="prompt-box"><span class="plabel">PROMPT</span><p>你扮演一个对这个概念一无所知的学生，我把 XXX 讲给你听；指出我逻辑里的错漏并在我讲完前不要剧透答案。</p></div></li>
+    <li><b>考古第三方代码</b>（1.4）——「这个行为怎么实现的」式提问，配合让 agent 读源码、打印关键 prompt、改 prompt 观察行为变化来验证结论。</li>
+    <li><b>raw prompt 三件套</b>（1.5）——填平 intent 与 spec 的 gap：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我要一个【什么东西】；用【什么技术/资产/约束】实现；【怎样算正确——最好给一个可运行的验证方式】。请完成它。</p></div></li>
+    <li><b>技术选型挑战</b>（1.7）——费曼式的双向讨论：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我要做教务系统，后台在 Python / Java / TypeScript 之间纠结。我先讲我的倾向和理由，请你挑战我，尝试说服一个持不同意见的学生。</p></div></li>
+    <li><b>审稿人视角 grounding</b>（2.9）——读论文/评估任何强逻辑文本前先用：<div class="prompt-box"><span class="plabel">PROMPT</span><p>站在人类已知的知识边界看这个问题：相关的已解决问题是什么、解决到什么程度；这篇工作试图解决其中哪些不一样的、增量的问题？先不要复述论文本身。</p></div></li>
+    <li><b>学生视角 rephrase</b>（2.9）——学新知识时用：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我目前学到【知识状态】，编程水平【水平】。请只用我学过的概念把 XXX 重新讲一遍（rephrase），遇到超出部分先标注再展开。</p></div></li>
+    <li><b>一步推理</b>（2.10）——对齐后的协作单元：<div class="prompt-box"><span class="plabel">PROMPT</span><p>基于以上我们达成共识的事实，往后推理一步，并说明这一步的合理性依据。不要一次推出多步。</p></div></li>
+    <li><b>研究上下文护栏</b>（3.5）——防止 reward hacking：<div class="prompt-box"><span class="plabel">PROMPT</span><p>研究目标是【big picture】。评价标准是从真实工具与 state-of-the-art 算法出发的结果，包括 timeout 产生的搜索路径；不要构造小型自证 benchmark，不要以「证明方法有用」为目标——以「弄清什么有效、什么无效」为目标。</p></div></li>
+    <li><b>算力换智力调度</b>（3.7）——把开放问题拆成可验证子任务：先枚举空间（选音 → 检字 → 选词源），每个子任务交给独立 subagent 验证，最后人工汇总。<i>模板即流程：枚举 → 分块 → 各块 verifier → 汇总。</i></li>
+  </ol>
+</section>
+
+</div><!-- /wrap -->
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1CQt365EzW">BV1CQt365EzW</a>　·　UP：绿导师原谅你了</li>
+          <li>写作底稿：work/chap1–3.txt（faster-whisper large-v3-turbo 逐字稿，98 分钟全程覆盖）</li>
+          <li>术语基准：可视化笔记 footer 勘误表（12 条），本讲义扩展至 20 条</li>
+          <li>配套阅读：<a href="bili_summary_BV1CQt365EzW.html">bili_summary_BV1CQt365EzW.html</a>（可视化精读笔记，28 张图解）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>笔记性质</h4>
+        <ul>
+          <li>内容为对公开课程视频的听写整理与结构化讲义化改写；概念解释含整理者补充，非逐字稿出版物</li>
+          <li>思考题与附录 C 的斜体说明为整理者补充</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

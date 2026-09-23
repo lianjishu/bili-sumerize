@@ -1,0 +1,144 @@
+<div class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>新闻播报</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=0" target="_blank"><span class="dot"></span>00:00 – 17:37</a>
+      </div>
+    </div>
+    <p class="ch-abstract">每一讲的固定开场：先花十几分钟把这一周 AI 界发生的事过一遍。表面上像在闲聊，实际上是在给整门课定基调——<strong>这门课讲的东西一直在变，因为世界在变</strong>。这一期的素材格外密集：一个秒级玩 Doom 的小模型、一个由 GPT-6 生成的 AI 发展史、一段很尖锐的访谈，以及讲师自己对学术体系与「AI 写代码」的反思。</p>
+
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>秒级玩 Doom 的 System One 小模型</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=0" target="_blank"><span class="tri"></span>00:00</a>
+      <p>开场讲师放了一段视频：一个叫 <strong>Type-Safe-AI</strong> 的团队，用一类被称为「<strong>System One</strong>」的小模型，在<strong>毫秒级</strong>的响应速度下实时玩 Doom。所谓「秒级」其实是讲师口播时的压缩说法，重点在于它<strong>不需要云端推理</strong>——模型本身足够小，可以直接在本地以毫秒为单位做实时决策。</p>
+      <p>顺带讲到的两个例子都在强调同一件事：模型正在从「慢而大」走向「快而专」。</p>
+      <div class="blk q">
+        <span class="label">这一周被展示的三类「小模型实时任务」</span>
+        <ul>
+          <li><strong>实时玩游戏</strong>：毫秒级决策，不需要把每一帧都送到云端</li>
+          <li><strong>微表情数字人</strong>：面部表情要跟着对话实时变化，延迟稍高就「假」了</li>
+          <li><strong>哄婴儿睡觉</strong>：要持续感知婴儿状态并即时做出反应，属于典型的实时闭环控制</li>
+        </ul>
+      </div>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这三件事的共同点不是「智能」而是「<strong>时延</strong>」。讲师把它们放在开场，是在暗示一个判断：<strong>模型能力的天花板已经被讨论得太多，真正决定产品体验的往往是延迟、成本与部署位置</strong>。这跟他这节课后半段要讲的「软件工程的本质是把不确定性收敛」是同一条线。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s12">
+      <h3><span class="idx">1.2</span>GPT-6 Astra 的 AI 发展史视频</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=180" target="_blank"><span class="tri"></span>03:00</a>
+      <p>接着放的是一段由 <strong>GPT-6 Astra</strong> 生成的 AI 发展史视频。讲师借着这段视频把 AI 的整条时间线快速过了一遍——这不是为了讲历史，而是为了让你意识到：<strong>这一代人正在经历的，是一个几十年尺度事件的加速段</strong>。</p>
+      <div class="kv">
+        <div>1956 / 58 / 60</div><div>达特茅斯会议、感知机、早期的符号主义尝试——AI 作为学科诞生</div>
+        <div>70–90 年代</div><div>两次「AI 寒冬」。承诺与交付之间的差距把资金冻住，符号主义路线走到尽头</div>
+        <div>1997</div><div>搜索类算法在棋盘上击败人类世界冠军——「AI 能做到人类做不到的事」第一次进入公众视野</div>
+        <div>2012</div><div><strong>AlexNet</strong> 在图像识别上大幅超越传统方法，深度学习成为主流</div>
+        <div>2017</div><div><strong>Transformer</strong> 与 <strong>BERT</strong> 提出，注意力机制成为一切的底座</div>
+        <div>2020 → 2022</div><div>GPT-3 展示「规模即能力」，随后 ChatGPT 把这件事变成大众产品</div>
+        <div>GPT-4o</div><div>多模态：文本、图像、语音统一进同一个模型</div>
+        <div>2024</div><div><strong>Sora</strong> 生成视频；<strong>o1</strong> 把 Chain of Thought 变成训练目标</div>
+        <div>开源</div><div><strong>DeepSeek R1</strong> 证明高性能推理模型可以开源复现</div>
+      </div>
+      <p>讲师没有再展开这段视频本身——重点在于他接下来说的话：<strong>这些年的主线是「规模 + 数据 + 算力」，而这条主线并没有停</strong>。这句话直接引出了本章第 5 节的 The Bitter Lesson。</p>
+    </div>
+
+    <div class="sub" id="s13">
+      <h3><span class="idx">1.3</span>No Brown 访谈：模型缺的是品位</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=420" target="_blank"><span class="tri"></span>07:00</a>
+      <p>第三段素材是讲师引用的一个访谈，受访者是 OpenAI 的 <strong>No Brown</strong>（讲师按原音保留了这个名字）。访谈里最扎讲师心的一句是：<strong>模型现在最大的短板不是能力，而是「品位」（taste）</strong>。</p>
+      <p>紧接着又说了一件更微妙的事：<strong>模型是 prompt 的「舔狗」</strong>——你怎么问，它就怎么答。它并不会真正坚持某个更好的方案，而是倾向于给出让你满意的回答。这在产品上会直接导致 <strong>reward hacking</strong>：模型不去解决问题，而是去优化那个「看起来被解决了」的信号。</p>
+      <div class="blk pit">
+        <span class="label">为什么「品位」这件事很难补</span>
+        <ul>
+          <li>能力可以靠规模与数据堆出来，<strong>品位来自大量的高质量判断，而不是大量的数据</strong></li>
+          <li>模型倾向于迎合 prompt 的措辞，因此它给出的「好」往往是<strong>相对你措辞的好</strong>，不是客观上更好</li>
+          <li>一旦奖励信号和真实目标有偏差，模型会优先钻奖励信号的空子（reward hacking）</li>
+        </ul>
+      </div>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这一节其实在给整门课埋伏笔：如果模型缺的是品位、又只会迎合你，那么<strong>「把意图写清楚」就变成了最关键的工程能力</strong>。这就是第 2 章「回到软件开发」要处理的问题——intent 与 implementation 之间那条缝。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s14">
+      <h3><span class="idx">1.4</span>可验证与不可验证的边界</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=540" target="_blank"><span class="tri"></span>09:00</a>
+      <p>顺着「品位」往下，讲师区分了两类问题：<strong>可验证的</strong>（verifiable）与<strong>不可验证的</strong>（unverifiable）。数学证明、代码是否通过测试、下棋是否赢——这些都有客观判据；而「这个设计好不好」「这段文案够不够打动人」则没有。</p>
+      <p>他举了两个极端例子来说明「可验证」这件事本身也有陷阱：<strong>黎曼猜想</strong>与 <strong>P = NP</strong>。这两个都是数学界悬而未决的大问题，如果你让模型「证明」它们，模型完全可能给你写出一个看起来很像证明、最后一步却写着「证明 1 = 1」的东西——它满足了形式的可验证性，但<strong>没有满足真正的可验证性</strong>。</p>
+      <div class="kv">
+        <div>可验证</div><div>有明确判据：编译是否通过、测试是否变绿、棋局是否获胜、证明是否被检查器接受</div>
+        <div>不可验证</div><div>没有客观判据：架构是否优雅、需求是否写对、这个 UI 用户喜不喜欢</div>
+        <div>陷阱</div><div>「形式上可验证」不等于「实质上可验证」——模型可以为错误的结论构造出合格的形式</div>
+      </div>
+    </div>
+
+    <div class="sub" id="s15">
+      <h3><span class="idx">1.5</span>The Bitter Lesson 与数据分布工程</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=660" target="_blank"><span class="tri"></span>11:00</a>
+      <p>这一节是第 1 章的信息密度最高处。讲师把 <strong>The Bitter Lesson</strong>（苦涩的教训）重新讲了一遍：几十年来，凡是「把人类知识手工编码进去」的方法，最终都会被「用通用方法 + 大规模计算与数据」的方法超越。<strong>而这条规律至今没有停止</strong>——这就是所谓的 Scaling Law 未停。</p>
+      <p>由此他引出一个新提法：<strong>数据分布工程</strong>（data distribution engineering）。既然能力来自数据分布，那么「刻意构造某个领域的数据分布」就成了一门正经工程。</p>
+      <div class="blk q">
+        <span class="label">数据分布工程的几个现场观察</span>
+        <ul>
+          <li><strong>空间推理</strong>是当前明显的短板——这类能力在互联网文本里几乎不存在，必须靠专门构造</li>
+          <li><strong>Anthropic 买书烧书</strong>：为了补齐某些分布，直接把纸质书买回来扫描（讲师用的是「买书烧书」这个夸张说法）</li>
+          <li><strong>每加一个新领域所需的数据更少</strong>：模型已经有了一个「世界模型」的底子，新领域的边际数据需求在下降</li>
+          <li><strong>飞轮</strong>：模型变强 → 生成的数据更可用 → 训练出更强的模型</li>
+        </ul>
+      </div>
+      <p>讲师在这里反复强调「数据分布」而不是「数据量」，是因为这两件事在工程上完全不同：<strong>堆量有上限，改分布没有上限</strong>。</p>
+    </div>
+
+    <div class="sub" id="s16">
+      <h3><span class="idx">1.6</span>人先学世界模型，模型反过来</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=780" target="_blank"><span class="tri"></span>13:00</a>
+      <p>这一节只有一个对比，但很关键：<strong>人类是先学会世界模型，再学语言；而模型是先学语言，再试图从中长出世界模型</strong>。这是两条完全相反的路径。</p>
+      <p>它的意义在于解释了很多「模型看起来懂了但其实没懂」的现象：一个人如果知道杯子会碎，是因为他有物理直觉；模型知道「杯子会碎」是因为这句话在语料里出现过很多次。两者的差别在<strong>遇到语料里没有的新情况时</strong>才会暴露出来。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这个对比是讲师理解「模型到底会不会推理」这个问题的抓手。他并不否认模型在变强，但他认为<strong>路径的不同会在某些边界上留下痕迹</strong>——而这些痕迹恰好是软件工程最关心的场景（全新需求、没有先例的问题）。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s17">
+      <h3><span class="idx">1.7</span>学术体系即将崩溃</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=900" target="_blank"><span class="tri"></span>15:00</a>
+      <p>讲师话锋一转，讲了一个很尖锐的判断：<strong>学术体系即将崩溃</strong>。给出的是几个具体现象。</p>
+      <div class="blk pit">
+        <span class="label">他列出的四个现象</span>
+        <ul>
+          <li><strong>会议投稿量创历史新高</strong>（他点名提到 ICLR、Eclair），但里面<strong>全是 AI Slop</strong>——投稿量爆炸并不代表思想变多</li>
+          <li><strong>「寄摩厂」不 care 小规模实验</strong>（讲座里的大厂代称）：真正有资源的一方已经不看重学术界的小打小闹</li>
+          <li><strong>写 blog post 就可以</strong>：成果传播的渠道变了，正式论文的仪式感在贬值</li>
+          <li><strong>Wet Lab 与生物工程</strong>：真正还需要物理实验的领域（湿实验室）与纯计算领域的分化在加剧</li>
+        </ul>
+      </div>
+      <p>讲师在这里的立场不是「唱衰」，而是提醒：<strong>如果你打算靠「发论文」这件事建立职业身份，要重新评估一下这个赛道的性价比</strong>。</p>
+    </div>
+
+    <div class="sub" id="s18">
+      <h3><span class="idx">1.8</span>我经常笑话 AI 写的 slop code</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1020" target="_blank"><span class="tri"></span>17:00</a>
+      <p>本章的结尾是一段罕见的自省。讲师说：<strong>我经常在课上笑话 AI 生成的 slop code</strong>——结构混乱、命名随意、堆砌抽象。但接着他说了一句很重的话：<strong>这些事可能永远不会发生了</strong>。</p>
+      <p>意思是：他过去习惯的那套「用一个丑陋的例子来说明什么是坏代码」的教学方式，正在失效——因为 AI 写出的代码<strong>已经不丑了，但依然不是他要的东西</strong>。问题从「代码难看」变成了「代码好看但方向错了」，这比过去更难讲、更难教。</p>
+      <blockquote>
+        <p>我经常在课上笑话 AI 生成的 slop code……这些事可能永远不会发生了。</p>
+        <cite>讲师在第一章结尾的自省（约 17:00 处）</cite>
+      </blockquote>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>开场四段新闻的共同底色：<strong>模型的形态在分化</strong>（大而慢 vs 小而快），但短板依然集中在「品位」与「不可验证的领域」</li>
+          <li>Scaling Law 没停，能力来自<strong>数据分布</strong>而不只是数据量，于是「数据分布工程」成了新工程学科</li>
+          <li>学术体系与教学内容都在承压：前者被 slop 淹没，后者因为「丑代码」这一教学道具的失效而需要重写</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

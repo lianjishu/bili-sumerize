@@ -1,0 +1,354 @@
+<section class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>实操 (1)：普通人的视角</h2>
+        <div class="ch-play"><span class="dot"></span>29:44 – 48:34　·　6 小节</div>
+        <p class="ch-abstract">这一章是给「不太会用 agent」的人写的入门。讲师从自己选用的工具（派 / Pi）讲起，然后连续展示了五个自己每天在用的例子：<strong>一句话装 Linux 系统、自动回邮件与打发票、用 agent 读论文、用 agent 读 B 站视频</strong>。贯穿其中的只有一句话——<strong>你花在「配置」上的时间，应该全部换成「提出一个更大的问题」的时间</strong>。</p>
+      </div>
+    </div>
+
+    <!-- 2.1 -->
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>用 agent 的两个原则：现在就用，以及随时问他</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1784"><span class="tri"></span>回跳 29:44</a>
+
+      <p class="lead">讲师先坦白自己的假设前提：「我先假设大家其实不会用 agent——不太会用 agent，就除了什么『把我把这个作业做了』以外。」然后给出两个他已经用了一学期的原则。</p>
+
+      <font></font>
+      <div class="blk steps">
+        <span class="label">原则一 · 现在就开始用</span>
+        <ol>
+          <li>「作为 AI native 的一代人，你们要知道，就是给他一个合适的指令他就可以把这个指令完成。」</li>
+          <li>课上选用的工具是「派」（Pi）：「你只要跟他说就可以了。」</li>
+          <li>并且可以写配置文件，比如 <code>AGENTS.md</code>。</li>
+        </ol>
+      </div>
+
+      <p>他现场演示了配置文件的威力：问 agent「你是谁」，它回答自己是「生成式软件工程的助教 agent」。讲师接着追问——「你不就是个模型吗，为什么还知道生成式软件工程？」</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 246" role="img" aria-label="AGENTS.md 作为临时记忆的作用位置">
+          <rect x="0" y="0" width="1080" height="246" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">为什么 agent「知道」它不该知道的事</text>
+
+            <rect x="30" y="48" width="240" height="80" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="74" fill="#46c6e0" font-size="11.5" font-weight="700">你的项目目录</text>
+            <text x="50" y="94" fill="#adbccd" font-size="11">jyy-generatice-se/</text>
+            <text x="50" y="114" fill="#adbccd" font-size="11">├── urllist.txt 等文件</text>
+
+            <rect x="300" y="48" width="240" height="80" rx="9" fill="rgba(169,139,250,.12)" stroke="#a98bfa" stroke-width="1.4"/>
+            <text x="320" y="74" fill="#a98bfa" font-size="11.5" font-weight="700">AGENTS.md</text>
+            <text x="320" y="94" fill="#adbccd" font-size="11">写清「你是谁、在什么项目里」</text>
+            <text x="320" y="114" fill="#77879a" font-size="10.5">被自动读进上下文</text>
+
+            <rect x="570" y="48" width="240" height="80" rx="9" fill="rgba(240,180,41,.12)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="590" y="74" fill="#f0b429" font-size="11.5" font-weight="700">模型的回答</text>
+            <text x="590" y="94" fill="#adbccd" font-size="11">「我是生成式软件工程的</text>
+            <text x="590" y="114" fill="#adbccd" font-size="11">助教 agent」</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="272" y1="88" x2="294" y2="88"/><polygon points="294,88 286,84 286,92"/>
+              <line x1="542" y1="88" x2="564" y2="88"/><polygon points="564,88 556,84 556,92"/>
+            </g>
+
+            <rect x="840" y="48" width="210" height="80" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="860" y="74" fill="#adbccd" font-size="11.5" font-weight="700">讲师的原话定性</text>
+            <text x="860" y="96" fill="#e9eff7" font-size="11.5">「这部分是临时的记忆」</text>
+            <text x="860" y="116" fill="#77879a" font-size="10.5">→ 所以原则二：随时问他</text>
+
+            <rect x="30" y="150" width="1020" height="76" rx="9" fill="rgba(63,214,140,.06)" stroke="#3fd68c"/>
+            <text x="50" y="176" fill="#3fd68c" font-size="11.5" font-weight="700">两个原则的完整表述（讲师原话）：</text>
+            <text x="50" y="200" fill="#adbccd" font-size="11.5">「使用 agent 的第一个原则：现在就开始用。第二个原则：随时问他。这是最小的、第一个原则。」</text>
+            <text x="50" y="218" fill="#77879a" font-size="10.5">补充判断：「在这个意义上其实是你的想象力限制了你的 agent 的上限。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜机制</b>　三格讲清了 <code>AGENTS.md</code> 在链路里的位置——<b>它不是「设置」，是「被自动塞进上下文的初始记忆」</b>。讲师因此把「随时问他」列为第二条原则：记忆是临时的，遇到不理解的行为，直接问它就行。</figcaption>
+      </figure>
+
+      <div class="blk eye">
+        <span class="label">讲师留的课后作业</span>
+        <p>「正好一会儿课间的时候大家可以想一想：<strong>你用 agent 做的最酷的一件事情是什么？</strong>想象力是你们的上限。」</p>
+      </div>
+    </div>
+
+    <!-- 2.2 -->
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>U 盘系统：一句话把 Linux 装进 U 盘，并要求它自己验证</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1930"><span class="tri"></span>回跳 32:10</a>
+
+      <p class="lead">这是本章最完整的一个案例。讲师的特色是带一个<strong>装好 Linux 的 U 盘</strong>，插在教室电脑上直接启动。他讲了自己过去的身份是「装机仙人」，以及现在这件事变成了什么样子。</p>
+
+      <div class="blk pit">
+        <span class="label">先讲一个事故</span>
+        <p>「我在有一年的操作系统课上把这个硬盘给抹掉了。然后抹掉以后，下一个上课老师就……教学师傅。」（这是玩笑，但说明 U 盘方案的风险是真实的。）</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 336" role="img" aria-label="一句话装 Linux 的五个动作与验证环节">
+          <rect x="0" y="0" width="1080" height="336" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="34" width="1020" height="52" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="50" y="57" fill="#3fd68c" font-size="11.5" font-weight="700">实际发出的指令（讲师原话复述）：</text>
+            <text x="50" y="77" fill="#e9eff7" font-size="11.5">「你去 mirrors.nju.edu.cn 上找一个 Debian 13 的镜像，把它装到我的 U 盘上。这个 U 盘插在里面，然后确保这个 U 盘可以启动，然后用模拟器验证。」</text>
+
+            <rect x="30" y="104" width="190" height="66" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="128" fill="#5b9cf8" font-size="11.5" font-weight="700">① 找镜像</text>
+            <text x="46" y="148" fill="#adbccd" font-size="10.5">校内 mirror 源</text>
+            <text x="46" y="164" fill="#77879a" font-size="10">Debian 13</text>
+
+            <rect x="244" y="104" width="190" height="66" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="260" y="128" fill="#5b9cf8" font-size="11.5" font-weight="700">② 写入 U 盘</text>
+            <text x="260" y="148" fill="#adbccd" font-size="10.5">分区 + 引导记录</text>
+            <text x="260" y="164" fill="#77879a" font-size="10">讲师没碰过</text>
+
+            <rect x="458" y="104" width="190" height="66" rx="9" fill="rgba(240,180,41,.12)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="474" y="128" fill="#f0b429" font-size="11.5" font-weight="700">③ QEMU 验证</text>
+            <text x="474" y="148" fill="#adbccd" font-size="10.5">「点睛之笔」</text>
+            <text x="474" y="164" fill="#77879a" font-size="10">启动到登录界面</text>
+
+            <rect x="672" y="104" width="190" height="66" rx="9" fill="rgba(240,180,41,.12)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="688" y="128" fill="#f0b429" font-size="11.5" font-weight="700">④ 创建用户并登录</text>
+            <text x="688" y="148" fill="#adbccd" font-size="10.5">用户名/密码由讲师指定</text>
+            <text x="688" y="164" fill="#77879a" font-size="10">「他全部都做好」</text>
+
+            <rect x="886" y="104" width="164" height="66" rx="9" fill="rgba(63,214,140,.12)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="902" y="128" fill="#3fd68c" font-size="11.5" font-weight="700">⑤ 交付</text>
+            <text x="902" y="148" fill="#adbccd" font-size="10.5">「验证完成给我」</text>
+            <text x="902" y="164" fill="#77879a" font-size="10">讲师才启动 U 盘</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="222" y1="137" x2="238" y2="137"/><polygon points="238,137 230,133 230,141"/>
+              <line x1="436" y1="137" x2="452" y2="137"/><polygon points="452,137 444,133 444,141"/>
+              <line x1="650" y1="137" x2="666" y2="137"/><polygon points="666,137 658,133 658,141"/>
+              <line x1="864" y1="137" x2="880" y2="137"/><polygon points="880,137 872,133 872,141"/>
+            </g>
+
+            <rect x="30" y="190" width="1020" height="60" rx="9" fill="rgba(70,198,224,.06)" stroke="#46c6e0"/>
+            <text x="50" y="214" fill="#46c6e0" font-size="11.5" font-weight="700">接下来还有一条指令（换桌面环境）：</text>
+            <text x="50" y="238" fill="#adbccd" font-size="11.5">「我要装一个 tile-based window manager。」→ 得到 Sway：Super+Enter 新开窗口，Super+Space 切换布局。</text>
+
+            <rect x="30" y="262" width="1020" height="58" rx="9" fill="rgba(248,115,110,.06)" stroke="#f8736e"/>
+            <text x="50" y="286" fill="#f8736e" font-size="11.5" font-weight="700">关键认知（讲师自己指出）：</text>
+            <text x="50" y="310" fill="#adbccd" font-size="11.5">「当然我是有 knowledge，所以我知道他是怎么完成这个安装的。」——<tspan fill="#e9eff7" font-weight="700">他仍然需要判断力，只是不再需要执行的手艺</tspan>。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程 + 验证</b>　五个动作里<b>第 3、4 步是颜色不同的那两步</b>——讲师称 QEMU 验证为「点睛之笔」。这说明他的 prompt 里包含了<strong>验证要求</strong>，而不只是一个动作清单：这和后面第 5 章「让 AI 自己去 verify」是同一个套路，只是这里是他主动写进指令的。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.3 -->
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>学习曲线被抹平了：从「看几千页 CPU 手册」到「问一句」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2120"><span class="tri"></span>回跳 35:20</a>
+
+      <p class="lead">这一段是讲师对自己身份变化的坦白，也是全课最有分量的一段自述。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 314" role="img" aria-label="学习曲线的变化：过去需要多年积累，现在需要知道边界">
+          <rect x="0" y="0" width="1080" height="314" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">同一个人，两套学习路径</text>
+
+            <!-- old -->
+            <rect x="30" y="46" width="490" height="180" rx="10" fill="rgba(91,156,248,.06)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="50" y="72" fill="#5b9cf8" font-size="12.5" font-weight="700">过去（讲师自述）</text>
+            <text x="50" y="98" fill="#adbccd" font-size="11.5">「我记得我大四的时候，可能跟你们一样大的时候，</text>
+            <text x="50" y="118" fill="#adbccd" font-size="11.5">就在看英特尔的几千页的那个 CPU 的 specification，</text>
+            <text x="50" y="138" fill="#adbccd" font-size="11.5">然后去看那个每一个 CPU 的 feature 是干什么用的。」</text>
+            <text x="50" y="168" fill="#77879a" font-size="11">→ 时间的投入 = 能力的来源</text>
+            <text x="50" y="196" fill="#77879a" font-size="11">→ 配置终端要改 Zshrc，「一改就出错，一改就出错，非常的痛苦」</text>
+
+            <!-- now -->
+            <rect x="560" y="46" width="490" height="180" rx="10" fill="rgba(63,214,140,.06)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="580" y="72" fill="#3fd68c" font-size="12.5" font-weight="700">现在（讲师的态度转变）</text>
+            <text x="580" y="98" fill="#adbccd" font-size="11.5">「我就突然觉得，在这个时间点，有一个人他可以跟我沟通，</text>
+            <text x="580" y="118" fill="#adbccd" font-size="11.5">他把这些东西全看了、都懂、能做对，</text>
+            <text x="580" y="138" fill="#adbccd" font-size="11.5">而我现在需要的是<tspan fill="#e9eff7" font-weight="700">解锁他的能力</tspan>。」</text>
+            <text x="580" y="168" fill="#77879a" font-size="11">→ 「你学习知识的方式变了」</text>
+            <text x="580" y="196" fill="#77879a" font-size="11">→ 配置出错时它「不仅可以给你改，还能事无巨细地解释为什么要这样改」</text>
+
+            <!-- conclusion -->
+            <rect x="30" y="240" width="1020" height="58" rx="9" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="264" fill="#f0b429" font-size="11.5" font-weight="700">新的能力定义（讲师原话）：</text>
+            <text x="50" y="288" fill="#e9eff7" font-size="12">「你更多的时候你需要知道他能做什么、你敢知道他能做什么、能做到什么程度，然后你带着他去做一件更大的他做不到的事情。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　两栏的差别不是「谁更省力」，而是<b>投入方向从「积累手艺」变成了「判断边界」</b>。讲师把这句话说得更狠：「人现在唯一的功能就是带着 AI 做 AI 现在做不到的事情。一旦如果你没有这个能力，你就立即已经被淘汰了。」</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">由此推出的学习方法</span>
+        <p>「谁掌握了 AI agent，谁就掌握了暴增的学习效率。你现在的学习方式是<strong>你先用好它、先把东西搞出来，再回头去复盘理解</strong>——这个效率会比你从零开始一点一点搭积木要高很多。」</p>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">但讲师自己加了警告</span>
+        <p>「但这里面有个危险：<strong>你的理解可能和比较好的理解会有差距</strong>——没东西我们不知道，但是这是一个非常不一样的事情。」</p>
+      </div>
+    </div>
+
+    <!-- 2.4 -->
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>收发邮件与打印发票：一个长在手机备忘录上的 agent</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2330"><span class="tri"></span>回跳 38:50</a>
+
+      <p class="lead">第二个例子是讲师自己写的邮件 skill，以及他如何把 agent 接到 Apple Reminders 上，让手表来收通知。</p>
+
+      <div class="blk steps">
+        <span class="label">邮件 skill 做的事</span>
+        <ol>
+          <li>数据库里有他历史上回过的所有邮件。</li>
+          <li>收到新邮件时，自动把它标成一个已完成的状态，并<strong>用他的口吻自动写好回复草稿</strong>。</li>
+          <li>讲师自己的评价：「虽然我现在觉得它做的还不够好，除了一些简单的 routine 性质的东西可以直接用它的回复以外，大部分时候我还得去改。」</li>
+          <li>附件自动归档：「如果我要我收到一张发票，他就会把我的发票自动保存到一个指定的归档的位置。」</li>
+        </ol>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 268" role="img" aria-label="从语音输入到手机通知的链路">
+          <rect x="0" y="0" width="1080" height="268" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="46" width="200" height="80" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="48" y="72" fill="#46c6e0" font-size="11.5" font-weight="700">① 语音/文字</text>
+            <text x="48" y="92" fill="#adbccd" font-size="10.5">「帮我把今天的</text>
+            <text x="48" y="110" fill="#adbccd" font-size="10.5">发票打印出来」</text>
+
+            <rect x="262" y="46" width="200" height="80" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="280" y="72" fill="#a98bfa" font-size="11.5" font-weight="700">② Apple Reminders</text>
+            <text x="280" y="92" fill="#adbccd" font-size="10.5">在备忘录里加一条</text>
+            <text x="280" y="110" fill="#77879a" font-size="10">「点勾就 commit」</text>
+
+            <rect x="494" y="46" width="200" height="80" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="512" y="72" fill="#f0b429" font-size="11.5" font-weight="700">③ bot 后台处理</text>
+            <text x="512" y="92" fill="#adbccd" font-size="10.5">「在后台会处理」</text>
+            <text x="512" y="110" fill="#77879a" font-size="10">驱动本机打印机</text>
+
+            <rect x="726" y="46" width="324" height="80" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="744" y="72" fill="#3fd68c" font-size="11.5" font-weight="700">④ 通知回到手表</text>
+            <text x="744" y="92" fill="#adbccd" font-size="10.5">「他会重新给我一个推送的通知，</text>
+            <text x="744" y="110" fill="#77879a" font-size="10">然后这个通知会通过我的手表送到我的」</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="232" y1="86" x2="256" y2="86"/><polygon points="256,86 248,82 248,90"/>
+              <line x1="464" y1="86" x2="488" y2="86"/><polygon points="488,86 480,82 480,90"/>
+              <line x1="696" y1="86" x2="720" y2="86"/><polygon points="720,86 712,82 712,90"/>
+            </g>
+
+            <rect x="30" y="152" width="1020" height="94" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="176" fill="#adbccd" font-size="11.5"><tspan fill="#e9eff7" font-weight="700">讲师对产品形态的判断：</tspan></text>
+            <text x="50" y="200" fill="#adbccd" font-size="11.5">「在 Open Cloud 之前我就这样。然后在 Open Cloud 我觉得 Open Cloud 或者 Ermas 不是个人 agent 产品的终极形态，</text>
+            <text x="50" y="220" fill="#adbccd" font-size="11.5">这个产品还可以做得更好，所以未来还有很多的空间。」</text>
+            <text x="50" y="240" fill="#77879a" font-size="10.5">前提条件：「前提是我放心的事情」——他把 agent 接进来的边界是有明确安全判断的。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　四步链路里最关键的是第 ② 步：<b>他把 agent 的入口放在了手机原生的 Reminders 而不是某个聊天 App 里</b>，理由是「我觉得是比 Telegram 表现好」。这是「工具选择本身就是设计」的一个具体例子。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.5 -->
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>用 agent 读书与读论文：把「已知」剥掉，剩下的才值得读</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2530"><span class="tri"></span>回跳 42:10</a>
+
+      <p class="lead">讲师先讲了一个读书人的坦白：「我在你们这么大的时候每年教材书就要看几十本，还会看很多闲书。但我今天已经不看书了。」——然后他解释他现在的读书方式。</p>
+
+      <div class="blk q">
+        <span class="label">他重读的两本书</span>
+        <ul>
+          <li><strong>The Mythical Man-Month</strong>（《人月神话》，Fred Brooks）——「这个标题起得非常 misleading。」</li>
+          <li><strong>A Philosophy of Software Design</strong>（John Ousterhout）——「这个书非常的紧凑，里面有很多软件工程的、真正的软件工程的智慧，非常好。」</li>
+        </ul>
+      </div>
+
+      <p>他读第一章的做法分两步，第二步是他认为自己的 agent 比 GPT-5.6s「做得更好一点」的地方：</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 372" role="img" aria-label="讲师读论文的两步法与他的 skill 配置">
+          <rect x="0" y="0" width="1080" height="372" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="34" width="1020" height="70" rx="10" fill="rgba(70,198,224,.07)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="58" fill="#46c6e0" font-size="11.5" font-weight="700">第一步 · 回溯人类历史</text>
+            <text x="50" y="82" fill="#adbccd" font-size="11.5">「我在这里为了做每一页 slides，我都会让 GPT-5.6 首先去回看人类的历史，人类历史和我这些相关的这些案例里面有没有一些 lessons、</text>
+            <text x="50" y="98" fill="#adbccd" font-size="11.5">一些重要的案例能够得到启发和印证的。」</text>
+
+            <rect x="30" y="120" width="1020" height="70" rx="10" fill="rgba(169,139,250,.07)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="50" y="144" fill="#a98bfa" font-size="11.5" font-weight="700">第二步 · 找相关工作，但只挑经典</text>
+            <text x="50" y="168" fill="#adbccd" font-size="11.5">「第二个，根据我的这个讲的这个东西能不能找一些相关工作——不仅是在 computer science 里，</text>
+            <text x="50" y="184" fill="#adbccd" font-size="11.5">然后我会让他 prefer 这些 <tspan fill="#e9eff7" font-weight="700">well recognized、high impact</tspan> 的 results。」</text>
+
+            <rect x="30" y="206" width="490" height="152" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="232" fill="#f0b429" font-size="12" font-weight="700">「AI 梗同学」skill 里的机制</text>
+            <text x="50" y="258" fill="#adbccd" font-size="11.5">✓ 更多的 personality</text>
+            <text x="50" y="280" fill="#adbccd" font-size="11.5">✓ 有随机性：「会抽卡」</text>
+            <text x="50" y="302" fill="#adbccd" font-size="11.5">✓ 抽完以后「他们会讨论，他们会有分歧的观点」</text>
+            <text x="50" y="324" fill="#adbccd" font-size="11.5">✓ 讨论以后主 agent「再把这个分歧的观点再送给他们回来讨论，</text>
+            <text x="50" y="342" fill="#e9eff7" font-size="11.5" font-weight="700">　　直到收敛为止」</text>
+
+            <rect x="560" y="206" width="490" height="152" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="580" y="232" fill="#3fd68c" font-size="12" font-weight="700">由此得到的读论文方法</text>
+            <text x="580" y="258" fill="#adbccd" font-size="11.5">「我会说你从人类已有的知识开始，假设人类已有的所有的东西</text>
+            <text x="580" y="278" fill="#adbccd" font-size="11.5">都已经是固定下来的、都是已知的，</text>
+            <text x="580" y="300" fill="#adbccd" font-size="11.5">然后我要把这篇论文里面新的东西、最少的东西给<tspan fill="#e9eff7" font-weight="700">剥离出来</tspan>。」</text>
+            <text x="580" y="326" fill="#f0b429" font-size="11.5">「这个时候一篇 12 页的论文基本上就没有剩下多少了，</text>
+            <text x="580" y="344" fill="#f0b429" font-size="11.5">就会变得非常非常短。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜机制</b>　左下那栏是全片最能直接抄走的一个设计：<b>不是让 agent 一次给答案，而是让多个有分歧的 agent 反复讨论到收敛</b>。讲师称这条路叫「算力换智力」——第 5 章会再回到这个词。他最后特意声明：「我仍然是读论文的，所以我不是那种只看微信公众号的老灯。」</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.6 -->
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>用 agent 读 B 站视频：效率差距是十倍一百倍，但有个前提</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2720"><span class="tri"></span>回跳 45:20</a>
+
+      <p class="lead">这是本章最后一个例子，也是和本笔记自身最相关的一个。讲师说明了他的「读视频」流程，并且给出了一句警告。</p>
+
+      <div class="blk steps">
+        <span class="label">讲师读一个视频的流程</span>
+        <ol>
+          <li>给一个 BVID。</li>
+          <li>「一般来说我会读什么呢？就读这个 podcast。」——优先选长对话/访谈类内容。</li>
+          <li>把它总结成一个<strong>自动的图文时间轴</strong>。「你看这是整理过的，这个文本的质量还是可以的，比字幕的质量要高一些。」</li>
+          <li>关键在于<strong>截图密度</strong>：「实际上我的截图的密度会更大一些。当我两帧图片之间的间隔大到一定程度的时候，我就会解读，我就得到了这个视频说的 ground truth。」</li>
+          <li>然后「AI 梗同学」上线消化：「因为它有我的记忆，把我认为不需要看、trivial 的东西——比如说这里面所有东西都是我非常清楚的东西，那么我就不需要看它。」</li>
+          <li>结果：「我就可以在几分钟的时间里面看完一个一两个小时的视频，而且我基本上确信，我还是很好地知道了那里面不一样的东西。」</li>
+        </ol>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">前提条件（他没省略）</span>
+        <p>「那当然剥夺了你们娱乐的——如果你是这样娱乐，看一个什么滑翔买瓜的衍生视频，那就不要用 AI 读了。」</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 264" role="img" aria-label="agent 时代的效率差距与竞争含义">
+          <rect x="0" y="0" width="1080" height="264" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">讲师给出的数量级判断，以及它对「竞争」意味着什么</text>
+
+            <rect x="30" y="48" width="500" height="88" rx="10" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.4"/>
+            <text x="50" y="74" fill="#f8736e" font-size="12" font-weight="700">「会用 agent 学习的人和不会用 agent 学习的人，</text>
+            <text x="50" y="96" fill="#f8736e" font-size="12" font-weight="700">他学习的效率差距是十倍一百倍。」</text>
+            <text x="50" y="122" fill="#adbccd" font-size="11.5">注意这是讲师的口头估算，不是实测数据。</text>
+
+            <rect x="550" y="48" width="500" height="88" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="570" y="74" fill="#f0b429" font-size="12" font-weight="700">「那么你们坐在这，你们怎么和一个十倍一百倍的人竞争？」</text>
+            <text x="570" y="100" fill="#adbccd" font-size="11.5">讲师把这句话接回了第 1.3 节的简历问题：</text>
+            <text x="570" y="122" fill="#adbccd" font-size="11.5">「那个没给你看到的、学习效率是你一百倍的人，</text>
+            <text x="570" y="140" fill="#adbccd" font-size="11.5">他的简历是长什么样的？」</text>
+
+            <rect x="30" y="156" width="1020" height="90" rx="10" fill="rgba(70,198,224,.06)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="182" fill="#46c6e0" font-size="11.5" font-weight="700">本章收束（讲师原话）：</text>
+            <text x="50" y="206" fill="#e9eff7" font-size="12">「而更可怕的还在下一节课。所以我们课间休息一会儿，你们可以想一想，因为我还没有公开我下面的内容，还要给大家留一点惊喜。」</text>
+            <text x="50" y="230" fill="#77879a" font-size="10.5">下一节课 = 第 03-Raw「软件仓库管理」，讲的正是版本管理与 Git。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比 + 推论</b>　右栏那句话是全章的问题意识来源。<b>注意讲师也给了一个自嘲的边界</b>：「因为我是一个上学老、下学小的人」——他自己也承认时间有限，所以「世界上肯定有人做得比我更好」。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

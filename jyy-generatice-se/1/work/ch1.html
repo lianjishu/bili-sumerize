@@ -1,0 +1,467 @@
+<section class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>课程简介</h2>
+        <div class="ch-play"><span class="dot"></span>00:00 – 29:44　·　10 小节　·　官方章节名原样</div>
+        <p class="ch-abstract">这一章只做三件事：<strong>交代这门课为什么存在</strong>（AI 把「昂贵的能力」变成了日用品，于是「上大学」这件事本身需要重新论证），<strong>交代这门课怎么上</strong>（案例为主、松散组织、允许不来上课），以及<strong>从零科普大语言模型与 agent</strong>。这一讲没有技术门槛，但讲师抛出的问题很重：如果所有人的简历都长一个样，你凭什么被招？</p>
+      </div>
+    </div>
+
+    <!-- 1.1 -->
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>站在人类命运的交叉路口：把昂贵的能力变成日用品</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=0"><span class="tri"></span>回跳 0:00</a>
+
+      <p class="lead">讲师用他自己的 Neovim 开场：按 F5，打开浏览器，开课。然后给出这门课的定位——不是「教编程」，而是站在计算机发展史的一个转折点上，回头看每次技术变革真正改变了什么。</p>
+
+      <p>他给出的归纳只有一句：<strong>每一次变革，都是把昂贵的能力变成了日用品</strong>。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 330" role="img" aria-label="四次技术变革与它把什么变成了日用品">
+          <rect x="0" y="0" width="1080" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="30" fill="#77879a" font-size="12.5">每一次变革 = 把一项昂贵的能力变成日用品</text>
+
+            <line x1="60" y1="120" x2="1020" y2="120" stroke="#31465c" stroke-width="1.5"/>
+            <polygon points="1020,120 1010,115 1010,125" fill="#31465c"/>
+
+            <!-- nodes -->
+            <rect x="60" y="66" width="200" height="44" rx="8" fill="rgba(91,156,248,.14)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="160" y="84" fill="#5b9cf8" font-size="12" font-weight="700" text-anchor="middle">1975 · 个人电脑</text>
+            <text x="160" y="102" fill="#adbccd" font-size="10.5" text-anchor="middle">Altair 8800（配图由 AI 生成）</text>
+
+            <rect x="290" y="66" width="200" height="44" rx="8" fill="rgba(70,198,224,.14)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="390" y="84" fill="#46c6e0" font-size="12" font-weight="700" text-anchor="middle">互联网</text>
+            <text x="390" y="102" fill="#adbccd" font-size="10.5" text-anchor="middle">「连接了所有人」· ICQ → OICQ</text>
+
+            <rect x="520" y="66" width="200" height="44" rx="8" fill="rgba(63,214,140,.14)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="620" y="84" fill="#3fd68c" font-size="12" font-weight="700" text-anchor="middle">移动互联网</text>
+            <text x="620" y="102" fill="#adbccd" font-size="10.5" text-anchor="middle">「一夜之间，菜场也贴上了二维码」</text>
+
+            <rect x="750" y="66" width="270" height="44" rx="8" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1.5"/>
+            <text x="885" y="84" fill="#f0b429" font-size="12" font-weight="700" text-anchor="middle">2022 至今 · 生成式 AI</text>
+            <text x="885" y="102" fill="#adbccd" font-size="10.5" text-anchor="middle">「人类历史上增长最快的产品」</text>
+
+            <g stroke="#233240" stroke-width="1" stroke-dasharray="3 3">
+              <line x1="160" y1="110" x2="160" y2="116"/><line x1="390" y1="110" x2="390" y2="116"/>
+              <line x1="620" y1="110" x2="620" y2="116"/><line x1="885" y1="110" x2="885" y2="116"/>
+            </g>
+
+            <!-- change rows -->
+            <rect x="60" y="140" width="960" height="76" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="80" y="164" fill="#77879a" font-size="11">这次变化里，「AI 替我上大学」的说法开始流传：</text>
+            <text x="80" y="186" fill="#adbccd" font-size="11.5">老师用豆包出题 → 学生用豆包做作业 → <tspan fill="#f8736e" font-weight="700">整个闭环里只有学生没有受到训练</tspan></text>
+            <text x="80" y="206" fill="#77879a" font-size="10.5">讲师举例：操作系统作业过去把人折磨一遍才长本事；现在把链接丢给 Codex，甚至只需要说一句「第八个实验帮我实现」。</text>
+
+            <rect x="60" y="232" width="960" height="76" rx="9" fill="rgba(240,180,41,.06)" stroke="#f0b429"/>
+            <text x="80" y="256" fill="#f0b429" font-size="11" font-weight="700">于是「到底还应不应该学编程」这个问题，有了一个不好听的答案：</text>
+            <text x="80" y="278" fill="#adbccd" font-size="11.5">「既应该，也不应该」——有些能力你还是需要的，<tspan fill="#e9eff7" font-weight="700">但应该怎么做，我们不知道</tspan>。</text>
+            <text x="80" y="298" fill="#77879a" font-size="10.5">讲师原话：所以我看到的其实大家都在一种非常焦虑的状态上。这门课的一个目的是缓解这种焦虑。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜时间线</b>　四段是讲师自己排的技术史，最后一段特意用琥珀色加粗——<b>因为它是唯一一段「变化还没结束」的</b>。他特意提到 1975 年那台机器的配图本身就是 AI 生成的，并且有明显 AI 味：「没关系，我说过我上课是跟大家一个比较松散的讨论和交流的过程。」</figcaption>
+      </figure>
+    </div>
+
+    <!-- 1.2 -->
+    <div class="sub" id="s12">
+      <h3><span class="idx">1.2</span>两份焦虑：一份怕被取代，一份怕白学</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=180"><span class="tri"></span>回跳 3:00</a>
+
+      <p class="lead">讲师把学生的焦虑拆成两种，而且很明确地说这两种焦虑<strong>指向相反的方向</strong>——一种是因为太依赖 AI，一种是因为太听老师的话。</p>
+
+      <div class="kv">
+        <div>第一种焦虑</div><div>如果每门课都开卷考试、都让 AI 答题，我全都答对了；但出来以后，<strong>第一个被 AI 取代的就是我</strong>。</div>
+        <div>第二种焦虑</div><div>延续中学状态、老师说啥就做啥、每堂课都认真听、每次作业都认真做。四年毕业时发现——<strong>你确实学会了一点什么，但你学会的东西 AI 都会做</strong>。</div>
+        <div>最切实的痛苦</div><div>保研。投了很多简历，海投很多地方。</div>
+      </div>
+
+      <blockquote>
+        <p>「我其实也收到了很多这样的简历，我觉得很糟糕。因为所有这一切都是 AI 做的，我没有干任何事，我就告诉它有一份简历。」</p>
+        <cite>—— 讲师，约 4:40</cite>
+      </blockquote>
+
+      <div class="blk eye">
+        <span class="label">值得记的观察</span>
+        <ul>
+          <li>两种焦虑看起来矛盾，其实同源：<strong>都指向「你的产出无法与别人的产出区分」</strong>。依赖 AI 的人和不用 AI 的人，交出来的东西在形式上是一样的。</li>
+          <li>讲师把课程目标直接对准这个痛处：「我希望用这一门课来缓解一下大家这样的焦虑的情绪，更多的是带着大家觉得还原一种快乐 vibecoding 的快乐。」</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.3 -->
+    <div class="sub" id="s13">
+      <h3><span class="idx">1.3</span>为什么一份「堆满成果」的简历是零分的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=290"><span class="tri"></span>回跳 4:50</a>
+
+      <p class="lead">讲师现场投屏了一份真实简历（个人信息已替换为 Unicode 方块）。看起来很漂亮：CCF 期刊列表、论文、accepted。他的判断是——<strong>这是零分的简历</strong>。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="零分简历与脱颖而出简历的对比">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">同一份「成果很多」的简历，为什么在导师眼里是零分</text>
+
+            <rect x="30" y="46" width="490" height="238" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="50" y="72" fill="#f8736e" font-size="12.5" font-weight="700">讲师收到的版本 —— 零分</text>
+            <text x="50" y="100" fill="#adbccd" font-size="11.5">✓ 一大堆实习</text>
+            <text x="50" y="122" fill="#adbccd" font-size="11.5">✓ 一大堆奖项</text>
+            <text x="50" y="144" fill="#adbccd" font-size="11.5">✓ 一大堆论文（CCF 期刊列表 · accepted）</text>
+            <text x="50" y="170" fill="#f8736e" font-size="11.5">✗ 没有 GitHub 链接</text>
+            <text x="50" y="192" fill="#f8736e" font-size="11.5">✗ 没有个人主页</text>
+            <text x="50" y="214" fill="#f8736e" font-size="11.5">✗ 没有一篇 preprint</text>
+            <text x="50" y="246" fill="#77879a" font-size="10.5">讲师原话：accepted 也看不见，所以大家说在投就等于不存在。</text>
+            <text x="50" y="266" fill="#77879a" font-size="10.5">「因为没有额外的信息」——这是判零分的唯一理由。</text>
+
+            <rect x="560" y="46" width="490" height="238" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="580" y="72" fill="#3fd68c" font-size="12.5" font-weight="700">问题不在「成果不够」——</text>
+            <text x="580" y="104" fill="#adbccd" font-size="11.5">「你和你的竞争者已经无法区分了。」</text>
+            <text x="580" y="132" fill="#e9eff7" font-size="11.5" font-weight="700">真正要回答的是：</text>
+            <text x="580" y="158" fill="#e9eff7" font-size="12.5" font-weight="700">是什么能让你从这些简历里脱颖而出？</text>
+            <text x="580" y="192" fill="#adbccd" font-size="11.5">讲师提到，有一篇能指认你个人贡献的发表，</text>
+            <text x="580" y="212" fill="#adbccd" font-size="11.5">对你可能是「简单项」，</text>
+            <text x="580" y="232" fill="#adbccd" font-size="11.5">但对很多其他人来说并不是。</text>
+            <text x="580" y="264" fill="#77879a" font-size="10.5">关键词：「额外的信息」——导师真正想知道的是你本人做了什么。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左栏打叉的三项有个共同点：<b>它们都可以被任何一个人用同样的方式生成</b>。这条判据在后面第 5 章会以「三个空间」的形式再出现一次——简历和软件一样，问题都是「无法从 intent 追溯到 implementation 到底是谁做的」。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">这一节的结论</span>
+        <ul>
+          <li>简历的判分标准不是「成果数量」，而是<strong>能否从中还原出「你个人做了什么」</strong>。</li>
+          <li>讲师明确说：「那你应该怎么样向你的未来的导师去展示你自己？」——这是这门课整个学期的暗线。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.4 -->
+    <div class="sub" id="s14">
+      <h3><span class="idx">1.4</span>人的两个优势：信息差，以及「你可以坐牢」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=490"><span class="tri"></span>回跳 8:10</a>
+
+      <p class="lead">讲师自问自答：软件工程是干什么的？「很简单，怎么样让软件工程不失败——怎么样造出一个软件来。」那么在 AI 比你会做题之后，「人」剩下的优势是什么？他给了两条，第二条带点玩笑但意思很实在。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 246" role="img" aria-label="人的两个优势与大学真正教的东西">
+          <rect x="0" y="0" width="1080" height="246" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="30" width="330" height="92" rx="10" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="50" y="56" fill="#5b9cf8" font-size="12.5" font-weight="700">优势一 · 信息差</text>
+            <text x="50" y="80" fill="#adbccd" font-size="11.5">「你有别人不知道的信息，</text>
+            <text x="50" y="100" fill="#adbccd" font-size="11.5">你才能做别人做不到的事。」</text>
+
+            <rect x="380" y="30" width="330" height="92" rx="10" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="400" y="56" fill="#a98bfa" font-size="12.5" font-weight="700">优势二 · 「你可以坐牢」</text>
+            <text x="400" y="80" fill="#adbccd" font-size="11.5">讲师原话的半玩笑表述：</text>
+            <text x="400" y="100" fill="#adbccd" font-size="11.5">AI 不用承担后果，人需要。</text>
+
+            <rect x="730" y="30" width="320" height="92" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="750" y="56" fill="#3fd68c" font-size="12.5" font-weight="700">大学真正教你的</text>
+            <text x="750" y="80" fill="#adbccd" font-size="11.5">「怎么样成为一个更好的人，</text>
+            <text x="750" y="100" fill="#adbccd" font-size="11.5">驾驭别人驾驭不了的东西。」</text>
+
+            <rect x="30" y="146" width="1020" height="76" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="172" fill="#77879a" font-size="11">讲师对这门课的定位（原话）：</text>
+            <text x="50" y="196" fill="#e9eff7" font-size="13" font-weight="700">「可能这门课试着去帮大家建立驾驭人工智能的能力。」</text>
+            <text x="50" y="214" fill="#77879a" font-size="10.5">注意这里的动词是「驾驭」，不是「使用」——后面第 4 章的「CS 从业者视角」就在讲这两者的差别。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜关系</b>　三条并排所以你能看出它们的分工：<b>前两条是现状的护城河，第三条是课程要建的能力</b>。讲师特意提到信息差「在社会上面广泛地存在」，包括学校里「别人没有的往年试卷」这种恶性竞争。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 1.5 -->
+    <div class="sub" id="s15">
+      <h3><span class="idx">1.5</span>这门课怎么上：把上课做成一场可回放的表演</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=620"><span class="tri"></span>回跳 10:20</a>
+
+      <p class="lead">这是本章信息密度最高的一段：讲师把自己的备课流程完整地展示了一遍，而且这套流程本身就是这门课的第一个案例。</p>
+
+      <div class="blk steps">
+        <span class="label">讲师的幻灯片生产流水线</span>
+        <ol>
+          <li>课前先写讲义（Markdown）——「相当于我会先想好我今天上课的时候我大概在这个时间应该讲什么、举什么样的例子，<strong>相当于我要约束好 AI 做什么</strong>。」</li>
+          <li>按 F5 播放时，Markdown 会渲染成 slides。<strong>紫色部分是 GPT-5.6s「添油加醋」加上去的</strong>，他自己的内容与 AI 生成的内容在视觉上可区分。</li>
+          <li>调用一个叫 <code>make slides</code> 的 skill，从一个写好的 Markdown 生成整套 slides。</li>
+          <li>其中还有一个「AI 梗同学」的 skill：生成三个 subagent 并赋予不同的 personality，各自在<strong>隔离的上下文</strong>里干活，最后主 agent 回来汇总。</li>
+          <li>换了几版提示词，每一版都重新生成一次；最后用一个<strong>别的模型盲评</strong>，挑出质量最高的一版。</li>
+        </ol>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 340" role="img" aria-label="讲义到 slides 的流水线，以及数字永生的闭环">
+          <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">source of truth 只有一个，其余全是派生物</text>
+
+            <rect x="30" y="48" width="176" height="70" rx="9" fill="rgba(70,198,224,.12)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="46" y="72" fill="#46c6e0" font-size="11.5" font-weight="700">Markdown 讲义</text>
+            <text x="46" y="92" fill="#adbccd" font-size="10.5">「source of truth」</text>
+            <text x="46" y="108" fill="#77879a" font-size="10">人类写的那一份</text>
+
+            <rect x="238" y="48" width="176" height="70" rx="9" fill="rgba(169,139,250,.12)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="254" y="72" fill="#a98bfa" font-size="11.5" font-weight="700">选中 snippet 扩写</text>
+            <text x="254" y="92" fill="#adbccd" font-size="10.5">agent 按 skill 执行</text>
+            <text x="254" y="108" fill="#77879a" font-size="10">图片 → AIGC 生成</text>
+
+            <rect x="446" y="48" width="176" height="70" rx="9" fill="rgba(240,180,41,.12)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="462" y="72" fill="#f0b429" font-size="11.5" font-weight="700">Markdown slides</text>
+            <text x="462" y="92" fill="#adbccd" font-size="10.5">紫色 = AI 加的部分</text>
+            <text x="462" y="108" fill="#77879a" font-size="10">可逐句追溯来源</text>
+
+            <rect x="654" y="48" width="176" height="70" rx="9" fill="rgba(63,214,140,.12)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="670" y="72" fill="#3fd68c" font-size="11.5" font-weight="700">浏览器渲染演出</text>
+            <text x="670" y="92" fill="#adbccd" font-size="10.5">「上课是一种表演」</text>
+            <text x="670" y="108" fill="#77879a" font-size="10">讲师自称是演员</text>
+
+            <rect x="862" y="48" width="188" height="70" rx="9" fill="rgba(248,115,110,.12)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="878" y="72" fill="#f8736e" font-size="11.5" font-weight="700">课后 review 录像</text>
+            <text x="878" y="92" fill="#adbccd" font-size="10.5">即兴 = 不完美</text>
+            <text x="878" y="108" fill="#77879a" font-size="10">切片 → 重新回到 code</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="206" y1="83" x2="232" y2="83"/><polygon points="232,83 224,79 224,87"/>
+              <line x1="414" y1="83" x2="440" y2="83"/><polygon points="440,83 432,79 432,87"/>
+              <line x1="622" y1="83" x2="648" y2="83"/><polygon points="648,83 640,79 640,87"/>
+              <line x1="830" y1="83" x2="856" y2="83"/><polygon points="856,83 848,79 848,87"/>
+            </g>
+
+            <path d="M 956 122 L 956 158 L 118 158 L 118 122" fill="none" stroke="#3fd68c" stroke-width="1.5" stroke-dasharray="5 4"/>
+            <polygon points="118,122 113,132 123,132" fill="#3fd68c"/>
+            <text x="537" y="176" fill="#3fd68c" font-size="11.5" text-anchor="middle" font-weight="700">回灌：录像切片重新整理成内容 → 沉淀成程序 → 课程「数字永生」</text>
+
+            <rect x="30" y="196" width="1020" height="124" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="222" fill="#77879a" font-size="11">支撑这一切的判断（讲师原话）：</text>
+            <text x="50" y="248" fill="#e9eff7" font-size="12.5" font-weight="700">「everything is code」</text>
+            <text x="50" y="272" fill="#adbccd" font-size="11.5">从这样的 content as code 来 —— 这个世界里面的一切都可以用代码来生成，包括这个桌子（CAD）、椅子、电脑。</text>
+            <text x="50" y="296" fill="#77879a" font-size="10.5">他的设想：把「生成式软件工程该讲什么、逻辑是什么、第一节课怎么上」沉淀成一个程序，由全世界的人来维护和定制。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜闭环</b>　上面一条是单向的生产线，下面那条绿色的虚线回灌才是关键。<b>注意「紫色 = AI 加的部分」这个设计</b>：他没有让 AI 直接改讲义，而是在视觉层保留了「谁写的」这一信息——和第 1.3 节「简历要能还原出你做了什么」是同一种洁癖。</figcaption>
+      </figure>
+
+      <div class="blk q">
+        <span class="label">讲师的自我定位</span>
+        <p>「我认为如果你是来学习的那更高效的方法——比如说我做一个老师，我应该思考的是怎么样把知识以更好的方式呈现给大家，而我的答案是<strong>我应该在上课的时候，上课是一种表演</strong>。」所以他自称演员：调动情绪、按预设剧本演出、课后 review 表演。</p>
+      </div>
+    </div>
+
+    <!-- 1.6 -->
+    <div class="sub" id="s16">
+      <h3><span class="idx">1.6</span>三条课程政策：禁止古法编程、token 自费、通过/不通过</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=840"><span class="tri"></span>回跳 14:00</a>
+
+      <p class="lead">三条政策里，最有信息量的不是「禁止古法编程」，而是<strong>他对「为什么用便宜模型」的解释</strong>——这直接说明了他对当前模型能力的判断。</p>
+
+      <table>
+        <tr><th>政策</th><th>内容</th><th>讲师给的理由（原话要点）</th></tr>
+        <tr>
+          <td><strong>禁止古法编程</strong></td>
+          <td>不许手搓。课程要求用 agent 完成。</td>
+          <td>「你们各个都是古法编程的好手，因为你们要考试、要保研、要机试。」他知道这个体系短期内改不了：「你要改变一个体系很难，但是我非常想要撕开一个小的口子。」</td>
+        </tr>
+        <tr>
+          <td><strong>token 自费</strong></td>
+          <td>自己充 token。他会用便宜的模型上课。</td>
+          <td>「如果你们手上没有付费的 token，就应该立即退学。」课上所有演示——包括 slides 生成、所有 assets——<strong>全部用 DeepSeek V4 Flash</strong>，只有 slides 生成用「更聪明的模型」。理由：证明「一个足够便宜但智能相对有一些的模型」就能带大家做完这些事。</td>
+        </tr>
+        <tr>
+          <td><strong>通过 / 不通过</strong></td>
+          <td>考核方式只有两档。</td>
+          <td>「在这个时代分数已经变得不那么重要了，而真正重要的就是在你最后找工作、或者在你保研的那一刻，投去那个简历上面有什么东西。」课的产出建议：实现一个自己的 email 管理系统，跑在宿舍一台常开的小电脑上。</td>
+        </tr>
+      </table>
+
+      <div class="blk eye">
+        <span class="label">值得记的细节</span>
+        <ul>
+          <li>关于 token 的价值，讲师说了一句很直白的话：「<strong>你没有 token 你就可以立即退休了</strong>」——后面第 2 章他会用自己「一句话装 Linux」来证明这句不是夸张。</li>
+          <li>他提到学生「喜欢在夜里工作」，而 DeepSeek 夜间计价更便宜，于是有了那个「梁文峰时间 / 梁文谷时间」的梗（保留在页脚修正表里）。</li>
+          <li>他明说无法限制学生用什么模型：「同一个任务你让 Claude 来做就是比 DeepSeek V4 Flash 做得又好又快，没办法。」这是他对「分数不可比」的解释。</li>
+          <li>关于课程的终极想象，他说得有点吓人：如果每个人的电脑都装监控，AI 就能评判你大学四年是怎么过的——「这是一个非常非常恐怖的事情」。他的态度是「保持 open」。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 1.7 -->
+    <div class="sub" id="s17">
+      <h3><span class="idx">1.7</span>大语言模型是什么：一个学到的概率分布，仅此而已</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1080"><span class="tri"></span>回跳 18:00</a>
+
+      <p class="lead">讲师明确说了「我今天不讲什么是大语言模型」，然后给了最短的定义——<strong>它就是一个概率分布，和你概率统计课上抛硬币的题没有任何区别</strong>。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="从概率分布到 agent 的演化路径">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="36" width="240" height="96" rx="10" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="60" fill="#46c6e0" font-size="12" font-weight="700">① 一个概率分布</text>
+            <text x="50" y="84" fill="#adbccd" font-size="11">给一段很长的文本（一本书），</text>
+            <text x="50" y="104" fill="#adbccd" font-size="11">在书后面接几个字：</text>
+            <text x="50" y="122" fill="#77879a" font-size="10.5">「能不能帮我总结一下这本书」</text>
+
+            <rect x="300" y="36" width="240" height="96" rx="10" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="320" y="60" fill="#5b9cf8" font-size="12" font-weight="700">② 不断预测下一个 token</text>
+            <text x="320" y="84" fill="#adbccd" font-size="11">每次输出一个字符，</text>
+            <text x="320" y="104" fill="#adbccd" font-size="11">接在已有文本后面，循环。</text>
+            <text x="320" y="122" fill="#77879a" font-size="10.5">「这个模型很大，它见过世界上所有的东西」</text>
+
+            <rect x="570" y="36" width="240" height="96" rx="10" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="590" y="60" fill="#a98bfa" font-size="12" font-weight="700">③ 输出越长，上下文越长</text>
+            <text x="590" y="84" fill="#adbccd" font-size="11">「大家发现模型可以输出越来越长的</text>
+            <text x="590" y="104" fill="#adbccd" font-size="11">文本，也接受越来越长的上下文」</text>
+            <text x="590" y="122" fill="#77879a" font-size="10.5">→ 于是有了推理模型</text>
+
+            <rect x="840" y="36" width="210" height="96" rx="10" fill="rgba(63,214,140,.12)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="860" y="60" fill="#3fd68c" font-size="12" font-weight="700">④ agent</text>
+            <text x="860" y="84" fill="#adbccd" font-size="11">输出一个「特殊的 token」</text>
+            <text x="860" y="104" fill="#adbccd" font-size="11">要求调用 bash 程序</text>
+            <text x="860" y="122" fill="#77879a" font-size="10.5">执行结果重新送回 loop</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="272" y1="84" x2="294" y2="84"/><polygon points="294,84 286,80 286,88"/>
+              <line x1="542" y1="84" x2="564" y2="84"/><polygon points="564,84 556,80 556,88"/>
+              <line x1="812" y1="84" x2="834" y2="84"/><polygon points="834,84 826,80 826,88"/>
+            </g>
+
+            <rect x="30" y="156" width="1020" height="56" rx="9" fill="rgba(240,180,41,.06)" stroke="#f0b429"/>
+            <text x="50" y="180" fill="#f0b429" font-size="11.5" font-weight="700">这门课的立场：</text>
+            <text x="176" y="180" fill="#adbccd" font-size="11.5">「这门课是站在使用者的视角上，也就是说你们只要知道存在一个东西叫大语言模型。」</text>
+            <text x="50" y="200" fill="#77879a" font-size="10.5">训练很难，所以「这是为什么现在那几个 Lab 这么牛逼」——但那不是这门课要讲的部分。</text>
+
+            <rect x="30" y="228" width="1020" height="56" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="252" fill="#3fd68c" font-size="11.5" font-weight="700">agent 的机制拆解：</text>
+            <text x="200" y="252" fill="#adbccd" font-size="11.5">语言模型可以输出下一个 token → 让它输出一个「特殊 token」表示「调用 bash」</text>
+            <text x="50" y="272" fill="#adbccd" font-size="11.5">→ bash 运行 → 结果重新送回 agent 的 loop → 「这样 agent 就可以自主运行，给他一个比较复杂的任务他可以不断地尝试尝试尝试」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜因果链</b>　四步链条里，<b>第 2→3 步的推力是「上下文变长」，不是「模型变聪明」</b>。讲师的原话是「随着大家发现模型可以输出越来越长的文本、也接受越来越长的上下文的时候，agent 就出现了」——这条链条解释了为什么这一讲的后面全都在讲「上下文里放什么」（也预告了第 02 讲的 Prompt/Context Engineering）。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">本节的极简定义</span>
+        <p>「大语言模型就是一个概率分布，跟你们在概率统计课上学的抛硬币……没有任何的区别。它是一个学到的概率分布。」</p>
+      </div>
+    </div>
+
+    <!-- 1.8 -->
+    <div class="sub" id="s18">
+      <h3><span class="idx">1.8</span>从 GPT-4 到 GPT-5.6：同一件事，从「调半天」到「一句话」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1290"><span class="tri"></span>回跳 21:30</a>
+
+      <p class="lead">讲师用两个自己的真实经历做对照，时间跨度只有一两年，但工作量的差别是数量级的。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 320" role="img" aria-label="GPT-4 时代与 GPT-5.6 时代的对比">
+          <rect x="0" y="0" width="1080" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <!-- left -->
+            <rect x="30" y="40" width="490" height="256" rx="10" fill="rgba(91,156,248,.07)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="50" y="66" fill="#5b9cf8" font-size="12.5" font-weight="700">2023 · GPT-4 时代</text>
+            <text x="50" y="92" fill="#e9eff7" font-size="12" font-weight="700">案例 A：给五岁的孩子解释扫描电子显微镜</text>
+            <text x="50" y="116" fill="#adbccd" font-size="11.5">当时的做法是「玩 prompt engineering」：</text>
+            <text x="50" y="138" fill="#adbccd" font-size="11.5">「我希望用朴素的语言、打一个合适的比方，帮助他理解。」</text>
+            <text x="50" y="166" fill="#f0b429" font-size="11.5" font-weight="700">GPT-4 给的比方（讲师评价：让我非常震惊）</text>
+            <text x="50" y="188" fill="#adbccd" font-size="11.5">「你现在有一个山，这个山的形状你看不到——你闭着眼睛看不到，</text>
+            <text x="50" y="208" fill="#adbccd" font-size="11.5">但你又想知道那个山是什么形状的，怎么办呢？</text>
+            <text x="50" y="228" fill="#adbccd" font-size="11.5">你就对那个山扔石头，闭着眼睛扔。有的方向石头穿过去了，</text>
+            <text x="50" y="248" fill="#adbccd" font-size="11.5">有的方向弹回来了，你能听到声音——</text>
+            <text x="50" y="268" fill="#adbccd" font-size="11.5">你就可以推测出这个山的形状。」</text>
+            <text x="50" y="288" fill="#77879a" font-size="10.5">讲师补充：他后来去查了资料，这个比方打的是对的。</text>
+
+            <!-- right -->
+            <rect x="560" y="40" width="490" height="256" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="580" y="66" fill="#f0b429" font-size="12.5" font-weight="700">今天 · GPT-5.6 时代</text>
+            <text x="580" y="92" fill="#e9eff7" font-size="12" font-weight="700">案例 A'：同一个问题</text>
+            <text x="580" y="116" fill="#adbccd" font-size="11.5">「GPT-5.6 给的他打的更严谨，而且因为它有 reasoning，</text>
+            <text x="580" y="136" fill="#adbccd" font-size="11.5">所以它还给了更好的解释。」</text>
+
+            <line x1="580" y1="156" x2="1030" y2="156" stroke="#233240" stroke-width="1"/>
+
+            <text x="580" y="182" fill="#e9eff7" font-size="12" font-weight="700">案例 B → B'：给 GLM 找 bug</text>
+            <text x="580" y="208" fill="#5b9cf8" font-size="11.5">当年：一个 prompt 可以给 GLM 找到 150 个 bug。</text>
+            <text x="580" y="234" fill="#f0b429" font-size="11.5">今天：「你这个工作就完全在 GPT-5.6 的时代就是一句话的事情。</text>
+            <text x="580" y="254" fill="#f0b429" font-size="11.5">真的是一句话，不需要再做任何为 GPT 的特别的调整。」</text>
+            <text x="580" y="282" fill="#77879a" font-size="10.5">注意「不需要再做任何特别的调整」——提示词工程的收益被模型能力吃掉了。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左右两栏的时间差只有两年多。<b>要留意的不是「模型变强了」，而是「变得更强的部分正好吃掉了提示词技巧」</b>——这正是为什么第 02 讲要重新定义提示词工程为「上下文工程」。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 1.9 -->
+    <div class="sub" id="s19">
+      <h3><span class="idx">1.9</span>agent 是怎么出现的：一个特殊 token 换来越来越强的自主性</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1390"><span class="tri"></span>回跳 23:10</a>
+
+      <p class="lead">讲师现场展示了他自己的环境配置（Sway 窗口管理器 + 定制终端），并且强调<strong>这些配置他一行都没手写过</strong>——只用了一个 prompt。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 288" role="img" aria-label="agent 配置环境的实际流程">
+          <rect x="0" y="0" width="1080" height="288" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">用自然语言配置一套完整的开发环境（讲师现场演示）</text>
+
+            <rect x="30" y="46" width="1020" height="58" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="50" y="70" fill="#3fd68c" font-size="11.5" font-weight="700">唯一的一条 prompt：</text>
+            <text x="196" y="70" fill="#e9eff7" font-size="12">「你能不能帮我把我现在的命令行终端、帮我把我的系统 Sway 都配置成现代的样子、比较好用的样子」</text>
+            <text x="50" y="92" fill="#77879a" font-size="10.5">模型：DeepSeek V4 Flash。讲师原话：「结束了……没有更好的模型。」</text>
+
+            <rect x="30" y="118" width="330" height="150" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="142" fill="#46c6e0" font-size="11.5" font-weight="700">结果 1 · Sway 窗口管理器</text>
+            <text x="50" y="166" fill="#adbccd" font-size="11">「为课堂展示做了优化」</text>
+            <text x="50" y="186" fill="#adbccd" font-size="11">对比度调高、顶栏全部去掉</text>
+            <text x="50" y="210" fill="#adbccd" font-size="11">Super+Enter 新开窗口</text>
+            <text x="50" y="230" fill="#adbccd" font-size="11">Super+Space 切换布局</text>
+            <text x="50" y="254" fill="#77879a" font-size="10.5">tile-based，不用鼠标</text>
+
+            <rect x="375" y="118" width="330" height="150" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="395" y="142" fill="#a98bfa" font-size="11.5" font-weight="700">结果 2 · 定制的终端</text>
+            <text x="395" y="166" fill="#adbccd" font-size="11">top → 更现代的系统监视器</text>
+            <text x="395" y="186" fill="#adbccd" font-size="11">ls 被自动换成 eza</text>
+            <text x="395" y="210" fill="#adbccd" font-size="11">find 被自动换成 fd</text>
+            <text x="395" y="230" fill="#adbccd" font-size="11">目录/markdown/Makefile 特殊着色</text>
+            <text x="395" y="254" fill="#77879a" font-size="10.5">Neovim 也是现代配置</text>
+
+            <rect x="720" y="118" width="330" height="150" rx="9" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="740" y="142" fill="#f0b429" font-size="11.5" font-weight="700">讲师强调的三件事</text>
+            <text x="740" y="168" fill="#adbccd" font-size="11">① 他看过配置文件的次数：<tspan fill="#e9eff7" font-weight="700">零</tspan></text>
+            <text x="740" y="192" fill="#adbccd" font-size="11">② 「我只知道让它保交付」</text>
+            <text x="740" y="216" fill="#adbccd" font-size="11">③ 现在的 agent 会不断尝试：</text>
+            <text x="740" y="236" fill="#adbccd" font-size="11">「他错了以后他会去试试别的方法」</text>
+            <text x="740" y="258" fill="#77879a" font-size="10.5">对比去年上操作系统课时 agent 还各种出错、任务完不成就停下来。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　三栏并列所以你能看出重心：<b>能力提升的关键不是模型更聪明，而是「会自己换方法重试」</b>。讲师最后一段判断是：「agent 的能力还远远没有被释放出来」，并提到 next-token prediction 是「效率很低的模型」，以及 diffusion 型语言模型、可回头修改的上下文等方向。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 1.10 -->
+    <div class="sub" id="s110">
+      <h3><span class="idx">1.10</span>故事还没结束：摩尔定律还在，但路线未定</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1660"><span class="tri"></span>回跳 27:40</a>
+
+      <p class="lead">本章最后一段是纯判断，没有事实可核对——但它是理解全课基调的前提，所以值得原样记下来。</p>
+
+      <div class="blk q">
+        <span class="label">讲师对未来的判断</span>
+        <ul>
+          <li>「agent 的能力还远远没有被释放出来。」</li>
+          <li>next-token prediction「是一个效率很低的模型」，未来可能有 diffusion 型的语言模型——「从一个随机的噪声开始，一点一点生成了一个很长的东西，像人做梦一样」。</li>
+          <li>「我不是 predict next token，我可以把上下文回头去改，随时可以把一个很长的上下文裁短。」</li>
+          <li>「整个 AI research 大家都在赌这件事情要发生，摩尔定律还在那。我现在很难想未来会变成什么，我不能预测未来到底哪一条路线会胜出。」</li>
+        </ul>
+      </div>
+
+      <blockquote>
+        <p>「你可以预见的是，这个世界肯定会变得非常的不一样。那在这个世界上我们应该怎么办，是每一个同学我觉得都值得好好考虑一下的问题。」</p>
+        <cite>—— 第 01 章收束，约 29:00</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>

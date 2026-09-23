@@ -1,0 +1,728 @@
+<section class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>使模型遵循指令的技巧</h2>
+        <div class="ch-play"><span class="dot"></span>33:07 – 75:30　·　12 小节　·　官方章节名原样</div>
+        <p class="ch-abstract">这是全片最硬的一章。讲师从计算理论讲起（有限状态机 vs 图灵机），解释 CoT 为什么等于给模型递了纸笔；然后解释幻觉的成因，用一个「藏头诗 + 同偏旁」的怪题演示 CoT 如何自我纠错；最后把一切收敛到一句话：<strong>写 prompt 最重要的是那个 verifier</strong>。后半章顺着这个逻辑解释了「不说人话」「读论文被带偏」「审稿被故事污染」等一连串现象。</p>
+      </div>
+    </div>
+
+    <!-- 2.1 -->
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>先看机制：模型听指令时，算力其实是有限的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=1994"><span class="tri"></span>回跳 33:14</a>
+
+      <p class="lead">讲师先用一个「非常有 insight 的 argument」开场：模型再大，<strong>为了输出一个 token，也只走一遍被激活的那部分参数</strong>——所以单次推理是一个固定大小的计算。这条观察直接对应到计算理论里的经典区分。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 356" role="img" aria-label="有限状态机与图灵机的区别，以及模型和人的映射">
+          <rect x="0" y="0" width="1080" height="356" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">唯一的区别：图灵机多了一条可以无限写下去的纸带</text>
+
+            <!-- FSM -->
+            <rect x="30" y="48" width="452" height="128" rx="10" fill="rgba(91,156,248,.08)" stroke="#5b9cf8"/>
+            <text x="48" y="72" fill="#5b9cf8" font-size="12.5" font-weight="700">有限状态机（FSM）</text>
+            <text x="48" y="94" fill="#adbccd" font-size="11.5">状态是有限的，走一圈回到原点</text>
+            <g font-size="11" fill="#adbccd">
+              <rect x="52" y="108" width="46" height="28" rx="6" fill="#141d28" stroke="#31465c"/><text x="75" y="127" text-anchor="middle">00</text>
+              <rect x="112" y="108" width="46" height="28" rx="6" fill="#141d28" stroke="#31465c"/><text x="135" y="127" text-anchor="middle">01</text>
+              <rect x="172" y="108" width="46" height="28" rx="6" fill="#141d28" stroke="#31465c"/><text x="195" y="127" text-anchor="middle">10</text>
+              <rect x="232" y="108" width="46" height="28" rx="6" fill="#141d28" stroke="#31465c"/><text x="255" y="127" text-anchor="middle">11</text>
+            </g>
+            <g stroke="#5b9cf8" stroke-width="1.4" fill="#5b9cf8">
+              <line x1="98" y1="122" x2="108" y2="122"/><polygon points="108,122 102,119 102,125"/>
+              <line x1="158" y1="122" x2="168" y2="122"/><polygon points="168,122 162,119 162,125"/>
+              <line x1="218" y1="122" x2="228" y2="122"/><polygon points="228,122 222,119 222,125"/>
+              <path d="M 255 140 C 255 162 75 162 75 140" fill="none"/>
+              <polygon points="75,140 71,148 79,148"/>
+            </g>
+            <text x="48" y="166" fill="#77879a" font-size="11">记忆只存在于「当前处在哪个状态」</text>
+
+            <!-- TM -->
+            <rect x="498" y="48" width="552" height="128" rx="10" fill="rgba(63,214,140,.08)" stroke="#3fd68c"/>
+            <text x="516" y="72" fill="#3fd68c" font-size="12.5" font-weight="700">图灵机（Turing machine）</text>
+            <text x="516" y="94" fill="#adbccd" font-size="11.5">状态依旧有限，但多了一条无限长的纸带</text>
+            <g fill="#141d28" stroke="#3fd68c" stroke-width="1.1">
+              <rect x="516" y="108" width="60" height="28" rx="4"/>
+              <rect x="580" y="108" width="60" height="28" rx="4"/>
+              <rect x="644" y="108" width="60" height="28" rx="4"/>
+              <rect x="708" y="108" width="60" height="28" rx="4"/>
+              <rect x="772" y="108" width="60" height="28" rx="4"/>
+              <rect x="836" y="108" width="60" height="28" rx="4"/>
+              <rect x="900" y="108" width="60" height="28" rx="4"/>
+              <rect x="964" y="108" width="60" height="28" rx="4"/>
+            </g>
+            <text x="546" y="127" fill="#3fd68c" font-size="11" text-anchor="middle">…</text>
+            <text x="610" y="127" fill="#adbccd" font-size="11" text-anchor="middle">写</text>
+            <text x="674" y="127" fill="#adbccd" font-size="11" text-anchor="middle">下</text>
+            <text x="738" y="127" fill="#adbccd" font-size="11" text-anchor="middle">来</text>
+            <text x="802" y="127" fill="#adbccd" font-size="11" text-anchor="middle">，</text>
+            <text x="866" y="127" fill="#adbccd" font-size="11" text-anchor="middle">随</text>
+            <text x="930" y="127" fill="#adbccd" font-size="11" text-anchor="middle">时</text>
+            <text x="994" y="127" fill="#adbccd" font-size="11" text-anchor="middle">看</text>
+            <text x="516" y="166" fill="#77879a" font-size="11">计算能力的差距就来自这条纸带</text>
+
+            <!-- mapping rows -->
+            <rect x="30" y="196" width="1020" height="66" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="220" fill="#f0b429" font-size="11.5" font-weight="700">讲师引用的说法（Manuel Blum 给研究生的建议）</text>
+            <text x="48" y="244" fill="#e9eff7" font-size="12">你是有限状态机；但只要手上有 paper and pencil，你就是一个图灵机。</text>
+
+            <rect x="30" y="276" width="504" height="66" rx="10" fill="rgba(70,198,224,.08)" stroke="#46c6e0"/>
+            <text x="48" y="300" fill="#46c6e0" font-size="11.5" font-weight="700">映射到人</text>
+            <text x="48" y="322" fill="#adbccd" font-size="11.5">边思考边记录 → 可以随时回看 → 知识积累</text>
+
+            <rect x="546" y="276" width="504" height="66" rx="10" fill="rgba(169,139,250,.08)" stroke="#a98bfa"/>
+            <text x="564" y="300" fill="#a98bfa" font-size="11.5" font-weight="700">映射到模型</text>
+            <text x="564" y="322" fill="#adbccd" font-size="11.5">单次输出 = 有限计算　＋　上下文 = 那条纸带</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左边状态机、右边多一条纸带，这个差别就是「能算一加一」和「能算任意长算式」的差别。<b>关键映射</b>：模型的纸带就是它的上下文——这也是下一节 CoT 的全部理论基础。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">结论</span>
+        <ul>
+          <li>「模型很强」和「单步计算量有限」不矛盾，两者同时为真。</li>
+          <li>所以提升智能的一条现实路径不是换模型，而是<strong>给它更多可写的纸</strong>。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 2.2 -->
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>CoT 就是「把上下文当纸笔」——但那张纸只能往后写</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=2176"><span class="tri"></span>回跳 36:16</a>
+
+      <p class="lead">思维链模型做的事，就是把模型的上下文当成 paper and pencil。讲师特意强调了这条纸笔的缺陷：<strong>它是 append only 的，写错了擦不掉</strong>，只能靠注意力把错的部分忽略过去。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="CoT 的上下文纸带：只能追加，不能擦除">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">一次「难题」推理里的上下文纸带（从左往右生长）</text>
+
+            <!-- tape -->
+            <g>
+              <rect x="30" y="60" width="150" height="46" rx="6" fill="#141d28" stroke="#31465c"/>
+              <text x="105" y="80" fill="#adbccd" font-size="11" text-anchor="middle">问题：一加一？</text>
+              <text x="105" y="97" fill="#77879a" font-size="10" text-anchor="middle">→ 直接答 2（不需要纸）</text>
+
+              <rect x="196" y="60" width="150" height="46" rx="6" fill="rgba(240,180,41,.12)" stroke="#f0b429"/>
+              <text x="271" y="80" fill="#f0b429" font-size="11" text-anchor="middle">难：先想一想</text>
+              <text x="271" y="97" fill="#adbccd" font-size="10" text-anchor="middle">「我可以先试一试什么」</text>
+
+              <rect x="362" y="60" width="150" height="46" rx="6" fill="rgba(91,156,248,.12)" stroke="#5b9cf8"/>
+              <text x="437" y="80" fill="#5b9cf8" font-size="11" text-anchor="middle">试写第一版</text>
+              <text x="437" y="97" fill="#adbccd" font-size="10" text-anchor="middle">可能对，也可能错</text>
+
+              <rect x="528" y="60" width="150" height="46" rx="6" fill="rgba(248,115,110,.12)" stroke="#f8736e"/>
+              <text x="603" y="80" fill="#f8736e" font-size="11" text-anchor="middle">发现不对</text>
+              <text x="603" y="97" fill="#adbccd" font-size="10" text-anchor="middle">错的内容留在纸上</text>
+
+              <rect x="694" y="60" width="150" height="46" rx="6" fill="rgba(91,156,248,.12)" stroke="#5b9cf8"/>
+              <text x="769" y="80" fill="#5b9cf8" font-size="11" text-anchor="middle">接着往后写修正</text>
+              <text x="769" y="97" fill="#adbccd" font-size="10" text-anchor="middle">不能回退去擦</text>
+
+              <rect x="860" y="60" width="190" height="46" rx="6" fill="rgba(63,214,140,.12)" stroke="#3fd68c"/>
+              <text x="955" y="80" fill="#3fd68c" font-size="11" text-anchor="middle">判定对错 → 完成</text>
+              <text x="955" y="97" fill="#adbccd" font-size="10" text-anchor="middle">「一旦解答写出来就可以再试」</text>
+            </g>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="180" y1="83" x2="192" y2="83"/><polygon points="192,83 185,80 185,86"/>
+              <line x1="346" y1="83" x2="358" y2="83"/><polygon points="358,83 351,80 351,86"/>
+              <line x1="512" y1="83" x2="524" y2="83"/><polygon points="524,83 517,80 517,86"/>
+              <line x1="678" y1="83" x2="690" y2="83"/><polygon points="690,83 683,80 683,86"/>
+              <line x1="844" y1="83" x2="856" y2="83"/><polygon points="856,83 849,80 849,86"/>
+            </g>
+
+            <!-- loop back -->
+            <path d="M 603 110 C 603 152 437 152 437 112" fill="none" stroke="#f8736e" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <polygon points="437,112 433,120 441,120" fill="#f8736e"/>
+            <text x="520" y="166" fill="#f8736e" font-size="10.5">改不动就换个思路重来（仍是往后追加）</text>
+
+            <!-- properties -->
+            <rect x="30" y="192" width="330" height="88" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="215" fill="#46c6e0" font-size="11.5" font-weight="700">性质 1｜append only</text>
+            <text x="48" y="237" fill="#adbccd" font-size="11.5">只能不停往后写，不能擦除</text>
+            <text x="48" y="259" fill="#adbccd" font-size="11.5">错的内容永远留在上下文里</text>
+
+            <rect x="376" y="192" width="330" height="88" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="394" y="215" fill="#46c6e0" font-size="11.5" font-weight="700">性质 2｜靠注意力忽略错误</text>
+            <text x="394" y="237" fill="#adbccd" font-size="11.5">不是删掉，而是「不看了」</text>
+            <text x="394" y="259" fill="#adbccd" font-size="11.5">所以注意力强度决定纠错效果</text>
+
+            <rect x="722" y="192" width="328" height="88" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429"/>
+            <text x="740" y="215" fill="#f0b429" font-size="11.5" font-weight="700">性质 3｜Token 就是思考的量</text>
+            <text x="740" y="237" fill="#adbccd" font-size="11.5">「他用 Token 的数量」来换正确率</text>
+            <text x="740" y="259" fill="#77879a" font-size="11">→ 这条会在 3.7 变成「算力换智力」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜时间线式因果</b>　六个格子就是上下文的生长过程。<b>最该记住的是红色那段回环</b>：模型没法「回头擦掉」，它只能在纸的末尾写一句「我错了，应该是……」——这解释了为什么思维链经常看起来啰嗦又自我推翻。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.3 -->
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>幻觉不是 bug，是被「打分规则」训出来的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=2264"><span class="tri"></span>回跳 37:44</a>
+
+      <p class="lead">早期没有思维链的 ChatGPT「被调成了一个人类的舔狗」。讲师用打分规则反推幻觉的来源，这一段是整章因果链最清楚的地方。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 340" role="img" aria-label="幻觉成因因果链与 CoT 时代的改变">
+          <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">旧时代（无 CoT）的因果链</text>
+
+            <rect x="30" y="44" width="196" height="64" rx="8" fill="rgba(248,115,110,.10)" stroke="#f8736e"/>
+            <text x="128" y="68" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">人类给回答打分</text>
+            <text x="128" y="88" fill="#adbccd" font-size="10.5" text-anchor="middle">不回答 → 一定低分</text>
+
+            <rect x="262" y="44" width="196" height="64" rx="8" fill="rgba(248,115,110,.10)" stroke="#f8736e"/>
+            <text x="360" y="68" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">随便答 → 有概率对</text>
+            <text x="360" y="88" fill="#adbccd" font-size="10.5" text-anchor="middle">答对即高分</text>
+
+            <rect x="494" y="44" width="196" height="64" rx="8" fill="rgba(240,180,41,.10)" stroke="#f0b429"/>
+            <text x="592" y="68" fill="#f0b429" font-size="11.5" font-weight="700" text-anchor="middle">最优策略 = 必须给东西</text>
+            <text x="592" y="88" fill="#adbccd" font-size="10.5" text-anchor="middle">「无论如何一定要给你一个」</text>
+
+            <rect x="726" y="44" width="324" height="64" rx="8" fill="rgba(248,115,110,.16)" stroke="#f8736e" stroke-width="1.5"/>
+            <text x="888" y="68" fill="#f8736e" font-size="12" font-weight="700" text-anchor="middle">→ 幻觉</text>
+            <text x="888" y="88" fill="#adbccd" font-size="10.5" text-anchor="middle">不是它想骗你，是不说话的成本更高</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="226" y1="76" x2="258" y2="76"/><polygon points="258,76 250,72 250,80"/>
+              <line x1="458" y1="76" x2="490" y2="76"/><polygon points="490,76 482,72 482,80"/>
+              <line x1="690" y1="76" x2="722" y2="76"/><polygon points="722,76 714,72 714,80"/>
+            </g>
+
+            <text x="30" y="146" fill="#77879a" font-size="12">CoT + 强化学习时代的变化</text>
+            <rect x="30" y="162" width="240" height="76" rx="8" fill="rgba(63,214,140,.10)" stroke="#3fd68c"/>
+            <text x="150" y="186" fill="#3fd68c" font-size="11.5" font-weight="700" text-anchor="middle">答错的惩罚远大于不答</text>
+            <text x="150" y="207" fill="#adbccd" font-size="10.5" text-anchor="middle">模型学会「先验一验再输出」</text>
+            <text x="150" y="226" fill="#77879a" font-size="10" text-anchor="middle">→ 这就是思维链被训出来的动力</text>
+
+            <rect x="288" y="162" width="240" height="76" rx="8" fill="rgba(91,156,248,.10)" stroke="#5b9cf8"/>
+            <text x="408" y="186" fill="#5b9cf8" font-size="11.5" font-weight="700" text-anchor="middle">像人一样逐步逼近目标</text>
+            <text x="408" y="207" fill="#adbccd" font-size="10.5" text-anchor="middle">test-time scaling</text>
+            <text x="408" y="226" fill="#77879a" font-size="10" text-anchor="middle">每一轮 session 都能观察到</text>
+
+            <rect x="546" y="162" width="240" height="76" rx="8" fill="rgba(169,139,250,.10)" stroke="#a98bfa"/>
+            <text x="666" y="186" fill="#a98bfa" font-size="11.5" font-weight="700" text-anchor="middle">训练数据以代码/数学为主</text>
+            <text x="666" y="207" fill="#adbccd" font-size="10.5" text-anchor="middle">因为有明确反馈，可以自动判分</text>
+            <text x="666" y="226" fill="#77879a" font-size="10" text-anchor="middle">→ 所以 verifier 友好的能力涨得最快</text>
+
+            <rect x="804" y="162" width="246" height="76" rx="8" fill="rgba(70,198,224,.10)" stroke="#46c6e0"/>
+            <text x="927" y="186" fill="#46c6e0" font-size="11.5" font-weight="700" text-anchor="middle">意外收获</text>
+            <text x="927" y="207" fill="#adbccd" font-size="10.5" text-anchor="middle">只在数学/编程上训，却学会了</text>
+            <text x="927" y="226" fill="#adbccd" font-size="10.5" text-anchor="middle">写诗这种「没有 verifier」的任务</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="270" y1="200" x2="284" y2="200"/><polygon points="284,200 277,197 277,203"/>
+              <line x1="528" y1="200" x2="542" y2="200"/><polygon points="542,200 535,197 535,203"/>
+              <line x1="786" y1="200" x2="800" y2="200"/><polygon points="800,200 793,197 793,203"/>
+            </g>
+
+            <rect x="30" y="256" width="1020" height="66" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="280" fill="#f0b429" font-size="11.5" font-weight="700">这条链对写 prompt 的直接启示</text>
+            <text x="48" y="305" fill="#e9eff7" font-size="12">你没法改变它的训练方式，但你可以改变它「被评判的标准」——把明确的 verifier 写进上下文，就等于告诉它这轮怎么算答对。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜因果链</b>　上面一条解释幻觉「为什么必然出现」，下面一条解释思维链「为什么必然学会自我纠错」。<b>两段代码之外的第三件事</b>：讲师提到强化学习也带来副作用——模型会变成「做题家」，只对能被打分的部分敏感。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.4 -->
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>现场实验：让模型做「nonsense」的藏头诗</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=2333"><span class="tri"></span>回跳 38:53</a>
+
+      <p class="lead">讲师出的题故意「反人类」：拿一个 nonsense 的头，要求押韵、讲动物相关的故事，还要求「2026 年 9 月 1 日」这八个字按顺序出现在八句里。人看到这种题第一反应是骂出题人，模型却照单全收。</p>
+
+      <div class="blk q">
+        <span class="label">问题</span>
+        <ul>
+          <li>一个训练数据里根本不可能出现过的怪任务，模型凭什么能完成？</li>
+          <li>它怎么知道自己是做对了还是做错了？</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="怪题的自我验证解题路径">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="46" width="182" height="70" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e"/>
+            <text x="121" y="70" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">任务是 nonsense</text>
+            <text x="121" y="90" fill="#adbccd" font-size="10.5" text-anchor="middle">不是训练数据里的东西</text>
+            <text x="121" y="106" fill="#77879a" font-size="10" text-anchor="middle">「模型不会骂出题人」</text>
+
+            <rect x="244" y="46" width="182" height="70" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429"/>
+            <text x="335" y="70" fill="#f0b429" font-size="11.5" font-weight="700" text-anchor="middle">自知一次写不对</text>
+            <text x="335" y="90" fill="#adbccd" font-size="10.5" text-anchor="middle">先选一个韵脚，试写一版</text>
+            <text x="335" y="106" fill="#77879a" font-size="10" text-anchor="middle">不确定 → 所以先写</text>
+
+            <rect x="458" y="46" width="182" height="70" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8"/>
+            <text x="549" y="70" fill="#5b9cf8" font-size="11.5" font-weight="700" text-anchor="middle">用 next token 自检</text>
+            <text x="549" y="90" fill="#adbccd" font-size="10.5" text-anchor="middle">「足够判定写得对还是不对」</text>
+            <text x="549" y="106" fill="#77879a" font-size="10" text-anchor="middle">判定能力就是 verifier</text>
+
+            <rect x="672" y="46" width="182" height="70" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8"/>
+            <text x="763" y="70" fill="#5b9cf8" font-size="11.5" font-weight="700" text-anchor="middle">不对就改 / 重来</text>
+            <text x="763" y="90" fill="#adbccd" font-size="10.5" text-anchor="middle">改很久不行 → 换一个韵脚</text>
+            <text x="763" y="106" fill="#77879a" font-size="10" text-anchor="middle">不断验证、回溯</text>
+
+            <rect x="886" y="46" width="164" height="70" rx="9" fill="rgba(63,214,140,.12)" stroke="#3fd68c"/>
+            <text x="968" y="70" fill="#3fd68c" font-size="11.5" font-weight="700" text-anchor="middle">居然写成了</text>
+            <text x="968" y="90" fill="#adbccd" font-size="10.5" text-anchor="middle">押上了，也有故事感</text>
+            <text x="968" y="106" fill="#77879a" font-size="10" text-anchor="middle">品味仍不完美</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="214" y1="81" x2="240" y2="81"/><polygon points="240,81 233,78 233,84"/>
+              <line x1="428" y1="81" x2="454" y2="81"/><polygon points="454,81 447,78 447,84"/>
+              <line x1="642" y1="81" x2="668" y2="81"/><polygon points="668,81 661,78 661,84"/>
+              <line x1="856" y1="81" x2="882" y2="81"/><polygon points="882,81 875,78 875,84"/>
+            </g>
+
+            <!-- second experiment -->
+            <rect x="30" y="140" width="500" height="130" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="164" fill="#46c6e0" font-size="11.5" font-weight="700">第二组实验：同偏旁的句子</text>
+            <text x="48" y="188" fill="#adbccd" font-size="11.5">要求一整句话的每个字同偏旁——模型对空间结构感知很差，</text>
+            <text x="48" y="208" fill="#adbccd" font-size="11.5">理论上需要视觉模型才行。</text>
+            <text x="48" y="232" fill="#3fd68c" font-size="11.5">实际结果：它靠思维链硬写出来了。</text>
+            <text x="48" y="254" fill="#77879a" font-size="10.5">讲师记录输出：江湖游泳渡河波涛汹涌泪流满意洗滴泥污……</text>
+
+            <rect x="550" y="140" width="500" height="130" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429"/>
+            <text x="568" y="164" fill="#f0b429" font-size="11.5" font-weight="700">但世界上限仍在人类这边</text>
+            <text x="568" y="188" fill="#adbccd" font-size="11.5">同韵到底的极端要求下，人类群体的答案仍然更强。</text>
+            <text x="568" y="208" fill="#adbccd" font-size="11.5">讲师给出的破局方式：让它写一个 → 就能写一万个 →</text>
+            <text x="568" y="228" fill="#adbccd" font-size="11.5">在一万个里再微改，逐步逼近「千古流传」的层次。</text>
+            <text x="568" y="252" fill="#77879a" font-size="10.5">这是「算力换智力」在创作类任务上的体现</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　这条路径唯一的关键是第三步：<b>模型自己就是自己的 verifier</b>。押韵、偏旁、藏头这类约束是「字面可判定」的，所以哪怕任务再怪，它也能靠试错收敛。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.5 -->
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>本章核心结论：写 prompt 最重要的是那个 verifier</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=2679"><span class="tri"></span>回跳 44:39</a>
+
+      <p class="lead">把前四节收起来，讲师给出这一章最重要的一句话：<strong>如果你们能够给模型一个非常明确的 verifier，再加上一个足够强的模型，不管它是编程任务还是教学任务，都能大幅提升完成度</strong>。反过来，教学任务最难的正是「它很难 verifier」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 320" role="img" aria-label="verifier 明确程度谱系">
+          <rect x="0" y="0" width="1080" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">verifier 明确程度谱系（左边越强，越能放手）</text>
+
+            <rect x="30" y="48" width="1020" height="14" rx="7" fill="#1c2836"/>
+            <rect x="30" y="48" width="340" height="14" rx="7" fill="#3fd68c"/>
+            <rect x="370" y="48" width="330" height="14" fill="#f0b429"/>
+            <rect x="700" y="48" width="350" height="14" rx="7" fill="#f8736e"/>
+
+            <rect x="30" y="80" width="330" height="118" rx="10" fill="rgba(63,214,140,.08)" stroke="#3fd68c"/>
+            <text x="48" y="104" fill="#3fd68c" font-size="12" font-weight="700">机器可验证</text>
+            <text x="48" y="128" fill="#adbccd" font-size="11.5">测试脚本过 / 不过</text>
+            <text x="48" y="148" fill="#adbccd" font-size="11.5">编译器报错 / 不报错</text>
+            <text x="48" y="168" fill="#adbccd" font-size="11.5">数学答案能对</text>
+            <text x="48" y="188" fill="#77879a" font-size="10.5">→ 可以不计代价地多轮重试</text>
+
+            <rect x="376" y="80" width="318" height="118" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429"/>
+            <text x="394" y="104" fill="#f0b429" font-size="12" font-weight="700">模型自己可判定</text>
+            <text x="394" y="128" fill="#adbccd" font-size="11.5">押韵、藏头、同偏旁</text>
+            <text x="394" y="148" fill="#adbccd" font-size="11.5">格式是否合法（JSON 能不能 parse）</text>
+            <text x="394" y="168" fill="#adbccd" font-size="11.5">背景是不是纯白（可截图让视觉模型验）</text>
+            <text x="394" y="188" fill="#77879a" font-size="10.5">→ 也能自我纠错，但要你先把判据说清楚</text>
+
+            <rect x="710" y="80" width="340" height="118" rx="10" fill="rgba(248,115,110,.08)" stroke="#f8736e"/>
+            <text x="728" y="104" fill="#f8736e" font-size="12" font-weight="700">没有 verifier</text>
+            <text x="728" y="128" fill="#adbccd" font-size="11.5">课堂的起承转合 / 情绪节奏</text>
+            <text x="728" y="148" fill="#adbccd" font-size="11.5">内容够不够共情 / 够不够动人的</text>
+            <text x="728" y="168" fill="#adbccd" font-size="11.5">「AI 味够不够淡」</text>
+            <text x="728" y="188" fill="#77879a" font-size="10.5">→ 只能人肉当 verifier，效率最低</text>
+
+            <rect x="30" y="216" width="500" height="86" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="240" fill="#46c6e0" font-size="11.5" font-weight="700">讲师自述的翻车：数字切片</text>
+            <text x="48" y="263" fill="#adbccd" font-size="11.5">第一个切片做成了，第二个怎么调都做不好。</text>
+            <text x="48" y="284" fill="#adbccd" font-size="11.5">原因不是模型不行，是「好」有两个以上互相冲突的判据。</text>
+
+            <rect x="550" y="216" width="500" height="86" rx="10" fill="rgba(70,198,224,.08)" stroke="#46c6e0"/>
+            <text x="568" y="240" fill="#46c6e0" font-size="11.5" font-weight="700">可迁移动作</text>
+            <text x="568" y="263" fill="#adbccd" font-size="11.5">接任务先问：我能不能写出自动判对的脚本？能不能截个图让视觉模型看？</text>
+            <text x="568" y="284" fill="#adbccd" font-size="11.5">能 → 交给 agent 迭代；不能 → 提前规划人工验收点。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜谱系对比</b>　色带从左到右是「可验证 → 不可验证」。<b>最反直觉的一格在中间</b>：藏头诗这种怪题属于「模型自己可判定」，所以它能完成；而课堂上的人味属于最右端，所以讲师说「这是我至今和 AI 不一样的地方」。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.6 -->
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>为什么会这样：注意力机制和人脑的类比</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=2856"><span class="tri"></span>回跳 47:36</a>
+
+      <p class="lead">self-attention 在输出每一个 token 时，都会回顾过去的一部分 token——有些被高度注意，有些被忽略。讲师用「写代码」和「写完代码喘口气」两个阶段做类比，解释了为什么指令在上下文里必须反复出现。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 316" role="img" aria-label="注意力随输出阶段转移">
+          <rect x="0" y="0" width="1080" height="316" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">同一段上下文，在输出的不同阶段被「看」到的权重不同</text>
+
+            <!-- state A -->
+            <rect x="30" y="46" width="500" height="176" rx="10" fill="rgba(91,156,248,.07)" stroke="#5b9cf8"/>
+            <text x="48" y="70" fill="#5b9cf8" font-size="12" font-weight="700">阶段 A：正在写代码</text>
+
+            <rect x="48" y="84" width="130" height="34" rx="6" fill="#141d28" stroke="#233240"/>
+            <text x="113" y="106" fill="#77879a" font-size="10.5" text-anchor="middle">system prompt</text>
+            <text x="113" y="130" fill="#77879a" font-size="10.5" text-anchor="middle">「用中文回答」</text>
+
+            <rect x="196" y="84" width="150" height="34" rx="6" fill="rgba(91,156,248,.18)" stroke="#5b9cf8" stroke-width="1.6"/>
+            <text x="271" y="106" fill="#5b9cf8" font-size="10.5" text-anchor="middle">用户需求：实现一个赛车</text>
+            <text x="271" y="130" fill="#adbccd" font-size="10.5" text-anchor="middle">注意力集中在这里</text>
+
+            <rect x="364" y="84" width="148" height="34" rx="6" fill="rgba(91,156,248,.18)" stroke="#5b9cf8" stroke-width="1.6"/>
+            <text x="438" y="106" fill="#5b9cf8" font-size="10.5" text-anchor="middle">已经写出的代码</text>
+            <text x="438" y="130" fill="#adbccd" font-size="10.5" text-anchor="middle">注意力也集中在这里</text>
+
+            <line x1="113" y1="146" x2="113" y2="176" stroke="#233240" stroke-width="1.6"/>
+            <line x1="271" y1="146" x2="271" y2="176" stroke="#5b9cf8" stroke-width="4"/>
+            <line x1="438" y1="146" x2="438" y2="176" stroke="#5b9cf8" stroke-width="4"/>
+            <text x="48" y="196" fill="#adbccd" font-size="11">结果：这一阶段输出里，「用中文回答」这条指令容易被暂时忽略。</text>
+
+            <!-- state B -->
+            <rect x="550" y="46" width="500" height="176" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c"/>
+            <text x="568" y="70" fill="#3fd68c" font-size="12" font-weight="700">阶段 B：代码写完，开始收尾</text>
+
+            <rect x="568" y="84" width="130" height="34" rx="6" fill="rgba(63,214,140,.18)" stroke="#3fd68c" stroke-width="1.6"/>
+            <text x="633" y="106" fill="#3fd68c" font-size="10.5" text-anchor="middle">system prompt</text>
+            <text x="633" y="130" fill="#3fd68c" font-size="10.5" text-anchor="middle">「用中文回答」</text>
+
+            <rect x="716" y="84" width="150" height="34" rx="6" fill="#141d28" stroke="#233240"/>
+            <text x="791" y="106" fill="#77879a" font-size="10.5" text-anchor="middle">用户需求</text>
+            <text x="791" y="130" fill="#77879a" font-size="10.5" text-anchor="middle">注意力降下来了</text>
+
+            <rect x="884" y="84" width="148" height="34" rx="6" fill="#141d28" stroke="#233240"/>
+            <text x="958" y="106" fill="#77879a" font-size="10.5" text-anchor="middle">已写出的代码</text>
+            <text x="958" y="130" fill="#77879a" font-size="10.5" text-anchor="middle">注意力降下来了</text>
+
+            <line x1="633" y1="146" x2="633" y2="176" stroke="#3fd68c" stroke-width="4"/>
+            <line x1="791" y1="146" x2="791" y2="176" stroke="#233240" stroke-width="1.6"/>
+            <line x1="958" y1="146" x2="958" y2="176" stroke="#233240" stroke-width="1.6"/>
+            <text x="568" y="196" fill="#adbccd" font-size="11">结果：喘气的这一刻，它「想起」了前面的要求，回头补上。</text>
+
+            <!-- bottom -->
+            <rect x="30" y="242" width="500" height="60" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="266" fill="#f0b429" font-size="11.5" font-weight="700">推论 1｜指令越多，注意力越不够分</text>
+            <text x="48" y="288" fill="#adbccd" font-size="11.5">「上下文是一种会抢夺注意力资源的」东西</text>
+
+            <rect x="550" y="242" width="500" height="60" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="568" y="266" fill="#f0b429" font-size="11.5" font-weight="700">推论 2｜早期那套「你是一个专家」在 hack 注意力</text>
+            <text x="568" y="288" fill="#adbccd" font-size="11.5">GPT-5 时代后不必再写，把 verifier 写清楚更有用</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜关系示意</b>　线的粗细就是注意力权重。<b>不是装饰</b>：讲师用「化简算式时注意力全在算式上，化简完了吸一口气才想起别的要求」来类比，这段类比直接解释了为什么重要指令值得在上下文里重复出现。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.7 -->
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>副作用：为什么模型「不说人话」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=3147"><span class="tri"></span>回跳 52:27</a>
+
+      <p class="lead">一个很典型的例子：你要求「白色背景、不要半透明」，模型确实照做了——但它会把这条要求写成代码<strong>注释</strong>贴在那儿。它知道这件事很重要，却没有转过弯来「这是给人看的要求，不是给代码看的要求」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="过度遵循指令的副作用与权衡">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="40" width="300" height="100" rx="10" fill="rgba(70,198,224,.09)" stroke="#46c6e0"/>
+            <text x="48" y="64" fill="#46c6e0" font-size="11.5" font-weight="700">你在 prompt 里写的</text>
+            <text x="48" y="88" fill="#e9eff7" font-size="11.5">「要一个白色背景」</text>
+            <text x="48" y="108" fill="#e9eff7" font-size="11.5">「不要半透明的毛玻璃效果」</text>
+            <text x="48" y="128" fill="#77879a" font-size="10.5">两条都是明确、可 verify 的指令</text>
+
+            <rect x="360" y="40" width="330" height="100" rx="10" fill="rgba(248,115,110,.09)" stroke="#f8736e"/>
+            <text x="378" y="64" fill="#f8736e" font-size="11.5" font-weight="700">它实际干的事</text>
+            <text x="378" y="88" fill="#adbccd" font-size="11.5">样式做对了，然后额外在代码上加一行注释：</text>
+            <text x="378" y="110" fill="#e9eff7" font-size="11">「白色背景，不要半透明效果」</text>
+            <text x="378" y="130" fill="#77879a" font-size="10.5">→ 把「给人的要求」当成了「交付物的一部分」</text>
+
+            <rect x="720" y="40" width="330" height="100" rx="10" fill="rgba(240,180,41,.09)" stroke="#f0b429"/>
+            <text x="738" y="64" fill="#f0b429" font-size="11.5" font-weight="700">根因</text>
+            <text x="738" y="88" fill="#adbccd" font-size="11.5">强化学习把「遵循指令」训成了执念，</text>
+            <text x="738" y="108" fill="#adbccd" font-size="11.5">但共情能力在后训练阶段是偏弱的。</text>
+            <text x="738" y="130" fill="#77879a" font-size="10.5">所以「模型不说人话」</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="330" y1="90" x2="356" y2="90"/><polygon points="356,90 349,87 349,93"/>
+              <line x1="690" y1="90" x2="716" y2="90"/><polygon points="716,90 709,87 709,93"/>
+            </g>
+
+            <text x="30" y="176" fill="#77879a" font-size="12">于是你面对一个两难（讲师原话称之为 trade off）</text>
+
+            <rect x="30" y="192" width="500" height="92" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="216" fill="#5b9cf8" font-size="11.5" font-weight="700">选项 1｜写进 AGENTS.md 或做成 skill</text>
+            <text x="48" y="240" fill="#adbccd" font-size="11.5">明确规定「写注释时应该怎么样」</text>
+            <text x="48" y="262" fill="#f8736e" font-size="11.5">代价：这段规则会长期污染上下文，占用注意力预算</text>
+
+            <rect x="550" y="192" width="500" height="92" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="568" y="216" fill="#5b9cf8" font-size="11.5" font-weight="700">选项 2｜不写，每次口头纠正</text>
+            <text x="568" y="240" fill="#adbccd" font-size="11.5">上下文干净，但要反复消耗你的精力</text>
+            <text x="568" y="262" fill="#f0b429" font-size="11.5">代价：讲师说「到目前为止还没有一个通用的、把所有问题都解决好的方案」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比 + 权衡</b>　上面一行是「现象 → 根因」，下面一行是「两种修法与各自代价」。<b>直接可用的判据</b>：这条经验很容易被网上现成的 skill 覆盖，但讲师提醒——从网上拿来的 skill 第一次用确实有改进，第二次就不够好了，容易陷入泥潭状态，这时应该回到「自己想清楚注意力在干什么，再自己写指令」。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.8 -->
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>案例：直接让 AI「总结这篇论文」会发生什么</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=3297"><span class="tri"></span>回跳 54:57</a>
+
+      <p class="lead">讲师现场把一篇 PDF 丢进临时模式（避免 AGENTS.md 污染它），然后问「帮我做个总结」。紧接着他问全班：<strong>这样读论文会有什么问题？</strong>答案是一条完整的因果链。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 330" role="img" aria-label="论文对上下文的注意力污染链路">
+          <rect x="0" y="0" width="1080" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">「总结一下 paper.pdf」背后发生的事</text>
+
+            <rect x="30" y="46" width="196" height="82" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8"/>
+            <text x="128" y="70" fill="#5b9cf8" font-size="11.5" font-weight="700" text-anchor="middle">论文是逻辑自洽的</text>
+            <text x="128" y="92" fill="#adbccd" font-size="10.5" text-anchor="middle">反复修改过，A→B→C→D</text>
+            <text x="128" y="110" fill="#77879a" font-size="10" text-anchor="middle">「所有都是扣起来的」</text>
+
+            <rect x="262" y="46" width="196" height="82" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e"/>
+            <text x="360" y="70" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">注意力被强污染</text>
+            <text x="360" y="92" fill="#adbccd" font-size="10.5" text-anchor="middle">每个 token 都顺着前文的逻辑走</text>
+            <text x="360" y="110" fill="#77879a" font-size="10" text-anchor="middle">「它说 A 所以 B 所以 C」</text>
+
+            <rect x="494" y="46" width="196" height="82" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e"/>
+            <text x="592" y="70" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">看起来正确 → 全部接受</text>
+            <text x="592" y="92" fill="#adbccd" font-size="10.5" text-anchor="middle">模型判断「这些都是对的」</text>
+            <text x="592" y="110" fill="#77879a" font-size="10" text-anchor="middle">于是接着往下做</text>
+
+            <rect x="726" y="46" width="324" height="82" rx="9" fill="rgba(240,180,41,.14)" stroke="#f0b429" stroke-width="1.5"/>
+            <text x="888" y="70" fill="#f0b429" font-size="12" font-weight="700" text-anchor="middle">你拿到的「总结」</text>
+            <text x="888" y="92" fill="#e9eff7" font-size="11.5" text-anchor="middle">本质上就是作者的 claim</text>
+            <text x="888" y="112" fill="#77879a" font-size="10.5" text-anchor="middle">不是第三方评估，只是复述</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+              <line x1="226" y1="87" x2="258" y2="87"/><polygon points="258,87 250,83 250,91"/>
+              <line x1="458" y1="87" x2="490" y2="87"/><polygon points="490,87 482,83 482,91"/>
+              <line x1="690" y1="87" x2="722" y2="87"/><polygon points="722,87 714,83 714,91"/>
+            </g>
+
+            <rect x="30" y="146" width="500" height="78" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="48" y="170" fill="#46c6e0" font-size="11.5" font-weight="700">不限于论文</text>
+            <text x="48" y="193" fill="#adbccd" font-size="11.5">任何「逻辑很强」的资料都一样：教科书某一章、</text>
+            <text x="48" y="213" fill="#adbccd" font-size="11.5">计算机系统基础里的链接与加载，只要你看不明白，就会被牵过去。</text>
+
+            <rect x="550" y="146" width="500" height="78" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="568" y="170" fill="#f8736e" font-size="11.5" font-weight="700">伴生现象：墙头草</text>
+            <text x="568" y="193" fill="#adbccd" font-size="11.5">你说它好，它马上说好；你说它不好，它马上说不好，来回摇摆。</text>
+            <text x="568" y="213" fill="#77879a" font-size="10.5">→ 因为它没有独立于上下文的判据</text>
+
+            <rect x="30" y="240" width="1020" height="72" rx="10" fill="rgba(63,214,140,.08)" stroke="#3fd68c"/>
+            <text x="48" y="264" fill="#3fd68c" font-size="11.5" font-weight="700">解法的方向（下一节展开）</text>
+            <text x="48" y="288" fill="#e9eff7" font-size="12">不要一上来就让它「总结」，而是先让它和你站在同一个位置——先对齐，再推理。讲师原话：「我希望 AI 和我能够对齐，就是他能站在我的立场上去理解这个 paper。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜因果链</b>　这条链的起点不是「模型不行」，而是<b>论文本身的可信度对注意力构成了强牵引</b>。理解这一点之后，解法就很自然：把对齐步骤放在总结之前。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.9 -->
+    <div class="sub" id="s29">
+      <h3><span class="idx">2.9</span>两种对齐写法：审稿人视角 与 学生视角</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=3600"><span class="tri"></span>回跳 1:00:00</a>
+
+      <p class="lead">对抗「上下文污染」的个人经验，讲师给了一套动作：让模型先站在<strong>人类已知知识边界</strong>上，把相关问题、已解决到什么程度都摆出来，再谈这篇工作的增量在哪。对学生，同理但换一个对齐基准。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 340" role="img" aria-label="两种对齐写法的对比">
+          <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <!-- left -->
+            <rect x="30" y="40" width="500" height="286" rx="11" fill="rgba(70,198,224,.06)" stroke="#46c6e0"/>
+            <text x="52" y="66" fill="#46c6e0" font-size="12.5" font-weight="700">写法一｜审稿人视角（讲师读论文/审稿时用）</text>
+            <text x="52" y="90" fill="#77879a" font-size="11">对齐基准 = 人类已知的知识边界</text>
+
+            <rect x="52" y="104" width="456" height="96" rx="8" fill="#111a24" stroke="#233240"/>
+            <text x="68" y="126" fill="#adbccd" font-size="11.5">先问三件事，把人机位置摆平：</text>
+            <text x="68" y="148" fill="#e9eff7" font-size="11.5">① 人类历史上，相关且已解决的东西是什么？</text>
+            <text x="68" y="168" fill="#e9eff7" font-size="11.5">② 解决到什么程度了？</text>
+            <text x="68" y="188" fill="#e9eff7" font-size="11.5">③ 这个工作试图解决哪些不一样的、增量的问题？</text>
+
+            <text x="52" y="226" fill="#3fd68c" font-size="11.5" font-weight="700">为什么有效</text>
+            <text x="52" y="248" fill="#adbccd" font-size="11.5">讲师用「回到你已有的知识」的例子：你已经知道 .cpp 能编成 .exe，</text>
+            <text x="52" y="268" fill="#adbccd" font-size="11.5">那这个共同基点上，再问「为什么还需要链接」就顺理成章。</text>
+            <text x="52" y="294" fill="#77879a" font-size="10.5">这样 AI 不再是自说自话，而是和你站在同一个平面上往后推一步</text>
+            <text x="52" y="314" fill="#77879a" font-size="10.5">讲师补充：一线模型做这一步已经够好，flash 级别他还会留个心眼</text>
+
+            <!-- right -->
+            <rect x="550" y="40" width="500" height="286" rx="11" fill="rgba(169,139,250,.06)" stroke="#a98bfa"/>
+            <text x="572" y="66" fill="#a98bfa" font-size="12.5" font-weight="700">写法二｜学生视角（把 AI 对齐到你自己）</text>
+            <text x="572" y="90" fill="#77879a" font-size="11">对齐基准 = 你当前的知识水平</text>
+
+            <rect x="572" y="104" width="456" height="96" rx="8" fill="#111a24" stroke="#233240"/>
+            <text x="588" y="126" fill="#adbccd" font-size="11.5">先把你自己的水位告诉它：</text>
+            <text x="588" y="148" fill="#e9eff7" font-size="11.5">① 这门课我学到什么程度了？</text>
+            <text x="588" y="168" fill="#e9eff7" font-size="11.5">② 我的编程水平在哪一档？</text>
+            <text x="588" y="188" fill="#e9eff7" font-size="11.5">③ 然后：用我学过的知识把这份材料重新讲一遍</text>
+
+            <text x="572" y="226" fill="#3fd68c" font-size="11.5" font-weight="700">实现方式</text>
+            <text x="572" y="248" fill="#adbccd" font-size="11.5">把这份「水位说明」当成数据库或 memory 来维护</text>
+            <text x="572" y="268" fill="#adbccd" font-size="11.5">（讲师举的例子：AGENTS.md 之类的地方长期带着它）。</text>
+            <text x="572" y="294" fill="#77879a" font-size="10.5">效果：AI 不再输出「教科书腔」，而是贴着你的现有概念往上搭</text>
+            <text x="572" y="314" fill="#77879a" font-size="10.5">讲师自述：我也经常要纠正它「说人话」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比矩阵</b>　两栏结构完全对称，唯一变量是<b>「拿什么当代替对齐基准」</b>——审稿人拿人类知识全集，学生拿自己的现有水平。讲师强调这不是礼貌动作，而是「大幅提高 AI 和你协作的对齐程度」的技术手段。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.10 -->
+    <div class="sub" id="s210">
+      <h3><span class="idx">2.10</span>对齐之后只让它「推一步」，因为一步是可验证的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=3881"><span class="tri"></span>回跳 1:04:41</a>
+
+      <p class="lead">对齐完成后，讲师并不要求 AI 给出整套结论，而是<strong>让它只往后推一步</strong>。理由很漂亮：一步推理是可以 verify 的，虽然不像跑测试那么严格，但已经是一个明确的信号。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 214" role="img" aria-label="一步推理的可验证性">
+          <rect x="0" y="0" width="1080" height="214" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="52" width="290" height="92" rx="10" fill="rgba(91,156,248,.10)" stroke="#5b9cf8"/>
+            <text x="48" y="76" fill="#5b9cf8" font-size="11.5" font-weight="700">已有的、不会动的事实</text>
+            <text x="48" y="100" fill="#adbccd" font-size="11.5">论文内容 / 教科书章节 / 你的现有知识</text>
+            <text x="48" y="122" fill="#77879a" font-size="10.5">这些是「过去所有的事实」，是基底</text>
+
+            <rect x="360" y="52" width="240" height="92" rx="10" fill="rgba(240,180,41,.12)" stroke="#f0b429"/>
+            <text x="480" y="76" fill="#f0b429" font-size="11.5" font-weight="700" text-anchor="middle">只往后推一步</text>
+            <text x="480" y="100" fill="#adbccd" font-size="11.5" text-anchor="middle">CoT 最擅长的动作</text>
+            <text x="480" y="122" fill="#77879a" font-size="10.5" text-anchor="middle">不过度要求它给出完整推理链</text>
+
+            <rect x="640" y="52" width="410" height="92" rx="10" fill="rgba(63,214,140,.12)" stroke="#3fd68c"/>
+            <text x="658" y="76" fill="#3fd68c" font-size="11.5" font-weight="700">这一步可以被 verify</text>
+            <text x="658" y="100" fill="#adbccd" font-size="11.5">「推理最重要的就是它可以 verify，这是一个明确的 verify 的信号」</text>
+            <text x="658" y="122" fill="#77879a" font-size="10.5">和「能不能通过测试」同类，只是判据换成「合不合理」</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="320" y1="98" x2="356" y2="98"/><polygon points="356,98 348,94 348,102"/>
+              <line x1="600" y1="98" x2="636" y2="98"/><polygon points="636,98 628,94 628,102"/>
+            </g>
+
+            <text x="30" y="180" fill="#77879a" font-size="11.5">附带观察：讲师用同一套动作审自己的论文时，AI 会批评实验不够好——</text>
+            <text x="30" y="200" fill="#adbccd" font-size="11.5">但他的实际拒稿理由几乎从来不是实验不够好，而是「逻辑链条断开了」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　三步里第二步是刻意的克制：<b>把「难验证的整段推理」切成「可验证的一步」</b>，这和 2.5 的 verifier 原则是同一件事的另一种用法。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.11 -->
+    <div class="sub" id="s211">
+      <h3><span class="idx">2.11</span>A1/A2 案例：为什么讲师认为学术发表体系快崩了</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=3998"><span class="tri"></span>回跳 1:06:38</a>
+
+      <p class="lead">讲师讲了他「昨天刚拒掉」的一篇论文：方案把问题拆成 A1 和 A2 两部分，做出了 A2 的改进，实验看起来也没问题——但按他的估算，<strong>A1 占了 99% 的权重，A2 只占 1%</strong>。优化那 1%，就像在噪声上做文章。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 302" role="img" aria-label="A1 A2 权重估算与学术生态的闭环风险">
+          <rect x="0" y="0" width="1080" height="302" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">问题 A 的内部权重（讲师估算）</text>
+
+            <rect x="30" y="46" width="700" height="52" rx="7" fill="rgba(91,156,248,.14)" stroke="#5b9cf8"/>
+            <text x="52" y="78" fill="#5b9cf8" font-size="12.5" font-weight="700">A1　占 99%　—— 真正决定性能的部分</text>
+
+            <rect x="740" y="46" width="180" height="52" rx="7" fill="rgba(248,115,110,.16)" stroke="#f8736e"/>
+            <text x="830" y="72" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">A2　占 1%</text>
+            <text x="830" y="89" fill="#adbccd" font-size="10.5" text-anchor="middle">论文优化的就是这里</text>
+
+            <rect x="930" y="46" width="120" height="52" rx="7" fill="#141d28" stroke="#31465c"/>
+            <text x="990" y="72" fill="#f8736e" font-size="11.5" font-weight="700" text-anchor="middle">≈ noise</text>
+            <text x="990" y="89" fill="#77879a" font-size="10.5" text-anchor="middle">优化其 10% 无意义</text>
+
+            <text x="30" y="126" fill="#adbccd" font-size="11.5">讲师的理解：「老师肯定是做 A 的」，学生被分到 A2，从 A1 里搬了些 XYZ 到 A2，让 A2 的效果好看一点，然后写了一篇论文。</text>
+            <text x="30" y="148" fill="#f0b429" font-size="11.5">他的判断：实验可能没错、A2 的故事也可能成立，但「整件事情在这个意义上不成立」。</text>
+
+            <rect x="30" y="170" width="500" height="112" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e"/>
+            <text x="48" y="194" fill="#f8736e" font-size="11.5" font-weight="700">他看到的闭环风险</text>
+            <text x="48" y="217" fill="#adbccd" font-size="11.5">AI slop 大量涌入 community</text>
+            <text x="48" y="237" fill="#adbccd" font-size="11.5">→ 用 AI 写文章 → 用 AI 审文章</text>
+            <text x="48" y="257" fill="#adbccd" font-size="11.5">→ 审稿 AI 被上下文里的故事污染 → 最后没人真读文章</text>
+
+            <rect x="550" y="170" width="500" height="112" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429"/>
+            <text x="568" y="194" fill="#f0b429" font-size="11.5" font-weight="700">他对模型的实测评价</text>
+            <text x="568" y="217" fill="#adbccd" font-size="11.5">让 GPT-5.6 当审稿人：「做的并不好」。</text>
+            <text x="568" y="237" fill="#adbccd" font-size="11.5">它主要在验证论文逻辑有没有断（是不是 invalid paper），</text>
+            <text x="568" y="257" fill="#adbccd" font-size="11.5">而不回答「这篇东西值不值得读」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜数据简图</b>　比例是讲师的口头估算（99% / 1%），不是实测数据，这里按原话标注。<b>要带走的判断习惯</b>：在看一份工作的贡献时，先问「它优化的那部分在整体里占多大权重」，这比看实验表格更早筛掉无效工作。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2.12 -->
+    <div class="sub" id="s212">
+      <h3><span class="idx">2.12</span>回到学习方法：对齐「过去的我」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1CQt365EzW?t=4254"><span class="tri"></span>回跳 1:10:54</a>
+
+      <p class="lead">本章收尾，讲师把 verifier 的概念收到自己身上：他学一门新东西的 verifier 是——<strong>有没有按照我自己的思维方式，重构或扩展了我的逻辑边界</strong>。方法则是「对齐过去的我」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 288" role="img" aria-label="知识圈的持续外扩">
+          <rect x="0" y="0" width="1080" height="288" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12">读到一篇好资料之后发生的事</text>
+
+            <circle cx="300" cy="164" r="40" fill="rgba(70,198,224,.18)" stroke="#46c6e0"/>
+            <circle cx="300" cy="164" r="78" fill="none" stroke="#31465c" stroke-dasharray="5 4"/>
+            <circle cx="300" cy="164" r="116" fill="none" stroke="#31465c" stroke-dasharray="5 4"/>
+            <text x="300" y="160" fill="#46c6e0" font-size="11" text-anchor="middle">已知的</text>
+            <text x="300" y="176" fill="#46c6e0" font-size="11" text-anchor="middle">facts</text>
+
+            <g stroke="#3fd68c" stroke-width="2" fill="#3fd68c">
+              <line x1="424" y1="164" x2="484" y2="164"/><polygon points="484,164 474,159 474,169"/>
+            </g>
+            <text x="454" y="152" fill="#3fd68c" font-size="11" text-anchor="middle">外扩</text>
+
+            <circle cx="640" cy="164" r="52" fill="rgba(63,214,140,.12)" stroke="#3fd68c"/>
+            <text x="640" y="160" fill="#3fd68c" font-size="11" text-anchor="middle">新的一圈</text>
+            <text x="640" y="176" fill="#3fd68c" font-size="11" text-anchor="middle">长出来了</text>
+
+            <rect x="748" y="52" width="302" height="230" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="768" y="76" fill="#46c6e0" font-size="11.5" font-weight="700">这一节的动作清单</text>
+            <text x="768" y="102" fill="#adbccd" font-size="11.5">① 读到让我受启发的资料（哪怕几十年前、</text>
+            <text x="768" y="120" fill="#adbccd" font-size="11.5">　 甚至别的领域）</text>
+            <text x="768" y="144" fill="#adbccd" font-size="11.5">② 先问：我的盲区在哪？哪些前置知识我不知道？</text>
+            <text x="768" y="168" fill="#adbccd" font-size="11.5">③ 把新 fact 补进心里的图</text>
+            <text x="768" y="192" fill="#adbccd" font-size="11.5">④ 用已有知识把更多东西推出来 → 圈往外长</text>
+            <text x="768" y="220" fill="#f0b429" font-size="11.5" font-weight="700">⑤ 三观尽毁那几次最关键</text>
+            <text x="768" y="240" fill="#77879a" font-size="10.5">旧的 fact 一个没变，但它们的连接方式全变了</text>
+            <text x="768" y="262" fill="#77879a" font-size="10.5">讲师举的例子：线粒体母系单遗传 → 追溯共同祖先</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜关系图</b>　同心圆是「知识边界」，每次受启发的阅读都会把外圈推出去一格。<b>讲师的原话是这个 verifier 非常不 trivial</b>：「在一个混沌状态下面，经历了若干次三观尽毁」——这种判据写不进脚本，所以它只能靠你自己判断。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">本章结论｜三条</span>
+        <ul>
+          <li><strong>verifier 决定上限</strong>：能给明确判据的任务，放手让模型迭代；给不出判据的，人自己顶上。</li>
+          <li><strong>注意力是共享资源</strong>：指令越多越容易被稀释，所以关键约束值得重复，也所以「上下文污染」是真问题。</li>
+          <li><strong>先对齐再推理</strong>：无论审稿还是学习，先把人机放在同一平面上，再让它推一步。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

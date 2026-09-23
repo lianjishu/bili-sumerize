@@ -1,0 +1,217 @@
+<div class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>为 Agent 设计版本管理系统</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2153" target="_blank"><span class="dot"></span>35:53 – 63:48</a>
+      </div>
+    </div>
+    <p class="ch-abstract">第一章讲的是「现有工具为什么长这样」。这一章换成第一性原理：如果<strong>提交者不是人、而是每秒能提交一次的 Agent</strong>，版本管理系统该怎么重新设计？讲师的答案落在一个从操作系统和数据库课程里搬来的概念上——<strong>乐观并发控制 → 悲观锁</strong>。</p>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>现有 VCS 都假设用户是人</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2153" target="_blank"><span class="tri"></span>35:53</a>
+      <p>讲师先把话说透：<strong>Git 里的每一个设计，背后都站着一个「人类用户」的假设</strong>。把这个假设抽掉，很多设计就失去了理由。</p>
+      <div class="kv">
+        <div>假设①：你是单线程的</div><div>一个时刻你只能在一处工作，所以「工作区」是唯一的，切换分支要 checkout——本质是在单线程里切换上下文</div>
+        <div>假设②：提交是稀缺的</div><div>提交意味着「我做完了一段有意义的工作」，所以要写 message、要 review、要慎重</div>
+        <div>假设③：你需要被保护</div><div>暂存区、<code>--force</code> 警告、危险操作二次确认，都是在防止人类手滑</div>
+        <div>假设④：责任可以归属</div><div><code>git blame</code> 之所以有意义，是因为「人」要为代码负责，会被批评、会被追责</div>
+      </div>
+      <p>这四个假设在人类团队里都成立。但讲师指出，<strong>它们没有一条对 Agent 成立</strong>——而这就是重新设计的全部空间。</p>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>人的通信带宽只有「十分钟一次提交」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2300" target="_blank"><span class="tri"></span>38:20</a>
+      <p>最核心的一个洞察在这里。讲师说：人类协作的<strong>瓶颈从来不在算力，而在通信带宽</strong>。一个人完成一小步、想清楚、写成提交信息、和别人同步，这一圈下来大概要<strong>十分钟</strong>。所以 Git 的整个节奏是围绕「十分钟一次提交」这个带宽设计的。</p>
+      <figure>
+        <svg viewBox="0 0 1040 320" role="img" aria-label="人与 Agent 的提交频率对比">
+          <rect x="0" y="0" width="1040" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一段时间轴：人类提交（稀疏） vs Agent 提交（密集）</text>
+
+            <text x="40" y="76" fill="#46c6e0" font-size="12.5" font-weight="700">人类　　每 ~10 分钟一次提交</text>
+            <line x1="40" y1="104" x2="1000" y2="104" stroke="#233240" stroke-width="1"/>
+            <g fill="#46c6e0">
+              <circle cx="90" cy="104" r="6"/><circle cx="270" cy="104" r="6"/>
+              <circle cx="450" cy="104" r="6"/><circle cx="630" cy="104" r="6"/>
+              <circle cx="810" cy="104" r="6"/><circle cx="960" cy="104" r="6"/>
+            </g>
+            <text x="40" y="130" fill="#77879a" font-size="11">每次提交要：想清楚 → 写 message → 同步给同事 → 等别人跟上</text>
+            <text x="40" y="150" fill="#adbccd" font-size="11">带宽瓶颈在人，不在机器</text>
+
+            <line x1="40" y1="184" x2="1000" y2="184" stroke="#233240" stroke-width="1"/>
+
+            <text x="40" y="222" fill="#f0b429" font-size="12.5" font-weight="700">Agent　　每秒都能提交</text>
+            <line x1="40" y1="250" x2="1000" y2="250" stroke="#233240" stroke-width="1"/>
+            <g fill="#f0b429">
+              <circle cx="60" cy="250" r="3.2"/><circle cx="76" cy="250" r="3.2"/><circle cx="92" cy="250" r="3.2"/>
+              <circle cx="108" cy="250" r="3.2"/><circle cx="124" cy="250" r="3.2"/><circle cx="140" cy="250" r="3.2"/>
+              <circle cx="156" cy="250" r="3.2"/><circle cx="172" cy="250" r="3.2"/><circle cx="188" cy="250" r="3.2"/>
+              <circle cx="204" cy="250" r="3.2"/><circle cx="220" cy="250" r="3.2"/><circle cx="236" cy="250" r="3.2"/>
+              <circle cx="252" cy="250" r="3.2"/><circle cx="268" cy="250" r="3.2"/><circle cx="284" cy="250" r="3.2"/>
+              <circle cx="300" cy="250" r="3.2"/><circle cx="316" cy="250" r="3.2"/><circle cx="332" cy="250" r="3.2"/>
+              <circle cx="348" cy="250" r="3.2"/><circle cx="364" cy="250" r="3.2"/><circle cx="380" cy="250" r="3.2"/>
+              <circle cx="396" cy="250" r="3.2"/><circle cx="412" cy="250" r="3.2"/><circle cx="428" cy="250" r="3.2"/>
+              <circle cx="444" cy="250" r="3.2"/><circle cx="460" cy="250" r="3.2"/><circle cx="476" cy="250" r="3.2"/>
+              <circle cx="492" cy="250" r="3.2"/><circle cx="508" cy="250" r="3.2"/><circle cx="524" cy="250" r="3.2"/>
+              <circle cx="540" cy="250" r="3.2"/><circle cx="556" cy="250" r="3.2"/><circle cx="572" cy="250" r="3.2"/>
+              <circle cx="588" cy="250" r="3.2"/><circle cx="604" cy="250" r="3.2"/><circle cx="620" cy="250" r="3.2"/>
+              <circle cx="636" cy="250" r="3.2"/><circle cx="652" cy="250" r="3.2"/><circle cx="668" cy="250" r="3.2"/>
+              <circle cx="684" cy="250" r="3.2"/><circle cx="700" cy="250" r="3.2"/><circle cx="716" cy="250" r="3.2"/>
+              <circle cx="732" cy="250" r="3.2"/><circle cx="748" cy="250" r="3.2"/><circle cx="764" cy="250" r="3.2"/>
+              <circle cx="780" cy="250" r="3.2"/><circle cx="796" cy="250" r="3.2"/><circle cx="812" cy="250" r="3.2"/>
+            </g>
+            <text x="40" y="278" fill="#77879a" font-size="11">提交不再需要「想清楚、写信息、等同步」，它可以是纯粹的机器动作</text>
+            <text x="40" y="298" fill="#adbccd" font-size="11">瓶颈从人挪到了<tspan>并发冲突</tspan>——多个 Agent 同时改同一份文件怎么办</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜提交频率</b>　上图每个点是「一次提交」。人类那行稀疏到可以数清，Agent 那行已经糊成一条线。<b>这就是问题的实质</b>：当提交密度提高几个数量级，为「低频提交的人类」设计的合并策略（先各自工作、最后 merge）会立刻崩溃——冲突不再是偶发事件，而是常态。</figcaption>
+      </figure>
+      <p>讲师用操作系统的类比把这件事说清楚：<strong>多个 Agent 就像多个线程在并发访问共享内存</strong>。你在操作系统课上学的那些东西——临界区、互斥锁、读者写者问题——在这里全部重新出现，只是被换了一个宿主。</p>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>乐观并发控制是怎么来的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2600" target="_blank"><span class="tri"></span>43:20</a>
+      <p>讲师明确给 Git 的并发模型定了性：<strong>Git 是乐观并发控制（optimistic concurrency control）</strong>。它的假设是——冲突很少发生，所以先让大家放手干，等真要合并时再处理冲突；冲突了就让人类坐下来手动解决。</p>
+      <div class="blk q">
+        <span class="label">乐观并发的完整链条</span>
+        <ul>
+          <li><strong>假设冲突罕见</strong>：每个人都基于自己的副本工作，互不打扰</li>
+          <li><strong>不设锁</strong>：没人会阻止你修改任何文件</li>
+          <li><strong>冲突延迟到合并时暴露</strong>：<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> 标记就是冲突现场</li>
+          <li><strong>解决成本由人承担</strong>：冲突需要人判断语义，机器给不出正确答案</li>
+        </ul>
+      </div>
+      <p>这套模型在人类团队里非常合算：冲突少、解冲突的人有业务上下文。但讲师指出——<strong>这个前提正在被打破</strong>。当十个 Agent 同时在一个仓库里干活，它们会频繁改到同一个文件；而「坐下来手动解冲突」这件事，Agent 做得并不比人靠谱，尤其当冲突涉及跨文件的设计意图时。</p>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>数据库里的乐观锁与悲观锁</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2900" target="_blank"><span class="tri"></span>48:20</a>
+      <p>为了讲清「另一种选择」，讲师直接调用了数据库课的知识：事务并发控制里的<strong>乐观锁</strong>与<strong>悲观锁</strong>。</p>
+      <table>
+        <tr><th>维度</th><th>乐观锁（optimistic）</th><th>悲观锁（pessimistic）</th></tr>
+        <tr><td>核心假设</td><td>冲突很少发生</td><td>冲突很可能发生</td></tr>
+        <tr><td>做法</td><td>先干活，提交时校验版本号/时间戳</td><td>干活前先加锁，别人只能等</td></tr>
+        <tr><td>冲突代价</td><td>回滚重做（要能重放）</td><td>等待（要能等，且不会死锁）</td></tr>
+        <tr><td>适合场景</td><td>读多写少、冲突概率低</td><td>写多、冲突概率高、重做成本高</td></tr>
+        <tr><td>对应到 VCS</td><td class="warn">Git 的模型</td><td class="ok">讲师设想的 Agent 模型</td></tr>
+      </table>
+      <p>讲师特别强调<strong>为什么数据库课要教这两样</strong>：因为这两条路各自有适用面，你必须知道「当时的人为什么选乐观/悲观」，才能在场景变化时做出正确迁移。而当前的场景变化正是——<strong>提交者从低频人类变成了高频 Agent</strong>。</p>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>Agent 时代需要悲观锁</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3100" target="_blank"><span class="tri"></span>51:40</a>
+      <p>结论在这里给出：<strong>当提交者变成 Agent，乐观并发控制的代价会反超悲观锁</strong>。原因有三条：</p>
+      <div class="blk steps">
+        <span class="label">为什么会反转</span>
+        <ol>
+          <li><strong>冲突从偶发变常态</strong>：多 Agent 同仓库并发，改到同一文件的概率大幅上升</li>
+          <li><strong>「回滚重做」对 Agent 不便宜</strong>：Agent 的一次尝试可能消耗大量 token 与上下文，重做等于把成本乘以冲突次数</li>
+          <li><strong>Agent 不会「坐下来好好谈」</strong>：人类解冲突靠的是对业务的共同理解，Agent 缺少这层共享上下文，冲突解决质量不稳定</li>
+        </ol>
+      </div>
+      <div class="blk eye">
+        <span class="label">讲师的关键论断</span>
+        <p>「即使它慢一点，等一会儿总比重做一遍便宜。」——<strong>用等待换确定性</strong>，这是悲观锁的本质交易。在人手不足、Agent 却可以无限并行的时代，让部分 Agent 排队，反而比让它们全部冲上去然后大面积冲突更划算。</p>
+      </div>
+      <p>注意这不是「悲观锁一定更好」，而是<strong>前提变了，最优解跟着变</strong>。讲师特意点明：这套推理链（识别假设 → 发现假设失效 → 换模型）本身就是软件工程最核心的能力，而不是哪个具体工具的知识。</p>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>git worktree：一个目录还不够</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3350" target="_blank"><span class="tri"></span>55:50</a>
+      <p>顺着「多 Agent 并行」往下，讲师提到了一个很具体的工程点：<strong>git worktree</strong>。它允许同一个仓库挂出多个工作目录，每个目录检出不同的分支——这样多个 Agent 就能各自占据一个目录，互不干扰地工作。</p>
+      <figure>
+        <svg viewBox="0 0 1040 300" role="img" aria-label="git worktree 的结构">
+          <rect x="0" y="0" width="1040" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">一个 .git 对象库　·　多个工作目录同时挂载（每个 Agent 一个）</text>
+
+            <rect x="60" y="70" width="200" height="130" rx="10" fill="rgba(169,139,250,.14)" stroke="#a98bfa" stroke-width="1.4"/>
+            <text x="76" y="96" fill="#a98bfa" font-size="12.5" font-weight="700">主干仓库 .git</text>
+            <text x="76" y="120" fill="#adbccd" font-size="11">唯一一份对象库</text>
+            <text x="76" y="140" fill="#adbccd" font-size="11">objects / refs / HEAD</text>
+            <text x="76" y="166" fill="#77879a" font-size="10.5">所有 worktree 共享</text>
+            <text x="76" y="184" fill="#77879a" font-size="10.5">因此提交不重复存储</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="none">
+              <path d="M260 100 L360 76 M260 135 L360 150 M260 170 L360 226"/>
+            </g>
+
+            <g fill="rgba(70,198,224,.14)" stroke="#46c6e0" stroke-width="1.3">
+              <rect x="364" y="52" width="210" height="48" rx="8"/>
+              <rect x="364" y="126" width="210" height="48" rx="8"/>
+              <rect x="364" y="202" width="210" height="48" rx="8"/>
+            </g>
+            <g fill="#e9eff7" font-size="11">
+              <text x="380" y="73">worktree 1 · Agent A</text>
+              <text x="380" y="89" fill="#77879a" font-size="10">检出 feature/login</text>
+              <text x="380" y="147">worktree 2 · Agent B</text>
+              <text x="380" y="163" fill="#77879a" font-size="10">检出 feature/api</text>
+              <text x="380" y="223">worktree 3 · Agent C</text>
+              <text x="380" y="239" fill="#77879a" font-size="10">检出 feature/ui</text>
+            </g>
+
+            <g stroke="#46c6e0" stroke-width="1.4" fill="rgba(70,198,224,.10)">
+              <path d="M600 76 L700 76 M600 150 L700 150 M600 226 L700 226" />
+            </g>
+            <text x="712" y="80" fill="#adbccd" font-size="11">各自独立的文件视图</text>
+            <text x="712" y="154" fill="#adbccd" font-size="11">但共享同一份历史</text>
+            <text x="712" y="230" fill="#adbccd" font-size="11">不必来回 checkout 切换</text>
+
+            <rect x="700" y="256" width="320" height="30" rx="7" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.2"/>
+            <text x="716" y="276" fill="#f0b429" font-size="10.5">它解决「并行工作」，但没解决「并发冲突」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜worktree</b>　一个 <code>.git</code> 对象库，挂出多个工作目录。它让「多个 Agent 同时干活」在物理上成立，但注意最后那行提醒——<strong>worktree 只是把并行搬到了文件系统层面，冲突依然要在合并时处理</strong>。所以它是悲观锁方案的必要前提，不是替代品。</figcaption>
+      </figure>
+      <div class="blk pit">
+        <span class="label">一个容易踩的细节</span>
+        <p>在 worktree 模式下，<code>.git</code> 不再是目录，而是一个<strong>文件</strong>，里面写着 <code>gitdir: /path/to/main/.git/worktrees/xxx</code>。如果你写脚本时习惯性判断「<code>.git</code> 是不是目录」，就会在多 worktree 环境下判断错误。判断仓库是否存在，应该用 <code>git rev-parse --git-dir</code>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>Agent 的 blame 和 git bisect 都会失效</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3520" target="_blank"><span class="tri"></span>58:40</a>
+      <p>讲师接着点名了两类「人类专用」的能力，在 Agent 时代会失去意义：</p>
+      <div class="kv">
+        <div>git blame</div><div>逐行追问「这行是谁写的」。它的价值来自<strong>人的可追责性</strong>——人会被批评、会被扣分、会被开除。Agent 不会被解雇，也不会「因为怕被 blame 而写得更好」，所以 blame 的激励意义消失</div>
+        <div>git bisect</div><div>二分查找引入 bug 的提交。它依赖「提交粒度稳定、每个提交都能跑」。但 Agent 每秒提交一次时，一次逻辑变更会被切成几十个提交，<strong>「哪一个提交引入了 bug」这个问题的粒度就不成立了</strong></div>
+        <div>共同点</div><div>它们都建立在「提交是有意义的、可读的、数量不多的」之上；当提交密度爆炸，这个前提塌了</div>
+      </div>
+      <p>这里讲师补了一句很值得回味的话：<strong>这些工具不是「没用」，而是「衡量的对象变了」</strong>。在 Agent 团队里，你关心的不再是「谁写的」，而是「这段逻辑是哪次任务推进带来的、当时的目标是什么」——这又回到了第 1 章那个词：<strong>可追溯性</strong>，只是追溯的锚点从「人」换成了「任务意图」。</p>
+      <div class="blk q">
+        <span class="label">如果 blame 不需要了，那要什么</span>
+        <ul>
+          <li>要的是<strong>「这次变更隶属哪个任务」</strong>，而不是「这行代码隶属哪个人」</li>
+          <li>要的是<strong>变更的意图记录</strong>（为什么要做这件事），而不是变更的作者</li>
+          <li>要的是<strong>可以被机器消费的结构化历史</strong>——因为下一个读这段历史的，很可能也是 Agent</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>版本控制是工具，团队管理才是难题</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3828" target="_blank"><span class="tri"></span>63:48</a>
+      <p>第二章的收尾，也是全讲的第一个转折点。讲师把话拉回到「软件工程为什么还存在」：<strong>版本控制终究只是工具，真正难的是团队管理与任务分解</strong>。</p>
+      <div class="blk concl">
+        <span class="label">本章结论</span>
+        <ul>
+          <li><strong>Git 的模型 = 乐观并发控制</strong>，它的每个假设都指向「低频提交的人类」</li>
+          <li><strong>Agent 把提交频率提高几个数量级</strong>，乐观策略的冲突代价随之反超，悲观锁重新变得合理</li>
+          <li><strong>worktree 解决并行，不解决冲突</strong>；blame 与 bisect 的价值基础被动摇</li>
+          <li><strong>但工具层面的重新设计并不能拯救软件工程</strong>——真正的瓶颈是「怎么把一个大目标拆成可以并行的子任务」。这件事，沟通关系是平方级增长的，目前 AI 还不会做</li>
+        </ul>
+      </div>
+      <p>讲师在这里给了一个很实在的建议：<strong>现在就把自己当成主 agent</strong>，去练习「怎么把任务分解给 2 个、3 个 slave」。他说自己前面给了个不好的示范（随手创建两个 slave 就开干），真正成熟的做法是——<strong>在写下第一行代码之前，先想清楚协作怎么做、项目怎么管、每天什么时候同步</strong>。这句铺垫，直接接到了第 3 章的现场演示。</p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,457 @@
+<section class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>Git 入门与一些最佳实践</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1480"><span class="dot"></span>24:40 开始播放</a>
+        <p class="ch-abstract">本章是全片最长的一段，也是信息密度最高的。它从一个面试问题切入，一路推演出 Git 的设计动机，<strong>最后落在「水面下的冰山」——那些用血和泪换来的 best practice</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>什么是 Git：从推免面试的一个问题说起</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1480"><span class="tri"></span>24:40</a>
+      <p>老师刚参加完推免面试，把这个过程搬到了课堂上。他先问「什么是 Git」——大多数同学能答出「下载分发代码」「管理项目快照」，这在他意料之中。</p>
+      <p>真正让他意外的是下一个问题：<strong>git merge 发生冲突以后，你会观察到什么？</strong>几乎没有人答得好。</p>
+      <figure>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="两个面试问题与回答情况">
+          <rect x="0" y="0" width="1000" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一个面试，两个层次的问题</text>
+
+            <rect x="40" y="58" width="440" height="106" rx="10" fill="rgba(169,139,250,.08)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#a98bfa" font-size="13" font-weight="700">Q1「什么是 Git」</text>
+            <text x="62" y="112" fill="#adbccd" font-size="12">「从 Git 下载、分发代码」</text>
+            <text x="62" y="134" fill="#adbccd" font-size="12">「管理目录 / 项目的快照」</text>
+            <text x="62" y="156" fill="#3fd68c" font-size="11.5">→ 意料之内，能说两句就算过关</text>
+
+            <rect x="520" y="58" width="440" height="106" rx="10" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="542" y="86" fill="#f8736e" font-size="13" font-weight="700">Q2「merge 冲突后看到什么」</text>
+            <text x="542" y="112" fill="#adbccd" font-size="12">预期答案：两边冲突的代码同时出现</text>
+            <text x="542" y="134" fill="#adbccd" font-size="12">还带 &lt;&lt;&lt;&lt;&lt;&lt; ======= &gt;&gt;&gt;&gt;&gt;&gt; 标记</text>
+            <text x="542" y="156" fill="#f8736e" font-size="11.5">→ 比较意外：大家都答得不好</text>
+
+            <rect x="40" y="186" width="920" height="86" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="62" y="214" fill="#77879a" font-size="12.5">老师对「答得不好」的两个归因：</text>
+            <text x="62" y="238" fill="#adbccd" font-size="12.5">① 没用过 —— 没有真正开发过、没在真实项目里撞过冲突（就算只用 agent 开发，多分支也很容易撞）</text>
+            <text x="62" y="260" fill="#adbccd" font-size="12.5">② 没留意 —— 用过，但那一秒钟跳过去了，于是什么都没留下（回到「惊人的注意力」）</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜问题的层次</b>　这两个问题的差别，正好是「会用」和「懂」的差别。<b>Q2 不需要任何额外知识，只需要你曾经停下来看过一眼</b>——它测的不是记忆力，是注意力。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>merge 冲突现场长什么样</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1560"><span class="tri"></span>26:00</a>
+      <p>老师现场拆解了冲突现场。假设一个文件原来是 <code>1 1 1 1</code>，A 把第二行改成 <code>2</code>，B 把第二行改成 <code>3</code>。这时候 Git 不能替你决定——它<strong>把两边的版本都摆出来，把责任交回给人</strong>。</p>
+      <div class="blk q">
+        <span class="label">冲突标记的三段结构</span>
+        <ul>
+          <li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 之后是<strong>当前分支</strong>的内容</li>
+          <li><code>=======</code> 是分隔线</li>
+          <li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; incoming</code> 之后是<strong>要合进来的分支</strong>的内容</li>
+          <li>IDE 会在上方多出按钮：<code>accept incoming change</code>，让你自己决定谁进谁出，再重新 commit 完成 resolve</li>
+        </ul>
+      </div>
+      <figure>
+        <svg viewBox="0 0 1000 340" role="img" aria-label="merge 冲突现场的文本结构">
+          <rect x="0" y="0" width="1000" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">一个文件、两个人的不同改法，与 Git 给出的「现场」</text>
+
+            <rect x="40" y="56" width="240" height="96" rx="8" fill="#141d28" stroke="#233240"/>
+            <text x="60" y="82" fill="#77879a" font-size="11.5">base（共同祖先）</text>
+            <text x="60" y="110" fill="#adbccd" font-size="13" font-family="Consolas, monospace">1</text>
+            <text x="60" y="130" fill="#adbccd" font-size="13" font-family="Consolas, monospace">1</text>
+            <text x="60" y="150" fill="#77879a" font-size="11.5">…</text>
+
+            <rect x="320" y="56" width="240" height="96" rx="8" fill="rgba(70,198,224,.08)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="340" y="82" fill="#46c6e0" font-size="11.5">A 的修改</text>
+            <text x="340" y="110" fill="#adbccd" font-size="13" font-family="Consolas, monospace">1</text>
+            <text x="340" y="130" fill="#46c6e0" font-size="13" font-weight="700" font-family="Consolas, monospace">2</text>
+            <text x="340" y="150" fill="#77879a" font-size="11.5">…</text>
+
+            <rect x="600" y="56" width="240" height="96" rx="8" fill="rgba(169,139,250,.08)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="620" y="82" fill="#a98bfa" font-size="11.5">B 的修改</text>
+            <text x="620" y="110" fill="#adbccd" font-size="13" font-family="Consolas, monospace">1</text>
+            <text x="620" y="130" fill="#a98bfa" font-size="13" font-weight="700" font-family="Consolas, monospace">3</text>
+            <text x="620" y="150" fill="#77879a" font-size="11.5">…</text>
+
+            <text x="24" y="192" fill="#77879a" font-size="12.5">merge 之后，文件里看到的东西（简化示意）：</text>
+
+            <rect x="40" y="206" width="920" height="112" rx="9" fill="#141d28" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="62" y="234" fill="#f8736e" font-size="12.5" font-family="Consolas, monospace">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</text>
+            <text x="62" y="256" fill="#46c6e0" font-size="12.5" font-family="Consolas, monospace">2</text>
+            <text x="62" y="278" fill="#77879a" font-size="12.5" font-family="Consolas, monospace">=======</text>
+            <text x="62" y="300" fill="#a98bfa" font-size="12.5" font-family="Consolas, monospace">3</text>
+            <text x="360" y="234" fill="#adbccd" font-size="11.5">← 你当前的版本</text>
+            <text x="360" y="278" fill="#adbccd" font-size="11.5">← 分隔线</text>
+            <text x="360" y="300" fill="#adbccd" font-size="11.5">← 对方的版本，两边源码<tspan>同时可见</tspan></text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜冲突现场</b>　老师特意点出：<b>这个设计和「地铁标识」是同一个 first principle</b>——当你必须做决定的时候，把所有需要的信息放在你面前，不让你到处找。Git 选择「不做猜测，只呈现」，把判断权完整交回给人。</figcaption>
+      </figure>
+      <div class="blk eye">
+        <span class="label">老师的亲身经历</span>
+        <p>「我现在也是这样——merge 出错了，让 agent 帮我修，最后它说测试都通过，我看一眼觉得 OK。但如果<strong>你愿意在冲突的时候停下来</strong>，尤其是学生时代，你会发现一个完全不同的世界。」</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>Git 是怎么被发明出来的</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1870"><span class="tri"></span>31:10</a>
+      <p>这一节是全片方法论最集中的地方。老师不是直接讲 Git 的历史，而是<strong>从需求一步步推到设计</strong>，让同学看到 Git 是可以被「想出来」的。</p>
+      <div class="blk steps">
+        <span class="label">从需求推导 Git · 老师的推演链</span>
+        <ol>
+          <li>起点：U 盘里放目录、每次打一个包 →「作业 V1、作业 V2、作业最终版」</li>
+          <li>发现需求：<strong>我想要回到上一个版本，看看我那时候怎么写的</strong>（可能是误操作，也可能是想看旧实现）</li>
+          <li>提炼需求：把「目录」的版本管理起来，不再靠复制多个目录</li>
+          <li>设计最小工具：一个命令能 <strong>list 所有版本</strong>、另一个命令能 <strong>切回某个版本</strong>——你已经发明了一个简化版 Git</li>
+          <li>需求继续生长：和室友一起改同一个文件怎么办？→ 你自然会推出分支、合并、冲突</li>
+        </ol>
+      </div>
+      <p>老师强调这条推演链的意义：<strong>每一步都和前面有逻辑关联，而这些关联里「多多少少都有一些数学在」</strong>。他甚至把这一点和 OpenAI 说「要先把数学训好」联系起来——因为推理能力是一切问题的底层。</p>
+      <div class="blk pit">
+        <span class="label">为什么人类先发明了 SVN 而不是 Git</span>
+        <p>「这体现了人类的局限性」——在没有 Git 之前，大家先用的是 SVN（check in / check out）。这说明<strong>最优解不是必然被最先找到的</strong>，路径依赖真实存在。这一段为下一节的对比做了铺垫。</p>
+      </div>
+      <figure>
+        <svg viewBox="0 0 1000 250" role="img" aria-label="Git 的真实时间线">
+          <rect x="0" y="0" width="1000" height="250" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">Linux 内核是怎么走到 Git 的</text>
+
+            <line x1="60" y1="130" x2="940" y2="130" stroke="#31465c" stroke-width="1.5"/>
+            <g stroke="#31465c" stroke-width="1.5">
+              <circle cx="120" cy="130" r="5" fill="#46c6e0"/>
+              <circle cx="380" cy="130" r="5" fill="#a98bfa"/>
+              <circle cx="600" cy="130" r="5" fill="#f0b429"/>
+              <circle cx="880" cy="130" r="5" fill="#3fd68c"/>
+            </g>
+
+            <text x="120" y="106" fill="#46c6e0" font-size="12" font-weight="700" text-anchor="middle">1991–2002</text>
+            <text x="120" y="160" fill="#adbccd" font-size="11.5" text-anchor="middle">「作业 V1 / V2」式</text>
+            <text x="120" y="180" fill="#77879a" font-size="11" text-anchor="middle">发补丁到邮件列表</text>
+
+            <text x="380" y="106" fill="#a98bfa" font-size="12" font-weight="700" text-anchor="middle">之后</text>
+            <text x="380" y="160" fill="#adbccd" font-size="11.5" text-anchor="middle">BitKeeper</text>
+            <text x="380" y="180" fill="#77879a" font-size="11" text-anchor="middle">一个商业工具</text>
+
+            <text x="600" y="106" fill="#f0b429" font-size="12" font-weight="700" text-anchor="middle">2005</text>
+            <text x="600" y="160" fill="#adbccd" font-size="11.5" text-anchor="middle">Linus 做 Git</text>
+            <text x="600" y="180" fill="#77879a" font-size="11" text-anchor="middle">简单 · 好用 · 概念正确</text>
+
+            <text x="880" y="106" fill="#3fd68c" font-size="12" font-weight="700" text-anchor="middle">今天</text>
+            <text x="880" y="160" fill="#adbccd" font-size="11.5" text-anchor="middle">AI 时代的底层设施</text>
+            <text x="880" y="180" fill="#77879a" font-size="11" text-anchor="middle">npm / 各种配置都在上面</text>
+
+            <rect x="60" y="202" width="880" height="34" rx="8" fill="#141d28" stroke="#233240"/>
+            <text x="80" y="224" fill="#adbccd" font-size="11.5">Git 比我们想象的年轻：2005 年，Linus 对既有工具彻底失去耐心，决定自己写一个。<tspan>推荐读物：Pro Git</tspan>（老师补了一句：直接让 agent 读就行）</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜时间线</b>　老师顺带点出一个当代事实：GitHub 创立时想的是「方便分发代码」，<b>但没人预料到它会成为 AI 时代的底层技术设施</b>——npm 依赖、模型配置、各种 agent 配置全都在上面。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>SVN 存 delta，Git 存快照</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1912"><span class="tri"></span>31:52</a>
+      <p>这是全章技术含量最高的一段对比。老师说 SVN 存的是<strong>项目的变化</strong>（每次改一行就存一个 patch），Git 存的是<strong>快照</strong>。前者看起来更省空间，但会随着项目增长把大家拖进泥潭。</p>
+      <figure>
+        <svg viewBox="0 0 1000 330" role="img" aria-label="SVN delta 与 Git snapshot 的对比">
+          <rect x="0" y="0" width="1000" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一个需求「回到早期版本」，两种存储模型的代价完全不同</text>
+
+            <rect x="40" y="56" width="440" height="248" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#f8736e" font-size="13.5" font-weight="700">SVN：存 delta（变化量）</text>
+            <text x="62" y="112" fill="#adbccd" font-size="12">V1 → 一个初始版本，之后每次改动存一个 patch</text>
+
+            <g font-family="Consolas, monospace" font-size="11.5">
+              <rect x="62" y="130" width="60" height="30" rx="5" fill="#141d28" stroke="#233240"/><text x="78" y="150" fill="#adbccd">V1</text>
+              <rect x="130" y="130" width="52" height="30" rx="5" fill="rgba(248,115,110,.14)" stroke="#f8736e"/><text x="140" y="150" fill="#f8736e">+Δ1</text>
+              <rect x="190" y="130" width="52" height="30" rx="5" fill="rgba(248,115,110,.14)" stroke="#f8736e"/><text x="200" y="150" fill="#f8736e">+Δ2</text>
+              <rect x="250" y="130" width="52" height="30" rx="5" fill="rgba(248,115,110,.14)" stroke="#f8736e"/><text x="260" y="150" fill="#f8736e">+Δ3</text>
+              <rect x="310" y="130" width="52" height="30" rx="5" fill="rgba(248,115,110,.14)" stroke="#f8736e"/><text x="320" y="150" fill="#f8736e">+Δ4</text>
+              <text x="374" y="150" fill="#77879a">…</text>
+            </g>
+
+            <text x="62" y="192" fill="#77879a" font-size="11.5">要回到 V1，需要：</text>
+            <text x="62" y="214" fill="#adbccd" font-size="12">从当前版本<tspan>逐个往回退</tspan>，依次撤销 Δ4、Δ3、Δ2、Δ1</text>
+            <text x="62" y="236" fill="#77879a" font-size="11.5">越早的版本，回退代价越大——项目越大越痛</text>
+            <text x="62" y="266" fill="#f8736e" font-size="12">✗ 高效，但把大家拖进了泥潭</text>
+            <text x="62" y="288" fill="#77879a" font-size="11">（可以用缓存等方法优化，但方向本身有问题）</text>
+
+            <rect x="520" y="56" width="440" height="248" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="542" y="86" fill="#3fd68c" font-size="13.5" font-weight="700">Git：存 snapshot（快照）</text>
+            <text x="542" y="112" fill="#adbccd" font-size="12">每次提交，存下「那一刻整个项目的状态」</text>
+
+            <g font-family="Consolas, monospace" font-size="11.5">
+              <rect x="542" y="130" width="72" height="30" rx="5" fill="rgba(63,214,140,.14)" stroke="#3fd68c"/><text x="552" y="150" fill="#3fd68c">快照 1</text>
+              <rect x="622" y="130" width="72" height="30" rx="5" fill="rgba(63,214,140,.14)" stroke="#3fd68c"/><text x="632" y="150" fill="#3fd68c">快照 2</text>
+              <rect x="702" y="130" width="72" height="30" rx="5" fill="rgba(63,214,140,.14)" stroke="#3fd68c"/><text x="712" y="150" fill="#3fd68c">快照 3</text>
+              <rect x="782" y="130" width="72" height="30" rx="5" fill="rgba(63,214,140,.14)" stroke="#3fd68c"/><text x="792" y="150" fill="#3fd68c">快照 4</text>
+              <text x="866" y="150" fill="#77879a">…</text>
+            </g>
+            <g stroke="#3fd68c" stroke-width="1.3">
+              <line x1="560" y1="176" x2="812" y2="176"/>
+            </g>
+            <text x="686" y="196" fill="#3fd68c" font-size="11.5" text-anchor="middle">任何一个快照都可以直接跳过去</text>
+
+            <text x="542" y="224" fill="#adbccd" font-size="12">要回到快照 1：<tspan>一秒钟，直接切过去</tspan></text>
+            <text x="542" y="254" fill="#3fd68c" font-size="12">✓ 模型干净，符合 first principle</text>
+            <text x="542" y="276" fill="#77879a" font-size="11">空间代价由「共享未变文件」来消化（见第 3 章）</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两种存储模型</b>　这不是「谁更省空间」的问题，而是<b>谁的模型更贴近需求</b>。需求是「想要就立刻回去」，那么直接存快照就是最直白的实现——这也解释了为什么老师一直强调「first principle」。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>第一次 git init</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=2088"><span class="tri"></span>34:48</a>
+      <p>开始动手。老师建了一个空的 terminal，演示最基础的两个动作：<code>git init</code> 和 <code>git add</code>。</p>
+      <div class="blk q">
+        <span class="label">两个必须知道的「隐性知识」</span>
+        <ul>
+          <li><code>git init</code> 之后会打印一些<strong>看起来很奇怪的信息</strong>。这时有两种选择：让 agent 解释给你听，或者忽略它——而前者是更高效的学习方式</li>
+          <li>目录里多出一个 <code>.git</code>，但它<strong>默认是隐藏的，所以你看不到它</strong></li>
+          <li>做完这一步，你的项目就变成了一个「被 Git 版本管理的仓库」</li>
+        </ul>
+      </div>
+      <div class="kv">
+        <div>git add</div><div>把一个文件的变化放进暂存区（staging area），准备提交</div>
+        <div>git status</div><div>看当前工作区里有哪些变化、哪些已暂存</div>
+        <div>git commit</div><div>创建一个<strong>带有消息的快照</strong>，可以在任意时间点之间穿梭</div>
+      </div>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>commit message 为什么重要</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=2200"><span class="tri"></span>36:40</a>
+      <p>老师在这里说了一句很重的话：「<strong>这体现了软件工程的智慧</strong>」。他用「作业 V1 / V2 / V3」和 commit message 做对比。</p>
+      <div class="blk pit">
+        <span class="label">反面示范：I did some cool stuff</span>
+        <p>老师故意做了一个 <code>I did some cool stuff</code> 的提交，然后问 AI 这符不符合 best practice。AI 直接指出：<strong>提交信息毫无信息量，是最重要的问题</strong>；用祈使句、现在时，描述变更动机（例如 <code>fix off-by-one in strlen check</code>）；还建议考虑 <code>conventional commits</code> 前缀。</p>
+      </div>
+      <figure>
+        <svg viewBox="0 0 1000 320" role="img" aria-label="commit message 的意义">
+          <rect x="0" y="0" width="1000" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">一万次提交之后，两种 message 会变成什么</text>
+
+            <rect x="40" y="56" width="440" height="238" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#f8736e" font-size="13" font-weight="700">① 全部都写「I did some cool stuff」</text>
+            <g font-family="Consolas, monospace" font-size="11.5" fill="#77879a">
+              <text x="62" y="114">a1b2c3  I did some cool stuff</text>
+              <text x="62" y="134">d4e5f6  I did some cool stuff</text>
+              <text x="62" y="154">g7h8i9  I did some cool stuff</text>
+              <text x="62" y="174">…  × 10000</text>
+            </g>
+            <text x="62" y="206" fill="#adbccd" font-size="12">老师原话：这个 committed message 就变成 <tspan>slop</tspan> 了</text>
+            <text x="62" y="228" fill="#f8736e" font-size="12">「如果一万个提交都是这样，那这个特性就不该存在」</text>
+            <text x="62" y="252" fill="#77879a" font-size="11.5">→ 那还不如从 V1 到 V2 呢</text>
+            <text x="62" y="276" fill="#77879a" font-size="11.5">→ 无法审计、无法 bisect、无法 blame</text>
+
+            <rect x="520" y="56" width="440" height="238" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="542" y="86" fill="#3fd68c" font-size="13" font-weight="700">② 每次说清楚「改了什么」</text>
+            <g font-family="Consolas, monospace" font-size="11.5" fill="#adbccd">
+              <text x="542" y="114">a1b2c3  fix off-by-one in strlen</text>
+              <text x="542" y="134">d4e5f6  feat: 增加导出 CSV 接口</text>
+              <text x="542" y="154">g7h8i9  refactor: 抽出解析层</text>
+              <text x="542" y="174">…</text>
+            </g>
+            <text x="542" y="206" fill="#3fd68c" font-size="12">→ 能看到项目的历史轨迹</text>
+            <text x="542" y="228" fill="#adbccd" font-size="12">→ 修了多少 bug、加了什么需求、经历过什么重构</text>
+            <text x="542" y="252" fill="#3fd68c" font-size="12">→ 让别人（和 agent）更容易理解你的项目</text>
+            <text x="542" y="276" fill="#77879a" font-size="11.5">→ 这也是一个好的软件工程 practice</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两种历史</b>　老师把这个话题和「教育体系」联系起来：<b>commit message 的本质是「动机的可追溯」</b>。如果动机不写下来，未来的自己（或 agent）就只能靠猜。</figcaption>
+      </figure>
+      <div class="blk eye">
+        <span class="label">一个很实用的动作</span>
+        <p>「你真正需要的是：<strong>在任何时候学习</strong>。碰到新东西的时候追问一句——我刚才做的，符合 best practice 吗？」老师说这一问只要一秒钟（加上豆包语音输入），但会得到很多解释。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>空提交：一个可以但不应做的事</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=2400"><span class="tri"></span>40:00</a>
+      <p>老师抛出一个反直觉的问题：<strong>能不能在不改任何代码的情况下，再做一个提交？</strong>你自己敲 <code>git commit</code> 会被拒绝（没有修改），但他让 agent 做，agent 知道怎么做。</p>
+      <div class="kv">
+        <div>场景</div><div>一个 bug fix 完成后，想为发布打一个「冻结点」</div>
+        <div>常规做法</div><div>在最后一次提交上打 tag（如 v0.1）</div>
+        <div>空提交的做法</div><div>强行做一次无改动提交，message 写「finalize for v0.1，冻结所有东西」</div>
+        <div>好处</div><div>把「bug fix 的提交」和「finalize 的提交」分开，历史更清晰</div>
+        <div>另一用途</div><div>无改动时触发 CI 或流水线</div>
+        <div>约束</div><div><strong>偶尔可以，绝不能大量创建</strong>——所以它不是 best practice</div>
+      </div>
+      <div class="blk q">
+        <span class="label">这里真正的教学点</span>
+        <p>老师问的不是「能不能」，而是「<strong>你为什么想这么做</strong>」。能说清动机的空提交是工程判断；说不出动机的空提交是噪声。这和 commit message 那一节是同一个主题。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>把 agent 当最好的软件工程老师</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=2640"><span class="tri"></span>44:00</a>
+      <p>老师让同学做了一件很违反直觉的事：<strong>故意做一次「不那么规范」的提交，然后让 AI 按严重程度排序指出问题</strong>。结果 AI 的表现相当好——它还会告诉你应该怎么做。</p>
+      <figure>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="AI 给出的提交问题清单">
+          <rect x="0" y="0" width="1000" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">AI 按「严重程度排序」给出的审查结论</text>
+
+            <rect x="40" y="56" width="920" height="66" rx="9" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="62" y="82" fill="#f8736e" font-size="13" font-weight="700">① 提交信息毫无信息量</text>
+            <text x="62" y="106" fill="#adbccd" font-size="12">「主观废话」—— 老师的原话，AI 指出这<tspan>是最重要的问题</tspan></text>
+
+            <rect x="40" y="132" width="920" height="66" rx="9" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="62" y="158" fill="#f0b429" font-size="13" font-weight="700">② 提交粒度和内容混杂</text>
+            <text x="62" y="182" fill="#adbccd" font-size="12">一次提交里混了多件不相关的事，无法单独 review / revert</text>
+
+            <rect x="40" y="208" width="920" height="66" rx="9" fill="rgba(91,156,248,.07)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="62" y="234" fill="#5b9cf8" font-size="13" font-weight="700">③ hello（编译产物）根本不应该进版本库</text>
+            <text x="62" y="258" fill="#adbccd" font-size="12">应该加进 <tspan>.gitignore</tspan>，由构建系统产出 —— 这就引出了下一节</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜三档问题</b>　注意 AI 的排序方式：<b>它先排「信息量」，再排「粒度」，最后才排「具体文件」</b>。这个排序本身就是一种工程判断力，值得学。</figcaption>
+      </figure>
+      <div class="blk eye">
+        <span class="label">老师的一段自陈</span>
+        <blockquote>
+          <p>「我可能这个知识是知道的、内化在脑子里面，但你给我两个小时去想，我也能写一个非常好的『为什么要做这件事』。但是<strong>我的智力是有限的、精力是有限的、注意力也是有限的</strong>。我在上课的时候，大脑里做思考的那部分容量就不够了，所以我讲的是 sub-optimal 的，不是最好的。」</p>
+          <cite>——讲师解释为什么建议同学课后继续追问 AI</cite>
+        </blockquote>
+      </div>
+    </div>
+
+    <div class="sub" id="s29">
+      <h3><span class="idx">2.9</span>.gitignore 与「不该进版本库的东西」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=2820"><span class="tri"></span>47:00</a>
+      <p>老师演示了 <code>git add .</code> 的危险：它会把所有未跟踪的文件都加进来，包括那些<strong>本不该进版本库</strong>的东西。</p>
+      <figure>
+        <svg viewBox="0 0 1000 340" role="img" aria-label="不该进版本库的三类文件">
+          <rect x="0" y="0" width="1000" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">为什么二进制 / 生成物不能进版本库 —— 一个真实的冲突推演</text>
+
+            <rect x="40" y="56" width="290" height="150" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="62" y="84" fill="#adbccd" font-size="13" font-weight="700">你的机器编译出</text>
+            <text x="62" y="112" fill="#77879a" font-size="12" font-family="Consolas, monospace">hello （二进制）</text>
+            <text x="62" y="136" fill="#77879a" font-size="11.5">带日期、带 hash、</text>
+            <text x="62" y="156" fill="#77879a" font-size="11.5">带你本机的指纹</text>
+            <text x="62" y="186" fill="#adbccd" font-size="11.5">每个环境 build 出来的</text>
+            <text x="62" y="202" fill="#adbccd" font-size="11.5">二进制都不一样</text>
+
+            <rect x="355" y="56" width="290" height="150" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="377" y="84" fill="#adbccd" font-size="13" font-weight="700">同事的机器编译出</text>
+            <text x="377" y="112" fill="#77879a" font-size="12" font-family="Consolas, monospace">hello （二进制）</text>
+            <text x="377" y="136" fill="#77879a" font-size="11.5">同样的源码</text>
+            <text x="377" y="156" fill="#77879a" font-size="11.5">也可能不一样</text>
+            <text x="377" y="186" fill="#adbccd" font-size="11.5">更别说源码本来就</text>
+            <text x="377" y="202" fill="#adbccd" font-size="11.5">不一样了</text>
+
+            <rect x="670" y="56" width="290" height="150" rx="10" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="692" y="84" fill="#f8736e" font-size="13" font-weight="700">一合并 → 二进制冲突</text>
+            <text x="692" y="112" fill="#adbccd" font-size="11.5">而二进制冲突</text>
+            <text x="692" y="132" fill="#adbccd" font-size="11.5">是<tspan>很难合并的</tspan></text>
+            <text x="692" y="164" fill="#77879a" font-size="11.5">文本冲突你能看懂、</text>
+            <text x="692" y="184" fill="#77879a" font-size="11.5">能选择；二进制不能</text>
+            <text x="692" y="204" fill="#f8736e" font-size="11.5">✗ 版本库膨胀 + 冲突</text>
+
+            <rect x="40" y="226" width="920" height="90" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="62" y="252" fill="#77879a" font-size="12.5">老师的提醒：这里<tspan>没有绝对规则</tspan></text>
+            <text x="62" y="276" fill="#adbccd" font-size="12">· 编译产物（exe / hello）→ 不进，加 .gitignore，由构建系统产出</text>
+            <text x="62" y="298" fill="#adbccd" font-size="12">· 但 <tspan>package-lock.json</tspan>、某些生成的 header → 可以进，方便别人不复现工具链也能编译</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜二进制冲突</b>　老师的论证方式很典型：<b>不是背规则，而是推到「合并那一刻会发生什么」</b>。理解了「二进制冲突没法 merge」，就再也不需要别人告诉你加不加 .gitignore。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s210">
+      <h3><span class="idx">2.10</span>导师的高血压时刻</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=3360"><span class="tri"></span>56:00</a>
+      <p>老师很生动地讲了带新博士生的经历：打开新同学的 Git 项目，往往会进入一个「高血压环节」。这一节有点像「新人常见错误清单」，但老师的意图是——<strong>这些正是过往同学用真实的代价换来的经验</strong>。</p>
+      <div class="blk pit">
+        <span class="label">打开项目就能看到的几类问题</span>
+        <ul>
+          <li><code>dist</code>、<code>log</code> 被提交上来——都是生成物，不该交</li>
+          <li>个人配置、IDE 设置被提交——甚至带着 <code>C:\...</code> 这样的硬编码路径，换个环境根本无法复现</li>
+          <li>更高血压的：<strong>处于 active 状态的 API key</strong> 被提交。老师说「当我发现这个 API key 是 DeepSeek 的时候，我就知道这应该是一个中国兄弟」</li>
+          <li>没有 Mac 的同学不经意间把 <code>.DS_Store</code> 交上来——Finder 打开目录就会生成，而它是以点开头的隐藏文件，所以「你是看不到的」</li>
+        </ul>
+      </div>
+      <figure>
+        <svg viewBox="0 0 1000 260" role="img" aria-label="git add . 与隐藏文件的陷阱">
+          <rect x="0" y="0" width="1000" height="260" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">为什么 <tspan font-family="Consolas, monospace">git add .</tspan> 会翻车</text>
+
+            <rect x="40" y="56" width="440" height="180" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#3fd68c" font-size="13" font-weight="700">合理的地方</text>
+            <text x="62" y="114" fill="#adbccd" font-size="12">带点的通常是约定俗成的东西：</text>
+            <text x="62" y="140" fill="#adbccd" font-size="12">· <tspan>.github/workflows</tspan> —— CI 配置</text>
+            <text x="62" y="164" fill="#adbccd" font-size="12">· <tspan>.gitignore</tspan> —— 忽略规则</text>
+            <text x="62" y="188" fill="#adbccd" font-size="12">· 各种点配置文件</text>
+            <text x="62" y="216" fill="#77879a" font-size="11.5">所以 Git 默认会把带点的都放进来</text>
+
+            <rect x="520" y="56" width="440" height="180" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="542" y="86" fill="#f8736e" font-size="13" font-weight="700">糟糕的地方</text>
+            <text x="542" y="114" fill="#adbccd" font-size="12">· <tspan>.DS_Store</tspan> —— 隐藏索引文件</text>
+            <text x="542" y="138" fill="#adbccd" font-size="12">· 个人 shell 历史、编辑器缓存</text>
+            <text x="542" y="162" fill="#adbccd" font-size="12">· 本地调试用的临时文件</text>
+            <text x="542" y="190" fill="#f8736e" font-size="12">→ 因为你看不到它，就很容易误提交</text>
+            <text x="542" y="216" fill="#77879a" font-size="11.5">→ 它经常变化，不该进版本库</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜隐藏文件的陷阱</b>　老师讲这一段时语气很轻松，但落点是严肃的：<b>「简单规则」和「绝对规则」的差别</b>。带点的文件「一般」该进，但不是「总是」该进——这种分寸感只能靠理解原理获得。</figcaption>
+      </figure>
+      <div class="blk concl">
+        <span class="label">一个耐人寻味的收束</span>
+        <p>老师说他做软件工程研究，其中一个很标准的课题就是<strong>「研究你的 Git 项目满不满足这些实践」</strong>，不满足就给你一个提示，最后做成一个小工具、在提交前告诉你 OK 不 OK。「但所有这些都被大模型杀死了——因为大模型可以如此耐心地给你检查，<strong>还给你一个 emoji 让你开心一下</strong>。」</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s211">
+      <h3><span class="idx">2.11</span>hook 与大写还是小写</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=3560"><span class="tri"></span>59:20</a>
+      <p>章末，老师用一个很小的例子收尾：他在给几十条检查规则命名时，纠结该用全大写还是小写。他从使用角度看「两个都没问题」，但这是个两难。</p>
+      <p>他现场让 agent 配了一个 hook——<strong>在 agent 需要我输入的时候「叮」一声提醒</strong>——并且演示了 hook 在 git pre-commit 上的用法。然后他把这个「大写还是小写」的问题丢给 GPT 解释，AI 从他的心理动机出发分析「为什么全大写会显得更强」。</p>
+      <figure>
+        <svg viewBox="0 0 1000 270" role="img" aria-label="hook 的两个用途">
+          <rect x="0" y="0" width="1000" height="270" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">hook = 「在某件事发生的时候，干一件事」</text>
+
+            <rect x="40" y="56" width="440" height="186" rx="10" fill="rgba(70,198,224,.07)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#46c6e0" font-size="13" font-weight="700">agent 里的 hook</text>
+            <text x="62" y="114" fill="#adbccd" font-size="12">场景：agent 完成、需要我输入时</text>
+            <text x="62" y="138" fill="#adbccd" font-size="12">动作：播放一声「叮」提醒我回来</text>
+            <text x="62" y="168" fill="#77879a" font-size="11.5">老师原话：「帮我配置一个全局的 hook，</text>
+            <text x="62" y="188" fill="#77879a" font-size="11.5">在 agent 需要输入的时候叮一声提醒」</text>
+            <text x="62" y="218" fill="#3fd68c" font-size="11.5">→ Claude Code / Codex / Pi 都支持</text>
+
+            <rect x="520" y="56" width="440" height="186" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="542" y="86" fill="#f0b429" font-size="13" font-weight="700">git 的 hook</text>
+            <text x="542" y="114" fill="#adbccd" font-size="12">场景：提交之前（pre-commit）</text>
+            <text x="542" y="138" fill="#adbccd" font-size="12">动作：跑几十条 checking rules</text>
+            <text x="542" y="168" fill="#77879a" font-size="11.5">老师正在做一个更严肃的项目，</text>
+            <text x="542" y="188" fill="#77879a" font-size="11.5">工程标准更高，所以要给规则命名</text>
+            <text x="542" y="218" fill="#f0b429" font-size="11.5">→ 于是有了「大写还是小写」的两难</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜hook 的两处用法</b>　这个例子的价值不在 hook 本身，而在于<b>「无穷多这样的两难问题」</b>构成了学习与生活的常态。老师的态度是：如果每个问题都稍微问一句，你就会积累出很多「掌精和知识」。</figcaption>
+      </figure>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <p>「你学了 git init、git push、git pull，就会用 Git 了。但<strong>真正水面下的冰山是各种各样的 best practice，而每一个 best practice 其实都是血和泪的教训</strong>。」——第 2 章的实操到此收尾，下一章要从「用」转向「理解它是怎么实现的」。</p>
+      </div>
+    </div>
+  </div>
+</section>

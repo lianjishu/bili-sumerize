@@ -1,0 +1,6 @@
+1-欢迎来到未来 [01-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1pb8o6yE8f/?spm_id_from=333.1387.collection.video_card.click&vd_source=f05c56ed809d0cbc9881d69c3bbe3222
+2-提示词工程 [02-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1CQt365EzW?spm_id_from=333.788.videopod.sections&vd_source=f05c56ed809d0cbc9881d69c3bbe3222
+3-软件仓库管理 [03-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1kybV6DE47/?spm_id_from=333.788.videopod.sections&vd_source=f05c56ed809d0cbc9881d69c3bbe3222
+4-软件仓库管理 (2) [04-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1Q6en6NEUo?spm_id_from=333.788.videopod.sections&vd_source=f05c56ed809d0cbc9881d69c3bbe3222
+5-软件工程的来龙去脉 [05-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1Nyeq6qEt8?spm_id_from=333.788.videopod.sections&vd_source=f05c56ed809d0cbc9881d69c3bbe3222
+6-需求和架构 (1) [06-Raw/26生成式软件工程/NJU]: https://www.bilibili.com/video/BV1Rch76WEfQ?spm_id_from=333.788.videopod.sections&vd_source=f05c56ed809d0cbc9881d69c3bbe3222

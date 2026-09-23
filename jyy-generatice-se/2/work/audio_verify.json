@@ -1,0 +1,67 @@
+{
+ "video": {
+  "id": "BV1CQt365EzW",
+  "title": "提示词工程 [02-Raw/26生成式软件工程/NJU]",
+  "fulltitle": "提示词工程 [02-Raw/26生成式软件工程/NJU]",
+  "uploader": "绿导师原谅你了",
+  "uploader_id": "202224425",
+  "upload_date": "20260901",
+  "duration_meta": 5905.536,
+  "view_count": 44338,
+  "like_count": 1184,
+  "comment_count": 240,
+  "tags": [
+   "软件工程",
+   "人工智能",
+   "编程",
+   "南京大学"
+  ],
+  "description": "",
+  "thumbnail": "http://i1.hdslb.com/bfs/archive/7cb300cfcc64cbaeb9c7bf74c41de28f3a558318.jpg",
+  "webpage_url": "https://www.bilibili.com/video/BV1CQt365EzW",
+  "parts": 0,
+  "playlist": null,
+  "chapters": [
+   {
+    "title": "Prompt (Context) Engineering",
+    "start_time": 0,
+    "end_time": 1987
+   },
+   {
+    "title": "使模型遵循指令的技巧",
+    "start_time": 1987,
+    "end_time": 4530
+   },
+   {
+    "title": "更长程任务的建议",
+    "start_time": 4530,
+    "end_time": 5906
+   }
+  ]
+ },
+ "audio": {
+  "format_id": "30280",
+  "abr_kbps": 125.773,
+  "m4a": {
+   "duration": 5905.536,
+   "size": "92859529",
+   "codec": "aac",
+   "sample_rate": "48000",
+   "channels": 2
+  },
+  "mp3": {
+   "duration": 5905.535986,
+   "size": "141734655",
+   "bit_rate": "192002",
+   "codec": "mp3",
+   "sample_rate": "44100",
+   "channels": 2
+  }
+ },
+ "verify": {
+  "diff_m4a_vs_meta_pct": 0.0,
+  "diff_mp3_vs_meta_pct": 0.0,
+  "threshold_pct": 5.0,
+  "status": "PASS"
+ }
+}

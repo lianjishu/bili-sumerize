@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>软件仓库管理 (2) · 精读讲义 — jyy《生成式软件工程》第 04 讲</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --paper:#ffffff; --tx:#1c2733; --tx2:#52616f; --tx3:#6b7a89;
+    --line:#dfe7ee; --panel:#f1f5f8;
+    --c1:#0b7285; --c2:#7048c8; --c3:#b7791f;
+    --c1bg:#e6f4f7; --c2bg:#f1ecfa; --c3bg:#faf3e3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--tx);font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,Georgia,serif;font-size:17px;line-height:1.9;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 28px}
+  code,.mono{font-family:ui-monospace,Consolas,"JetBrains Mono",monospace}
+  code{background:var(--panel);padding:1px 6px;border-radius:4px;font-size:.86em}
+
+  header.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 40px}
+  .kicker{font-family:ui-monospace,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:var(--c1);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .subtitle{margin-top:10px;font-size:19px;color:var(--tx2)}
+  .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta-row span{font-size:13.5px;color:var(--tx2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .meta-row a{color:var(--c1);text-decoration:none}
+  .meta-row a:hover{text-decoration:underline}
+
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin:34px 0}
+  nav.toc h2{font-size:15px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--tx3);margin-bottom:14px}
+  nav.toc ol{list-style:none}
+  nav.toc li{margin:7px 0;font-size:15.5px}
+  nav.toc a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  nav.toc a:hover{color:var(--c1);border-color:var(--c1)}
+  nav.toc .n{font-family:ui-monospace,monospace;color:var(--tx3);margin-right:10px;font-size:13px}
+  nav.toc .sub{margin-left:34px;color:var(--tx2);font-size:14px}
+
+  .usage{background:var(--c1bg);border:1px solid #c3e2ea;border-radius:12px;padding:20px 26px;margin:0 0 40px;font-size:15.5px;color:#12333a}
+  .usage strong{color:var(--c1)}
+
+  section.chap{margin:64px 0}
+  .ch-head{border-top:5px solid;padding:20px 0 8px}
+  .ch-head.c1{border-color:var(--c1)} .ch-head.c2{border-color:var(--c2)} .ch-head.c3{border-color:var(--c3)}
+  .ch-num{font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:.22em;color:var(--tx3)}
+  .ch-head.c1 .ch-num{color:var(--c1)} .ch-head.c2 .ch-num{color:var(--c2)} .ch-head.c3 .ch-num{color:var(--c3)}
+  .ch-head h2{font-size:30px;font-weight:800;margin:4px 0 4px}
+  .ch-range{font-size:14px;color:var(--tx3);font-family:ui-monospace,monospace}
+
+  article.sec{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:30px 34px;margin:26px 0}
+  article.sec h3{font-size:21.5px;font-weight:800;line-height:1.5;margin-bottom:4px}
+  article.sec h3 .secno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  .ts{font-family:ui-monospace,monospace;font-size:12.5px;white-space:nowrap}
+  .ts a{color:var(--tx3);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .ts a:hover{color:var(--c1);border-color:var(--c1)}
+  article.sec p{margin:12px 0;text-align:justify}
+  article.sec p+p{margin-top:14px}
+  article.sec ul,article.sec ol{margin:12px 0 12px 26px}
+  article.sec li{margin:6px 0}
+  em.term{font-style:normal;font-weight:700;border-bottom:2px solid var(--c1);padding-bottom:1px}
+  .c2-scope em.term{border-color:var(--c2)} .c3-scope em.term{border-color:var(--c3)}
+
+  .callout{border-radius:10px;padding:16px 22px;margin:16px 0;font-size:15.5px;line-height:1.85}
+  .callout .tag{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .co-concept{background:var(--c1bg);border:1px solid #c3e2ea}
+  .co-concept .tag{color:var(--c1)}
+  .co-case{background:var(--c3bg);border:1px solid #ecd9ad}
+  .co-case .tag{color:var(--c3)}
+  .co-warn{background:#fdeeed;border:1px solid #f2c7c3}
+  .co-warn .tag{color:#b03a30}
+
+  .prompt-box{background:#0f1b24;color:#dbe7f1;border-radius:10px;padding:18px 22px;margin:16px 0;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.8}
+  .prompt-box .plabel{display:block;font-size:11px;letter-spacing:.18em;color:#6fa3bd;margin-bottom:8px}
+  .prompt-box p{margin:6px 0}
+
+  .summary{background:var(--panel);border-left:4px solid var(--c1);border-radius:0 10px 10px 0;padding:18px 24px;margin:18px 0}
+  .c2-scope .summary{border-color:var(--c2)} .c3-scope .summary{border-color:var(--c3)}
+  .summary h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx2);margin-bottom:8px}
+  .summary li{margin:5px 0}
+  .quiz{margin:18px 0}
+  .quiz h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx3);margin-bottom:8px}
+  .quiz ol{margin-left:26px}
+  .quiz li{margin:7px 0;color:var(--tx2)}
+
+  .divider{text-align:center;color:#b8c6d2;font-size:20px;letter-spacing:1.2em;margin:10px 0}
+
+  section.appendix{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:34px 38px;margin:26px 0}
+  section.appendix h2{font-size:23px;font-weight:800;margin-bottom:14px}
+  section.appendix h2 .apno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  section.appendix h3{font-size:17px;margin:22px 0 10px;color:var(--c1)}
+  section.appendix p{margin:10px 0;text-align:justify}
+  table.gl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.gl th{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:var(--tx3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.gl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.gl td:first-child{font-family:ui-monospace,monospace;font-size:13px;color:#8a4b3a}
+  table.gl td:nth-child(2){font-weight:700}
+  table.gl td:last-child{color:var(--tx2)}
+  .tsindex{columns:2;column-gap:40px;font-size:14.5px;margin-top:10px}
+  .tsindex div{break-inside:avoid;margin:7px 0}
+  .tsindex a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .tsindex a:hover{color:var(--c1)}
+  .tsindex .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--tx3);margin-right:8px}
+  .example-list{margin:12px 0 4px}
+  .example-list li{margin:12px 0}
+
+  footer.foot{background:var(--paper);border-top:1px solid var(--line);margin-top:70px;padding:40px 0 60px;font-size:13.5px;color:var(--tx2)}
+  footer.foot h4{font-size:13px;letter-spacing:.12em;font-family:ui-monospace,monospace;color:var(--tx3);margin:18px 0 8px}
+  footer.foot ul{list-style:none}
+  footer.foot li{margin:5px 0}
+  footer.foot a{color:var(--c1);text-decoration:none}
+  footer.foot a:hover{text-decoration:underline}
+
+  @media print{
+    body{background:#fff;font-size:12.5pt}
+    article.sec,nav.toc,section.appendix{border:none;page-break-inside:avoid}
+    .prompt-box{background:#eef2f5;color:#1c2733}
+    header.hero{padding-top:20px}
+  }
+  @media (max-width:640px){
+    h1{font-size:30px} article.sec{padding:22px 20px}
+    .tsindex{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lecture Handout · Generative Software Engineering · NJU</div>
+    <h1>软件仓库管理 (2)<br>精读讲义</h1>
+    <p class="subtitle">jyy 南大《生成式软件工程》第 04 讲 · 全程 98 分钟逐字稿精读整理</p>
+    <div class="meta-row">
+      <span>视频：<a href="https://www.bilibili.com/video/BV1Q6en6NEUo">BV1Q6en6NEUo</a></span>
+      <span>讲师：jyy（绿导师原谅你了）</span>
+      <span>时长：98:29</span>
+      <span>三章 · 26 节 · 附录 3 篇</span>
+      <span>术语以<a href="#apx-a">勘误表</a>为准</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>CONTENTS · 目录</h2>
+  <ol>
+    <li><a href="#ch1"><span class="n">01</span>重新设计版本管理系统</a></li>
+    <li><a href="#ch2"><span class="n">02</span>为 Agent 设计版本管理系统</a></li>
+    <li><a href="#ch3"><span class="n">03</span>从零开始一个新项目</a></li>
+    <li><a href="#apx-a"><span class="n">A</span>术语对照表（勘误表扩展版）</a></li>
+    <li><a href="#apx-b"><span class="n">B</span>时间戳索引</a></li>
+    <li><a href="#apx-c"><span class="n">C</span>课堂演示流程复盘与 Prompt 速查</a></li>
+  </ol>
+</nav>
+
+<div class="usage">
+  <strong>这份讲义怎么用：</strong>它与同目录的可视化笔记（<a href="bili_summary_BV1Q6en6NEUo.html">bili_summary_BV1Q6en6NEUo.html</a>）互补——笔记是「看图回忆」，讲义是「从头读懂」。每个小节标题旁有时间戳，点击跳回原视频对应秒数核对。<em class="term">Prompt 模板</em>用深色框标出，可直接复制改写；<em class="term">概念卡</em>压缩了本节的机制性结论；每章末有小结与思考题（思考题为整理者补充）。
+</div>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>重新设计版本管理系统</h2>
+    <div class="ch-range">00:00 – 35:53 · 8 节</div>
+  </div>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.1</span>lab 1 与「会成长的个人助手」 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=0">00:00</a></span></h3>
+    <p>本讲开场先发布 lab 1：<b>会成长的个人助手</b>。课程所有作业均为选做，最后由讲师的机器人验收评分。需求完全不限——想怎么做就怎么做，最好直接 <em class="term">webcode</em>（用 AI 直接写应用）一个，而且今天课上会留出现场时间，讲师自己也来 webcode 一个，展示直接把需求丢给 AI 会踩什么坑。</p>
+    <p>需求是供参考的方向：</p>
+    <ul>
+      <li><b>学习数据库</b>：把专业课（计算机网络、概率论）的资料、研究组的论文与文献教科书，整理成个人的知识库；</li>
+      <li><b>个人信息数据库</b>：填表是每个学生的痛点——姓名、学号、身份证、简历，全部交给 agent 去填；</li>
+      <li><b>关联南大 smail 邮箱</b>：比如两周后讲师半夜发邮件，你的 agent 能替你回——实现一个 <em class="term">always on</em> 的后台助手；买一个一两百块的嵌入式小设备，就能在宿舍里持续跑你的 agent loop；</li>
+      <li><b>手机端联动</b>：网页、iOS 或 Android app 都行——你只要让 agent 去做，它会自己下好所有需要的东西。</li>
+    </ul>
+    <div class="callout co-case"><span class="tag">课堂案例 · 三年做的填表系统</span>
+      疫情期间讲师招过一个研究生，花了三年做一个自动填表系统——大家都觉得填表很烦。等他毕业的时候，ChatGPT 突然出现，学生很慌，觉得自己做的事情马上要被替代。讲师的回应是：「不要紧，你赶快答辩，就可以毕业了。」——世界就是这么快。
+    </div>
+    <p>为什么要布置这个实验？看起来所有任务都在 AI 能力范围之内，但如果你直接把实验要求丢给 AI，它会做出很多「看起来合理」的决定，而这些决定会让项目维护越来越困难，最后陷入泥潭。下一个 lab 会和这个 lab 强关联——给它加一个和前面所有需求都有一定冲突的新需求，让 agent 越改越崩溃——这是刻意设计的软件工程体验。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>lab 1「会成长的个人助手」：选做、不限做法、鼓励 webcode。</li>
+      <li>直接丢需求给 AI = 在合理的局部决定里积累全局性的维护困难。</li>
+      <li>下一个 lab 会加冲突需求，复现「越改越崩溃」的软件工程体验。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.2</span>AI Slop 的沼泽地与可追溯性 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=232">03:52</a></span></h3>
+    <p>每个同学都有必要体验一下软件工程里的<em class="term">焦油坑（tar pit）</em>：当你的 <em class="term">AI slop</em>（AI 直出的粗糙产物）开始不断消耗你的 token，你终于有一天会下定决心——把这个项目删掉从头重做，或者回退到某个很早期的版本重新开始。这个实验想告诉大家的就是这件事。</p>
+    <p>复习上节课的框架：<em class="term">项目</em>是各种文件的集合——你的 <em class="term">intent</em>（设计初衷）、<em class="term">spec</em>（设计文档、接口、数据库选型、项目结构）与 <em class="term">implementation</em>（代码实现）都在项目里。讲师明确说他不喜欢 AI 写出来的那种非常长的 README：</p>
+    <div class="callout co-case"><span class="tag">案例 · 挣一个亿只需要一页 README</span>
+      有一天你想到了一个好点子，真想用它去挣一个亿，要组建创业团队、说服计算机系的教授出来跟你干——你其实只需要一个<b>比较短的 README</b>：你想做什么产品、能达到什么效果，配一两个 screenshots、最重要的那些设计。剩下的事情——specification、用什么数据库、怎么从一万用户扩到一亿——有架构能力、写代码能力的人可以帮你补出来。你只要有那个最原始的设计（intent），剩下的人可以帮你补全。
+    </div>
+    <p>但项目里的文件之间还有大量<b>隐藏的关联</b>，文件系统表达不了。文档说数据结构是 linked list，代码实现了，测试又依赖这个实现——这些关联在写文档的时候可能还没有代码，随手一写，实现之后又没有强行绑定起来。这正好引出下一节的「文件系统不是组织项目的方式」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>AI slop 消耗 token → 陷入焦油坑 → 删库重做，是本实验要刻意制造的体验。</li>
+      <li>项目 = intent + spec + implementation 的集合；README 应写初衷而非长篇说明书。</li>
+      <li>项目内文件的隐藏关联（文档—代码—测试）是文件系统表达不了的。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.3</span>文件系统不是组织项目的方式 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=419">06:59</a></span></h3>
+    <p>大家用文件系统管理项目，其实真的就只是图方便：回到 1950、1960 年，操作系统提供的存储功能就只有文件——那时候关系数据库还没有发明出来，所有程序员别无他法，只能把项目以文件的形式存进去。<b>这是一个历史包袱</b>，一路沿用至今。</p>
+    <p>而文件系统丢失了很多信息。intent、spec 这类文档好歹是一个文件，但很多关联性的东西表达不出来。一个典型场景：</p>
+    <div class="callout co-warn"><span class="tag">警示 · linked list 技术债</span>
+      你让 AI 把 linked list 换成更高效的 tree 结构去优化性能，它啪啪啪把代码改了。但你可能忘了，某个 markdown 文档里写着「我这个项目的数据是用 linked list 管理的」。写文档时可能还没有代码，随手一写；代码实现之后，这个关联又没有被强行绑住——这就是<em class="term">技术债（technical debt）</em>。随着文档和代码不断向前推演，它们的不一致只会越来越多，不会越来越少，软件就此陷入维护的泥潭。
+    </div>
+    <p>更麻烦的是，当你（甚至 AI）后来看到这份代码时，到底是文档说的对、还是代码说的对？聊天记录没有了——换了一台电脑，chat 已经消失；git repo 里可能还有一些 change 的日志，但到最后你真的不知道该信谁。这在软件工程里是一个研究了非常长时间的问题：<em class="term">traceability（可追溯性）</em>——项目里的测试用例、文档、哪怕文档中的一行、代码之间的关联是什么，能不能在软件系统演进的整个过程中维持住？2014 年的综述文章回顾的正是更早的工作。</p>
+    <p>于是历史一再重演：大家最后总有一天发现，用文件系统管理代码、靠打压缩包发布、打压缩包发给合作者这件事维护不下去了——所以有了 SVN，有了 Git。<b>那么下一个是什么？</b>这是本讲的主线问题。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>文件系统组织项目只是 1950 年代的历史巧合，不是正确的设计。</li>
+      <li>文档与代码的不一致只会累积（technical debt），traceability 是软件工程的经典难题。</li>
+      <li>压缩包 → SVN → Git 一路演化，每一代都是被上一代的不可维护逼出来的。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.4</span>从带环图走到 repository.db <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=702">11:42</a></span></h3>
+    <p>如果以后我们再也不写代码了，软件就不应该像现在 git repo 里这样——一堆 README、hello.c、docs 目录。也许我们还是需要文档，但文档可能是<b>好多个切片</b>：变成很多 object 或 entity。这个文档和实现之间有一个关系（代码实现了这个文档）；一个测试用例也指向这个文档，又关联到代码的那部分实现；文档和文档之间又有关联——这是一个<b>完全结构化的、随便连接的、带环的图（graph with cycles）</b>，没办法在文件系统里以目录树的形式表达。</p>
+    <p>那把它放进一个数据库里——讲师称之为 <em class="term">repository.db（repo.db）</em>。显然，人类没办法用现在 Unix 世界里的工具去维护这样一个 repository。但不要紧：</p>
+    <div class="callout co-case"><span class="tag">讲师金句</span>
+      「用魔法打败魔法——人类理解不了的东西，我们只要训练 AI。它只要有强化学习的反馈信号，我们就可以训练 AI，AI 能够理解这个 repo。」
+    </div>
+    <p>工作方式仍然沿用 Git 的 philosophy：Git 管理文件、目录快照和快照之间的关系，希望我们<b>小步前进</b>——每 fix 一个 bug、改一个文档，都产生一个 commit，用 rebase、merge、fast-forward 创建可追踪的修改历史。未来版本：AI 自动维护所有软件 artifact 之间的一致性——文档说是 linked list，实现就必须是；文档说要有 ABC 三方面测试，测试用例就必须有 ABC。你跟 AI 说「我对幻灯片样式不满意」，这就是一小步；大型系统里绝大部分内容跟这一小步无关，AI 根据 chat 把相关的东西摘出来。</p>
+    <p>这里用到数据库里的 <em class="term">视图（view）</em>概念：数据就在那里，但我可以创建一个不一样的查询，把它以另一个形式展示出来。AI 有动态生成任何内容的能力——<b>everything is code, content is code</b>——所以它可以根据你的 chat，生成一个和你要改的这一小步相关的 view：不是代码、文档、diff，而是一个可视化的看板，列出和这个小步相关的东西，问你要改什么。改完之后，从一个一致的状态（V0）做一次小步修改，到下一个一致的状态（V1）——还是 repo.db。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · repo.db 工作流</span>
+      仓库从「文件集合」变成「实体关系数据库」：文档、代码、测试都是图上的节点。每次修改 = 一小步（由 chat 确定意图）→ AI 摘出相关子图生成 view → 修改 → AI 维护全图一致性 → 产生下一个快照。人从此再也不要直接看代码。
+    </div>
+    <p>讲师顺带吐槽：他其实蛮讨厌 Cursor 这类现代 IDE 一打开就默认 Agent Mode、强迫你用 chat 沟通——他还是「相对精通古法编程」的，对代码有一些掌控欲，「可能是不好的，但这可能是未来」。也正面回应同学们的焦虑：就算一两年后真有公司把这事做出来，我们思考它的过程中用的全是你们学习的经典 CS 课程——数据库的 view、实体和关系、Git 的长期开发经验。如果模型强到一个大项目一步就变成下一个，我们现在还不知道怎么办；但至少初期，还是要沿用过去积累的软件工程智慧，小步向前。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>软件的自然形态是带环的对象图，文件树只是降维的存储方式。</li>
+      <li>repo.db + AI 维护一致性 + view 交互 = 一种可能的下一代软件工程形态。</li>
+      <li>小步前进的哲学不变；经典 CS 课程（数据库、Git）正是重构这一切的原材料。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.5</span>jujutsu：把 change 当一等公民 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1716">28:36</a></span></h3>
+    <p>从「我们关心的是修改」这个 first principle 出发，可以重新审视 Git 的一个设计折衷：Git 里<b>没有专门的 change 对象</b>——修改是用 commit 来替代的，一个 commit 和它 parent 之间的差异才叫「一次修改」。</p>
+    <p>这个替代在绝大部分情况下够用，但有两个别扭之处：</p>
+    <ul>
+      <li><b>merge 的隐藏作者变更</b>：merge 由 A 来做，B 写的内容在冲突 resolve 之后，ownership 就归到了 A；</li>
+      <li><b>rebase 改写历史</b>：re- = 改 base——把 commit 的 base 换掉，每次 rebase 都会创建新的 commit ID，历史就变了。你感觉到这里有轻微的不一致：你其实只想「把修改搬过来」，但搬的载体是 commit，搬完 ID 全变。</li>
+    </ul>
+    <p>如果我们把 change 也变成 <em class="term">first class citizen（一等公民）</em>，会发生什么？——「你就发明了下一代更好用的版本控制系统」。这就是 <em class="term">jujutsu（jj）</em>：一个和 Git 底层完全兼容的新一代 VCS，你可以直接把它当 Git 用，但它增加了 change 的概念：</p>
+    <ul>
+      <li>每个工作状态都是一个 change 对象，可以被赋值、被指认；</li>
+      <li>rebase 时，jj 直接把 change 搬过来——冲突解决不了也没关系，change 对象把冲突的记录也一路带下来，你可以稍后统一 resolve；</li>
+      <li>底层模型没有变（还是 Git 那一套对象与快照），但用起来舒服很多。</li>
+    </ul>
+    <div class="callout co-concept"><span class="tag">概念卡 · 从 change 出发的推导</span>
+      「从我要把 change 作为 first class citizen 开始，再往后推，你就可以发明自己的版本管理系统。」——jj 不是唯一可推导的路线，但它示范了一种设计方法：找到上一代工具里被「替代品」掩盖的核心概念，把它扶正。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>Git 用 commit 替代 change，代价是 merge 作者漂移、rebase 改写 ID。</li>
+      <li>jj：change 为一等公民，与 Git 完全兼容，冲突可作为 change 的一部分被搬运和延后处理。</li>
+      <li>设计方法：质疑现有工具里哪个概念是二等公民，把它扶正，就能推演出新一代系统。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.6</span>没有暂存区，也没有「未提交」 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1805">30:05</a></span></h3>
+    <p>jj 有一个很好的特点：<b>它不需要 staging area</b>。Git 里最讨厌的场景（讲师上操作系统课会讲这个例子）：</p>
+    <div class="callout co-case"><span class="tag">案例 · 导师的电话</span>
+      你在改 hello.c，改到一半——项目不能编译、不能运行、测试也通不过。这时候老师来电话：「现在有一个很高优先级的项目，客户等着交差，这个 bug 一分钟给我修了。」你怎么办？你不应该 commit，于是你得先把它加到 index 里，然后 <code>git stash</code> 压栈，回头修紧急 bug。刚修到一半，导师又来电话：「这个 bug 别修了，还有一个优先级更高的，你去修它。」——你只好再 stash 一次。git stash 是一个栈，里面堆了好多好多个提交，你还得去管理这个栈。
+    </div>
+    <p>jj 的视角完全不同：<b>想象你随时随地都在编辑这个 repo——这本身不就是一个 change 吗？</b>你现在把 hello.c 改一改、加一行减一行，全都是 change。所以 jj 干的事情，好像是「你但凡改了一个字节，它都会立即做一次 git commit」——当然不会产生一堆线性历史，而是先把上一次的 commit 抹掉（amend），用当前的修改去替代它。也就是说：<b>工作区永远处于一个 change 已提交的状态</b>。</p>
+    <p>这样一来，你连 staging area 都不需要了——「未提交」这个状态本身消失了。</p>
+    <div class="callout co-concept"><span class="tag">概念卡</span>
+      Git 的世界：工作区 →（git add）→ 暂存区 →（git commit）→ 历史，stash 是为「被打断」打的补丁。jj 的世界：工作区即 change，改动即提交，打断不需要任何特殊操作——因为你的工作本来就一直是一个已提交的 change。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>git stash 的痛点来自「改到一半被打断」：栈越压越深，还要管理。</li>
+      <li>jj 让工作区永远处于提交状态（自动 amend），staging area 与「未提交」一起消失。</li>
+      <li>「任何时候都在编辑 repo」= 任何时候都是一个 change。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.7</span>线性历史与 rebase <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1420">23:40</a></span></h3>
+    <p>回到 Git 的原始模型：一个快照上，两个开发者 A、B 独立开发，各自产生 commit。要把两条线合起来时，Git 提倡的是<b>两路 merge</b>——新 commit 有两个 parent，继承双方修改。但这带来隐藏的作者问题：merge 完成后，其中由 B 写、在冲突时被 A resolve 掉的内容，最终 ownership 归到了 A。</p>
+    <p><em class="term">rebase</em> 是另一条路：不产生分叉的合并提交，而是尝试把 B 的修改逐个「搬」到 A 的后面——A 先改了文档、加了测试，B 加了 feature 和测试，rebase 就先试 feature 能不能直接接在 A 的历史后面，成功了再搬 test。如果两条线的修改完全无冲突，就能一路合并成<b>线性的历史</b>。</p>
+    <p>但 rebase 有很大的风险：一旦搬动时发现 B 的测试和 A 的 feature 不兼容（甚至两边改了同一个地方），就进入冲突解决的 rebase 模式——</p>
+    <div class="callout co-warn"><span class="tag">警示 · rebase 模式的体验</span>
+      进入过这个模式的人会发现「瞬间自己就不知道应该怎么办了」，然后打开你的 agent 问：「我现在在……我发生了什么？」agent 会细心地解释给你。更麻烦的是：搬 feature 时失败一次，搬 test 时可能又要失败一次；而且每一次搬动都创建一个<b>新的 commit ID</b>——因为 base 改了（re-base），历史就被改写了。
+    </div>
+    <p>对比之下，两路 merge 至少保留了所有原始 commit 的 ID，只新增一个合并提交；rebase 则让「我关心的修改」和「承载它的 commit」发生脱节——这正是 1.5 中把 change 扶正为独立对象的动机。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>merge：保留全部历史，但冲突 resolve 会造成作者归属漂移。</li>
+      <li>rebase：得到线性历史，但冲突时要逐个搬 commit，且每次搬动改写 ID。</li>
+      <li>「我们关心的是修改」——Git 没有独立的 change 对象，是这两类别扭的共同根源。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.8</span>肌肉记忆造成的路径依赖 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2028">33:48</a></span></h3>
+    <p>为什么这一代人不直接换用更好的工具？讲师给出了一个诚实的答案：他已经形成了 Git 的肌肉记忆；比他更老的一代形成了 SVN 的肌肉记忆。<b>人一旦形成肌肉记忆，要把习惯掰过来就很困难了</b>——他即便能从 first principle 出发理解 jujutsu，甚至能 virtual re-implement 这个系统，也没有足够的时间再去训练另一套肌肉记忆。</p>
+    <p>AI native 的你们正好反过来：还没有形成肌肉记忆，可以直接先用「对的设计」，之后再回头理解——「原来 Git 这么蠢」。人类历史本来就是积累的：SVN 用不下去了才用 Git，发现了 Git 的缺点才有了 jj。当年 Git 出现时大家也觉得很先进——它是 <em class="term">persistent data structure</em>，而 SVN 从 diff 那条线一开始就走错了；今天回头看，Git 也犯了设计上的错误——它最早没想到 rebase 会有这么大的 impact，有 merge 就解决了手上的问题，所以没把概念模型想得更清楚。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 学习顺序的两条路</span>
+      旧人类的路径：先学 Git（因为时代只给了 Git），再用更高级的工具纠正。新人类的路径：先用最正确的设计建立肌肉记忆，再回头理解旧设计的缺陷。AI 辅助下，第二条路是可行的——你可以把「最重要的 prompt」交给 agent：「我如果要学 jujutsu，想从 change 开始理解。」jj 的 tutorial 一上来也会告诉你它没有 staging area、版本管理更自然——对人类更友好，实际上对 agent 也更友好。
+    </div>
+    <p>这一段也回应了一位毕业同学的评论：学生时代大多数人做作业不与人合作，rebase/merge 用不上——这是对的。但讲师的回应是：走出校园去看看，互联网开发者社区铺天盖地都是这些内容。任何你留意过的项目的 <code>contributing.md</code>（仓库根目录的贡献者指南，通常回答「我怎么参与这个项目」：项目总体结构、分支、提交信息、PR 规范与流程）里，总有一天你会看到「必须在自己的分支上 rebase、保持线性历史、禁止直接创建分叉的 merge」——那时你就知道 rebase 是干什么的了。</p>
+    <div class="callout co-warn"><span class="tag">警示 · AI 时代的斩杀线</span>
+      「老师不教的就是你不需要会的」是高中升学利益最大化的正确策略，但带进大学就会造成新人类与旧人类之间的 gap。讲师的危机感：AI 时代的斩杀线以下的价值全部归零——现在可能还斩不到 985 计算机专业的同学，但低级智力劳动（比如大量会计从业者）的底层已经在被 agent 替代。所以操作系统、编译器、软件工程这些经典课程里的智慧，你要学到、形成自己的理解——这是斩杀线以上的部分。
+    </div>
+    <div class="summary"><h4>本章小结（01 章）</h4><ul>
+      <li>文件系统组织项目是历史巧合；文档—代码—测试的 traceability 关联它是表达不了的。</li>
+      <li>下一代仓库的一种想象：repo.db（实体关系图）+ AI 维护一致性 + view 交互，人不再直接看代码。</li>
+      <li>jj 的两个设计支点：change 是一等公民；工作区永远处于提交状态（无暂存区）。</li>
+      <li>merge 与 rebase 的别扭同源：Git 没有独立的 change 对象。</li>
+      <li>趁肌肉记忆未形成，直接用「对的设计」；经典课程的知识在斩杀线以上。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>你的项目里有没有「文档说 A、代码是 B」的技术债？试着让 agent 找出这类不一致，并设计一个机制让它们以后强制同步。</li>
+      <li>用 jj（或让 agent 带你模拟）做一次「改到一半被更高优先级任务打断」，对比 git stash 流程的体验差异。</li>
+      <li>找三个开源项目的 contributing.md，看它们对 merge/rebase 的规定——哪些项目强制线性历史？为什么？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>为 Agent 设计版本管理系统</h2>
+    <div class="ch-range">35:53 – 63:48 · 8 节</div>
+  </div>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.1</span>现有 VCS 都假设用户是人 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2197">36:37</a></span></h3>
+    <p>这门课是生成式软件工程，所以真正要做的是：<b>在 agent 时代，再次重新设计版本管理系统</b>。你当然可以让 agent 去用 git——git 对人类是一个很大的进步，但对 agent 来说进步就相对小一些，因为它本来就很会 rebase 这些操作。一路走过来：SVN 有局限，Git 有局限，那 agent 时代的局限是什么、要破掉什么？</p>
+    <p>所有现存的 version control system 都有一个共同的假设：<b>使用者是人类</b>。而人类有什么特点？人类是 <em class="term">single-threaded 的生物</em>。</p>
+    <div class="callout co-case"><span class="tag">课堂比喻 · 粉笔导弹</span>
+      讲师上操作系统课讲并发程序时，让你把线程想象成一个人。线程访问共享内存只有两个基本操作：load/read 和 store/write。想观察这个世界？对不起，手要抱在后面，只能看；想真正写一个变量？必须把眼睛闭起来。而闭眼扔出「粉笔导弹」的那一刻，你之前读到的那个值已经失效了——从上一次读取到现在，中间可能发生了很多事：你被 CPU 换下去了、被中断打断了、另一个线程跑了一秒钟才轮到你恢复。恢复过来后，你按寄存器里那个旧值把粉笔扔了出去——很可能就扔错了。
+    </div>
+    <p>多线程共享内存带来无穷的问题，人也是一样：人和人之间有无法逾越的物理屏障——你不能理解我的思想，我也不能理解你的；每个人都只有一份 <em class="term">IO 设备</em>：一双手、一张嘴、一对眼睛。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>为 agent 重新设计 VCS 的第一步：找出「为人设计」这个隐含假设。</li>
+      <li>人是 single-threaded 的：观察（读）和行动（写）不能同时进行。</li>
+      <li>粉笔导弹比喻 = 并发程序里 stale value 的来源，也适用于人协作写代码。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.2</span>人的通信带宽只有「十分钟一次提交」 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2301">38:21</a></span></h3>
+    <p>以这种方式编辑代码库、产生 change，人的节奏是以<b>小时</b>为单位的；一个软件公司负责一个模块的开发，多也就十几个人——已经是不小的团队——所以整体上也就是以<b>十分钟</b>为单位产生一个提交。</p>
+    <p>十分钟一个提交，意味着提交速度比人和人之间<b>沟通的速度慢很多</b>：写一两个小时的东西，动手之前你肯定先跟师兄说「师兄我要干个这个行不行」，20 秒钟问完就去改；去公司打工则每天早上开站会，leader 把任务分下来，你在半小时的会议里划分好 scope，把项目切开，领一部分走，然后去产生 change——这是<em class="term">古法编程</em>。</p>
+    <p>在古法编程时代，stash 是一个合理的设计：导师打电话是可能发生的，但「修到一半又来一个电话」的概率很低，所以绝大部分时候你的 stash 栈里只有一层；如果太深，你其实可以直接拒绝工作——「我手上有一个更高优先级的任务，对不起」——然后自己排队。</p>
+    <p>agent 时代这件事全变了：</p>
+    <ul>
+      <li>单个 agent 生产 AI slop 的速度就以<b>分钟级</b>甚至更快——上下文是热的时候，fix 一个东西只要几十秒钟，像 DeepSeek Flash 干活就是几秒钟；</li>
+      <li>agent 工作时以<b>秒级</b>可以产生一个原子提交；</li>
+      <li>你还可以轻易组建 <b>十倍一百倍的 agent team</b>。</li>
+    </ul>
+    <p>Git 这种为人设计的模型就有点跟不上速度了。大型项目或许有<em class="term">门禁（gate）</em>——提交后必须跑几分钟的测试流水线，可以放缓 agent 提交的速度——但毫无疑问，agent 加速了软件开发的全过程。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 提交频率的两代差距</span>
+      人：小时级工作 × 十几人 ≈ 10 分钟一个提交，且提交前可以先口头沟通。agent：秒级原子提交 × 成百的 team —— 沟通的开销没有变，提交的速度放大了三个数量级。VCS 的所有机制都建立在前者的节奏上。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>「十分钟一次提交」是人月节奏的产物，先于提交的口头沟通是默认的并发控制。</li>
+      <li>agent 把提交节奏压到秒级、并发数放大百倍，为人设计的 Git 模型跟不上。</li>
+      <li>CI 门禁能拖慢但不能逆转这个趋势。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.3</span>乐观并发控制是怎么来的 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3163">52:43</a></span></h3>
+    <p>为什么我们会需要 Git 那一整套 best practice？因为人的限制塑造了工具。人之间的 <em class="term">communication gap</em> 导致每天早上要开一次会同步进展、分配任务；而且就算沟通了，成本也很高——你室友请教你一个数学问题，明明你会做，就是怎么都讲不明白，除非你是很好的老师、能共情别人、站在别人角度思考。沟通成本高，正是小公司、初创团队效率更高的原因；系统一大、人一多，沟通效率下降，产出速度也降下来——<b>一个 100 人的团队不可能达到 10 人团队 10 倍的效率，有两三倍就不错了</b>，所以团队没有办法随意变大。</p>
+    <p>于是需要 Git 的 best practice：快照、小步前进——改一个 typo 也做一个 commit，每一个小 commit 都可以追溯。因为一旦出问题，你需要回溯到那个人做 commit 的时间点：<b>那个人是有记忆的</b>——开发者会回想起「那天早上开了个会、我接到这个需求、沟通出了问题」，找到当时的沟通记录和文档，再决定怎么修正。<code>git bisect</code> 和 <code>git blame</code> 就是专为此设计的特性。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · Git ≈ 乐观并发控制</span>
+      数据库里，Git 的模型更像<em class="term">乐观的并发控制（optimistic concurrency control）</em>：「乐观」指假设两个 transaction 不会冲突。人的世界同理——事前开过会、划分好了 scope，所以大家先往前跑，合并的时候大概率不产生冲突，不管 merge 还是 rebase 都能顺利完成。<b>事前沟通 + 事后 blame 追溯</b>，就是人类开发流程里的乐观并发控制。
+    </div>
+    <p>这个假设在人的世界里大概率成立——就像教育系统数据库里，每个同学读写的都是自己的数据（选我的课、查我的课表），全局冲突不太可能。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>沟通 gap → 站会、scope 划分、小步 commit、blame 追溯：一整套人的协议。</li>
+      <li>100 人团队 ≠ 10 倍效率：沟通成本平方增长限制了团队规模。</li>
+      <li>乐观并发控制 = 事前约定互不冲突，事后靠可追溯性兜底。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.4</span>数据库里的乐观锁与悲观锁 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3345">55:45</a></span></h3>
+    <p>把 Git 的模型放进数据库的坐标系里看。两条很大的 SQL transaction，中间可以混任何代码：先 select 读一个值，然后用图灵完备的语言（Python、JS）做计算——你永远不知道它会根据读到的结果算出什么，甚至可以根据外部时间来算——最后 update 写回去。<b>update 的时候就可能产生冲突</b>：如果两个 transaction 互相要读对方要写的对象，会产生循环的数据依赖；互相要锁对方持有的对象，会产生<em class="term">死锁（deadlock）</em>——这时 transaction 检测到循环依赖，只能 abort、回滚（roll back）。</p>
+    <p>数据库为什么敢用乐观策略？因为「每个 transaction 读写的是自己那块数据」的假设大概率成立（教育系统里选课、查课表都是各读各的）。但注意，<b>乐观/悲观不是数据库的专利，操作系统的思路完全不同</b>：</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 锁 vs transaction</span>
+      操作系统里做并发控制靠<em class="term">上锁</em>：访问可能冲突的资源之前，先 <em class="term">acquire</em> 一把锁；别人想再 lock，对不起，必须等到你 <em class="term">release</em>——acquire 和 release 之间建立「先一后二」的强制顺序，而不是「大家先往前跑、跑了再说」。讲师上操作系统课常说的口诀：「一把大锁保平安」——做过实验你就知道，粗暴但有效。
+    </div>
+    <p>乐观和悲观是两种世界观：乐观赌「不会冲突」，靠检测与回滚兜底；悲观假设「会冲突」，用先声明使用权来避免冲突本身。数据库课、操作系统课学的正是这两套机制——而它们即将在软件工程里再被做一次。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>大 transaction + 中间图灵完备计算 + update = 冲突与死锁的温床，检测到循环依赖只能 abort 回滚。</li>
+      <li>乐观并发：假设不冲突（读多写少、数据私有），回滚兜底。</li>
+      <li>悲观并发（锁）：acquire/release 强制先后，冲突从源头避免。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.5</span>Agent 时代需要悲观锁 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3616">01:00:16</a></span></h3>
+    <p>回到 agent：如果 agent 快了 1000 倍，主 agent 协调时又一下子分出去好多任务，它们就真的会<b>频繁触发 transaction abort</b>——冲突变得常态。AI 时代 abort 不是大问题：agent 出了 conflict 它就修，能修好。但更好的问题是：<b>我们是不是可以换一种并发控制的方式？</b></p>
+    <p>答案是引入<em class="term">悲观的并发控制</em>：主 agent 规划完任务，立即把项目的某一部分<b>锁上</b>——在一个 git repo（或一个快照）上支持一个 lock 操作，声明「我要做这件事，需要这些 scope，先上锁」；做完、commit、释放锁。另一边想干的事情如果被别人锁上了，就必须等锁释放才能再锁。这样不就几乎避免了所有的冲突吗？</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 文件级悲观锁</span>
+      最简单的粒度：在<b>文件级</b>上锁——两个 agent 不会同时写同一个测试、不会往同一个 page 里做更改。又因为 agent 数量足够多、速度足够快，即使有局部等待，整体项目进度仍可推进：总有别的 agent 在跑别的、不冲突的任务。
+    </div>
+    <p>这里操作系统课的知识直接起作用：锁的本质是「不要并行」，它和多处理器并行有根本矛盾——一把大锁会把能并发的程序退回成串行程序。但当系统里有很多<b>相互独立、不冲突</b>的线程时，即便每个线程都持有锁，整体依然是高效并发的——<b>悲观的，也可以是高效的</b>。这些知识关联起来，你就能看清：在 agent 时代，我们又可以重新设计一个版本控制的系统。</p>
+    <div class="callout co-case"><span class="tag">延伸 · 为什么备课有用</span>
+      讲师说这也是他喜欢上课的原因：不上操作系统课、不上生成式软件工程课，就不会逼自己把这些事情在脑子里再过一遍，问一遍「是不是地球上所有人都错了」。讲课必须共情听众、把最顶层的 idea 提炼出来——这也是一种强迫自己 first-principle 思考的机制。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>agent 提交快 1000 倍 → 冲突常态化 → 乐观策略的事前假设失效。</li>
+      <li>悲观方案：主 agent 规划后立即 lock scope，做完 commit 再释放；文件级锁即可避免大部分冲突。</li>
+      <li>锁与并行矛盾，但「多个独立不冲突线程各持锁」依然高效——悲观 ≠ 串行。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.6</span>git worktree：一个目录还不够 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2819">46:59</a></span></h3>
+    <p>让 agent 沿用人的模型非常容易：每个 agent 一台独立的开发计算机（容器），一对一对应 single-threaded 的人类，instruct 它「remote 仓库在 GitHub 上，你现在就是一个单人开发者，从 tmux 里收到命令就可以开干」。现场演示：开两个 tmux session——实际开发中它们位于两台不同的机器或容器，物理隔离、看不到世界上其他的人——讲师自称 Master，给两个 coding agent 各起一个名字同时开工。AI agent 变快之后开始写 slop code，这时如果你的指挥发生一点点差错就很危险；流行的 paradigm 是<b>一个监工 agent + 好多个子 agent</b>：为了最大化模型智力、防止 AI 生成你不想要的东西，让一个强模型（如 Codex）设计、另一个强模型（Claude）review，让它们互相打架达成一致——开两个 tmux 就行，主 agent 负责协调、看输出、往里 inject prompt，多 agent 系统就转起来了。</p>
+    <p>多个 agent 工作在同一个 Git 仓库上会有麻烦；工作在不同的 repo 上则完全可以——各自到远端拉取别人的提交，冲突了自己修，必要时给 master agent 发消息。而在今天的 workaround 里，还有一个现成的工具：<em class="term">git worktree</em>。</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 课堂现场</span>
+      <p>我的老师说 git worktree 可以改进这样并行的工作方式。那么能让这两个 tmux sessions 都工作在 worktree 上吗？</p>
+    </div>
+    <p>讲师特别强调：<b>提问是关键的</b>。你早上刷微信公众号看到「git worktree」或者什么 sandbox container，就可以立即让 agent 帮你试一试。</p>
+    <p>现场考古的收获：<code>.git</code> 通常是一个目录（里面有 logs、objects 等），但 worktree 里的 <code>.git</code> 竟然是一个<b>普通的文本文件</b>——内容是 <code>gitdir: ...</code>，指向真正的仓库位置。</p>
+    <div class="callout co-case"><span class="tag">案例 · agent 也会学到新东西</span>
+      「这个也是我才知道的」——agent 追问下去告诉你：git 除了 .git 可以是目录，还可以是一个这种格式的文件。git 最大程度地复用了操作系统里的机制：worktree 就是一个小型的 git 目录，依然有 HEAD、index、logs，但它依附于原有的 .git 目录而生。
+    </div>
+    <p>所以 worktree 提供了一种比「开好几台虚拟机、每台放一个 agent」更轻量的合作方式：各 worktree 的提交在本地互相可见，不需要互相 pull 和 push；但如果修改有冲突，仍然需要 merge 和 rebase 才能合并——性能上比跨机器协作更高。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>agent 沿用人的模型：一人一容器一 tmux，即可构建多 agent 系统；强模型互搏（设计 vs review）是流行的协调范式。</li>
+      <li>git worktree：同一仓库挂多个工作目录，worktree 的 .git 是指向主仓库的文本文件。</li>
+      <li>worktree 比「一人一台虚拟机」轻量：提交本地互相可见；冲突仍需 merge/rebase。</li>
+      <li>从公众号刷到新名词，第一反应可以是「让 agent 帮我试一试」。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.7</span>Agent 的 blame 和 git bisect 都会失效 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3195">53:15</a></span></h3>
+    <p><code>git blame</code>、<code>git bisect</code> 这些特性是专门为人设计的：出了问题，回溯到做这个 commit 的人和时间点——<b>那个人是有记忆的</b>，会回想起那天早上的会和出问题的沟通记录。这套机制隐含着一个社会结构：blame 你多了，你就该被开掉了——实习生就背锅了。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 没有人可以被 blame</span>
+      但如果项目由 agent team 或 agent swarm 来实现——agent 没有坐牢、被开除的能力——这个模型就变了：<b>我们再也不需要 blame 了，项目只要前进就可以了</b>。我们甚至不需要知道是历史上哪个提交引入的错误，只要知道现在哪里错了，把它修了就行。
+    </div>
+    <p>更好玩的是：每个 agent 都是<b>相同的模型</b>——完全相同的克隆体。同样的事情让它们来做，虽然模型有不确定性，但大概率会收敛到相同的结果：同样的 prompt 做同一件事，方向性的东西是收敛的。这让「追责」变得更加没有意义。</p>
+    <p>当然，快照仍然需要：方向走错的时候，如果没有保留历史上的某个 snapshot，往前走了很远再回头，代价比一点一点往前修要大。所以 agent 时代的版本控制是——不断<b>大步向前</b>，几乎永远不看过去；Git 的 community 里只留一些 lessons（这个项目到底经历了什么样的演化），然后不停合并、不停往前走。<b>历史的价值，从「谁写错了」变成了「我怎么把它修好」</b>——只要知道从现在开始怎么往前进，就足够了。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>blame/bisect 的前提是「人有记忆、人可被追责」——对 agent 不成立。</li>
+      <li>相同模型的 agent 是克隆体，收敛性让追责进一步失去意义。</li>
+      <li>历史的价值转向：从谁写错了 → 我怎么修好；快照保留用于回退，不再用于问责。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.8</span>版本控制是工具，团队管理才是难题 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3844">01:04:04</a></span></h3>
+    <p>版本管理从历史动机、过去、现在讲到未来，基本讲完了。但版本控制<b>本质上还是一个工具</b>——哪怕是刚才那种基于乐观/悲观锁的版本控制，真正困难的实际上是团队的管理。为什么我们觉得还需要软件工程？因为现在没有办法做到一句话产出一个高质量的产品：如果老板随口说「做一个 AI 时代的微信，一个社交爆款」，AI 直接就能出微信级的产品——那软件工程就死了，我们就都死了。现在斩杀线暂时还没有到<b>团队管理</b>这一层，所以我们还要学。</p>
+    <p>但也许有一天讲师也会被斩杀：摩尔定律本质上是一种 scaling law，现在还成立，模型肯定会更强、更小、更快，也许算力终有一天能换出智能。不过至少今天，AI 还不知道怎么做团队管理——<b>每多一个人，两两之间的沟通关系都是平方级上升的</b>。所以现在软件工程团队里最难招的不是码农，而是能把任务分解的 <em class="term">team leader</em>：能把「我要造一个微信」这样的国民级应用拆给 10 个小团队、10 个 team leader，最后拼起来还能成为一支团队的人最稀缺；能带小团队的人其次稀缺。就算每个人都做好了分内的事，只要你不完全知道别人在做什么、对整体了解不够，各种冲突还是会发生——他写测试你的代码过不了。</p>
+    <p>而你们今天就可以开始练：把自己当成主 agent。刚才那两个 slave 的示范（讲师自称那是个不好的示范）你现在就可以立即拥有——两个 DeepSeek 的 slave，然后去想：要最大化两个、三个、更多 agent 的产出，任务应该怎么分解？提交策略怎么确定——什么时候让 agent 提交、什么时候合并？把这一章讲的版本控制概念全部带进你的开发流程。</p>
+    <div class="callout co-concept"><span class="tag">讲师金句 · 本章结语</span>
+      「版本控制是工具，它蒸馏了人类过去软件工程很多年的经验，告诉我们人类要这样开发。在这个工具上，你可以开发出属于你自己的软件工程的直觉和经验。」
+    </div>
+    <div class="summary"><h4>本章小结（02 章）</h4><ul>
+      <li>现有 VCS 的隐含假设：single-threaded 的人类、十分钟一次提交、事前口头沟通。</li>
+      <li>agent 把提交压到秒级、并发放大百倍：乐观并发（先跑再说+blame 兜底）失效，悲观并发（lock scope → commit → release）成为可能且高效。</li>
+      <li>worktree 是今天的过渡方案：同仓库多工作目录，.git 可以只是一个文本文件。</li>
+      <li>agent 无需 blame：历史的价值从追责变成修复；相同模型收敛，克隆体无问责意义。</li>
+      <li>工具之上，真正的稀缺能力是任务分解与团队管理——今天就可以用「我是主 agent」来练。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用 tmux + git worktree 复现本章演示：让两个 agent 分别实现同一个项目的两个独立模块，观察冲突在什么环节出现、由谁解决。</li>
+      <li>设计一个「悲观锁」版的提交协议：锁的粒度（文件/模块/目录）选多大？锁由主 agent 还是子 agent 申请？死锁怎么办？</li>
+      <li>你的团队里谁在扮演 team leader？试着把你最近的一个需求按「10 分钟提交 × 可独立验证」的标准拆给 3 个 agent。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>从零开始一个新项目</h2>
+    <div class="ch-range">63:49 – 98:29 · 10 节</div>
+  </div>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.1</span>汉诺塔的单向限制与递归 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4111">01:08:31</a></span></h3>
+    <p>版本管理讲完，讲师闲扯了一个他最近在网上刷到的面试题——本来是<em class="term">汉诺塔（Tower of Hanoi）</em>的小学生考级题目，加了一个额外要求：<b>所有盘子的移动只能往一个方向</b>。两个盘子时看不出来问题；三个盘子就能看出问题了——常规移法要把上面两个先移到中间柱，但在这个限制下你做不到，你必须重新设计。</p>
+    <p>解法仍然基于递归与归纳：最大盘子的最优移动路径总是「向右移一个、再向右移一个」（受单向限制决定），剩下 n-1 个盘子的移动由归纳法保证最优。讲师现场写了一个这样的程序验证最优性。「有点难，对吧？你很难想象小学生竟然可以做这样的题。」如果是保研机试碰到这个题——那就是小学生难度的题，但你需要真正理解这个问题，输出移动方案或步数。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>加一条「单向移动」约束，经典递归题就需要重新设计递归结构。</li>
+      <li>约束之下的最优解：最大盘子固定走两步向右，其余由归纳法接管。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.2</span>把 playground 卖给小学生 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4336">01:12:16</a></span></h3>
+    <p>重要的不是汉诺塔本身，而是接下来要做的事：<b>我们现在要推出这个产品——把它卖给小学生</b>。讲师把单向汉诺塔做成了一个 playground：小学生可以在里面写代码，代码可以随时编辑，<b>可视化是随代码联动的</b>——写错了，就能定位到那条语句，比如「试图把一个蓝色的（小的）移到大的上面」，同学们就能找到 bug。</p>
+    <p>怎么挣钱？当然是<em class="term">付费的增值服务</em>——AI 助教：小朋友实在做不下去的时候，点一个「我要助教」的按钮，DeepSeek 的 token 就开始燃烧，然后可以收取比 DeepSeek 原价更贵的 token 费，记在账户上。为什么贵得有理？</p>
+    <div class="callout co-case"><span class="tag">案例 · 独门 prompt 就是壁垒</span>
+      「因为我的 prompt 是我独门的。我作为一个有经验的老教师，我可以把我自己蒸馏成 prompt，我可以敏锐地知道这个小朋友的问题在哪里，然后给他提供个性化的指导。」——这时候就涉及到要做一个信息系统了。
+    </div>
+    <p>这段铺垫的价值在于：一个真实的小产品，从「能跑的程序」走到「要收钱的信息系统」，中间正好会经过「架构怎么选」的决策点——这就引出了后面 GPT 给出的标准架构与讲师的不同意见。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>产品化三件套：可编辑的 playground、随代码联动的可视化、AI 助教增值服务。</li>
+      <li>变现逻辑：token 加价 + 独门 prompt（老教师的经验蒸馏成个性化指导）。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.3</span>GPT 给的标准架构，为什么我不喜欢 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4473">01:14:33</a></span></h3>
+    <p>讲师没时间自己做，让学生设计；看了学生和 AI 聊完的那版设计，又让 GPT 来梳理需求。GPT 的原话是：</p>
+    <div class="prompt-box"><span class="plabel">GPT 梳理的需求（课堂原话）</span>
+      <p>一个 API 应用，一个关系数据库，一个对象存储，需要异步点评，再加后台任务进程；数据库存关系和记录，大课程包与完整轨迹放对象存储，任务量小时数据库任务表就够用。</p>
+    </div>
+    <p>如果你们上软件工程课，这是一个<b>非常正常、太正常</b>的标准答案——GPT 是个语言模型，它给的就是教科书式的架构。但讲师不喜欢这个设计。为什么？他举了 <em class="term">Overleaf</em> 的例子：</p>
+    <div class="callout co-case"><span class="tag">案例 · Overleaf 导出 git repo 改论文</span>
+      Overleaf 有一个讲师最喜欢的功能：可以把项目当成一个 git repo 导出。他要给学生改论文时，把论文 clone 到本地——不用忍受网页界面——打开 Codex，让它起 sub-agent，给每一个 .tex 文件并行地修语法错误；给一个很长的 prompt、并行指令，论文就改好了。
+    </div>
+    <p>顺着这个体验想：这个 playground 难道不应该也是这样吗？这就进入下一节——用版本管理替代数据库。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>GPT 的架构（API + 关系数据库 + 对象存储 + 后台任务）是标准的「正确答案」。</li>
+      <li>标准答案未必是你的需求：Overleaf 的 git 导出展示了另一种可能。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.4</span>用版本管理替代数据库 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4617">01:16:57</a></span></h3>
+    <p>对这个 playground，讲师的真实设想：学生每改一次代码——idle 了、点了运行、切换了——就<b>自动做一个 git 提交</b>；申请 AI 助教的时候，在当时的 git 提交上<b>产生一个分叉</b>（branch），点评就挂在这个分支上。</p>
+    <p>GPT 没有算到的一笔账：</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 成本的不对称</span>
+      「产生一个 git 提交的成本，远远小于把剩下的东西 persist 下来的成本——后者忽略不计。当我用数据库的时候，我确实得到了一些好处，比如总体压缩可能更小、性能更高，<b>但这其实不是我要的：我的本质需求是版本管理</b>。」
+    </div>
+    <p>所以最早期的时候，可以直接把小朋友的代码存在自己的代码库里，在文件目录格式、commit message 格式、使用方式都<b>收敛</b>之后，再迁移到数据库——这完全可以。而且回头看学生提交的整个 git 历史，很多事情变得非常容易，自己控制起来也轻松很多；<b>直到遇到性能瓶颈之前，都不想迁移到任何一种数据库</b>。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 学的东西都有用</span>
+      「你学 Git 是有用的；你学 multi-agent 的管理，你就能够有一个机会，想到一个和别人不太一样的设计。」——GPT 给的是平均答案，你的差异化设计来自你多学的那些知识。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>学生每次操作 → 自动 git commit；AI 助教点评 → 在提交上开分支。</li>
+      <li>本质需求是版本管理：数据库的压缩与性能收益不是当前目标。</li>
+      <li>先收敛格式、再迁移数据库——架构可以演化，不必一步到位。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.5</span>现场 webcode：不加约束地丢一个需求 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4721">01:18:41</a></span></h3>
+    <p>接下来做一件真实的事：从零开始一个新项目——就做 lab 1 的个人助手。<b>项目早期不能用 multi agent，你就是包工头</b>：先找一个你用得上的、能力相对最强的 agent，跟他多轮对话。「你们现在开始干，就比什么都要好」——讲师决定现场直接打开课程作业，完全没有事先准备，把实验要求原样丢给 agent。</p>
+    <p>有两种办法：第一种是直接回车；更好的方式是先跟他讨论。观察不同模型的直觉：一线模型会先进入 <em class="term">plan mode</em>，跟你确认一些事实，再生成一个 workflow；像 Claude Code，需要执行比较复杂的任务时，会生成一段 TypeScript——里面有一个函数叫 <code>Agent</code>，函数体是一段<b>自然语言</b>，它用这种方式来组织 workflow，甚至可以有循环：有好多任务，就在循环上面一个个解决。然后它就直接开干了——</p>
+    <div class="callout co-case"><span class="tag">现场 · 300 token/s</span>
+      「用魔法，只能用魔法打败魔法——这个 300 token per second 实在是太恐怖了。」讲师让它先跑一会儿，回头再来验收。
+    </div>
+    <div class="prompt-box"><span class="plabel">实验要求 · 现场丢给 agent 的原文（节选）</span>
+      <p>实现一个「会成长的个人助手」：学习数据库（专业课程资料、研究组文献的归档）、个人信息管理（自动填表）、关联 smail 邮箱（always on 的自动回复）、可扩展的手机端/网页联动。做法不限，鼓励 webcode。</p>
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>项目早期 = 包工头模式：一个最强 agent + 多轮对话，不用 multi agent。</li>
+      <li>观察 agent 的直觉：plan mode 确认事实 → 生成 workflow（TypeScript 函数包自然语言）→ 直接开干。</li>
+      <li>现场不加约束地丢需求，正是下一节「做出不要的东西」的前置实验。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.6</span>它做对了每一步，却做出了我不要的东西 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5150">01:25:50</a></span></h3>
+    <p>让 agent 跑的这几分钟里，讲师揭示了这就是<em class="term">上下文工程/提示词工程里最危险的一点</em>：你提示词里的每一个词，self-attention 都会看到；而 AI 已经被训练成 <b>prompted 的舔狗</b>——它有一种无法往外拉的、必须遵循你指令的倾向。所以当你把一个讨论稿式的、开放的需求丢给它时，它会<b>过度遵循指令</b>，最终生成一个「确实满足了指令、但其实不是你想要的」的东西。</p>
+    <p>回头看实验要求，真正的言外之意其实是一句话：<b>「实现一个持续为你工作的个人助手」——这句话最重要，其他都是解读</b>。每个人想要的第一步都不同：对同学们来说，一个月内最大的痛点是高效的学习和复习——最好 agent 能自动从外网收集资料、层次化归档、给一个好看的界面。于是讲师现场追问 agent：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 现场追问</span>
+      <p>其实我想要的是一个比较好的学习助手：能收集外部信息、综合总结、根据我的进度学习。看看你现在的方案，哪部分能实现我这个功能？</p>
+    </div>
+    <p>结果它在做 database。<b>在没有你精心设想、讨论过需求的时候，AI 基本上只会生成 slop。</b>你要的 reply 没有、收集没有——你脑袋里所想的那个 intent、specification 和它理解的东西之间有<b>巨大的 gap</b>；但模型一旦看到「你要实现这个」，它就真的去实现它了。</p>
+    <p>讲师复查产出：从 README.md 来看，<b>它做的所有事情都是正确的，没有一个错误，但最终它得到了一个你不想要的东西</b>。更典型的是——它甚至都没有创建一个 git repository。成熟的 PM 会在写下第一行代码之前就跟团队讨论好：协作怎么做、项目怎么管、每天什么时候开会；agent 很好玩，它直接上手就做，把这一切当成一个用一次就丢掉的东西。（「感觉他烧了我不少 token——也无所谓了，我参加 DeepSeek 内测送了一千块额度还没用完。」）</p>
+    <div class="callout co-warn"><span class="tag">警示 · 过度设计与真实需求</span>
+      比如填表：讲师真正需要的是一个 browser use agent，能帮他在各种网页上处理，「一号通」只是作为一个测试的出口。所以第一步根本不需要在教育系统上做太多设计——<b>过度设计反而不好</b>。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>prompted 舔狗效应：开放需求会被过度遵循，产出「满足指令但不是你想要的」。</li>
+      <li>实验要求的言外之意只有一句：「持续为你工作的个人助手」——其余是解读。</li>
+      <li>未经讨论的需求 → AI 只会生成 slop；intent 与它理解的 spec 之间是巨大的 gap。</li>
+      <li>它每一步都对，但连 git 仓库都没建——「先谈怎么管项目」这件事它不会主动做。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.7</span>MVP：先卖出一小步 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5557">01:32:37</a></span></h3>
+    <p>回看 agent 产出的结构：有入口层、编排层、能力层、数据层——一个非常典型的架构，但它把它当成一个<b>业务逻辑系统（教育系统）</b>来做。这有非常大的风险：软件看起来已经像一个完整的教育系统了，可是绝大部分内容其实不是讲师要的。</p>
+    <p>如果真的要从零开始构建，更符合主流 best practice 的是 <em class="term">MVP（minimum viable product，最小可行产品）</em>的范式——讲师口语里先说成了 variable，随即改口 viable。</p>
+    <div class="callout co-case"><span class="tag">名句</span>
+      「The biggest risk in product development is building something nobody wants.」——你做的东西没人要，是产品开发最大的风险。刚才 agent 做的东西，大部分正是讲师不要的。
+    </div>
+    <p>做一个最小的版本，逼迫的是<b>想清楚什么样的需求才是你绝对要的</b>。讲师的最小版本是：提升学习效率 + 提升工作效率——这两条定了之后，第一个 MVP 里<b>可以没有任何数据库</b>：任何时候文件系统膨胀了，跟 agent 说一句「按照这个数据的组织，帮我搭建出一个数据库」，这个问题就结束了。所以不需要一开始就做数据库——一旦带上了数据库，每次重构都要让 agent 做 database 迁移。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>四层架构的「教育系统」看着完整，但大部分不是你要的——build something nobody wants。</li>
+      <li>MVP 逼你区分「绝对要的」和「可以后置的」：最小版本可以没有数据库。</li>
+      <li>文件系统 → 数据库的迁移随时可以交给 agent；反向迁移（拆数据库）成本高得多。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.8</span>文件系统与数据库的心智负担 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5641">01:34:01</a></span></h3>
+    <p>为什么文件系统优先？<b>心智负担不一样</b>。文件系统你可以自己在文件管理器里调整目录结构，逐渐梳理到你舒服为止；而调 database schema，你要面对一个可能还没学过的东西——很多同学还不知道它是什么。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 熟悉系统的优先级</span>
+      人类对直观的东西已经训练得非常舒服：从小学上电脑课开始你就在操作文件目录，对这个模式非常习惯。而面对 database schema 这个未知的东西，你需要强行做一次<b>概念的翻译</b>——「我脑袋里是这样的概念，翻译到数据库里是那样的」。那不如先用你已经适应了的、熟悉的系统，用最简单的方式把学习资料的归档、通知消息的进入等需求管起来。
+    </div>
+    <p>这也呼应了第 1 章的结论——文件系统不是组织项目的<b>正确</b>方式，但它是你最<b>熟悉</b>的方式；在项目早期，「熟悉」压倒「正确」，等格式收敛、需求稳定之后再升级到更结构化的存储。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>调文件目录 vs 调数据库 schema：一个零翻译成本，一个需要概念转换。</li>
+      <li>早期选熟悉压倒正确，迁移交给未来的 agent——这是刻意的选择，不是偷懒。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.9</span>我自己的邮件 agent 连数据库都没有 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5714">01:35:14</a></span></h3>
+    <p>讲师拿自己的系统做证据：<b>他现在回邮件的 agent 没有用任何数据库</b>。流程是：agent 收邮箱 → 把 email id 放到一个共享的云盘同步目录上；email id 里有 agent 解析出来的回复草稿、邮件分类（是不是垃圾邮件）；再由下一级流水线处理。<b>我心里清楚的是：我的系统里有哪几级流水线、它们之间应该怎么协作、哪些东西通过云盘传递</b>——就这么简单。</p>
+    <p>随后是现场演示「需求的更改」：他希望邮件、资料等都和云盘保持同步——「这就叫需求的更改」；现在不知道它的架构好不好，让 agent 帮忙看一看。由此给出一个判断好架构的标准：</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 什么是一个好的架构</span>
+      你在当前时刻有一个需求，现在的实现满足它；但当需求发生变更时，你相应做出的变化是<b>摧毁性的</b>、是背上一个技术债、还是从容应对——这就区分了架构的好坏。软件工程最不一样的地方，就是它要<b>对未来需求的变化负责</b>——能不能「以不变应万变」：需求发生根本性变化时，架构能否以最少的变化去应对。这件事操作系统课不教、数据库课也不教。
+    </div>
+    <p>它回头检查 agent 方案里的 <code>system.db</code>：个人资料、邮件归档、索引草稿全都放进一个数据库。现在看起来不会引起很大问题（绝大部分项目都这样），但随着项目进展，两种开发方式的分野就出来了：<b>一种是上来就做一个大的，几大步把需求都实现完，然后拖着技术债不断往后迭代；另一种是从最小的地方开始，得到一个特别精巧的架构</b>。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>讲师的邮件 agent：云盘 + 多级流水线，零数据库——简单到每个环节都可控。</li>
+      <li>好架构的判据在需求变更时显现：变化是摧毁性的、技术债的、还是从容的。</li>
+      <li>「以不变应万变」是软件工程区别于系统课的核心命题。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.10</span>结尾：早期的 prompt 影响最大 <span class="ts"><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5882">01:38:02</a></span></h3>
+    <p>全课收束到一句话：<b>你早期的 prompt，对整个项目走向的影响是最大的</b>。最早把 README 交给它、说一句「我要做一个 MVP」，都会对项目造成很大的影响——因为 agent 会忠实地把你早期的一切决定放大到整个项目里。</p>
+    <p>最后留下一个框架，请记住<b>版本管理做的三件事</b>——它们在 agent 时代和古法编程时代都成立：</p>
+    <ul>
+      <li><b>记住现在</b>：你必须有一个 repository——不管未来是什么形式，C/C++、Python、JavaScript 项目都要把文件管起来；</li>
+      <li><b>记住历史</b>：有一天你删掉的东西发现还有用，可以捞回来；在提交的历史里，你能看到自己怎么演进到某个点、发现这条路失败了、再回到另一个点开始正确的路线；</li>
+      <li><b>记住教训</b>：这些 lessons 会不停地警示你，下一步应该怎么迈出向后的一小步。</li>
+    </ul>
+    <div class="callout co-case"><span class="tag">讲师原话 · 三章的收束</span>
+      第一章问「现有版本管理为什么长成这样」（历史与路径依赖）；第二章问「提交者变成 Agent 之后它会怎么变」（第一性原理重构）；第三章回到最朴素的现实——工具再好，如果你在第一步没说清自己要什么，agent 会非常高效地帮你做出一个没人想要的东西。<b>真正的软件工程能力，是在写下第一行代码之前就开始的。</b>
+    </div>
+    <div class="summary"><h4>本章小结（03 章）</h4><ul>
+      <li>单向汉诺塔 → playground → AI 助教：一个真实小产品暴露出「标准架构 vs 本质需求」的分歧。</li>
+      <li>用 git 替代数据库：自动提交 + 分叉点评；本质需求是版本管理，性能优化可以等到瓶颈出现。</li>
+      <li>现场 webcode 复盘：不加约束的需求 → prompted 舔狗式过度遵循 → 每步都对但整体不要。</li>
+      <li>MVP（minimum viable product）：想清楚绝对要的需求，最小版本可以没有数据库；文件系统优先是因为心智负担低。</li>
+      <li>好架构 = 需求变更时变化最小（以不变应万变）；讲师的邮件 agent 零数据库、多级流水线。</li>
+      <li>早期 prompt 影响最大；版本管理三件事：记住现在、记住历史、记住教训。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>把 lab 1 的实验要求重写成一个「言外之意优先」的 prompt：第一句话说什么？哪些细节降级为解读？对比两种 prompt 的产出。</li>
+      <li>为你的个人助手设计第一个 commit：README 写什么（intent + 一两个 screenshot + 最重要的设计）？什么信号出现时才引入数据库？</li>
+      <li>检查你手头项目：如果明天需求变成「所有数据要与云盘同步」，你的架构变化是摧毁性的、技术债的、还是从容的？为什么？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">附录 A</span>术语对照表（勘误表扩展版）</h2>
+  <p>逐字稿由 faster-whisper 转写，存在 ASR 误识别。下表前 13 条为可视化笔记勘误表的全部修正条目，后 17 条为讲义写作中另行修正的高频误识别。术语保留原则与原勘误一致：模型名（GPT、DeepSeek、Codex、Claude、DeepSeek Flash）按课堂原话保留；「一号通」（校园统一认证，85:20 处作 browser use agent 的测试出口）、「smail」（南大邮箱）、「webcoding」「包工头」「斩杀线」「填表」等口语表达按原话保留。</p>
+  <table class="gl">
+    <tr><th>ASR 误识别</th><th>正确写法</th><th>备注 / 一句话解释</th></tr>
+    <tr><td>get / get 提交 / 用 get 管理</td><td>git</td><td>语音同音误写，全文统一</td></tr>
+    <tr><td>jujutsu / 酒酒次 / 桔桔次 / jujitsu / Digits</td><td>Jujutsu（jj）</td><td>新一代版本控制系统，change 为一等公民</td></tr>
+    <tr><td>Bitkeeper</td><td>BitKeeper</td><td>Linux 内核曾用的商业版本控制工具</td></tr>
+    <tr><td>repository.db / 仓库.db</td><td>repository 数据库</td><td>讲师设想中的未来仓库形态</td></tr>
+    <tr><td>work tree / WorkTrip / Workshade</td><td>git worktree</td><td>同一仓库挂多个工作目录</td></tr>
+    <tr><td>blame / bisect / get by sec</td><td>git blame / git bisect</td><td>逐行追责；二分定位引入 bug 的提交</td></tr>
+    <tr><td>乐观所 / 悲观所</td><td>乐观锁 / 悲观锁</td><td>并发控制术语，语音同音误写</td></tr>
+    <tr><td>MVP / minimum variable product</td><td>minimum viable product</td><td>讲师口语先说成 variable，随即改口</td></tr>
+    <tr><td>slot / slop</td><td>AI slop</td><td>AI 直出的粗糙产物，讲师核心用词</td></tr>
+    <tr><td>Deepseek / Deep Sea / 深度求索</td><td>DeepSeek</td><td>统一写法</td></tr>
+    <tr><td>Cloud Code</td><td>Claude Code</td><td>Anthropic 的编程 agent</td></tr>
+    <tr><td>汉诺塔 / Hiota / DV / TOP好多</td><td>汉诺塔（Tower of Hanoi）</td><td>讲师口语混说，「TOP好多」即 Tower of Hanoi 的误听</td></tr>
+    <tr><td>Overleaf / overleaf</td><td>Overleaf</td><td>在线 LaTeX 协作平台</td></tr>
+    <tr><td>交游坑</td><td>焦油坑（tar pit）</td><td>《人月神话》开篇比喻；AI slop 消耗 token 后的维护泥潭</td></tr>
+    <tr><td>测试用力</td><td>测试用例</td><td>全篇高频误识别</td></tr>
+    <tr><td>VIO / 试图</td><td>视图（view）</td><td>数据库视图概念；「数据库里的试图」即「视图」</td></tr>
+    <tr><td>Tmax / tmax / tmark / TMX</td><td>tmux</td><td>终端复用器，多 agent 演示载体</td></tr>
+    <tr><td>展插线 / 展察线 / 被拆弹</td><td>斩杀线 / 被斩杀</td><td>讲师用语：AI 时代价值归零的分界线</td></tr>
+    <tr><td>填狗</td><td>舔狗</td><td>「prompted 的舔狗」：被指令遵循训练塑造的模型</td></tr>
+    <tr><td>护士锁</td><td>互斥锁（mutex）</td><td>「锁拆小了，我们 mutex」</td></tr>
+    <tr><td>客栏体</td><td>克隆体</td><td>相同模型的 agent 互为克隆体</td></tr>
+    <tr><td>西口查询</td><td>SQL 查询</td><td>「我早就不写任何 SQL 查询了」</td></tr>
+    <tr><td>Adversary Lock</td><td>advisory lock</td><td>数据库咨询锁机制</td></tr>
+    <tr><td>蒸留 / 振留</td><td>蒸馏</td><td>「把自己蒸馏成 prompt」</td></tr>
+    <tr><td>压站</td><td>压栈</td><td>git stash 的栈语义</td></tr>
+    <tr><td>操纪用课 / 操线课</td><td>操作系统课</td><td>并发、锁等概念的出处课</td></tr>
+    <tr><td>Skinlog</td><td>scaling law</td><td>「摩尔定律本质上是一种 scaling law」</td></tr>
+    <tr><td>人乐神话</td><td>《人月神话》</td><td>沟通成本平方增长的经典出处</td></tr>
+    <tr><td>社交报款</td><td>社交爆款</td><td>「AI 时代的微信」例子</td></tr>
+    <tr><td>reverse（58:07 并列 merge）</td><td>rebase</td><td>「不管是 merge 也好还是 rebase 也好」</td></tr>
+  </table>
+  <h3>保持原样的术语</h3>
+  <p>「一号通」为校园统一认证的口语指称，保留；「smail」为南大学生邮箱域名，保留；「webcoding」（用 AI 直接写应用）、「包工头」（项目早期一人带一个强模型）、「斩杀线」「古法编程」「大锁保平安」等口语表达按课堂原话保留，以存讲课语气。</p>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">附录 B</span>时间戳索引</h2>
+  <p>关键概念 → 原视频对应秒数（点击跳转，可自行核对）。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=0">lab 1：会成长的个人助手</a></div>
+    <div><span class="t">01:59</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=119">三年填表系统与 ChatGPT 的故事</a></div>
+    <div><span class="t">03:52</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=232">AI slop 与焦油坑：删库重做的决断</a></div>
+    <div><span class="t">06:59</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=419">文件系统只是历史的选择</a></div>
+    <div><span class="t">08:00</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=480">linked list 文档与技术债</a></div>
+    <div><span class="t">09:41</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=581">traceability 可追溯性研究</a></div>
+    <div><span class="t">11:42</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=702">软件即对象图：repo.db 设想</a></div>
+    <div><span class="t">12:52</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=772">用魔法打败魔法</a></div>
+    <div><span class="t">13:26</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=806">Git 哲学：快照与小步前进</a></div>
+    <div><span class="t">15:53</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=953">摘出相关子图生成 view</a></div>
+    <div><span class="t">19:26</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1166">学生时代用不到 rebase 的 gap</a></div>
+    <div><span class="t">20:05</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1205">contributing.md 贡献者指南</a></div>
+    <div><span class="t">21:53</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1333">AI 时代的斩杀线</a></div>
+    <div><span class="t">23:40</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1420">两路 merge 与隐藏的作者变更</a></div>
+    <div><span class="t">25:55</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1555">rebase 的冲突风险</a></div>
+    <div><span class="t">27:43</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1663">re = 改变 base：历史被改写</a></div>
+    <div><span class="t">28:36</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1716">把 change 变成 first class citizen</a></div>
+    <div><span class="t">30:05</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1805">没有 staging area</a></div>
+    <div><span class="t">30:53</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1853">导师电话与 git stash 痛点</a></div>
+    <div><span class="t">33:48</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2028">肌肉记忆与路径依赖</a></div>
+    <div><span class="t">36:37</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2197">VCS 的假设：用户是人</a></div>
+    <div><span class="t">36:56</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2216">粉笔导弹：读写不能同时进行</a></div>
+    <div><span class="t">38:21</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2301">十分钟一次提交的通信带宽</a></div>
+    <div><span class="t">41:05</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2465">agent 的秒级原子提交</a></div>
+    <div><span class="t">43:26</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2606">现场演示：tmux 双 agent 开工</a></div>
+    <div><span class="t">46:59</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2819">git worktree workaround</a></div>
+    <div><span class="t">49:05</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=2945">.git 也可以是一个文件</a></div>
+    <div><span class="t">52:43</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3163">Git best practice 的由来</a></div>
+    <div><span class="t">53:15</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3195">agent 时代不需要 git blame</a></div>
+    <div><span class="t">55:45</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3345">数据库 transaction 与死锁</a></div>
+    <div><span class="t">57:03</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3423">Git 模型 = 乐观并发控制</a></div>
+    <div><span class="t">59:02</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3542">操作系统的锁：acquire/release</a></div>
+    <div><span class="t">01:00:16</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3616">agent 时代需要悲观并发控制</a></div>
+    <div><span class="t">01:04:04</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3844">版本控制是工具，团队管理才是难题</a></div>
+    <div><span class="t">01:05:57</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3957">最难招的是分解任务的 team leader</a></div>
+    <div><span class="t">01:08:31</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4111">汉诺塔单向限制面试题</a></div>
+    <div><span class="t">01:12:16</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4336">把 playground 卖给小学生</a></div>
+    <div><span class="t">01:14:33</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4473">GPT 给出的标准架构</a></div>
+    <div><span class="t">01:15:00</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4500">Overleaf 导出 git repo 改论文</a></div>
+    <div><span class="t">01:16:57</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4617">本质需求是版本管理</a></div>
+    <div><span class="t">01:18:41</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4721">现场 webcode：包工头模式</a></div>
+    <div><span class="t">01:21:48</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4908">prompted 的舔狗与过度遵循</a></div>
+    <div><span class="t">01:25:50</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5150">做对了每一步，却做出了不要的东西</a></div>
+    <div><span class="t">01:27:13</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5233">第一件事：创建空的 git 仓库</a></div>
+    <div><span class="t">01:28:09</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5289">以不变应万变的架构</a></div>
+    <div><span class="t">01:29:46</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5386">版本管理三件事：现在/历史/教训</a></div>
+    <div><span class="t">01:32:37</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5557">MVP：minimum viable product</a></div>
+    <div><span class="t">01:34:01</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5641">文件系统 vs 数据库的心智负担</a></div>
+    <div><span class="t">01:35:14</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5714">邮件 agent 连数据库都没有</a></div>
+    <div><span class="t">01:38:02</span><a href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5882">早期的 prompt 影响最大</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">附录 C</span>课堂演示流程复盘与 Prompt 速查</h2>
+  <p>本讲以现场演示为主，共三场：多 agent 协作、汉诺塔 playground、现场 webcode。这里按时间顺序复盘每场演示的操作流程与关键观察，文末附本讲出现的 prompt 写法速查。</p>
+  <h3>演示一 · 多 agent 协作与 worktree（43:26 – 51:05）</h3>
+  <ol class="example-list">
+    <li><b>布置</b>：开两个 tmux session（实际应位于两台机器/容器，物理隔离），讲师自称 Master；每个 agent 视为「有一个独立电脑的单人开发者」，remote 仓库设在 GitHub 上，从 tmux 收到命令即开干。</li>
+    <li><b>观察</b>：两个 coding agent 同时工作，各自提交；工作在不同 repo 上互不干扰，到远端拉取彼此提交，冲突了自己修，必要时给 master 发消息。</li>
+    <li><b>升级问法</b>：把「我的老师说 git worktree 可以改进这样并行的工作方式，能让这两个 tmux sessions 都工作在 worktree 上吗」丢给 agent——演示「刷到新概念 → 立即让 agent 试」的循环。</li>
+    <li><b>考古</b>：查看 worktree 里的 <code>.git</code>——不是目录而是一个 <code>gitdir: ...</code> 文本文件，指向主仓库；agent 表示「这个也是我才知道的」。</li>
+    <li><b>结论</b>：worktree = 比虚拟机更轻量的 agent 并行方案，提交本地互相可见；冲突仍需 merge/rebase。</li>
+  </ol>
+  <h3>演示二 · 汉诺塔 playground（71:25 – 74:03）</h3>
+  <ol class="example-list">
+    <li><b>已备好的程序</b>：单向限制汉诺塔的递归解法，讲师课前写好并验证最优性（最大盘子固定向右两步 + 归纳）。</li>
+    <li><b>产品化设想</b>：代码可随时编辑，可视化随代码联动——写错时定位到具体语句（如「试图把小的移到大的上」）帮助找 bug。</li>
+    <li><b>变现设计</b>：「我要助教」按钮 → DeepSeek token 开始燃烧 → 按高于原价的 token 费记账；壁垒在独门 prompt（老教师的个性化指导经验蒸馏而成）。</li>
+    <li><b>需求梳理</b>：学生与 AI 讨论后由 GPT 归纳出标准架构（API + 关系数据库 + 对象存储 + 后台任务）——讲师用 Overleaf git 导出的体验反驳，提出「git 提交 + 分叉点评」替代数据库。</li>
+  </ol>
+  <h3>演示三 · 现场 webcode 个人助手（78:41 – 92:30）</h3>
+  <ol class="example-list">
+    <li><b>丢需求</b>：把 lab 1 实验要求原样丢给最强 agent，完全无准备。观察一线模型先进 plan mode 确认事实，再生成 workflow（Claude Code 用一段 TypeScript，函数体是自然语言，可含循环）。</li>
+    <li><b>跑</b>：300 token/s 直接开干，先让它跑一会儿。</li>
+    <li><b>复盘</b>：prompt 里每个词 self-attention 都会看到；开放讨论稿式需求 → 过度遵循 → 「满足指令但不是你想要的」。真正的言外之意只有一句：「实现一个持续为你工作的个人助手」。</li>
+    <li><b>追问</b>：补一句真实需求（学习助手：收集外部信息、综合总结、按进度学习），发现它在做 database，你要的收集与总结没有。</li>
+    <li><b>检查</b>：它甚至没建 git 仓库；产出是入口/编排/能力/数据四层的「教育系统」——每步都对，整体不要。</li>
+    <li><b>正确姿势</b>：第一件事先创建空的 git 仓库、写好 README（intent）；再往前迈一小步；早期 prompt 对项目走向影响最大。</li>
+  </ol>
+  <h3>Prompt 速查</h3>
+  <ol class="example-list">
+    <li><b>学新一代工具</b>（1.8）——用 first principle 代替肌肉记忆：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我如果要学 jujutsu（jj），想从 change 开始理解——帮我从「把 change 当一等公民」推导出它的整套工作流，对比 git 的对应操作。</p></div></li>
+    <li><b>并行环境提问</b>（2.6）——把刚看到的新名词立刻变成实验：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我的老师说 git worktree 可以改进这样并行的工作方式。那么能让这两个 tmux sessions 都工作在 worktree 上吗？</p></div></li>
+    <li><b>追真实需求</b>（3.6）——纠偏过度遵循的产出：<div class="prompt-box"><span class="plabel">PROMPT</span><p>其实我想要的是一个比较好的学习助手：能收集外部信息、综合总结、根据我的进度学习。看看你现在的方案，哪部分能实现我这个功能？</p></div></li>
+    <li><b>文件系统升级数据库</b>（3.7）——按需迁移的一句话方案：<div class="prompt-box"><span class="plabel">PROMPT</span><p>按照这个数据的组织，帮我搭建出一个数据库。</p></div></li>
+    <li><b>架构体检</b>（3.9）——需求变更后让 agent 审自己的架构：<div class="prompt-box"><span class="plabel">PROMPT</span><p>我希望邮件、资料等都和云盘保持同步。现在不知道它的架构做得好不好，你帮我看一看：这个变更会带来摧毁性的改动、技术债，还是从容应对？</p></div></li>
+  </ol>
+</section>
+
+</div><!-- /wrap -->
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1Q6en6NEUo">BV1Q6en6NEUo</a>　·　UP：绿导师原谅你了</li>
+          <li>写作底稿：work/ts_A–C.txt（faster-whisper 逐字稿，98 分钟全程覆盖）</li>
+          <li>术语基准：可视化笔记 footer 勘误表（13 条修正条目），本讲义扩展至 30 条</li>
+          <li>配套阅读：<a href="bili_summary_BV1Q6en6NEUo.html">bili_summary_BV1Q6en6NEUo.html</a>（可视化精读笔记）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>笔记性质</h4>
+        <ul>
+          <li>内容为对公开课程视频的听写整理与结构化讲义化改写；概念解释含整理者补充，非逐字稿出版物</li>
+          <li>思考题与附录 C 的说明为整理者补充</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

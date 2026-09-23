@@ -1,0 +1,39 @@
+{
+ "page": {
+  "scrollW": 1440,
+  "scrollH": 33878,
+  "viewportW": 1440
+ },
+ "svgTextOverlaps": [],
+ "svgTextOutOfBox": [],
+ "hOverflow": [],
+ "emptyBlocks": [],
+ "anchors": [
+  {
+   "id": "ch1",
+   "y": 993
+  },
+  {
+   "id": "ch2",
+   "y": 9410
+  },
+  {
+   "id": "ch3",
+   "y": 21565
+  },
+  {
+   "id": "apx-a",
+   "y": 28251
+  },
+  {
+   "id": "apx-b",
+   "y": 31037
+  },
+  {
+   "id": "apx-c",
+   "y": 31845
+  }
+ ],
+ "figures": [],
+ "svgTextInDom": []
+}

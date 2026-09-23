@@ -1,0 +1,363 @@
+<section class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>视频恢复—实操 (2)：浏览器是最好的入口</h2>
+        <div class="ch-play"><span class="dot"></span>48:34 – 65:10　·　6 小节</div>
+        <p class="ch-abstract">本章由一个真实的直播事故开场——USB 采集卡断了，讲师<strong>当场让 agent 修</strong>。接着他把视角从「单个 agent 能做什么」升到「生态能做什么」，核心论点是：<strong>浏览器是人类软件工程的奇迹之一，而 Chrome DevTools 是给开发者留的那个口子；普通人以前进不去，现在进得去了</strong>。这一章有全片最完整的一次「现场翻车 + 收敛」演示。</p>
+      </div>
+    </div>
+
+    <!-- 3.1 -->
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>直播事故：agent 用软件把 USB 拔了又插回去</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2914"><span class="tri"></span>回跳 48:34</a>
+
+      <p class="lead">这是全片最好的案例，因为它是<strong>计划外的、真实的、有物理约束的问题</strong>：教室的视频采集卡通过 USB 接入，中途断了；而接口在机器后面，讲师碰不到。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="USB 采集卡故障的处理过程">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">一个必须在「不能物理接触」约束下解决的问题</text>
+
+            <rect x="30" y="48" width="240" height="86" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="48" y="72" fill="#f8736e" font-size="11.5" font-weight="700">故障现象</text>
+            <text x="48" y="94" fill="#adbccd" font-size="11">左边摄像头画面还在动</text>
+            <text x="48" y="112" fill="#adbccd" font-size="11">但 USB 捕获设备掉了</text>
+            <text x="48" y="128" fill="#77879a" font-size="10">「不知道为什么断掉了」</text>
+
+            <rect x="302" y="48" width="240" height="86" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="320" y="72" fill="#46c6e0" font-size="11.5" font-weight="700">约束</text>
+            <text x="320" y="94" fill="#adbccd" font-size="11">「因为我是碰不到那个接口，</text>
+            <text x="320" y="112" fill="#adbccd" font-size="11">那个接口在机器的后面」</text>
+            <text x="320" y="128" fill="#77879a" font-size="10">硬件方案不可能，只能软件解</text>
+
+            <rect x="574" y="48" width="240" height="86" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="592" y="72" fill="#a98bfa" font-size="11.5" font-weight="700">发出的 prompt</text>
+            <text x="592" y="94" fill="#adbccd" font-size="11">「我的 USB 有问题，</text>
+            <text x="592" y="112" fill="#adbccd" font-size="11">能不能 reconnect」</text>
+            <text x="592" y="128" fill="#77879a" font-size="10">DeepSeek V4 Flash</text>
+
+            <rect x="846" y="48" width="204" height="86" rx="9" fill="rgba(63,214,140,.12)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="864" y="72" fill="#3fd68c" font-size="11.5" font-weight="700">结果</text>
+            <text x="864" y="94" fill="#adbccd" font-size="11">用软件方式把采集卡</text>
+            <text x="864" y="112" fill="#adbccd" font-size="11">「拔出来又插进去了」</text>
+            <text x="864" y="128" fill="#77879a" font-size="10">视频恢复正常</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="272" y1="91" x2="296" y2="91"/><polygon points="296,91 288,87 288,95"/>
+              <line x1="544" y1="91" x2="568" y2="91"/><polygon points="568,91 560,87 560,95"/>
+              <line x1="816" y1="91" x2="840" y2="91"/><polygon points="840,91 832,87 832,95"/>
+            </g>
+
+            <rect x="30" y="156" width="1020" height="60" rx="9" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="180" fill="#f0b429" font-size="11.5" font-weight="700">讲师的自我评价：</text>
+            <text x="50" y="204" fill="#adbccd" font-size="11.5">「它用你们前所未见的 Linux 命令——就有些其实我有概念，但是我也不知道它具体是怎么工作的。」</text>
+
+            <rect x="30" y="228" width="1020" height="56" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="252" fill="#adbccd" font-size="11.5"><tspan fill="#e9eff7" font-weight="700">这段演示能成立的两个前提：</tspan>① 讲师知道自己「有概念」——他能判断这个解法方向对不对；</text>
+            <text x="50" y="272" fill="#adbccd" font-size="11.5">② 问题边界清楚——目标就是「重新连上」，这是可验证的。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　这个案例的价值在于<b>它把「人的能力」和「AI 的能力」切得很干净</b>：讲师负责定义问题和判断方向（他懂 USB 子系统是干什么的），agent 负责找到并执行他从未见过的具体命令。后面第 3.4 节会给出一个反例——当讲师<strong>不在场</strong>时会发生什么。</figcaption>
+      </figure>
+
+      <div class="blk q">
+        <span class="label">回到「普通人」的主线</span>
+        <p>「我刚才说了还不是 AI 的真正的形态，作为普通人刚才我给大家展示的是一个白板的派——什么也没有。就是你在派的官方网站上把它安装下来，你配置一个 DeepSeek V4 Flash 的 API Key，<strong>你立即就可以得到刚才所有的那些东西。多么可怕的一件事。</strong>」</p>
+      </div>
+    </div>
+
+    <!-- 3.2 -->
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>agent 的生态：复用别人的能力，从未如此轻松</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3050"><span class="tri"></span>回跳 50:50</a>
+
+      <p class="lead">讲师用一条他自己讲的「计算机科学的定律」作为铺垫，说明为什么在 AI 时代「复用」这件事的性质变了。</p>
+
+      <blockquote>
+        <p>「我上课的时候一直会说 computer science 的定律：如果有一件事情它是合理的、并且你想做，那么百分之百一定也有别人会想做。」</p>
+        <cite>—— 约 51:20</cite>
+      </blockquote>
+
+      <figure>
+        <svg viewBox="0 0 1080 292" role="img" aria-label="pre-AI 时代与 AI 时代的复用方式对比">
+          <rect x="0" y="0" width="1080" height="292" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="40" width="490" height="120" rx="10" fill="rgba(91,156,248,.06)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="50" y="66" fill="#5b9cf8" font-size="12.5" font-weight="700">pre-AI 时代</text>
+            <text x="50" y="92" fill="#adbccd" font-size="11.5">「那么开源社区多多少少就会来公开一些脚本。」</text>
+            <text x="50" y="116" fill="#adbccd" font-size="11.5">你要做的事情：去 GitHub 找到它、拉下来、读懂它、</text>
+            <text x="50" y="138" fill="#adbccd" font-size="11.5">改造成自己的场景。</text>
+            <text x="50" y="158" fill="#77879a" font-size="10.5">门槛在于「读懂命令式代码」。</text>
+
+            <rect x="560" y="40" width="490" height="120" rx="10" fill="rgba(63,214,140,.06)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="580" y="66" fill="#3fd68c" font-size="12.5" font-weight="700">AI 时代</text>
+            <text x="580" y="92" fill="#adbccd" font-size="11.5">「做这件事情复用别人的能力<tspan fill="#e9eff7" font-weight="700">变得前所未有的轻松</tspan>。」</text>
+            <text x="580" y="116" fill="#adbccd" font-size="11.5">「我可以往 SkillHub 上面发一个 Skill，</text>
+            <text x="580" y="138" fill="#adbccd" font-size="11.5">然后你可以在派的插件生态上面找到一个插件。」</text>
+            <text x="580" y="158" fill="#77879a" font-size="10.5">门槛降到「看得懂自然语言的说明书」。</text>
+
+            <rect x="30" y="180" width="1020" height="100" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="206" fill="#f0b429" font-size="12" font-weight="700">讲师给「普通人」的行动建议（原话）：</text>
+            <text x="50" y="232" fill="#e9eff7" font-size="12">「所以你们想到应该下一步作为一个普通人，你应该做什么？应该用插件把浏览器管控起来，应该用插件把电脑管控起来。」</text>
+            <text x="50" y="258" fill="#77879a" font-size="10.5">这两句直接引出本章剩下全部内容——先讲浏览器为什么是「奇迹」，再讲怎么管控它。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左栏和第 1.5 节讲的「content as code」是同一套思路：<b>过去复用的是代码，现在复用的是「意图的说明书」</b>。这也解释了为什么这一讲的每个案例都要特意标出「用了什么 skill」——skill 是新的复用单元。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 3.3 -->
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>Chrome DevTools 为什么是「人类软件工程史上的奇迹之一」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3160"><span class="tri"></span>回跳 52:40</a>
+
+      <p class="lead">这是本章的技术核心。讲师先花了几分钟讲浏览器的复杂度，再讲 DevTools 这个口子，最后讲他 2020 年做过的一个「疯狂」的项目作为能力上限的佐证。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 356" role="img" aria-label="浏览器复杂度、DevTools 与它的能力上限">
+          <rect x="0" y="0" width="1080" height="356" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="34" width="500" height="104" rx="10" fill="rgba(70,198,224,.07)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="58" fill="#46c6e0" font-size="12" font-weight="700">为什么浏览器是「奇迹」</text>
+            <text x="50" y="82" fill="#adbccd" font-size="11.5">「它的代码量甚至远超操作系统内核，</text>
+            <text x="50" y="102" fill="#adbccd" font-size="11.5">因为它要和用户打交道，它有大量的比如图形栈、</text>
+            <text x="50" y="122" fill="#adbccd" font-size="11.5">还有显示相关的东西、性能优化等等。」</text>
+            <text x="50" y="138" fill="#77879a" font-size="10">「看起来就是个浏览器显示网页的」——但远不止。</text>
+
+            <rect x="550" y="34" width="500" height="104" rx="10" fill="rgba(169,139,250,.07)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="570" y="58" fill="#a98bfa" font-size="12" font-weight="700">DevTools 是给开发者留的那个口子</text>
+            <text x="570" y="82" fill="#adbccd" font-size="11.5">F12 打开；可以删元素、调试；</text>
+            <text x="570" y="102" fill="#adbccd" font-size="11.5">在 console 能看到很多信息、HTTP 头；</text>
+            <text x="570" y="122" fill="#adbccd" font-size="11.5"><tspan fill="#e9eff7" font-weight="700">可以把请求 copy 成 curl</tspan>，带着 cookie 和全部状态。</text>
+
+            <rect x="30" y="156" width="1020" height="76" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="180" fill="#77879a" font-size="11">关键是这句话（讲师原话）：</text>
+            <text x="50" y="204" fill="#e9eff7" font-size="12">「这都是以前——就是在 pre-LLM 时代，开发者做的事情。但是在 LLM 时代变了，<tspan fill="#3fd68c" font-weight="700">普通人也可以享受到 Chrome DevTools 的所有的厉害的地方</tspan>。」</text>
+            <text x="50" y="224" fill="#77879a" font-size="10.5">过去的门槛是「你得会写代码去操作它」，现在的门槛只是「你得说清你想要什么」。</text>
+
+            <rect x="30" y="248" width="1020" height="94" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="272" fill="#f0b429" font-size="11.5" font-weight="700">2020 年那个「非常非常疯狂的 project」（讲师用来证明 DevTools 的能力上限）：</text>
+            <text x="50" y="296" fill="#adbccd" font-size="11.5">Android 应用可以用 Java 写 → Java/Kotlin 编译到 JVM → 在 OpenJDK 上运行 Android App → 把界面所有按钮的坐标和文本算出来</text>
+            <text x="50" y="316" fill="#adbccd" font-size="11.5">→ <tspan fill="#e9eff7" font-weight="700">不走 Android 的渲染，直接在 Chrome 里画出那个计算器</tspan>，按钮位置和文字都对，点了状态还会变。</text>
+            <text x="50" y="336" fill="#77879a" font-size="10.5">「我可以在本机执行一个 Android。」→「这是一个非常非常 powerful 的工具。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜分层</b>　三层从下到上讲同一件事：<b>能力一直在那儿，缺的只是「谁能操作它」</b>。这也是第 3.5 节「从一次成功到抢课脚本」得以成立的机制基础——DevTools 让 agent 有了眼睛和手。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 3.4 -->
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>现场翻车：让 AI 去填教务系统，它一开始不听指令</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3330"><span class="tri"></span>回跳 55:30</a>
+
+      <p class="lead">这是全片最有价值的一段，因为它展示了<strong>真实的失败过程</strong>，而不是剪好的成功案例。任务是：填教学周历（讲师非常讨厌填这个）。</p>
+
+      <div class="blk pit">
+        <span class="label">翻车点 1 · 不听指令</span>
+        <p>讲师说：「帮我用随便什么 AI 填写，<strong>不要看任何东西</strong>。」因为如果不加这句，agent 会去读他目录里的 ripple 之类的其他文件。结果——「你看他还在干这个事，对吧，我就是想让他去填。你看他他就是不听指令。」</p>
+        <p>讲师把原因归给了模型选择：「这是 DeepSeek V4 Flash 的问题。如果是最一线的模型它会知道。<strong>翻车也是经常有的，所以模型其实还在不断的能力增长中。</strong>」</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 296" role="img" aria-label="现场翻车到收敛的完整过程">
+          <rect x="0" y="0" width="1080" height="296" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">现场演示：从「不听指令」到「自己找到正确方式」</text>
+
+            <rect x="30" y="48" width="190" height="94" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="46" y="72" fill="#f8736e" font-size="11.5" font-weight="700">① 不听指令</text>
+            <text x="46" y="94" fill="#adbccd" font-size="10.5">让它别读文件，</text>
+            <text x="46" y="112" fill="#adbccd" font-size="10.5">它还是去读了</text>
+            <text x="46" y="132" fill="#77879a" font-size="10">「他不看翻车也是经常有的」</text>
+
+            <rect x="244" y="48" width="190" height="94" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="260" y="72" fill="#f0b429" font-size="11.5" font-weight="700">② 尝试方案 A</text>
+            <text x="260" y="94" fill="#adbccd" font-size="10.5">「直接注入一个试点</text>
+            <text x="260" y="112" fill="#adbccd" font-size="10.5">的方式」</text>
+            <text x="260" y="132" fill="#77879a" font-size="10">失败</text>
+
+            <rect x="458" y="48" width="190" height="94" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="474" y="72" fill="#5b9cf8" font-size="11.5" font-weight="700">③ 反思</text>
+            <text x="474" y="94" fill="#adbccd" font-size="10.5">「他会不断的反思他做的</text>
+            <text x="474" y="112" fill="#adbccd" font-size="10.5">这件事情合不合理」</text>
+            <text x="474" y="132" fill="#77879a" font-size="10">「刚开始在尝试」</text>
+
+            <rect x="672" y="48" width="190" height="94" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="688" y="72" fill="#a98bfa" font-size="11.5" font-weight="700">④ 换成点坐标</text>
+            <text x="688" y="94" fill="#adbccd" font-size="10.5">「但是点坐标</text>
+            <text x="688" y="112" fill="#adbccd" font-size="10.5">是可以的」</text>
+            <text x="688" y="132" fill="#77879a" font-size="10">找到能走通的路</text>
+
+            <rect x="886" y="48" width="164" height="94" rx="9" fill="rgba(63,214,140,.14)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="902" y="72" fill="#3fd68c" font-size="11.5" font-weight="700">⑤ 成功</text>
+            <text x="902" y="94" fill="#adbccd" font-size="10.5">「他已经开始可以</text>
+            <text x="902" y="112" fill="#adbccd" font-size="10.5">填写了」</text>
+            <text x="902" y="132" fill="#77879a" font-size="10">讲师：完全不需要插手</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="222" y1="95" x2="238" y2="95"/><polygon points="238,95 230,91 230,99"/>
+              <line x1="436" y1="95" x2="452" y2="95"/><polygon points="452,95 444,91 444,99"/>
+              <line x1="650" y1="95" x2="666" y2="95"/><polygon points="666,95 658,91 658,99"/>
+              <line x1="864" y1="95" x2="880" y2="95"/><polygon points="880,95 872,91 872,99"/>
+            </g>
+
+            <rect x="30" y="162" width="1020" height="118" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="186" fill="#77879a" font-size="11">为什么他愿意在课上用一个「会翻车」的模型：</text>
+            <text x="50" y="210" fill="#adbccd" font-size="11.5">「如果我用最一线的模型，它就会遵循的更好。我用 Flash 还有一个原因，就是它在课上会更快，所以没关系。」</text>
+            <text x="50" y="238" fill="#3fd68c" font-size="11.5" font-weight="700">「所以说 Chrome DevTools 是一个非常强大的工具。」</text>
+            <text x="50" y="262" fill="#adbccd" font-size="11.5">它的价值不在「一次成功」，而在<tspan fill="#e9eff7" font-weight="700">「走通过一次以后」</tspan>——这一步直接引出下一节。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流程</b>　注意第 ① 到 ④ 步的颜色：<b>红色是「人的失望」，琥珀/蓝色是「agent 的自救」</b>。讲师没有把翻车剪掉，反而借此说明了一个重要判断——<strong>模型的指令遵循能力差异，在「反复重试」这种能力面前已经不是决定性的了</strong>。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 3.5 -->
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>从一次成功到自动抢课脚本：能力真正的边界在哪里</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3500"><span class="tri"></span>回跳 58:20</a>
+
+      <p class="lead">讲师当场把上一节的结论推进了一步，这是本章最关键的一段推论。</p>
+
+      <div class="blk q">
+        <span class="label">三连推论（讲师原话）</span>
+        <ul>
+          <li>「当它走通过一次以后，<strong>这个 session 里面的东西会留下来</strong>。」</li>
+          <li>「我可以把它沉淀成<strong>确定性的脚本</strong>，对吧，它可以形成记忆——就是说这条路径应该怎么走、什么能成功、什么能失败。」</li>
+          <li>「它也可以把走过的这些网页成功变成脚本，<strong>你就得到了一个自动选课抢课的系统</strong>。」</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 264" role="img" aria-label="从探索到沉淀的三级跃迁">
+          <rect x="0" y="0" width="1080" height="264" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">同一件事的三级形态：探索 → 记忆 → 确定性脚本</text>
+
+            <rect x="30" y="48" width="320" height="110" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="74" fill="#f0b429" font-size="12" font-weight="700">① 探索期</text>
+            <text x="50" y="98" fill="#adbccd" font-size="11.5">agent 反复试错，「刚开始在尝试」</text>
+            <text x="50" y="120" fill="#adbccd" font-size="11.5">慢、不稳定、会翻车</text>
+            <text x="50" y="144" fill="#77879a" font-size="10.5">代价：token + 时间</text>
+
+            <rect x="380" y="48" width="320" height="110" rx="10" fill="rgba(91,156,248,.08)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="400" y="74" fill="#5b9cf8" font-size="12" font-weight="700">② 记忆期</text>
+            <text x="400" y="98" fill="#adbccd" font-size="11.5">session 里的东西留下来</text>
+            <text x="400" y="120" fill="#adbccd" font-size="11.5">「什么能成功、什么能失败」</text>
+            <text x="400" y="144" fill="#77879a" font-size="10.5">代价：需要人来判断哪些该沉淀</text>
+
+            <rect x="730" y="48" width="320" height="110" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="750" y="74" fill="#3fd68c" font-size="12" font-weight="700">③ 确定性脚本</text>
+            <text x="750" y="98" fill="#adbccd" font-size="11.5">「走的这些网页成功变成脚本」</text>
+            <text x="750" y="120" fill="#e9eff7" font-size="11.5" font-weight="700">→ 自动选课抢课系统</text>
+            <text x="750" y="144" fill="#77879a" font-size="10.5">代价：几乎为零，可重复执行</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="352" y1="103" x2="374" y2="103"/><polygon points="374,103 366,99 366,107"/>
+              <line x1="702" y1="103" x2="724" y2="103"/><polygon points="724,103 716,99 716,107"/>
+            </g>
+
+            <rect x="30" y="176" width="1020" height="72" rx="10" fill="rgba(248,115,110,.06)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="50" y="200" fill="#f8736e" font-size="11.5" font-weight="700">讲师对这件事的评价（带一点自嘲）：</text>
+            <text x="50" y="224" fill="#adbccd" font-size="11.5">「所以这是多么恐怖的一件事，对吧——你不需要有任何的知识。他就在这里帮我填写。如果我要对付本科生院一定要我填的话，我就用这个方式来处理。」</text>
+            <text x="50" y="242" fill="#77879a" font-size="10.5">注意「不需要任何知识」是夸张说法：前面他自己承认要靠「有概念」来判断方向。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜演化</b>　三级形态里，<b>第 ② 步是唯一需要人的</b>——判断「哪些该沉淀、哪些不该」。这个判断在第 02 讲会以「记忆该不该交给 AI 管」的形式再出现一次（讲师当时说他不喜欢 AI 总揽 memory）。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">本章的技术结论</span>
+        <p>浏览器之所以是最好的入口，是因为<strong>它同时提供了三样东西</strong>：① 一个几乎覆盖所有日常事务的操作面（教务、邮箱、网盘、后台）；② DevTools 这个给开发者的完整观测/操作接口；③ 网页操作天然可验证（填进去了没、页面变没变）。</p>
+      </div>
+    </div>
+
+    <!-- 3.6 -->
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>信息飞轮：为什么 skill 可以互相组合，而 1+1 大于 2</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3640"><span class="tri"></span>回跳 60:40</a>
+
+      <p class="lead">本章收束于一个「系统」层面的判断。讲师先引用 Unix 哲学，再解释为什么这套东西在 AI 时代第一次真正生效。</p>
+
+      <blockquote>
+        <p>「Unix 的 philosophy 它能成立的原因就是那个管道能实现所有程序的自由组合和无限复用，<strong>一加一是可以大于二的</strong>。」</p>
+        <cite>—— 约 61:10</cite>
+      </blockquote>
+
+      <figure>
+        <svg viewBox="0 0 1080 366" role="img" aria-label="信息飞轮的组成与运转">
+          <rect x="0" y="0" width="1080" height="366" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <!-- sources -->
+            <rect x="30" y="46" width="250" height="150" rx="10" fill="rgba(70,198,224,.07)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="72" fill="#46c6e0" font-size="12" font-weight="700">输入 · 大量信息源</text>
+            <text x="50" y="98" fill="#adbccd" font-size="11">✓ AI 早报（讲师提到的那份）</text>
+            <text x="50" y="120" fill="#adbccd" font-size="11">✓ B 站推送</text>
+            <text x="50" y="142" fill="#adbccd" font-size="11">✓ Archive 推送</text>
+            <text x="50" y="164" fill="#adbccd" font-size="11">✓ Hacker News 推送</text>
+            <text x="50" y="186" fill="#77879a" font-size="10.5">「他有 RSS 的，他有这个推送源的」</text>
+
+            <!-- process -->
+            <rect x="310" y="46" width="250" height="150" rx="10" fill="rgba(169,139,250,.07)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="330" y="72" fill="#a98bfa" font-size="12" font-weight="700">处理 · 沉淀</text>
+            <text x="330" y="98" fill="#adbccd" font-size="11">「这些东西我都可以做一次，</text>
+            <text x="330" y="118" fill="#adbccd" font-size="11">沉淀成 skill 或者沉淀成脚本」</text>
+            <text x="330" y="146" fill="#77879a" font-size="10.5">全是自然语言：</text>
+            <text x="330" y="168" fill="#e9eff7" font-size="11" font-weight="700">「你一行代码都不用写」</text>
+            <text x="330" y="186" fill="#77879a" font-size="10.5">但可以复用</text>
+
+            <!-- output -->
+            <rect x="590" y="46" width="230" height="150" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="610" y="72" fill="#3fd68c" font-size="12" font-weight="700">输出 · 有用的知识</text>
+            <text x="610" y="100" fill="#adbccd" font-size="11">「这个处理系统最终</text>
+            <text x="610" y="120" fill="#adbccd" font-size="11">会产生有用的知识」</text>
+            <text x="610" y="150" fill="#77879a" font-size="10.5">循环的关键动作：</text>
+            <text x="610" y="174" fill="#e9eff7" font-size="11" font-weight="700">「你会不断地调整</text>
+            <text x="610" y="190" fill="#e9eff7" font-size="11" font-weight="700">这个工作流」</text>
+
+            <!-- wheel -->
+            <circle cx="920" cy="121" r="66" fill="none" stroke="#240" stroke-width="0"/>
+            <circle cx="920" cy="121" r="62" fill="rgba(240,180,41,.06)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="920" y="114" fill="#f0b429" font-size="11.5" font-weight="700" text-anchor="middle">飞轮</text>
+            <text x="920" y="136" fill="#adbccd" font-size="10.5" text-anchor="middle">越转越有价值</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="282" y1="121" x2="304" y2="121"/><polygon points="304,121 296,117 296,125"/>
+              <line x1="562" y1="121" x2="584" y2="121"/><polygon points="584,121 576,117 576,125"/>
+              <line x1="822" y1="121" x2="852" y2="121"/><polygon points="852,121 844,117 844,125"/>
+            </g>
+
+            <path d="M 920 185 A 64 64 0 1 1 858 121" fill="none" stroke="#f0b429" stroke-width="1.4" stroke-dasharray="5 4"/>
+            <polygon points="858,121 866,113 852,113" fill="#f0b429"/>
+
+            <rect x="30" y="218" width="500" height="128" rx="10" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="244" fill="#f0b429" font-size="11.5" font-weight="700">为什么组合能放大能力</text>
+            <text x="50" y="268" fill="#adbccd" font-size="11.5">「从一<tspan fill="#e9eff7" font-weight="700">个上下文</tspan>里面提取这个记忆和脚本的能力」是一种 skill；</text>
+            <text x="50" y="288" fill="#adbccd" font-size="11.5">「在网页上面怎么浏览」是另一种 skill；</text>
+            <text x="50" y="312" fill="#e9eff7" font-size="11.5" font-weight="700">「他们是可以加在一起互相调用的」。</text>
+            <text x="50" y="334" fill="#77879a" font-size="10.5">讲师判断：「这个 AI agent 的生态其实已经达到了一个临界点。」</text>
+
+            <rect x="550" y="218" width="500" height="128" rx="10" fill="rgba(248,115,110,.06)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="570" y="244" fill="#f8736e" font-size="11.5" font-weight="700">讲师对「自我进化」的两点保留</text>
+            <text x="570" y="268" fill="#adbccd" font-size="11.5">① 他不惊讶：「虽然说我做一个 CS professional，我其实不惊讶。」</text>
+            <text x="570" y="292" fill="#adbccd" font-size="11.5">② 他讨厌 AI 自作主张记 memory：「他会把一些我不想让他记住的东西记住，</text>
+            <text x="570" y="312" fill="#adbccd" font-size="11.5">我想让他记住的东西不记住。所以我更多的时候是调用我自己的流程，</text>
+            <text x="570" y="332" fill="#e9eff7" font-size="11.5" font-weight="700">把这个东西写到我的数据库里」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜系统</b>　左侧三段是讲师描述的信息流；右侧那个环是它的价值来源——<b>「你会不断地调整这个工作流，然后它就会不断地产生对你有用的知识」</b>。右下那段保留也很重要：<strong>他对「让 AI 自己管记忆」是明确抵触的</strong>，这与第 02 讲里「上下文污染」的讨论同源。</figcaption>
+      </figure>
+
+      <div class="blk q">
+        <span class="label">本章最后一段，是直接对听众说的</span>
+        <p>「让你想象一个拥有这样飞轮的人——你在这个飞轮上，而（另一个人）没有飞轮上，这是一个多么可怕的事情。所以这时候你可以理解为什么 Open Cloud 和 Ermas 是一个现象级的产品、为什么他们能给人这么多惊喜。」</p>
+        <p>以及一句很直白的自我判断：「当有一天模型过了那个临界点的时候，我现在就比 AI 多一点点，我比 AI 多的那一点点也被 AI 取代以后，我也被消灭了。」</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,292 @@
+<div class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>无处不在的架构</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=2668" target="_blank"><span class="dot"></span>44:28 – 72:32</a>
+      </div>
+    </div>
+    <p class="ch-abstract">讲师先反驳一个流行印象：<strong>架构不是玄学，也不是只有大系统才有的东西</strong>。它的本质就一件事——<strong>控制复杂性</strong>。然后他用三个尺度的例子把这件事讲穿：十行的非递归汉诺塔、两千行的 Excel 二维码生成器，以及在两者之间反复出现的那条主线——<strong>把问题抽象成一层中间表示，而不是直接硬写</strong>。</p>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>架构就是控制复杂性</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=2668" target="_blank"><span class="tri"></span>44:28</a>
+      <p>讲师从上一章的技术债接过来：解决它的方式是<strong>架构</strong>。他先纠正了一个误解。</p>
+      <div class="blk q">
+        <span class="label">关于架构的三个常见误解与纠正</span>
+        <ul>
+          <li><strong>误解：架构很高大上、有玄学。</strong>纠正：不是的。从你第一次设计任何代码、任何系统的时候，无论它多小，它里面都有架构思维</li>
+          <li><strong>误解：先做个 MVP 就行，架构以后再说。</strong>纠正：MVP 那个 AI 生成的 slop 已经<strong>不能算 MVP 了</strong>，它已经是一个小型产品原型，维护它会变得非常困难</li>
+          <li><strong>误解：架构是需求都定完之后的下一步。</strong>纠正：架构和需求是连在一起的——<strong>你没有需求就不用谈架构了</strong></li>
+        </ul>
+      </div>
+      <p>讲师给出的定义很干脆：<strong>架构本质上就是「怎么样去控制一个东西的复杂性」</strong>。而当代码稍微有一点规模，你就可以开始考虑「这个复杂性应该怎么分解」。</p>
+      <p>他随即用两个小例子说明架构无处不在：</p>
+      <div class="blk steps">
+        <span class="label">两个「小到不能再小」的架构</span>
+        <ol>
+          <li><strong>写 OJ 时的 main</strong>：<code>read input</code> → <code>parse input</code> → <code>process input</code> → <code>write output</code>。这四步的切分本身就是一种分解复杂性的方式</li>
+          <li><strong>命令行程序的 argv 处理</strong>：这是操作系统和进程之间的约定，它会传过来一个 vector of arguments。你会写 <code>string compare</code> 吗？不会——你会用 <code>getopt</code>，配一个 switch-case 和一个 while 循环</li>
+        </ol>
+      </div>
+      <p>讲师特别强调了 <code>getopt</code> 这个例子的价值：argv 本身是<strong>非常复杂的东西</strong>（支持长参数、短参数、POSIX 标准）。而 getopt 这个架构的作用，就是<strong>把这份复杂性隔开</strong>。你因此学会了一种「parser 的架构模式」。</p>
+      <div class="blk pit">
+        <span class="label">讲师在这里讲了段很不客气的话</span>
+        <p>他说他很讨厌那种「<strong>语言律师</strong>」式的授课方式。举例：你要求讲 C++ 的 lambda，老教师的回应是「我讲了呀」——然后他讲的只是 <code>[](){}</code> 的语法，没有讲这个特性应该怎么用。「这个讲了和没讲有什么区别呢？」</p>
+      </div>
+      <p>所以讲师的方法是：<strong>你看到的每一个东西，都要往后想一层——它为什么长这样，它在解决什么复杂性</strong>。getopt 的价值不在于它是个函数，而在于它<strong>把「一个复杂的字符串」变成「一个简单的 parse state」，从而是一种抵抗需求变化的方式</strong>。</p>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>十行的架构：非递归汉诺塔</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=3060" target="_blank"><span class="tri"></span>51:00</a>
+      <p>讲师用一个十行的题目来说明「架构关乎你对需求掌握到什么程度」。这个题目是：<strong>写一个非递归的汉诺塔</strong>。他说他以前问过刚保研的研究生，能不能写出来——研究生摇头。所以它成了一个课堂例子。</p>
+      <p>讲师给同一个 prompt 试了多个模型，结果各不相同，而这正好展示了「架构品位的差异」。</p>
+      <div class="blk q">
+        <span class="label">同一个 prompt，不同模型的四种反应</span>
+        <ul>
+          <li><strong>GPT-6「我不做人类了」</strong>：它说「你写不出来是因为你的数学不如我好」，然后找到了汉诺塔的数学性质——盘子移动方向等于 (n + 二进制末尾 0 的个数) 之类的关系，写出了极度优化的代码。讲师说「它应该是对的，但你看不明白」</li>
+          <li><strong>DeepSeek 写得更有人感</strong>：它写了一个非常优雅、非常干净的架构，用<strong>显式的栈</strong>保存「还要继续执行的任务」，每次都执行栈顶的任务。这是标准解法</li>
+          <li><strong>豆包选对了方案但代码有瑕疵</strong>：思路和 DeepSeek 基本一致，但实现上有问题</li>
+          <li><strong>CSDN 上的博客</strong>：讲师搜到的第一个非递归汉诺塔代码<strong>比 AI Slop 问题还严重</strong>（他甚至怀疑那些「高质量」的样子是 AI 营造出来的）。他的评价是：与其看这个，「你还不如跟 AI 学」</li>
+        </ul>
+      </div>
+      <p>在展示完这些之后，讲师给出了<strong>他自己的解法思路</strong>，这段是这一节的核心。</p>
+      <figure>
+        <svg viewBox="0 0 1040 340" role="img" aria-label="从形式语义到状态机再到最终实现">
+          <rect x="0" y="0" width="1040" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">讲师的思路：不从「怎么写非递归」入手，而从「C 语言是什么」入手</text>
+
+            <rect x="30" y="48" width="222" height="110" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="46" y="72" fill="#46c6e0" font-size="11.5" font-weight="700">① 程序是一个状态机</text>
+            <text x="46" y="94" fill="#adbccd" font-size="10.5">C 语言有明确的「状态」</text>
+            <text x="46" y="114" fill="#77879a" font-size="10.5">单步行为由 operational</text>
+            <text x="46" y="130" fill="#77879a" font-size="10.5">semantics（操作语义）定义</text>
+            <text x="46" y="148" fill="#adbccd" font-size="10.5">→ 讲师花一整节课讲这个</text>
+
+            <rect x="276" y="48" width="222" height="110" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="292" y="72" fill="#5b9cf8" font-size="11.5" font-weight="700">② 小步骤是良定义的</text>
+            <text x="292" y="94" fill="#adbccd" font-size="10.5">例如「hanoi(n-1)」</text>
+            <text x="292" y="114" fill="#adbccd" font-size="10.5">在程序语言的世界里</text>
+            <text x="292" y="130" fill="#77879a" font-size="10.5">是一个 well-defined 的操作</text>
+            <text x="292" y="148" fill="#77879a" font-size="10.5">→ 所以可以「模拟」它</text>
+
+            <rect x="522" y="48" width="222" height="110" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="538" y="72" fill="#f0b429" font-size="11.5" font-weight="700">③ 写一个解释器</text>
+            <text x="538" y="94" fill="#adbccd" font-size="10.5">把形式语义的小步语义</text>
+            <text x="538" y="114" fill="#adbccd" font-size="10.5">翻译成一个状态机表示</text>
+            <text x="538" y="132" fill="#77879a" font-size="10.5">→ 于是任意递归程序</text>
+            <text x="538" y="148" fill="#77879a" font-size="10.5">都能机械地变成非递归</text>
+
+            <rect x="768" y="48" width="242" height="110" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="784" y="72" fill="#3fd68c" font-size="11.5" font-weight="700">④ 对汉诺塔来说 overkill</text>
+            <text x="784" y="94" fill="#adbccd" font-size="10.5">通用解释器太笨重了</text>
+            <text x="784" y="114" fill="#adbccd" font-size="10.5">做一个 simplification / 优化</text>
+            <text x="784" y="132" fill="#77879a" font-size="10.5">就退化成那份干净的标准解法</text>
+            <text x="784" y="148" fill="#77879a" font-size="10.5">两者是等价的</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="254" y1="103" x2="272" y2="103"/><polygon points="272,103 264,99 264,107"/>
+              <line x1="500" y1="103" x2="518" y2="103"/><polygon points="518,103 510,99 510,107"/>
+              <line x1="746" y1="103" x2="764" y2="103"/><polygon points="764,103 756,99 756,107"/>
+            </g>
+
+            <line x1="30" y1="180" x2="1010" y2="180" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="204" fill="#77879a" font-size="11.5">讲师给出的「品位」判断</text>
+            <rect x="30" y="216" width="470" height="106" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="238" fill="#adbccd" font-size="11.5" font-weight="700">为什么这是理解 C 语言的好机会</text>
+            <text x="46" y="260" fill="#77879a" font-size="10.5">表面上是在做一道算法题</text>
+            <text x="46" y="278" fill="#77879a" font-size="10.5">实际上是把「递归 ↔ 非递归」还原成</text>
+            <text x="46" y="296" fill="#77879a" font-size="10.5">「形式语义 ↔ 状态机」这一组等价关系</text>
+            <text x="46" y="314" fill="#adbccd" font-size="10.5">→ 一道题串起了整门程序语言课</text>
+
+            <rect x="520" y="216" width="490" height="106" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="536" y="238" fill="#adbccd" font-size="11.5" font-weight="700">对模型的判断</text>
+            <text x="536" y="260" fill="#77879a" font-size="10.5">GPT-6 其实「懂」，但它不会往这个方向想</text>
+            <text x="536" y="278" fill="#77879a" font-size="10.5">所以讲师说自己还有信心守住品位</text>
+            <text x="536" y="296" fill="#77879a" font-size="10.5">并认为强化学习可以把它往这个方向引导</text>
+            <text x="536" y="314" fill="#adbccd" font-size="10.5">→ 一旦学会，它在适当的时候也能做出这个实现</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜十行的架构</b>　这张图最值得记住的是①②③这条链：<strong>讲师没有把「非递归汉诺塔」当成一个算法技巧题，而是把它当成「C 语言的形式语义」的一次应用</strong>。换句话说，你写不出非递归版本，不是因为你不懂汉诺塔，而是因为你对递归的本质理解不够深。这就是他说的「架构关乎你对需求掌握到什么程度」——<strong>你对问题的理解层次，决定了你写出来的东西是什么形状</strong>。</figcaption>
+      </figure>
+      <p>讲师还特别回应了「为什么大家写不出来」这个问题：<strong>大家写不出来的时候，是因为对「递归」这件事理解得不够深</strong>。而他课上讲过的一个技巧是——<strong>任意程序都可以翻译成递归与非递归两种等价形式</strong>，你只要能写出 C 语言的解释器，把任何代码做这个转换「就没有任何难度」。</p>
+    </div>
+
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>同一个汉诺塔的四种表达</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=3360" target="_blank"><span class="tri"></span>56:00</a>
+      <p>讲师把上面的分析收了尾，把四种代码放在一起做了一次「架构水平的横向对比」。</p>
+      <div class="kv">
+        <div>GPT-6</div><div>「一切都是数学规律」——从数学性质直接推出移动序列。<strong>跳出了问题，但也跳出了「给人读」这件事</strong></div>
+        <div>DeepSeek</div><div>「递归是栈、递归是栈」——它在语料里学到了这个反复出现的表述，于是做了一个<strong>正确的、可读的</strong>实现</div>
+        <div>讲师自己</div><div>「你们对编程语言世界的理解，投射成了递归与非递归的区别」——<strong>再往外走了一步</strong>，把它还原成语义层面的等价</div>
+        <div>CSDN 那份</div><div>「这个就属于是训练还没有收敛的」——讲师用这句话很客气地评价了那份质量堪忧的代码</div>
+      </div>
+      <p>讲师由此得出结论：<strong>你在任何一个小的地方，都能看出架构水平的高低</strong>。而这句话正是这一章标题「无处不在的架构」的注脚——它不是只有大系统才有的东西，十行代码就能看出差别。</p>
+    </div>
+
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>架构能力从哪来</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=3480" target="_blank"><span class="tri"></span>58:00</a>
+      <p>在进入两千行的例子之前，讲师先回答了那个必然会被问到的问题：<strong>架构的能力从哪来？</strong></p>
+      <blockquote>
+        <p>从你学过的每一个东西上来。如果它是好的、它是优雅的，它促进了你对这个问题的思考。</p>
+        <cite>讲师回答架构能力的来源（约 58:00 处）</cite>
+      </blockquote>
+      <p>他给了一句很凝练的表述：<strong>压缩就是智能</strong>。你把一个问题压缩了，你就得到了那个 <strong>first principle</strong>——而有了第一性原理，你就能从它去推导应该怎么做。</p>
+      <div class="blk q">
+        <span class="label">架构能力的三类来源</span>
+        <ul>
+          <li><strong>学校里的学习</strong>：那些「好的、优雅的」知识，它们促进了你的思考方式</li>
+          <li><strong>社会上的积累</strong>：你必须和「除了教科书、除了做题之外的人」打交道，才能知道一个马上就要退休的、优雅的教务老师是怎么看待教务系统的</li>
+          <li><strong>共情能力</strong>：这是讲师反复强调的——你的想法总是「最好的数据库、最高的性能」，但她只是想要那个字大一点、点鼠标时不要手滑到边上那个按钮</li>
+        </ul>
+      </div>
+      <p>讲师把这条线和第 2 章的「同理心」接上了：<strong>架构的好坏有一部分取决于你知不知道用户真正在意什么</strong>。而这一点，靠刷题刷不出来。</p>
+    </div>
+
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>两千行的架构：Excel 生成二维码</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=3540" target="_blank"><span class="tri"></span>59:00</a>
+      <p>讲师换到另一个量级：两千行。他在课上讲过一个例子——<strong>用 Excel 生成二维码</strong>：把一个长字符串编码成能直接扫描的二维码，全部在 Excel 里完成（第一个 sheet 放输入，其他单元格做计算，最后打出一个 01 矩阵）。</p>
+      <p>讲师要求用软件工程的概念重新理解这个问题。他先说了一个反直觉的判断：</p>
+      <div class="blk q">
+        <span class="label">这个需求看起来非常明确</span>
+        <ul>
+          <li>需求就是「Excel 的一个单元格」：有输入的单元格、有输出的单元格</li>
+          <li>它是一个<strong>非常 deterministic 的任务</strong>——没有任何模糊之处</li>
+          <li>但即便如此，<strong>它里面仍然有架构的考虑</strong></li>
+        </ul>
+      </div>
+      <p>讲师先演示了 AI 在这个任务上的表现，并提出了一个很有意思的观察：<strong>agent 对自己的能力边界是有估计的</strong>。</p>
+      <div class="blk steps">
+        <span class="label">用两个任务对比 agent 的「自知之明」</span>
+        <ol>
+          <li><strong>简单任务</strong>：两个 sheet，第二个是学生实验成绩，第一个是期末考试成绩，要求写一个公式把学号对应的实验成绩拉过来。这在它能力范围内，「就会一把戳」</li>
+          <li><strong>困难任务</strong>：二维码生成。「显然超出他的能力范围，他还是会分成……试图去分解这个问题，但他也会做价格（代价评估）」</li>
+          <li>讲师的结论：<strong>至少今天的模型，在做架构这件事上稍稍是有一些落后的</strong></li>
+        </ol>
+      </div>
+      <p>如果直接把二维码算法硬写成 Excel 公式会怎样？讲师给了一个很形象的类比：那个公式会变得<strong>极其冗长</strong>——「就好比让你们用 brainfuck 去实现一个 non-trivial 的程序」，写出来就会是一团无法阅读的东西。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这里有个很值得注意的现象：讲师说 AI 在这种任务上会「overreact」——他给了一个非常明确的问题（从字符串到二维码），AI <strong>还要去读文件</strong>。同时他也指出，二维码本身是<strong>完全有规范</strong>的（版本、纠错等级、掩码、数据编码、纠错码），AI 给的实现非常短、也很正确，真正难的是<strong>把它塞进 Excel 的约束里</strong>。所以问题不在算法，在「目标语言」。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>需求看起来明确，其实全是坑</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=3720" target="_blank"><span class="tri"></span>62:00</a>
+      <p>讲师接着推翻了「这个需求很明确」这个前提，举了三个具体的坑。</p>
+      <div class="blk pit">
+        <span class="label">三个具体的坑</span>
+        <ul>
+          <li><strong>Excel 版本在演化</strong>：查找学号对应的成绩，以前是 <code>VLOOKUP</code>，后来微软终于受不了，推出了 <code>XLOOKUP</code>（Extended Lookup）。所以「用哪个版本的语法」是一个真实的选择</li>
+          <li><strong>兼容性 vs 简洁性的取舍</strong>：你到底是要兼容旧版本标准（这样发给教务老师她也能打开），还是要做一个只有自己用、一次性用完就扔的（那就可以用最新语法、写最简单的公式）？<strong>这到底是哪个呢</strong></li>
+          <li><strong>布局会变</strong>：如果最后对二维码放的位置不满意，想整体往右移一格——如果所有单元格都是硬编码的，就<strong>立即崩溃</strong></li>
+        </ul>
+      </div>
+      <p>讲师用「改版本」这个场景把代价讲得很清楚：如果 AI 给你 webcode 了一个用 Excel 2023 公式的代码，你突然说「不行，要改成 2019、甚至 2003」——<strong>全完蛋</strong>。你的设计和实现就会从头回到原点，重新再做一遍。</p>
+      <p>他说，对于一个 2000 行的项目，重做是 OK 的；<strong>但如果这个 2000 行的东西已经嵌入到一个巨大无比的教育系统里，和别的部分产生了关联</strong>，那就只能「加人、加钱」。讲师对此的评价是：<strong>这显然就是一个架构没有设计好的结果</strong>。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这一节是全章最实用的一段：它在说明<strong>「需求明确」这件事本身是幻觉</strong>。真正让需求变模糊的不是客户说不清，而是<strong>实现所依赖的外部环境在变</strong>（Excel 版本、布局、使用场景）。所以架构的价值，是让这些变化<strong>不需要重写</strong>——这就直接引出了下一节的中间语言。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s37">
+      <h3><span class="idx">3.7</span>造一门中间语言</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4020" target="_blank"><span class="tri"></span>67:00</a>
+      <p>讲师开始给解法。他的推理链是这一章最漂亮的部分：</p>
+      <figure>
+        <svg viewBox="0 0 1040 340" role="img" aria-label="中间语言的架构">
+          <rect x="0" y="0" width="1040" height="340" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">把「不可编译」变成「可编译」：插入一层中间语言</text>
+
+            <rect x="30" y="48" width="200" height="76" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="46" y="70" fill="#46c6e0" font-size="11.5" font-weight="700">Python / 伪代码</text>
+            <text x="46" y="92" fill="#adbccd" font-size="10.5">二维码算法容易用算法描述</text>
+            <text x="46" y="110" fill="#77879a" font-size="10.5">但 Excel 跑不了它</text>
+
+            <rect x="268" y="48" width="200" height="76" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="284" y="70" fill="#f8736e" font-size="11.5" font-weight="700">✗ Py2Excel 编译器</text>
+            <text x="284" y="92" fill="#adbccd" font-size="10.5">这个东西不存在</text>
+            <text x="284" y="110" fill="#77879a" font-size="10.5">Excel 本来是给财务报表设计的</text>
+
+            <rect x="506" y="48" width="200" height="76" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="522" y="70" fill="#f0b429" font-size="11.5" font-weight="700">✗ 直接让 LM 硬写</text>
+            <text x="522" y="92" fill="#adbccd" font-size="10.5">它上手就做</text>
+            <text x="522" y="110" fill="#77879a" font-size="10.5">需求一漂移就崩</text>
+
+            <rect x="744" y="48" width="266" height="76" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="760" y="70" fill="#3fd68c" font-size="11.5" font-weight="700">✓ 造一门中间语言</text>
+            <text x="760" y="92" fill="#adbccd" font-size="10.5">既能翻译成 Python，</text>
+            <text x="760" y="110" fill="#adbccd" font-size="10.5">又能翻译成 Excel</text>
+
+            <g stroke="#233240" stroke-width="1.2" stroke-dasharray="3 3">
+              <line x1="130" y1="124" x2="130" y2="152"/><line x1="368" y1="124" x2="368" y2="152"/>
+              <line x1="606" y1="124" x2="606" y2="152"/><line x1="877" y1="124" x2="877" y2="152"/>
+            </g>
+
+            <rect x="30" y="160" width="470" height="120" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="182" fill="#adbccd" font-size="11.5" font-weight="700">中间语言长什么样</text>
+            <g font-family="Consolas, Cascadia Code, monospace" font-size="10.5" fill="#adbccd">
+              <text x="46" y="206">(E或 A B)        ← 或运算节点</text>
+              <text x="46" y="226">(Xof E)          ← 取出字符串某一位</text>
+              <text x="46" y="246">...</text>
+            </g>
+            <text x="46" y="270" fill="#77879a" font-size="10.5">就是一个表达式树——你们写过表达式的求值程序</text>
+
+            <rect x="520" y="160" width="490" height="120" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="536" y="182" fill="#adbccd" font-size="11.5" font-weight="700">于是两条翻译路径都通了</text>
+            <text x="536" y="206" fill="#77879a" font-size="10.5">· 翻译成 Python：递归 dump 表达式树，按节点拼起来</text>
+            <text x="536" y="226" fill="#77879a" font-size="10.5">· 翻译成 Excel：要求每个节点都有一条「渲染成公式」的规则</text>
+            <text x="536" y="246" fill="#77879a" font-size="10.5">  任意格子放中间结果，再引用它拼出上层</text>
+            <text x="536" y="270" fill="#adbccd" font-size="10.5">→ 布局变了只是换个格子编号，算法本身不动</text>
+
+            <line x1="30" y1="296" x2="1010" y2="296" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="320" fill="#77879a" font-size="11.5">这和 getopt 是同一个架构：先把输入规整成一个中间表示，再从中间表示出发做后面的事。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜中间语言</b>　这张图的推理链值得完整记住：<strong>问题不在二维码算法（那很清楚），也不在 Excel（那是个语言），而在「两者之间没有桥」</strong>。讲师的解法是先造一座桥——一门表达能力刚好够用的中间语言。它比 Python 弱（好翻译成 Excel），比 Excel 强（能表达算法）。<strong>有了这层中间表示，「兼容 2019 还是 2023」就只影响一个节点翻译成什么公式，不影响整个逻辑</strong>。</figcaption>
+      </figure>
+      <p>讲师给了一个很实在的建议：这个中间语言的设计可以<strong>让大语言模型去做</strong>——你让模型生成「这个语言的二维码计算逻辑」，然后<strong>先把它翻译成 Python 去验证公式对不对</strong>；等公式写对了，再去生成 Excel。</p>
+      <p>他还举了表达式树的例子（<code>(E或 A B)</code>、<code>(Xof E)</code>），说你们都写过表达式求值的程序，所以这个中间语言「显然很容易翻译成 Python，你直接把它打包就行了」——递归地处理左右子树，根据节点类型拼起来。而<strong>要翻译成 Excel，只需要要求每个节点都有一条渲染成 Excel 公式的规则</strong>。</p>
+    </div>
+
+    <div class="sub" id="s38">
+      <h3><span class="idx">3.8</span>一份中间语言，两种执行方式</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Rch76WEfQ?t=4260" target="_blank"><span class="tri"></span>71:00</a>
+      <p>讲师把这个架构总结成了一句口号式的话，也是这一章的收尾。</p>
+      <blockquote>
+        <p>一份中间语言，两种执行方式。构造一次，我的架构就在这里。</p>
+        <cite>讲师总结这个架构（约 71:00 处）</cite>
+      </blockquote>
+      <p>他把架构画成一张很简单的图：<strong>LLM 翻译成中间语言 → 一条路用来验证（Python）→ 一条路用来交付（Excel）</strong>。这个结构带来的好处是连锁的：</p>
+      <div class="blk q">
+        <span class="label">有了中间语言之后，还能长出什么</span>
+        <ul>
+          <li><strong>优化</strong>：如果某处生成的代码太长、性能不好，可以写「改写规则」，把一个程序从一种形态改写成另一种形态（例如把循环里不变的变量计算提到循环外——编译器会自动做，你也可以手动做，还可以让大模型去优化它）</li>
+          <li><strong>Profile 驱动优化</strong>：你在计算机系统课上学到的 profiling guided optimization 也接得上了——先知道性能瓶颈在哪，再用 profile 去指导代码应该写成什么样</li>
+          <li><strong>版本迁移</strong>：将来 Excel 版本变了，无非就是把一些<strong>算子换一个实现方式</strong></li>
+        </ul>
+      </div>
+      <p>讲师在这里做了最后一次呼应：<strong>「这就是我们刚才在第一个最小的例子里讲 getopt 时说的」</strong>——写一个命令行工具，第一件事是 getopt，得到一个 parse state，再从 parse state 出发做下一步。<strong>和这里的设计一模一样</strong>。</p>
+      <p>他还留了一段给未来：现在 AI Infra 也在做类似的事，人类有很多领域知识，所以在他们领域里有非常多好的设计——<strong>这些都是非常值得学习的</strong>。</p>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>架构的本质只有一件事：<strong>控制复杂性</strong>；它在十行代码里就能看出来</li>
+          <li>架构关乎你对需求的掌握程度——<strong>你对问题的理解层次决定了代码的形状</strong>（汉诺塔从「数学性质」到「标准栈」到「形式语义」是三档理解）</li>
+          <li>「需求明确」是幻觉：真正让需求变模糊的是<strong>实现所依赖的外部环境在变</strong></li>
+          <li>核心手法只有一条：<strong>先把输入规整成一个中间表示，再从中间表示出发做后面的事</strong>（getopt、表达式树、中间语言都是同一个模式）</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

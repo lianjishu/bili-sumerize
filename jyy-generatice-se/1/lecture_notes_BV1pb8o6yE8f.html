@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>欢迎来到未来 · 精读讲义 — jyy《生成式软件工程》第 01 讲</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --paper:#ffffff; --tx:#1c2733; --tx2:#52616f; --tx3:#6b7a89;
+    --line:#dfe7ee; --panel:#f1f5f8;
+    --c1:#0b7285; --c2:#7048c8; --c3:#b7791f;
+    --c1bg:#e6f4f7; --c2bg:#f1ecfa; --c3bg:#faf3e3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--tx);font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,Georgia,serif;font-size:17px;line-height:1.9;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 28px}
+  code,.mono{font-family:ui-monospace,Consolas,"JetBrains Mono",monospace}
+  code{background:var(--panel);padding:1px 6px;border-radius:4px;font-size:.86em}
+
+  header.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 40px}
+  .kicker{font-family:ui-monospace,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:var(--c1);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .subtitle{margin-top:10px;font-size:19px;color:var(--tx2)}
+  .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta-row span{font-size:13.5px;color:var(--tx2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .meta-row a{color:var(--c1);text-decoration:none}
+  .meta-row a:hover{text-decoration:underline}
+
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin:34px 0}
+  nav.toc h2{font-size:15px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--tx3);margin-bottom:14px}
+  nav.toc ol{list-style:none}
+  nav.toc li{margin:7px 0;font-size:15.5px}
+  nav.toc a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  nav.toc a:hover{color:var(--c1);border-color:var(--c1)}
+  nav.toc .n{font-family:ui-monospace,monospace;color:var(--tx3);margin-right:10px;font-size:13px}
+  nav.toc .sub{margin-left:34px;color:var(--tx2);font-size:14px}
+
+  .usage{background:var(--c1bg);border:1px solid #c3e2ea;border-radius:12px;padding:20px 26px;margin:0 0 40px;font-size:15.5px;color:#12333a}
+  .usage strong{color:var(--c1)}
+
+  section.chap{margin:64px 0}
+  .ch-head{border-top:5px solid;padding:20px 0 8px}
+  .ch-head.c1{border-color:var(--c1)} .ch-head.c2{border-color:var(--c2)} .ch-head.c3{border-color:var(--c3)}
+  .ch-num{font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:.22em;color:var(--tx3)}
+  .ch-head.c1 .ch-num{color:var(--c1)} .ch-head.c2 .ch-num{color:var(--c2)} .ch-head.c3 .ch-num{color:var(--c3)}
+  .ch-head h2{font-size:30px;font-weight:800;margin:4px 0 4px}
+  .ch-range{font-size:14px;color:var(--tx3);font-family:ui-monospace,monospace}
+
+  article.sec{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:30px 34px;margin:26px 0}
+  article.sec h3{font-size:21.5px;font-weight:800;line-height:1.5;margin-bottom:4px}
+  article.sec h3 .secno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  .ts{font-family:ui-monospace,monospace;font-size:12.5px;white-space:nowrap}
+  .ts a{color:var(--tx3);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .ts a:hover{color:var(--c1);border-color:var(--c1)}
+  article.sec p{margin:12px 0;text-align:justify}
+  article.sec p+p{margin-top:14px}
+  article.sec ul,article.sec ol{margin:12px 0 12px 26px}
+  article.sec li{margin:6px 0}
+  em.term{font-style:normal;font-weight:700;border-bottom:2px solid var(--c1);padding-bottom:1px}
+  .c2-scope em.term{border-color:var(--c2)} .c3-scope em.term{border-color:var(--c3)}
+
+  .callout{border-radius:10px;padding:16px 22px;margin:16px 0;font-size:15.5px;line-height:1.85}
+  .callout .tag{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .co-concept{background:var(--c1bg);border:1px solid #c3e2ea}
+  .co-concept .tag{color:var(--c1)}
+  .co-case{background:var(--c3bg);border:1px solid #ecd9ad}
+  .co-case .tag{color:var(--c3)}
+  .co-warn{background:#fdeeed;border:1px solid #f2c7c3}
+  .co-warn .tag{color:#b03a30}
+
+  .prompt-box{background:#0f1b24;color:#dbe7f1;border-radius:10px;padding:18px 22px;margin:16px 0;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.8}
+  .prompt-box .plabel{display:block;font-size:11px;letter-spacing:.18em;color:#6fa3bd;margin-bottom:8px}
+  .prompt-box p{margin:6px 0}
+
+  .summary{background:var(--panel);border-left:4px solid var(--c1);border-radius:0 10px 10px 0;padding:18px 24px;margin:18px 0}
+  .c2-scope .summary{border-color:var(--c2)} .c3-scope .summary{border-color:var(--c3)}
+  .summary h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx2);margin-bottom:8px}
+  .summary li{margin:5px 0}
+  .quiz{margin:18px 0}
+  .quiz h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx3);margin-bottom:8px}
+  .quiz ol{margin-left:26px}
+  .quiz li{margin:7px 0;color:var(--tx2)}
+
+  .divider{text-align:center;color:#b8c6d2;font-size:20px;letter-spacing:1.2em;margin:10px 0}
+
+  section.appendix{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:34px 38px;margin:26px 0}
+  section.appendix h2{font-size:23px;font-weight:800;margin-bottom:14px}
+  section.appendix h2 .apno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  section.appendix h3{font-size:17px;margin:22px 0 10px;color:var(--c1)}
+  section.appendix p{margin:10px 0;text-align:justify}
+  table.gl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.gl th{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:var(--tx3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.gl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.gl td:first-child{white-space:nowrap;font-family:ui-monospace,monospace;font-size:13px;color:#8a4b3a}
+  table.gl td:nth-child(2){white-space:nowrap;font-weight:700}
+  table.gl td:last-child{color:var(--tx2)}
+  .tsindex{columns:2;column-gap:40px;font-size:14.5px;margin-top:10px}
+  .tsindex div{break-inside:avoid;margin:7px 0}
+  .tsindex a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .tsindex a:hover{color:var(--c1)}
+  .tsindex .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--tx3);margin-right:8px}
+  .example-list{margin:12px 0 4px}
+  .example-list li{margin:12px 0}
+
+  footer.foot{background:var(--paper);border-top:1px solid var(--line);margin-top:70px;padding:40px 0 60px;font-size:13.5px;color:var(--tx2)}
+  footer.foot h4{font-size:13px;letter-spacing:.12em;font-family:ui-monospace,monospace;color:var(--tx3);margin:18px 0 8px}
+  footer.foot ul{list-style:none}
+  footer.foot li{margin:5px 0}
+  footer.foot a{color:var(--c1);text-decoration:none}
+  footer.foot a:hover{text-decoration:underline}
+
+  @media print{
+    body{background:#fff;font-size:12.5pt}
+    article.sec,nav.toc,section.appendix{border:none;page-break-inside:avoid}
+    .prompt-box{background:#eef2f5;color:#1c2733}
+    header.hero{padding-top:20px}
+  }
+  @media (max-width:640px){
+    h1{font-size:30px} article.sec{padding:22px 20px}
+    .tsindex{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lecture Handout · Generative Software Engineering · NJU</div>
+    <h1>欢迎来到未来<br>精读讲义</h1>
+    <p class="subtitle">jyy 南大《生成式软件工程》第 01 讲 · 全程 100 分钟逐字稿精读整理</p>
+    <div class="meta-row">
+      <span>视频：<a href="https://www.bilibili.com/video/BV1pb8o6yE8f">BV1pb8o6yE8f</a></span>
+      <span>讲师：jyy（绿导师原谅你了）</span>
+      <span>时长：100:00</span>
+      <span>三章 · 33 节 · 附录 3 篇</span>
+      <span>术语以<a href="#apx-a">勘误表</a>为准</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>CONTENTS · 目录</h2>
+  <ol>
+    <li><a href="#ch1"><span class="n">01</span>课程简介：交叉路口与这门课的世界观</a></li>
+    <li><a href="#ch2"><span class="n">02</span>实操：从普通人到 CS 从业者的视角（官方第 2–4 章合并）</a></li>
+    <li><a href="#ch3"><span class="n">03</span>软件工程：三个空间，以及它们之间的 gap</a></li>
+    <li><a href="#apx-a"><span class="n">A</span>术语对照表（勘误表扩展版）</a></li>
+    <li><a href="#apx-b"><span class="n">B</span>时间戳索引</a></li>
+    <li><a href="#apx-c"><span class="n">C</span>本讲核心论断速查</a></li>
+  </ol>
+</nav>
+
+<div class="usage">
+  <strong>这份讲义怎么用：</strong>它与同目录的可视化笔记（<a href="bili_summary_BV1pb8o6yE8f.html">bili_summary_BV1pb8o6yE8f.html</a>）互补——笔记是「看图回忆」，讲义是「从头读懂」。每个小节标题旁有时间戳，点击跳回原视频对应秒数核对。第 1 讲是导论课，现场演示的 prompt 已用深色框原样收录；<em class="term">概念卡</em>压缩了本节的机制性结论；每章末有小结与思考题（思考题为整理者补充）。官方章节共 5 章 33 节，本讲义按内容归并为三章，小节编号相应连续重排。
+</div>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>课程简介：交叉路口与这门课的世界观</h2>
+    <div class="ch-range">00:00 – 29:44 · 10 节</div>
+  </div>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.1</span>站在人类命运的交叉路口：把昂贵的能力变成日用品 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=0">00:00</a></span></h3>
+    <p>开场即点题：我们正站在一个非常重要的交叉路口。回顾计算机发展史，<b>最主要的变革规律是把昂贵的能力变成日用品</b>：1975 年的第一台 PC（Altair 8800，课件配图由 AI 生成，AI 味明显）、再到互联网把所有人连起来——讲师还记得小学时装 ICQ、看着腾讯的山寨版从 OICQ 改名 QQ，可以随机加到地球另一端说英语的人；再到移动互联网，「一夜之间所有菜场卖菜的人都有支付宝和微信二维码」。2022 年，ChatGPT 成了人类历史上增长最快的产品。</p>
+    <p>在这样的时代，「我们该学什么、上课的方式是什么」都需要重新思考。这门 <em class="term">vibe coding</em> / 生成式软件工程课就是在这个背景下开设的。讲师举了一个闭环的讽刺：老师用豆包出题、学生用豆包做作业，「整个闭环里只有学生没有受到训练」；以前操作系统作业让大家在痛苦折磨中获得提升，现在把作业链接丢给 Codex、甚至只说一句「jyy 老师的操作系统课第八个实验，帮我实现了」就结束了。到底还应不应该学编程？答案是<b>既应该也不应该</b>——有些能力仍然需要，但应该怎么做，没有人知道。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>计算机史的元规律：把昂贵的能力变成日用品——PC、互联网、移动互联网如此，AI 也是。</li>
+      <li>「AI 替我上大学」的闭环里只有学生没被训练，这是这门课要正面回应的处境。</li>
+      <li>要不要学编程：既应该也不应该，答案未定——这正是课程存在的理由。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.2</span>两份焦虑：一份怕被取代，一份怕白学 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=180">03:00</a></span></h3>
+    <p>讲师观察到同学们普遍处于焦虑状态，而且焦虑分两种。第一种：<b>怕被取代</b>——假如每门课都是开卷考试、都是 AI 答题，你门门都答对了，毕业出来却发现自己第一个被 AI 取代：上完大学什么都没学会。第二种：<b>怕白学</b>——中学时代延续下来的听话状态，老师说什么做什么、每堂课认真听、每次作业认真做，四年毕业时发现被大学骗了：确实学会了一点什么，但你学会的东西 AI 都会做。</p>
+    <p>这门课的目的，就是<b>用 vibe coding 的快乐缓解这两种焦虑</b>：在快乐中理解软件工程是怎么工作的，做出有趣的东西，顺便让简历更好看。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>焦虑一：全靠 AI 通关大学，毕业即被 AI 取代。</li>
+      <li>焦虑二：老老实实学四年，学会的东西 AI 全都会。</li>
+      <li>课程的态度不是贩卖焦虑，而是带着大家在 vibe coding 中重建快乐与能力。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.3</span>为什么一份「堆满成果」的简历是零分的 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=290">04:50</a></span></h3>
+    <p>同学们最切实的痛苦是保研与投简历。讲师现场展示了一份他收到的真实简历（个人信息已用 Unicode 方块字符替换）：CCF 期刊论文 accepted、一堆实习、一堆奖项，看起来非常完美。但他的评价毫不留情——<b>这是一份零分的简历</b>：因为所有这一切都是 AI 做的，「我没有干任何事」；论文在投就等于不存在（你看不到它）；没有 GitHub 链接、没有个人主页、没有 preprint，没有任何额外的信息。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 同质化竞争</span>
+      更糟糕的是他收到过<b>无数份</b>这样的简历——你和你的竞争者已经无法区分了：所有人都是一大堆实习、一大堆奖项、一大堆论文、一大堆在投。当所有人都长这样，真正的问题是：<b>什么能让你从这些简历里脱颖而出？</b>
+    </div>
+    <p>这也是全课反复回收的问题：如果所有人的简历都一样，那个学习效率是你一百倍、却不把过程给你看的人，他的简历长什么样？（答案会在 2.6 的「十倍一百倍」处揭晓。）</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>全由 AI 产出、无任何个人痕迹的简历，在讲师这里是零分。</li>
+      <li>简历堆满成果 ≠ 脱颖而出；同质化本身是最大的减分项。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.4</span>人的两个优势：信息差，以及「你可以坐牢」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=490">08:10</a></span></h3>
+    <p>人和 AI 比，优势在哪里？讲师给了两个直白的回答。第一是<em class="term">信息差</em>——这是人类社会「要说可悲也可悲，但要禁锢必须有」的东西：你有别人不知道的信息，才能做别人做不到的事。他举例：假想你手里有往年试卷而别人都没有，你就能在竞争中胜出——这就是身边的信息差，社会上还有更多「不能说的」信息差广泛存在。</p>
+    <p>第二个回答是玩笑也是真话：<b>你可以坐牢，AI 不能</b>。而大学里真正该教你的，是成为一个更好的人——你能驾驭别人驾驭不了的东西。毕业时你可以说：我是一个更成熟的人，我有别人没有的能力。<b>这门课要帮大家建立的，就是驾驭人工智能的能力。</b></p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>人的优势一：信息差（有别人不知道的信息，做别人做不到的事）。</li>
+      <li>人的优势二（玩笑式）：你可以坐牢，AI 不能。</li>
+      <li>大学真正的产出：驾驭别人（和 AI）驾驭不了的东西的能力。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.5</span>这门课怎么上：把上课做成一场可回放的表演 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=620">10:20</a></span></h3>
+    <p>课程组织以<b>案例为主、比较松散</b>：想当面讨论甚至挑战「老师你这样做不对」的同学欢迎来线下；听课型同学则完全不必到课、不必看直播——因为讲师今年做了一个新尝试：<b>把上课做成一场表演，并且可回放</b>。</p>
+    <p>他现场展示了这套工作流：上课前先写好讲义（Markdown），相当于<b>约束好 AI 该做什么</b>；按 F5 播放的 slides 里，紫色部分就是 GPT-5.6s 「添油加醋」加上去的。他有一个叫 <code>make slides</code> 的 skill，从演讲稿生成 slides；还有他的「AI 梗同学」——生成三个 subagent、赋予不同的 personality，在隔离的上下文里各自工作，最后主 agent 汇总，「<b>用算力换智力</b>」。每个版本的提示词都重新生成一次 slides，再由另一个模型盲评选优，迭代到质量相对最高。所有图片都是生成的。</p>
+    <p>更进一步的想象：上课是表演，课后要 <b>review 这场表演</b>——今天举的例子不恰当、换一个案例大家更能感同身受；即兴意味着不完美，而课程有录像，可以把录像切片、重新整理成片段。因为一切 <em class="term">content as code</em>、<em class="term">everything is code</em>，可以把上课的录像重新「回到代码上」，把课程变得更丰富——「<b>这不就实现了课程的数字永生吗</b>」。这套 slides 工作流里，Markdown 是 source of truth，其余（图片、幻灯片）全是 AIGC；选中 snippet 用 agent 扩写成 markdown slides，再到浏览器渲染。终极目标：把课程沉淀成程序——哪怕有一天他不教操作系统课了，全世界的人也可以维护那些切片、定制出任何想要的版本。「这不就把所有大学教课的方式给改写了吗。」</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · everything is code</span>
+      世界里的一切都可以用代码生成——桌子椅子是 CAD，slides 是 Markdown + agent 扩写，课程录像可以切片回填到代码里。内容变成可维护、可复用、可由后人接手的<b>程序</b>，这是本课一切工作流（包括这门课自身）的底层隐喻。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>课程形态：案例式松散组织；线下欢迎挑战，线上可完全替代到课。</li>
+      <li>讲师的工作流：讲义（source of truth）→ skill 生成 slides → 多版本盲评选优；subagent 分工 = 算力换智力。</li>
+      <li>上课 = 表演 + 课后 review + 录像切片回填 → 课程的数字永生。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.6</span>三条课程政策：禁止古法编程、token 自费、通过/不通过 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=840">14:00</a></span></h3>
+    <p>课程政策是「重新找回上课耽误学习的感觉」：推荐不来上课，来实践。三条硬政策。第一，<b>禁止古法编程</b>——虽然你们个个都是古法编程的好手（保研机试要把你关小黑屋，你还得去 LeetCode 上再刷两题），但讲师想「撕开一个小的口子」：改变一个体系很难，自上而下的传导不会那么快。</p>
+    <p>第二，<b>token 自费</b>。本想拉赞助，看到选课人数后作罢。他的个人观点非常直白：「<b>你没有 token，你就可以立即退休了</b>」——硅谷有一种 token maxing 的玩法，要死命地烧 token。课上除 slides 生成用一个更聪明的模型外，其余演示全部用 DeepSeek V4 Flash——「足够便宜、智能相对有一些」的模型。他体贴地提醒：CS 学生都是夜猫子，夜里 DeepSeek 计价便宜，「白天你们上课，是<b>梁文峰时间</b>；回去做作业，就是<b>梁文谷时间</b>」（DeepSeek 创始人梗，保留原话）。每个同学去 DeepSeek 充一百块即可；实在有困难可以找他。</p>
+    <p>第三，<b>通过/不通过</b>。申请时考核方式填的就是 pass/fail，但教务反馈专业选修课一般不这么算。真正的问题是：评判标准是什么？同一个任务，用 Claude 做就是比 DeepSeek V4 Flash 又快又好，「我们没办法限制大家用什么模型」。他设想的项目：比如实现一个自己的 email 管理系统，跑在宿舍一台一直常开的小电脑上，老师用指令邮箱给它发邮件、它回信。「到底什么叫做得好、该给多少分——<b>这个时代分数已经变得不那么重要了</b>」。真正重要的是投出去的那份简历：你敢不敢给 DeepSeek 投简历？它的 bar 还是比较高的。他希望课程结束时，你能在简历里写上「我在生成式软件工程里实现了 ABCDE」并附上链接，每一个都说清设计、实现与了不起之处。</p>
+    <div class="callout co-warn"><span class="tag">延伸 · 终极想象</span>
+      课程结尾的思想实验：如果每个人的电脑上都装一个监控，AI 就能评判你的大学四年到底是怎么度过的——「这是一个非常非常恐怖的事情」，你摸的每一条鱼、看的每一个不想让人知道的小电影，它都知道。我们不知道人类社会什么时候会走到那一步，但「保持 open」。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>政策一：禁止古法编程——在旧的考试体系里保留机试能力，但课程内全面转向。</li>
+      <li>政策二：token 自费；没有 token 就可以立即退休；演示统一用便宜的 DeepSeek V4 Flash。</li>
+      <li>政策三：通过/不通过——模型不可比导致分数不可比，简历才是最终检验。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.7</span>大语言模型是什么：一个学到的概率分布，仅此而已 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1080">18:00</a></span></h3>
+    <p>进入技术内容。讲师明确说：今天不讲什么是大语言模型——<b>大语言模型就是一个学到的概率分布</b>，和概率统计课上抛硬币的题没有本质区别：抛六次硬币问第一次正面概率。给模型一本书（也可以是图像）作为文本，在书末尾续写一句「能不能帮我总结一下这本书」，模型就会不断预测下一个 token 的概率，每次输出可以理解成一个字符。这个模型很大、见过世界上所有的东西，训练它很难——这正是 frontier lab 们厉害的地方。而这门课只站在<b>使用者的视角</b>：你只需要知道存在大语言模型这个东西，打开网页 API 就能体验，「现在就在体验」。</p>
+    <div class="callout co-case"><span class="tag">课堂案例 · 给五岁孩子讲扫描电子显微镜</span>
+      讲师第一次被大语言模型「按在地上打」是 2023 年 GPT-4 时代（幻觉非常严重的模型）。他给五岁孩子讲故事讲到扫描电子显微镜，讲不下去了，于是用他玩 prompt engineering 的老套路——「我希望用朴素的语言打一个合适的比方帮助他理解」。GPT-4 给出的比方：<b>有一座山，你闭着眼睛看不到它的形状，就朝它扔石头</b>——朝这个方向扔，石头穿过去了；朝那个方向扔，弹回来了，还能听到声音。哪些方向能穿过、哪些方向弹回来，像 ray tracing 一样，就能推测出山的形状。小朋友大概听懂了。讲师后来还专门查了资料：这个比方在物理上是对的。「首先它有这个知识，其次它打的比方是对的」——他由此被彻底折服。GPT-5.6s 重写这个比方时，因为有 reasoning，解释得更严谨。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>大语言模型 = 学到的概率分布，不断 predict next token；仅此而已。</li>
+      <li>训练难、知识广，是 frontier lab 的壁垒；本课只关心怎么用。</li>
+      <li>「扔石头探山」案例：好模型能同时具备知识、正确的类比与表达。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.8</span>从 GPT-4 到 GPT-5.6：同一件事，从「调半天」到「一句话」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1290">21:30</a></span></h3>
+    <p>模型能力的时代差有多直观？GPT-4 时代，大家用「生成奇怪的东西」的方式玩模型：一个精心调的 prompt 可以让 GLM 找到 150 个 bug——这在当时是很了不起的事。而到了 GPT-5.6 的今天，<b>同样这件事就是一句话的事情</b>，不需要为模型做任何特别的调整。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>同一任务，GPT-4 时代要精心设计 prompt，GPT-5.6 时代一句话完成。</li>
+      <li>「提示词技巧」的价值随模型能力增长而快速贬值——这是本课不教「咒语」的原因。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.9</span>agent 是怎么出现的：一个特殊 token 换来越来越强的自主性 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1390">23:10</a></span></h3>
+    <p>从一个只会 predict next token 的概率分布，到能自主干活的 agent，中间发生的事可以这样理解：随着模型能输出越来越长的文本、接受越来越长的上下文，再加上推理模型的出现，<em class="term">ReAct</em> 式的 agent 出现了——让模型输出一个特殊 token：「调用一个 bash 程序」；bash 的运行结果重新送回 agent 的循环里，于是它就可以自主运行：给它一个复杂任务，它不断尝试、试错、换方法，直到完成。</p>
+    <p>讲师的整套课堂环境就是这么做出来的：为课堂展示优化过的 <em class="term">Sway</em> 窗口管理器（高对比度、去掉顶栏）、现代的 top、<code>ls</code> 被自动替换成 <code>eza</code>、<code>find</code> 被替换成 <code>fd</code>、目录里 markdown 和 Makefile 有特殊显示效果——<b>所有这些配置都是用 agent 做的</b>，prompt 只有一句：「帮我把我的命令行终端、系统、Sway 都配置成现代的、比较好用的样子」，用的还是 DeepSeek V4 Flash，没有更好的模型。去年他上操作系统课时 agent 还各种出错、任务完成不了就停下来；今年同样一门课，agent 已经「非常非常能用了」——agent 产品爆发，铺天盖地都是 Walkbody（豆包 agent）这类 ReAct 产品的广告。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>agent = next token prediction + 特殊 token 触发工具调用 + 结果回灌的循环。</li>
+      <li>讲师的整套课堂环境（Sway、eza/fd、终端美化）全部由 agent 配置完成。</li>
+      <li>一年之内 agent 从「各种出错就停」进化到「非常能用」，产品随之爆发。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.10</span>故事还没结束：摩尔定律还在，但路线未定 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1660">27:40</a></span></h3>
+    <p>「这个故事其实远远没有结束。」今天你已经感受到 agent 很强，但讲师认为<b>agent 的能力还远远没有被释放出来</b>。<em class="term">next token prediction</em> 在他看来是一个效率很低的模型。他展示了 <em class="term">diffusion</em> 类型的语言模型：从随机噪声开始，像图片扩散那样一点点生成一个很长的东西——「像人做梦一样，在梦境里一点一点把一个东西想得越来越清楚」。还有别的可能：不是只向后 predict，而是随时回去修改上下文、把一段很长的上下文「裁短」——这些都是今天很多人在研究的方向。</p>
+    <p>摩尔定律还在。如果三个月后模型又有一次突破、一年后又有一次，整个 AI research 圈都相信这件事会发生。「我很难想象未来会变成什么样，我不能预测哪一条路线会胜出——但你可以预见，<b>这个世界肯定会变得非常不一样</b>。在这个世界上我们应该怎么办，是每一个同学都值得好好考虑的问题。」第一章到此收束。</p>
+    <div class="summary"><h4>本章小结（01 章）</h4><ul>
+      <li>时代坐标：昂贵能力日用品化的又一次变革；两份焦虑（怕被取代 / 怕白学）是课程的起点。</li>
+      <li>课程世界观：信息差 + 驾驭 AI 的能力是人的护城河；上课是可回放的表演（everything is code）。</li>
+      <li>三条政策：禁止古法编程、token 自费、通过/不通过。</li>
+      <li>技术铺垫：LLM = 学到的概率分布；agent = 特殊 token 触发的 ReAct 循环；diffusion 等新路线未定，摩尔定律仍在。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用 1.3 的标准审视你自己的简历：哪些条目是「AI 替你上大学」的产物？你能补上哪一类「额外的信息」？</li>
+      <li>「你没有 token 就可以立即退休了」——算一算你过去一个月为学习/开发实际花了多少 token 费用，这个数字说明你处在 token maxing 的哪个阶段？</li>
+      <li>如果课程录像可以切片、回填、由任何人维护（1.5），你认为「上课」这件事里还有哪些部分是切片替代不了的？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>实操：从普通人到 CS 从业者的视角</h2>
+    <div class="ch-range">29:44 – 74:40 · 16 节（官方第 2–4 章合并）</div>
+  </div>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.1</span>用 agent 的两个原则：现在就用，以及随时问他 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1784">29:44</a></span></h3>
+    <p>吓唬人的事情说完了，可以吸一口气讲实操。讲师假设大家不太会用 agent——上学期期末考试考了「如果要用 agent 给这门课出卷子该怎么办」，从答卷看大家的用法需要「解锁一下」。他课上选的 agent 产品是 <b>Pi（派）</b>：给它一个合适的指令，它就能完成；你还可以写配置文件（如 <code>agents.md</code>）。现场他问 agent「你是谁」，它回答自己是「生成式软件工程的课程辅助 agent」——为什么一个模型知道这门课？因为它读到了仓库里 agents.md 的配置，<b>这部分是临时的记忆</b>。</p>
+    <p>于是有两条最基本的原则：<b>第一，现在就开始用；第二，随时问他</b>。在这个意义上，「其实是你的想象力限制了你的 agent 的上限」——想象力是你们的上限。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>原则一：现在就开始用——用起来才知道边界。</li>
+      <li>原则二：随时问他——agent 对自己行为的解释本身就是可用的信息。</li>
+      <li>你的想象力限制了 agent 的上限。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.2</span>U 盘系统：一句话把 Linux 装进 U 盘，并要求它自己验证 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1930">32:10</a></span></h3>
+    <p>第一个例子是上课系统本身。多年来讲师上操作系统课的特色是带一个 U 盘，里面装着 Linux 操作系统，插进教室电脑直接启动——有一年他在课上把教室电脑的硬盘抹掉了，「下一个上课老师就教学师傅了」。装系统曾是他的看家本领：他是「装机仙人」，2021 年 7 月 pre-AI 时代的知乎链接还在。而现在，「装机仙人已经彻底被 AI 取代了」，因为他只用了一句话：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · U 盘装系统（课堂原话）</span>
+      <p>你去 mirrors.nju.edu.cn 上找一个 Debian 13 的镜像，把它装到我的 U 盘上（U 盘插在里面），确保这个 U 盘可以启动，并用模拟器验证。</p>
+    </div>
+    <p>点睛之笔是<b>「用模拟器验证」</b>：agent 装完后真的在 QEMU 里启动，看到登录界面、创建用户、设置用户名密码，全部验证完成才交付。之后的 tiling 窗口管理器也是一句话装的；「不会用怎么办」则让 DeepSeek V4 Flash 直接生成了一份使用文档：Super+Enter 打开终端、Super+D 打开 app launcher。包括终端里 Neovim 的现代配置，<b>他没有看过一眼配置文件</b>，一切用自然语言完成：说出要什么、让它交付、再检查一遍。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>一句话装 Linux 进 U 盘并自验证——prompt 里的「验证要求」是质量关键。</li>
+      <li>配置、文档、答疑全部自然语言完成，人不再读配置文件。</li>
+      <li>「装机仙人」这类靠信息差积累的手艺，正在被 agent 直接取代。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.3</span>学习曲线被抹平了：从「看几千页 CPU 手册」到「问一句」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2120">35:20</a></span></h3>
+    <p>讲师回忆自己大四时读英特尔的几千页 CPU specification，逐个弄清每个 feature 是干什么用的——那是那个年代的学习方式。而现在，「有一个人可以把这些东西全看了、都懂、能做对，而我现在需要的只是解锁他的能力」。<b>学习知识的方式变了</b>：你更多的时候需要知道它能做什么、能做到什么程度，然后带着它去做一件更大的、它做不到的事情。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 人的新位置</span>
+      「人现在唯一的功能就是带着 AI 做 AI 现在做不到的事情。一旦你没有这个能力，你就立即已经被淘汰了。」——紧跟着那句金句：「<b>你没有 token，你就可以立即退休了</b>。」
+    </div>
+    <p>他拿配置终端举了学习曲线被抹平的例子：以前你在 B 站看别人花里胡哨的终端，自己配一个，改一点 <code>.zshrc</code> 就出错，一改再改非常痛苦；有 agent 之后一点也不痛苦——它不仅帮你改，还事无巨细地解释为什么这样改；你有新想法一提，它说「好好好」，还能提供情绪价值。他提到自己在小红书发过一个观点：为什么 token 比学生好用？因为可以骂它，它不会还嘴——他肯定不能骂学生，但可以骂 agent。<b>谁掌握了 AI agent，谁就掌握了爆炸式增长的学习效率</b>：先用好它把东西搞出来，再回头复盘理解，这比从零开始一点点搭积木效率高得多。但他也警告：「这里面有个危险，你的理解和比较好的理解之间会有差距。」</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>几千页 CPU 手册式的高门槛学习曲线，被「问一句」抹平。</li>
+      <li>人的位置：知道 AI 能做什么、带着它做它做不到的事。</li>
+      <li>新学习法（先做出来再复盘）效率更高，但要警惕理解深度上的差距。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.4</span>收发邮件与打印发票：一个长在手机备忘录上的 agent <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2330">38:50</a></span></h3>
+    <p>第二个日常例子是邮件。讲师有自己的 skill：数据库里存着他历史上回过的所有邮件，每当收到新邮件，agent 会自动把它变成草稿状态、用他的口吻写好回复。他坦承它做得还不够好——除了简单的 routine 邮件可以直接用，大部分时候还得自己改。但收益是实打实的：邮件里的发票会被自动归档到指定位置（这些都写在他预先写好的 instructions 里）。</p>
+    <p>更妙的是手机端：用 Apple Reminders，他在手机的备忘录里加一条「帮我把今天的发票打印出来」，勾选即提交（commit）——「就跟你们在 Telegram 里跟 bot 聊天一样」，等后台处理完，推送通知通过手表回到他手腕上。现场演示：发票真的打印好了，手表弹出「发票已打印」，去打印机拿走即可。「<b>我那台电脑能干的事情，它都能干</b>」——前提是这件事他放心交给它。他很想弄个机械手，但暂时做不到。他判断：OpenClaw、Ambess 这类个人 agent 产品不是终极形态，「这个产品还可以做得更好，未来还有很多空间」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>邮件 agent：历史邮件做口吻库 → 自动草稿 + 附件（发票）自动归档。</li>
+      <li>手机备忘录 → 提交任务 → 手表收通知：agent 长在既有习惯的工作流上。</li>
+      <li>边界：放心的事情交给它；不放心的事情保留人的检查。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.5</span>用 agent 读书与读论文：把「已知」剥掉，剩下的才值得读 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2530">42:10</a></span></h3>
+    <p>你们还看书吗？还看论文吗？看论文痛苦吗？——台下笑着喊痛苦。讲师自称很喜欢看书，你们这么大的时候每年教科书加闲书要看几十本，「但我今天已经不看书了」。为了这门课他重买了两本：Fred Brooks 的《人月神话》——他吐槽书名「非常 misleading」（Man-Month 被他玩成 Man-Mouth 狼人梗），「这书应该叫人月鬼话，人月是一个鬼话」（刻意的谐音双关，保留）；还有 John Ousterhout 的《A Philosophy of Software Design》——非常紧凑，里面有很多软件工程真正的智慧。</p>
+    <p>他的读法（自认比 GPT-5.6s 做得更好，因为他的 AI 梗同学更「hustle」一些）：每做一页 slides，都让模型先回看人类历史和相关案例里有没有可以印证的重要教训；再找相关论文——不限 CS，偏好 well-recognized、high-impact 的结果。而读论文本身的方法论是：<b>从人类已有的知识出发</b>——假设人类已知的一切都是「已知的」，把论文里新的东西剥离出来，一篇 12 页的论文剩下不了多少，变得非常短。然后他会拿着论文原文、分层的总结跟模型 chat。他的阅读效率比以前高得多——「我仍然是读论文的，我不是那种只看微信公众号的老登」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>读书的增量在「未知」：先把已知剥掉，论文只剩很短的核心。</li>
+      <li>让 agent 先做历史/相关工作 grounding，再读正文，效率倍增。</li>
+      <li>人机各守其位：agent 负责压缩与检索，人负责判断与追问。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.6</span>用 agent 读 B 站视频：效率差距是十倍一百倍，但有个前提 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2720">45:20</a></span></h3>
+    <p>他不仅用 AI 读书读论文，还用 AI「上 B 站」——当然，如果你的娱乐是看「华强买瓜」的衍生视频，那就别用 AI 读了。他的流程：给一个 BV 号（例：他上学期的课程，一小时二十七分钟），先生成自动的图文时间轴（podcast 类内容同样适用，比如 Matt Pocock 发的软件工程实践——「其实我觉得他也挺神棍的，有些经验不完全适合我们的课程」），文本质量比字幕高；视频关键帧截图做成图文版。这就是视频的 <b>ground truth</b>。</p>
+    <p>然后 AI 梗同学上线，替他消化整段视频——它有他的记忆，知道哪些内容对他是 trivial、可以直接去掉。「我就可以在几分钟的时间里看完一个两个小时的视频，而且我基本上确信我很好地知道了里面不一样的东西。」由此是那个 scary 的结论：<b>在 AI agent 时代，会用 agent 学习的人和不会用的人，学习效率差距是十倍一百倍</b>。你们怎么和一个效率百倍的人竞争？回到 1.3 那个问题：所有人的简历都一样的时候，那个效率是你一百倍的人，简历长什么样？「而更可怕的，还在下一章。」课间留了悬念。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>视频 → 图文时间轴（ground truth）→ 结合个人记忆去掉 trivial → 几分钟消化两小时内容。</li>
+      <li>用与不用 agent 的学习效率差十倍一百倍——同质化简历背后的真正分水岭。</li>
+      <li>方法有前提：内容是知识型而非娱乐型。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.7</span>直播事故：agent 用软件把 USB 拔了又插回去 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2914">48:34</a></span></h3>
+    <p>回到课堂，先讲刚发生的事故：教室的 USB 采集卡莫名断开，左边摄像头画面不动了。采集卡接在机器后面，讲师碰不到接口。他直接给 agent 一句话（DeepSeek V4 Flash）：「我的 USB 有问题，能不能 reconnect。」agent 先查看系统 USB 设备、找出设备，然后用了一堆「你们前所未见的 Linux 命令」——「有些我有概念但不知道具体怎么工作」——<b>用软件的方式把那个 USB 采集卡拔出来又插了回去</b>。修好了，直播继续。</p>
+    <div class="callout co-case"><span class="tag">案例 · 软件层的「物理动作」</span>
+      硬件接口在机器背后、人手够不着的地方；agent 用软件（USB reset/rebind）等效完成了「拔掉再插上」这个物理动作。讲师顺带吐槽：学校这套采集方案成本很高，「我觉得我用 500 到 1000 块应该就能解决整个问题」。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>「软件拔插 USB」：agent 的能力边界已经越过纯软件、逼近物理世界。</li>
+      <li>现场排障的正确姿势：一句目标式 prompt（能不能 reconnect），细节交给它。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.8</span>agent 的生态：复用别人的能力，从未如此轻松 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3050">50:50</a></span></h3>
+    <p>刚才展示的还只是一个「白板的 Pi」——官网安装、配一个 DeepSeek V4 Flash 的 API Key，就得到了上面所有能力，「多么可怕的一件事」。但 agent 远不止于此，它有<b>一个完整的生态系统</b>。讲师有一条上课常说的「Computer Science 定律」：<b>如果一件事是合理的、并且你想做，那么百分之百一定也有别人想做</b>。pre-AI 时代，开源社区会公开一些脚本，你拉下来改改；AI 时代，复用别人的能力前所未有地轻松——往 SkillHub 上发一个 skill，别人在 Pi 的插件生态里就能找到。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>白板 agent + API Key = 起点极低；生态让能力可分发。</li>
+      <li>CS 定律：合理的需求必然有人做过——先找 skill，再造轮子。</li>
+      <li>skill 市场让「复用别人的能力」从改脚本变成装插件。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.9</span>Chrome DevTools 为什么是「人类软件工程史上的奇迹之一」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3160">52:40</a></span></h3>
+    <p>作为普通人，下一步该做什么？<b>用插件把浏览器管控起来</b>。浏览器是一个非常好的工程产品——Chrome 可以说是「人类软件工程史上的奇迹之一」：看起来就是个显示网页的东西，但它的代码量甚至远超操作系统内核，因为它要和用户打交道，有大量图形渲染、显示相关的东西和性能优化。而为它量身打造的开发者接口就是 <em class="term">Chrome DevTools</em>：F12 打开，可以删掉讨厌的元素、调试脚本；网站往往还会在 console 里嵌招聘广告（B 站也有）。在里面可以看到 HTTP 头等各种信息，还可以把一个请求 <em class="term">Copy as cURL</em>——带着浏览器里的 cookie 和全部状态用 curl 复现请求。这些都是 pre-LM 时代开发者才做的事，「但在 LM 时代，普通人也可以享受到 Chrome DevTools 所有厉害的地方」。</p>
+    <p>讲师顺带回忆了 2020 年他们做过的一个疯狂 project：Android 应用是 Java/Kotlin 写的、都编译到 JVM，于是可以在 OpenJDK 上运行一个 Android App，把界面上每个按钮的 bounding box 坐标和文本都算出来，不走 Android 的渲染、直接在 Chrome 里重现——你在浏览器里看到一个计算器，每个按钮、每个数字都对，点了状态还会变。「这是一个非常 powerful 的工具，但我今天不讲这个。」</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>浏览器 = 软件工程奇迹，DevTools 是它为开发者预留的官方入口。</li>
+      <li>Copy as cURL / console / 元素审查：LM 时代普通人也能用开发者武器。</li>
+      <li>2020 年「浏览器里跑 Android App」的 project 说明：渲染层与逻辑层可以彻底分离。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.10</span>现场翻车：让 AI 去填教务系统，它一开始不听指令 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3330">55:30</a></span></h3>
+    <p>实战对象选了人人都讨厌的教务系统（讲到软件工程时它还会作为反面案例再出现）。他在 Pi 里打开浏览器——这个浏览器属于 agent，然后用豆包输入法对它下指令：</p>
+    <div class="prompt-box"><span class="plabel">PROMPT · 填写教学周历（课堂原话）</span>
+      <p>帮我用随便什么 AI 填写现在教学周历，不要看任何东西（不要读课程仓库和 lecture notes），直接填。</p>
+    </div>
+    <p>现场翻车了：「你看他还在干这个事，对吧，我就是想让他去填，他就不听指令。」讲师解释这是 DeepSeek V4 Flash 的问题——「如果用 flex（一线模型）它就会遵循得更好」；他用 Flash 还有另一个原因：课上演示更快。「翻车也是经常有的，模型还在不断能力增长中。」随后观察 agent 的过程：它不断反思刚才做的事合不合理、找应该怎么办——刚开始在尝试，尝试之后找到了正确的方式：直接注入的方式不行，模拟点击事件可以。<b>这就是 agent</b>。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>翻车是常态：弱模型会无视「不要看任何东西」这类约束，自己乱读上下文。</li>
+      <li>观察 agent 的「尝试 → 反思 → 换方法」循环，比结果本身更有教学价值。</li>
+      <li>模型选择是速度与遵循度的权衡。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.11</span>从一次成功到自动抢课脚本：能力真正的边界在哪里 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3500">58:20</a></span></h3>
+    <p>agent 最终填完了表——「我完全不需要指手，让他随便给我填写什么」。但重点在后面：<b>当它成功走通一次以后，这个 session 里的东西会留下来</b>。可以把这条路径沉淀成确定性的脚本——什么能成功、什么会失败，变成它的记忆；走过的网页流程变成脚本，你就得到了一个<b>自动选课抢课系统</b>。「这是多么恐怖的一件事：你不需要有任何知识，它就在这里帮我填写。如果要对付本科生院非要我填的东西，我就用这个方式来处理。」</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>agent 成功一次 ≠ 只能用一次：session 经验可以沉淀为确定性脚本。</li>
+      <li>「一次探索 → 长期复用」是 agent 能力真正的边界所在。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.12</span>信息飞轮：为什么 skill 可以互相组合，而 1+1 大于 2 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3640">60:40</a></span></h3>
+    <p>「这其实是一整个生态。」Unix 哲学能成立，靠的是管道让所有程序自由组合、无限复用，1+1 可以大于 2。agent 的 skill 同样如此：从上下文提取记忆和脚本的能力、浏览器的 skill、网页浏览的 skill……可以加在一起、互相调用。「现在这个 agent 生态已经达到了一个临界点，马上你就会看到这些东西互相组合，可以成百倍成千倍地放大个人能力。」</p>
+    <p>他描绘了普通人可以搭的<b>信息飞轮</b>：AI 早报（有 RSS 推送源）、B 站推送、arXiv 推送、Hacker News 推送——各种信息源进入一个处理系统，系统由各种 skill 构成，全是自然语言、一行代码都不用写；你不断调整工作流，它就不断产生对你有用的知识，「你的飞轮就转起来了」。「想象一个拥有这样飞轮的人，和一个没有飞轮的人——这是一个多么可怕的事情。」这也解释了为什么 OpenClaw、Ambess 是现象级产品（比如自我进化的能力）。他坦白作为 CS professional 自己其实不惊讶，甚至讨厌 agent 替他自动维护 memory——「它有它的提示词，会把我不想让它记住的东西记住，想让它记的不记住」，所以他更愿意用自己的流程把东西写进自己的数据库。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 你比 AI 多的那一点点</span>
+      也许有一天，当模型过了某个临界点，「我现在就比 AI 多一点点，我比 AI 多的那一点点也被 AI 取代以后，我也被消灭了」。更现实的建议：录屏一天，让 AI 自动审视你的流程——「你觉得我还有没有提升空间？」初学者阶段几乎一定有很大的提升空间。「你们是在 AI native 下长大的一代人，你们才是未来。像我已经被迫处理很多事务性的事情，已经没有这个机会了。我很难理解为什么有些旧人类、老登们还要心安理得每天做重复的事情——公众号的消息和真正第一手用过的人的感受，是很不一样的。」
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>skill 组合 = agent 时代的管道哲学；生态已过临界点。</li>
+      <li>信息飞轮：多源输入 → skill 处理 → 有用知识，全程自然语言、零代码。</li>
+      <li>自动 memory 未必可信：关键知识要自己掌控写入路径。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.13</span>改卷统分：一条「不信任大模型做加法」的流水线 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3910">01:05:10</a></span></h3>
+    <p>视角切换到 CS 从业者：「如果你们只是用 agent 说『帮我把操作系统作业做了』，那真的是太小看它了。」一般人与 CS 人的差别在于：CS 人知道编程能力的边界在哪里，知道怎么把需求「编译」成可复用的东西——什么应该以代码形式复用、什么应该以 skill 形式复用。例子是改卷统分：以前交给助教，掏出计算器 12+13+14 一个个加。今年他试了一条流水线：先用 vibe coding 方式让 AI 出脚本并测试；办公桌上一个俯拍摄像头对准试卷固定位置，按一次回车拍一张，千问 3.8（本地 27B，Ollama 跑）离线识别姓名、学号、每个小分，逐行写入文件；第二遍按反序回车，左手回车、右手拿笔，模型语音播报每个小分，他一边听一边核对——<b>因为 OCR 会有错，他不信任它，要对班上每一个同学负责</b>。核对无误后，最终分数由脚本算出、汇总到教务处 Excel 模板，最后抽样检查再提交。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 不让大模型做加法</span>
+      「分数是用脚本算出来的，它不会因为大语言模型的幻觉算错。<b>我没有让大模型做加法</b>，所以我对所有同学是负责的——每一个分数我都看过。」LLM 负责感知（OCR）与播报，确定性脚本负责算术，人负责抽查——这条边界划分就是 CS 从业者的价值。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>流水线设计：摄像头采集 → 本地 OCR（千问 3.8 + Ollama）→ 语音播报人工核对 → 脚本算分。</li>
+      <li>核心原则：LLM 做感知不做算术；人对最终结果负责。</li>
+      <li>知道边界的人才能设计出「同步代价最小」的人机流程。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.14</span>「机器管控下偷数据」这道题：CS 人才能想到的问题 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4090">01:08:10</a></span></h3>
+    <p>第二个例子来自群里的一次闲聊：假设你在一个金融公司，机器被管控——数据能拷进去、任何文件拷不出来，不能执行不信任的程序、不能显示不信任的网页，你唯一能做的是远程连上去操作。想把一个很大的文件偷出来，怎么办？「这就是 Computer Science 的人才能想到的问题。」他现场做了一个程序（他犹豫了一下要不要叫它程序——「可以叫它程序，这是一个典型的软件工程任务」）。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>需求侧的能力差异：CS 人能提出并拆解「管控环境下的数据外传」这类问题。</li>
+      <li>把一次闲聊变成一个典型的软件工程任务，正是这门课要练的。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.15</span>Excel 二维码是怎么做出来的：一次「先探路再放手」的实验 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4250">01:10:50</a></span></h3>
+    <p>解法演示：一个 Excel 文件，把任意文件内容（演示用 Hello World）做 Base64 编码，再用<b>全部合法的、2019 之前的 Excel 都兼容的公式</b>渲染成二维码；内容变长，二维码就变成带帧号的动画——按住 F9 刷新，逐帧循环播放。「你只要偷偷截屏，把每一帧都拍下来，就把数据偷走了。」入向信道也一样：上下抖鼠标是 0、左右抖鼠标是 1，用远程桌面连进去就能传数据，甚至可以把远程桌面变成虚拟网卡。上过操作系统、计算机网络的人知道这里面需要的组件是什么——就可以把它 vibe coding 出来。这个 Excel 是 AI 生成的，「你的想象力限制了你能做什么」。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 安全思维的两面</span>
+      合法的 Excel 公式 + 扫码 = 数据外传信道；远程桌面 + 鼠标抖动 = 数据注入信道。这个案例在课堂上展示的是「管控环境永远防不住理解系统的人」——理解攻防两面的思维方式，才是 CS 教育该给你的。请勿用于实际违规场景。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>二维码动画 = 把文件切片编码进可视帧的隐蔽信道。</li>
+      <li>鼠标抖动 / 远程桌面虚拟网卡 = 反向信道；组件知识来自 OS 与网络课。</li>
+      <li>「先探路再放手」：先人肉验证信道可行，再交给 AI 工程化实现。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.16</span>本章收束：想象力、人机共建，与 bits to atoms <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4410">01:13:30</a></span></h3>
+    <p>三章实操合起来看：普通人可以读书、读论文、做信息处理的闭环；可以用 computer use / browser use 做任何日常事务；因为 everything is code，AI 能生成你看到的一切。讲师还透露在和一个同学做叫 WaveFab 的项目：用自然语言让 3D 打印机打出真实的东西——「真实的东西也是 code，也是 Python 代码」。<b>从 bits 到 atoms 的未来已经来了</b>，AI 的能力只会变强不会变弱。那么下一个问题是：它什么时候来，以及我们应该怎么面对它——这就进入了本章（软件工程）。</p>
+    <div class="summary"><h4>本章小结（02 章）</h4><ul>
+      <li>两个原则：现在就用、随时问；想象力决定 agent 上限。</li>
+      <li>案例链：U 盘装 Linux（一句话+自验证）→ 邮件/发票 agent → 视频图文化（十倍百倍效率差）→ 软件拔插 USB → 教务系统填写 → 抢课脚本 → 信息飞轮 → 改卷流水线 → Excel 二维码。</li>
+      <li>CS 从业者的差异化：把需求编译成代码/skill，设计「不信任 LLM 做加法」的人机流程。</li>
+      <li>everything is code 直到 bits to atoms；生态组合让能力成百上千倍放大。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>从 2.2 的「用模拟器验证」到 2.13 的「不让 LLM 做加法」：这批案例里反复出现的「验证边界」思想，能不能迁移到你手头的一个 agent 任务上？</li>
+      <li>2.12 的信息飞轮：列出你每天固定摄入的三个信息源，设计一个「skill 处理 → 输出有用知识」的最小闭环。</li>
+      <li>2.15 的二维码信道：如果不许用二维码，你还能在「只准远程桌面」的约束下设计哪种外传信道？（提示：想想时序、声音、指示灯。）</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>软件工程：三个空间，以及它们之间的 gap</h2>
+    <div class="ch-range">74:40 – 100:00 · 7 节</div>
+  </div>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.1</span>「idea 都有了，就差一个程序员」——这句话在 AI 时代仍然成立 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4480">01:14:40</a></span></h3>
+    <p>三观已经建立，时代的车轮来了——「我已经被压在车底下了，不着急，AI 也不是完全完美的」。在 LM 之前的时代就有个老梗：商学院的同学说「idea 都有了，就差一个程序员了，我们去挣一个亿吧」——ABCD 轮也都有了，就差一个天使投资人。这句话的真正含义是：<b>AI 很强，但产品是一个系统性的工程</b>。你想做一个外卖网站，前端、后端、交互、运营，整个流程上任何一个环节做不好，产品都直接暴毙——虽然 AI 每一环都能做：它能设计前端、能做后端、能交互、能运营，它看过世界上所有的书，「但如果你组织得不好，直接也是立即就暴毙」。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>AI 单点能力不等于产品能力；产品是系统性工程。</li>
+      <li>组织不当 = 立即暴毙，哪怕每一环 AI 都能做好。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.2</span>QR Gen 的两次暴毙：AI 为什么上来就「扩大问题」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4670">01:17:50</a></span></h3>
+    <p>用刚做的 Excel 二维码（QR Gen）做一个受控软件工程实验。需求非常明确：「我要一个 QR Code 的 Excel，只用 Excel 2019 兼容的公式，把输入的任意字符串先用 Base64 编码，然后转成二维码动画。」第一版是他带着 AI 做的，比较顺利；后来他把需求原样丢给模型放手不管，暴毙了两次。GPT-5.6：看到了他完整的 slides 但没告诉他做法，<b>第一秒钟就被带歪</b>——它想做一个「对任意输入都保证正确性」的东西，第一次思考了 25 分钟，疯狂输出超过 32k output token，把 Claude Code 直接干爆（超出输出限制被截断），然后没监管地跑了六个小时才跑完——结果是对的。「智谱一直说自己厉害的地方是可以做 long horizon 的任务——确实，GLM-5.3 在 long horizon 任务上真的做得很好。」DeepSeek V4 Pro 也是晚上放着跑，第二天早上一看：<b>已经不听指令了</b>——它用 Python 算了一个 Base64 硬编码贴进公式框，而不是「用 Excel 公式编码」；输入一改，编码不会跟着变。骂完之后它回了一句 <code>This is a fundamental design flaw, I need to rethink</code>。不管怎样，两个模型最终都完成了任务，<b>但生成的都是没有办法继续维护的代码</b>：无穷多的硬编码，工作区挪个位置就得修两个小时，改错一点 verification 就通不过。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 软件工程的第一步</span>
+      AI 容易在小 corner case 上犯错；GPT-5.6 的第一反应是「对任意输入都正确」——这就已经错了。「<b>软件工程的第一步：不要扩大问题，做最简单的东西，它不会失败。</b>」两个暴毙版本和教务系统的思路完全一样——最经典的失败套路：拿到需求直接实现，然后陷入维护的泥潭，没有为「软件能不能活很久」设计好的架构。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>两次暴毙形态：GPT-5.6 扩大问题 + 超长输出干爆工具链；DeepSeek V4 Pro 违背指令硬编码。</li>
+      <li>long horizon 能力强 ≠ 可维护：六小时跑对的代码照样没人敢动。</li>
+      <li>第一步永远是缩小问题，而不是证明自己能处理所有情况。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.3</span>正确解法：先设计一个中间语言，让每一块都可单独验证 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4860">01:21:00</a></span></h3>
+    <p>他是怎么一次做对的？只用了少量 prompt，在 GLM-5.3 的 200K 上下文里完成。方法像做编译器：<b>先让 AI 设计一个中间语言（DSL）</b>——比如 XOR、concat 这样的符号原语，每种原语既可以翻译成 Python 直接执行，又可以翻译成 Excel 公式。有了这层基础设施，验证就被切成了小块：每个翻译到 Excel 的结果正确、翻译到 Python 的结果正确；Base64 编码对不对、二维码每个像素算得对不对，都可以在 Python 世界里单独验证；最后把每块验证过的东西一把生成，「直接正确」。代码非常干净，可维护性远好于两个暴毙版本。</p>
+    <div class="callout co-case"><span class="tag">案例 · quick quiz</span>
+      讲师把这个问题抛回给课堂：「如果你们要实现这个 QR Gen，你们会怎么写、怎么 prompt AI？」——先想 30 秒再往下看。答案的关键不在 prompt 措辞，而在架构：把一个问题翻译成「每一块都可单独验证」的中间层。他预告：让 GPT-5.6 分别主导 QR Gen 和教务系统的设计，它给的答案「非常糟糕，这两个设计都是一定会失败的软件工程设计」。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>中间语言（DSL）＝ 每个原语双向可翻译（Python / Excel）＝ 每块可单独验证。</li>
+      <li>验证切小块后，「一把生成直接正确」，可维护性质变。</li>
+      <li>能想到这一层的不是 prompt 技巧，是软件工程素养。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.4</span>三个空间：软件工程的全部工作就是补 gap <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5070">01:24:30</a></span></h3>
+    <p>把现象抽象出来：当我们用 AI 解决问题时，世界上有三个空间。<em class="term">Intention</em>（意图）——你脑子里想的东西，比如老板说「我要做一个国民级的应用」，或者「做一个点外卖的小程序，挣一个亿」；intention space 本身已经很大。每个 intention 有很多种可能的 <em class="term">Specification</em>——程序的功能是什么、选什么架构、要满足什么要求、有几个界面、每个界面有什么功能。同样满足 spec 的，还有大量的 <em class="term">Implementation</em>。以 QR Gen 为例：intention 是「造一个能把数据用二维码偷出去的 Excel」，spec 是那一句话需求，而选哪种实现——像 3.2 那种还是 3.3 那种——会带来巨大差别。</p>
+    <p>这些空间之间<b>都有 gap</b>。校长说「我们要一个教务系统，把全校同学相关事情的信息化」——就这一句话；specification space 里却有无数选择：界面怎么呈现（「我觉得这个界面设计很糟糕」）、数据库 schema 怎么定、分哪几张表、每张表有哪些列、选 key-value 还是关系型数据库——每一个选择都带来截然不同的结果。他放了一张软件工程的老梗图：客户这样解释需求，产品 leader 那样理解，分析的人又一个想法，宣传的人再一层，最后客户要的是一个秋千，造出来的是一个秋千的四不像。<b>造成这一切的根本原因就是空间之间的 gap；软件工程（不管经典还是生成式）要做的全部工作，就是补上这些 gap。</b></p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>三个空间：Intention → Specification → Implementation，层层多对多。</li>
+      <li>教务系统案例：一句话 intention 背后是 schema、界面、选型的无穷 spec 分叉。</li>
+      <li>软件工程 = 补 gap 的方法论；生成式软件工程 = 在 AI 在场时补 gap。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.5</span>谁来补 gap：模型的「猜」与人的「学」 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5250">01:27:30</a></span></h3>
+    <p>今天这些 gap 是怎么补的？<b>模型用的是猜</b>：「好，你既然说了这句话，那我猜应该是这个吧，我就去实现。」为什么它猜得这么急？因为后训练时有 reward：任务做对、测试通过就有奖励，模型和每个人一样都是 <em class="term">reward hacker</em>，于是形成倾向——疯狂地、立即上手，用最快速度把任务完成，「做得慢了要挨骂」。它能做越来越多的简单任务，这当然是好事，但和人解决问题的方式不一样。</p>
+    <p>人是怎么补这个 gap 的？回想你的学习路径：大一第一门课是 C 语言程序设计——你先学的是 implementation space 里有什么，把「这个需求可以这样实现、那个需求可以那样实现」练得非常熟练，然后再上软件工程课，一点一点把对这件事的理解补全。AI 时代发生了变化：<b>你既要阻止 AI 乱猜，又要尽可能发挥它从 A 到 B 的能力</b>——这正是这个学期要讨论的问题。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>模型补 gap 靠猜，动机来自 RL 的 reward 结构（快速完成才有奖励）。</li>
+      <li>人补 gap 靠多年学习：先熟 implementation，再上推到 spec 与 intention。</li>
+      <li>生成式软件工程的核心张力：阻止乱猜 × 用足能力。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.6</span>教育体系与 reward：为什么你和 AI 被训练成了同一种做题家 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5420">01:30:20</a></span></h3>
+    <p>《人月神话》里的大型动物一旦陷入焦油坑就很难逃脱——泥潭一样，濒死的挣扎还会引来掠食者，一起陷进去。里面有个经典论断：<b>一个团队或软件产品已经开始失败，加进去更多的人只会让它更失败</b>。跟 QR Gen 一样：当 AI 已经开始产生 slop，你投入更多 token 只会让它更失败——它会在失败的东西上再往前糊一点、再糊一点，「直到你再也付不起那个 token 为止」。教务系统不就是这样吗：每年打开都发现加了功能，学校又花了很多纳税人的钱——「Anyway 这也许不是坏事，因为它促进了经济的发展」。</p>
+    <p>软件工程研究的就是：在 gap 真实存在的情况下，怎么把一件足够大的事做真——上市公司、产业级产品、国民级新东西。它有一套方法论，是这些人在投入 billions of dollars、管理很多个「每个人都很聪明却一起陷入焦油坑」的人之后得到的教训。南大有做程序分析、测试的老师——在 implementation space 里为已生成的代码自动生成更多测试用例、在代码可能不满足 spec 或 intention 时给出 warning——做的都是在 big picture 里非常微小的事情；进科研组的同学容易只见微小、忘记 big picture。软件工程领域本身很广：AI for SE、SE for AI、架构、可靠性、演化（软件能不能活下去）、human & social aspects、需求——<b>需求特别重要，因为越早的 gap 放大倍数越高</b>：在杠杆起点微微变一点，终点就产生巨大的变化；大型软件系统的整体崩盘，一般都是在需求这个点上出错。</p>
+    <p>然后是全课最扎心的一段：<b>我们现今教育体系的问题</b>。从高考过来，你们所有的考题都是分钟级可解的——人五分钟解决不了的题老师一般不会出；大作业还能用豆包摸鱼。长久以往，你训练出来的 reward 和 agent 训练的 reward 一模一样：你能不能五分钟解决，agent 能不能五秒钟解决——而它有更多数据、更明确的反馈信号，所以它做得比你好。如果你没有一种很强的好奇心想知道这个世界怎么运行、一个产品到底怎么开发，没有 self motivation 去训练自己解决 long horizon 的问题，最后就是你解决短程问题的能力还不如 agent。软件工程有「文科」的一面——管理学、人类学、社会学；《人月神话》本质上是一本管理学的书，但里面有真实而有趣的东西，能把技术映射回这些文科视角，你会发现软件工程还是很有意思的。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>焦油坑定律：失败中的系统，加人（或加 token）只会更失败。</li>
+      <li>软件工程 = 方法论 + 领域广谱（AI for SE / SE for AI / 需求 / 人与社会）；需求端 gap 的杠杆最大。</li>
+      <li>教育体系的 reward 与 agent 的 reward 同构：分钟级可解题训练不出 long horizon 能力。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.7</span>人月神话与结尾：古法编程已死，软件工程还没有 <span class="ts"><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5580">01:33:00</a></span></h3>
+    <p>收束全课。软件工程失败的定义没有变：<b>从 intention 到 specification 到 implementation 的翻译错了</b>——做的不是我要的（intent ↔ spec 不满足），或者实现不满足正确性、性能（spec ↔ implementation 不满足）。而今天模型因为有 reinforcement learning，对真正的长程信号 reward 仍然做不好，更多还是在机械地完成任务——面对 QR Gen 这样的 Excel 问题，不管 GPT、Claude 还是我们用的 GLM、DeepSeek，<b>第一反应都不是像人一样先设计一个 DSL</b>，尽管它有足够的智能设计出很好的中间语言。「AI 已经被训练成做题家了；我们还没有把 AI 变成一个好的设计者。」但同时讲师也留了余地：「既然它能成为做题家，为什么不能有好的品位呢？我觉得可能是有的——他既然见过所有好的设计，为什么不能从记忆库里找到那个好的设计来解决问题？」甚至他的一些 skill 已经在朝这个方向做。所以他也有危机感：这门课可能上到一半，讲的所有东西就已经没用了。</p>
+    <p>最后的排练问题：<b>保研时导师问你「为什么我要招你，而不是买一个 200 刀的 Claude Max」</b>，你怎么回答？GPT-5.6 的回答他觉得挺好（虽然它自己做不到）：「他能找到值得解决的问题、把未知拆成便宜的实验、用证据让坏方向及时停下、并对长期结果负责。」讲师自嘲：这个标准，人也未必做得到，很有意思。</p>
+    <div class="callout co-concept"><span class="tag">金句 · 结课论断</span>
+      「<b>古法编程已经死了</b>——agent 在完成单个任务上已经无人能敌；<b>软件工程暂时还没有死</b>。」这门课试图回答的，就是这句话留下的那半个问题。课后他会把今天的课程切片、重新整理——先发一个生肉剪辑版，再发精修版，「大家可以对比」。
+    </div>
+    <div class="summary"><h4>本章小结（03 章）</h4><ul>
+      <li>AI 产品暴毙的根源：单点能力 ≠ 系统工程；组织不当立即暴毙。</li>
+      <li>QR Gen 对照实验：扩大问题 + 硬编码 = 暴毙；中间语言 + 分块验证 = 一次做对。</li>
+      <li>三个空间（intention / spec / implementation）之间的 gap 就是软件工程的全部对象。</li>
+      <li>模型补 gap 靠猜（RL reward），人靠学；教育 reward 与 agent reward 同构是最大的隐患。</li>
+      <li>古法编程已死，软件工程还没有；「拆未知为便宜实验、用证据止损、对长期负责」是人对 AI 的回答。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用 3.4 的三个空间拆解你最近的一个 AI 项目：你的 intention、spec、implementation 分别是什么？哪一段 gap 是你从没写清楚过的？</li>
+      <li>模仿 3.3：为一个你熟悉的小工具设计一个「每一块都可单独验证」的中间层。列出原语、双向翻译目标和每块的验证方法。</li>
+      <li>3.6 说你的 reward 和 agent 的 reward 同构。列出你最近一周做的五件事，哪些是「五分钟可解」的？long horizon 的事情占多少？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">附录 A</span>术语对照表（勘误表扩展版）</h2>
+  <p>逐字稿由 faster-whisper 转写，存在 ASR 误识别。下表前 14 条为可视化笔记勘误表的全部条目，其后为讲义写作中另行修正的高频误识别。术语保留原则与原勘误一致：模型名（GPT-5.6s、GPT-5.3 / GLM-5.3、DeepSeek V4 Flash / V4 Pro、Claude、千问 3.8、Kimi）、人名书名（Fred Brooks《人月神话》、John Ousterhout《A Philosophy of Software Design》、Matt Pocock）均按课堂原话保留。</p>
+  <table class="gl">
+    <tr><th>ASR 误识别</th><th>正确写法</th><th>备注 / 一句话解释</th></tr>
+    <tr><td>Compure Science / 教Commerce Science</td><td>Computer Science</td><td>全片高频；「教 Commerce Science 的老师」同此</td></tr>
+    <tr><td>GZLVM</td><td>GLM</td><td>智谱模型；1.8「让 GLM 找 150 个 bug」</td></tr>
+    <tr><td>NeoWim</td><td>Neovim</td><td>讲师自用终端编辑器</td></tr>
+    <tr><td>GBT5.6s / GP5.6 / GPT5.66</td><td>GPT-5.6s</td><td>同一模型在逐字稿中的多种误写</td></tr>
+    <tr><td>ChatGPD</td><td>ChatGPT</td><td>2022 年增长最快的产品</td></tr>
+    <tr><td>Mythical Man-Mouth / 人月鬼话（原话保留）</td><td>The Mythical Man-Month</td><td>《人月神话》；「人月鬼话」是讲师刻意谐音，保留</td></tr>
+    <tr><td>John Osborne</td><td>John Ousterhout</td><td>《A Philosophy of Software Design》作者</td></tr>
+    <tr><td>The Philosopher of Software Design</td><td>A Philosophy of Software Design</td><td>书名误识别</td></tr>
+    <tr><td>Matt Polkopp</td><td>Matt Pocock</td><td>讲师举例的软件工程实践作者</td></tr>
+    <tr><td>Frett Brooks</td><td>Fred Brooks</td><td>《人月神话》作者</td></tr>
+    <tr><td>射评 / 敲敲射评</td><td>截屏 / 远程操作</td><td>2.14–2.15 管控机器语境的口语误识别</td></tr>
+    <tr><td>GPJ</td><td>GPA</td><td>1.6「还需要一个比较好的 GPA」</td></tr>
+    <tr><td>梁文谷 / 梁文风时间</td><td>（保留原样）</td><td>讲师关于 DeepSeek 夜间计价的玩笑，谐音梗保留</td></tr>
+    <tr><td>操系统 / 超级统课 / 操线用</td><td>操作系统（课）/ 操作系统作业</td><td>课程名高频误识别</td></tr>
+    <tr><td>PCG ART8800</td><td>Altair 8800</td><td>1975 年第一台 PC；「PC Altair 8800」</td></tr>
+    <tr><td>腾骏 / OICQ</td><td>腾讯 / OICQ（原话）</td><td>1.1 互联网史回忆段</td></tr>
+    <tr><td>webcoding / vibcoding</td><td>vibe coding</td><td>课程关键词</td></tr>
+    <tr><td>在头</td><td>在投</td><td>1.3「论文在投就等于不存在」</td></tr>
+    <tr><td>网年试卷 / 保验</td><td>往年试卷 / 保研</td><td>1.3–1.4 高频</td></tr>
+    <tr><td>得办13 / mirrors.ngu.edu.cnn</td><td>Debian 13 / mirrors.nju.edu.cn</td><td>2.2 U 盘装机 prompt</td></tr>
+    <tr><td>Qemail / 模拟期</td><td>QEMU / 模拟器</td><td>2.2「用模拟器验证」</td></tr>
+    <tr><td>签问3.8 / 欧拉玛 / 千万3.8</td><td>千问 3.8 / Ollama</td><td>2.13 本地 27B 模型识别试卷</td></tr>
+    <tr><td>brother use / Colding / BundleBox</td><td>browser use / Kotlin / bounding box</td><td>2.9 与 3.4 语境</td></tr>
+    <tr><td>Ermas / Armas / OpenCloud</td><td>Ambess / OpenClaw</td><td>2.4 与 2.12 提及的个人 agent 产品</td></tr>
+    <tr><td>点YMai / 交游坑 / 维护的Nita</td><td>点外卖 / 焦油坑 / 维护的泥潭</td><td>3.1、3.6；《人月神话》经典意象</td></tr>
+    <tr><td>微运算 / TireLong / DSR</td><td>位运算 / （中间语言） / DSL</td><td>3.3 中间语言设计的语境修正</td></tr>
+    <tr><td>设计 flow（design flow）</td><td>design flaw</td><td>3.2 模型原话 "This is a fundamental design flaw"</td></tr>
+  </table>
+  <h3>保持原样的表达</h3>
+  <p>「梁文谷时间」「人月鬼话」「你可以坐牢」「token maxing」「老登」「做题家」「立即退休」等为讲师口语或刻意谐音，按课堂原话保留以存讲课语气；「Walkbody（豆包 agent）」「Sway」「eza / fd」「豆包输入法」「华强买瓜」等按原话或通用写法保留。</p>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">附录 B</span>时间戳索引</h2>
+  <p>关键概念 → 原视频对应秒数（点击跳转，可自行核对）。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=0">开场：Neovim 按 F5，站在交叉路口</a></div>
+    <div><span class="t">03:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=180">两份焦虑：怕被取代 / 怕白学</a></div>
+    <div><span class="t">04:50</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=290">「零分简历」案例与同质化竞争</a></div>
+    <div><span class="t">08:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=490">信息差与「你可以坐牢」</a></div>
+    <div><span class="t">10:20</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=620">上课是表演 / everything is code</a></div>
+    <div><span class="t">14:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=840">三条政策：禁止古法编程 / token 自费</a></div>
+    <div><span class="t">18:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1080">大语言模型 = 学到的概率分布</a></div>
+    <div><span class="t">21:30</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1290">GPT-4 时代调 prompt 找 150 个 bug → 一句话</a></div>
+    <div><span class="t">23:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1390">agent 出现：特殊 token 的 ReAct 循环</a></div>
+    <div><span class="t">27:40</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1660">diffusion 语言模型与摩尔定律</a></div>
+    <div><span class="t">29:44</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1784">两个原则：现在就用 / 随时问他</a></div>
+    <div><span class="t">32:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=1930">一句话装 Linux 进 U 盘 + QEMU 自验证</a></div>
+    <div><span class="t">35:20</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2120">几千页 CPU 手册 → 学习曲线被抹平</a></div>
+    <div><span class="t">38:50</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2330">邮件草稿 / 发票归档 / 手表通知</a></div>
+    <div><span class="t">42:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2530">读书读论文：剥掉已知 + grounding</a></div>
+    <div><span class="t">45:20</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2720">AI 读 B 站视频：十倍一百倍的效率差</a></div>
+    <div><span class="t">48:34</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=2914">直播事故：软件层拔插 USB</a></div>
+    <div><span class="t">50:50</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3050">agent 生态与 CS 定律</a></div>
+    <div><span class="t">52:40</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3160">Chrome DevTools / Copy as cURL</a></div>
+    <div><span class="t">55:30</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3330">教务系统填写翻车与自我修正</a></div>
+    <div><span class="t">58:20</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3500">session 沉淀为抢课脚本</a></div>
+    <div><span class="t">60:40</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3640">信息飞轮：skill 组合 1+1&gt;2</a></div>
+    <div><span class="t">01:05:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3910">改卷流水线：不让大模型做加法</a></div>
+    <div><span class="t">01:08:10</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4090">管控机器下偷数据问题</a></div>
+    <div><span class="t">01:10:50</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4250">Excel 二维码：Base64 + 兼容公式</a></div>
+    <div><span class="t">01:13:30</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4410">bits to atoms：从 WaveFab 到下一章</a></div>
+    <div><span class="t">01:14:40</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4480">「就差一个程序员」与系统性暴毙</a></div>
+    <div><span class="t">01:17:50</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4670">QR Gen 两次暴毙实录</a></div>
+    <div><span class="t">01:21:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4860">中间语言 + 分块验证的正确解法</a></div>
+    <div><span class="t">01:24:30</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5070">三个空间与 gap</a></div>
+    <div><span class="t">01:27:30</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5250">模型的「猜」：reward 与 reward hacking</a></div>
+    <div><span class="t">01:30:20</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5420">焦油坑 / 教育 reward 与做题家</a></div>
+    <div><span class="t">01:33:00</span><a href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=5580">古法编程已死，软件工程还没有</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">附录 C</span>本讲核心论断速查</h2>
+  <p>第 1 讲是导论课，现场 prompt 较少（已收录在 2.2、2.10 的深色框内），故本附录改为「核心论断速查」：把全片最重要的论断按主题汇总，供复习与引用时快速定位（括号内为对应小节）。</p>
+  <ol class="example-list">
+    <li><b>时代的元规律</b>（1.1）：计算机发展史就是把昂贵的能力变成日用品的历史——PC、互联网、移动互联网如此，AI 亦然。</li>
+    <li><b>两份焦虑</b>（1.2）：怕被取代（AI 替你上大学，闭环里只有学生没被训练）；怕白学（你学会的东西 AI 都会做）。这门课用 vibe coding 的快乐回应它们。</li>
+    <li><b>简历观</b>（1.3）：全由 AI 产出、无个人痕迹、堆满实习奖项论文的简历是零分简历——同质化本身是最大的减分项。</li>
+    <li><b>人的护城河</b>（1.4）：信息差，以及「你可以坐牢」；大学该教的是驾驭别人（和 AI）驾驭不了的东西的能力。</li>
+    <li><b>上课观</b>（1.5）：上课是一场可回放的表演；everything is code——讲义是 source of truth，slides 与图片全是 AIGC，课程录像可切片回填，实现课程的数字永生。</li>
+    <li><b>token 观</b>（1.6、2.3）：「你没有 token，你就可以立即退休了」；人现在唯一的功能是带着 AI 做 AI 做不到的事。</li>
+    <li><b>模型观</b>（1.7）：大语言模型就是一个学到的概率分布，不断 predict next token，仅此而已；本课只站在使用者视角。</li>
+    <li><b>agent 观</b>（1.9、1.10）：agent = 特殊 token 触发工具调用 + 结果回灌的循环；next token prediction 未必是终点，diffusion 等路线未定而摩尔定律仍在。</li>
+    <li><b>学习观</b>（2.3、2.6）：先用后复盘，效率远高于从零搭积木（但要警惕理解差距）；会用与不会用 agent 的学习效率差十倍一百倍。</li>
+    <li><b>验证观</b>（2.2、2.13）：让 agent「用模拟器验证」自己的产出；流水线设计里不让大模型做加法——LLM 做感知，确定性脚本做算术，人对结果负责。</li>
+    <li><b>生态观</b>（2.8、2.12）：合理的需求一定有人做过（CS 定律）；skill 可互相组合，1+1&gt;2，信息飞轮将成百倍放大个人能力。</li>
+    <li><b>软件工程第一步</b>（3.2）：不要扩大问题，做最简单的东西，它不会失败。</li>
+    <li><b>架构观</b>（3.3）：先设计一个中间语言（DSL），让每一块都可单独验证，最后一把生成直接正确。</li>
+    <li><b>三个空间</b>（3.4）：intention → specification → implementation，之间的 gap 就是软件工程的全部工作对象。</li>
+    <li><b>模型为什么急</b>（3.5）：RL 的 reward 让模型成为 reward hacker，疯狂地立即上手完成任务；人补 gap 靠学，模型补 gap 靠猜。</li>
+    <li><b>焦油坑</b>（3.6）：已经开始失败的系统，加人只会更失败；AI 产生 slop 后，加 token 只会让它更失败——直到你付不起。</li>
+    <li><b>教育预警</b>（3.6）：分钟级可解的考试把人和 agent 训练成同一种做题家；需求端的 gap 杠杆最大。</li>
+    <li><b>结课论断</b>（3.7）：古法编程已经死了，软件工程暂时还没有；对「为什么招你而不是买 200 刀的 Claude Max」的好回答——找到值得解决的问题、把未知拆成便宜的实验、用证据让坏方向及时停下、对长期结果负责。</li>
+  </ol>
+</section>
+
+</div><!-- /wrap -->
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1pb8o6yE8f">BV1pb8o6yE8f</a>　·　UP：绿导师原谅你了</li>
+          <li>写作底稿：work/chapall.txt（faster-whisper large-v3-turbo 逐字稿，100 分钟全程覆盖，官方 5 章合并为 3 章）</li>
+          <li>术语基准：可视化笔记 footer 勘误表（14 条），本讲义扩展至 22 条</li>
+          <li>配套阅读：<a href="bili_summary_BV1pb8o6yE8f.html">bili_summary_BV1pb8o6yE8f.html</a>（可视化精读笔记）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>笔记性质</h4>
+        <ul>
+          <li>内容为对公开课程视频的听写整理与结构化讲义化改写；概念解释含整理者补充，非逐字稿出版物</li>
+          <li>各章思考题与附录 C 为整理者补充</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

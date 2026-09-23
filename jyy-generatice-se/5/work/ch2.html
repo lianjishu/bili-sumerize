@@ -1,0 +1,201 @@
+<div class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>回到软件开发</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1057" target="_blank"><span class="dot"></span>17:37 – 39:01</a>
+      </div>
+    </div>
+    <p class="ch-abstract">新闻播完，回到正题。这一章回答的问题很朴素：<strong>现在我们有了这么强的模型，那「软件开发」这件事到底还剩下什么要做？</strong>讲师的答案是回到最初的三段式——intent、specification、implementation——然后指出：今天的答案就是 <strong>做 MVP</strong>，而且他用自己用 AI 驱动标签打印机和扫描仪的<strong>真实项目</strong>证明了这条路走得通。</p>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>斩杀线一直在上移</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1057" target="_blank"><span class="tri"></span>17:37</a>
+      <p>讲师用「<strong>斩杀线</strong>」这个词描述一种不断上移的技能门槛：以前不会写 SQL 就会被淘汰，后来门槛变成不会用框架，再后来变成不会用 AI。<strong>这条线一直在往上走，不会停</strong>。</p>
+      <p>他的态度是：不要因为「这个技能以后可能没用」就不学。因为你判断不准哪一年会失效，而<strong>学的过程本身会给你可迁移的东西</strong>。这也是他为什么还要继续上课的原因——课本身也在被这条线追着改。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这不是安慰话。整门课的设计都建立在「斩杀线会上移」这个前提上：与其教一个五年后会过时的具体工具，不如教你<strong>面对新工具时怎么重新设计工作流</strong>。前面几讲重新设计版本管理系统，就是这套方法论的应用。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>intent、specification、implementation</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1140" target="_blank"><span class="tri"></span>19:00</a>
+      <p>这是整门课的老框架，讲师又拎出来讲了一遍，因为它解释了「为什么 AI 再强也还要有人」。</p>
+      <div class="kv">
+        <div>intent</div><div>你脑子里真正想要的东西。它是<strong>模糊的、不完整的、甚至在你说出来之前自己都不完全清楚</strong>的</div>
+        <div>specification</div><div>你用某种语言把 intent 写下来的结果。它是<strong>一次有损压缩</strong>——写下来的永远比想说的少</div>
+        <div>implementation</div><div>能运行的代码。它是对 specification 的又一次转换，同样有损</div>
+      </div>
+      <p>讲师强调：<strong>gap 不在「AI 写不出代码」这一段，而在前面两段</strong>。AI 已经能很可靠地把一份清晰的 spec 变成能跑的 implementation；问题是你很难把 intent 无损地变成 spec，也很容易以为自己写清楚了其实没有。</p>
+      <div class="blk pit">
+        <span class="label">三段式最容易出错的三个位置</span>
+        <ul>
+          <li><strong>intent → spec</strong>：你脑子里其实有三个互相冲突的目标，写下来时只写了一个，另外两个被悄悄丢掉了</li>
+          <li><strong>spec 的隐含假设</strong>：你写「用户点确认后保存」，但没写「如果没有登录怎么办」「如果网络断了怎么办」</li>
+          <li><strong>spec → implementation 的歧义</strong>：一句话可以有一百种合理实现，AI 选了不是你心里的那一种——而且它看起来完全正确</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>今天的答案：做 MVP</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1320" target="_blank"><span class="tri"></span>22:00</a>
+      <p>既然 gap 在前面两段，那解决办法就不是「把 spec 写得更全」，而是<strong>尽快把东西做出来，用真实反馈去修正 intent</strong>。这就是 <strong>MVP</strong>——minimum viable product，最小可行产品。</p>
+      <p>讲师在这句话上有个小口误：他先说成 minimum <em>variable</em> product，随即自己改口纠正成 <strong>viable</strong>。这个口误本身也挺说明问题——很多人心里的 MVP 确实变成了「变量最小的产品」，而不是「能验证想法的最小产品」。</p>
+      <div class="blk q">
+        <span class="label">MVP 在这门课里的准确含义</span>
+        <ul>
+          <li>它不是「少做一点功能」，而是<strong>用最小的代价换到最关键的反馈</strong></li>
+          <li>它验证的对象不是「功能能不能跑」，而是「<strong>你的 intent 对不对</strong>」</li>
+          <li>所以 MVP 的选择标准不是「哪个容易做」，而是「<strong>哪个信息量最大</strong>」</li>
+        </ul>
+      </div>
+      <p>接下来的几节，讲师用自己的真实项目来展示 MVP 是怎么跑的——而且这个项目正好是「AI 帮我造工具」，而非「AI 帮我写业务代码」。</p>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>标签打印机与扫描仪：我的真实案例</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1500" target="_blank"><span class="tri"></span>25:00</a>
+      <p>讲师讲了他最近做的一个小项目：<strong>用 AI 驱动一台标签打印机和一台佳能扫描仪</strong>。这个项目的起点很具体——他有实际需求（打印标签、扫描文档），但<strong>厂商自带的软件极其难用</strong>，而且在跨平台上有各种限制。</p>
+      <p>他的做法不是去研究厂商那一大坨软件怎么用，而是<strong>把它整个屏蔽掉，自己从总线层重新做一遍抽象</strong>。</p>
+      <div class="blk steps">
+        <span class="label">他实际做的事</span>
+        <ol>
+          <li>在计算机总线上直接识别到设备，绕过厂商软件</li>
+          <li>把设备驱动抽象成最基本的三个动作：<code>read</code> / <code>write</code> / <code>ioctl</code></li>
+          <li>在这之上再抽象一层：扫描仪提供 <code>scan</code>，打印机提供 <code>print(image)</code></li>
+          <li>让上层代码只依赖这层接口，与具体设备实现完全解耦</li>
+          <li>用一个 AI agent 专门对付打印机，另一个专门对付扫描仪，两个并行推进</li>
+        </ol>
+      </div>
+      <p>结果是：<strong>花了五个小时，把额度用完，做出了产品级的效果</strong>。这里「产品级」指的是——如果去掉厂商软件的存在，这个东西就是一个能用的产品。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这个案例的关键不在「AI 会写驱动」，而在于<strong>讲师选择了正确的抽象层</strong>。他没有让 AI 去「模仿厂商软件的用法」（那是最脏的一层），而是退到 <code>read/write/ioctl</code> 这种几十年不变的稳定接口上。<strong>抽象层的选择决定了这个项目能不能在五小时内做完</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>抽象：从 ioctl 到 print(image)</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1700" target="_blank"><span class="tri"></span>28:20</a>
+      <p>讲师把上一节的抽象过程画出来讲了一遍，这实际上是这一章最有方法论价值的一段。</p>
+      <figure>
+        <svg viewBox="0 0 1040 330" role="img" aria-label="从裸设备到业务接口的两层抽象">
+          <rect x="0" y="0" width="1040" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">两层抽象：把设备收敛成三个动作，再把动作收敛成业务语义</text>
+
+            <rect x="30" y="52" width="200" height="66" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="46" y="76" fill="#f8736e" font-size="12" font-weight="700">厂商自带软件</text>
+            <text x="46" y="96" fill="#adbccd" font-size="10.5">平台绑定 · 难用 · 不可组合</text>
+            <text x="46" y="111" fill="#77879a" font-size="10.5">← 整个屏蔽掉，不去研究它</text>
+
+            <rect x="266" y="52" width="200" height="66" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="282" y="76" fill="#f0b429" font-size="12" font-weight="700">计算机总线 / 设备驱动</text>
+            <text x="282" y="96" fill="#adbccd" font-size="10.5">read · write · ioctl</text>
+            <text x="282" y="111" fill="#77879a" font-size="10.5">几十年不变的稳定接口</text>
+
+            <rect x="502" y="52" width="200" height="66" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="518" y="76" fill="#46c6e0" font-size="12" font-weight="700">设备语义层</text>
+            <text x="518" y="96" fill="#adbccd" font-size="10.5">scan() · print(image)</text>
+            <text x="518" y="111" fill="#77879a" font-size="10.5">与具体型号解耦</text>
+
+            <rect x="738" y="52" width="272" height="66" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="754" y="76" fill="#3fd68c" font-size="12" font-weight="700">上层应用</text>
+            <text x="754" y="96" fill="#adbccd" font-size="10.5">只依赖接口，不关心实现</text>
+            <text x="754" y="111" fill="#77879a" font-size="10.5">→ 换个打印机，代码不用改</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="232" y1="85" x2="262" y2="85"/><polygon points="262,85 254,81 254,89"/>
+              <line x1="468" y1="85" x2="498" y2="85"/><polygon points="498,85 490,81 490,89"/>
+              <line x1="704" y1="85" x2="734" y2="85"/><polygon points="734,85 726,81 726,89"/>
+            </g>
+
+            <line x1="30" y1="146" x2="1010" y2="146" stroke="#233240" stroke-width="1"/>
+            <text x="24" y="172" fill="#77879a" font-size="11.5">现场出现的问题与解法</text>
+
+            <rect x="30" y="186" width="470" height="112" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="208" fill="#adbccd" font-size="11.5" font-weight="700">AI 反复打标签 15 次</text>
+            <text x="46" y="228" fill="#77879a" font-size="11">它不确定浓淡深浅，就一直重打，还主动来问</text>
+            <text x="46" y="246" fill="#adbccd" font-size="11">→ 解法一：直接告诉它参数，别让它试</text>
+            <text x="46" y="264" fill="#adbccd" font-size="11">→ 解法二：接一个摄像头，走全自动闭环</text>
+            <text x="46" y="284" fill="#77879a" font-size="10.5">这个小插曲说明：AI 愿意试，但试的成本要你来兜</text>
+
+            <rect x="520" y="186" width="490" height="112" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="536" y="208" fill="#adbccd" font-size="11.5" font-weight="700">从 LP 转用通用打印驱动</text>
+            <text x="536" y="228" fill="#77879a" font-size="11">一开始走的是 LP（line printer）这条老路</text>
+            <text x="536" y="246" fill="#adbccd" font-size="11">→ 后来换成通用打印驱动的路径，兼容性更好</text>
+            <text x="536" y="264" fill="#adbccd" font-size="11">→ 这一步换得动，正是因为上层只依赖 print(image)</text>
+            <text x="536" y="284" fill="#77879a" font-size="10.5">抽象层的价值在「换实现」的那一刻才被兑现</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两层抽象</b>　这个图的重点是最左边那个被划掉的方块：<strong>厂商软件被显式地放弃了</strong>。讲师没有去逆向它、也没有去兼容它，而是退到总线层重新起了一层。整套东西之所以能在五小时内做完，靠的不是 AI 快，而是<strong>抽象层选对了</strong>——底层接口几十年不变，上层接口自己定义，中间那段脏活交给 AI。</figcaption>
+      </figure>
+      <p>讲师特别提醒了一点：<strong>这套抽象还有一个隐性收益</strong>。当他后来想换实现（比如从 LP 路径换成通用打印驱动）时，上层代码一行都不用改。这就是「接口与实现解耦」在真实项目里的兑现时刻。</p>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>软件公司正在彻底消亡</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1860" target="_blank"><span class="tri"></span>31:00</a>
+      <p>由这个项目，讲师提出一个很大胆的判断：<strong>软件公司正在彻底消亡</strong>。他给出的理由是「驱动开发」这门生意的经济学被彻底改写了。</p>
+      <div class="blk pit">
+        <span class="label">驱动开发为什么是一门要消失的生意</span>
+        <ul>
+          <li>开发一套驱动的人力成本极高——要养一批懂底层的人</li>
+          <li>而且必须维护<strong>多个平台</strong>：Windows 一套、Mac 一套，各写一遍</li>
+          <li>但用户愿意为驱动付的钱很低，因为它是<strong>中间件</strong>，用户感知不到</li>
+          <li>于是这块业务一直是「成本高、收益低」——现在 AI 把成本那一侧几乎打到零</li>
+        </ul>
+      </div>
+      <p>讲师的意思不是「公司会消失」，而是<strong>「靠卖中间件赚钱」这个模式会消失</strong>。当一个人用五小时就能做出产品级效果的驱动层，那这个市场就不再需要一家公司来专门做这件事。</p>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>豆包手机：APP 沦为接口</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2040" target="_blank"><span class="tri"></span>34:00</a>
+      <p>讲师接着讲了一个观察：<strong>豆包手机</strong>（字节与手机厂商的合作形态）。他的判断是：<strong>APP 正在退化成 computer use 的接口</strong>——不再需要人去点那个精心设计的界面，而是让模型去点。</p>
+      <div class="kv">
+        <div>过去</div><div>APP 的价值在界面：把功能做成好看的按钮，人来点</div>
+        <div>现在</div><div>APP 的价值在<strong>可被调用的能力</strong>：模型能不能可靠地完成「点外卖」这件事</div>
+        <div>接口化</div><div>阿里千问这类助手开始把各家的服务整合进来，用户面对的不再是 APP 列表，而是一个对话框</div>
+        <div>组合</div><div>讲师提到 Jab 与豆包手机的搭配——模型 + 设备代理的组合形态</div>
+      </div>
+      <p>他还预告了下一个实验的要求：<strong>把 assistant 接到一个物理设备上</strong>。他举了一个电子墨水瓶的例子——有同学用 Claude Opus 4.6 去解包 APK、逆向出蓝牙协议，从而控制那个设备。<strong>这条路已经有人走通了</strong>。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>从「AI 写驱动」到「AI 直接操控 APP」到「AI 逆向蓝牙协议控制硬件」，这三件事串起来是同一条线：<strong>软件的「界面」这一层正在被模型吃掉，剩下的价值全部沉淀到接口层</strong>。这对做产品的人是坏消息（界面优势没了），对做抽象的人是好消息（接口设计能力更值钱了）。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>1960 年的软件危机现场</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2220" target="_blank"><span class="tri"></span>37:00</a>
+      <p>本章的最后，讲师把时间线拉回到 1960 年代，用几个非常具体的细节来说明「软件危机」是怎么发生的。</p>
+      <div class="blk q">
+        <span class="label">他举的那些历史细节</span>
+        <ul>
+          <li><strong>1960 年，硬件比程序员贵</strong>：一台机器的钱能养很多人，所以「省机器时间」是最高优先级，人怎么写代码不重要</li>
+          <li>所以大家<strong>画流程图</strong>，然后手工翻译成机器代码——因为让机器多跑一遍太贵了</li>
+          <li>程序员脑子里只有<strong>汇编与 goto</strong>，因为那是当时唯一被优化过的写法</li>
+          <li><strong>Dijkstra 1957 年登记职业时被写成「理论物理学家」</strong>——「程序员」这个职业当时还不算一个正当职业</li>
+          <li><strong>1968 年 Boys' Life 杂志</strong>（面向青少年的杂志）已经在畅想「终端可以即时判分」这件事</li>
+        </ul>
+      </div>
+      <p>还有个关于「缺同理心」的观察：讲师说 <strong>985 的学生往往缺同理心与商业理解</strong>——技术上能做出很漂亮的东西，但不理解这个东西对真实用户、对商业意味着什么。这恰好是软件企业存在的理由。</p>
+      <p>讲师举了个很形象的对比来说明「补 gap 是有价值的」：<strong>开发一个操作系统可能要花 1000 万美元</strong>，而如果你去问 AI，「我给你微博 50」——意思是 AI 根本不能替代那个「把需求搞对、把资源组织起来」的过程。另外一个例子是软件与桥梁工程的差别：<strong>桥梁要适应自然物理规律，软件要适应的是人的需求</strong>，而人的需求是高度定制化的——选课系统要考虑先到先得、抽签、按专业保留名额，还要处理「先修课能不能特批」这种边界情况。</p>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>gap 不在 AI 写代码那一段，而在 <strong>intent → specification</strong> 那一段</li>
+          <li>所以今天的标准答案是 <strong>做 MVP</strong>：用最小的代价换到最关键的反馈，验证的对象是你的 intent</li>
+          <li>讲师的真实项目证明这条路可行，但前提是<strong>选对抽象层</strong>——底层用几十年不变的接口，上层自定义语义</li>
+          <li>「界面」这一层正在被模型吃掉，价值向接口层沉淀；中间件生意的成本结构被彻底改写</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

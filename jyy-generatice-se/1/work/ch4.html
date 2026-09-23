@@ -1,0 +1,190 @@
+<section class="chapter ch4" id="ch4">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">04</div>
+      <div class="ch-title">
+        <h2>实操 (3)：Computer Science 从业者的视角</h2>
+        <div class="ch-play"><span class="dot"></span>65:10 – 74:40　·　4 小节</div>
+        <p class="ch-abstract">上一章是「普通人怎么用」，这一章换视角：<strong>CS 从业者知道边界在哪里</strong>。讲师用两个自己的项目说明这种区别——一个是把 140 份试卷的统分做成流水线（他知道什么时候不该让大模型做加法），另一个是「在机器管控下把文件偷出来」的 Excel 二维码工程（他知道该用什么中间语言）。<strong>这一章的核心命题是：一般人的瓶颈是「不知道提出什么」，CS 人的瓶颈是「知道该以什么形式复用」。</strong></p>
+      </div>
+    </div>
+
+    <!-- 4.1 -->
+    <div class="sub" id="s41">
+      <h3><span class="idx">4.1</span>改卷统分：一条「不信任大模型做加法」的流水线</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=3910"><span class="tri"></span>回跳 1:05:10</a>
+
+      <p class="lead">这是全片最能体现「CS 从业者视角」的案例。讲师先讲了过去是怎么做的，然后讲今年他改成什么样。</p>
+
+      <div class="blk pit">
+        <span class="label">过去（他自嘲对学生太好）</span>
+        <p>「改完以后我要统分，那一般来说这个任务就是给助教的：助教你去把这个分加了。然后助教就掏出一个计算器，12 加 13 加 14 加 15 加 16，然后再仔细合一遍。」</p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 396" role="img" aria-label="改卷统分流水线的两个阶段与三个关键设计">
+          <rect x="0" y="0" width="1080" height="396" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="30" y="28" fill="#77879a" font-size="12.5">一条「人 + agent 分工明确」的流水线</text>
+
+            <!-- stage 1 -->
+            <rect x="30" y="44" width="1020" height="118" rx="10" fill="rgba(70,198,224,.06)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="68" fill="#46c6e0" font-size="12" font-weight="700">第一阶段 · 拍照识别（离线跑）</text>
+            <text x="50" y="94" fill="#adbccd" font-size="11.5">办公桌上方一个从顶向下的摄像头，固定拍试卷的一块固定位置 → 调好 → 按回车拍一张</text>
+            <text x="50" y="116" fill="#adbccd" font-size="11.5">→ 回车后回头去 offline 用视觉模型识别：姓名、学号、每一个小分 → 每个小分写一行到一个文件</text>
+            <text x="50" y="142" fill="#77879a" font-size="10.5">「我是两只手的，我两只手都没写下（笔）——如果我这张卷子没有摆好，我就可以调整一下再来。」</text>
+
+            <!-- stage 2 -->
+            <rect x="30" y="170" width="1020" height="118" rx="10" fill="rgba(169,139,250,.06)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="50" y="194" fill="#a98bfa" font-size="12" font-weight="700">第二阶段 · 反序复核（人在环里）</text>
+            <text x="50" y="220" fill="#adbccd" font-size="11.5">反序执行，「我还是以回车键，这时候我左右手就换了：我左手按回车，右手拿笔」</text>
+            <text x="50" y="242" fill="#adbccd" font-size="11.5">→ 脚本用语音播报「谁谁谁、学号是什么、每一个小分是多少，11 加 12 加 13……」→ <tspan fill="#e9eff7" font-weight="700">讲师一边听一边核对</tspan></text>
+            <text x="50" y="266" fill="#f8736e" font-size="11">「因为 OCR 会有错，我不信任他。我要对我的班上的每一个同学负责。」</text>
+
+            <!-- three designs -->
+            <rect x="30" y="304" width="330" height="82" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="50" y="328" fill="#3fd68c" font-size="11.5" font-weight="700">设计 ① 加法不用大模型</text>
+            <text x="50" y="350" fill="#adbccd" font-size="11">「这个分数是用脚本 <tspan fill="#e9eff7" font-weight="700">eval</tspan> 算出来的，</text>
+            <text x="50" y="370" fill="#adbccd" font-size="11">所以他是不会错……我没有让大模型做加法。」</text>
+
+            <rect x="375" y="304" width="330" height="82" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="395" y="328" fill="#3fd68c" font-size="11.5" font-weight="700">设计 ② 模型跑在本地</text>
+            <text x="395" y="350" fill="#adbccd" font-size="11">「我知道我的本地有一个 <tspan fill="#e9eff7" font-weight="700">27B 的 Qwen</tspan>，</text>
+            <text x="395" y="370" fill="#adbccd" font-size="11">然后 Ollama 可以用。」→ 隐私 + 成本都可控</text>
+
+            <rect x="720" y="304" width="330" height="82" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="740" y="328" fill="#f0b429" font-size="11.5" font-weight="700">设计 ③ 优化人机同步的代价</text>
+            <text x="740" y="350" fill="#adbccd" font-size="11">「我知道应该用这样的流程——</text>
+            <text x="740" y="370" fill="#adbccd" font-size="11">一个最舒服的流程减轻我和 agent 之间同步的代价。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜流水线 + 三个设计</b>　前两段是流程，下面三个方块是<b>「为什么一般人做不出这套东西」的答案</b>。讲师的原话是：<b>「这些如果一般人你可以试一下——你哪怕是跟最好的模型说『我现在改了 140 张卷子，小分都已经写上去了，我要统分，帮我实现』，它到不了一个这么快的收敛的方案。」</b></figcaption>
+      </figure>
+
+      <div class="blk eye">
+        <span class="label">为什么这条流水线的收敛快</span>
+        <p>讲师的解释是：<strong>他知道边界在哪里</strong>。加法交给确定性脚本、识别交给本地视觉模型、复核交给人。<strong>每一段都用它最擅长的东西，而且每一段的「对不对」都能立刻判定。</strong>这比让一个 agent 从「统分」到「出分」一把梭要快得多，因为后者没有中途的 verifier。</p>
+      </div>
+    </div>
+
+    <!-- 4.2 -->
+    <div class="sub" id="s42">
+      <h3><span class="idx">4.2</span>「机器管控下偷数据」这道题：CS 人才能想到的问题</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4090"><span class="tri"></span>回跳 1:08:10</a>
+
+      <p class="lead">讲师说明这道题的来由：「前几天在一个星期左右的时间里，有一个我们在群里面突然闲聊，说机器被管控了很讨厌。」然后他完整地描述了约束条件。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 336" role="img" aria-label="受限环境下的两条数据外传通道">
+          <rect x="0" y="0" width="1080" height="336" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="34" width="1020" height="104" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="50" y="58" fill="#f8736e" font-size="12" font-weight="700">约束条件（讲师设定的场景：一个金融公司的数据管控）</text>
+            <text x="50" y="84" fill="#adbccd" font-size="11.5">✓ 数据可以带进去：插 U 盘，把 Word / Excel 拷进去是可以的</text>
+            <text x="50" y="106" fill="#adbccd" font-size="11.5">✗ 数据出不来：「没有任何文件可以拷到 / 考出来」</text>
+            <text x="50" y="128" fill="#adbccd" font-size="11.5">✗ 不能执行任何不信任的程序　✗ 不能显示任何不信任的网页　✓ 唯一能做的：在远处敲键盘</text>
+
+            <rect x="30" y="158" width="500" height="164" rx="10" fill="rgba(70,198,224,.06)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="50" y="182" fill="#46c6e0" font-size="12" font-weight="700">通道 ① · 抖鼠标（入口）</text>
+            <text x="50" y="208" fill="#adbccd" font-size="11.5">「你可以在上下维度抖鼠标就是零，左右维度抖鼠标就是一」</text>
+            <text x="50" y="230" fill="#adbccd" font-size="11.5">→ 用一个远程桌面连进去，就可以往里面传输数据</text>
+            <text x="50" y="254" fill="#77879a" font-size="10.5">难点：你能装 EXE 才行——「一般是不行的」。</text>
+            <text x="50" y="280" fill="#adbccd" font-size="11.5">更进一步的方案：「你只要有一个远程桌面，</text>
+            <text x="50" y="300" fill="#adbccd" font-size="11.5">你就可以在那里面做一个<tspan fill="#e9eff7" font-weight="700">虚拟网卡</tspan>，把远程桌面变成虚拟网卡。」</text>
+
+            <rect x="550" y="158" width="500" height="164" rx="10" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="570" y="182" fill="#3fd68c" font-size="12" font-weight="700">通道 ② · Excel 二维码动画（出口）　← 讲师做的那个</text>
+            <text x="570" y="208" fill="#adbccd" font-size="11.5">一个 Excel 文件，里面是：输入任意字符串 → Base64 编码 → 转成二维码</text>
+            <text x="570" y="230" fill="#adbccd" font-size="11.5">字符串不变则二维码不变；改一个字符，二维码跟着变</text>
+            <text x="570" y="254" fill="#e9eff7" font-size="11.5" font-weight="700">把它做成一个「二维码动画」：一帧一帧地刷，带帧号</text>
+            <text x="570" y="280" fill="#adbccd" font-size="11.5">→ 按住 F9 刷新，每一帧都拍下来 → 数据就出来了</text>
+            <text x="570" y="300" fill="#77879a" font-size="10.5">关键：Excel 是合法的。「我用了所有的东西都是公式，2019 之前的 Excel 都兼容。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜双通道</b>　左右两条通道的分工很清楚：<b>左边负责「送进去」，右边负责「拿出来」，两边都只用合法的东西</b>（鼠标事件、Excel 公式）。讲师的原话：「这个例子我刚才这个 Excel 是用 AI 生成的——<strong>你的想象力限制了你能做什么。</strong>」</figcaption>
+      </figure>
+
+      <div class="blk q">
+        <span class="label">为什么他特意挑这道题</span>
+        <p>因为它的解法<strong>完全依赖对计算机系统的理解</strong>：「你是 Computer Science 的学生，你知道你上过操作系统、上过计算机网络，你知道这里面需要的组件是什么，你就可以把这个 vibecoding 出来。」</p>
+      </div>
+    </div>
+
+    <!-- 4.3 -->
+    <div class="sub" id="s43">
+      <h3><span class="idx">4.3</span>Excel 二维码是怎么做出来的：一次「先探路再放手」的实验</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4250"><span class="tri"></span>回跳 1:10:50</a>
+
+      <p class="lead">讲师把这个 Excel 项目做成了受控实验：<strong>第一版他带着 AI 做，第二版他完全不参与</strong>。结果差异巨大，而且他给出了原因分析。（这段内容与第 5 章 5.2/5.3 是同一个项目的两个视角，这里记的是「实验设计」，那里记的是「软件工程结论」。）</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 372" role="img" aria-label="对照实验的两组设置与结果">
+          <rect x="0" y="0" width="1080" height="372" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="38" width="490" height="150" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.4"/>
+            <text x="50" y="62" fill="#3fd68c" font-size="12" font-weight="700">实验组 A · 讲师带着 AI 做</text>
+            <text x="50" y="88" fill="#adbccd" font-size="11.5">「因为第一个版本是我带着 AI 做的，</text>
+            <text x="50" y="108" fill="#adbccd" font-size="11.5">所以做的还比较顺利。」</text>
+            <text x="50" y="136" fill="#77879a" font-size="10.5">「带着做」的含义（结合第 5 章）：</text>
+            <text x="50" y="158" fill="#adbccd" font-size="11.5">先设计中间语言，把大问题切成</text>
+            <text x="50" y="178" fill="#adbccd" font-size="11.5">每一块都可单独验证的小问题。</text>
+
+            <rect x="560" y="38" width="490" height="150" rx="10" fill="rgba(248,115,110,.07)" stroke="#f8736e" stroke-width="1.4"/>
+            <text x="580" y="62" fill="#f8736e" font-size="12" font-weight="700">实验组 B · 把需求直接告诉 AI</text>
+            <text x="580" y="88" fill="#adbccd" font-size="11.5">「然后后来我就直接把这个告诉 AI」</text>
+            <text x="580" y="116" fill="#adbccd" font-size="11.5">→ 第一次思考 25 分钟，输出超过 <tspan fill="#e9eff7" font-weight="700">32k output token</tspan>，</text>
+            <text x="580" y="136" fill="#adbccd" font-size="11.5">被「超过默认 output 限制」截断</text>
+            <text x="580" y="158" fill="#adbccd" font-size="11.5">→ 再跑，无人监管跑了 <tspan fill="#e9eff7" font-weight="700">6 个小时</tspan></text>
+            <text x="580" y="178" fill="#77879a" font-size="10.5">讲师同时用 Claude 和 DeepSeek V4 Pro 两条线夜跑。</text>
+
+            <rect x="30" y="204" width="1020" height="64" rx="9" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="50" y="228" fill="#f0b429" font-size="11.5" font-weight="700">实验组 B 的结果：不听指令</text>
+            <text x="50" y="252" fill="#adbccd" font-size="11.5">「他给了一个 Base64 是硬编码的——他用 <tspan fill="#e9eff7" font-weight="700">Python 算了一个 Base64</tspan> 贴到那个公式框里。如果我的那个字符串改了，他的 Base64 是不会改的。」</text>
+
+            <rect x="30" y="282" width="1020" height="80" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="50" y="306" fill="#77879a" font-size="11">模型的自我批评（讲师复述）：</text>
+            <text x="50" y="330" fill="#e9eff7" font-size="12">「那我就骂他了。我骂完以后他那个 Claude 就说：This is a fundamental design flaw, I need to rethink.」</text>
+            <text x="50" y="352" fill="#3fd68c" font-size="11.5" font-weight="700">「不管怎么样，就是他们两个最终都完成了任务。」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜对照实验</b>　两组唯一的变量是<b>「需求给得有多细」</b>。注意 B 组的失败不是任务完不成，而是<b>完成方式不可维护</b>：硬编码的 Base64 让整个产物失去意义。这就是第 5 章「软件工程的失败」的确切含义。</figcaption>
+      </figure>
+    </div>
+
+    <!-- 4.4 -->
+    <div class="sub" id="s44">
+      <h3><span class="idx">4.4</span>本章小结：想象力的边界，以及「人机共建」的现状</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1pb8o6yE8f?t=4410"><span class="tri"></span>回跳 1:13:30</a>
+
+      <p class="lead">讲师把这一章和上一章的结论合在一起说了一遍，并给了一个很诚实的当前状态判断。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 282" role="img" aria-label="一般人视角与CS从业者视角的分工总结">
+          <rect x="0" y="0" width="1080" height="282" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <rect x="30" y="34" width="490" height="130" rx="10" fill="rgba(91,156,248,.07)" stroke="#5b9cf8" stroke-width="1.3"/>
+            <text x="50" y="58" fill="#5b9cf8" font-size="12" font-weight="700">一般人可以学的（第 2 章）</text>
+            <text x="50" y="84" fill="#adbccd" font-size="11.5">✓ 看书、做总结</text>
+            <text x="50" y="106" fill="#adbccd" font-size="11.5">✓ 实现一个信息处理的闭环（飞轮）</text>
+            <text x="50" y="128" fill="#adbccd" font-size="11.5">✓ 用 computer use / browser use 处理日常事务</text>
+            <text x="50" y="152" fill="#77879a" font-size="10.5">这一切只需要：装一个 agent、配一个便宜模型的 API Key。</text>
+
+            <rect x="560" y="34" width="490" height="130" rx="10" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="580" y="58" fill="#3fd68c" font-size="12" font-weight="700">CS 人的额外能力（第 4 章）</text>
+            <text x="580" y="84" fill="#adbccd" font-size="11.5">✓ 知道什么东西该以代码形式复用</text>
+            <text x="580" y="106" fill="#adbccd" font-size="11.5">✓ 知道什么东西该以 skill 形式复用</text>
+            <text x="580" y="128" fill="#adbccd" font-size="11.5">✓ 能把一个模糊需求编译成一个可分步验证的流程</text>
+            <text x="580" y="152" fill="#e9eff7" font-size="10.5">讲师原话：「这就是我们和一般人的区别。」</text>
+
+            <rect x="30" y="182" width="1020" height="82" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.4"/>
+            <text x="50" y="206" fill="#f0b429" font-size="12" font-weight="700">当前状态（讲师对未来的判断）：</text>
+            <text x="50" y="230" fill="#e9eff7" font-size="12">「所以有些时候现在我还需要人 and AI 要共建。但我也赌有一天 AI 的能力能够强到它能够感知我的一切，然后能帮我做一个完美的东西。」</text>
+            <text x="50" y="252" fill="#77879a" font-size="10.5">关键词是「赌」——他前面说过自己「不对哪条路线胜出做预测」。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜分工</b>　两栏的差别可以压成一句话：<b>一般人能让 agent 做「他想到的事」，CS 人能让 agent 做「他设计出来的事」</b>。后者需要的能力（编译需求、选择复用形式、设计验证点）恰好就是第 5 章要讲的「软件工程」。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+

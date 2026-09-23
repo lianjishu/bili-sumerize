@@ -1,0 +1,206 @@
+<section class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>开场 &amp; 版本管理</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1kybV6DE47?t=0"><span class="dot"></span>00:00 开始播放</a>
+        <p class="ch-abstract">本章看似是闲聊，其实全部在讲同一件事：<strong>在 AI 什么都能做的时代，人还剩下什么是值得学的</strong>。答案不在「知识点」里，而在注意力和对世界的感知上。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>开头：一次 GPT-6 的现场演示</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=0"><span class="tri"></span>00:00</a>
+      <p>开场直接放了一段 GPT-6 的现场演示作为这学期的起点。上半年还在讨论 GPT-5.6s，几个月之后版本的迭代已经要重新理解一次。老师用这类演示来说明一件事：<strong>技术演进的速度已经超出了「按学期更新教学内容」的节奏</strong>。</p>
+      <div class="blk q">
+        <span class="label">为什么用演示开场</span>
+        <ul>
+          <li>先让同学对「能力上限」有一个体感，再谈课程安排才有效</li>
+          <li>这些能力不是未来的可能性，而是<strong>当下就可以用到的东西</strong></li>
+          <li>课程的立场：不追着讲工具，而是讲<strong>判断力</strong>——什么时候该用、用到什么程度</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s12">
+      <h3><span class="idx">1.2</span>代码正在变得不需要人读</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=120"><span class="tri"></span>02:00</a>
+      <p>老师提到一个正在发生的转折：过去写代码是为了让人读懂，现在越来越多的代码是写给机器执行的——<strong>人不再需要逐行阅读它</strong>。这直接冲击了几十年来的工程惯例（命名、注释、可读性）。</p>
+      <figure>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="代码的可读性假设正在改变">
+          <rect x="0" y="0" width="1000" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一个问题的两种答案：谁在读这段代码</text>
+
+            <rect x="40" y="60" width="420" height="200" rx="10" fill="rgba(70,198,224,.08)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="64" y="92" fill="#46c6e0" font-size="14" font-weight="700">过去：人在读代码</text>
+            <text x="64" y="120" fill="#adbccd" font-size="12.5">· 命名要表达意图，注释要解释「为什么」</text>
+            <text x="64" y="144" fill="#adbccd" font-size="12.5">· 代码风格统一，是为了降低沟通成本</text>
+            <text x="64" y="168" fill="#adbccd" font-size="12.5">· 可读性 = 可维护性 = 工程价值</text>
+            <text x="64" y="192" fill="#adbccd" font-size="12.5">· 评审靠人眼一行一行看</text>
+            <text x="64" y="224" fill="#77879a" font-size="11.5">核心假设：代码的主要读者是人类同事</text>
+
+            <rect x="540" y="60" width="420" height="200" rx="10" fill="rgba(169,139,250,.08)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="564" y="92" fill="#a98bfa" font-size="14" font-weight="700">现在：agent 在读代码</text>
+            <text x="564" y="120" fill="#adbccd" font-size="12.5">· 代码的正确性由测试与构建保证</text>
+            <text x="564" y="144" fill="#adbccd" font-size="12.5">· 人更多看接口、看结构、看 diff 摘要</text>
+            <text x="564" y="168" fill="#adbccd" font-size="12.5">· 可读性的对象从人变成了模型</text>
+            <text x="564" y="192" fill="#adbccd" font-size="12.5">· 评审靠 agent 解释，人做判断</text>
+            <text x="564" y="224" fill="#77879a" font-size="11.5">新的问题：人还能不能看懂自己的项目</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="466" y1="160" x2="512" y2="160"/><polygon points="512,160 504,156 504,164"/>
+            </g>
+            <text x="489" y="150" fill="#31465c" font-size="11" text-anchor="middle">转变</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜读者变了</b>　这不是「好代码的标准降低了」，而是<b>读者的身份变了</b>。当主要读者从人变成模型，工程惯例里哪些该留、哪些该改，正是这门课要讨论的。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s13">
+      <h3><span class="idx">1.3</span>AI 时代还要不要学数据库和操作系统</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=280"><span class="tri"></span>04:40</a>
+      <p>这是全章最实在的一段。老师先复述了同学最常问的问题：<strong>既然 agent 都会写，为什么还要学数据库、操作系统、编译原理这些「底层」？</strong>他没有直接给答案，而是打了一个类比。</p>
+      <blockquote>
+        <p>1900 年代的司机必须懂机械——会修化油器、会换轮胎、听得出发动机异响。今天的自动驾驶不需要你懂这些。但这不意味着机械知识没用了，而是<strong>它的用途变了：不再是开车的前提，而是理解限制、做出判断的背景</strong>。</p>
+        <cite>——讲师用汽车与驾驶的类比说明「底层知识」地位的迁移</cite>
+      </blockquote>
+      <div class="kv">
+        <div>问题的表层</div><div>「学了这个还有用吗」——按「会不会被 AI 替代」来判断知识价值</div>
+        <div>问题的深层</div><div>「我能不能判断 AI 做得对不对」——这才是底层知识真正的作用</div>
+        <div>结论</div><div>底层知识从「操作技能」变成了「审查能力」，<strong>它不再帮你做事，而是帮你判断</strong></div>
+        <div>具体到本课</div><div>不懂 Git 的对象模型，就没法判断 agent 那套「重写历史」的操作是否安全</div>
+      </div>
+      <div class="blk eye">
+        <span class="label">值得记下的判断</span>
+        <p>老师在这一段的立场很明确：<strong>不是「要不要学」，而是「为什么学」发生了改变</strong>。为了动手而学、与为了判断而学，是两种完全不同的学习方式。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s14">
+      <h3><span class="idx">1.4</span>惊人的注意力</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=460"><span class="tri"></span>07:40</a>
+      <p>老师反复提到的一个习惯，越到后面越重要，可以说贯穿了整门课：<strong>看到别人给你的答案之前，先自己想一想你会怎么做</strong>。</p>
+      <div class="blk q">
+        <span class="label">惊人的注意力 · 具体做法</span>
+        <ul>
+          <li>看到一个结论，先问<strong>「如果是我，我会怎么做」</strong>，再看别人怎么做的</li>
+          <li>看到一次报错、一次冲突、一次失败，停下来一秒，<strong>看清楚它长什么样</strong></li>
+          <li>学生时代的时间成本极低——一秒钟的观察，换来的是一辈子的印象</li>
+          <li>关键不是「多花时间」，而是把注意力<strong>放在别人会跳过的地方</strong></li>
+        </ul>
+      </div>
+      <figure>
+        <svg viewBox="0 0 1000 260" role="img" aria-label="惊人的注意力在做的事">
+          <rect x="0" y="0" width="1000" height="260" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一个动作，两种处理方式</text>
+
+            <rect x="40" y="58" width="440" height="170" rx="10" fill="#141d28" stroke="#233240"/>
+            <text x="62" y="88" fill="#77879a" font-size="13" font-weight="700">默认路径：跳过</text>
+            <text x="62" y="116" fill="#adbccd" font-size="12.5">看到一行等号、一堆尖括号 →</text>
+            <text x="62" y="140" fill="#adbccd" font-size="12.5">「冲突了，帮我修一下」</text>
+            <text x="62" y="164" fill="#adbccd" font-size="12.5">agent 修好、测试通过 →</text>
+            <text x="62" y="188" fill="#77879a" font-size="12.5">继续往下走，什么都没留下</text>
+            <text x="62" y="214" fill="#f8736e" font-size="11.5">结果：会用，但不知道为什么</text>
+
+            <rect x="520" y="58" width="440" height="170" rx="10" fill="rgba(70,198,224,.08)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="542" y="88" fill="#46c6e0" font-size="13" font-weight="700">惊人注意力：停下来看一眼</text>
+            <text x="542" y="116" fill="#adbccd" font-size="12.5">「这个冲突现场长什么样？」 →</text>
+            <text x="542" y="140" fill="#adbccd" font-size="12.5">看到两边代码被同时保留下来</text>
+            <text x="542" y="164" fill="#adbccd" font-size="12.5">「为什么要这样设计？」 →</text>
+            <text x="542" y="188" fill="#adbccd" font-size="12.5">理解到「信息要放在发生的地方」</text>
+            <text x="542" y="214" fill="#3fd68c" font-size="11.5">结果：一个原则，到处都能用</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两种路径</b>　老师强调的重点不是「多看」，而是<b>在别人会跳过的那一秒上停一下</b>。这一秒不会拖慢你，反而会让后面的每一步都变快。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s15">
+      <h3><span class="idx">1.5</span>第一个博士生的 U 盘事故</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=620"><span class="tri"></span>10:20</a>
+      <p>老师讲了一个自己带过的故事：第一个博士生把研究数据放在 U 盘里，U 盘坏了，数据没了。这件事后来成了他坚持用版本控制的原因，也成了这一讲的<strong>叙事起点</strong>。</p>
+      <p>他借此说明：版本管理最初的动机不是「多人协作」，也不是「工程规范」，而是一个非常朴素的需求——<strong>我想回到上一个版本，看看那时候我写的是什么</strong>。</p>
+      <div class="blk pit">
+        <span class="label">这一段的落点</span>
+        <p>所有版本控制系统的第一性原理，都可以从一个学生「怕文件丢、怕改错」的处境里推出来。<strong>先有需求，后有工具</strong>——这是老师反复示范的思考方式。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s16">
+      <h3><span class="idx">1.6</span>我要的是对世界的感知能力</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=760"><span class="tri"></span>12:40</a>
+      <p>接着上面的话题，老师澄清了一件事：学习的产出不是一个知识点清单，而是<strong>对世界的感知能力</strong>——能不能判断一件事会发生什么、后果有多严重、哪个方向是对的。</p>
+      <div class="blk q">
+        <span class="label">为什么「感知」比「知识」更重要</span>
+        <ul>
+          <li>知识可以随时问 AI 得到，<strong>但「该问什么」问不出来</strong></li>
+          <li>感知能力决定了你能不能在信息不足时做判断</li>
+          <li>它只能通过一次次真实的观察、失败、复盘积累</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s17">
+      <h3><span class="idx">1.7</span>香港与南京的地铁标识</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=900"><span class="tri"></span>15:00</a>
+      <p>这一讲里最精彩的类比之一。老师比较了香港地铁与南京地铁的站内标识设计：香港的出口指示牌<strong>在地上、在天花板上、在每一个转角处都有</strong>；南京的则往往集中在某个位置。</p>
+      <p>他由此引出一条通用原则：<strong>当一个人处于「需要做决定的那一刻」，应该把这个决定所需的所有信息，放在他所在的那个位置</strong>。信息要放在发生的地方，而不是放在「你应该去看」的地方。</p>
+      <figure>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="信息要放在做决定的地方">
+          <rect x="0" y="0" width="1000" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同一条原则的三种表现</text>
+
+            <rect x="40" y="56" width="290" height="216" rx="10" fill="rgba(70,198,224,.08)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#46c6e0" font-size="13.5" font-weight="700">地铁标识</text>
+            <text x="62" y="114" fill="#adbccd" font-size="12">在转角处就告诉你在哪、</text>
+            <text x="62" y="136" fill="#adbccd" font-size="12">往哪走、还需多久</text>
+            <text x="62" y="168" fill="#77879a" font-size="11.5">决定发生的位置：</text>
+            <text x="62" y="188" fill="#adbccd" font-size="12">你正要拐弯的那一刻</text>
+            <text x="62" y="222" fill="#3fd68c" font-size="11.5">✓ 信息跟着人走</text>
+
+            <rect x="355" y="56" width="290" height="216" rx="10" fill="rgba(169,139,250,.08)" stroke="#a98bfa" stroke-width="1.3"/>
+            <text x="377" y="86" fill="#a98bfa" font-size="13.5" font-weight="700">merge 冲突</text>
+            <text x="377" y="114" fill="#adbccd" font-size="12">两边冲突的代码被同时</text>
+            <text x="377" y="136" fill="#adbccd" font-size="12">摆在你面前，等你决定</text>
+            <text x="377" y="168" fill="#77879a" font-size="11.5">决定发生的位置：</text>
+            <text x="377" y="188" fill="#adbccd" font-size="12">你去看那个文件的时候</text>
+            <text x="377" y="222" fill="#3fd68c" font-size="11.5">✓ 不做预先判断，只呈现</text>
+
+            <rect x="670" y="56" width="290" height="216" rx="10" fill="rgba(240,180,41,.08)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="692" y="86" fill="#f0b429" font-size="13.5" font-weight="700">写文档</text>
+            <text x="692" y="114" fill="#adbccd" font-size="12">把「为什么这么做」写在</text>
+            <text x="692" y="136" fill="#adbccd" font-size="12">代码旁边，而不是 wiki 里</text>
+            <text x="692" y="168" fill="#77879a" font-size="11.5">决定发生的位置：</text>
+            <text x="692" y="188" fill="#adbccd" font-size="12">有人要改这一行的时候</text>
+            <text x="692" y="222" fill="#3fd68c" font-size="11.5">✓ 不需要先去别处找</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜一条原则，三个场景</b>　老师说自己「无意中举了地铁标识的例子」，后来发现 Git 也在用同一个原则——<b>first principle 是连起来的</b>。这是本讲反复出现的一种教学方式：从一个具体场景抽出一条原则，再拿它去解释另一件完全无关的事。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s18">
+      <h3><span class="idx">1.8</span>在脑中先实现一遍</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1kybV6DE47?t=1180"><span class="tri"></span>19:40</a>
+      <p>章末给了一个具体的学习方法，后面第 3 章讲 Git 底层时会再次用到：<strong>在做之前，先在脑子里实现一遍</strong>。</p>
+      <div class="blk steps">
+        <span class="label">virtually implement：四步</span>
+        <ol>
+          <li>明确需求——「我想回到上一个版本」</li>
+          <li>自己设计一个最小方案——「那就每次复制一份目录，再加个命令列出所有版本」</li>
+          <li>发现这个方案的缺陷——「目录会爆炸、无法比较、无法多人协作」</li>
+          <li>对照真实实现——「原来 Git 是这么解决这些缺陷的」</li>
+        </ol>
+      </div>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <p>第 1 章没有讲任何 Git 命令，但它是第 2、3 章的前提：<strong>先把「学什么」想清楚，再去看「怎么用」</strong>。注意力的价值在于，它让你在第 2 章看到冲突现场时，不只是「修好了」，而是「看懂了」。</p>
+      </div>
+    </div>
+  </div>
+</section>

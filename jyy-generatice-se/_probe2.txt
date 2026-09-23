@@ -1,0 +1,5 @@
+deps ok 1.2.1
+---- nvidia ----
+ct2 4.8.2 cuda_devices 1
+---- chrome ----
+True

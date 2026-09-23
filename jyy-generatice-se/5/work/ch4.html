@@ -1,0 +1,241 @@
+<div class="chapter ch4" id="ch4">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">04</div>
+      <div class="ch-title">
+        <h2>软件工程给世界带来了什么</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4506" target="_blank"><span class="dot"></span>75:06 – 99:59</a>
+      </div>
+    </div>
+    <p class="ch-abstract">上一章讲的是软件工程怎么被逼出来的，这一章讲它<strong>留下了什么</strong>。讲师把软件工程的遗产归成了四类：<strong>checklist（清单）、bad smell（坏味道）、语言分层、契约（design by contract）</strong>，然后非常克制地评估了一遍——它们在 AI 时代还有多少用。最后用自己读 796 页 UML 规范的真实经历，给出这一讲最有分量的一段判断。</p>
+
+    <div class="sub" id="s41">
+      <h3><span class="idx">4.1</span>checklist：有人文关怀的工具</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4506" target="_blank"><span class="tri"></span>75:06</a>
+      <p>讲师先说了一个被严重低估的东西：<strong>checklist</strong>。它的形式极其朴素——一张单子，做一步打个勾。国际上还有 ISO 标准规定了某些领域必须用清单管理流程。</p>
+      <p>他承认大家对打勾这件事的感受：<strong>老师让你打勾很烦</strong>。但他紧接着说：<strong>烦归烦，它确实能显著降低失败的概率</strong>。清单的作用不是让你更聪明，而是让你<strong>不会因为遗忘而失败</strong>。</p>
+      <div class="blk q">
+        <span class="label">checklist 在 AI 时代的一个具体用法</span>
+        <ul>
+          <li>跟客户沟通完之后<strong>逐条打勾确认</strong>，能大幅降低「做出来的东西不是他要的」这种 intent 不符的概率</li>
+          <li>因为沟通里的很多信息是<strong>隐含的</strong>——客户以为自己说清楚了，你以为自己听懂了，双方都没意识到中间丢了东西</li>
+          <li>清单强制把隐含假设显式化：一条一条念出来，对方才有机会说「不，不是这个意思」</li>
+        </ul>
+      </div>
+      <p>讲师给清单的评价很有意思：他称它为<strong>「有人文关怀的工具」</strong>。理由是——它承认人会忘、会累、会犯错，然后设计了一个机制去接住这些缺点。<strong>它不是要求人变得更强，而是承认人本来就有限</strong>。</p>
+    </div>
+
+    <div class="sub" id="s42">
+      <h3><span class="idx">4.2</span>bad smell 与研究生的一点小小方向</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4740" target="_blank"><span class="tri"></span>79:00</a>
+      <p>第二个遗产是 <strong>bad smell</strong>（坏味道）——它来自重构理论，指的是那些「能跑，但明显预示设计中存在更深层问题」的代码征兆。它不是一个错误，而是一个信号。</p>
+      <p>讲师举了两个很具体的例子，第二个尤其有意思。</p>
+      <div class="blk pit">
+        <span class="label">他举的两个 bad smell</span>
+        <ul>
+          <li><strong>等号左右不写空格</strong>：这是风格问题，但它反映的是一种「代码主要是给机器读的」的态度</li>
+          <li><strong>GPT-6 学会省 token 之后写出极难懂但正确的代码</strong>：模型为了降低成本，把变量名压短、把结构压扁，代码完全正确，但极难阅读</li>
+        </ul>
+      </div>
+      <p>第二个例子是这一节的关键——<strong>它说明 AI 会自己长出新的 bad smell</strong>。过去坏味道的来源是「人偷懒、人不懂设计」；现在多了一个来源：<strong>模型在优化它自己的成本函数</strong>。这跟第 1 章讲的 reward hacking 是同一个机制在代码层面的表现。</p>
+      <p>讲师顺便讲了他自己的研究方向：他说研究生做的东西往往只是<strong>极小的一点</strong>——比如他提到（举例）像「Java 中某一类 bad smell 的自动检测」这种题目。这不是自谦，是在说明<strong>学术工作的颗粒度</strong>：一篇论文解决的是一个精确到可以写成算法的小问题。</p>
+    </div>
+
+    <div class="sub" id="s43">
+      <h3><span class="idx">4.3</span>不同阶段需要不同的语言</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4980" target="_blank"><span class="tri"></span>83:00</a>
+      <p>第三个遗产是一条被讲得很少的洞见：<strong>软件的不同阶段，需要使用不同「形式化程度」的语言</strong>。</p>
+      <figure>
+        <svg viewBox="0 0 1040 300" role="img" aria-label="从自然语言到形式语言的连续谱">
+          <rect x="0" y="0" width="1040" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">形式化程度的连续谱：越往右，机器越能判断对错</text>
+
+            <line x1="60" y1="90" x2="980" y2="90" stroke="#31465c" stroke-width="1.6"/>
+            <polygon points="980,90 968,85 968,95" fill="#31465c"/>
+
+            <g stroke="#233240" stroke-width="1">
+              <line x1="120" y1="90" x2="120" y2="100"/>
+              <line x1="320" y1="90" x2="320" y2="100"/>
+              <line x1="520" y1="90" x2="520" y2="100"/>
+              <line x1="720" y1="90" x2="720" y2="100"/>
+              <line x1="920" y1="90" x2="920" y2="100"/>
+            </g>
+
+            <g font-size="11.5" text-anchor="middle">
+              <text x="120" y="120" fill="#f8736e">纯自然语言</text>
+              <text x="120" y="138" fill="#77879a" font-size="10.5">「用户点确认后保存」</text>
+              <text x="320" y="120" fill="#f0b429">checklist</text>
+              <text x="320" y="138" fill="#77879a" font-size="10.5">结构化但仍是自然语言</text>
+              <text x="520" y="120" fill="#46c6e0">设计文档 / UML</text>
+              <text x="520" y="138" fill="#77879a" font-size="10.5">有确定的图形语义</text>
+              <text x="720" y="120" fill="#5b9cf8">契约 / 断言</text>
+              <text x="720" y="138" fill="#77879a" font-size="10.5">写进代码，可被检查</text>
+              <text x="920" y="120" fill="#3fd68c">形式化证明</text>
+              <text x="920" y="138" fill="#77879a" font-size="10.5">数学上可验证</text>
+            </g>
+
+            <g font-size="11" text-anchor="middle" fill="#adbccd">
+              <text x="120" y="66">模糊 · 有歧义</text>
+              <text x="920" y="66">精确 · 无歧义</text>
+            </g>
+
+            <line x1="30" y1="164" x2="1010" y2="164" stroke="#233240" stroke-width="1"/>
+
+            <rect x="30" y="182" width="480" height="104" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="204" fill="#adbccd" font-size="11.5" font-weight="700">为什么不能全用形式化语言</text>
+            <text x="46" y="226" fill="#77879a" font-size="11">形式化语言表达力有限，写需求本身就很痛苦</text>
+            <text x="46" y="246" fill="#77879a" font-size="11">而且客户不读形式化语言，没法确认 intent</text>
+            <text x="46" y="268" fill="#adbccd" font-size="11">→ 所以设计阶段往往只有自然语言文档</text>
+
+            <rect x="530" y="182" width="480" height="104" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="546" y="204" fill="#adbccd" font-size="11.5" font-weight="700">文档最大的三个缺点</text>
+            <text x="546" y="226" fill="#77879a" font-size="11">幻觉：写了不存在的逻辑，读的人以为存在</text>
+            <text x="546" y="246" fill="#77879a" font-size="11">typo：一个笔误就能让语义完全走偏</text>
+            <text x="546" y="268" fill="#77879a" font-size="11">无法对齐：文档与人脑之间没有校验机制</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜语言的连续谱</b>　这张图的重点是那条轴：<strong>checklist 不是「落后的管理工具」，它是介于自然语言与形式语言之间的一个中间语言</strong>。它保留了自然语言的可读性（客户能看懂、能确认），同时又把内容结构化到「可以一条条打勾」的程度。讲师讲「不同阶段需要不同语言」，正是在说明为什么软件工程里会同时存在这么多看起来互相矛盾的产物——文档、图、清单、断言。</figcaption>
+      </figure>
+      <p>讲师还提到一个很现实的问题：<strong>设计阶段的文档几乎只有自然语言</strong>，而自然语言文档有三个致命缺点——<strong>人会幻觉、会有 typo、无法对齐</strong>。这三点合起来，就是设计文档长期被诟病「写完就没人看」的根本原因。他还提到 docx 打印存档这种做法——一旦打印出来，它就跟代码彻底脱节了。</p>
+    </div>
+
+    <div class="sub" id="s44">
+      <h3><span class="idx">4.4</span>design by contract 与 Eiffel</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5460" target="_blank"><span class="tri"></span>91:00</a>
+      <p>第四个遗产是 <strong>design by contract</strong>（契约式设计），它来自 <strong>Eiffel</strong> 语言——大约在 <strong>1986 年</strong>左右。</p>
+      <p>它的核心思想是：<strong>把 Hoare 三元组（前置条件 / 程序 / 后置条件）直接写进代码里</strong>，用一种叫 <code>require</code> / <code>do</code> / <code>ensure</code> 的结构。</p>
+      <figure>
+        <svg viewBox="0 0 1040 270" role="img" aria-label="契约式设计的结构">
+          <rect x="0" y="0" width="1040" height="270" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">账户取款：把「什么情况下能做、做完必须满足什么」写进代码</text>
+
+            <rect x="30" y="50" width="440" height="190" rx="9" fill="#141d28" stroke="#233240"/>
+            <g font-family="Consolas, Cascadia Code, monospace" font-size="11.5">
+              <text x="48" y="76" fill="#5b9cf8">withdraw</text>
+              <text x="48" y="96" fill="#77879a">(amount: INTEGER)</text>
+              <text x="48" y="124" fill="#f8736e">require</text>
+              <text x="64" y="144" fill="#adbccd">amount &gt; 0</text>
+              <text x="64" y="162" fill="#adbccd">amount &lt;= balance</text>
+              <text x="48" y="190" fill="#3fd68c">ensure</text>
+              <text x="64" y="210" fill="#adbccd">balance = old balance - amount</text>
+            </g>
+
+            <rect x="510" y="50" width="500" height="190" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="528" y="76" fill="#adbccd" font-size="11.5" font-weight="700">讲师从这段契约里读出来的两件事</text>
+            <text x="528" y="102" fill="#77879a" font-size="11">① 它自然地把设计问题暴露出来</text>
+            <text x="544" y="122" fill="#adbccd" font-size="11">你写下 require <tspan fill="#f8736e">amount &lt;= balance</tspan> 的那一刻</text>
+            <text x="544" y="142" fill="#adbccd" font-size="11">就必须回答：余额不足时，程序应该做什么？</text>
+            <text x="544" y="162" fill="#77879a" font-size="11">这个问题在写 do 之前就浮出来了</text>
+            <text x="528" y="190" fill="#77879a" font-size="11">② 建议先写 require / ensure，最后才写 do</text>
+            <text x="544" y="210" fill="#adbccd" font-size="11">先把「边界」定死，中间的实现反而是最容易的</text>
+            <text x="528" y="230" fill="#f0b429" font-size="11">MVP 阶段可以先忽略它，但概念要记住</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜契约的形状</b>　这段代码是讲师用来展示「契约不是形式主义」的证据。写下 <code>require amount &lt;= balance</code> 这件事本身，就逼着你去想「余额不足」这个分支——而这个分支恰恰是需求阶段最容易漏掉的。所以 <strong>design by contract 真正的价值不在运行时的断言检查，而在于它是一个「把隐含假设显式化」的思考工具</strong>。至于实践建议，讲师说得很克制：MVP 阶段可以先不管它。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s45">
+      <h3><span class="idx">4.5</span>三十年前的断言预言</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5580" target="_blank"><span class="tri"></span>93:00</a>
+      <p>顺着契约，讲师讲了一件他自己的事：<strong>在 ChatGPT 出现之前，他给操作系统课做过一个预言</strong>——他说三十年后，如果一个 assert 不能被证明，那程序就编译不过。也就是说，<strong>「证明」这件事会变成编译器的一部分</strong>。</p>
+      <p>他说现在回过头看，这个预言<strong>可能十到十五年就会实现</strong>，而不是三十年。原因是 AI 让「自动推理 / 自动构造证明」这件原本极其昂贵的事变便宜了。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这段很短，但它跟本讲的时间观是一致的：讲师习惯把「预言的实现速度」算错，而且<strong>每次都算得太保守</strong>。<strong>The Bitter Lesson</strong>、斩杀线、学术体系、以及这个断言预言——四个例子里他的判断都是「会比我以为的更快发生」。这是他在课上反复传递的一种态度。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s46">
+      <h3><span class="idx">4.6</span>UML 的野心：让语意对齐</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5700" target="_blank"><span class="tri"></span>95:00</a>
+      <p>然后是 <strong>UML</strong>——Unified Modeling Language，统一建模语言。讲师先讲了它的野心，讲得很准确：<strong>UML 想做的事情，是让语意对齐</strong>。</p>
+      <div class="blk q">
+        <span class="label">UML 假设的那条推理链</span>
+        <ul>
+          <li>自然语言与形式语言<strong>不能对齐</strong>——你说的话和我理解的话永远有偏差</li>
+          <li>所以需要一个<strong>中间语言</strong>：它既有确定的图形语义，又能被人读懂</li>
+          <li>于是有了类图（静态结构）、顺序图（交互时序）——它们都<strong>有确定的语义</strong>，不是随便画的框</li>
+          <li>这样需求方与实现方就有了一个共同的、不会各自理解的媒介</li>
+        </ul>
+      </div>
+      <p>讲师顺便讲了人类的类比：<strong>数学语言（比如皮亚诺公理）之所以能对齐，是因为它把人从「各自理解」里解救出来了</strong>。UML 想做的是同一件事，只不过对象是软件设计，而不是数学。</p>
+      <p>而「自然语言直连大脑的 latent space」这个说法也被提到了——这正是 UML 想绕开的东西：它假设自然语言太模糊，必须插入一层确定性的媒介。</p>
+    </div>
+
+    <div class="sub" id="s47">
+      <h3><span class="idx">4.7</span>我觉得今天 UML 已经死了</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5820" target="_blank"><span class="tri"></span>97:00</a>
+      <p>但接下来这句话是这一章最锋利的一刀：<strong>「我觉得今天 UML 已经死了」</strong>。</p>
+      <p>讲师给了完整的推理，而且推理方式很漂亮——他攻击的不是 UML 做得不好，而是<strong>UML 的前提条件被抽掉了</strong>。</p>
+      <div class="blk pit">
+        <span class="label">为什么 UML 的前提不成立了</span>
+        <ul>
+          <li>UML 的全部合法性建立在<strong>「自然语言与形式语言无法对齐」</strong>这个假设上</li>
+          <li>但今天 AI 让自然语言可以与<strong>任何东西</strong>对齐——它可以直接从一段中文描述生成类结构、生成测试、生成实现</li>
+          <li>既然中间那层媒介不再必要，那 UML 作为「媒介」的价值就消失了</li>
+          <li>讲师承认：类图与顺序图仍然有确定的语义，但这不足以让它继续成为一个必要的工业实践</li>
+        </ul>
+      </div>
+      <p>这一节的分量在于它的方法论：<strong>判断一个技术会不会死，不是看它做得好不好，而是看它成立的前提还在不在</strong>。这和他在第 3 章讲 goto、讲 Royce 时的思路一脉相承——都在追问「这个概念是在什么条件下被提出的」。</p>
+    </div>
+
+    <div class="sub" id="s48">
+      <h3><span class="idx">4.8</span>用 subagent 分片读 796 页 spec</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5940" target="_blank"><span class="tri"></span>99:00</a>
+      <p>为了备课 UML，讲师做了一件很实际的事：<strong>读了 796 页的 UML 规范</strong>。他没有自己一页页读，而是用了一套方法。</p>
+      <div class="blk steps">
+        <span class="label">他的分片阅读流程</span>
+        <ol>
+          <li>把 spec <strong>切成带 overlap（重叠）的分片</strong>——每片大约 50 页，相邻分片有重叠，避免切断上下文</li>
+          <li>每个分片<strong>派给一个 subagent</strong> 去读</li>
+          <li>要求每个 agent 做两件事：<strong>提取其中的软件工程智慧</strong>，并<strong>剔除那些不符合 AI 时代的结论</strong></li>
+          <li>把 lecture notes 全部给模型，让它<strong>总结成课件</strong></li>
+          <li>整套流程可以 scale 到几千页</li>
+        </ol>
+      </div>
+      <p>成本的部分他算得很具体：<strong>花了 5 小时额度的 18%，大约相当于 Kimi 699 套餐里的 5 块 3</strong>。也就是说，读一份 796 页的规范，成本是五块钱这个量级。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这个案例把第 2 章的 MVP 与第 3 节的「不同阶段需要不同语言」接了起来：<strong>796 页的规范里，绝大部分内容在 AI 时代已经不需要逐条遵守了</strong>，重要的只是那几条原则。所以这套流程的真正价值不是「读得快」，而是<strong>有能力从海量规范里筛出「还成立的那部分」</strong>。讲师给 agent 的指令里明确要求「剔除不符合 AI 时代的」，这个筛选动作才是核心。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s49">
+      <h3><span class="idx">4.9</span>我们以后还学得起学不起了</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=6120" target="_blank"><span class="tri"></span>102:00</a>
+      <p>由成本这个话题，讲师问了一个很尖锐的问题：<strong>我们以后还学得起、学不起了？</strong>他给了一些具体的数字来支撑这个担忧。</p>
+      <div class="kv">
+        <div>学习用</div><div>100 刀的 Codex 订阅大概够学习用——日常练习的量不需要更贵的东西</div>
+        <div>烧 token 的场景</div><div>真正贵的是<strong>维护大项目</strong>：上下文反复加载、大范围重构，token 消耗是学习场景的很多倍</div>
+        <div>上下文的天花板</div><div><strong>100 万上下文很快就会被填满</strong>——一个真实项目的代码量远超标称的上下文窗口</div>
+        <div>缓解办法</div><div>学习流程可以用 <strong>digested version</strong>（消化过的精简版）——不必每个环节都用最强的模型读原文</div>
+      </div>
+      <p>讲师把这件事讲成「教育平权」问题：如果学习成本被 token 价格推高，那就会产生新的分层。<strong>他也给了一个乐观的理由</strong>：学习场景与生产场景的成本结构完全不同，前者是「小而频繁」，后者是「大而持续」，所以「学得起」这件事比「用得起」容易做到。</p>
+    </div>
+
+    <div class="sub" id="s410">
+      <h3><span class="idx">4.10</span>796 页只回答一个问题</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=6180" target="_blank"><span class="tri"></span>103:00</a>
+      <p>最后是这一讲的收尾。讲师说，读完那 796 页的规范，他得到的结论可以压缩成一句话：<strong>整份规范从头到尾都在回答同一个问题——哪些 intention 必须定死，哪些可以留白</strong>。</p>
+      <p>然后他把这个结论推到了人身上，这是全片最有分量的一段：</p>
+      <blockquote>
+        <p>人和人之间、你和下一时刻的自己都无法对齐，因为你不 deterministic，所以你和自己都对不齐。</p>
+        <cite>讲师在收尾处的判断（约 103:00 处）</cite>
+      </blockquote>
+      <p>这句话把整讲串起来了：intent 的不确定性不是「没写清楚」造成的技术问题，而是<strong>语义对齐在本质上就不可能完全达成</strong>——因为对齐的双方（哪怕是同一个人在不同时刻）都不确定。软件工程的全部方法论，本质上都是在<strong>承认这个前提之后，寻找能让工作继续推进的最小共识</strong>。</p>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>软件工程的四类遗产：<strong>checklist</strong>（承认人会遗忘）、<strong>bad smell</strong>（识别设计信号）、<strong>语言分层</strong>（不同阶段用不同形式化程度）、<strong>design by contract</strong>（把隐含假设显式化）</li>
+          <li>它们的共同内核是同一件事：<strong>把不确定的 intent 收敛成可以验证的东西</strong></li>
+          <li>UML 之死说明了一个方法论：判断技术是否还成立，要看<strong>它诞生的前提条件</strong>是否还在，而不只是它做得好不好</li>
+          <li>796 页规范只回答一个问题：<strong>哪些 intent 必须定死，哪些可以留白</strong>；而人连与自己都无法完全对齐</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

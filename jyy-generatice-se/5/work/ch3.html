@@ -1,0 +1,311 @@
+<div class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>从软件危机到软件工程</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2341" target="_blank"><span class="dot"></span>39:01 – 75:06</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这是全片最长、也最「补课」的一章。<strong>软件工程这门学科是被软件危机逼出来的</strong>，而危机不是「写不出代码」，是「进度、成本、质量一起失控」。讲师沿着 Dijkstra、NATO 会议、Margaret Hamilton、Winston Royce 四个坐标把这段历史讲透，最后一个反常识的结论：<strong>那张著名的瀑布模型图，出处是一篇批判瀑布模型的文章</strong>。</p>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>进度、成本、质量一起失控</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2341" target="_blank"><span class="tri"></span>39:01</a>
+      <p>软件危机的定义不是「程序员水平不行」，而是<strong>三件事同时失控</strong>：进度拖、成本超、质量差。而且这三者是相互纠缠的——为了赶进度就砍测试，砍了测试质量就崩，质量崩了就返工，返工又拖进度。</p>
+      <div class="blk pit">
+        <span class="label">危机现场的三个典型症状</span>
+        <ul>
+          <li><strong>估算失效</strong>：没有人能说清楚这个系统要多久、要多少人、要花多少钱</li>
+          <li><strong>无法验证</strong>：做完了也不知道对不对，测试往往是最晚开始、最先被压缩的环节</li>
+          <li><strong>人不可替换</strong>：一个关键的人走了，这个系统就没人懂了——这在当时是常态</li>
+        </ul>
+      </div>
+      <p>讲师强调：正是因为「写代码」这件事当时已经能做，但「把一个大系统按时按质做出来」做不到，才有了软件工程这门学科。</p>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>GoTo Statement Considered Harmful</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2520" target="_blank"><span class="tri"></span>42:00</a>
+      <p>Dijkstra 那篇著名的短文标题是 <strong>「Go To Statement Considered Harmful」</strong>——注意原文里 Go To 是分开写的。它的核心论点不是「goto 这个指令有毒」，而是：<strong>goto 破坏了「程序状态可以被静态推理」这个前提</strong>。</p>
+      <p>讲师的暴论在这里出现了：<strong>程序员的水平随着 goto 密度的上升而下降</strong>。这句话当然是个玩笑式的夸张，但它抓住了一个真实的相关性——<strong>goto 用得越多，说明这个人越倾向于用「跳转」而不是「结构」来表达控制流</strong>。</p>
+      <p>但讲师紧接着就举了一个反例，而且是 Linux 内核里的：<strong><code>goto release</code></strong> 惯用法。</p>
+      <figure>
+        <svg viewBox="0 0 1040 300" role="img" aria-label="goto release 惯用法与结构化退出">
+          <rect x="0" y="0" width="1040" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">同一个「中途失败要清理资源」的需求，两种控制流结构</text>
+
+            <text x="30" y="58" fill="#f8736e" font-size="12" font-weight="700">✗ 嵌套 if：清理逻辑被复制 N 遍</text>
+            <rect x="30" y="70" width="450" height="200" rx="9" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.2"/>
+            <g font-size="11" fill="#adbccd">
+              <text x="48" y="94">if (acquire_a() == OK) {</text>
+              <text x="66" y="114">if (acquire_b() == OK) {</text>
+              <text x="84" y="134">if (acquire_c() == OK) {</text>
+              <text x="102" y="154">... 真正的工作 ...</text>
+              <text x="84" y="174">} else { release_b(); release_a(); }</text>
+              <text x="66" y="194">} else { release_a(); }</text>
+              <text x="48" y="214">}</text>
+            </g>
+            <text x="48" y="242" fill="#f8736e" font-size="11">问题：加一个资源就要改所有分支的清理代码</text>
+            <text x="48" y="260" fill="#77879a" font-size="10.5">清理逻辑与正常的业务流程纠缠在一起</text>
+
+            <line x1="510" y1="50" x2="510" y2="282" stroke="#233240" stroke-width="1"/>
+
+            <text x="540" y="58" fill="#3fd68c" font-size="12" font-weight="700">✓ goto release：清理逻辑只写一遍</text>
+            <rect x="540" y="70" width="470" height="200" rx="9" fill="rgba(63,214,140,.08)" stroke="#3fd68c" stroke-width="1.2"/>
+            <g font-size="11" fill="#adbccd">
+              <text x="558" y="94">if (acquire_a() != OK) goto release_a;</text>
+              <text x="558" y="114">if (acquire_b() != OK) goto release_b;</text>
+              <text x="558" y="134">if (acquire_c() != OK) goto release_c;</text>
+              <text x="558" y="154">... 真正的工作 ...</text>
+              <text x="558" y="176" fill="#3fd68c">release_c: release_c_res();</text>
+              <text x="558" y="196" fill="#3fd68c">release_b: release_b_res();</text>
+              <text x="558" y="216" fill="#3fd68c">release_a: release_a_res();</text>
+              <text x="558" y="236">return rc;</text>
+            </g>
+            <text x="558" y="260" fill="#3fd68c" font-size="11">每个资源只释放一次，从上往下「懒释放」</text>
+
+            <text x="30" y="292" fill="#77879a" font-size="11">结论：goto 不是「有害的指令」，而是「有害的用法」。用它可以消掉重复的清理逻辑，这恰好是结构化的。</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜goto 的两种命运</b>　Dijkstra 反对的是「用 goto 把控制流搅乱」，不是「goto 这个关键字本身」。右边这种写法在 Linux 内核里遍地都是，它的作用是<strong>把散落在各个失败分支里的清理逻辑收敛成一条从下往上的释放链</strong>——每加一个资源，只需要加一行 goto 和一个 label，不用去改任何已有分支。这个例子也是讲师用来提醒「读经典要读原文」的引子。</figcaption>
+      </figure>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这里有一个重要的思维习惯：<strong>一个「最佳实践」被总结出来之后，往往会脱离它原本的语境，变成一个不能质疑的教条</strong>。讲师举 goto 的例子，就是在示范「读经典要读原文、要看它反对的具体是什么」。这个习惯在第 7 节讲 Royce 时会再来一次，而且那次更夸张。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>The Humble Programmer</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2880" target="_blank"><span class="tri"></span>48:00</a>
+      <p><strong>1972 年</strong>，Dijkstra 获得图灵奖，按惯例要做一个图灵讲座。讲座的标题是 <strong>「The Humble Programmer」</strong>——谦卑的程序员。讲师挑了里面几个论点讲，每一个都跟今天高度相关。</p>
+      <div class="blk q">
+        <span class="label">The Humble Programmer 里的几个论点</span>
+        <ul>
+          <li><strong>Online Judge 不会有软件危机</strong>：因为题目是封闭的、边界是清晰的、验收是自动的。而真实软件没有这些性质</li>
+          <li><strong>机器越强，intent 就越多、不确定性就越多</strong>：能力边界外扩之后，人们会立刻提出更难的需求</li>
+          <li><strong>要写 nicely factored solutions</strong>：把问题拆成一个个小块的、可以独立理解的部分</li>
+          <li><strong>保守的力量来自教育机构与用户</strong>：教育机构习惯按老方式教，用户舍不得重写那些还能跑的旧程序——这两股力量在阻止进步</li>
+        </ul>
+      </div>
+      <p>讲师对这条「保守力量」特别有感触：他既在教育机构里工作，也见过太多「这个系统还能跑就别动它」的决策。这两股力量加起来，会让软件世界里同时存在大量<strong>技术上早该被替换、但在组织上无法被替换</strong>的东西。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>「Online Judge 不会有软件危机」这句话在今天的对应物就是：<strong>AI 在刷题与基准测试上表现极好，一进入真实项目就掉链子</strong>。原因是同一个——真实项目没有清晰的边界、没有自动验收、需求还在变。这条线索会一直连到软件工程存在的理由。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>1968 年 NATO 软件工程会议</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3180" target="_blank"><span class="tri"></span>53:00</a>
+      <p><strong>1968 年</strong>的 NATO 软件工程会议是「software engineering」这个词被正式提出的场合。讲师讲这个会议的方式很值得注意——他没有去讲会议达成了什么共识，而是讲了<strong>这个会议本身暴露的问题</strong>。</p>
+      <p>一个被反复提到的细节是：参加会议的人<strong>连「软件」这个词该叫什么都没统一</strong>。（会议记录里出现了 software、software engineering、programming 等多种叫法。）这说明这门学科在被命名的那一刻，连研究对象都还没界定清楚。</p>
+      <div class="kv">
+        <div>1968</div><div>NATO 会议，「software engineering」诞生。此时的动机很实际：军方的大型系统一再失败，需要把它当成工程来管</div>
+        <div>1970</div><div>Royce 发表《Managing the Development of Large Software Systems》——下一节的主角</div>
+        <div>1972</div><div>Dijkstra 的图灵讲座，给这门学科提供了一套哲学姿态（谦卑）</div>
+        <div>IEEE 定义</div><div>软件工程 = <strong>systematic, disciplined, quantifiable approach</strong>（系统的、有纪律的、可量化的方法）——三个词里最关键的是「可量化」</div>
+      </div>
+      <p>讲师顺带讲了一下软件工程的定义为什么必须包含「可量化」：<strong>因为不可量化的东西没法验收，没法验收的东西就没法管理</strong>。这正是软件危机的核心。</p>
+    </div>
+
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>Margaret Hamilton 与 Apollo</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4020" target="_blank"><span class="tri"></span>67:00</a>
+      <p>讲师放了那张著名的照片：<strong>Margaret Hamilton 站在打印出来的 Apollo 导航软件代码旁边</strong>，代码堆起来比她还高。1969 年，Apollo 11 成功登月，她负责的是导航与着陆软件。</p>
+      <p>讲师从这件事里挑了两个东西讲，都是软件工程的核心概念。</p>
+      <div class="blk steps">
+        <span class="label">Apollo 软件留下的两个遗产</span>
+        <ol>
+          <li><strong>防御性编程</strong>：假设每一处都可能出错，代码里到处是检查。这个思想从 SICP 那本书开始就被系统讲授——而那本书的成书时间是 1980 年代，也就是说它把 60 年代的工程实践变成了教材</li>
+          <li><strong>「The never going to happen can happen」</strong>：那些「绝对不可能发生」的情况，真的会发生。讲师说这句话是他理解软件工程的起点</li>
+        </ol>
+      </div>
+      <p>最精彩的是那件真实事故的细节：<strong>Apollo 11 下降过程中，雷达数据把计算机的算力吃掉了</strong>，导致警报。软件没有崩溃，而是靠<strong>优先级机制与 recovery 逻辑</strong>把导航任务保了下来，让下降控制继续执行——最终阿姆斯特朗手动飞完了最后一段。如果没有那套优先级与恢复逻辑，这次着陆会直接中止。</p>
+      <figure>
+        <svg viewBox="0 0 1040 280" role="img" aria-label="Apollo 优先级恢复机制">
+          <rect x="0" y="0" width="1040" height="280" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">Apollo 11 下降阶段的算力抢占，与软件是怎么扛住的</text>
+
+            <rect x="30" y="50" width="200" height="60" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="46" y="74" fill="#f8736e" font-size="11.5" font-weight="700">雷达数据异常涌入</text>
+            <text x="46" y="94" fill="#adbccd" font-size="10.5">Rendezvous Radar 被意外打开</text>
+
+            <rect x="278" y="50" width="200" height="60" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="294" y="74" fill="#f0b429" font-size="11.5" font-weight="700">算力被吃满</text>
+            <text x="294" y="94" fill="#adbccd" font-size="10.5">警报 1202 / 1201 触发</text>
+
+            <rect x="526" y="50" width="200" height="60" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+            <text x="542" y="74" fill="#46c6e0" font-size="11.5" font-weight="700">优先级调度接管</text>
+            <text x="542" y="94" fill="#adbccd" font-size="10.5">低优先级任务被丢弃</text>
+
+            <rect x="774" y="50" width="236" height="60" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="790" y="74" fill="#3fd68c" font-size="11.5" font-weight="700">下降控制继续</text>
+            <text x="790" y="94" fill="#adbccd" font-size="10.5">任务保住了，人类手动收尾</text>
+
+            <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+              <line x1="232" y1="80" x2="274" y2="80"/><polygon points="274,80 266,76 266,84"/>
+              <line x1="480" y1="80" x2="522" y2="80"/><polygon points="522,80 514,76 514,84"/>
+              <line x1="728" y1="80" x2="770" y2="80"/><polygon points="770,80 762,76 762,84"/>
+            </g>
+
+            <line x1="30" y1="132" x2="1010" y2="132" stroke="#233240" stroke-width="1"/>
+
+            <rect x="30" y="150" width="470" height="110" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="172" fill="#adbccd" font-size="11.5" font-weight="700">防御性编程：把「不可能」当成会发生</text>
+            <text x="46" y="194" fill="#77879a" font-size="11">每一处假设都要有对应的检查，而不是「这里不会出错」</text>
+            <text x="46" y="214" fill="#77879a" font-size="11">The never going to happen can happen</text>
+            <text x="46" y="236" fill="#adbccd" font-size="11">→ 这个概念后来成了 SICP 的讲授内容之一</text>
+            <text x="46" y="254" fill="#77879a" font-size="10.5">讲师说这是他理解软件工程的起点</text>
+
+            <rect x="520" y="150" width="490" height="110" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="536" y="172" fill="#adbccd" font-size="11.5" font-weight="700">恢复逻辑：宁可丢功能，不能丢任务</text>
+            <text x="536" y="194" fill="#77879a" font-size="11">警报出现时，软件选择的不是「全部停下」</text>
+            <text x="536" y="214" fill="#77879a" font-size="11">而是「丢掉不重要的，保住重要的」</text>
+            <text x="536" y="236" fill="#adbccd" font-size="11">→ 这就是优先级与 recovery 一起工作的结果</text>
+            <text x="536" y="254" fill="#77879a" font-size="10.5">如果当时选择中止，这次着陆就直接失败了</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜Apollo 的恢复逻辑</b>　这张图要说明的是：<strong>软件工程里「优雅降级」这个要求，是被一次真实事故逼出来的</strong>。警报响起来的时候，软件面临的选择不是「对或错」，而是「丢什么、保什么」——而这个选择必须在写代码的时候就预先做好。这就是为什么「优先级」这件事在关键时刻比「功能齐全」重要得多。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>为什么必须把任务划开</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3660" target="_blank"><span class="tri"></span>61:00</a>
+      <p>讲师讲了一件他自己工作方式上的事：<strong>他同时开两个 agent，一个专门对付打印机，一个专门对付扫描仪</strong>。他说这不是因为效率，而是因为<strong>不划开就做不完</strong>。</p>
+      <div class="blk q">
+        <span class="label">为什么「划开」是硬要求</span>
+        <ul>
+          <li>任务不划开，你会一直在两个问题的上下文之间来回切换，每次切换都要重新加载状态</li>
+          <li>更要紧的是：<strong>一个任务里混进两个目标，你连「它为什么失败」都判断不了</strong>——失败的是打印机那一半，还是扫描仪那一半？</li>
+          <li>划开之后每个部分都有独立的验收标准，于是「做完了没有」这件事第一次变得可判断</li>
+        </ul>
+      </div>
+      <p>讲师在这里把话题连到了软件工程最核心的操作：<strong>把一个大问题分解成若干个可以独立验证的小问题</strong>。这件事看起来基础，但它是所有方法论（瀑布、敏捷、TDD、MVP）的共同内核。</p>
+    </div>
+
+    <div class="sub" id="s37">
+      <h3><span class="idx">3.7</span>Royce：瀑布图来自一篇批判瀑布的文章</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4080" target="_blank"><span class="tri"></span>68:00</a>
+      <p>这是全章最重要的一节。<strong>1970 年</strong>，Winston Royce 发表了《Managing the Development of Large Software Systems》。今天所有讲瀑布模型的书都会引用那几张图——需求 → 设计 → 编码 → 测试 → 维护，一级一级往下流。</p>
+      <p>但讲师强调：<strong>那篇文章实际上是批判瀑布模型的</strong>，它是软件工程史上被误读最严重的文章之一。</p>
+      <div class="blk pit">
+        <span class="label">被误读的机制</span>
+        <ul>
+          <li>Royce 在文章前半部分<strong>画出了那个大家都记得的「单向流动」图</strong>，然后明确指出这样做的致命问题</li>
+          <li>文章后半部分他给出了<strong>自己的 Software Development Model</strong>——每一级都要能回到上一级，形成反馈回路</li>
+          <li>但后人只引用了前半部分那张漂亮的图，把后半部分的批判整段丢掉了</li>
+          <li>于是「瀑布模型」成了一种实践，而它的原作者是反对它的</li>
+        </ul>
+      </div>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>讲师讲这件事的方式和第 2 节 goto 那一段完全一致：<strong>「一个被总结出来的最佳实践」与「它原本的语境」经常是相反的</strong>。这不是要在课堂上翻案，而是要训练一种阅读习惯——<strong>看到一张到处被引用的图，先去找它的出处上下文</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s38">
+      <h3><span class="idx">3.8</span>Do it twice 与测试的第一个物理事件</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4380" target="_blank"><span class="tri"></span>73:00</a>
+      <p>Royce 文章里有两个概念被讲师单独拎了出来讲。</p>
+      <div class="kv">
+        <div>Do it twice</div><div>不要指望一次就做对。<strong>先做一版，扔掉，再做一版</strong>——因为只有做出第一版，你才真正知道自己要什么</div>
+        <div>Preliminary Pilot Program</div><div>Royce 提出要先做一个「试点的雏形程序」——<strong>这实际上就是今天的 MVP</strong>。也就是说 MVP 这个思想在 1970 年就已经写在论文里了</div>
+        <div>测试是链条上第一个物理事件</div><div>前面所有阶段（需求、设计、编码）都是<strong>在纸上发生的</strong>，只有测试是第一次让它真正跑起来、真正接触现实</div>
+        <div>风险在测试处爆炸</div><div>因为风险都被推迟到测试这一步才暴露，所以补救的本质<strong>不是「更努力地测试」，而是把发现问题的时间点提前</strong></div>
+      </div>
+      <p>讲师用 <strong>TDD</strong> 与<strong>敏捷</strong>来反向解释 Do it twice：如果把「做两次」推到极限，就成了「做无数次」——也就是持续迭代。所以敏捷不是对 Royce 的否定，而是<strong>把 Do it twice 里那个「twice」放大了</strong>。</p>
+      <div class="blk concl">
+        <span class="label">这一段最值得记住的一句话</span>
+        <p>「<strong>测试是链条上第一个物理事件</strong>」——这句话解释了为什么返工成本会随着阶段往后推进而急剧上升。因为前面每一级都只是「我认为它对」，只有测试是「它真的对不对」。所以工程上的所有努力，本质上都是在<strong>把「真的对不对」这个信息提早拿到</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s39">
+      <h3><span class="idx">3.9</span>用 data dependency graph 解释返工成本</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4620" target="_blank"><span class="tri"></span>77:00</a>
+      <p>这一节讲师给了一个他自己很喜欢的模型：<strong>用 data dependency graph（数据依赖图）来解释返工成本</strong>。它的前提是一个很大胆的类比：<strong>把人当成程序，人和程序是等价的</strong>。</p>
+      <p>人做一件事也要 chain of thought，也要按依赖顺序推进；如果某个前置结论错了，后面所有基于它的工作都要作废——这跟程序里的数据依赖完全一样。</p>
+      <figure>
+        <svg viewBox="0 0 1040 320" role="img" aria-label="数据依赖图与两种遍历顺序">
+          <rect x="0" y="0" width="1040" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="30" fill="#77879a" font-size="12.5">同一个依赖图（DAG），两种推进顺序：DFS 打深 vs BFS 铺开</text>
+
+            <g stroke="#31465c" stroke-width="1.5" fill="none">
+              <path d="M130 90 L230 60 M130 90 L230 120 M230 60 L330 42 M230 60 L330 82 M230 120 L330 140 M330 42 L430 42 M330 82 L430 82 M330 140 L430 140"/>
+            </g>
+            <g fill="rgba(70,198,224,.14)" stroke="#46c6e0" stroke-width="1.3">
+              <circle cx="130" cy="90" r="22"/>
+              <circle cx="230" cy="60" r="22"/><circle cx="230" cy="120" r="22"/>
+              <circle cx="330" cy="42" r="22"/><circle cx="330" cy="82" r="22"/><circle cx="330" cy="140" r="22"/>
+            </g>
+            <g fill="#e9eff7" font-size="10" text-anchor="middle">
+              <text x="130" y="94">intent</text>
+              <text x="230" y="64">需求 A</text><text x="230" y="124">需求 B</text>
+              <text x="330" y="46">设计 A1</text><text x="330" y="86">设计 A2</text><text x="330" y="144">设计 B1</text>
+            </g>
+            <text x="130" y="146" fill="#77879a" font-size="10" text-anchor="middle">根节点</text>
+
+            <rect x="500" y="30" width="240" height="120" rx="9" fill="rgba(248,115,110,.09)" stroke="#f8736e" stroke-width="1.2"/>
+            <text x="516" y="52" fill="#f8736e" font-size="11.5" font-weight="700">✗ 先做设计，再验证需求</text>
+            <text x="516" y="74" fill="#adbccd" font-size="10.5">把 A1/A2/B1 全做完，再回头看 intent</text>
+            <text x="516" y="94" fill="#77879a" font-size="10.5">如果 intent 里 A 这个方向是错的</text>
+            <text x="516" y="114" fill="#77879a" font-size="10.5">→ A1 与 A2 全部作废</text>
+            <text x="516" y="136" fill="#f8736e" font-size="10.5">作废成本 = 已完成的全部下游节点</text>
+
+            <rect x="770" y="30" width="240" height="120" rx="9" fill="rgba(63,214,140,.09)" stroke="#3fd68c" stroke-width="1.2"/>
+            <text x="786" y="52" fill="#3fd68c" font-size="11.5" font-weight="700">✓ MVP：先走通最高优先级链</text>
+            <text x="786" y="74" fill="#adbccd" font-size="10.5">先打通 intent → A → A1 这一条链</text>
+            <text x="786" y="94" fill="#77879a" font-size="10.5">拿到真实反馈后再向右扩展</text>
+            <text x="786" y="114" fill="#77879a" font-size="10.5">→ 错了只损失一条链</text>
+            <text x="786" y="136" fill="#3fd68c" font-size="10.5">作废成本 = 一条链的长度</text>
+
+            <line x1="30" y1="180" x2="1010" y2="180" stroke="#233240" stroke-width="1"/>
+
+            <rect x="30" y="198" width="480" height="104" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="46" y="220" fill="#adbccd" font-size="11.5" font-weight="700">DFS：纵向打到底</text>
+            <text x="46" y="242" fill="#77879a" font-size="11">沿着一条依赖链一路往下做，做完再回上一层</text>
+            <text x="46" y="262" fill="#adbccd" font-size="11">优点：早期就能拿到「这条链通不通」的信息</text>
+            <text x="46" y="282" fill="#77879a" font-size="10.5">这就是 MVP 的形状——先走通一条最小链路</text>
+
+            <rect x="530" y="198" width="480" height="104" rx="9" fill="#141d28" stroke="#233240"/>
+            <text x="546" y="220" fill="#adbccd" font-size="11.5" font-weight="700">BFS：横向铺满一层</text>
+            <text x="546" y="242" fill="#77879a" font-size="11">把同一层的所有节点都做完，再进入下一层</text>
+            <text x="546" y="262" fill="#adbccd" font-size="11">这就是瀑布的形状——需求全定完才进设计</text>
+            <text x="546" y="282" fill="#77879a" font-size="10.5">风险：错误要到最后才暴露，返工面最大</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜依赖图与遍历顺序</b>　这张图是第 8 节那个结论的形式化：<strong>返工成本 = 错误被发现时，它下游已经完成的工作量</strong>。瀑布模型（BFS）之所以风险高，是因为它把「验证」这件事推到了最后一层，那个时候整个图都已经铺满了；而 MVP（DFS）先走通一条链，用<strong>最短的路径去换取最早的信息</strong>。讲师特别强调「MVP = 先走通优先级最高的那条 dependency，再向右扩展」——它不是一个「功能裁剪」的概念，而是一个<strong>遍历顺序</strong>的概念。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s310">
+      <h3><span class="idx">3.10</span>阅读经典的启发价值</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4506" target="_blank"><span class="tri"></span>75:06</a>
+      <p>本章结尾，讲师回到「为什么要读这些老文章」。他的论证不是「经典所以好」，而是一个更实用的理由：</p>
+      <div class="blk q">
+        <span class="label">读经典的三个具体好处</span>
+        <ul>
+          <li><strong>看到思想的原始形态</strong>：今天被简化成一句话的「最佳实践」，原文往往带着完整的条件与反例。读原文才不会把条件丢掉</li>
+          <li><strong>发现今天的问题早就被想过</strong>：返工成本、验收标准、需求的不确定性——这些问题在 1970 年就被讨论过了，只是每代人都在重新发现一次</li>
+          <li><strong>获得「不被一句话带走」的判断力</strong>：goto 与瀑布这两个例子都说明，<strong>脱离语境的结论会长期误导人</strong></li>
+        </ul>
+      </div>
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>软件危机 = 进度、成本、质量一起失控，它逼出了「软件工程」这门学科（1968 NATO 会议）</li>
+          <li>Dijkstra 提供了哲学姿态（The Humble Programmer），Margaret Hamilton 提供了工程实践（防御性编程 + 优先级恢复）</li>
+          <li>Royce 提供了方法（Do it twice、Pilot Program = MVP），但那张最有名的瀑布图其实是他要批判的对象</li>
+          <li>所有方法论的内核是同一件事：<strong>把「它到底对不对」这个信息尽早拿到</strong>——用依赖图来说，就是选择正确的遍历顺序</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

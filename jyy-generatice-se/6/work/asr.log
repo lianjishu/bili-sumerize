@@ -1,0 +1,21 @@
+[init] model=E:/Projects/VibeCoding/BiliSumerize/jyy-generatice-se/models/faster-whisper-large-v3-turbo device=cuda compute=float16
+[init] loaded in 1.7s
+[seg] 200 ... t=346s
+[seg] 400 ... t=720s
+[seg] 600 ... t=1192s
+[seg] 800 ... t=1574s
+[seg] 1000 ... t=1911s
+[seg] 1200 ... t=2310s
+[seg] 1400 ... t=2655s
+[seg] 1600 ... t=3023s
+[seg] 1800 ... t=3381s
+[seg] 2000 ... t=3751s
+[seg] 2200 ... t=4151s
+[seg] 2400 ... t=4521s
+[seg] 2600 ... t=4894s
+[seg] 2800 ... t=5284s
+[seg] 3000 ... t=5694s
+============================================================
+[done] segments=3058 audio=5810.1s elapsed=207.6s speedup=28.0x
+[check] last_end=5810.1s coverage=100.00%
+[out] 6/work/transcript.json

@@ -1,0 +1,222 @@
+<div class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>重新设计版本管理系统</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=0" target="_blank"><span class="dot"></span>00:00 – 35:53</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这一章不讲「怎么用 Git」，而是问一个更狠的问题：如果我们今天从零开始设计一个版本管理系统，它会是什么样？讲师的切入点是——<strong>文件系统不是组织项目的正确方式</strong>，而现有 VCS 的每一处设计（暂存区、非线性历史、命令命名）都是过去几十年人类工作方式的<strong>路径依赖</strong>。</p>
+
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>lab 1 与「会成长的个人助手」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=0" target="_blank"><span class="tri"></span>00:00</a>
+      <p>承接上一讲的版本管理，这一周发布了第一个 lab：<strong>会成长的个人助手</strong>（a personal assistant that grows）。要求刻意写得非常宽松——<em>不限</em>，你想怎么做就怎么做，最好能用 webcode 的方式做出来。讲师说今天会留出时间，<strong>自己现场 webcode 一个</strong>，并把「直接让 AI 从零开始写」会遇到的小坑演示给大家看。</p>
+      <div class="blk q">
+        <span class="label">这个需求为什么选它</span>
+        <ul>
+          <li>每个同学都会需要——它对应的是「持续为你工作」这一件事，而不是一次性作业</li>
+          <li>可以接到你的<strong>学习数据库</strong>：把专业课（计网、概率）的资料、研究组的论文与教科书整理成个人库</li>
+          <li>也可以接<strong>个人信息</strong>：填表要姓名/学号/身份证号，讲师说这些他现在全交给 agent 了</li>
+          <li>更可以接<strong>邮件</strong>：把你的邮箱和数据库关联起来，让助手替你做收件箱流水线</li>
+        </ul>
+      </div>
+      <p>讲师顺带讲了一个有点残酷的小故事：疫情时他招过一个研究生，做了三年「自动填表系统」，毕业那年 ChatGPT 出现了，学生很慌，觉得三年的工作瞬间被替代。讲师说：<strong>不要紧，赶快答辩，然后就可以毕业了</strong>——世界发展就是这么快要适应。</p>
+      <div class="blk eye">
+        <span class="label">观察点</span>
+        <p>这个 lab 的定位不是「练一个技术」，而是<strong>给你一个真实长期存在的痛点</strong>，逼你把这两节课讲的版本管理、下一节的软件架构全部用在自己身上。需求写宽，是为了让你在「自己定义需求」这一步就开始暴露问题——第 3 章会现场演示这件事有多难。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s12">
+      <h3><span class="idx">1.2</span>AI Slop 的沼泽地与可追溯性</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=180" target="_blank"><span class="tri"></span>03:00</a>
+      <p>讲师提出问题：当 AI 生成的代码越来越多，我们会掉进一片 <strong>AI Slop 的沼泽地</strong>——代码堆得越来越厚，但没人真正理解它。而你要在这片沼泽里<strong>追溯</strong>（traceability）：某一处行为是谁引入的、为什么引入、当时的上下文是什么。</p>
+      <div class="kv">
+        <div>核心矛盾</div><div>AI 让「生产代码」成本骤降，但「理解代码」的成本没有降——两者之间的缺口就是 slop 的沼泽</div>
+        <div>可追溯性</div><div>每一个变更要能回答三件事：<strong>改了什么</strong>、<strong>为什么改</strong>、<strong>谁/什么时候改的</strong></div>
+        <div>版本管理的位置</div><div>它是唯一能在时间轴上把这些信息钉住的基础设施，因此 AI 时代它只会更重要，不会消失</div>
+      </div>
+      <p>这里有个反直觉的关键点：<strong>AI 让写代码变便宜，反而让版本管理变得更关键</strong>。因为在人类手写代码的时代，代码量小、作者记得住；而 agent 一天能产出你过去一个月的工作量，你唯一能依赖的就是那条被认真维护的历史记录。</p>
+    </div>
+
+    <div class="sub" id="s13">
+      <h3><span class="idx">1.3</span>文件系统不是组织项目的方式</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=600" target="_blank"><span class="tri"></span>10:00</a>
+      <p>这一节是第一章的思想起点。讲师的观点很直接：<strong>我们把项目组织成「文件夹套文件夹」，这其实是一种很别扭的方式</strong>。它之所以成为主流，只是因为计算机早期就是按文件系统设计的，我们从小就习惯了它。</p>
+      <div class="blk pit">
+        <span class="label">文件系统的四个根本局限</span>
+        <ul>
+          <li><strong>它是一棵树</strong>：一个文件只能属于一个目录，但真实世界里一个对象常常同时属于多个分类（一份论文既是「研究组」又是「本学期」）</li>
+          <li><strong>它没有时间维度</strong>：你看到的是「现在」，看不见「怎么变成现在这样的」</li>
+          <li><strong>它没有出处</strong>：一个文件是 AI 生成的、抄来的、还是自己写的，文件系统本身不知道</li>
+          <li><strong>它拍平了结构</strong>：目录层级只表达「在哪里」，不表达「是什么关系」</li>
+        </ul>
+      </div>
+      <p>正是在这里，讲师引出了「<strong>带环图 → repository.db</strong>」这条线：如果把项目组织成一个<strong>有向无环图甚至带环图</strong>（一个对象可以有多个父节点），那么「一个文件同时属于多个集合」「一个文件的历史是一张图而不是一条线」这些事就自然成立了。而承载这张图的形式，就不必是文件夹，而可以是一个<strong>数据库</strong>。</p>
+    </div>
+
+    <div class="sub" id="s14">
+      <h3><span class="idx">1.4</span>从带环图走到 repository.db</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=900" target="_blank"><span class="tri"></span>15:00</a>
+      <p>顺着「项目不是文件夹」往下推，讲师给出的设想是：<strong>仓库本身就应该是一个数据库</strong>（他称之为 <code>repository.db</code>）。你在里面存的不是「一堆文件」，而是<strong>对象与对象之间的关系</strong>——文件、版本、标签、评论、责任人，全部是表里的行，用外键和索引去表达关系。</p>
+      <figure>
+        <svg viewBox="0 0 1040 320" role="img" aria-label="文件树与图结构仓库的对比">
+          <rect x="0" y="0" width="1040" height="320" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">左边：文件系统（树）　·　右边：图结构仓库（一个对象可有多个父节点）</text>
+
+            <g stroke="#233240" stroke-width="1.4" fill="none">
+              <path d="M60 120 L128 84 M60 120 L128 156 M128 84 L196 62 M128 84 L196 106 M128 156 L196 178"/>
+            </g>
+            <g fill="rgba(70,198,224,.14)" stroke="#46c6e0" stroke-width="1.3">
+              <rect x="16" y="100" width="46" height="40" rx="7"/>
+              <rect x="104" y="64" width="46" height="40" rx="7"/>
+              <rect x="104" y="136" width="46" height="40" rx="7"/>
+              <rect x="172" y="42" width="46" height="40" rx="7"/>
+              <rect x="172" y="86" width="46" height="40" rx="7"/>
+              <rect x="172" y="158" width="46" height="40" rx="7"/>
+            </g>
+            <g fill="#e9eff7" font-size="10" text-anchor="middle">
+              <text x="39" y="125">root</text>
+              <text x="127" y="89">src</text>
+              <text x="127" y="161">docs</text>
+              <text x="195" y="67">a.py</text>
+              <text x="195" y="111">b.py</text>
+              <text x="195" y="183">x.md</text>
+            </g>
+            <text x="16" y="252" fill="#77879a" font-size="11">一棵树：一个文件只能挂在一个父节点下</text>
+            <text x="16" y="274" fill="#adbccd" font-size="11">→ 无法表达「一份文件同时属于两个集合」</text>
+
+            <line x1="520" y1="40" x2="520" y2="290" stroke="#233240" stroke-width="1"/>
+
+            <g stroke="#a98bfa" stroke-width="1.4" fill="none">
+              <path d="M580 140 L660 86 M580 140 L660 190 M660 86 L744 64 M660 86 L744 130 M660 190 L744 168 M660 190 L744 214"/>
+              <path d="M744 64 L824 110 M744 130 L824 110 M744 214 L824 110"/>
+            </g>
+            <g fill="rgba(169,139,250,.14)" stroke="#a98bfa" stroke-width="1.3">
+              <circle cx="580" cy="140" r="26"/>
+              <circle cx="660" cy="86" r="26"/>
+              <circle cx="660" cy="190" r="26"/>
+              <circle cx="744" cy="64" r="26"/>
+              <circle cx="744" cy="130" r="26"/>
+              <circle cx="744" cy="214" r="26"/>
+              <circle cx="824" cy="110" r="26"/>
+            </g>
+            <g fill="#e9eff7" font-size="10" text-anchor="middle">
+              <text x="580" y="144">obj</text>
+              <text x="660" y="90">v1</text>
+              <text x="660" y="194">v2</text>
+              <text x="744" y="68">tag</text>
+              <text x="744" y="134">doc</text>
+              <text x="744" y="218">issue</text>
+              <text x="824" y="114">merge</text>
+            </g>
+            <text x="560" y="252" fill="#77879a" font-size="11">一张图：对象之间是关系，不是包含</text>
+            <text x="560" y="274" fill="#adbccd" font-size="11">→ 历史、标签、评论、责任人都是图上的一条边</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜树 vs 图</b>　左边是今天的文件系统，右边是讲师设想中的图结构仓库。区别的实质是：<b>树只回答「在哪」，图能回答「和谁有关系、怎么变成现在这样」</b>。当仓库本身是数据库时，可追溯性、多归属、历史查询都变成了一次 SQL 查询。</figcaption>
+      </figure>
+      <p>注意讲师在这里强调的<strong>不是「数据库一定更好」</strong>，而是「文件系统只是一种历史选择」。第 3 章他会亲自演示一个反例：<em>在没有性能瓶颈之前，他反而不建议你一开始就用数据库</em>——因为文件系统的心智负担更低。这两处看似矛盾，其实是同一套逻辑的两端：<strong>形式要匹配你当前真正需要的能力</strong>。</p>
+    </div>
+
+    <div class="sub" id="s15">
+      <h3><span class="idx">1.5</span>jujutsu：把 change 当一等公民</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1200" target="_blank"><span class="tri"></span>20:00</a>
+      <p>既然现有 Git 是路径依赖的产物，那有没有人已经按「重新设计」的思路做过了？讲师举了 <strong>Jujutsu（jj）</strong> 这个新一代版本控制系统。它的核心差异是把 <strong>change（一次变更）当成一等公民</strong>，而不是把 commit 当成「提交动作产生的结果」。</p>
+      <div class="kv">
+        <div>Git 的心智模型</div><div>工作区 → <code>git add</code> 暂存区 → <code>git commit</code> 落库。提交是一个<strong>动作</strong>，你要先想清楚再按下</div>
+        <div>jj 的心智模型</div><div>你始终工作在<strong>一个 change 上</strong>，它自动被记录、可以随时被改写。提交不是动作，而是一种持续状态</div>
+        <div>带来的改变</div><div>不需要「我该不该 add」「这个文件要不要提交」这类中间决策，注意力全部留给「这次变更在语义上是否是一个整体」</div>
+      </div>
+      <p>这个对比之所以重要，是因为它直接呼应了本讲的主线：<strong>Git 的暂存区是一个为「人类犹豫」而设计的缓冲</strong>——人类需要时间思考「我现在到底改了哪些东西」，所以给了一个可以部分提交的中间层。而如果提交者是 agent，它不存在犹豫，暂存区就变成了纯粹的负担。</p>
+    </div>
+
+    <div class="sub" id="s16">
+      <h3><span class="idx">1.6</span>没有暂存区，也没有「未提交」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1400" target="_blank"><span class="tri"></span>23:20</a>
+      <p>顺着 jj 继续推：如果 change 是一等公民，那么<strong>「未提交的修改」这个概念本身就不该存在</strong>。你在编辑器里每动一下，都是一次 change 的演化；你想把哪几个 change 合成一个、想怎么重排它们的顺序，都是对已有对象的<strong>整理</strong>，而不是对「还没进入系统的脏数据」的抢救。</p>
+      <div class="blk q">
+        <span class="label">概念的重新划分</span>
+        <ul>
+          <li><strong>没有暂存区</strong>：不再需要「选一部分提交」，因为每次变更本来就被完整记录</li>
+          <li><strong>没有脏工作区</strong>：不存在「改了但没提交」的状态，所有修改都在版本树里</li>
+          <li><strong>历史可以随手改写</strong>：改写历史不是危险操作，而是日常整理（rebase 变成默认行为而非例外）</li>
+          <li><strong>代价</strong>：这套模型对人的直觉是反的——你已经习惯了「提交前要检查」，突然不用检查了，反而会觉得不踏实</li>
+        </ul>
+      </div>
+      <p>讲师没有在推荐你立刻换工具，他的目的是<strong>通过一个「已经存在的反例」，让你看清 Git 里哪些部分是本质、哪些只是历史包袱</strong>。这个分辨能力，恰好就是第 2 章「为 Agent 重新设计」所需要的。</p>
+    </div>
+
+    <div class="sub" id="s17">
+      <h3><span class="idx">1.7</span>线性历史与 rebase</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1600" target="_blank"><span class="tri"></span>26:40</a>
+      <p>继续推演：如果改历史是日常，那么历史就应该是<strong>一条线</strong>，而不是一堆并行的分叉再被 merge 揉成一团。这就是 jj 与 Git 的另一个关键差异——<strong>通过 rebase 维护线性历史</strong>，而不是留下 merge 节点。</p>
+      <figure>
+        <svg viewBox="0 0 1040 300" role="img" aria-label="merge 历史与线性历史的对比">
+          <rect x="0" y="0" width="1040" height="300" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">上：Git 默认的 merge 历史（保留分叉）　·　下：rebase 后的线性历史（分叉被整理掉）</text>
+
+            <g stroke="#31465c" stroke-width="2" fill="none">
+              <path d="M60 92 L180 92 M180 92 L300 108 M300 108 L430 108 M180 92 L300 76 M300 76 L430 108"/>
+            </g>
+            <g fill="rgba(70,198,224,.16)" stroke="#46c6e0" stroke-width="1.4">
+              <circle cx="60" cy="92" r="11"/><circle cx="180" cy="92" r="11"/>
+              <circle cx="300" cy="76" r="11"/><circle cx="300" cy="108" r="11"/>
+              <circle cx="430" cy="108" r="11"/>
+            </g>
+            <g fill="#e9eff7" font-size="9.5" text-anchor="middle">
+              <text x="60" y="95">A</text><text x="180" y="95">B</text>
+              <text x="300" y="79">C</text><text x="300" y="111">D</text><text x="430" y="111">M</text>
+            </g>
+            <text x="452" y="82" fill="#f8736e" font-size="11">← M 是 merge 节点</text>
+            <text x="452" y="112" fill="#adbccd" font-size="11">历史在这里分叉又合流，读起来要跳来跳去</text>
+
+            <line x1="40" y1="160" x2="1000" y2="160" stroke="#233240" stroke-width="1"/>
+
+            <g stroke="#3fd68c" stroke-width="2" fill="none">
+              <path d="M60 226 L220 226 M220 226 L380 226 M380 226 L540 226 M540 226 L700 226 M700 226 L860 226"/>
+            </g>
+            <g fill="rgba(63,214,140,.16)" stroke="#3fd68c" stroke-width="1.4">
+              <circle cx="60" cy="226" r="11"/><circle cx="220" cy="226" r="11"/>
+              <circle cx="380" cy="226" r="11"/><circle cx="540" cy="226" r="11"/>
+              <circle cx="700" cy="226" r="11"/><circle cx="860" cy="226" r="11"/>
+            </g>
+            <g fill="#e9eff7" font-size="9.5" text-anchor="middle">
+              <text x="60" y="229">A</text><text x="220" y="229">B</text><text x="380" y="229">C</text>
+              <text x="540" y="229">D</text><text x="700" y="229">E</text><text x="860" y="229">F</text>
+            </g>
+            <text x="880" y="212" fill="#3fd68c" font-size="11">一条直线</text>
+            <text x="880" y="246" fill="#adbccd" font-size="11">每个提交都建立在</text>
+            <text x="880" y="264" fill="#adbccd" font-size="11">上一个之上，无分叉</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两种历史</b>　上面是 Git 默认行为：分支并行、merge 节点把两条线缝起来。下面是 rebase 后的结果：<b>同一批变更被重排成一条直线，读历史的人不需要在分叉间来回跳</b>。讲师倾向后者——因为它让「这个项目是怎么一步步长成现在这样的」变成一个可以直接从头读到尾的故事。</figcaption>
+      </figure>
+      <p>这里有个容易忽略的工程含义：<strong>线性历史让「二分定位 bug」变得简单</strong>。在分叉历史里，<code>git bisect</code> 要在多条线上跳，语义是模糊的；在线性历史里，它就是在一个数组上二分，非常干净。这一点在第 2 章「Agent 时代 bisect 会失效」那里还会再绕回来。</p>
+    </div>
+
+    <div class="sub" id="s18">
+      <h3><span class="idx">1.8</span>肌肉记忆造成的路径依赖</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=1900" target="_blank"><span class="tri"></span>31:40</a>
+      <p>第一章的收尾，讲师点出为什么这些「明显更合理」的设计没有普及：<strong>肌肉记忆与路径依赖</strong>。你已经在 Git 上敲了十年命令，团队里的每个人都默认了这套流程；换一套模型的成本，远大于它带来的那点优雅。</p>
+      <blockquote>
+        <p>不是 Git 的设计有多完美，而是所有人都会用 Git。</p>
+        <cite>—— 讲师对「工具演进为什么慢」的解释</cite>
+      </blockquote>
+      <div class="blk concl">
+        <span class="label">本章结论</span>
+        <ul>
+          <li><strong>形式要匹配需求</strong>：文件系统、数据库、图结构，各自适合不同的组织诉求，没有绝对优劣</li>
+          <li><strong>现有 VCS 大量设计是「为人类服务」的</strong>：暂存区缓冲犹豫、merge 保留并行工作、命令命名迁移自 SVN 时代</li>
+          <li><strong>路径依赖是最大的阻力</strong>：技术上的最优解常常输给习惯上的默认解</li>
+          <li><strong>但 Agent 的出现，可能会打破这种惯性</strong>——因为提交者的形态变了，为人类设计的那套假设就集体失效了。这正好是第 2 章的命题</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

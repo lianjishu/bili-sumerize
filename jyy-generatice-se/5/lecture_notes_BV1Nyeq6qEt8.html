@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>软件的来龙去脉 · 精读讲义 — jyy《生成式软件工程》第 05 讲</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --paper:#ffffff; --tx:#1c2733; --tx2:#52616f; --tx3:#6b7a89;
+    --line:#dfe7ee; --panel:#f1f5f8;
+    --c1:#0b7285; --c2:#7048c8; --c3:#b7791f;
+    --c1bg:#e6f4f7; --c2bg:#f1ecfa; --c3bg:#faf3e3;
+    --c4:#2e7d32; --c4bg:#e9f4ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--tx);font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,Georgia,serif;font-size:17px;line-height:1.9;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 28px}
+  code,.mono{font-family:ui-monospace,Consolas,"JetBrains Mono",monospace}
+  code{background:var(--panel);padding:1px 6px;border-radius:4px;font-size:.86em}
+
+  header.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 40px}
+  .kicker{font-family:ui-monospace,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:var(--c1);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:40px;font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .subtitle{margin-top:10px;font-size:19px;color:var(--tx2)}
+  .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta-row span{font-size:13.5px;color:var(--tx2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .meta-row a{color:var(--c1);text-decoration:none}
+  .meta-row a:hover{text-decoration:underline}
+
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin:34px 0}
+  nav.toc h2{font-size:15px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--tx3);margin-bottom:14px}
+  nav.toc ol{list-style:none}
+  nav.toc li{margin:7px 0;font-size:15.5px}
+  nav.toc a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  nav.toc a:hover{color:var(--c1);border-color:var(--c1)}
+  nav.toc .n{font-family:ui-monospace,monospace;color:var(--tx3);margin-right:10px;font-size:13px}
+  nav.toc .sub{margin-left:34px;color:var(--tx2);font-size:14px}
+
+  .usage{background:var(--c1bg);border:1px solid #c3e2ea;border-radius:12px;padding:20px 26px;margin:0 0 40px;font-size:15.5px;color:#12333a}
+  .usage strong{color:var(--c1)}
+
+  section.chap{margin:64px 0}
+  .ch-head{border-top:5px solid;padding:20px 0 8px}
+  .ch-head.c1{border-color:var(--c1)} .ch-head.c2{border-color:var(--c2)} .ch-head.c3{border-color:var(--c3)} .ch-head.c4{border-color:var(--c4)}
+  .ch-num{font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:.22em;color:var(--tx3)}
+  .ch-head.c1 .ch-num{color:var(--c1)} .ch-head.c2 .ch-num{color:var(--c2)} .ch-head.c3 .ch-num{color:var(--c3)} .ch-head.c4 .ch-num{color:var(--c4)}
+  .ch-head h2{font-size:30px;font-weight:800;margin:4px 0 4px}
+  .ch-range{font-size:14px;color:var(--tx3);font-family:ui-monospace,monospace}
+
+  article.sec{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:30px 34px;margin:26px 0}
+  article.sec h3{font-size:21.5px;font-weight:800;line-height:1.5;margin-bottom:4px}
+  article.sec h3 .secno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  .ts{font-family:ui-monospace,monospace;font-size:12.5px;white-space:nowrap}
+  .ts a{color:var(--tx3);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .ts a:hover{color:var(--c1);border-color:var(--c1)}
+  article.sec p{margin:12px 0;text-align:justify}
+  article.sec p+p{margin-top:14px}
+  article.sec ul,article.sec ol{margin:12px 0 12px 26px}
+  article.sec li{margin:6px 0}
+  em.term{font-style:normal;font-weight:700;border-bottom:2px solid var(--c1);padding-bottom:1px}
+  .c2-scope em.term{border-color:var(--c2)} .c3-scope em.term{border-color:var(--c3)}
+  .c4-scope em.term{border-color:var(--c4)}
+
+  .callout{border-radius:10px;padding:16px 22px;margin:16px 0;font-size:15.5px;line-height:1.85}
+  .callout .tag{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .co-concept{background:var(--c1bg);border:1px solid #c3e2ea}
+  .co-concept .tag{color:var(--c1)}
+  .co-case{background:var(--c3bg);border:1px solid #ecd9ad}
+  .co-case .tag{color:var(--c3)}
+  .co-warn{background:#fdeeed;border:1px solid #f2c7c3}
+  .co-warn .tag{color:#b03a30}
+
+  .prompt-box{background:#0f1b24;color:#dbe7f1;border-radius:10px;padding:18px 22px;margin:16px 0;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.8}
+  .prompt-box .plabel{display:block;font-size:11px;letter-spacing:.18em;color:#6fa3bd;margin-bottom:8px}
+  .prompt-box p{margin:6px 0}
+
+  .summary{background:var(--panel);border-left:4px solid var(--c1);border-radius:0 10px 10px 0;padding:18px 24px;margin:18px 0}
+  .c2-scope .summary{border-color:var(--c2)} .c3-scope .summary{border-color:var(--c3)}
+  .c4-scope .summary{border-color:var(--c4)}
+  .summary h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx2);margin-bottom:8px}
+  .summary li{margin:5px 0}
+  .quiz{margin:18px 0}
+  .quiz h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx3);margin-bottom:8px}
+  .quiz ol{margin-left:26px}
+  .quiz li{margin:7px 0;color:var(--tx2)}
+
+  .divider{text-align:center;color:#b8c6d2;font-size:20px;letter-spacing:1.2em;margin:10px 0}
+
+  section.appendix{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:34px 38px;margin:26px 0}
+  section.appendix h2{font-size:23px;font-weight:800;margin-bottom:14px}
+  section.appendix h2 .apno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  section.appendix h3{font-size:17px;margin:22px 0 10px;color:var(--c1)}
+  section.appendix p{margin:10px 0;text-align:justify}
+  table.gl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.gl th{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:var(--tx3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.gl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.gl td:first-child{white-space:nowrap;font-family:ui-monospace,monospace;font-size:13px;color:#8a4b3a}
+  table.gl td:nth-child(2){white-space:nowrap;font-weight:700}
+  table.gl td:last-child{color:var(--tx2)}
+  .tsindex{columns:2;column-gap:40px;font-size:14.5px;margin-top:10px}
+  .tsindex div{break-inside:avoid;margin:7px 0}
+  .tsindex a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .tsindex a:hover{color:var(--c1)}
+  .tsindex .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--tx3);margin-right:8px}
+  .example-list{margin:12px 0 4px}
+  .example-list li{margin:12px 0}
+
+  footer.foot{background:var(--paper);border-top:1px solid var(--line);margin-top:70px;padding:40px 0 60px;font-size:13.5px;color:var(--tx2)}
+  footer.foot h4{font-size:13px;letter-spacing:.12em;font-family:ui-monospace,monospace;color:var(--tx3);margin:18px 0 8px}
+  footer.foot ul{list-style:none}
+  footer.foot li{margin:5px 0}
+  footer.foot a{color:var(--c1);text-decoration:none}
+  footer.foot a:hover{text-decoration:underline}
+
+  @media print{
+    body{background:#fff;font-size:12.5pt}
+    article.sec,nav.toc,section.appendix{border:none;page-break-inside:avoid}
+    .prompt-box{background:#eef2f5;color:#1c2733}
+    header.hero{padding-top:20px}
+  }
+  @media (max-width:640px){
+    h1{font-size:30px} article.sec{padding:22px 20px}
+    .tsindex{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lecture Handout · Generative Software Engineering · NJU</div>
+    <h1>软件的来龙去脉<br>精读讲义</h1>
+    <p class="subtitle">jyy 南大《生成式软件工程》第 05 讲 · 全程 100 分钟逐字稿精读整理</p>
+    <div class="meta-row">
+      <span>视频：<a href="https://www.bilibili.com/video/BV1Nyeq6qEt8">BV1Nyeq6qEt8</a></span>
+      <span>讲师：jyy（绿导师原谅你了）</span>
+      <span>时长：99:59</span>
+      <span>四章 · 36 节 · 附录 3 篇</span>
+      <span>术语以<a href="#apx-a">勘误表</a>为准</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>CONTENTS · 目录</h2>
+  <ol>
+    <li><a href="#ch1"><span class="n">01</span>新闻播报</a></li>
+    <li><a href="#ch2"><span class="n">02</span>回到软件开发</a></li>
+    <li><a href="#ch3"><span class="n">03</span>从软件危机到软件工程</a></li>
+    <li><a href="#ch4"><span class="n">04</span>软件工程给世界带来了什么</a></li>
+    <li><a href="#apx-a"><span class="n">A</span>术语对照表（勘误表扩展版）</a></li>
+    <li><a href="#apx-b"><span class="n">B</span>时间戳索引</a></li>
+    <li><a href="#apx-c"><span class="n">C</span>本讲课堂操作与 Prompt 范例汇总</a></li>
+  </ol>
+</nav>
+
+<div class="usage">
+  <strong>这份讲义怎么用：</strong>它与同目录的可视化笔记（<a href="bili_summary_BV1Nyeq6qEt8.html">bili_summary_BV1Nyeq6qEt8.html</a>）互补——笔记是「看图回忆」，讲义是「从头读懂」。每个小节标题旁有时间戳，点击跳回原视频对应秒数核对。<em class="term">Prompt / 操作范例</em>用深色框标出，可直接复制改写；<em class="term">概念卡</em>压缩了本节的机制性结论；每章末有小结与思考题（思考题为整理者补充）。
+</div>
+
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>新闻播报</h2>
+    <div class="ch-range">00:00 – 17:37 · 8 节</div>
+  </div>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.1</span>秒级玩 Doom 的 System One 小模型 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=0">00:00</a></span></h3>
+    <p>正式进入软件工程之前，先看新闻。第一条：<em class="term">Type-Safe-AI</em> 发布了一个可以实时玩 Doom 的基础模型。讲师的猜测是：它可能不是标准 transformer，而是一种每帧只输出一个 token（一次决策）的架构——游戏状态被打成一个 JSON 喂进去，毫秒到百毫秒级输出决策，基本达到准人类实时。它被微调过，<b>不说人话，但可以做决策</b>——像一个通用的、介于大模型和传统小模型（比如决策树）之间的东西。它给自己起的名字叫 <em class="term">System One</em>：真正人类意义上的实时决策。</p>
+    <p>这不是新技术，以前也有人尝试做超快的模型，但这次火了以后，<b>赛道正式被打开</b>。对 AI native 时代的年轻人来说，问题变成了：如果一个模型能在 50–100 毫秒里做实时决策，你能拿它干什么？比如让它做决策、根据你说的话实时生成 AI 数字人脸上的微表情——以前的大模型有这个能力，但延迟做不到「有人感」（还记得那个聊着聊着突然说起广东话的 AI 演员吗）；而今天可以。</p>
+    <div class="callout co-case"><span class="tag">课堂案例 · 赛道打开之后</span>
+      讲师玩笑：这样的模型甚至可以哄小朋友睡觉，「婴儿睡不着的难题就彻底解决了」。毫秒级决策模型 + 实时微表情生成，人机交互的质感完全不同。今年春晚还没有人感的人形机器人，明年可能就有能实时做出非常棒的微表情的机器人了——有点可怕。
+    </div>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>实时玩 Doom 的小模型：单步决策、百毫秒级响应、不说人话但能干事。</li>
+      <li>「赛道打开」的意义：低延迟决策模型让 AI 具备实时交互感。</li>
+      <li>AI 的进化速度非常非常快。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.2</span>GPT-6 Astra 的 AI 发展史视频 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=212">03:32</a></span></h3>
+    <p>第二条新闻：一个完全由 <em class="term">GPT-6 Astra</em> 生成的 AI 发展史视频。脉络从 1956 到 1958、1960 年感知与规划机器走出实验室，到 70–90 年代人工智能寒冬，到 1997 年用搜索算法第一次击败人类世界冠军；2012 年 AlexNet 之后世界骤变，发展速度始料未及；2016 年 AlphaGo（讲师当年在现场看直播）；2017 年讲师读 PhD 时关注词向量、Transformer、BERT 能干什么有趣的事情；2020 年 GPT-3 出来时大家吃惊「为什么要做那么大参数的模型」——直到 2022 年才知道为什么。而那已经是接近十年前的事了。</p>
+    <p>然后就一路加速：2022–2023 年能看图、GPT-4o 能识别语音做多模态；Gemini 生成视频；2024 年 9 月 Sora 才第一次发布、同年 9 月出现带 Chain of Thought 的 o1；第一个开源 CoT 的 DeepSeek R1；视频结尾的彩蛋是千年难题（Millennium Problem）被「大力出奇迹」解决。讲师感慨：现在抖音上全是 AI 生成的短视频，连计算机学院楼下的展板都是 AI 生成的。</p>
+    <div class="callout co-case"><span class="tag">案例 · 《硅谷》S1E01</span>
+      讲师顺带放了美剧 Silicon Valley 第一季第一集的名场面：几个书呆子要去做一件改变世界的事情——「千百年来我们这种书呆子一直都被欺负，在人工智能时代终于可以出人头地」。
+    </div>
+    <div class="callout co-concept"><span class="tag">概念卡 · 加速的含义</span>
+      世界的发展在加速，可能比大家想象的要快。这对就业市场是挑战，同样意味着机遇：这种实时小模型带火的生态，是一瞬间到来还是要等几年、等硬件跟上，我们不知道——但方向看得见。另外，如果你拥有一个大的素材库（YouTube / Bilibili 配下载工具），你就拥有了所有东西的入口，创造任何东西都会变得容易。
+    </div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.3</span>No Brown 访谈：模型缺的是品位 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=484">08:04</a></span></h3>
+    <p>最近还有一个 OpenAI 的 <em class="term">No Brown</em> 访谈。他的判断与讲师的直觉一致：<b>现在 AI 模型的短板是品位</b>——他对这个问题的定义是「模型对接下来应该做什么的直觉，做得还不够好」。模型被训练成了 <em class="term">prompt 的舔狗</em>：你让它做什么，它就盯着疯狂地做；同时还有一点 <em class="term">reward hacking</em> 的倾向——用最快最脏的方式把你要的任务完成，因为完成任务才能拿到 reward，它就会不断往这个方向强化。</p>
+    <p>于是它生产的东西，从长期主义角度看是可能不满意的：它执着于做<b>立即有反馈</b>的东西。但讲师认为没有什么根本道理阻止我们改进——完全可以用更多的合成数据告诉模型「你在做这件事的时候，可以想得更远一点」，无非就是在 CoT 的头几个 token 里决定你要做什么。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>模型短板 = 品位 = 「接下来该做什么」的直觉不足。</li>
+      <li>舔狗行为 + reward hacking：短期满足任务，长期不满意的根源。</li>
+      <li>可以训练「想得更远」：CoT 开头的几个 token 决定方向。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.4</span>可验证与不可验证的边界 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=564">09:24</a></span></h3>
+    <p>No Brown 还提到了<em class="term">可验证与不可验证的边界</em>。你觉得品位是不可验证的，但也许没那么难；反过来数学是可验证的，但验证也没有那么容易——因为就算把它 formolize（形式化）了，从自然语言描述的问题到形式语言描述的问题之间<b>还是有 gap</b>（auto formalization 的 gap）。</p>
+    <div class="callout co-case"><span class="tag">课堂笑话 · 形式化证明的坑</span>
+      前段时间有个笑话：有人声称证明了 P=NP，写了大概几千页的形式化证明；后来大家发现，他形式化时定义的那个问题根本不存在（nothing），等于最后证明了「1=1」。形式化本身是有 gap 的——可验证不等于已经验证。
+    </div>
+    <p>这一节是第 2 章 intent / specification / implementation 之 gap 的预告：gap 不只存在于软件构造里，连「把问题翻译成数学」这件事本身都有 gap。</p>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.5</span>The Bitter Lesson 与数据分布工程 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=619">10:19</a></span></h3>
+    <p>OpenAI 说他们 <em class="term">All in RSI</em>（递归自我改进）。回头看，<em class="term">The Bitter Lesson</em> 到今天、Scaling Law 到今天，可能还没有停止。GPT-6 发布以后讲师最大的感受是：<b>OpenAI 可能摸到了一个门道，他把它叫做「数据分布工程」</b>——GPT-6 有非常惊人的空间推理能力，能理解图片里的空间关系，在画图、生成模型方面都做得非常好，毫无疑问是因为训练时（基模预训练和后训练的强化学习阶段）都加入了这部分的数据，给它「这样做是好是不好、对和错」的反馈。</p>
+    <p>这是另一个维度的 Scaling Law。以前的理解是：更多训练数据 → 基模更好，所以 Anthropic 去买书、烧书，拿到绝版数据就能比别人强。而在强化学习时代，他们看到的是：<b>如果基模已经很好，再加一个它没见过的领域做强化学习，它会在所有任务上都做得更好</b>——这是一件非常恐怖的事情。</p>
+    <p>看模型一代代怎么发展：最早完全是语料（语言的 token，Large Language Model）；先训练语言，再训练视觉多模态、数学；学会数学以后，才再学会空间感知的关系。如果从零训练一个具身智能的模型，很容易出问题：它需要大量模拟器数据，而模型是个 reward hacker，会抓住模拟器里光照渲染的细微信号（比如脚上的像素点亮还是不亮）拿到 reward、完全不能泛化。但一个又会语言、又会数学、还会写程序的大基座模型，在上面做空间感知训练，<b>需要的数据反而更少</b>——每加一个新的人类领域，需要的数据不是更多而是更少，就能达到泛化的效果。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 数据分布工程的飞轮</span>
+      只要决定在什么时候、按什么比例给模型注入什么数据，模型架构不重要、算法不重要——只要训练不崩、训推一致（不能训练时一个参数、推理时参数变了），有十倍一百倍的数据问题就解决。更好的算法、模型结构只有一定程度的提升；但只要飞轮还在、还有钱，就可以无限 scale 下去。
+    </div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.6</span>人先学世界模型，模型反过来 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=789">13:09</a></span></h3>
+    <p>人和模型正好是反过来的。人是先学<em class="term">世界模型</em>：婴儿出生就和这个世界交互，先训练一两年三年的世界模型，然后才开始说话，再学数学，再读 PhD 训练 research taste。而大模型是先语言、再数学、再多模态、再空间感知。</p>
+    <p>但不管按什么顺序训练，只要你有足够多的数据、scaling law 成立，模型就能训成——「当模型成功了，人也成功了」。所以他们可能看到了数据分布工程上的一个飞轮：下一个 scale 的领域是什么？情感计算、化学，还是生物工程——有消息说 Anthropic 要做 Wet Lab 做生物工程的实验。也许预测老鼠的行为都能成为一个新领域：在这个领域上建立反馈、优化训练分布，把这个领域<b>以插件的形式插进基模训练里</b>，飞轮就转起来——每次新建一个实验室、投几十亿美元，模型能力就往上抬一个台阶。</p>
+    <div class="callout co-case"><span class="tag">对比 · 两条科研路径</span>
+      基模厂：建实验室 → 能力上台阶，几乎可预见有收益。学术界：随机想一个 idea，有没有用不知道，写 paper、接受 peer review——讲师的判断是「我觉得这个体系马上就要崩溃了」。每个同学都可以想一想：在这个崩溃的体系下，我们还能剩下什么。
+    </div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.7</span>学术体系即将崩溃 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=864">14:24</a></span></h3>
+    <p>一方面，ICLR 今年投稿数量到达新的巅峰——学术界更多地在被 <em class="term">AI slop</em> 充满，因为同学们都想发论文保研。另一方面，基模厂已经不 care 这些东西了：<b>你在一个小规模上做的任何实验，对它来说都没有意义</b>——它看到了另一个维度的 scaling law；你不在基模厂，就没有任何资源做数据分布工程，对「什么时候加什么数据」的分布一无所知。</p>
+    <p>即使你有一些小规模上非常酷的想法，可能也不需要写 paper 了——写一个 blog post，基模厂的 AI 看到，就会去他们的数据上试一试。他们有 RSI 的 loop：先造出一个人工智能，上面跑 recursive improvement 的循环，靠这个循环去做任何事，飞轮就登起来了。一旦这个自动化的能力生产闭环收敛（在 AI 帮助下肯定会很快收敛，因为 AI 比任何一个人类都强），它就可以自己去找下一个领域。</p>
+    <p>讲师也理了一些方向：跟 AI 聊完之后，至少有些东西可以作为小领域来验证——比如<b>在系统架构上训练品位，让它做出好的系统设计</b>。但很可能到学期结束，下一版模型突然就把系统设计加进去了。</p>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>投稿量巅峰 vs 基模厂不 care：小规模实验在数据分布工程面前失去意义。</li>
+      <li>酷想法的价值出口从 paper 变成 blog post——基模厂的 RSI loop 会来捡。</li>
+      <li>「训练品位做系统设计」这类方向，可能随时被下一版模型覆盖。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.8</span>我经常笑话 AI 写的 slop code <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1040">17:20</a></span></h3>
+    <p>承接上一节的危险：讲师经常在课上笑话 AI 生成的 <em class="term">slop code</em>——「你看它结构多么糟糕，我加一个需求它就崩溃了」。但如果「训练品位」这条路被基模厂走通，这些事情可能就永远都不会发生了。</p>
+    <div class="summary"><h4>本章小结（01 章）</h4><ul>
+      <li>毫秒级实时决策模型（System One）打开了新赛道；AI 进化速度非常快。</li>
+      <li>GPT-6 背后可能是一门新手艺：数据分布工程——什么时候、按什么比例注入什么数据。</li>
+      <li>好基座上加新领域做 RL，所有任务都变好；新领域需要的数据反而更少。</li>
+      <li>模型的短板是品位；学术体系在 AI slop 与基模厂的 RSI loop 面前即将崩溃。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>「数据分布工程」和传统的「堆更多数据」差在哪里？为什么在好基座上加新领域需要的数据反而更少？</li>
+      <li>小规模实验对基模厂失去意义之后，学术研究的价值出口会变成什么？你认同讲师的「崩溃」判断吗？</li>
+      <li>挑一个你觉得 AI「没有品位」的具体产出，分析它缺的是「接下来该做什么的直觉」中的哪一环。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>回到软件开发</h2>
+    <div class="ch-range">17:37 – 39:01 · 8 节</div>
+  </div>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.1</span>斩杀线一直在上移 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1057">17:37</a></span></h3>
+    <p>新闻讲完，为什么我们还是需要上课？因为你还是不能完全依赖 AI。人类是一个竞争的社会，和生物进化很像——<em class="term">survival of the fittest</em>，你是试着生存的。所以<em class="term">斩杀线</em>毫无疑问在不断地向上移动；每一个人想的问题都是：怎么在最后还没有被斩杀的时候，搭上最后一班车。</p>
+    <p>从人类的角度讲，不管是 Anthropic、OpenAI 还是 DeepSeek，都希望靠人工智能推动人类进步。斩杀线一定程度上会让很多人的生活失去意义，但「我们成为一个更好的人，就可以更好地找到这个意义」——这也是没有办法的事，我们每个人都是这样，包括讲师自己。</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.2</span>intent、specification、implementation <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1115">18:35</a></span></h3>
+    <p>回到技术内容。上次讲了版本管理，而且花了好多次课给大家说：<em class="term">intent</em>（你想要什么）、<em class="term">specification</em>、<em class="term">implementation</em> 这三者之间是<b>有 gap 的</b>。就是因为有这个 gap，构造软件才成为一个公认的难题，也因此有了软件工程。</p>
+    <p>所以现在的处境是：如果你要从零开始构造一个系统，版本管理已经有了，那么<b>到底应该怎么构造</b>？</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.3</span>今天的答案：做 MVP <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1157">19:17</a></span></h3>
+    <p>今天的答案是：直接做一个 <em class="term">MVP</em>——minimum viable product，最小可行产品。讲师现场有个小口误，先说成 minimum <i>variable</i> product，随即自己改口成 <b>viable</b>。这个口误挺有代表性：很多人心里的 MVP 确实变成了「变量最小的产品」，而不是「能验证想法的最小产品」。</p>
+    <p>逻辑很直观：做得多就错得多，做得少就错得少。所以做一个<b>最少、但又和最终 product 最接近</b>的东西，收益比较大——因为它能帮你补上 intent–specification–implementation 之间的 gap：</p>
+    <ul>
+      <li>MVP 首先是 AI 生成的 slop，不怎么花钱，这个 implementation <b>随时可以扔掉</b>，不重要；</li>
+      <li>但它能帮你知道 <b>intent 哪里没弄对</b>；</li>
+      <li>以及 specification（比如架构）还有没有可以改进的空间；</li>
+      <li>然后再做几个版本的迭代，最后再出货。</li>
+    </ul>
+    <div class="summary"><h4>本节要点</h4><ul>
+      <li>MVP 的本质不是「最小」，是「能验证 intent 的最小产品」。</li>
+      <li>AI 时代 MVP 的实现成本趋近于零：slop 随时扔，但反馈真实。</li>
+      <li>迭代的对象是 intent 和 spec，不是 implementation。</li>
+    </ul></div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.4</span>标签打印机与扫描仪：我的真实案例 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1205">20:05</a></span></h3>
+    <p>讲师展示了他某个晚上做出来的东西：一个和物理世界交互的系统——开着豆包输入法、开了几个终端来回对话指挥 AI。背景是实验室里之前买的各种设备，每台设备都要用它自带的软件，而那些软件「用起来像吃屎」——所以干脆把那些软件全部屏蔽掉（这也是 AI 做的），整个扫码、上传到 ICS 主页的流程自动流转，不需要人扫码。</p>
+    <div class="callout co-case"><span class="tag">案例 · 五小时产品级</span>
+      五个小时，用国产模型（正好额度空着）基本上全部跑完，得到一个看起来非常可用的东西——「就跟你在食堂或者宿舍楼下看到的那个机器」，达到了某种产品级的效果。而这一切的实现方式，只是一个明确的目标加一轮一轮的验收。
+    </div>
+    <p>关键在于：他没有写一行代码，只向 AI 要一个<b>可验收的结果</b>，AI 一轮一轮地把事情搞定，最后再套一个前端界面，「我就是用嘴输出」。</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.5</span>抽象：从 ioctl 到 print(image) <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1252">20:52</a></span></h3>
+    <p>「屏蔽官方软件」这个动作背后，其实有正经的软件工程智慧。操作系统课上讲什么是<em class="term">设备驱动</em>：把一个设备抽象成 read / write / <em class="term">ioctl</em> 的接口。那能不能把它抽象成一个更好用的接口？</p>
+    <ul>
+      <li>扫描仪：接口就是一个 <code>scan</code>——是正面向上还是反面向上、单面还是双面、DPI 是多少，给它一个更干净的接口；</li>
+      <li>打印机：接口就是一个 <code>print(image)</code>。</li>
+    </ul>
+    <p>有了这个接口以后，<b>设计和实现就完全解开了</b>：软件层直接工作在接口层上，再也不需要去用那些不好用的官方软件了。这就是一个 self-service 系统。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 抽象即解耦</span>
+      「把设备抽象成接口」是软件工程里最典型的设计：接口一旦稳定，上层设计与底层实现互不牵连。AI 时代的区别只是——接口下面那一层的实现，现在由 AI 在几小时内补齐。
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.6</span>软件公司正在彻底消亡 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1362">22:42</a></span></h3>
+    <p>所以「以后软件公司面临一个非常彻底的消亡」。想想设备的驱动软件：标签打印机给你一个驱动、一个软件，佳能扫描仪的软件成本也非常高——要开发跨平台的驱动（Windows 驱动做完了还得做 Mac 驱动，因为用 Mac 的人越来越多，没驱动用户就抱怨、产品就卖不了那么好）。<b>在今天，这些统统都不需要了。</b></p>
+    <p>现场演示：那台照片打印机是杂牌（Easy Scan），连讲师都不知道它是什么。他只告诉 AI「我就想要把这个打印机驱动起来」，要一个可验收的结果。AI 一开始尝试用 <code>lp</code>（能识别到设备），后来发现可以直接用通用的（generic）打印驱动把它当成通用打印机来处理。打印机是热转印的——碳粉带加热、在有像素的位置把碳粉烫上去，有个「加热深度」参数谁也不知道是什么意思、该设多少，AI 就一张一张打标签、标上「第 15 次尝试」，问讲师淡了还是浓了（其实接个摄像头它连人都不需要，可以自己一张一张打、完全自动地完成校准）。</p>
+    <div class="callout co-case"><span class="tag">案例 · 逆向电子墨水屏</span>
+      办公室的电子墨水屏，原配 Android App 极度难用。讲师没有用 Computer Use，而是用 Claude Opus 4.6 直接把 APK 丢进去：解包、逆向蓝牙协议（它是标准蓝牙设备），根据代码弄清楚怎么把内容写进屏幕——得到了一样能用的东西。下一个实验就会要求大家把第一个实验的 assistant 和一个 physical device 联系起来：花 200 块买个非标小设备（可能连 Linux 驱动都没有），把它搞起来。
+    </div>
+    <p>用创业视角看这个产业链：你毕业创业卖标签打印机，找细分市场（每个学校、每个单位都需要，几百块一台相当有利润），硬件靠中国成熟的供应链不难；但 pre-AI 时代软件成本是大头——Windows 驱动、Mac 驱动，一个都不能少。今天这些被 AI 直接<b>杀死比赛</b>。AI 自己 probe 出打印机的参数和当前插入的标签，做的完全是定制化：</p>
+    <div class="callout co-case"><span class="tag">讲师原话</span>
+      「我想要什么，以我最舒适的方式来帮我定制，<b>不要通用</b>。」——因为以后生产软件、生产 intelligence 的成本会非常非常低。你已经生在这个「软件死掉了」的时代。
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.7</span>豆包手机：APP 沦为接口 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1523">25:23</a></span></h3>
+    <p>最近发布的<em class="term">豆包手机</em>，在讲师看来是一个非常好的工程产品，因为它体现了同样的软件工程智慧：<b>APP 都不重要了</b>。如果有一个接近实时的决策模型（就像 System One 那样的），和手机是非常配的——做豆包手机的时候模型可能还达不到，但这一天很快就会来。</p>
+    <p>于是应用沦为各种各样的接口：你说「我要点外卖」，它就用 computer use 去调用——应用就沦为了一个点外卖的接口、一个查询数据的接口。APP 是给人用的；如果只要提供一个 <b>API</b> 就可以给 agent 用，那 APP 是不是有一天全部都要死掉？阿里在疯狂做这件事——把旗下所有服务整合，试图用千问做起来；但讲师觉得有点生不逢时：太想把产品推出去，模型、算力可能不够，没有一个智力足够又足够快的模型来帮你完成任务，所以拿出来像一个「未来的半成品」。但这意味着未来总有一天肯定会来。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 产业链的震荡</span>
+      整个软件公司彻底消亡——想想这个产业链上养活了多少人、多少外包公司。设备厂商的驱动团队、跨平台软件团队、以及一切「给人用的壳」，都在被「生产 intelligence 的成本趋近于零」重新定价。
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.8</span>1960 年的软件危机现场 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1854">30:54</a></span></h3>
+    <p>既然软件都要死了，为什么还要讲软件工程？因为<b>曾经的软件工程不是这样的</b>。透过软件工程的历史，看世界上这些软件到底是怎么来的、我们在软件构造的历史中发明了什么——用这些理念可以更好地指导你今天和 agent 的协作，成为一个更好的 <em class="term">agent native</em> 软件开发者。</p>
+    <p>回到 1960 年，软件还是一个新事物的年代：</p>
+    <ul>
+      <li><b>硬件比码农贵得多</b>：一台计算机占一个很大的房间，作为最先进的设备制造成本极高。那时候大家还不敢偷工减料——就像刚开始造建筑都要猛堆料。对比今天：iPhone 18 Pro 用了 QLC 闪存颗粒，好像也没关系，因为 iPhone 的主张是数据都存 iCloud，保修期内闪存坏了就给你换主板，但它不对你的数据负责。</li>
+      <li><b>码农也很贵</b>：越早编程工具越不成熟，是高智力需求的工种。写汇编、写机器代码的年代，大家要求画流程图——你如果不画流程图直接写机器代码，就跟今天让大模型直接从二进制序列写汇编一样：模型可以，你做不到，你需要过度的预训练才能做到。</li>
+      <li><b>工程师缺软技能</b>：985 层层筛选的高智商人群，数学训练多了以后，多多少少缺一点对客户的同理心和对商业的理解。也有各方面都很强的六边形战士，但整体偏 nerdy——只想要造世界上最好的操作系统；Linus 那样的人就不是一个很好的客户经理。</li>
+      <li><b>客户也不知道计算机能做什么</b>：软件企业要签合同，「1000 万美元给你开发一个操作系统」；客户是 DARPA 的官员、NASA（要把人类送上月球）、要给飞机做飞控系统——他们不完全知道自己想要什么。</li>
+      <li><b>程序员是一个非常年轻的职业</b>：Dijkstra 1957 年登记结婚时，程序员不被承认为一个职业，最后登记成了理论物理学家。</li>
+    </ul>
+    <p>客户对软件已经产生了过度遐想：1968 年《Boys' Life》杂志 9 月号就畅想了「人是怎么样——终端即时判分、针对薄弱环节辅导、让学生按自己的节奏学习」——<b>到今天都没有实现</b>，你们还在上每节 50 分钟的两节课。客户脑子里是这样的东西，程序员脑子里全是汇编和 goto——gap 毫无疑问非常大。</p>
+    <p>这也解释了软件工程和桥梁工程、炼钢这些工程的本质区别：物理世界我们只能适应、不能改造它的结构——材料的强度出厂时就确定了，楼要盖几层、容纳多少人都是自然选择的结果；所以那些工程遵循比较强的模式、做一些小改进、不断往上创新，一直是 incremental 的，彻底推翻重来非常困难。而<b>软件的需求完全是拍脑袋想出来的</b>（1968 年大家就能想出个性化教学），高度定制化，把物理世界的需求投影到计算机世界，一直以来都被认为是高度需要人类智慧的活动——「软件是人类智慧的巅峰」确实是一个事实，操作系统、编译器这些非常难的软件，学它都需要多年的专业积累。它复杂到连制定 intent 的人都没有想好各种 corner case：</p>
+    <div class="callout co-case"><span class="tag">案例 · 选科系统的例外需求</span>
+      一个选科系统：先到先得、抽签、还是按专业保留？不满足先修课要求时老师能不能特批？「选操作系统必须先修计算机系统基础」——这是硬限制还是软限制、谁能 override？现实是：你到最后一秒钟，所有的口子学校都能给你开。软件的需求是高度定制化的、连接了物理社会和人的偏好的东西——所以做软件很难。
+    </div>
+    <div class="summary"><h4>本章小结（02 章）</h4><ul>
+      <li>斩杀线上移是生存环境，不是情绪；上课是因为不能完全依赖 AI。</li>
+      <li>MVP 补 intent–spec–implementation 的 gap：implementation 可扔，反馈真实。</li>
+      <li>标签打印机/扫描仪案例 = 老智慧（抽象、接口解耦）+ 新成本结构（AI 补实现）。</li>
+      <li>软件公司消亡的机制：定制化智能趋近免费，通用软件失去价值；APP 沦为接口。</li>
+      <li>1960 年的三重错位（硬件贵、码农贵、客户认知空白）+ 需求高度定制化，是软件危机的土壤。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用「scan / print(image)」的抽象思路，把你身边一个难用设备的官方功能重新设计成三个接口函数。</li>
+      <li>「APP 沦为接口」对你常用的一个应用意味着什么？它最不可能被 API 化的部分是什么？</li>
+      <li>选科系统的「硬限制还是软限制」问题，本质是 intent 没想清楚还是 spec 没写清楚？用三分法分析。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>从软件危机到软件工程</h2>
+    <div class="ch-range">39:01 – 75:06 · 10 节</div>
+  </div>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.1</span>进度、成本、质量一起失控 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2341">39:01</a></span></h3>
+    <p>到了某个时间点，大家发现了：<b>进度、成本、质量是一起失控的</b>——开发进度不能预测、软件开发成本崩溃、延期交付。这就是后来被称为「软件危机」的现场，也是本章故事的开端：那个时代的 Computer Scientist 们，已经开始观察软件里各种有趣的东西。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.2</span>GoTo Statement Considered Harmful <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2362">39:22</a></span></h3>
+    <p>第一个人物是 <em class="term">Dijkstra</em>，和他那篇著名的短文《GoTo Statement Considered Harmful》。大家学编程的时候都听说过 goto 有害，但同时你们也看到 Linux 内核里有好多 goto——这是 C 语言为数不多的比较 <em class="term">idiomatic</em> 的用法：<code>goto release</code>。在函数末尾的 release 处，逐个检查并释放你在函数里申请的所有资源；写代码时永远不在中途退出，想退出就必须 <code>goto release</code>——这个程序基本就能正确了。它解决了 C 语言里一个很大的问题：「随时申请、从不释放」（你们做 OJ 留下的坏习惯）。</p>
+    <p>Dijkstra 还先发表过一个暴论：「<b>程序员的水平随着 goto 的密度上升而下降</b>。」他其实背后是有一定道理的，不绝对。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 这篇文章真正讨论的</span>
+      它讨论的其实不是 goto 到底 harmful 不 harmful——goto 作为正确的机制使用（只允许你这样用）就不 harmful，还挺好。它背后考虑的是：希望你能写出<b>人能读的代码</b>。只有人能读，它才有可能维护得下去，从而软件世界能够相对正常地运转。
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.3</span>The Humble Programmer <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2503">41:43</a></span></h3>
+    <p>1972 年，Dijkstra 得图灵奖后的演讲《The Humble Programmer》。讲师强调现在很好的一点：我们可以在 AI 的帮助下<b>直接去 digest 原始的文稿</b>。</p>
+    <p>它谈到了为什么会有软件危机：<b>如果你永远写 Online Judge 的小程序，是不会有软件危机的</b>——算个东西算完就完了，程序一旦调对，你就永远不需要去维护它。但是机器变强以后，你的软件需求是不断膨胀的：机器越强，你承担的现实世界的 intent 越多；intent 越多，不确定性就越多，软件就越来越复杂。</p>
+    <p>他提了一些对软件的思考，比如 <em class="term">nicely factored solutions</em>（良好的分解）——这样的想法在你构造任何软件系统的时候都在不断被发现：讲师驱动标签打印机和扫描仪，也是一个 nicely factored solution。我们无时不刻都在用这样的想法来组织我们的软件。</p>
+    <div class="callout co-case"><span class="tag">原文金句 · 今天依然醍醐灌顶</span>
+      「保守力量主要来自教育机构，与舍不得重写旧程序的用户。」——1972 年写下的判断，放到今天依然成立。确实，Dijkstra 那个时候值一个图灵奖。
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.4</span>1968 年 NATO 软件工程会议 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2642">44:02</a></span></h3>
+    <p>因为软件开始失败了，1968 年有了 <em class="term">NATO 软件工程会议</em>——「软件工程」作为一门学问被摆上台面的标志性事件。会议的原始文稿今天也可以直接去读：讲师现场把链接丢给 agent，开一个窗口让它在后台读起来。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.5</span>Margaret Hamilton 与 Apollo <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2660">44:20</a></span></h3>
+    <p>差不多同一时期，<em class="term">Margaret Hamilton</em> 和她的团队提出了「软件工程」这个概念。那张她站在一摞打印出来的 Apollo 代码旁边的照片（With Apollo Code, 1969）是载入史册的：「经过不懈的 debug，这位最初的软件工程师把宇航员送上了月球。」</p>
+    <p>你们今天写的防御性编程，源头就在这里：比如学 SICP 的时候，它就告诉你写软件时要写 <em class="term">assertions</em>（断言）、写 specifications——<b>把一个绝对不能发生的假设，都当成可能发生</b>。这是为未来思考的防御性智慧：假设软件在任何时候、甚至违反假设的时候，依然要能够工作，这样才算设计了一个成功的软件。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 软件工程的起点</span>
+      <b>The never going to happen can happen</b>——绝不可能发生的事情，也可能发生。比如你可能要假设硬件也是不可靠的，无论如何都要在软件里做兜底机制：程序 crash 了，整个系统依然要能够工作。Apollo 11 登月下降的时候发生警报，软件因为有优先级调度和 recovery，让关键的下降控制任务得以继续。那时候还没有「软件工程」这个学科，他们就是从 first principle 去思考：要构造一个真正好的、高质量的软件，应该怎么做。
+    </div>
+    <p>在这个意义下软件工程诞生了：<b>在成本、时间和各种团队约束下，把人的意图——你想要设计的产品、客户的要求——变成一个可以工作的、可以维护的、可以生存的软件</b>。「可以生存」是指随着时间的推演需求可能会变化——和 never going to happen 是同一种感觉。IEEE 的定义：A systematic, disciplined, quantifiable approach to the development, operation and maintenance of software——工程化：你不再是一个个人英雄主义的时代（Hamilton 的时代需要一个好 leader，换一个人这个项目就失败了），而是可以拿到一个 <em class="term">checklist</em>：一至十条全部满足，不能保证你的软件成功，但失败的概率会小很多。有纪律、可量化、覆盖软件的整个生命周期。这个学科是从大量的失败、数亿美金的教训（包括炸掉的火箭）里积累出智慧的。</p>
+    <div class="callout co-warn"><span class="tag">警示 · OJ 的隐藏假设</span>
+      你们做 OJ 的时候假设题目是对的、题目是能做出来的——这个隐藏的假设本身就不对。当你反复强化它，你就 overfit 了这个假设。你应该假设面对的是开放的世界：题目可能是错的、条件随时可能会变、题目甚至可能变成另外一个题目——那你怎么做一个软件来解决它？OJ 训练的是逻辑思维、算法思维、CoT 能力，对理解软件有好处，但它是「假设封闭」的训练。
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.6</span>为什么必须把任务划开 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3045">50:45</a></span></h3>
+    <p>回到 pre-AI 时代，大家其实非常清楚 intent–spec–implementation 的 gap。如果你接到一个开发任务，<b>你不能立即安排大家去干嘛</b>——任何一个 leader 都不应该干这样的事，即便最终的产物一定是码农写出来的。因为不同的人看到的是不一样的部分；如果这个软件要分开，leader 都需要指派哪一个部分由哪一个人来做。</p>
+    <div class="callout co-case"><span class="tag">讲师的现役做法</span>
+      做打印机和扫描仪的时候，两个设备同时接在电脑上——讲师就起了两个 agent、开了两个窗口，一个去搞打印机、一个去搞扫描仪。很正常：需要一个划分任务的过程，不能是 self-organized 的。
+    </div>
+    <p>这就引出本章的核心问题：从一个空的 repo 开始，到底应该怎么开发？1970 年还没有 minimum viable product，也没有大模型——那时候的人怎么思考「按时不超预算地交付大型软件」？</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.7</span>Royce：瀑布图来自一篇批判瀑布的文章 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3097">51:37</a></span></h3>
+    <p><em class="term">Winston Royce</em> 的《Managing the Development of Large Software Systems》（1970）是软件工程领域的开山之作，回答的问题就是：怎么按时不超预算地交付大型软件。只要学过一点软件工程，你一定见过这张图：<em class="term">瀑布模型</em>（waterfall model）——从需求、系统需求、软件需求、分析、设计、编码、测试，一路到上线运维。而这张图就来自 Royce 的这篇经典文章。</p>
+    <div class="prompt-box"><span class="plabel">课堂演示 · AI 时代的读论文方式</span>
+      <p>备课前一天找到文章链接 → 直接和 agent 说「入库这个 paper」→ 得到文字整理版（按页切割、图片以 Markdown 嵌入）→ 配合命令行工具在终端里打印文本、提取图片、像 less 一样翻阅。这些都是 webcode，身边没有求任何人帮忙。</p>
+    </div>
+    <div class="callout co-warn"><span class="tag">警示 · 被误读最严重的一篇</span>
+      最有意思的是：<b>这篇被奉为瀑布模型源头的文章，实际是批判瀑布模型的</b>。一个东西经过好多次转手消化以后，你得到的东西可能就不是那个东西了。讲师让 AI 解释「瀑布模型在软件工程里到底是怎么被误读的」，AI 的回答很 make sense：「瀑布好画好背好出题，可以作为第一个模型讲；而且每一个新方法都说瀑布是史上最好用的反派。」——但它确实不纯属虚构：1970 年的文章本身已经告诉你不能瀑布、要做 MVP。
+    </div>
+    <p>1970 年的大家真的什么也没有，只能从 first principle 去思考。这里还有一段方法论插曲：过去查证一个知识网络几乎不可能——图书馆的索引机制建得也不好，找到精确的资料要花无穷多的时间，所以<b>不可能通过一手资料来学习，必须经过教科书做知识的有损压缩</b>。有的教科书写得好，是因为作者读过一手的信息、能共情学生，知道学生想要什么、什么地方会不明白。但今天作为一个老师，不需要再做压缩了——对每个人的压缩都是有损的、而且对不同的压缩损失了不同的部分；正确做法是把知识拆解成一个个发现点，你把点和它的原文拿到，<b>做属于你自己的压缩</b>。也因此，那些投入百万千万建设先进课程的计划，在 AI 时代可能被一个模型碾掉——你有任何疑问直接和 AI 对话，它还能在过程中找到更多的原文、甚至找到整条误读的链：这个教材怎么一步一步传到今天你手上的软件工程教材上的。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.8</span>Do it twice 与测试的第一个物理事件 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3308">55:08</a></span></h3>
+    <p>Royce 的分析：这样的流程<b>小到一个人自己用的程序，两步就够了</b>（这就是你们的 OJ）；但如果把这样的流程扩展到大型软件（瀑布模型），很容易失败。为什么？<b>因为测试是整个链条上第一个物理事件</b>——在设计的时候你有报告，但 program 真正被写出来之前，它都是不能运行的。这是 first principle：当面对不能运行的东西时，人都会随便做做。文档就是这样——你写实验文档的时候，对它的正确性有 guarantee 吗？最多 best effort：先写就写了，代码改了、设计改了、文档不一致，也就放在那，这些东西没有一个很强的约束。只有到测试的时候，程序才真正跑起来，你才真正知道它的行为是什么——虽然编码的时候可能已经感觉到有些不对了。</p>
+    <p>所以一旦 intent → specification → implementation 发生了漂移，到测试的时候才发现，就意味着要回头去修改前面的东西——<b>这就是超期或者超支的源头</b>。既然风险最终都在测试的地方爆炸，那所有补救的本质都是同一件事：<b>把发现问题的时间点提前</b>。</p>
+    <p>于是有了 Royce 的经典方案 <em class="term">Do it twice</em>：讲师把它总结为 <em class="term">Preliminary Pilot Program</em>——先做一个<b>不完备、但能够体现系统功能</b>的设计。它可能会失败，但迭代的成本会变得很低，就可以及时 reflect 回系统设计上。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · Do it twice 就是 MVP</span>
+      这是什么？这就是 minimum viable product——1970 年就告诉你不能瀑布、要做 MVP。这个 first principle 在今天的各种实践里都能对上：用 <em class="term">TDD</em>（Test Driven Development，测试驱动开发）去理解，就是「设计先行」的极端——干脆先把测试用例定好（输入这个，就应该经过这个流程输出这个）；用敏捷开发去理解：第一个版本不是 do it twice，而是 <b>do it infinite many times</b>——第一个版本哪怕只有 hello world、每个模块自报家门把模块串起来，也是一个好的 product，然后不断把软件向后演进，<b>让关键假设尽早遇到证据</b>。今天正确的 practice 可以映射到过去，过去正确的 first principle 也可以映射到今天。
+    </div>
+    <div class="callout co-case"><span class="tag">课堂案例 · OJ 上的瀑布失败</span>
+      你们做 OJ 都会出现这个事：一开始脑子一热想了个算法（其实不对），就去写代码；写完发现样例不对，对着样例一跑——完了，这个算法整个就错了。这就是一个典型的瀑布模型的失败。另一个方向的例子：直流电和交流电、爱迪生和特斯拉——一开始有个地方方向想错了，把全人类都带歪；如果全人类能从某一点换个方向，也许立即快速走上正确的道路。
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.9</span>用 data dependency graph 解释返工成本 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4158">69:18</a></span></h3>
+    <p>讲师是做操作系统出身的，他分享了自己对 Royce 模型的个性化理解——也是和 AI 讨论后觉得自洽的：<b>把 Royce 的模型理解成一种 data dependency，修改是有代价的</b>。</p>
+    <p>把瀑布的每个过程（需求分析 → 系统设计 → 系统实现 → 测试验证 → 交付维护）都想象成一个 program——人也是程序：人脑就是神经网络，也会做 Chain of Thought。讲师自己的体验：思考的时候还是会对齐到语言上，「我哪怕不说话，我依然会在心里说 OK 我要这样、会有什么样的后果」——用语言来对齐脑内的思维链。把这些过程产生的 artifact 连起来，就是一个 <em class="term">data dependency graph</em>（有向无环图）：需求有好几个点（有些相互关联有些无关），设计关联到需求的点，关联关系会传递。</p>
+    <p>在这个图上，Royce 的警告变得非常直观：<b>一旦 test 发现错了，往上追溯发现是几个 design 错了，那就惨了——所有依赖它的东西全部都毁掉了</b>。这就解释了为什么返工的 cost 很高。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 从 BFS 到 DFS：敏捷的图论解释</span>
+      知道修改有代价之后怎么办？把 dependency 割小。不要一次性产生大量的 dependency，而是从宽度优先（BFS：先做第一层、再做第二层、再做第三层）变成深度优先的迭代（DFS）——这不就是敏捷开发吗：先做一个 minimal viable product，把一些重要的、优先级最高的 dependency 流程走通，再不断扩展。瀑布模型里其实也有 insight：需求阶段对应把 intent 确定，设计阶段把 spec 基本确定，编码测试才是 implementation——因为 gap 的存在，每个 intent 会拆成好多个小点、并对后面产生 dependency，所以做 MVP、做敏捷、做 TDD 显然是正确的事情。
+    </div>
+    <p>每一个人对模型的理解都可以不一样——每个人都有自己的 diversity，成长经历不同。讲师很自然地用他在计算机科学里习得的概念去解释这个世界；这也是为什么我们非常需要个性化的教学。而这基本就是软件工程后来真正采用的处理方式——它也是一个 first principle。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.10</span>阅读经典的启发价值 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4464">74:24</a></span></h3>
+    <p>阅读这些经典的著作真的非常有启发性，是非常值得学习的方式。因为一般来说，<b>经典都记录了一个领域最初遇到的、也是最重要的根本性问题，然后它在方向上找到了一条出路</b>。尽管事后可以援引其他的概念，比它解决得更好——讲师就很喜欢 data dependency 这个视角，它在软件工程整个发展历史上都可以往这个方向思考、去导出更多的概念。</p>
+    <p>很多图灵奖的工作为什么能得图灵奖？就是因为它确实是在一个大家完全不知道的情况下，<b>确立了一个 first principle</b>，告诉大家这件事情应该这么做。奠定软件工程基础的、Royce 的这篇「瀑布模型的文章」（实际标题是 Managing the Development of Large Software Systems），就给了我们很多启发——在它上面长出了这个世界的很多分支。</p>
+    <div class="summary"><h4>本章小结（03 章）</h4><ul>
+      <li>软件危机 = 进度、成本、质量一起失控；危机催生了学科。</li>
+      <li>Dijkstra：goto 之争的本质是「人能读的代码才能维护」；机器越强、intent 越多、软件越复杂。</li>
+      <li>Hamilton：The never going to happen can happen——防御性、可生存的软件；checklist 替代个人英雄主义。</li>
+      <li>Royce：瀑布图来自一篇批判瀑布的文章；测试是第一个物理事件，所有补救的本质是把发现问题的时间点提前。</li>
+      <li>Do it twice = MVP；TDD、敏捷都是同一 first principle 的现代变体。</li>
+      <li>data dependency graph（讲师的个人理解）解释返工成本；从 BFS 到 DFS 的构建方式就是敏捷。</li>
+      <li>AI 时代人人可读一手经典：知识不再必须经过教科书的有损压缩。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>用 data dependency graph 画一遍你最近一个项目：哪条边最粗（改一次最疼）？MVP 该先走通哪条链？</li>
+      <li>找出一个你学过的、和原始出处含义有偏差的概念（比如瀑布模型），追问 AI：这个误读的传播链是怎样的？</li>
+      <li>「测试是第一个物理事件」：在你的开发流程里，第一个真正跑起来的时刻出现得够早吗？</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+
+<!-- ================= CHAPTER 4 ================= -->
+<section class="chap" id="ch4">
+  <div class="ch-head c4">
+    <div class="ch-num">CHAPTER 04</div>
+    <h2>软件工程给世界带来了什么</h2>
+    <div class="ch-range">75:06 – 99:59 · 10 节</div>
+  </div>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.1</span>checklist：有人文关怀的工具 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4547">75:47</a></span></h3>
+    <p>这个起点（一个软件到底是什么——你当然可以定义成代码和数据，但从这个视角看能往后推出更多东西）之后，几十年里软件工程为每一个阶段都创建了方法和工具，这些方法和工具可以<b>减少你返工的概率</b>。</p>
+    <p>上软件工程课的时候老师让你写文档，还给你一个非常长的 <em class="term">checklist</em>：这个有没有做到、那个有没有做到、有没有沟通过。做 OJ 题的你可能觉得 nonsense。<b>但 checklist 实际上是有用的，它减少了你 fail 的概率</b>——比如它最后总有一条「你是不是和客户最后沟通过了」：当你真的和客户沟通过、并且给它打勾的时候，实际上你大幅减少了 intent 不符合客户要求的概率。</p>
+    <div class="callout co-case"><span class="tag">讲师原话</span>
+      「这是一个有人文关怀的工具，它没有任何的代码。」——checklist 不写一行程序，却是软件工程方法与工具的最朴素形态。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.2</span>bad smell 与研究生的一点小小方向 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4621">77:01</a></span></h3>
+    <p>今天做软件工程研究，更多的时候是「当我们有了代码以后」：能不能做自动的测试（有无穷多灌水的 paper）、代码里有没有 <em class="term">bad smell</em>。bad smell 的例子：你看到一个代码在等号左右从来不写空格，你会认为这是不好的代码——这个规定在 AI 时代之前都成立。</p>
+    <div class="callout co-case"><span class="tag">有意思的观察 · GPT-6 之后</span>
+      GPT-6 学会省 token 以后，这件事情变了：它会写出极为无法理解的代码、把很多语句放到一行里——然后那个代码是对的，「我不知道它是怎么弄对的，但是反正它是对的」。也许我们永远不应该去读那样的代码。
+    </div>
+    <p>如果你去读研究生、选软件工程方向，大概率会在这个大图景里非常小的一点上工作——比如针对 Java 代码某一类 bad smell 的更好检测做一个东西。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 做深的时候看一眼树林</span>
+      在做深的过程中，不要忘记去看树林、去看这些经典的东西，你会有更好的认知。对人来说深度和广度都是：在深度里训练，你才有更长的思维链；在广度里训练，才有对整个世界更好的感觉。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.3</span>不同阶段需要不同的语言 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4725">78:45</a></span></h3>
+    <p>软件工程要在每个阶段创建方法学和工具，就意味着<b>不同的阶段要用不同的语言</b>：checklist 的年代（大模型之前）不可能用编程语言做 checklist——真的就是一个 docx 文档，打印出来存档，跟客户沟通的记录可能是手写的；到编程的时候又有编程语言。而编程语言之前马上就有一个 gap：那个时候没有大语言模型这种「万能的编译器」——只要有自然语言就能把它编译成任何一种语言。</p>
+    <p>再看设计阶段：1970 年的时候，设计就是自然语言文档——先写需求文档、需求文档写完写设计文档，follow 瀑布模型。<b>文档的最大缺点是什么？写文档的是人：人会产生幻觉、人会产生 typo，人和人讲同一件事的时候是无法对齐的</b>——这件事在你和室友之间已经发生过无数次了：你说的是这个，室友理解成了那个，你花了很多时间跟他沟通和对齐。</p>
+    <p>于是从 first principle 出发：要为设计阶段创建方法、创建工具去减少返工的概率，你要做的就是——<b>一个介于自然语言和编程语言之间的设计语言</b>，当然也是一个 <em class="term">domain specific language</em>（DSL）。你们想到了什么？checklist 本身就是一种中间语言：它虽然用自然语言，但有格式规范——必须一条一条、每一条必须打个勾或者打叉；它介于自然和形式化之间，是有语义的——语义虽然由人来检查，但人对于勾和叉的对齐，比直接写一个文档的对齐要更 formal 一点。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · formal 程度的阶梯</span>
+      一个「语言」的 formal 程度 = 它有确定性语义的程度。从 checklist（勾/叉）到设计语言到编程语言，formal 程度从设计阶段往下越来越 formal——这正好迎合了 intent → spec → implementation 之间 gap 的解决。开始理解软件工程这个学科了。
+    </div>
+    <p>我们当年是 bottom-up 地学：先学编程——因为不理解代码，你就没有办法理解整个过程。但 AI 来了以后变了：<b>你可以先从产品经理开始做 product</b>——反正后面所有的事情都是 webcoding，你不去控制质量、也不需要知道；不理解代码、不理解后面怎么运作，你依然可以设计好的产品，只要有好的想法就可以做。</p>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.4</span>design by contract 与 Eiffel <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5292">88:12</a></span></h3>
+    <p>这个过程中诞生了很多有软件工程智慧的方法和工具。除了 checklist，还有决策表/决策树——checklist 的 nonsense 赋予了形式的语义、避免了遗漏和矛盾；甚至有 checklist 要求你把所有文档两两摆在一起审查一遍——「你会想我才不想做这个事，我是写程序的。但就是这样的：两两摆在一起检查一遍，避免了 gap 的漂移，这都是智慧」。他失败过了——在管理团队的过程中，形成了管理学的经验。测试领域还有开山鼻祖级的 <em class="term">QuickCheck</em>：<b>让人描述性质（property），由工具生成输入寻找反例</b>。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · property-based testing 的逻辑</span>
+      你做任何从上到下的翻译都会错：从 specification 翻译到代码，尤其那些隐含的 specification——程序不能 crash、不要有 null pointer、内存不能泄漏。那你有没有可能：在代码里写一个 property，让它自动变成好多好多的测试用例；如果全部通过，我对代码就有更大的信心。你写的软件你永远不知道它对不对，但做过的质量保障越多，信心越大——除非你最终写了一个形式化的证明，信心可能更大。
+    </div>
+    <p>还有前面讲过的 <em class="term">traceability</em>（可追踪性）与<em class="term">需求追踪矩阵</em>：从文件系统的角度看软件，就是好多的文件——docs 下的 md、source 下的 ts、还有一个 readme；文件系统是一开始大家不得不用而不得不做的 workaround。traceability 要求你用链接或文档的方式，让每一个代码和每一个需求点都能对得上、需求和需求之间对得上、需求和设计之间对得上——所有这些都有独立的互相的交叉检验，你对软件的质量就更有信心了。它是没办法的办法：人的能力有限。</p>
+    <p>换个视角：<b>没有一个码农能够单独完成整个项目</b>——「我是世界上最厉害的码农就够了」是社会给你的 contract；但从完成任务的角度看，码农有好有坏、要花多少钱雇多少码农、最终把项目交付，这才是重要的。所以现在每一个人都要当产品经理：你手上有 2500 并发的 DeepSeek——绝对算相当资深的码农，绝不是本科毕业生级别的。你高中刚毕业的时候做梦都没想过，刚高考完就要管 2500 个人——<b>这个 mindset 可能要改一改</b>。</p>
+    <p>于是有了 <em class="term">design by contract</em>（面向契约的编程）：<em class="term">Eiffel</em> 语言（1986 年左右）要把<em class="term">霍尔三元组</em>直接写进代码里。上古语法：<code>function is</code> 先写文档（这个函数是干嘛的），<code>require</code> 前置条件，<code>do</code> 是实现，<code>ensure</code> 后置条件——做完以后它能保证什么。它鼓励你先不要写 do、留空，把软件各个模块的文档、precondition、postcondition 先写出来。</p>
+    <div class="callout co-case"><span class="tag">案例 · 余额不足怎么处理</span>
+      写一个账户取款的 precondition/postcondition 时，你会自然地关联到设计：余额不足到底应该怎么样处理？写第一个 MVP 的时候你一定不会管这些——直接让它 crash，假设这件事情永远不会发生，把它排除在 specification space 之外。但当你的软件不断向后演进的时候，你的 contract 就变得非常重要。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.5</span>三十年前的断言预言 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5483">91:23</a></span></h3>
+    <p>回头看，这么多年软工人做的事情，<b>就是在 spec 上横跳</b>：从自然语言，到半自然的语言（可以接纳设计的、有一些逻辑公式的语言——它可以没有代码、单纯检验这个逻辑，比如中间要函数调用时逻辑能不能成立），再到现在的编程语言。今天这依然是一个非常活跃的方向。</p>
+    <p>讲师觉得软件工程未来会发生很大的变化，因为 AI 来了：<b>自然语言对不齐的问题解决了，checklist 不好检查的问题也解决了，我们只剩下这个 gap</b>——只有是「我没有想清楚、我没有说清楚」；一旦我想清楚、说清楚，可能真的就都能解决了。</p>
+    <p>Eiffel 启发了 Dafny 一类的形式化验证工具：大家的梦想都是——我写一个程序，可以自动证明我的函数在前置条件满足的时候后置条件就会满足；而且把整个系统所有前置、后置条件连起来，它就能满足我的 intent。</p>
+    <div class="callout co-case"><span class="tag">讲师的预言</span>
+      在 ChatGPT 出来之前，讲师上操作系统课的时候预言：30 年以后，如果你程序里写的 assert——随便什么 assert、可以写前置条件后置条件（比如链表往左走再往右走总能回到自己）——只要我写出来它无法证明，这个程序就不能编译：编译器保证它能证明的东西才能编译。到那一天，property-based test 都不需要了——直接把 property 写进去，它帮你证明了就可以了。从现在来看，可能不需要 30 年，10 年或者 15 年就可以解决这样的问题。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.6</span>UML 的野心：让语意对齐 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5550">92:30</a></span></h3>
+    <p>这个过程中的一个集大成者叫 <em class="term">UML</em>（Unified Modeling Language），绕不过去的名字。它的想法很简单：既然世界这么复杂、不同层次要用不同语言（实现的时候是 C 或者 Java，设计的时候也有专门的领域语言 DSL），那我们能不能有一种<b>中间语言，统一整个面向对象的世界</b>？它要做的是一件非常有野心的事情：<b>语意的对齐</b>——而这件事情人类天生没有做好。</p>
+    <p>因为人类靠自然语言，自然语言是直连大脑 <em class="term">latent space</em> 的：「我今天看到一个美女」，每一个人的 latent space 里都构造了一个美女，但她都不一样——对不齐。让 GPT 画一个、DeepSeek 画一个、用 Blender 建模，画出来也是不一样的（开玩笑：好像豆包生成的都长一样）。</p>
+    <p>所以人类发明了数学语言：<b>数学语言是全人类都能自然对齐的</b>——我们知道什么是自然数，它是从公理一点一点构造出来的，而那个公理系统非常小，小到人类基本上可以对齐；一旦对齐完成，用皮亚诺公理就可以把整个计算机世界全部构建起来——在计算机世界里看到同样的东西，它的语义是绝对对齐的。</p>
+    <p>UML 想要的，就是去对齐自然语言世界里的东西——需求、设计这些说不清的东西。当然不可能百分之百对齐，但它希望<b>把能对齐的部分和不能对齐的部分剥离出来</b>，通过定义模型的元素和它们的语义：</p>
+    <ul>
+      <li><em class="term">类图</em>的语义是确定的：有个 class 叫 student，里面有个 field 叫 name——它可以变成源代码里的一个东西，有语义；</li>
+      <li><em class="term">sequence diagram</em>（时序图）：我要从前到后按某一时序执行，这个先后就是绝对对齐的——如果用自然语言写先后，当它发生并发的时候，到底谁先谁后、能不能并发，就是有歧义的；UML 消除了这个歧义。</li>
+    </ul>
+    <p>目标是在没有代码的时候，最大程度减少语义的漂移。</p>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.7</span>我觉得今天 UML 已经死了 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5726">95:26</a></span></h3>
+    <p>但讲师的判断很直接：<b>今天 UML 已经死了</b>。因为它的所有假设都建立在「自然语言和形式语言是不能对齐的」之上——所以它需要一层一层的中间语言。而今天，突然间自然语言可以和任何东西对齐了：反正 AI 就可以跟你问。所以 UML 也是历史里面的东西了。</p>
+    <div class="callout co-concept"><span class="tag">概念卡 · 工具会死，first principle 不死</span>
+      UML 作为工具过时了，但它设计时候的 first principle——把能对齐的语义定死、把不能对齐的部分留白——一直都在指导我们。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.8</span>用 subagent 分片读 796 页 spec <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5761">96:01</a></span></h3>
+    <p>为了备课，讲师特意让 AI 帮他重温了 UML spec：一个 700 多页的文档——他的工具特别做了可以 scale 长文档的能力，几千页也没有问题（体验接近 PDF）。（中间有个插曲：Kimi 因为看了他的视频送了一个 699 的月套餐，「这可能算一个广告」。）然后直接让 AI 帮忙备课：</p>
+    <div class="prompt-box"><span class="plabel">操作流程 · 分片读超长文档</span>
+      <p>把 796 页的 spec 切成带 overlap 的分片（总会有一点重叠）→ 每个 subagent 读 50 页 → 提取里面的软件工程智慧、剔除不符合 AI 时代的不必要的东西 → 把 lecture notes 全部给它们 → 汇总总结成课件。</p>
+    </div>
+    <p>整个过程的成本：折算成 699 套餐的 5 块 3。而如果用 GPT-6，它的 token 非常省，差不多价格能得到好得多的质量。</p>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.9</span>我们以后还学得起学不起了 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5873">97:53</a></span></h3>
+    <p>这是一个值得我们思考的问题：<b>当你拥有了更好的模型</b>，哪怕同样是学生群体，拥有好的模型和没有好的模型时，学习效率、学习成本也会有很大差距——学习成为了一个有算力门槛的活动。还好现在 token 不算太贵：一个 100 刀的 codex，对学习来说算是够用了。真正烧 token 的是维护大项目——上下文里要载入很多东西，100 万上下文马上就填满了；学习流程可以用 digested version，不会像讲师这样把整个 UML spec 都放进来。</p>
+    <div class="callout co-warn"><span class="tag">警示 · 一个没有答案的社会问题</span>
+      「我们以后还学得起学不起了」——这是一个非常现实的问题。如果要让所有人教育平权，我们没有那么多算力、没有那么多资源，那怎么办？we don't know。这可能是一个社会性的问题。
+    </div>
+  </article>
+
+  <article class="sec c4-scope">
+    <h3><span class="secno">4.10</span>796 页只回答一个问题 <span class="ts"><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5954">99:14</a></span></h3>
+    <p>AI 给 UML spec 做的总结，一句话就够：<b>796 页的 spec 从头到尾回答一个问题——哪些 intention 必须定死，哪些留白</b>。它构造了一个形式语言，去告诉你哪些东西可以在语义上确定下来、哪些可以不用。它解决的就是对齐的问题：人和人之间对不齐，你甚至和下一时刻的自己都不 deterministic——今天想的和明天想的就不一样，你跟你自己对不齐。</p>
+    <div class="summary"><h4>本章小结（04 章）</h4><ul>
+      <li>软件工程为每个阶段创建方法与工具，本质都是降低返工概率；checklist 是没有代码的、有人文关怀的工具。</li>
+      <li>不同阶段需要不同语言：从 checklist 的勾叉到 DSL 到编程语言，formal 程度递增，正好填补 intent→spec→implementation 的 gap。</li>
+      <li>Eiffel 的 design by contract 把霍尔三元组写进代码；QuickCheck 用 property 生成反例；traceability 用交叉检验建立信心。</li>
+      <li>spec 上横跳的终点：AI 补上了「对不齐」「查不了」的缺口，只剩「没想清楚、没说清楚」。</li>
+      <li>UML 死于自己的假设失效（自然语言现在可以对齐一切），但其 first principle 仍在。</li>
+      <li>subagent 分片读 796 页 spec：成本 5 块 3；「以后还学得起学不起」是开放的社会问题。</li>
+    </ul></div>
+    <div class="quiz"><h4>思考题（整理者补充）</h4><ol>
+      <li>为你手头项目里一个最容易扯皮的函数写 require / ensure 契约，再想想 MVP 阶段你会怎么处理「余额不足」这类分支。</li>
+      <li>UML 的哪些「确定语义的元素」（类图、时序图）在今天和 agent 协作时依然有用？用什么形式替代？</li>
+      <li>「796 页只回答一个问题」：你自己的项目里，哪些 intention 必须定死、哪些留白？试着写一页你的 spec。</li>
+    </ol></div>
+  </article>
+</section>
+
+<div class="divider">· · ·</div>
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">附录 A</span>术语对照表（勘误表扩展版）</h2>
+  <p>逐字稿由 faster-whisper 转写，存在 ASR 误识别。下表前 17 条为可视化笔记勘误表的全部条目，其后为讲义写作中另行修正的高频误识别。术语保留原则与原勘误一致：模型名（GPT-6 Astra、DeepSeek、Claude、Kimi、豆包）、产品/工具名（Doom、Silicon Valley、LP、佳能扫描仪）、人名书名（Winston Royce、Margaret Hamilton、《Boys' Life》）均按课堂原话保留。</p>
+  <table class="gl">
+    <tr><th>ASR 误识别</th><th>正确写法</th><th>备注 / 一句话解释</th></tr>
+    <tr><td>get / 用 get 管理</td><td>git</td><td>语音同音误写（勘误表条目）</td></tr>
+    <tr><td>狗吐 / go to / goto release</td><td>goto</td><td>Dijkstra 短文关键字；C 语言惯用法 goto release（勘误表条目）</td></tr>
+    <tr><td>地杰斯特拉 / 迪杰斯特拉 / Dexter / Dextra</td><td>Dijkstra</td><td>Edsger W. Dijkstra</td></tr>
+    <tr><td>汉密尔顿 / 马格丽特</td><td>Margaret Hamilton</td><td>Apollo 导航软件负责人（勘误表条目）</td></tr>
+    <tr><td>罗伊斯 / 罗依斯 / Winson</td><td>Winston Royce</td><td>《Managing the Development of Large Software Systems》作者</td></tr>
+    <tr><td>爱菲尔 / 埃菲尔 / IFfield / 艾菲尔</td><td>Eiffel</td><td>design by contract 的原始语言（勘误表条目）</td></tr>
+    <tr><td>设计当归约 / 设计契约</td><td>design by contract</td><td>契约式设计，讲师原话混说（勘误表条目）</td></tr>
+    <tr><td>UML / U M L / UMR / UMLS</td><td>UML</td><td>Unified Modeling Language（勘误表条目）</td></tr>
+    <tr><td>Tasty Safe AI / Type Safe AI</td><td>Type-Safe-AI</td><td>讲师口播的项目名，保留原样（勘误表条目）</td></tr>
+    <tr><td>GPT-6 Astra / Astro</td><td>GPT-6 Astra</td><td>讲师课堂原话，保留（勘误表条目）</td></tr>
+    <tr><td>No Brown / No 布朗</td><td>No Brown（OpenAI）</td><td>讲师引用的访谈对象，保留原音（勘误表条目）</td></tr>
+    <tr><td>Deepseek / Deep Sea / DeepSig</td><td>DeepSeek</td><td>统一写法（勘误表条目）</td></tr>
+    <tr><td>Cloud Code / Cloth</td><td>Claude Code / Claude</td><td>Anthropic 的模型与编程 Agent（勘误表条目）</td></tr>
+    <tr><td>豆包 / 豆豹</td><td>豆包</td><td>字节的模型与手机合作项目（勘误表条目）</td></tr>
+    <tr><td>IOCTL / io 控制</td><td>ioctl</td><td>Linux 设备驱动的控制接口（勘误表条目）</td></tr>
+    <tr><td>variable product</td><td>minimum viable product</td><td>讲师口误说成 variable，随即改口（勘误表条目）</td></tr>
+    <tr><td>Pilot Program / 飞行员程序</td><td>Preliminary Pilot Program</td><td>Royce 原文所指的 MVP（勘误表条目）</td></tr>
+    <tr><td>生存式软件工程</td><td>生成式软件工程</td><td>课程名（Generative Software Engineering）</td></tr>
+    <tr><td>决策术</td><td>决策树</td><td>1.1 与大模型对比的传统小模型</td></tr>
+    <tr><td>摆毫秒级</td><td>百毫秒级</td><td>1.1 实时决策的响应量级</td></tr>
+    <tr><td>磁像量</td><td>词向量</td><td>1.2 中 2017 年与 Transformer、BERT 并列</td></tr>
+    <tr><td>GP3 / GP4O / GP6</td><td>GPT-3 / GPT-4o / GPT-6</td><td>模型名混写</td></tr>
+    <tr><td>SORR</td><td>Sora</td><td>2024 年发布 video 生成模型</td></tr>
+    <tr><td>Chain of Salt / ChallSort / chain of source</td><td>Chain of Thought（CoT）</td><td>思维链；同名误识别反复出现</td></tr>
+    <tr><td>寄模厂 / 鸡魔场 / 积模 / 基魔</td><td>基模（厂）</td><td>基础模型（厂）；讲师口语</td></tr>
+    <tr><td>Eclair</td><td>ICLR</td><td>1.7 中投稿量达到新巅峰的会议</td></tr>
+    <tr><td>Skate Law / skin law</td><td>Scaling Law</td><td>规模定律</td></tr>
+    <tr><td>繁华的效果</td><td>泛化</td><td>1.5 「达到一个泛化的效果」</td></tr>
+    <tr><td>research test</td><td>research taste</td><td>研究品位；1.6 读 PhD 训练的东西</td></tr>
+    <tr><td>entropic</td><td>Anthropic</td><td>2.1 与 OpenAI、DeepSeek 并列</td></tr>
+    <tr><td>implantation / int</td><td>implementation / intent</td><td>三分法术语混写</td></tr>
+    <tr><td>散摩椅 / 小描仪 / 扫码仪</td><td>扫描仪</td><td>2.4 标签打印机案例的搭档设备</td></tr>
+    <tr><td>描灯百科</td><td>维基百科</td><td>3.7 讲师没打开的网站</td></tr>
+    <tr><td>土银甲</td><td>图灵奖</td><td>3.3 The Humble Programmer 的来源</td></tr>
+    <tr><td>扒插错误</td><td>debug（排查错误）</td><td>3.5 Hamilton 传记语境</td></tr>
+    <tr><td>Sertions / Sert</td><td>assertions / assert</td><td>断言；3.5 与 4.5</td></tr>
+    <tr><td>链钢</td><td>炼钢</td><td>2.8 与桥梁工程并列的传统工程</td></tr>
+    <tr><td>马农</td><td>码农</td><td>本讲高频误识别</td></tr>
+    <tr><td>DAPA</td><td>DARPA</td><td>2.8 中「不知道计算机能做什么」的客户</td></tr>
+    <tr><td>样力</td><td>样例</td><td>3.8 OJ 案例</td></tr>
+    <tr><td>breference search / depth search</td><td>BFS 宽度优先 / DFS 深度优先</td><td>3.9 构建软件方式的图论类比</td></tr>
+    <tr><td>骑虎灌顶</td><td>醍醐灌顶</td><td>3.3 对 Dijkstra 观点的形容</td></tr>
+    <tr><td>情绪化的证明</td><td>形式化的证明</td><td>4.4 质量信心的顶点</td></tr>
+    <tr><td>霍尔三原组</td><td>霍尔三元组</td><td>Hoare triple；4.4 design by contract 的数学基础</td></tr>
+    <tr><td>BedSmile</td><td>bad smell</td><td>代码坏味道</td></tr>
+    <tr><td>签问</td><td>千问（Qwen）</td><td>2.7 阿里整合服务的模型</td></tr>
+    <tr><td>深不逢</td><td>生不逢时</td><td>2.7 对千问产品的评价</td></tr>
+    <tr><td>飞标的东西</td><td>非标（设备）</td><td>非标准设备；2.4 / 2.6</td></tr>
+    <tr><td>Lightened Space / Latin Space</td><td>latent space</td><td>4.6 自然语言直连大脑的隐空间</td></tr>
+    <tr><td>公里 / 皮亚诺的公里</td><td>公理 / 皮亚诺公理</td><td>4.6 数学语言对齐的基础</td></tr>
+    <tr><td>电子墨水瓶</td><td>电子墨水屏</td><td>2.6 逆向 APK 案例</td></tr>
+    <tr><td>sistent</td><td>assistant</td><td>2.6 下一个实验要把 assistant 和物理设备连起来</td></tr>
+    <tr><td>上操线用课 / 操心课 / 操续系统 / 操系统</td><td>操作系统课 / 操作系统</td><td>高频误识别</td></tr>
+    <tr><td>autum formalization</td><td>auto formalization</td><td>1.4 自动形式化的 gap</td></tr>
+    <tr><td>李曼猜想</td><td>黎曼猜想</td><td>1.4 课堂笑话中的猜想之一</td></tr>
+    <tr><td>Daphne virus</td><td>Dafny 等形式化验证工具</td><td>4.5；ASR 存疑，按上下文为 Eiffel 启发的验证工具</td></tr>
+  </table>
+  <h3>保持原样的术语</h3>
+  <p>「slop / slop code」为讲师口语（AI 直出的粗糙产物），保留原样；「斩杀线」为讲师比喻（技能需求的生存门槛）；「webcode / webcoding」为讲师口语（= 用 AI 直接写应用）；「System One」「Type-Safe-AI」「GPT-6 Astra」「No Brown」按课堂原话保留；「舔狗」「杀死比赛」「自报家门」等口语表达按原话保留，以存讲课语气。</p>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">附录 B</span>时间戳索引</h2>
+  <p>关键概念 → 原视频对应秒数（点击跳转，可自行核对）。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=0">System One：实时玩 Doom 的小模型</a></div>
+    <div><span class="t">03:32</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=212">GPT-6 生成的 AI 发展史视频</a></div>
+    <div><span class="t">08:04</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=484">No Brown 访谈：模型缺的是品位</a></div>
+    <div><span class="t">09:24</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=564">可验证与不可验证的边界</a></div>
+    <div><span class="t">10:19</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=619">数据分布工程与新的 Scaling Law</a></div>
+    <div><span class="t">13:09</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=789">人先学世界模型，大模型反过来</a></div>
+    <div><span class="t">14:24</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=864">学术体系即将崩溃</a></div>
+    <div><span class="t">17:20</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1040">笑话 AI 写的 slop code</a></div>
+    <div><span class="t">17:37</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1057">斩杀线一直在上移</a></div>
+    <div><span class="t">18:35</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1115">intent / specification / implementation 的 gap</a></div>
+    <div><span class="t">19:17</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1157">今天的答案：做 MVP</a></div>
+    <div><span class="t">20:05</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1205">标签打印机与扫描仪：五小时产品级</a></div>
+    <div><span class="t">20:52</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1252">抽象：从 ioctl 到 scan / print(image)</a></div>
+    <div><span class="t">22:42</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1362">软件公司正在彻底消亡</a></div>
+    <div><span class="t">25:23</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1523">豆包手机：APP 沦为接口</a></div>
+    <div><span class="t">29:54</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1794">用 Claude 逆向电子墨水屏蓝牙协议</a></div>
+    <div><span class="t">30:54</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=1854">1960 年：硬件比码农贵得多</a></div>
+    <div><span class="t">34:21</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2061">Dijkstra 结婚登记：程序员不算职业</a></div>
+    <div><span class="t">35:21</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2121">1968《Boys' Life》对教育的畅想</a></div>
+    <div><span class="t">37:20</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2240">软件需求高度定制化（选科系统）</a></div>
+    <div><span class="t">39:01</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2341">进度、成本、质量一起失控</a></div>
+    <div><span class="t">39:22</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2362">GoTo Statement Considered Harmful</a></div>
+    <div><span class="t">41:43</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2503">The Humble Programmer（1972 图灵奖演讲）</a></div>
+    <div><span class="t">44:02</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2642">1968 年 NATO 软件工程会议</a></div>
+    <div><span class="t">44:20</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2660">Margaret Hamilton 提出「软件工程」</a></div>
+    <div><span class="t">46:26</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2786">The never going to happen can happen</a></div>
+    <div><span class="t">49:03</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=2943">IEEE 定义：systematic, disciplined, quantifiable</a></div>
+    <div><span class="t">50:45</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3045">起两个 agent 分头干活：任务必须划分</a></div>
+    <div><span class="t">51:37</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3097">Royce 开山之作与瀑布模型的出处</a></div>
+    <div><span class="t">54:16</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3256">瀑布图来自一篇批判瀑布的文章</a></div>
+    <div><span class="t">56:26</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3386">测试是整个链条上第一个物理事件</a></div>
+    <div><span class="t">58:41</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3521">Do it twice / Preliminary Pilot Program</a></div>
+    <div><span class="t">64:49</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=3889">Do it twice 在今天就是做 MVP</a></div>
+    <div><span class="t">67:47</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4067">敏捷 = do it infinite many times</a></div>
+    <div><span class="t">69:30</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4170">用 data dependency graph 解释返工成本</a></div>
+    <div><span class="t">72:41</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4361">从 BFS 到 DFS：敏捷的图论解释</a></div>
+    <div><span class="t">74:24</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4464">阅读经典的启发价值</a></div>
+    <div><span class="t">75:47</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4547">checklist：有人文关怀的工具</a></div>
+    <div><span class="t">77:28</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4648">GPT-6 省 token 后的代码坏味道失灵</a></div>
+    <div><span class="t">80:05</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4805">文档的最大缺点：人会产生幻觉</a></div>
+    <div><span class="t">80:46</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=4846">介于自然语言与编程语言之间的设计语言</a></div>
+    <div><span class="t">84:15</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5055">QuickCheck：描述性质、生成反例</a></div>
+    <div><span class="t">85:30</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5130">traceability 与需求追踪矩阵</a></div>
+    <div><span class="t">87:44</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5264">2500 并发的 DeepSeek 你怎么管</a></div>
+    <div><span class="t">88:12</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5292">design by contract 与 Eiffel 语言</a></div>
+    <div><span class="t">89:29</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5369">写契约时的设计思考：余额不足怎么办</a></div>
+    <div><span class="t">91:23</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5483">断言不能证明就不能编译的预言</a></div>
+    <div><span class="t">92:30</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5550">UML 的野心：语意的对齐</a></div>
+    <div><span class="t">94:41</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5681">类图与时序图：确定语义的元素</a></div>
+    <div><span class="t">95:26</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5726">今天 UML 已经死了</a></div>
+    <div><span class="t">97:08</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5828">subagent 分片读 796 页 spec</a></div>
+    <div><span class="t">98:58</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5938">我们以后还学得起学不起了</a></div>
+    <div><span class="t">99:24</span><a href="https://www.bilibili.com/video/BV1Nyeq6qEt8?t=5964">796 页只回答一个问题：哪些定死、哪些留白</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">附录 C</span>本讲课堂操作与 Prompt 范例汇总</h2>
+  <p>本讲的主体是「软件工程的历史」，课堂上最精彩的示范不是某个 prompt 模板，而是<b>一整套「用 AI 读经典、驾驭设备」的操作流程</b>。下面把课堂出现或讲师口述的操作与 prompt 按用途归类；斜体部分为整理者按课堂语境补全的说明。</p>
+  <ol class="example-list">
+    <li><b>读经典原文</b>（3.3 / 3.4 / 3.7）——The Humble Programmer、NATO 会议报告、Royce 原文、Hamilton 的帖子，都可以在 AI 帮助下直接 digest 原始文稿，跳过教科书的二手三四手消化。</li>
+    <li><b>入库论文</b>（3.7）——「直接和我的 agent 说：<i>入库这个 paper</i>」，得到文字整理版：按页切割、图片以 Markdown 嵌入；再配命令行工具打印文本、提取图片、像 less 一样翻阅。</li>
+    <li><b>追问误读链</b>（3.7）——发现教材与原文有出入时：</li>
+    <div class="prompt-box"><span class="plabel">PROMPT · 课堂演示</span>
+      <p>解释一下瀑布模型在软件工程里到底是怎么被误读的？——随后追问下去，它能找到更多原文，甚至找到整条误读的链：这个说法怎么一步一步传到今天你手上的教材上。</p>
+    </div>
+    <li><b>用自己的概念体系重述经典</b>（3.9）——讲师和 AI 讨论自己的个人理解是否自洽：</li>
+    <div class="prompt-box"><span class="plabel">PROMPT · 课堂演示</span>
+      <p>我把 Royce 的模型理解成一种 Data Dependency，修改是有代价的——这样可以吗？<i>（确认自洽后再展开成 BFS→DFS 的敏捷解释。）</i></p>
+    </div>
+    <li><b>分片读超长文档</b>（4.8）——796 页 UML spec 的完整流程：切成带 overlap 的分片 → 每个 subagent 读 50 页 → 提取软件工程智慧、剔除不符合 AI 时代的内容 → 结合 lecture notes 汇总成课件。总成本约 5 块 3。</li>
+    <li><b>驾驭非标硬件</b>（2.4 / 2.6）——两种路线：①「我就想要把这个打印机驱动起来」+ 一个可验收的结果，让 AI 自主尝试（lp → 通用驱动 → 逐张打标签标号校准加热深度）；②把设备 Android App 的 APK 直接丢给 Claude Opus 4.6 解包、逆向蓝牙协议。</li>
+    <li><b>与物理世界联动的实验设计</b>（2.6）——课程实验：把第一个实验的 assistant 和一个 physical device 联系起来，花 200 块买个非标小设备把它搞起来。</li>
+  </ol>
+</section>
+
+</div><!-- /wrap -->
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1Nyeq6qEt8">BV1Nyeq6qEt8</a>　·　UP：绿导师原谅你了</li>
+          <li>写作底稿：work/ts_A–D.txt（faster-whisper large-v3-turbo 逐字稿，100 分钟全程覆盖）</li>
+          <li>术语基准：可视化笔记 footer 勘误表（17 条），本讲义扩展至 55 条</li>
+          <li>配套阅读：<a href="bili_summary_BV1Nyeq6qEt8.html">bili_summary_BV1Nyeq6qEt8.html</a>（可视化精读笔记）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>笔记性质</h4>
+        <ul>
+          <li>内容为对公开课程视频的听写整理与结构化讲义化改写；概念解释含整理者补充，非逐字稿出版物</li>
+          <li>各章小结与思考题为整理者补充；可视化笔记页脚的节级时间戳与本讲义略有出入，讲义以逐字稿时间戳为准</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

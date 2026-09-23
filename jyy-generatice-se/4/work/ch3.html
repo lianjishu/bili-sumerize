@@ -1,0 +1,248 @@
+<div class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>从零开始一个新项目</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3828" target="_blank"><span class="dot"></span>63:48 – 98:29</a>
+      </div>
+    </div>
+    <p class="ch-abstract">前两章都在「设计」，这一章讲师直接打开终端，<strong>现场 webcode 一个个人助手</strong>——然后把它翻的车一帧一帧讲给你看。核心结论是那句经典的产品箴言：<strong>最大的风险是做出了没人想要的东西</strong>；而对抗它的方法只有一个——先做出最小的、能被验证的那一小步。</p>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>汉诺塔的单向限制与递归</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=3940" target="_blank"><span class="tri"></span>65:40</a>
+      <p>讲师先插了一个看似跑题的例子——<strong>只能朝一个方向移动的汉诺塔</strong>。这是他在网上看到的、据说出现在小学生编程考级里的题：盘子的移动方向被限制为单一方向，不能来回。</p>
+      <div class="blk q">
+        <span class="label">为什么讲这个</span>
+        <p>它其实是后面那个商业模式小例子的「内容素材」。讲师说这道题很难，但最优解有漂亮的结构：<strong>考虑最大的盘子，它总是「向右再向右」</strong>，这个移动次数不可再少；剩下的子问题基于归纳法（inductive）也是最优的。一个递归结构一旦想对，整道题就塌了。</p>
+      </div>
+      <p>他顺手演示了自己写的一个小程序：可编辑代码、可视化随代码运动。如果你把代码写错——比如试图把大盘子挪到小盘子上——可视化会立刻停在出错的那条语句，学生一眼就能找到 bug。这个「<strong>代码 ↔ 可视化实时联动</strong>」的做法，是后面整套商业设计的起点。</p>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>把 playground 卖给小学生</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4420" target="_blank"><span class="tri"></span>73:40</a>
+      <p>讲师把它当成一个产品来推演：如果要把这个 Python playground 卖给小学生，怎么挣钱？</p>
+      <div class="blk steps">
+        <span class="label">免费的部分</span>
+        <ol>
+          <li>一个纯粹的 playground：能写代码、能运行、可视化跟着动</li>
+          <li>出错时定位到具体语句，帮助找 bug</li>
+          <li>尽量以很低的成本提供给小朋友（讲师特意强调「开玩笑的，我们还是尽可能便宜」）</li>
+        </ol>
+      </div>
+      <p>增值的部分是 <strong>AI 助教</strong>：小孩子实在做不下去时点一下「我要助教」，此时 DeepSeek 的 token 开始燃烧，费用记在账户上。讲师说你完全可以收<strong>比 DeepSeek 原价更贵的 token 费</strong>——因为 prompt 是你独门的：<em>「我作为一个有经验的老教师，可以把自己蒸馏成 prompt」</em>，能敏锐判断这个小朋友卡在哪、给个性化指导。<strong>卖的不是模型，是教学经验。</strong></p>
+      <div class="blk eye">
+        <span class="label">这一步的意义</span>
+        <p>注意这个设计的精妙处：它就是第 3 章后面「MVP」思路的正面样板——<strong>先做一个能独立运行、价值成立的最小闭环（playground），再挂一个可选的增值模块（AI 助教）</strong>。对比之下，第 3.5 节那个被 AI 一次生成出来的「教育系统」，就是反面样板。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>GPT 给的标准架构，为什么我不喜欢</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4470" target="_blank"><span class="tri"></span>74:30</a>
+      <p>要做增值服务就得做信息系统。讲师让学生先和 AI 聊了一版设计，他自己也让 GPT 梳理了一遍需求。GPT 给的是教科书级答案：</p>
+      <div class="kv">
+        <div>GPT 的方案</div><div>一个 API 应用 + 一个关系数据库 + 一个对象存储；需要逐题点评时再加后台任务进程</div>
+        <div>数据划分</div><div>数据库存关系与记录，大课程包与完整轨迹放对象存储；任务量小时，数据库里一张任务表就够</div>
+        <div>讲师评价</div><div>「就是一个非常正常的」——如果这是软件工程课的作业，这个答案完全正确、挑不出错</div>
+      </div>
+      <p>但讲师说：<strong>「我不喜欢这个设计。」</strong>为什么？他先举了 Overleaf 的例子：Overleaf 可以把项目<strong>导出成一个 Git 仓库</strong>，于是他能把要改的学生论文 clone 到本地，直接开 Codex 起 sub-agent，逐个 .tex 文件修语法错误，一条长 prompt 下来论文就改好了——<strong>不需要忍受网页界面</strong>。</p>
+      <p>这就引出了他的核心反问：pico playground 为什么不是「学生每改一次代码，就自动做一次 <code>git commit</code>」？申请 AI 助教的时候转圈圈，正好可以在那个提交上<strong>产生一个分叉</strong>，把 AI 的点评作为 comment 挂上去。</p>
+    </div>
+
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>用版本管理替代数据库</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4600" target="_blank"><span class="tri"></span>76:40</a>
+      <p>讲师把账算得很清楚：<strong>产生一个 Git 提交 + 在它上挂一个 comment 的成本，远远小于把剩下所有东西持久化进数据库的成本</strong>——前者几乎可以忽略不计。</p>
+      <figure>
+        <svg viewBox="0 0 1040 330" role="img" aria-label="数据库方案与 Git 方案的对比">
+          <rect x="0" y="0" width="1040" height="330" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">GPT 的方案（左） vs 讲师的方案（右）</text>
+
+            <rect x="30" y="56" width="460" height="238" rx="11" fill="rgba(248,115,110,.06)" stroke="#f8736e" stroke-width="1.3"/>
+            <text x="50" y="82" fill="#f8736e" font-size="12.5" font-weight="700">典型信息系统架构</text>
+            <g fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.1">
+              <rect x="50" y="100" width="180" height="52" rx="8"/>
+              <rect x="250" y="100" width="220" height="52" rx="8"/>
+              <rect x="50" y="172" width="180" height="52" rx="8"/>
+              <rect x="250" y="172" width="220" height="52" rx="8"/>
+            </g>
+            <g fill="#e9eff7" font-size="11">
+              <text x="66" y="122">前端 / playground</text>
+              <text x="266" y="122">API 应用服务</text>
+              <text x="66" y="194">关系数据库</text>
+              <text x="266" y="194">对象存储（轨迹/课程包）</text>
+            </g>
+            <text x="50" y="252" fill="#adbccd" font-size="11">✓ 压缩率更高、性能更好、能横向扩展</text>
+            <text x="50" y="272" fill="#f8736e" font-size="11">✗ 每次 schema 变更都要让 Agent 做 database migration</text>
+
+            <rect x="550" y="56" width="460" height="238" rx="11" fill="rgba(63,214,140,.06)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="570" y="82" fill="#3fd68c" font-size="12.5" font-weight="700">用 Git 当数据库</text>
+            <g fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.1">
+              <rect x="570" y="100" width="420" height="52" rx="8"/>
+              <rect x="570" y="172" width="200" height="52" rx="8"/>
+              <rect x="790" y="172" width="200" height="52" rx="8"/>
+            </g>
+            <g fill="#e9eff7" font-size="11">
+              <text x="586" y="122">学生的代码 → 每次修改自动 commit</text>
+              <text x="586" y="194">AI 助教点评 = 提交上的分叉</text>
+              <text x="806" y="194">comment 挂在分叉上</text>
+            </g>
+            <text x="570" y="252" fill="#adbccd" font-size="11">✓ 提交成本可忽略、可追溯、人能直接看懂</text>
+            <text x="570" y="272" fill="#3fd68c" font-size="11">✓ 早期甚至可以把代码库和它连在一起管理</text>
+
+            <text x="30" y="316" fill="#77879a" font-size="11">讲师的判断：数据库的好处（压缩、性能）不是这个阶段要的；这个阶段真正要的是「版本管理」</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜两种架构</b>　左边是 GPT 给的标准答案，功能上一件不差；右边是讲师的方案，<b>把「版本管理」直接当成产品能力来做</b>，而不是先落到数据库字段里。他还补了一句：早期可以把 playground 和代码库连在一起管理，等文件目录格式、commit message 格式、文件用法都收敛了，再迁移到数据库也不迟。</figcaption>
+      </figure>
+      <p>这里讲师再次强调一个元观点：<strong>「你们学任何东西都是有用的。」</strong>学 Git 有用、学多 Agent 管理有用——因为两条知识交叉时，你才会想到一个和别人不一样的设计（用版本管理做信息系统）。这正是这一讲存在的理由。</p>
+    </div>
+
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>现场 webcode：不加约束地丢一个需求</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=4740" target="_blank"><span class="tri"></span>79:00</a>
+      <p>到这里讲师说：<strong>「我们真的可以干一件事了。」</strong>他先给出一条铁律——<strong>项目早期阶段你肯定不能用 multi-agent，你就是包工头</strong>：找一个你手上能力最强的 agent，和它多轮对话。</p>
+      <div class="blk q">
+        <span class="label">包工头模式</span>
+        <p>「你们现在开始干，就比什么都要好。」讲师决定当场打开课程作业，把需求直接丢给 agent，<strong>完全没有事先准备</strong>。他给了一个很开放的、类似讨论稿的需求，然后观察它会发生什么。</p>
+      </div>
+      <p>第一件被观察到的事，是 <strong>AI 的直觉和人的直觉不一样</strong>：一线模型收到复杂任务时会先进入 <strong>plan mode</strong>——先跟你确认事实，再生成一个 workflow。讲师顺手讲了 Claude Code 的实现细节：它需要执行复杂任务时，会生成一段 TypeScript，里面有一个叫 <code>Agent</code> 的函数，函数体是自然语言，甚至可以有循环——<strong>用它来组织 workflow</strong>。</p>
+      <div class="blk pit">
+        <span class="label">上下文工程最危险的一点（本讲重点）</span>
+        <p>你提示词里的<strong>每一个词，self-attention 都会看到它</strong>。因为 AI 现在已经被训练成了「prompt 的填狗」，它有一种<strong>没有办法往外拉</strong>的倾向——必须遵循你的指令。所以当需求本身是一个开放的讨论稿时，它会<strong>过度遵循</strong>：最终生成一个「确实满足了指令、但完全不是你想要的」东西。</p>
+      </div>
+      <p>讲师特别点出那个实验需求的<strong>言外之意：实现一个「持续为你工作的个人助手」——这一句最重要，其他都是解读</strong>。但模型不会替你判断哪一句重要，它会平等地对待每一个字。</p>
+    </div>
+
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>它做对了每一步，却做出了我不要的东西</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5060" target="_blank"><span class="tri"></span>84:20</a>
+      <p>结果出来了。讲师先说自己真正的需求是什么：<strong>一个比较好的学习助手</strong>——能从外网自动收集数据、以层次化方式归档、再给出一个不错的界面，还能根据他的进度来安排学习。然后他去看 agent 做出来的东西。</p>
+      <div class="kv">
+        <div>做出来的</div><div>一个相当完整的「教育系统」：入口层 / 编排层 / 能力层 / 数据层，引擎全是真代码，手机端是真 HTTP 服务，Pi 是集成的，模拟部分自洽</div>
+        <div>讲师的反应</div><div>「我就不试图 review 了」——它还做了一个提交，但<strong>甚至没有先创建一个 Git repository</strong>，直接一把梭</div>
+        <div>关键诊断</div><div>从 readme.md 来看，它做的所有事情都是对的，没有一个错误；<strong>但最终得到了一个你不想要的东西</strong></div>
+      </div>
+      <p>讲师解释了这个 gap 的来源：他提「填表」的时候，真正需要的是<strong>一个 browser-use agent</strong>——能在各种网页上替他处理事情，「一号」（某个填表入口）只是测试出口。但因为需求里出现了「教育系统」的措辞，agent 就<strong>真的去实现教育系统了</strong>。他的原话是：</p>
+      <blockquote>
+        <p>你的 intent、你的 specification、你的 intention 是有巨大 gap 的。当你一旦模型看到说「你要实现这个」，它就真的是真的去实现它了。</p>
+        <cite>—— 讲师对「为什么 AI 一定产出 slop」的解释</cite>
+      </blockquote>
+      <p>从这一刻开始，讲师用两句英文格言把结论钉死：</p>
+      <div class="blk pit">
+        <span class="label">两条格言</span>
+        <ul>
+          <li><strong>The biggest risk in product development is building something nobody wants.</strong>　产品开发最大的风险，是做出没人想要的东西——而 AI 恰好非常擅长高效地做出这种东西</li>
+          <li><strong>在没想清楚之前，先别写第一行代码。</strong>讲师说如果他是成熟的产品经理，老板丢来一个想法，他一定会<strong>先跟团队讨论「项目怎么管」</strong>——甚至在自己写下第一行代码之前，就要把「协作怎么做、每天什么时候开会」谈好。而 agent 很好玩，它直接上手就做</li>
+        </ul>
+      </div>
+      <p>有意思的是，讲师在这里自己承认：他也没跟 agent 讲「要先建仓库」。如果换成 Codex 可能会主动初始化、或反问「这个项目该怎么管理」——<strong>但默认行为通常不是这样，你得自己说</strong>。这也是本讲为什么反复强调「包工头要先想清楚」。</p>
+    </div>
+
+    <div class="sub" id="s37">
+      <h3><span class="idx">3.7</span>MVP：先卖出一小步</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5490" target="_blank"><span class="tri"></span>91:30</a>
+      <p>讲师给出正面做法：<strong>MVP（minimum viable product，最小可行产品）</strong>。它的作用不是「少做点」，而是<strong>逼你想清楚哪些需求是你绝对要的</strong>。</p>
+      <div class="blk steps">
+        <span class="label">从「大而全」倒推 MVP</span>
+        <ol>
+          <li>先问本质：如果我要一个个人助手，我最想要的是什么？——<strong>提升学习效率 + 提升工作效率</strong></li>
+          <li>再问第一步：为了实现这两条，我第一个必须有的 feature 是什么？——<strong>能从外网收集数据、层次化归档、给出好用的界面</strong></li>
+          <li>然后砍掉一切不直接支撑它的东西：<strong>第一个 MVP 里可以没有任何数据库</strong></li>
+          <li>因为文件系统膨胀时，你可以直接跟 agent 说「按照这个数据的组织，帮我抽象出一个数据库」——问题就结束了</li>
+        </ol>
+      </div>
+      <p>讲师把「要不要数据库」这件事讲得特别细：<strong>一旦你带上数据库，每次重构都要让 agent 做 database migration</strong>；而文件系统不一样——你自己就能在文件管理器里调整目录结构，逐渐梳理到舒服的形状。<strong>调文件和调 database schema，心智负担完全不同。</strong></p>
+      <div class="blk concl">
+        <span class="label">两条开发路径（讲师的原话对比）</span>
+        <ul>
+          <li><strong>路径 A（反面）</strong>：上来就是一个大的，好几大步把需求都实现完，然后拖着技术债不断往后迭代、加功能加功能</li>
+          <li><strong>路径 B（正面）</strong>：从最小的开始，「得到一个特别精巧的东西」，然后<strong>在遇到性能瓶颈之前，都不迁移到任何数据库</strong></li>
+        </ul>
+      </div>
+      <p>这里与第 1 章「文件系统不是组织项目的方式」形成了刻意的张力：<strong>长期看图和数据库更本质，但短期看文件系统的低心智负担更划算</strong>。讲师用 Git 管理的例子收尾——当学生的提交都用 Git 管起来之后，很多事情都变得非常容易，他自己控制起来也轻松很多。</p>
+    </div>
+
+    <div class="sub" id="s38">
+      <h3><span class="idx">3.8</span>文件系统与数据库的心智负担</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5700" target="_blank"><span class="tri"></span>95:00</a>
+      <p>这一节讲师把「为什么先用文件系统」从直觉上升成一条可复用的判断标准：<strong>人类对直观的东西已经训练得非常舒服了</strong>。</p>
+      <figure>
+        <svg viewBox="0 0 1040 280" role="img" aria-label="文件系统与数据库的心智负担对比">
+          <rect x="0" y="0" width="1040" height="280" fill="#0f151d"/>
+          <g font-family="Segoe UI, Microsoft YaHei">
+            <text x="24" y="32" fill="#77879a" font-size="12.5">同样一件事，两种介质的「概念翻译成本」</text>
+
+            <rect x="40" y="58" width="440" height="150" rx="11" fill="rgba(63,214,140,.07)" stroke="#3fd68c" stroke-width="1.3"/>
+            <text x="62" y="86" fill="#3fd68c" font-size="12.5" font-weight="700">文件系统 · 心智负担低</text>
+            <text x="62" y="112" fill="#adbccd" font-size="11.5">你从小学上电脑课就在文件夹里拖文件</text>
+            <text x="62" y="134" fill="#adbccd" font-size="11.5">看到目录结构 = 看到项目状态，无需翻译</text>
+            <text x="62" y="156" fill="#adbccd" font-size="11.5">改结构：直接在文件管理器里拖，立刻可见</text>
+            <text x="62" y="182" fill="#77879a" font-size="11">→ 建模成本 ≈ 0，人类的能力已迁移好了</text>
+
+            <rect x="540" y="58" width="460" height="150" rx="11" fill="rgba(240,180,41,.07)" stroke="#f0b429" stroke-width="1.3"/>
+            <text x="562" y="86" fill="#f0b429" font-size="12.5" font-weight="700">数据库 · 心智负担高</text>
+            <text x="562" y="112" fill="#adbccd" font-size="11.5">很多同学还没学过，根本不知道它是什么</text>
+            <text x="562" y="134" fill="#adbccd" font-size="11.5">要先做一次概念翻译：脑袋里的 A → 表里的 B</text>
+            <text x="562" y="156" fill="#adbccd" font-size="11.5">改结构：要写 migration，要保证不破坏旧数据</text>
+            <text x="562" y="182" fill="#77879a" font-size="11">→ 收益（压缩、性能）不是这个阶段真正要的</text>
+
+            <text x="40" y="244" fill="#77879a" font-size="11.5">结论：不是「数据库不好」，而是「面对一个你还不熟悉的形式时，你会被迫做一次概念的翻译」</text>
+            <text x="40" y="264" fill="#adbccd" font-size="11.5">不如先用你已经适应、已经熟悉的系统，用最简单的方式把功能做出来</text>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜心智负担</b>　讲师的原话是：「你在里面调文件，和你去调 database schema，你的心智负担是不一样的。」<b>这条判断可以复用到任何技术选型上</b>：选那个你已经拥有足够心智模型去驾驭的形式，把有限的注意力留给真正的业务问题。</figcaption>
+      </figure>
+      <p>讲师总结成一句很朴素的话：<strong>用最简单的方式帮你把「学习资料的进入、通知消息的进入」这些事管起来</strong>——先让它跑起来，形式以后可以再换。</p>
+    </div>
+
+    <div class="sub" id="s39">
+      <h3><span class="idx">3.9</span>我自己的邮件 agent 连数据库都没有</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5760" target="_blank"><span class="tri"></span>96:00</a>
+      <p>为了证明「不用数据库」不是纸上谈兵，讲师晒了自己在用的邮件 agent 的真实流程——<strong>到现场为止都没有用任何数据库</strong>：</p>
+      <div class="blk steps">
+        <span class="label">他的邮件流水线</span>
+        <ol>
+          <li>agent 收他的邮箱，把 <strong>email id</strong> 写到一个共享云盘同步目录里</li>
+          <li>每个 email id 里带着 agent 解析出的东西：<strong>回复草稿、邮件分类、是不是垃圾邮件</strong></li>
+          <li>再由下一级流水线去处理这些中间产物</li>
+          <li>整个系统他只关心一件事：<strong>有哪几级流水线、它们怎么协作、哪些东西通过云盘传递</strong></li>
+        </ol>
+      </div>
+      <p>然后他当场演示了一次真实的「需求变更」：<em>「我很喜欢我的云盘，是不是引入云盘要做一些架构的修改？我希望邮件资料等都和云盘保持同步。」</em>——这就是一个典型的需求更改，于是他把架构丢给 agent 让它看看好不好。</p>
+      <div class="blk q">
+        <span class="label">这引出了「什么是好的软件架构」</span>
+        <p>讲师的定义很直接：<strong>在当前需求下能正常工作，不算好架构</strong>。真正要问的是——<em>当需求发生变更的时候，你相应做出的那个变化，是局部的、还是摧毁性的？是背上一个技术债，还是平滑演进？</em>他的 agent 当前设计里有一个 <code>system.db</code>，把个人资料、邮件归档、索引草稿全放进去；现阶段「看起来还不会引起很大问题」，但随着项目推进就要看了。</p>
+      </div>
+      <p>这也把话题自然过渡到了下一节（也是下一讲的主题）：<strong>软件架构与构造</strong>。讲师把「能不能以不变应万变」定为核心问题——<em>你设计的架构，能不能抵抗未来需求发生根本性的变化？</em> AI 助教可能是文字助教、可能是图像助教，可能有交互、可能没有；需求在不停地变，而架构的变化要尽量小。<strong>这一条，数据库课不教、操作系统课也不教，是软件工程独有的。</strong></p>
+    </div>
+
+    <div class="sub" id="s310">
+      <h3><span class="idx">3.10</span>结尾：早期的 prompt 影响最大</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1Q6en6NEUo?t=5860" target="_blank"><span class="tri"></span>97:40</a>
+      <p>全讲的最后，讲师收回到两句可以带走的话。</p>
+      <div class="blk concl">
+        <span class="label">版本管理做的三件事（在 Agent 时代同样成立）</span>
+        <ul>
+          <li><strong>记住现在</strong>：你必须有一个 Repository，把文件管起来——不管是数据库形式，还是今天的 C/C++/Python/JavaScript 项目形式</li>
+          <li><strong>记住历史</strong>：有一天你不要某个东西了、或者删掉了某个东西，它还能被捞回来；你也能看见「怎么演进到这一点、在哪里失败了、又从哪里拐向另一条正确路线」</li>
+          <li><strong>记住教训</strong>：这些 lessons 不停地警示你下一步该怎么做——<strong>从第一步开始，每次只向前迈一小步</strong></li>
+        </ul>
+      </div>
+      <p>然后是本讲最后一句，也是贯穿全讲的核心：<strong>你早期的 prompt，对整个项目的走向影响是最大的</strong>。每一次最早的输入（哪怕是直接把 readme 丢过去、说「我要做一个 MVP」）都会对项目造成很大的影响。这也解释了为什么第 3.5–3.6 节那场「翻车演示」值得花二十分钟：<strong>它不是段子，它是在展示一条极具破坏力的因果链——含糊的早期输入 → agent 过度遵循 → 完整的错误产品</strong>。</p>
+      <blockquote>
+        <p>好，今天下课。我下一节课就（这周日）会进入软件架构和构造的内容。</p>
+        <cite>—— 讲师收尾（98:23）</cite>
+      </blockquote>
+      <div class="blk eye">
+        <span class="label">把这一讲串起来看</span>
+        <p>三章其实在回答同一个问题的三个层次：<strong>第一章</strong>问「现有版本管理为什么长成这样」（历史与路径依赖）；<strong>第二章</strong>问「如果提交者变成 Agent，它会怎么变」（第一性原理重构）；<strong>第三章</strong>则回到最朴素的现实——工具再好，如果你在第一步没说清自己要什么，agent 会非常高效地帮你做出一个没人想要的东西。<strong>所以真正的软件工程能力，是在写下第一行代码之前就开始的。</strong></p>
+      </div>
+    </div>
+
+  </div>
+</div>
