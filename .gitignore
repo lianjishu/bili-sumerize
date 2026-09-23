@@ -1,0 +1,15 @@
+# 大体积工具链（重建方法见 AGENTS.md / video-to-offline-notes 技能）
+bin/
+models/
+
+# 密钥：B 站登录 cookies，绝不入库
+bili_cookies.txt
+
+# 中间产物：音频（各系列 work/ 目录）
+**/work/*.m4a
+**/work/*.mp3
+**/work/*.wav
+
+# 系统垃圾
+Thumbs.db
+Desktop.ini
