@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文字稿 · 正视差距怎么就这么难呢？？？（道草日记）</title>
+<style>
+  :root{
+    --bg:#f4f2ee; --panel:#fbfaf7; --panel2:#efede7;
+    --tx:#33393f; --tx2:#5c6570; --tx3:#8a939e;
+    --line:#d9d5cc; --line2:#c4bfb2;
+    --c1:#5f7a6f; --c2:#8a6d5c; --c3:#6d7b95; --c4:#96655f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--tx);
+    font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,serif;
+    font-size:16.5px; line-height:1.95;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:56px 32px 80px;}
+
+  /* ===== hero ===== */
+  .kicker{
+    font-family:"Segoe UI","Microsoft YaHei",sans-serif;
+    font-size:12.5px; letter-spacing:.25em; color:var(--tx3);
+    text-transform:uppercase; margin-bottom:18px;
+  }
+  .kicker b{color:var(--c1);font-weight:600;}
+  h1{
+    font-size:30px; font-weight:700; line-height:1.45;
+    letter-spacing:.02em; margin-bottom:20px;
+  }
+  .meta{
+    font-family:"Microsoft YaHei",sans-serif; font-size:13px; color:var(--tx2);
+    display:flex; flex-wrap:wrap; gap:8px 22px; margin-bottom:26px;
+  }
+  .meta span b{color:var(--tx);font-weight:600;}
+  .meta a{color:var(--c3);text-decoration:none;border-bottom:1px dotted var(--line2);}
+  hr.top{border:none;border-top:1px solid var(--line);margin:0 0 30px;}
+
+  /* ===== 说明框 ===== */
+  .note{
+    background:var(--panel2); border:1px solid var(--line);
+    border-left:3px solid var(--c2); border-radius:6px;
+    padding:16px 22px; margin-bottom:36px;
+    font-family:"Microsoft YaHei",sans-serif; font-size:13.5px; color:var(--tx2);
+    line-height:1.9;
+  }
+  .note b{color:var(--tx);}
+
+  /* ===== TOC ===== */
+  .toc{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:22px 28px; margin-bottom:44px;
+    font-family:"Microsoft YaHei",sans-serif;
+  }
+  .toc h2{
+    font-size:13px; letter-spacing:.2em; color:var(--tx3); font-weight:600;
+    margin-bottom:12px;
+  }
+  .toc ol{list-style:none;counter-reset:toc;}
+  .toc li{counter-increment:toc; padding:5px 0; font-size:14.5px;}
+  .toc li::before{
+    content:counter(toc,decimal-leading-zero); color:var(--c1);
+    font-weight:700; margin-right:12px; font-size:13px;
+  }
+  .toc a{color:var(--tx2);text-decoration:none;}
+  .toc a:hover{color:var(--tx);}
+  .toc .t{
+    font-family:Consolas,monospace; font-size:12px; color:var(--tx3);
+    margin-left:8px;
+  }
+
+  /* ===== 章节 ===== */
+  section{margin-bottom:52px;}
+  .sec-head{
+    display:flex; align-items:baseline; gap:14px;
+    border-bottom:2px solid var(--line); padding-bottom:10px; margin-bottom:18px;
+  }
+  .sec-num{
+    font-family:Consolas,monospace; font-size:13px; font-weight:700;
+    color:#fff; background:var(--c1); border-radius:4px; padding:2px 8px;
+    letter-spacing:.05em;
+  }
+  section:nth-of-type(2) .sec-num{background:var(--c2);}
+  section:nth-of-type(3) .sec-num{background:var(--c3);}
+  section:nth-of-type(4) .sec-num{background:var(--c4);}
+  section:nth-of-type(5) .sec-num{background:var(--c1);}
+  section:nth-of-type(6) .sec-num{background:var(--c2);}
+  section:nth-of-type(7) .sec-num{background:var(--c3);}
+  section:nth-of-type(8) .sec-num{background:var(--c4);}
+  section:nth-of-type(9) .sec-num{background:var(--c1);}
+  h2{
+    font-size:21px; font-weight:700; letter-spacing:.02em; flex:1;
+  }
+  .stamp{
+    font-family:Consolas,monospace; font-size:12.5px; color:var(--tx3);
+    text-decoration:none; white-space:nowrap;
+  }
+  .stamp:hover{color:var(--c3);}
+  section p{margin-bottom:16px; text-align:justify;}
+  section p .tt{
+    font-family:Consolas,monospace; font-size:12px; color:var(--tx3);
+    margin-right:6px; user-select:none;
+  }
+  em{font-style:normal; color:var(--c2); font-weight:600;}
+  .strong{color:var(--tx); font-weight:700;}
+
+  blockquote{
+    border-left:3px solid var(--line2); background:var(--panel);
+    padding:14px 22px; margin:6px 0 18px; border-radius:0 6px 6px 0;
+    color:var(--tx2); font-size:15.5px;
+  }
+  blockquote .q-src{
+    display:block; margin-top:8px; font-family:"Microsoft YaHei",sans-serif;
+    font-size:12px; color:var(--tx3);
+  }
+  .aside{
+    font-family:"Microsoft YaHei",sans-serif; font-size:13px; color:var(--tx3);
+    background:var(--panel2); border:1px dashed var(--line2); border-radius:6px;
+    padding:12px 18px; margin:0 0 18px; line-height:1.85;
+  }
+  .aside b{color:var(--tx2);}
+
+  /* ===== footer ===== */
+  footer{
+    border-top:2px solid var(--line); margin-top:64px; padding-top:32px;
+  }
+  footer h2{
+    font-size:15px; letter-spacing:.15em; color:var(--tx2);
+    font-family:"Microsoft YaHei",sans-serif; margin-bottom:18px;
+  }
+  footer table{
+    width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:26px;
+  }
+  footer th,footer td{
+    border:1px solid var(--line); padding:8px 14px; text-align:left;
+    font-family:"Microsoft YaHei",sans-serif;
+  }
+  footer th{background:var(--panel2); color:var(--tx2); font-weight:600;}
+  footer td{color:var(--tx2);}
+  footer code{
+    font-family:Consolas,monospace; font-size:12.5px; color:var(--c4);
+  }
+  .colophon{
+    font-family:"Microsoft YaHei",sans-serif; font-size:12.5px;
+    color:var(--tx3); line-height:2;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== hero ===== -->
+  <div class="kicker">文字稿 · <b>道草日记</b> · BILIBILI</div>
+  <h1>正视差距怎么就这么难呢？？？</h1>
+  <div class="meta">
+    <span>UP 主 <b>道草日记</b></span>
+    <span>时长 <b>12:01</b></span>
+    <span>发布 <b>2026-09-16</b></span>
+    <span>播放 <b>6.7 万</b> · 点赞 <b>2878</b></span>
+    <span><a href="https://www.bilibili.com/video/BV16aeP6iEec/" target="_blank">BV16aeP6iEec ↗</a></span>
+  </div>
+  <hr class="top">
+
+  <div class="note">
+    <b>整理者按：</b>这是一篇<b>反讽文本</b>。UP 主把互联网上流传多年的若干「外国小孩／外国工程」谣言段子
+    （日本夏令营较量、美国护照后盾、英国人地铁不玩手机、澳洲苍蝇采蜜、犹太人蜂蜜书、德国油纸包……）
+    全部塞进同一个荒诞的「国际夏令营」故事里，让它们互相加码、滑向荒谬；
+    通篇「侄儿」那句复读机式的「这是我们做不到的」，和结尾「下次我们再一起反思」，都在给这种
+    「逢外必跪、逢事必反思」的叙事上眼药。<b>故事情节本身全部不真实</b>，各节末尾的「整理者注」
+    仅用于标注对应谣言的原型，帮助识别；转写忠实于口播原意，不做立场改写。
+  </div>
+
+  <!-- ===== TOC ===== -->
+  <div class="toc">
+    <h2>目 录</h2>
+    <ol>
+      <li><a href="#s1">开场：超不过的，朋友，根本超不过</a><span class="t">00:00</span></li>
+      <li><a href="#s2">国际夏令营与「平等」的惯例</a><span class="t">00:15</span></li>
+      <li><a href="#s3">第一课：一百公斤的负重拉练</a><span class="t">00:54</span></li>
+      <li><a href="#s4">麻雀危机（上）：没有一个国家见死不救</a><span class="t">01:27</span></li>
+      <li><a href="#s5">麻雀危机（中）：纳秒、瑞士表与全球停电</a><span class="t">04:00</span></li>
+      <li><a href="#s6">麻雀危机（下）：十度的水开成了一百度</a><span class="t">05:30</span></li>
+      <li><a href="#s7">苍蝇采蜜与书是甜的</a><span class="t">06:24</span></li>
+      <li><a href="#s8">油纸包、鞋底反光与一百米深的工程师</a><span class="t">08:15</span></li>
+      <li><a href="#s9">B2 接送与「下次一起反思」</a><span class="t">10:35</span></li>
+    </ol>
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>开场：超不过的，朋友，根本超不过</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=0" target="_blank">00:00 ↗</a>
+    </div>
+    <p><span class="tt">00:00</span>「我不明白，苹果都出折叠屏了，怎么还有人不知道我们之间的差距到底有多大？我们可以超越国外吗？<em>超不过的，朋友，根本超不过</em>。这个事实还不明显吗？今天我就用一个真实的故事，来让所有人正视差距。」</p>
+    <div class="aside"><b>整理者注：</b>开场第一句就是信号——「苹果都出折叠屏了」并不存在，apple 至今没有发布过折叠屏 iPhone。连「差距论」的论据本身都是编的，这正是全篇叙事方式的缩影。</div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>国际夏令营与「平等」的惯例</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=15" target="_blank">00:15 ↗</a>
+    </div>
+    <p><span class="tt">00:15</span>暑假，我陪侄儿参加了一个国际夏令营，有来自全世界的小朋友。出发前夜，侄儿郑重地找到我谈了一次话：去了以后<b class="strong">不要端着长辈的架子</b>，要和其他小朋友以兄弟相称。我问为什么，他说，<em>这是平等，是惯例</em>。我觉得有道理，就没多问。</p>
+    <p><span class="tt">00:46</span>于是整个夏令营，一群十来岁的孩子都拍着我的肩膀喊「老哥」；而侄儿，追着他们喊「爸爸」。好小子，在这儿等着我呢。</p>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>第一课：一百公斤的负重拉练</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=54" target="_blank">00:54 ↗</a>
+    </div>
+    <p><span class="tt">00:54</span>夏令营第一天是负重拉练。日本小朋友每人背着一个一百公斤的大包，嘴里喊着「羁绊！努力！友情！」这些听不懂的话，走了整整二十公里。太阳很毒，汗珠从他们下巴上摔下来，砸进土里，<em>碎成了「巴嘎」的形状</em>。没有一个孩子喊累。</p>
+    <p><span class="tt">01:13</span>走到终点后，他们把包卸下来，站得笔直，向着夕阳鞠了一躬。侄儿站在我身边，久久没有说话。很久，他轻轻感叹：看着他们的背影，突然明白了什么叫差距——<em>这是中国小朋友做不到的</em>。</p>
+    <div class="aside"><b>整理者注：</b>原型即流传二十余年的《夏令营中的较量》式「日本孩子」神话：负重几十公斤徒步几十公里、生病不退场、野外生存碾压中国孩子等。此类故事自 1990 年代起被反复辟谣，但从未绝迹。</div>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>麻雀危机（上）：没有一个国家见死不救</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=87" target="_blank">01:27 ↗</a>
+    </div>
+    <p><span class="tt">01:27</span>第二天下午，意外发生了。意大利小朋友养的一只宠物麻雀受了惊，扑棱棱冲上天，一头缠在营地边的电线上，倒挂着，翅膀被线缠住，越振越紧。电线有三层楼高，谁也上不去。</p>
+    <p><span class="tt">01:54</span>人群里有人喊：打电话求救吧。孩子们纷纷掏出手机——只有英国小朋友低下了头，红着脸小声说：「对不起，我没有手机。<em>我们英国人爱读书</em>，不只坐地铁的时候不用手机，其他时候也是不用手机的。」说完，把头垂得更低，仿佛为自己的诚实而感到抱歉。侄儿望着他，眼睛里有了一种复杂的东西。是羡慕，还是崇敬？我读不出来。</p>
+    <p><span class="tt">02:22</span>电话一个接一个打了出去，又一个接一个冷了下来。回答都很一致：不可能为了一只麻雀，动用救援力量。所有人的眼神都暗淡了下去。</p>
+    <p><span class="tt">02:35</span>这时候美国小朋友站了出来。他从口袋里掏出一本深蓝色的小册子，高高举起，阳光落在烫金的字上闪闪发光——<b class="strong">那是他的护照</b>。「无论你在世界哪个角落，强大的美利坚合众国，都是你坚强的后盾。」一个孩子随身带着自己的护照，就像随身带着自己的祖国。侄儿喃喃感叹：这就是我们的差距。</p>
+    <p><span class="tt">03:01</span>美国小朋友拨通了护照上的电话，接线的是大使馆。对方沉默了很久，告诉大家一个坏消息：这种情况，他们也有难处。就在大家再次陷入绝望的时候，美国小朋友对着话筒大喊了一声——<b class="strong">「那只麻雀是黑色的！」</b>电话那头静了。三秒钟后，一个庄重的声音传来：「孩子，救援马上开始。」后来我们才知道，那三秒钟里，<em>整个大使馆都起立了</em>。</p>
+    <p><span class="tt">03:31</span>侄儿已经泪眼婆娑，把手紧紧按在胸前：「生命诚可贵，而黑色的生命更贵。<em>这是我们永远做不到的</em>。」</p>
+    <p><span class="tt">03:41</span>大使馆说到做到。十分钟后，广播里传来了美国总统的声音，响彻整个大西洋——哦不对，放错了，是这个：「孩子们，我已下令<b class="strong">全球停电</b>，一定要救下那只麻雀。」</p>
+    <div class="aside"><b>整理者注：</b>此节揉了两个经典段子：「美国护照上说『无论你身在何处，美国都是你强大的后盾』」（多年流传的鸡汤，实际上美国护照内页印的是请求放行的外交辞令），以及「英国人在地铁里人人捧书、从不看手机」的都市传说（真相是伦敦地铁长时间没有手机信号，2024 年才逐步覆盖 4G）。「黑色的生命更贵」则是对美式身份政治叙事的戏仿。</div>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>麻雀危机（中）：纳秒、瑞士表与全球停电</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=240" target="_blank">04:00 ↗</a>
+    </div>
+    <p><span class="tt">04:00</span>就在这时，一个技术性难题横在了大家面前。法国小朋友指出：麻雀缠着的那根电线是带电的，是交流电，一刀切断，骤停的瞬间会产生巨大的反冲电流，麻雀会被活活电死。方法只有一个——在电流最小的一瞬间断电，可那只有<b class="strong">几纳秒</b>的时间，必须在现场有一个精确的信号。</p>
+    <p><span class="tt">04:29</span>瑞士小朋友站了出来。他不慌不忙地从手腕上解下一块手表，举过头顶：「这是瑞士工匠手工打造的手表，<em>就算走上 138 亿年，也不会有任何误差</em>。我来提供准确的时间。」</p>
+    <p><span class="tt">04:44</span>印度小朋友走出来配合他打信号。他走到电线杆下，伸出一只手，稳稳按在电线上，指尖感受着电流的起伏。一起一伏，一格一格——全世界的心跳都系在了那块小小的表盘之上。印度小朋友猛然睁眼，瑞士小朋友心领神会，果断大喊一声：「停电！」电流在指尖最小的那一刻被轻轻掐断了，<em>像掐灭一根蜡烛</em>。</p>
+    <p><span class="tt">05:21</span>欢呼声掀翻全场。侄儿抱着我，语无伦次：「这是我们做不到的，这是全人类都——哦不对，是我们做不到的。」</p>
+    <div class="aside"><b>整理者注：</b>「瑞士手表走 138 亿年不差一秒」——138 亿年恰好是宇宙年龄，段子式夸张的标配数字。此节顺带把「印度人开挂」「工匠精神」的刻板印象也各塞了一勺。</div>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>麻雀危机（下）：十度的水开成了一百度</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=330" target="_blank">05:30 ↗</a>
+    </div>
+    <p><span class="tt">05:30</span>可麻雀还挂在线上，必须有人爬上去解救。停电之后气温骤降，电线杆上结了一层薄冰，又滑又硬，爬一次摔一次。化冰需要开水，可现在哪有开水？</p>
+    <p><span class="tt">05:47</span>这时候法国小朋友站了出来。他招呼来十多个伙伴，每人从水壶里倒出一些凉水：「一个人的水只有十度。」他一边说着，一边伸出十根手指，「那么十个人的水，就是<b class="strong">一百度</b>。」随着水流的汇聚，呲的一声腾起一股白气。我伸手一探，果然烫手——<em>十度的水，真的开成了一百度</em>。</p>
+    <p><span class="tt">06:10</span>开水浇上去，冰应声而化。孩子们搭起人梯，手忙脚乱爬上电线杆，把麻雀解救了下来。侄儿看着那些水，怔了半天，感叹道：「团结的力量，<em>这是我们永远不懂的</em>。」</p>
+    <div class="aside"><b>整理者注：</b>温度是强度量，不可加和——十份十度的水混在一起还是十度。这一段是全篇物理谬误密度最高的部分，与后文的「鞋底反光照明」一样，属于故意写得一眼假、专钓「看着很励志就转发了」的读者。</div>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section id="s7">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>苍蝇采蜜与书是甜的</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=384" target="_blank">06:24 ↗</a>
+    </div>
+    <p><span class="tt">06:24</span>麻雀得救了，裹在外套里瑟瑟发抖，却倔强地睁着眼。可两个新问题几乎同时冒了出来。</p>
+    <p><span class="tt">06:33</span>第一个：英国小朋友晕倒了——救麻雀的时候他最积极，这下低血糖了，现场连一块方糖都找不到。这时澳洲小朋友不慌不忙，从背包里掏出一瓶<b class="strong">苍蝇</b>。全场安静了。他马上解释：「这是澳洲的苍蝇。澳洲环境太干净了，苍蝇找不到垃圾吃，只好学会了采蜜。」他打开瓶子放出苍蝇，不到十分钟它们回来了，腿上沾满金黄的花粉，把满满一嗉囊花蜜吐在叶片上，晶莹剔透，甘香宜人。侄儿看呆了，半晌感叹出一句：<em>「连苍蝇都有差距啊。」</em></p>
+    <p><span class="tt">07:14</span>新的难题却来了：英国小朋友悠悠转醒，一听要为他吃蜜，立刻挣扎着摆手，用绅士的、不容置疑的语气表示自己从来不吃蜂蜜——孩子的意志必须尊重，这是大家都知道的事情。可低血糖不补糖，是会出大事的。</p>
+    <p><span class="tt">07:34</span>就在这时，犹太小朋友走了过来。他没有说话，从怀里掏出一本厚厚的书，翻开，把花蜜涂在书页上，递到英国小朋友手里。像是触发了某种底层代码，英国小朋友疯狂地读起书来：为了方便翻书，他舔湿了手指；手指又沾染了蜂蜜。读到动情处，眼角闪着泪光，嘴里全是甜的。</p>
+    <p><span class="tt">07:56</span>犹太小朋友站在那里，向大家解释一切：「在我们家，孩子出生时，母亲会在书页上涂蜂蜜。我们在人生的第一天就知道——<b class="strong">书是甜的</b>。」侄儿喃喃感叹：为了让孩子喜欢阅读，竟然能在书本上涂蜂蜜，差距怎么就这么大。</p>
+    <div class="aside"><b>整理者注：</b>「澳洲苍蝇采蜜」与「犹太人在书页涂蜂蜜让孩子爱上阅读」都是流传多年的「外国人素质神话」段子；前者把澳大利亚的苍蝇灾害美化成了环保童话，后者作为教育典故同样查无实据。</div>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section id="s8">
+    <div class="sec-head">
+      <span class="sec-num">08</span>
+      <h2>油纸包、鞋底反光与一百米深的工程师</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=495" target="_blank">08:15 ↗</a>
+    </div>
+    <p><span class="tt">08:15</span>第二个问题：手忙脚乱之中，不知是谁把那根老电线拽断了。全世界还在停电呢，必须马上恢复供电——可没有人会接电线啊。</p>
+    <p><span class="tt">08:33</span>德国小朋友蹲了下去。他捡起断线的接头，对着月光端详，手指轻轻抚过皮线上的纹路，忽然，声音激动得变了调：「<b class="strong">这是德国制造的！</b>」众人凑过去，他指着接头处一个不起眼的钢印，一字一顿地念：「Made in——巴黎。」（<em>原文如此</em>。）他站起来，眼里闪着光：「德国制造的东西，安装施工的时候，一定会在附近埋一个油纸包，装着备用的零件。<em>这是规矩</em>。」侄儿已经泣不成声：「差距，这就是差距。」</p>
+    <p><span class="tt">09:09</span>大家重燃希望，可低头一看又都放下了——天太黑了。停电的夜里，月亮是唯一的光，接头在哪里根本看不清。黑暗成了最后一道难关。</p>
+    <p><span class="tt">09:17</span>这时加拿大小朋友站了出来。他什么也没说，带着同伴们往草地深处走了一圈，十几分钟后回来——突然一道雪亮的光扫过营地，所有人都眯起了眼睛。光是从他们的<b class="strong">鞋底</b>反射出来的：走了十几分钟草地，鞋底竟然一尘不染，反而更加锃光瓦亮，把月光齐刷刷反射回来，照得方圆几十米亮如白昼。侄儿低头看看自己的鞋，又看看他们的鞋，惭愧地感叹：「这么干净，我们是做不到的。」</p>
+    <p><span class="tt">09:54</span>接下来该日本小朋友出场了，他们当仁不让——因为他们的祖辈就有在冻土里挖土豆的习惯。他们抡起铁锹呼呼生风：一米，十米，五十米。一百米深的时候，铁锹铛的一声碰到了什么。挖出来一看，是一个巨大的油纸包。油纸被一层层揭开，慢得像一场仪式；揭到最后一层，所有人都屏住了呼吸——<b class="strong">一位德国工程师从油纸包里跳了出来</b>。</p>
+    <p><span class="tt">10:22</span>他看了一眼断线，从怀里掏出工具：包线，缠丝，套管，密封。动作行云流水，一气呵成。远处，城市的灯光再次亮起，像谁把星星重新撒回了人间。孩子们欢呼着要感谢他，德国工程师摆摆手，什么也没要，走到坑边，回头望了大家最后一眼，然后纵身一跳，跳回了那个一百米深的洞里。黑暗中传来他最后的声音：「我还要等下一个，需要我的人。」</p>
+    <p><span class="tt">10:55</span>草原上安静了很久很久。侄儿站在坑边，深深鞠了一躬；直起身时，眼里闪着泪光：「太严谨了，太专业了，<em>我们是永远做不到的</em>。」</p>
+    <div class="aside"><b>整理者注：</b>本节是全篇的谣言大联欢：「青岛德国下水道油纸包」是流传最广的中国版都市传说之一（已被多次辟谣，青岛下水道里从未发现过任何备用零件包）；「钢印 Made in 巴黎」是作者故意留的破绽——连骗子都不核对产地，信的人也不核对；「鞋底反光照明」则是彻底的原创荒诞。</div>
+  </section>
+
+  <!-- ============ 9 ============ -->
+  <section id="s9">
+    <div class="sec-head">
+      <span class="sec-num">09</span>
+      <h2>B2 接送与「下次一起反思」</h2>
+      <a class="stamp" href="https://www.bilibili.com/video/BV16aeP6iEec/?t=635" target="_blank">10:35 ↗</a>
+    </div>
+    <p><span class="tt">10:35</span>事情传回大洋彼岸，美国总统深受感动，再次下令派 B2 轰炸机专程送孩子们回家。孩子们在草原上排好了队：一分钟，十分钟，一小时——天边连一只鸟都没有飞过。就在大家疑惑的时候，侄儿突然浑身一个机灵，指着天空大喊大叫。所有人顺着他指的方向看去：天上空空荡荡，什么也没有。</p>
+    <p><span class="tt">11:29</span>侄儿兴奋得满脸通红：「B2 是<b class="strong">隐身战机</b>！看不见，也听不到，<em>但是我能感觉得到</em>！」说完，他仰起头，闭上眼睛，张开双臂，像在拥抱整个天空。一阵风从头顶掠过，掀起了他的头发。周围的小朋友先是一静，随即向他投去了赞许的目光——那目光里，没有一丝怀疑。</p>
+    <p><span class="tt">11:53</span>「所以你说，<b class="strong">正视差距</b>真的就这么难吗？好了，这里是道草日记，下次我们再一起反思。」</p>
+    <div class="aside"><b>整理者注：</b>全篇题眼在最后一句「下次我们再一起反思」——通篇「侄儿」那句复读机式的「这是我们做不到的／永远不懂的／永远做不到的」，加上他最后对着空无一物的天空张开双臂，讽刺的正是「反思怪」叙事：故事可以一个比一个假，但「我们的差距」必须照单全收。所谓「正视差距」，正视的其实是编出来的差距。</div>
+  </section>
+
+  <!-- ===== footer ===== -->
+  <footer>
+    <h2>附录 · 转写勘误对照（主要项）</h2>
+    <table>
+      <tr><th>ASR 原文（示例）</th><th>修正为</th></tr>
+      <tr><td><code>之而 / 直而 / 只而 / 芝儿 / 指而</code></td><td>侄儿</td></tr>
+      <tr><td><code>负重拉链</code></td><td>负重拉练</td></tr>
+      <tr><td><code>响吃整个大西层</code></td><td>响彻整个大西洋</td></tr>
+      <tr><td><code>回答都很同意</code></td><td>回答都很一致</td></tr>
+      <tr><td><code>男男的感叹</code></td><td>喃喃地感叹</td></tr>
+      <tr><td><code>一歌一歌 / 细在表盘</code></td><td>一格一格 / 系在表盘</td></tr>
+      <tr><td><code>果弹</code></td><td>果断</td></tr>
+      <tr><td><code>一素男花蜜</code></td><td>一嗉囊花蜜</td></tr>
+      <tr><td><code>新的南极</code></td><td>新的难题</td></tr>
+      <tr><td><code>挣扎着白手</code></td><td>挣扎着摆手</td></tr>
+      <tr><td><code>恢复宫殿</code></td><td>恢复供电</td></tr>
+      <tr><td><code>街头 / 月官 / 刚硬</code></td><td>接头 / 月光 / 钢印</td></tr>
+      <tr><td><code>买一个油纸包</code></td><td>埋一个油纸包</td></tr>
+      <tr><td><code>气不成声</code></td><td>泣不成声</td></tr>
+      <tr><td><code>当仑不让</code></td><td>当仁不让</td></tr>
+      <tr><td><code>洞土 / 铁桥狐狐身风</code></td><td>冻土 / 铁锹呼呼生风</td></tr>
+      <tr><td><code>蝉丝</code></td><td>缠丝</td></tr>
+      <tr><td><code>浑顺一个机灵 / 掀洗了头发</code></td><td>浑身一个机灵 / 掀起了头发</td></tr>
+      <tr><td><code>正光瓦亮 / 正式差距</code></td><td>锃光瓦亮 / 正视差距</td></tr>
+      <tr><td><code>刀草日记 / 直洗身时</code></td><td>道草日记 / 直起身时</td></tr>
+      <tr><td><code>Made in 巴黎</code></td><td>保留原文——两轮重转确认口播即为「巴黎」，系作者故意安排的荒诞破绽</td></tr>
+    </table>
+    <div class="colophon">
+      音频：Bilibili 30280 音轨（AAC ≈126 kbps）→ MP3 192 kbps，时长偏差 0.000%。<br>
+      转写：faster-whisper large-v3-turbo / CUDA float16，438 段，文本覆盖率 99.91%，用时 27.2s（26.5× 实时）。<br>
+      本页为口播内容的书面化整理稿。故事情节纯属虚构，为 UP 主道草日记的反讽创作；「整理者注」仅标注对应谣言原型，观点归属原视频 UP 主。
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

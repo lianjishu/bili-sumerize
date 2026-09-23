@@ -1,0 +1,3519 @@
+{
+ "model": "E:/Projects/VibeCoding/BiliSumerize/jyy-generatice-se/models/faster-whisper-large-v3-turbo",
+ "device": "cuda",
+ "compute_type": "float16",
+ "language": "zh",
+ "language_probability": 1,
+ "audio_duration": 721.978,
+ "transcribe_seconds": 27.2,
+ "speedup": 26.54,
+ "segment_count": 438,
+ "last_segment_end": 721.3,
+ "coverage_ratio": 0.9991,
+ "segments": [
+  {
+   "id": 0,
+   "start": 0.0,
+   "end": 15.84,
+   "text": "我不明白,苹果都是折叠屏了,怎么还有人不知道我们之间的差距到底有多大?我们可以超越国外吗?超不过的朋友,根本超不过。这个事实还不明显吗?今天我就用一个真实的故事来让所有人正视差距。",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1024
+  },
+  {
+   "id": 1,
+   "start": 15.84,
+   "end": 26.85,
+   "text": "暑假的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 2,
+   "start": 26.85,
+   "end": 29.31,
+   "text": "我陪着我的侄儿参加了一个夏令营",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 3,
+   "start": 29.31,
+   "end": 30.81,
+   "text": "那是一个国际夏令营",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 4,
+   "start": 30.81,
+   "end": 32.55,
+   "text": "有来自全世界的小朋友",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 5,
+   "start": 32.55,
+   "end": 33.55,
+   "text": "出发前夜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 6,
+   "start": 33.55,
+   "end": 35.85,
+   "text": "侄儿郑重的找到我谈了一次话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 7,
+   "start": 35.85,
+   "end": 36.69,
+   "text": "他告诉我",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 8,
+   "start": 36.69,
+   "end": 38.95,
+   "text": "去了以后不要端着长辈的架子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 9,
+   "start": 38.95,
+   "end": 41.17,
+   "text": "要和其他小朋友以兄弟相称",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 10,
+   "start": 41.17,
+   "end": 42.01,
+   "text": "我问为什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 11,
+   "start": 42.01,
+   "end": 43.39,
+   "text": "他说这是平等",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 12,
+   "start": 43.39,
+   "end": 44.11,
+   "text": "是惯例",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 13,
+   "start": 44.11,
+   "end": 45.27,
+   "text": "我觉得有道理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 14,
+   "start": 45.27,
+   "end": 46.07,
+   "text": "就没多问",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1098
+  },
+  {
+   "id": 15,
+   "start": 46.07,
+   "end": 48.81,
+   "text": "于是整个夏令营一群十来岁的孩子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 16,
+   "start": 48.81,
+   "end": 50.85,
+   "text": "都拍着我的肩膀喊老哥",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 17,
+   "start": 50.85,
+   "end": 52.87,
+   "text": "而侄儿却追着他们喊爸爸",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 18,
+   "start": 52.87,
+   "end": 54.81,
+   "text": "何止你小子在这儿等我呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 19,
+   "start": 54.81,
+   "end": 57.23,
+   "text": "夏令营的第一天是负重拉链",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 20,
+   "start": 57.23,
+   "end": 60.49,
+   "text": "日本小朋友每人背着一个一百公斤的大包",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 21,
+   "start": 60.49,
+   "end": 61.87,
+   "text": "日本孩子背着他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 22,
+   "start": 61.87,
+   "end": 64.03,
+   "text": "嘴里喊着羁绊努力友情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 23,
+   "start": 64.03,
+   "end": 66.63,
+   "text": "这些听不懂的话走了整整二十公里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 24,
+   "start": 66.63,
+   "end": 67.63,
+   "text": "太阳很毒",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 25,
+   "start": 67.63,
+   "end": 69.55,
+   "text": "汗珠从他们下巴摔下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 26,
+   "start": 69.55,
+   "end": 70.45,
+   "text": "砸进土里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 27,
+   "start": 70.45,
+   "end": 71.85,
+   "text": "碎成了巴嘎的形状",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 28,
+   "start": 71.85,
+   "end": 73.19,
+   "text": "没有一个孩子喊累",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 29,
+   "start": 73.19,
+   "end": 74.29,
+   "text": "走到终点后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 30,
+   "start": 74.29,
+   "end": 75.67,
+   "text": "他们把包卸下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0868
+  },
+  {
+   "id": 31,
+   "start": 75.67,
+   "end": 78.27,
+   "text": "站得笔直向着夕阳鞠了一躬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 32,
+   "start": 78.27,
+   "end": 79.75,
+   "text": "直而站在我身边",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 33,
+   "start": 79.75,
+   "end": 81.05,
+   "text": "久久没有说话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 34,
+   "start": 81.05,
+   "end": 82.79,
+   "text": "很久他轻轻感叹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 35,
+   "start": 82.79,
+   "end": 84.15,
+   "text": "看着他们的背影",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 36,
+   "start": 84.15,
+   "end": 85.95,
+   "text": "突然明白了什么叫差距",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 37,
+   "start": 85.95,
+   "end": 87.93,
+   "text": "这是中国小朋友做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 38,
+   "start": 87.93,
+   "end": 89.81,
+   "text": "第二天下午意外发生了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 39,
+   "start": 89.81,
+   "end": 92.17,
+   "text": "意大利小朋友养了一只宠物麻雀",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 40,
+   "start": 92.17,
+   "end": 93.17,
+   "text": "羽毛油亮",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 41,
+   "start": 93.17,
+   "end": 94.99,
+   "text": "会站在他的指头上唱歌",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 42,
+   "start": 94.99,
+   "end": 95.83,
+   "text": "就在这时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 43,
+   "start": 95.83,
+   "end": 97.95,
+   "text": "一只野猫在草丛里窜过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 44,
+   "start": 97.95,
+   "end": 98.83,
+   "text": "麻雀受惊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 45,
+   "start": 98.83,
+   "end": 100.25,
+   "text": "扑轮轮冲上了天",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 46,
+   "start": 100.25,
+   "end": 102.45,
+   "text": "一头缠在了营地边的电线上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 47,
+   "start": 102.45,
+   "end": 103.37,
+   "text": "他倒挂着",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 48,
+   "start": 103.37,
+   "end": 104.81,
+   "text": "翅膀被线缠住",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0971
+  },
+  {
+   "id": 49,
+   "start": 104.81,
+   "end": 105.73,
+   "text": "越振越紧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 50,
+   "start": 105.73,
+   "end": 107.61,
+   "text": "孩子们忽拉一下围过去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 51,
+   "start": 107.61,
+   "end": 109.31,
+   "text": "仰着头非常着急",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 52,
+   "start": 109.31,
+   "end": 111.11,
+   "text": "可电线有三层楼那么高",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 53,
+   "start": 111.11,
+   "end": 112.11,
+   "text": "谁也上不去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 54,
+   "start": 112.11,
+   "end": 113.49,
+   "text": "大家又想不出办法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 55,
+   "start": 113.49,
+   "end": 114.55,
+   "text": "就更着急了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 56,
+   "start": 114.55,
+   "end": 116.01,
+   "text": "人群里有人喊了一句话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 57,
+   "start": 116.01,
+   "end": 117.17,
+   "text": "打电话求救吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 58,
+   "start": 117.17,
+   "end": 119.17,
+   "text": "孩子们纷纷掏出手机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 59,
+   "start": 119.17,
+   "end": 121.21,
+   "text": "只有英国小朋友低下了头",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 60,
+   "start": 121.21,
+   "end": 122.21,
+   "text": "他红着脸",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 61,
+   "start": 122.21,
+   "end": 123.07,
+   "text": "小声说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 62,
+   "start": 123.07,
+   "end": 124.65,
+   "text": "对不起我没有手机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 63,
+   "start": 124.65,
+   "end": 126.11,
+   "text": "我们英国人爱读书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 64,
+   "start": 126.11,
+   "end": 128.21,
+   "text": "不只坐地铁的时候不用手机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 65,
+   "start": 128.21,
+   "end": 130.35,
+   "text": "其他时候也是不用手机的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 66,
+   "start": 130.35,
+   "end": 130.97,
+   "text": "他说完",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 67,
+   "start": 130.97,
+   "end": 132.45,
+   "text": "把头捶得更低了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 68,
+   "start": 132.45,
+   "end": 134.03,
+   "text": "仿佛为自己的诚实",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0942
+  },
+  {
+   "id": 69,
+   "start": 134.03,
+   "end": 135.09,
+   "text": "而感到抱歉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 70,
+   "start": 135.09,
+   "end": 136.23,
+   "text": "之而望着他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 71,
+   "start": 136.23,
+   "end": 138.37,
+   "text": "眼睛里有了一种复杂的东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 72,
+   "start": 138.37,
+   "end": 139.17,
+   "text": "是羡慕",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 73,
+   "start": 139.17,
+   "end": 140.09,
+   "text": "还是崇敬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 74,
+   "start": 140.09,
+   "end": 141.97,
+   "text": "或者还是别的什么感情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 75,
+   "start": 141.97,
+   "end": 142.79,
+   "text": "我读不出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 76,
+   "start": 142.79,
+   "end": 144.95,
+   "text": "电话一个接一个的打了出去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 77,
+   "start": 144.95,
+   "end": 146.85,
+   "text": "又一个接一个的冷了下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 78,
+   "start": 146.85,
+   "end": 148.83,
+   "text": "大家收到的回答都很同意",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 79,
+   "start": 148.83,
+   "end": 150.37,
+   "text": "不可能为了一只麻雀",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 80,
+   "start": 150.37,
+   "end": 151.73,
+   "text": "就动用救援力量",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 81,
+   "start": 151.73,
+   "end": 153.63,
+   "text": "看着麻雀被越缠越紧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 82,
+   "start": 153.63,
+   "end": 155.95,
+   "text": "所有人的眼神都暗淡了下去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 83,
+   "start": 155.95,
+   "end": 158.03,
+   "text": "这时候美国小朋友站了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 84,
+   "start": 158.03,
+   "end": 161.01,
+   "text": "他从口袋里掏出一本深蓝色的小册子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 85,
+   "start": 161.01,
+   "end": 162.03,
+   "text": "高高举起",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 86,
+   "start": 162.03,
+   "end": 163.87,
+   "text": "阳光落在烫金的字上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0794
+  },
+  {
+   "id": 87,
+   "start": 163.87,
+   "end": 165.07,
+   "text": "闪闪发光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 88,
+   "start": 165.07,
+   "end": 167.11,
+   "text": "无论你在世界哪个角落",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 89,
+   "start": 167.11,
+   "end": 168.87,
+   "text": "强大的美利坚合众国",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 90,
+   "start": 168.87,
+   "end": 170.45,
+   "text": "都是你坚强的后盾",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 91,
+   "start": 170.45,
+   "end": 171.73,
+   "text": "那是他的护照",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 92,
+   "start": 171.73,
+   "end": 174.29,
+   "text": "一个孩子随身带着自己的护照",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 93,
+   "start": 174.29,
+   "end": 176.49,
+   "text": "就像随身带着自己的祖国",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 94,
+   "start": 176.49,
+   "end": 178.45,
+   "text": "只而仰头望着那本护照",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 95,
+   "start": 178.45,
+   "end": 179.69,
+   "text": "男男的感叹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 96,
+   "start": 179.69,
+   "end": 181.39,
+   "text": "这就是我们的差距",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 97,
+   "start": 181.39,
+   "end": 183.95,
+   "text": "美国小朋友拨通了护照上的电话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 98,
+   "start": 183.95,
+   "end": 184.77,
+   "text": "电话通了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 99,
+   "start": 184.77,
+   "end": 185.99,
+   "text": "接线的是大使馆",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 100,
+   "start": 185.99,
+   "end": 188.27,
+   "text": "美国小朋友把麻雀的事情讲了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 101,
+   "start": 188.27,
+   "end": 189.55,
+   "text": "对方沉默了很久",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 102,
+   "start": 189.55,
+   "end": 191.41,
+   "text": "然后告诉大家一个坏消息",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 103,
+   "start": 191.41,
+   "end": 192.15,
+   "text": "这种情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 104,
+   "start": 192.15,
+   "end": 193.61,
+   "text": "他们也有难处",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0879
+  },
+  {
+   "id": 105,
+   "start": 193.61,
+   "end": 195.67,
+   "text": "大家再次陷入绝望的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 106,
+   "start": 195.67,
+   "end": 198.77,
+   "text": "美国小朋友突然对着话筒大喊了一声",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 107,
+   "start": 198.77,
+   "end": 200.79,
+   "text": "那只麻雀是黑色的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 108,
+   "start": 200.79,
+   "end": 202.55,
+   "text": "电话那头静了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 109,
+   "start": 202.55,
+   "end": 205.23,
+   "text": "三秒钟后一个庄重的声音传来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 110,
+   "start": 205.23,
+   "end": 207.61,
+   "text": "孩子救援马上开始",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 111,
+   "start": 207.61,
+   "end": 208.83,
+   "text": "后来我们才知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 112,
+   "start": 208.83,
+   "end": 211.69,
+   "text": "那三秒钟里整个大使馆都起立了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 113,
+   "start": 211.69,
+   "end": 213.79,
+   "text": "我的侄儿已经泪眼婆娑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 114,
+   "start": 213.79,
+   "end": 215.97,
+   "text": "他把手紧紧站在胸前说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 115,
+   "start": 215.97,
+   "end": 217.43,
+   "text": "生命诚可贵",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 116,
+   "start": 217.43,
+   "end": 219.59,
+   "text": "而黑色的生命更贵",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 117,
+   "start": 219.59,
+   "end": 221.65,
+   "text": "这是我们永远做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 118,
+   "start": 221.65,
+   "end": 223.29,
+   "text": "大使馆说到做到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0881
+  },
+  {
+   "id": 119,
+   "start": 223.29,
+   "end": 224.25,
+   "text": "十分钟后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 120,
+   "start": 224.25,
+   "end": 225.35,
+   "text": "广播里传来了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 121,
+   "start": 225.35,
+   "end": 226.67,
+   "text": "美国总统的声音",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 122,
+   "start": 226.67,
+   "end": 228.43,
+   "text": "响吃整个大西层",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 123,
+   "start": 228.43,
+   "end": 235.39,
+   "text": "哦不对",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 124,
+   "start": 235.39,
+   "end": 236.09,
+   "text": "放错了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 125,
+   "start": 236.09,
+   "end": 236.61,
+   "text": "是这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 126,
+   "start": 236.61,
+   "end": 237.33,
+   "text": "孩子们",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 127,
+   "start": 237.33,
+   "end": 238.25,
+   "text": "我已下令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 128,
+   "start": 238.25,
+   "end": 239.23,
+   "text": "全球停电",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 129,
+   "start": 239.23,
+   "end": 240.95,
+   "text": "一定要救下那只麻雀",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 130,
+   "start": 240.95,
+   "end": 242.29,
+   "text": "可就在这个时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 131,
+   "start": 242.29,
+   "end": 243.67,
+   "text": "一个技术性的难题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 132,
+   "start": 243.67,
+   "end": 244.97,
+   "text": "横在了大家面前",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 133,
+   "start": 244.97,
+   "end": 246.47,
+   "text": "一个法国小朋友说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 134,
+   "start": 246.47,
+   "end": 248.07,
+   "text": "麻雀缠着的那根电线",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 135,
+   "start": 248.07,
+   "end": 249.01,
+   "text": "是带电的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 136,
+   "start": 249.01,
+   "end": 249.93,
+   "text": "是交流电",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 137,
+   "start": 249.93,
+   "end": 251.19,
+   "text": "如果一刀切断",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 138,
+   "start": 251.19,
+   "end": 252.09,
+   "text": "骤停的瞬间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1257
+  },
+  {
+   "id": 139,
+   "start": 252.09,
+   "end": 253.91,
+   "text": "会产生巨大的反冲电流",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 140,
+   "start": 253.91,
+   "end": 255.45,
+   "text": "麻雀会被活活电死",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 141,
+   "start": 255.45,
+   "end": 256.95,
+   "text": "这个小朋友补充道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 142,
+   "start": 256.95,
+   "end": 258.15,
+   "text": "方法只有一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 143,
+   "start": 258.15,
+   "end": 260.39,
+   "text": "在电流最小的一瞬间断电",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 144,
+   "start": 260.39,
+   "end": 262.23,
+   "text": "可那只有几纳秒的时间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 145,
+   "start": 262.23,
+   "end": 264.99,
+   "text": "所以必须在现场有一个精确的信号",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 146,
+   "start": 264.99,
+   "end": 266.73,
+   "text": "孩子们都沉默了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 147,
+   "start": 266.73,
+   "end": 267.67,
+   "text": "风也停了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 148,
+   "start": 267.67,
+   "end": 269.73,
+   "text": "全世界都陷入了沉默",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 149,
+   "start": 269.73,
+   "end": 271.75,
+   "text": "这时瑞士小朋友站了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 150,
+   "start": 271.75,
+   "end": 274.81,
+   "text": "他不慌不忙的从手腕上解下一块手表",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 151,
+   "start": 274.81,
+   "end": 275.79,
+   "text": "举个头顶",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 152,
+   "start": 275.79,
+   "end": 278.81,
+   "text": "他说这是瑞士工匠手工打造的手表",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 153,
+   "start": 278.81,
+   "end": 280.89,
+   "text": "就算走上138亿年",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0897
+  },
+  {
+   "id": 154,
+   "start": 280.89,
+   "end": 282.45,
+   "text": "他也不会有任何误差",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 155,
+   "start": 282.45,
+   "end": 284.09,
+   "text": "我来提供准确的时间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 156,
+   "start": 284.09,
+   "end": 286.75,
+   "text": "这时候又走出来一个印度的小朋友",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 157,
+   "start": 286.75,
+   "end": 288.93,
+   "text": "他要配合瑞士小朋友打信号",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 158,
+   "start": 288.93,
+   "end": 291.45,
+   "text": "让瑞士小朋友看他的脸色形式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 159,
+   "start": 291.45,
+   "end": 293.59,
+   "text": "印度小朋友走到电线杆下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 160,
+   "start": 293.59,
+   "end": 294.59,
+   "text": "伸出一只手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 161,
+   "start": 294.59,
+   "end": 296.47,
+   "text": "稳稳按在了电线上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 162,
+   "start": 296.47,
+   "end": 298.79,
+   "text": "指尖感受着电流的起伏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 163,
+   "start": 298.79,
+   "end": 300.25,
+   "text": "一起一伏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 164,
+   "start": 300.25,
+   "end": 302.75,
+   "text": "瑞士小朋友眼睛盯着表中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 165,
+   "start": 302.75,
+   "end": 304.11,
+   "text": "一歌一歌",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 166,
+   "start": 304.11,
+   "end": 307.83,
+   "text": "全世界的心跳都细在了那块小小的表盘之上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 167,
+   "start": 307.83,
+   "end": 309.11,
+   "text": "一起一伏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 168,
+   "start": 309.11,
+   "end": 310.63,
+   "text": "一歌一歌",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 169,
+   "start": 310.63,
+   "end": 312.63,
+   "text": "印度小朋友猛然睁眼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 170,
+   "start": 312.63,
+   "end": 314.49,
+   "text": "瑞士小朋友心领神会",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 171,
+   "start": 314.49,
+   "end": 315.75,
+   "text": "果弹发出大喊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 172,
+   "start": 315.75,
+   "end": 316.41,
+   "text": "停电",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 173,
+   "start": 316.41,
+   "end": 318.75,
+   "text": "电流在指尖最小的那一刻",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 174,
+   "start": 318.75,
+   "end": 320.31,
+   "text": "被轻轻掐断了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 175,
+   "start": 320.31,
+   "end": 321.75,
+   "text": "像掐灭一根蜡烛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 176,
+   "start": 321.75,
+   "end": 323.65,
+   "text": "欢呼声掀翻全场",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 177,
+   "start": 323.65,
+   "end": 324.83,
+   "text": "指而抱着我",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 178,
+   "start": 324.83,
+   "end": 325.87,
+   "text": "语无伦次",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 179,
+   "start": 325.87,
+   "end": 327.31,
+   "text": "这是我们做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 180,
+   "start": 327.31,
+   "end": 328.41,
+   "text": "这是全人类都",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 181,
+   "start": 328.41,
+   "end": 328.87,
+   "text": "哦不对",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 182,
+   "start": 328.87,
+   "end": 330.39,
+   "text": "是我们做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 183,
+   "start": 330.39,
+   "end": 332.29,
+   "text": "可麻雀还挂在线上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 184,
+   "start": 332.29,
+   "end": 333.79,
+   "text": "必须有人爬上去解救",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 185,
+   "start": 333.79,
+   "end": 335.27,
+   "text": "大家抬头看了一眼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 186,
+   "start": 335.27,
+   "end": 336.49,
+   "text": "心又凉了半截",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 187,
+   "start": 336.49,
+   "end": 337.41,
+   "text": "停电之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 188,
+   "start": 337.41,
+   "end": 338.39,
+   "text": "气温骤降",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 189,
+   "start": 338.39,
+   "end": 340.43,
+   "text": "电线杆上截了一层薄冰",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0937
+  },
+  {
+   "id": 190,
+   "start": 340.43,
+   "end": 342.35,
+   "text": "又滑又硬爬一次",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 191,
+   "start": 342.35,
+   "end": 343.29,
+   "text": "摔一次",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 192,
+   "start": 343.29,
+   "end": 344.69,
+   "text": "根本爬不上去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 193,
+   "start": 344.69,
+   "end": 346.13,
+   "text": "化冰需要开水",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 194,
+   "start": 346.13,
+   "end": 347.51,
+   "text": "可现在哪有开水",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 195,
+   "start": 347.51,
+   "end": 349.67,
+   "text": "这时候法国小朋友站了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 196,
+   "start": 349.67,
+   "end": 351.37,
+   "text": "他招呼来十多个伙伴",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 197,
+   "start": 351.37,
+   "end": 353.67,
+   "text": "每人从水壶里倒出一些凉水",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 198,
+   "start": 353.67,
+   "end": 355.65,
+   "text": "一个人的水只有十度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 199,
+   "start": 355.65,
+   "end": 356.73,
+   "text": "他一边说着",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 200,
+   "start": 356.73,
+   "end": 358.47,
+   "text": "一边伸出十根手指",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 201,
+   "start": 358.47,
+   "end": 361.49,
+   "text": "那么十个人的水就是一百度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 202,
+   "start": 361.49,
+   "end": 363.15,
+   "text": "随着水流的汇聚",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 203,
+   "start": 363.15,
+   "end": 364.37,
+   "text": "嘖的一声",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 204,
+   "start": 364.37,
+   "end": 365.81,
+   "text": "腾起一股白气",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 205,
+   "start": 365.81,
+   "end": 366.97,
+   "text": "我伸手一探",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 206,
+   "start": 366.97,
+   "end": 368.25,
+   "text": "果然烫手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 207,
+   "start": 368.25,
+   "end": 370.83,
+   "text": "十度的水真的开成了一百度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 208,
+   "start": 370.83,
+   "end": 372.17,
+   "text": "开水浇上去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 209,
+   "start": 372.17,
+   "end": 373.43,
+   "text": "并应声而化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 210,
+   "start": 373.43,
+   "end": 374.93,
+   "text": "孩子们搭起人梯",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 211,
+   "start": 374.93,
+   "end": 377.09,
+   "text": "手忙脚乱的爬上电线杆",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 212,
+   "start": 377.09,
+   "end": 379.03,
+   "text": "把麻雀解救了下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 213,
+   "start": 379.03,
+   "end": 380.33,
+   "text": "之而看着那些水",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 214,
+   "start": 380.33,
+   "end": 381.27,
+   "text": "挣了半天",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 215,
+   "start": 381.27,
+   "end": 383.17,
+   "text": "感叹到团结的力量",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 216,
+   "start": 383.17,
+   "end": 384.91,
+   "text": "这是我们永远不懂的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 217,
+   "start": 384.91,
+   "end": 386.11,
+   "text": "麻雀得救了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 218,
+   "start": 386.11,
+   "end": 387.15,
+   "text": "裹在外套里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 219,
+   "start": 387.15,
+   "end": 388.17,
+   "text": "瑟瑟发抖",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 220,
+   "start": 388.17,
+   "end": 389.45,
+   "text": "却倔强的睁着眼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 221,
+   "start": 389.45,
+   "end": 391.13,
+   "text": "可大家还没来得及高兴",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 222,
+   "start": 391.13,
+   "end": 393.61,
+   "text": "两个问题几乎同时冒了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 223,
+   "start": 393.61,
+   "end": 394.65,
+   "text": "第一个问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 224,
+   "start": 394.65,
+   "end": 396.65,
+   "text": "英国小朋友晕倒了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 225,
+   "start": 396.65,
+   "end": 397.77,
+   "text": "因为没有手机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0999
+  },
+  {
+   "id": 226,
+   "start": 397.77,
+   "end": 399.09,
+   "text": "所以救麻雀的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 227,
+   "start": 399.09,
+   "end": 400.31,
+   "text": "它是最积极的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 228,
+   "start": 400.31,
+   "end": 401.97,
+   "text": "这下好了低血糖",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 229,
+   "start": 401.97,
+   "end": 404.29,
+   "text": "而现场连一块方糖都找不到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 230,
+   "start": 404.29,
+   "end": 405.91,
+   "text": "这时候澳洲小朋友",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 231,
+   "start": 405.91,
+   "end": 406.95,
+   "text": "不慌不忙的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 232,
+   "start": 406.95,
+   "end": 408.99,
+   "text": "从背包里掏出了一瓶苍蝇",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 233,
+   "start": 408.99,
+   "end": 410.19,
+   "text": "全场安静了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 234,
+   "start": 410.19,
+   "end": 411.93,
+   "text": "澳洲小朋友马上解释",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 235,
+   "start": 411.93,
+   "end": 413.15,
+   "text": "这是澳洲的苍蝇",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 236,
+   "start": 413.15,
+   "end": 414.81,
+   "text": "澳洲环境太干净了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 237,
+   "start": 414.81,
+   "end": 416.27,
+   "text": "苍蝇找不到垃圾吃",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 238,
+   "start": 416.27,
+   "end": 417.63,
+   "text": "只好学会了采蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 239,
+   "start": 417.63,
+   "end": 418.85,
+   "text": "他打开瓶子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 240,
+   "start": 418.85,
+   "end": 419.77,
+   "text": "放出了苍蝇",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 241,
+   "start": 419.77,
+   "end": 420.75,
+   "text": "不到十分钟",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 242,
+   "start": 420.75,
+   "end": 421.71,
+   "text": "他们回来了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 243,
+   "start": 421.71,
+   "end": 423.65,
+   "text": "腿上沾满金黄的花粉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 244,
+   "start": 423.65,
+   "end": 425.31,
+   "text": "把满满一素男花蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 245,
+   "start": 425.31,
+   "end": 426.73,
+   "text": "吐在了叶片上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0863
+  },
+  {
+   "id": 246,
+   "start": 426.73,
+   "end": 427.65,
+   "text": "晶莹剔透",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 247,
+   "start": 427.65,
+   "end": 428.91,
+   "text": "甘香宜人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 248,
+   "start": 428.91,
+   "end": 430.11,
+   "text": "侄儿看呆了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 249,
+   "start": 430.11,
+   "end": 430.63,
+   "text": "半晌",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 250,
+   "start": 430.63,
+   "end": 431.99,
+   "text": "他感叹出一句",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 251,
+   "start": 431.99,
+   "end": 433.87,
+   "text": "连苍蝇都有差距啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 252,
+   "start": 433.87,
+   "end": 434.93,
+   "text": "花蜜有了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 253,
+   "start": 434.93,
+   "end": 436.33,
+   "text": "新的南极却来了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 254,
+   "start": 436.33,
+   "end": 438.15,
+   "text": "英国小朋友悠悠转醒",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 255,
+   "start": 438.15,
+   "end": 439.47,
+   "text": "一听要为他吃蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 256,
+   "start": 439.47,
+   "end": 440.95,
+   "text": "立刻挣扎着白手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 257,
+   "start": 440.95,
+   "end": 441.85,
+   "text": "用绅士的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 258,
+   "start": 441.85,
+   "end": 442.97,
+   "text": "不容置疑的语气",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 259,
+   "start": 442.97,
+   "end": 444.79,
+   "text": "表示自己从来不吃蜂蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 260,
+   "start": 444.79,
+   "end": 446.73,
+   "text": "孩子的意志必须尊重",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 261,
+   "start": 446.73,
+   "end": 448.41,
+   "text": "这是大家都知道的事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 262,
+   "start": 448.41,
+   "end": 449.87,
+   "text": "可低血糖不补糖",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 263,
+   "start": 449.87,
+   "end": 451.15,
+   "text": "是会出大事的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 264,
+   "start": 451.15,
+   "end": 453.17,
+   "text": "大家围着他急得团团转",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 265,
+   "start": 453.17,
+   "end": 454.19,
+   "text": "就在这时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 266,
+   "start": 454.19,
+   "end": 455.83,
+   "text": "犹太小朋友走了过来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1233
+  },
+  {
+   "id": 267,
+   "start": 455.83,
+   "end": 456.79,
+   "text": "他没有说话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 268,
+   "start": 456.79,
+   "end": 459.05,
+   "text": "他从怀里掏出一本厚厚的书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 269,
+   "start": 459.05,
+   "end": 459.55,
+   "text": "翻开",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 270,
+   "start": 459.55,
+   "end": 461.69,
+   "text": "把花蜜涂在了书页上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 271,
+   "start": 461.69,
+   "end": 463.29,
+   "text": "递到英国小朋友手里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 272,
+   "start": 463.29,
+   "end": 465.33,
+   "text": "像是触发了某种底层代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 273,
+   "start": 465.33,
+   "end": 467.61,
+   "text": "英国小朋友疯狂的读起书来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 274,
+   "start": 467.61,
+   "end": 468.85,
+   "text": "为了方便翻书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 275,
+   "start": 468.85,
+   "end": 470.23,
+   "text": "他舔湿了手指",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 276,
+   "start": 470.23,
+   "end": 471.95,
+   "text": "手指又沾染了蜂蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 277,
+   "start": 471.95,
+   "end": 473.05,
+   "text": "读到动情处",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 278,
+   "start": 473.05,
+   "end": 474.83,
+   "text": "他的眼角闪着泪光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 279,
+   "start": 474.83,
+   "end": 476.63,
+   "text": "嘴里全是甜的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 280,
+   "start": 476.63,
+   "end": 478.25,
+   "text": "犹太小朋友站在那里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 281,
+   "start": 478.25,
+   "end": 479.69,
+   "text": "向大家解释一切",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 282,
+   "start": 479.69,
+   "end": 481.73,
+   "text": "在我们家孩子出生时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 283,
+   "start": 481.73,
+   "end": 483.73,
+   "text": "母亲会在书页上涂蜂蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 284,
+   "start": 483.73,
+   "end": 485.77,
+   "text": "我们在人生的第一天就知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0857
+  },
+  {
+   "id": 285,
+   "start": 485.77,
+   "end": 487.25,
+   "text": "书是甜的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 286,
+   "start": 487.25,
+   "end": 488.73,
+   "text": "芝儿站在人群外",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 287,
+   "start": 488.73,
+   "end": 489.81,
+   "text": "喃喃感叹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 288,
+   "start": 489.81,
+   "end": 491.53,
+   "text": "为了让孩子喜欢阅读",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 289,
+   "start": 491.53,
+   "end": 493.59,
+   "text": "竟然能在书本上涂蜂蜜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 290,
+   "start": 493.59,
+   "end": 495.91,
+   "text": "差距怎么就这么大",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 291,
+   "start": 495.91,
+   "end": 497.63,
+   "text": "大家松一口气的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 292,
+   "start": 497.63,
+   "end": 499.81,
+   "text": "也终于注意到了第二个问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 293,
+   "start": 499.81,
+   "end": 501.17,
+   "text": "手忙脚乱之中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 294,
+   "start": 501.17,
+   "end": 502.27,
+   "text": "也不知道是谁",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 295,
+   "start": 502.27,
+   "end": 504.13,
+   "text": "把那根老电线拽断了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 296,
+   "start": 504.13,
+   "end": 506.39,
+   "text": "现在全世界还在停电呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 297,
+   "start": 506.39,
+   "end": 507.75,
+   "text": "所有人都知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 298,
+   "start": 507.75,
+   "end": 509.27,
+   "text": "必须马上恢复宫殿",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 299,
+   "start": 509.27,
+   "end": 510.93,
+   "text": "可没有人会接电线啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 300,
+   "start": 510.93,
+   "end": 512.65,
+   "text": "大家又都束手无策了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 301,
+   "start": 512.65,
+   "end": 513.45,
+   "text": "就在这时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 302,
+   "start": 513.45,
+   "end": 515.11,
+   "text": "德国小朋友蹲了下去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0768
+  },
+  {
+   "id": 303,
+   "start": 515.11,
+   "end": 516.73,
+   "text": "他捡起断线的街头",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 304,
+   "start": 516.73,
+   "end": 517.99,
+   "text": "对着月官端详",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 305,
+   "start": 517.99,
+   "end": 520.45,
+   "text": "手指轻轻抚过皮线上的纹路",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 306,
+   "start": 520.45,
+   "end": 521.01,
+   "text": "忽然",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 307,
+   "start": 521.01,
+   "end": 522.95,
+   "text": "他的声音激动的变了调",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 308,
+   "start": 522.95,
+   "end": 524.55,
+   "text": "这是德国制造的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 309,
+   "start": 524.55,
+   "end": 525.71,
+   "text": "众人凑过去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 310,
+   "start": 525.71,
+   "end": 528.19,
+   "text": "他指着街头处一个不起眼的刚硬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 311,
+   "start": 528.19,
+   "end": 529.51,
+   "text": "一字一顿的念",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 312,
+   "start": 529.51,
+   "end": 530.35,
+   "text": "Made in",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 313,
+   "start": 530.35,
+   "end": 531.13,
+   "text": "巴黎",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 314,
+   "start": 531.13,
+   "end": 532.27,
+   "text": "他站起来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 315,
+   "start": 532.27,
+   "end": 533.37,
+   "text": "眼里闪着光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 316,
+   "start": 533.37,
+   "end": 534.71,
+   "text": "德国制造的东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 317,
+   "start": 534.71,
+   "end": 535.89,
+   "text": "安装施工的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 318,
+   "start": 535.89,
+   "end": 537.97,
+   "text": "一定会在附近买一个油纸包",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 319,
+   "start": 537.97,
+   "end": 539.23,
+   "text": "装着备用的零件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 320,
+   "start": 539.23,
+   "end": 540.17,
+   "text": "这是规矩",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 321,
+   "start": 540.17,
+   "end": 542.23,
+   "text": "我的侄儿已经气不成声",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 322,
+   "start": 542.23,
+   "end": 542.79,
+   "text": "差距",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 323,
+   "start": 542.79,
+   "end": 543.97,
+   "text": "这就是差距",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1081
+  },
+  {
+   "id": 324,
+   "start": 543.97,
+   "end": 545.37,
+   "text": "大家重燃希望",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 325,
+   "start": 545.37,
+   "end": 547.13,
+   "text": "所有人都抄起了工具",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 326,
+   "start": 547.13,
+   "end": 548.15,
+   "text": "可低头一看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 327,
+   "start": 548.15,
+   "end": 549.25,
+   "text": "又都放下了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 328,
+   "start": 549.25,
+   "end": 550.27,
+   "text": "天太黑了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 329,
+   "start": 550.27,
+   "end": 551.21,
+   "text": "停电的夜里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 330,
+   "start": 551.21,
+   "end": 552.53,
+   "text": "月亮是唯一的光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 331,
+   "start": 552.53,
+   "end": 553.83,
+   "text": "可坑洼在哪里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 332,
+   "start": 553.83,
+   "end": 554.85,
+   "text": "根本看不清",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 333,
+   "start": 554.85,
+   "end": 556.93,
+   "text": "黑暗成了最后一道难关",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 334,
+   "start": 556.93,
+   "end": 557.57,
+   "text": "这时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 335,
+   "start": 557.57,
+   "end": 559.33,
+   "text": "加拿大小朋友站了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 336,
+   "start": 559.33,
+   "end": 560.53,
+   "text": "他什么也没说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 337,
+   "start": 560.53,
+   "end": 561.71,
+   "text": "带着他的同伴们",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 338,
+   "start": 561.71,
+   "end": 563.57,
+   "text": "往草地深处走了一圈",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 339,
+   "start": 563.57,
+   "end": 564.69,
+   "text": "十几分钟后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 340,
+   "start": 564.69,
+   "end": 565.65,
+   "text": "他们回来了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 341,
+   "start": 565.65,
+   "end": 567.23,
+   "text": "突然一道雪亮的光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 342,
+   "start": 567.23,
+   "end": 568.23,
+   "text": "扫过营地",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 343,
+   "start": 568.23,
+   "end": 570.09,
+   "text": "所有人都眯起了眼睛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 344,
+   "start": 570.09,
+   "end": 572.93,
+   "text": "光是从他们的鞋底反射出来的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0932
+  },
+  {
+   "id": 345,
+   "start": 572.93,
+   "end": 574.47,
+   "text": "走了十几分钟草地",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 346,
+   "start": 574.47,
+   "end": 576.39,
+   "text": "他们的鞋底竟然一尘不染",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 347,
+   "start": 576.39,
+   "end": 578.21,
+   "text": "反而更加的正光瓦亮",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 348,
+   "start": 578.21,
+   "end": 580.57,
+   "text": "把月光齐刷刷的反射回来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 349,
+   "start": 580.57,
+   "end": 581.99,
+   "text": "照得方圆几十米",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 350,
+   "start": 581.99,
+   "end": 583.29,
+   "text": "亮如白昼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 351,
+   "start": 583.29,
+   "end": 585.21,
+   "text": "孩子们在这片白昼里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 352,
+   "start": 585.21,
+   "end": 587.41,
+   "text": "看清了脚下的每一寸土地",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 353,
+   "start": 587.41,
+   "end": 589.27,
+   "text": "之而低头看看自己的鞋",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 354,
+   "start": 589.27,
+   "end": 590.65,
+   "text": "又看看他们的鞋",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 355,
+   "start": 590.65,
+   "end": 591.79,
+   "text": "惭愧的感叹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 356,
+   "start": 591.79,
+   "end": 592.67,
+   "text": "这么干净",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 357,
+   "start": 592.67,
+   "end": 594.01,
+   "text": "我们是做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 358,
+   "start": 594.01,
+   "end": 596.55,
+   "text": "接下来又该日本小朋友出场了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 359,
+   "start": 596.55,
+   "end": 597.65,
+   "text": "他们当仑不让",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 360,
+   "start": 597.65,
+   "end": 598.93,
+   "text": "因为他们的祖辈",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 361,
+   "start": 598.93,
+   "end": 601.25,
+   "text": "就有在洞土里挖土豆的习惯",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 362,
+   "start": 601.25,
+   "end": 603.47,
+   "text": "他们抡起铁桥狐狐身风",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 363,
+   "start": 603.47,
+   "end": 604.07,
+   "text": "一米",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 364,
+   "start": 604.07,
+   "end": 604.75,
+   "text": "十米",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 365,
+   "start": 604.75,
+   "end": 605.63,
+   "text": "五十米",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 366,
+   "start": 605.63,
+   "end": 607.01,
+   "text": "一百米深的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 367,
+   "start": 607.01,
+   "end": 609.17,
+   "text": "铁桥当的一声碰到了什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 368,
+   "start": 609.17,
+   "end": 610.19,
+   "text": "挖出来一看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 369,
+   "start": 610.19,
+   "end": 611.79,
+   "text": "一个巨大的油纸包",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 370,
+   "start": 611.79,
+   "end": 613.57,
+   "text": "油纸被一层层揭开",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 371,
+   "start": 613.57,
+   "end": 615.15,
+   "text": "慢得像一场仪式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 372,
+   "start": 615.15,
+   "end": 616.43,
+   "text": "揭到最后一层",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 373,
+   "start": 616.43,
+   "end": 618.93,
+   "text": "所有人都屏住了呼吸",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 374,
+   "start": 618.93,
+   "end": 622.11,
+   "text": "一位德国工程师从油纸包里跳了出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 375,
+   "start": 622.11,
+   "end": 623.47,
+   "text": "他看了一眼断线",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 376,
+   "start": 623.47,
+   "end": 625.07,
+   "text": "从怀里掏出工具",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 377,
+   "start": 625.07,
+   "end": 625.71,
+   "text": "包线",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 378,
+   "start": 625.71,
+   "end": 626.39,
+   "text": "蝉丝",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 379,
+   "start": 626.39,
+   "end": 627.01,
+   "text": "套管",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 380,
+   "start": 627.01,
+   "end": 627.53,
+   "text": "密封",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 381,
+   "start": 627.53,
+   "end": 628.91,
+   "text": "动作行云流水",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 382,
+   "start": 628.91,
+   "end": 629.95,
+   "text": "一气呵成",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 383,
+   "start": 629.95,
+   "end": 630.57,
+   "text": "远处",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1113
+  },
+  {
+   "id": 384,
+   "start": 630.57,
+   "end": 631.87,
+   "text": "城市的灯光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 385,
+   "start": 631.87,
+   "end": 632.83,
+   "text": "再次亮起",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 386,
+   "start": 632.83,
+   "end": 635.61,
+   "text": "像谁把星星重新撒回了人间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 387,
+   "start": 635.61,
+   "end": 637.49,
+   "text": "全世界来电了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 388,
+   "start": 637.49,
+   "end": 639.47,
+   "text": "孩子们欢呼着要感谢他",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 389,
+   "start": 639.47,
+   "end": 640.99,
+   "text": "德国工程师摆摆手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 390,
+   "start": 640.99,
+   "end": 642.03,
+   "text": "什么也没要",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 391,
+   "start": 642.03,
+   "end": 642.91,
+   "text": "走到坑边",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 392,
+   "start": 642.91,
+   "end": 644.69,
+   "text": "回头望了大家最后一眼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 393,
+   "start": 644.69,
+   "end": 646.03,
+   "text": "然后纵身一跳",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 394,
+   "start": 646.03,
+   "end": 648.11,
+   "text": "跳回了那个一百米深的洞里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 395,
+   "start": 648.11,
+   "end": 650.33,
+   "text": "黑暗中传来他最后的身影",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 396,
+   "start": 650.33,
+   "end": 651.71,
+   "text": "我还要等下一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 397,
+   "start": 651.71,
+   "end": 653.13,
+   "text": "需要我的人",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 398,
+   "start": 653.13,
+   "end": 655.85,
+   "text": "草原上安静了很久很久",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 399,
+   "start": 655.85,
+   "end": 657.11,
+   "text": "芝儿站在坑边",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 400,
+   "start": 657.11,
+   "end": 658.51,
+   "text": "深深鞠了一躬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 401,
+   "start": 658.51,
+   "end": 659.47,
+   "text": "直洗身时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.138
+  },
+  {
+   "id": 402,
+   "start": 659.47,
+   "end": 661.05,
+   "text": "他眼里闪着泪光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 403,
+   "start": 661.05,
+   "end": 662.19,
+   "text": "太严谨了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 404,
+   "start": 662.19,
+   "end": 663.25,
+   "text": "太专业了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 405,
+   "start": 663.25,
+   "end": 665.03,
+   "text": "我们是永远做不到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 406,
+   "start": 665.03,
+   "end": 666.87,
+   "text": "事情传回大洋彼岸",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 407,
+   "start": 666.87,
+   "end": 668.79,
+   "text": "美国总统深受感动",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 408,
+   "start": 668.79,
+   "end": 671.05,
+   "text": "再次下令派B2轰炸机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 409,
+   "start": 671.05,
+   "end": 672.71,
+   "text": "专程送孩子们回家",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 410,
+   "start": 672.71,
+   "end": 674.87,
+   "text": "孩子们在草原上排好了队",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 411,
+   "start": 674.87,
+   "end": 675.63,
+   "text": "一分钟",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 412,
+   "start": 675.63,
+   "end": 676.45,
+   "text": "十分钟",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 413,
+   "start": 676.45,
+   "end": 677.29,
+   "text": "一小时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 414,
+   "start": 677.29,
+   "end": 679.37,
+   "text": "天边连一只鸟都没有飞过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 415,
+   "start": 679.37,
+   "end": 680.93,
+   "text": "就在大家疑惑的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 416,
+   "start": 680.93,
+   "end": 682.73,
+   "text": "侄儿突然浑顺一个机灵",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 417,
+   "start": 682.73,
+   "end": 684.37,
+   "text": "指着天空大喊大叫",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 418,
+   "start": 684.37,
+   "end": 686.93,
+   "text": "所有人顺着他指的方向看去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 419,
+   "start": 686.93,
+   "end": 688.43,
+   "text": "天上空空荡荡",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.082
+  },
+  {
+   "id": 420,
+   "start": 688.43,
+   "end": 689.51,
+   "text": "什么也没有",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 421,
+   "start": 689.51,
+   "end": 691.37,
+   "text": "之而兴奋的满脸通红",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 422,
+   "start": 691.37,
+   "end": 692.83,
+   "text": "B二是隐身战机",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 423,
+   "start": 692.83,
+   "end": 694.51,
+   "text": "看不见也听不到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 424,
+   "start": 694.51,
+   "end": 697.07,
+   "text": "但是我能感觉得到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 425,
+   "start": 697.07,
+   "end": 697.77,
+   "text": "说完",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 426,
+   "start": 697.77,
+   "end": 698.81,
+   "text": "他仰起头",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 427,
+   "start": 698.81,
+   "end": 699.85,
+   "text": "闭上眼睛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 428,
+   "start": 699.85,
+   "end": 700.93,
+   "text": "张开双臂",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 429,
+   "start": 700.93,
+   "end": 702.69,
+   "text": "像在拥抱整个天空",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 430,
+   "start": 702.69,
+   "end": 704.65,
+   "text": "一阵风从头顶掠过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 431,
+   "start": 704.65,
+   "end": 706.07,
+   "text": "掀洗了他的头发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 432,
+   "start": 706.07,
+   "end": 707.93,
+   "text": "周围的小朋友先是一静",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 433,
+   "start": 707.93,
+   "end": 710.61,
+   "text": "随即向他投去了赞许的目光",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 434,
+   "start": 710.61,
+   "end": 713.41,
+   "text": "那目光里没有一丝的怀疑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 435,
+   "start": 713.41,
+   "end": 717.07,
+   "text": "所以你说正式差距真的就这么难吗",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1283
+  },
+  {
+   "id": 436,
+   "start": 717.07,
+   "end": 719.38,
+   "text": "好了这里是刀草日记",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1443
+  },
+  {
+   "id": 437,
+   "start": 719.38,
+   "end": 721.3,
+   "text": "下次我们再一起反思",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1443
+  }
+ ]
+}
