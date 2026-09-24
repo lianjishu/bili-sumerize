@@ -10,13 +10,18 @@
 1. **文字稿** `transcript_<BV号>.html` — 口播书面化，无 SVG/截图，最常用
 2. **可视化笔记** `bili_summary_<BV号>.html` — 含动态 SVG 图解 + 整页截图切片
 
-目前三个内容系列（各自独立目录，工具链共用根目录）：
+目前内容系列（各自独立目录，工具链共用根目录）：
 
 | 目录 | 内容 |
 |---|---|
 | `jyy-generatice-se/` | jyy 南大《生成式软件工程》全 6 集（可视化笔记 + 文字讲义），集编号 = `urllist.txt` 行号 |
-| `hw-dong/` | UP 主 hw-dong 的视频，链接在 `hw-dong/url.txt` |
+| `hw-dong/` | UP 主 hw-dong 的视频，链接在 `hw-dong/url.txt`（产物：文字稿） |
 | `道草日记/` | UP 主道草日记，每个视频一个子目录（`<标题>/url.txt` + 产物） |
+| `圣徒城的小诺/` | UP 主圣徒城的小诺，`url.txt` 放链接，产物：**总结 + 讲义** |
+| `马克的技术工坊/` | UP 主马克的技术工作坊，`url.txt` 放链接，产物：**总结 + 讲义** |
+
+**称谓约定**：jyy 系列是大学课程 → 用「讲师」；**其余 UP 主类系列一律用「UP 主」**，
+正文与讲义都不得出现「讲师」。
 
 ## 目录结构
 
@@ -31,6 +36,8 @@ BiliSumerize/
 │   └── <编号>/          # bili_summary_*.html / lecture_notes_*.html / screenshots/ / work/
 ├── hw-dong/             # hw-dong 系列：url.txt + transcript_*.html + work/
 ├── 道草日记/             # 道草日记系列：<视频标题>/ 目录，内含 url.txt + transcript_*.html + work/
+├── 圣徒城的小诺/         # url.txt + bili_summary_*.html + lecture_notes_*.html + screenshots/ + work/
+├── 马克的技术工坊/       # url.txt + bili_summary_*.html + lecture_notes_*.html + screenshots/ + work/
 └── .agents/             # Agent 上下文（记忆 / 技能 / 提示词）
     ├── memory/          # MEMORY.md 长期约定 + YYYY-MM-DD.md 每日日志（追加式）
     ├── skills/          # 项目级技能（video-to-offline-notes；scripts/ 是 tools/ 的镜像）
@@ -69,6 +76,12 @@ python tools/check_render.py <out.html> 1440
 6. `tools/` 是脚本唯一来源；`.agents/skills/*/scripts/` 只是镜像，**不要直接改镜像**——改完 tools 后运行 `python tools/sync_skill.py` 同步，`--check` 验证。
 7. `.agents/memory/YYYY-MM-DD.md` 为追加式日志；长期约定沉淀进 `.agents/memory/MEMORY.md`。
 8. 完成 15+ 工具调用的多步任务后，考虑把新流程更新进技能。
+9. **正文与图注里写粗体一律用 `<strong>`，禁止 `**…**`** —— 模板不渲染 Markdown，
+   `**` 会原样出现在页面上。交付前 `grep -o '\*\*[^*]\{1,60\}\*\*'` 应为空。
+10. **SVG 里相邻两行的行距要 ≥20px**（字号 11.5），框高同步留足；否则
+   `check_render.py` 报「SVG 文字重叠」，且缩略图上看不出来。
+11. **章节色只有 6 个槽位**（A1–A6）。官方 chapters 超过 6 章时，让**末章复用第 1 章的颜色**
+    并在图注里说明；不要自造第 7 个 hex（会让 `theme.py` 的 role 映射漏色）。
 
 ## 关于 .agents/（对 WorkBuddy 的特别说明）
 

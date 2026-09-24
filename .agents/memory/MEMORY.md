@@ -14,6 +14,15 @@
    中间产物在 `hw-dong/work/`。
 3. `道草日记/<视频标题>/`（2026-09-23 起）— UP 主道草日记：每视频一个子目录
    （`url.txt` + `transcript_<BV号>.html` + `work/`），首集 BV16aeP6iEec 已完成。
+4. `圣徒城的小诺/`（2026-09-24 起）— UP 主**圣徒城的小诺**：`url.txt` 放链接，
+   每视频产出 **`bili_summary_<BV号>.html` 可视化笔记 + `lecture_notes_<BV号>.html` 讲义**，
+   中间产物在 `圣徒城的小诺/work/`。首集 BV1PKh86zEhX（AI 编程模型/基座横评）已完成。
+5. `马克的技术工坊/`（2026-09-24 起）— UP 主**马克的技术工作坊**（目录名少一个「作」字，
+   用户指定；视频里自称「马克」）：`url.txt` 放链接，同样产出 **总结 + 讲义**。
+   首集 BV154426xEha（AI 编程全流程，7 个官方章节）已完成。
+
+**称谓约定**：jyy 系列是大学课程 → 用「讲师」；**其余 UP 主/播客类系列一律用「UP 主」**，
+正文与讲义都不得出现「讲师」。
 
 工具链（bin/models/tools/cookies）2026-09-23 起统一放**仓库根目录**，全系列共用。
 **多系列并存后，动手前先确认用户指的是哪个系列哪个 `url.txt`**（曾把 hw-dong 与道草日记两个请求串台）。
@@ -37,6 +46,7 @@ BiliSumerize/
 │       └── work/                       # 该集材料：音频、转写、分章源文件、校验报告
 ├── hw-dong/             # url.txt + transcript_*.html + work/
 └── 道草日记/            # <视频标题>/ 子目录：url.txt + transcript_*.html + work/
+└── 圣徒城的小诺/         # url.txt + bili_summary_*.html + lecture_notes_*.html + screenshots/ + work/
 ```
 
 **编号必须以 `urllist.txt` 为准**，不要凭标题里的 `0X-Raw` 或其它编号推。
@@ -160,3 +170,40 @@ BiliSumerize/
    **之后再无 SVG** → 行内强调必须用 `<tspan>`。
 7. 超长页 `full_page=True` 一次性截图会错位（实测偏移 983px 且丢章节色），
    且缩略图看不出来 → 必须用 `shot_full.py` 的分段拼接法。
+8. `shot_full.py` / `slice_crop.py` 都吃**位置参数**（`--width` 会 ValueError）；
+   `slice_crop.py` 靠环境变量 `FFMPEG_BIN` 找 ffmpeg，不设会 `WinError 2`：
+   `FFMPEG_BIN=<repo>/bin/ffmpeg.exe python ../tools/slice_crop.py <full.png> <outdir> 1200 100`
+9. **`tools/transcribe_whisper.py` 的 PROMPT 写死了 jyy 课程术语** → 换视频另存一份改
+   PROMPT（如 `work/transcribe_nuo.py` / `work/transcribe_mark.py`），不要直接改 tools。
+   给横评类视频放大模型名/产品名词表可显著降低专名错字率。
+10. **正文里禁止写 `**加粗**`** —— 模板只认 `<strong>`，`**` 会原样显示在页面上。
+    （圣徒城那份曾遗留 4 处，2026-09-24 已修源码 + 重建 + 重截图。）
+11. **SVG 里相邻两行的行距要 ≥20px**（字号 11.5）。把 `y=185 / y=196` 这种
+    11px 行距塞进 60px 高的框，`check_render.py` 必报重叠（area 400+）。
+12. **官方 chapters 数 = 章节色数**：设计系统只有 6 个 accent，7 章时让末章复用第 1 章
+    的颜色（「首尾都是全局视角」），并写进图注 —— 不要自造第 7 个 hex，否则
+    将来跑 `theme.py` 会漏映射、残留旧色。
+13. **多章页面的 TOC 卡片数不是 3 的倍数**时，给最后一张加 `grid-column:1/-1` 跨满整行，
+    否则会留一个孤立的 card。
+
+## 无第二信源时的「定点复转」（2026-09-24 起）
+
+若视频 **既无 CC 字幕、也无 UP 附带的字幕文件**，就写一个窄窗复转脚本
+（`work/recheck.py`：`clip_timestamps=[start, start+dur]` + 环境变量传 `WHISPER_PROMPT`），
+对存疑专名做 2 轮不同提示词的重转：
+- 两轮一致 → 采信
+- 两轮不同 → 结合上下文音近推定，标**存疑**
+- 仍无法判定 → 保留原文并加注
+
+实例（BV154426xEha）：`ChairGPT→ChatGPT`、`覆盖倒→覆盖到`、`断板→短板`、
+`交付体验→交互体验`（均改）；`网答/网达→访达（Finder）`（音近推定，存疑）。
+
+## 双源 ASR 交叉校验（2026-09-24 起，模型名密集的视频默认启用）
+
+若 UP 主**随附件提供了字幕**（如 vCaptions SRT），把它当**独立第二转写源**与 Whisper 逐条比对：
+- 两源一致 → 直接采信
+- 两源分歧 → 进勘误表；模型名以官方为准，其余标「存疑」不擅改
+- 两源都写成同一荒诞词 → 多半是作者口语梗，按规则**保留原文加注**
+
+实例：BV1PKh86zEhX 的 `Fibro 5 / FBL5.1`→`Fable 5`（存疑）、
+`千问 3.8 27B vs 2107B`（两源不一致，存疑）、`美国大豆包`（作者戏称，保留）。
