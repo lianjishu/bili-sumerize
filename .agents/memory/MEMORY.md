@@ -186,6 +186,25 @@ BiliSumerize/
 13. **多章页面的 TOC 卡片数不是 3 的倍数**时，给最后一张加 `grid-column:1/-1` 跨满整行，
     否则会留一个孤立的 card。
 
+## git push 静默失败 exit 128 → 先查 `http_proxy`（2026-09-24）
+
+**症状**：`git push` 返回 exit 128 且 **stdout/stderr 全空**，
+但 `git ls-remote` / `git credential fill` / 带凭据的 HTTP 请求都正常 —— 极易误判成凭据坏了。
+
+**根因**：本机环境变量里有 `http_proxy=http://127.0.0.1:9982`（**注意 `http_proxy` 也在，
+不只有 `https_proxy`**）。git 走该代理访问 `git-receive-pack` 拿到 401 后，
+回头调 `git credential-manager get` 时**静默退出**，凭据从未回填重试。
+
+**解法**（已验证）：
+```powershell
+Remove-Item Env:\http_proxy,Env:\https_proxy,Env:\HTTP_PROXY,Env:\HTTPS_PROXY -ErrorAction SilentlyContinue
+```
+`NO_PROXY=gitee.com` **无效**，必须真删变量。推成功后 `git status -sb` 应无 `ahead`。
+
+**排查方法**：`GIT_CURL_VERBOSE=1` + `GIT_TRACE=1` 重定向到文件；
+或用 python `subprocess.run(capture_output=True)` 调 git 拿真实退出码
+（PowerShell 会把 git 的 stderr 包成 `NativeCommandError` 并吞掉内容）。
+
 ## 无第二信源时的「定点复转」（2026-09-24 起）
 
 若视频 **既无 CC 字幕、也无 UP 附带的字幕文件**，就写一个窄窗复转脚本
