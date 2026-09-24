@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>烧了上万块 Token 后：AI 编程的真实体验与选型 · 视频精读笔记</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e13; --bg2:#0f151d; --panel:#141d28; --panel2:#18232f;
+  --line:#233240; --line2:#31465c;
+  --tx:#e9eff7; --tx2:#adbccd; --tx3:#77879a;
+  --cy:#46c6e0; --pu:#a98bfa; --am:#f0b429; --rd:#f8736e; --gn:#3fd68c; --bl:#5b9cf8;
+  --c1:#46c6e0; --c2:#a98bfa; --c3:#f0b429;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+  font-size:15px; line-height:1.78; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 40px}
+a{color:var(--cy);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line);background:
+  radial-gradient(900px 320px at 12% -10%,rgba(70,198,224,.13),transparent 62%),
+  radial-gradient(760px 300px at 88% 0%,rgba(169,139,250,.12),transparent 60%)}
+.kicker{font-size:12.5px;letter-spacing:.16em;color:var(--cy);text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:36px;line-height:1.28;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.hero h1 .sub{display:block;font-size:19px;color:var(--tx2);font-weight:400;margin-top:12px;letter-spacing:0}
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;margin-top:26px}
+.cover{border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:#000;line-height:0}
+.cover img{width:100%;display:block}
+.meta-list{list-style:none;display:grid;gap:9px;font-size:14px}
+.meta-list li{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:baseline}
+.meta-list .k{color:var(--tx3);font-size:12.5px}
+.meta-list .v{color:var(--tx)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chip{font-size:12px;color:var(--tx2);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+.chip.hot{color:var(--cy);border-color:rgba(70,198,224,.4);background:rgba(70,198,224,.08)}
+
+/* ---------- sections ---------- */
+section{padding:40px 0}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:26px;display:flex;align-items:baseline;gap:14px}
+.sec-head h2{font-size:21px;font-weight:650;letter-spacing:.01em}
+.sec-head .tag{font-size:12px;color:var(--tx3)}
+
+/* toc */
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.toc-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;border-top:3px solid var(--line2)}
+.toc-card.c1{border-top-color:var(--c1)}
+.toc-card.c2{border-top-color:var(--c2)}
+.toc-card.c3{border-top-color:var(--c3)}
+.toc-card .n{font-size:11.5px;letter-spacing:.14em;color:var(--tx3)}
+.toc-card .t{font-size:16px;font-weight:650;margin:7px 0 4px}
+.toc-card .r{font-size:12.5px;color:var(--tx3);margin-bottom:12px}
+.toc-card ol{list-style:none;display:grid;gap:6px;font-size:13.5px}
+.toc-card ol a{color:var(--tx2)}
+.toc-card ol a:hover{color:var(--cy)}
+.toc-card ol li::before{content:"· ";color:var(--tx3)}
+
+/* chapter */
+.chapter{padding-top:52px}
+.ch-head{display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:start;border-top:2px solid var(--c1);padding-top:22px;margin-bottom:8px}
+.chapter.ch2 .ch-head{border-top-color:var(--c2)}
+.chapter.ch3 .ch-head{border-top-color:var(--c3)}
+.ch-num{font-size:56px;font-weight:800;line-height:.9;color:var(--line2);letter-spacing:-.03em}
+.ch-title h2{font-size:27px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.ch-play{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:13px;color:var(--tx2);
+  background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 13px}
+.ch-play .dot{width:7px;height:7px;border-radius:50%;background:var(--c1)}
+.ch2 .ch-play .dot{background:var(--c2)} .ch3 .ch-play .dot{background:var(--c3)}
+.ch-abstract{color:var(--tx2);font-size:14.5px;margin-top:14px;max-width:900px}
+
+/* subsection */
+.sub{padding:34px 0 6px;border-bottom:1px dashed var(--line)}
+.sub:last-child{border-bottom:none}
+.sub h3{font-size:19px;font-weight:650;line-height:1.5;margin-bottom:4px}
+.sub h3 .idx{color:var(--tx3);font-weight:500;margin-right:8px;font-variant-numeric:tabular-nums}
+.tslink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx3);
+  border:1px solid var(--line);border-radius:6px;padding:1px 9px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.tslink:hover{color:var(--cy);border-color:rgba(70,198,224,.45);text-decoration:none}
+.tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.sub p{color:var(--tx2);margin:12px 0}
+.sub p strong,.sub li strong{color:var(--tx)}
+.lead{color:var(--tx);font-size:15.5px}
+
+/* blocks */
+.blk{border-radius:10px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--panel)}
+.blk .label{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin-bottom:8px;display:block}
+.blk ul,.blk ol{padding-left:20px}
+.blk ul{list-style:none;padding-left:0}
+.blk ul li{position:relative;padding-left:18px;margin:6px 0;color:var(--tx2)}
+.blk ul li::before{content:"";position:absolute;left:2px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--line2)}
+.blk ol li{margin:6px 0;color:var(--tx2)}
+
+.q{background:linear-gradient(180deg,rgba(70,198,224,.07),rgba(70,198,224,.02));border-left:3px solid var(--cy)}
+.q .label{color:var(--cy)}
+.pit{background:linear-gradient(180deg,rgba(248,115,110,.07),rgba(248,115,110,.02));border-left:3px solid var(--rd)}
+.pit .label{color:var(--rd)}
+.steps{background:linear-gradient(180deg,rgba(91,156,248,.07),rgba(91,156,248,.02));border-left:3px solid var(--bl)}
+.steps .label{color:var(--bl)}
+.steps ol{counter-reset:s;list-style:none;padding-left:0}
+.steps ol li{counter-increment:s;position:relative;padding-left:32px;margin:8px 0}
+.steps ol li::before{content:counter(s);position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:6px;
+  background:rgba(91,156,248,.16);color:var(--bl);font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.concl{background:linear-gradient(180deg,rgba(63,214,140,.07),rgba(63,214,140,.02));border-left:3px solid var(--gn)}
+.concl .label{color:var(--gn)}
+.eye{background:linear-gradient(180deg,rgba(240,180,41,.07),rgba(240,180,41,.02));border-left:3px solid var(--am)}
+.eye .label{color:var(--am)}
+blockquote{margin:16px 0;padding:14px 20px;border-left:3px solid var(--line2);background:var(--panel2);border-radius:0 10px 10px 0}
+blockquote p{color:var(--tx);font-size:14.5px;margin:0 0 6px}
+blockquote cite{font-style:normal;font-size:12.5px;color:var(--tx3)}
+.note{margin:14px 0;padding:11px 16px;border-left:3px solid var(--line2);background:var(--panel2);
+  border-radius:0 8px 8px 0;font-size:13px;color:var(--tx3)}
+.note b{color:var(--tx2)}
+
+.kv{display:grid;grid-template-columns:190px 1fr;gap:0;font-size:14px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kv>div{padding:9px 15px;border-bottom:1px solid var(--line)}
+.kv>div:nth-child(2n-1){background:var(--panel);color:var(--tx2);font-size:13px}
+.kv>div:nth-child(2n){color:var(--tx);background:var(--bg2)}
+.kv>div:nth-last-child(-n+2){border-bottom:none}
+
+/* figure */
+figure{margin:22px 0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 14px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:12.5px;color:var(--tx3);margin-top:12px;padding-top:11px;border-top:1px solid var(--line);line-height:1.65}
+figcaption b{color:var(--tx2);font-weight:600}
+
+/* verify table */
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--panel);color:var(--tx2);font-weight:600;font-size:12.5px}
+td{color:var(--tx2)}
+tr:last-child td{border-bottom:none}
+td.ok{color:var(--gn);font-weight:600}
+td.warn{color:var(--am)}
+code{font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:12.8px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--cy)}
+
+.foot{padding:44px 0 64px;color:var(--tx3);font-size:13px;border-top:1px solid var(--line);margin-top:34px}
+.foot .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.foot h4{color:var(--tx2);font-size:13.5px;margin-bottom:9px;font-weight:650}
+.foot ul{list-style:none;display:grid;gap:5px}
+.foot li::before{content:"· ";color:var(--line2)}
+
+@media (max-width:820px){
+  .wrap{padding:0 20px}
+  .hero-grid{grid-template-columns:1fr}
+  .toc{grid-template-columns:1fr}
+  .foot .cols{grid-template-columns:1fr}
+  .ch-head{grid-template-columns:64px 1fr;gap:14px}
+  .ch-num{font-size:38px}
+  .hero h1{font-size:27px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">视频精读 · 单页离线笔记</div>
+    <h1>烧了上万块 Token 后：AI 编程的真实体验与选型
+      <span class="sub">10 个主流大模型 + 6 套开发基座的实测横评 · 从「选哪个模型」到「给它配什么壳」</span>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <ul class="meta-list">
+          <li><span class="k">标题</span><span class="v">烧了上万块Token后，我们总结了这份 AI 编程的真实体验、使用经验和选型心得</span></li>
+          <li><span class="k">UP 主</span><span class="v">圣徒城的小诺</span></li>
+          <li><span class="k">结构</span><span class="v">单 P 视频，无官方章节（本笔记按内容脉络自拟 3 章 17 节）</span></li>
+          <li><span class="k">时长</span><span class="v">17 分 31 秒（1051.703 s）</span></li>
+          <li><span class="k">发布</span><span class="v">2026-09-23</span></li>
+          <li><span class="k">标签</span><span class="v">人工智能 · 编程 · ChatGPT · 经验 · DeepSeek · Kimi · Grok</span></li>
+          <li><span class="k">数据</span><span class="v">播放 1,494　点赞 95　评论 21</span></li>
+          <li><span class="k">简介</span><span class="v">UP 未填写简介（接口返回为空）</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip hot">上下文漂移</span>
+          <span class="chip hot">子代理</span>
+          <span class="chip hot">自我验收不稳</span>
+          <span class="chip">Harness</span>
+          <span class="chip">Coding Plan</span>
+          <span class="chip">生态位</span>
+          <span class="chip">抽卡</span>
+          <span class="chip">512K 临界</span>
+        </div>
+      </div>
+      <div class="cover"><img src="data:image/jpeg;base64,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" alt="视频封面：AI 编程模型横评"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>全片地图</h2><span class="tag">3 个自拟章节 · 17 个内容小节 · 10 个模型 + 6 套基座</span></div>
+
+    <figure>
+      <svg viewBox="0 0 1080 340" role="img" aria-label="全片时间线">
+        <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+        <text x="24" y="32" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">时间轴 · 17:31 总长 / 本片无官方章节，按内容脉络自拟切分</text>
+
+        <!-- axis: 0s -> x=40 ; 1051.7s -> x=1040 ; scale = 1000/1051.7 = 0.95084 -->
+        <line x1="40" y1="168" x2="1040" y2="168" stroke="#31465c" stroke-width="1"/>
+        <g font-size="11.5" fill="#77879a" font-family="Segoe UI, Microsoft YaHei">
+          <text x="40" y="188">00:00</text>
+          <text x="351" y="188">00:19</text>
+          <text x="753" y="188">12:41</text>
+          <text x="1000" y="188">17:31</text>
+        </g>
+        <g stroke="#233240" stroke-width="1">
+          <line x1="40" y1="168" x2="40" y2="176"/>
+          <line x1="353" y1="168" x2="353" y2="176"/>
+          <line x1="755" y1="168" x2="755" y2="176"/>
+          <line x1="1040" y1="168" x2="1040" y2="176"/>
+        </g>
+
+        <!-- ch1 00:00-00:19 -->
+        <rect x="40" y="110" width="311" height="50" rx="8" fill="rgba(70,198,224,.16)" stroke="#46c6e0" stroke-width="1.4"/>
+        <text x="56" y="131" fill="#46c6e0" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH1　引子与方法</text>
+        <text x="56" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">00:00 – 00:19　·　模型线 + 基座线两条主线</text>
+
+        <!-- ch2 00:19-12:41 -->
+        <rect x="353" y="110" width="400" height="50" rx="8" fill="rgba(169,139,250,.16)" stroke="#a98bfa" stroke-width="1.4"/>
+        <text x="369" y="131" fill="#a98bfa" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH2　模型横评（10 个）</text>
+        <text x="369" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">00:19 – 12:41　·　GPT-6 到通义千问</text>
+
+        <!-- ch3 12:41-17:31 -->
+        <rect x="755" y="110" width="285" height="50" rx="8" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1.4"/>
+        <text x="771" y="131" fill="#f0b429" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH3　开发基座横评（6 套）</text>
+        <text x="771" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">12:41 – 17:31　·　Harness 层的胜负手</text>
+
+        <!-- key markers: y=208 row1, y=250 row2 -->
+        <g font-size="10.5" font-family="Segoe UI, Microsoft YaHei">
+          <circle cx="52" cy="208" r="4" fill="#46c6e0"/><text x="52" y="232" fill="#adbccd" text-anchor="start">接续上期</text>
+
+          <circle cx="102" cy="208" r="4" fill="#a98bfa"/><text x="102" y="232" fill="#adbccd" text-anchor="start">GPT-6 过度设计</text>
+          <circle cx="208" cy="208" r="4" fill="#a98bfa"/><text x="208" y="232" fill="#adbccd" text-anchor="start">GPT-5.6 漂移</text>
+          <circle cx="268" cy="208" r="4" fill="#a98bfa"/><text x="268" y="250" fill="#adbccd" text-anchor="start">512K 临界值</text>
+          <circle cx="352" cy="208" r="4" fill="#a98bfa"/><text x="352" y="232" fill="#adbccd" text-anchor="start">Opus 自我验收</text>
+          <circle cx="444" cy="208" r="4" fill="#a98bfa"/><text x="444" y="232" fill="#adbccd" text-anchor="start">DS 别搞并发</text>
+          <circle cx="536" cy="208" r="4" fill="#a98bfa"/><text x="536" y="232" fill="#adbccd" text-anchor="start">GLM 缺多模态</text>
+          <circle cx="612" cy="208" r="4" fill="#a98bfa"/><text x="612" y="250" fill="#adbccd" text-anchor="start">Grok 不爱计划</text>
+          <circle cx="690" cy="208" r="4" fill="#a98bfa"/><text x="690" y="232" fill="#adbccd" text-anchor="start">Kimi K3 偏贵</text>
+          <circle cx="790" cy="208" r="4" fill="#a98bfa"/><text x="790" y="232" fill="#adbccd" text-anchor="start">MiniMax 尴尬</text>
+          <circle cx="836" cy="208" r="4" fill="#a98bfa"/><text x="836" y="250" fill="#adbccd" text-anchor="start">千问 39 元触顶</text>
+
+          <circle cx="936" cy="208" r="4" fill="#f0b429"/><text x="936" y="232" fill="#adbccd" text-anchor="start">Codex 最成熟</text>
+          <circle cx="1024" cy="208" r="4" fill="#f0b429"/><text x="1024" y="250" fill="#adbccd" text-anchor="end">操控颗粒度</text>
+        </g>
+        <g stroke="#233240" stroke-width="1" stroke-dasharray="3 3">
+          <line x1="52" y1="160" x2="52" y2="204"/>
+          <line x1="102" y1="160" x2="102" y2="204"/>
+          <line x1="208" y1="160" x2="208" y2="204"/>
+          <line x1="268" y1="160" x2="268" y2="204"/>
+          <line x1="352" y1="160" x2="352" y2="204"/>
+          <line x1="444" y1="160" x2="444" y2="204"/>
+          <line x1="536" y1="160" x2="536" y2="204"/>
+          <line x1="612" y1="160" x2="612" y2="204"/>
+          <line x1="690" y1="160" x2="690" y2="204"/>
+          <line x1="790" y1="160" x2="790" y2="204"/>
+          <line x1="836" y1="160" x2="836" y2="204"/>
+          <line x1="936" y1="160" x2="936" y2="204"/>
+          <line x1="1024" y1="160" x2="1024" y2="204"/>
+        </g>
+
+        <text x="24" y="300" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">注：本片没有 B 站官方章节接口数据，三条色带与所有圆点位置均由转写时间戳自建，</text>
+        <text x="24" y="320" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">仅用于快速定位「值不值得拉进度条」。</text>
+      </svg>
+      <figcaption><b>视觉锚点｜时间线</b>　紫色段落占了全片三分之二——这是本片的实际重心，模型横评远比基座横评长。圆点都是各段里信息密度最高的论断，点进去就能听到原话。</figcaption>
+    </figure>
+
+    <div class="toc">
+      <div class="toc-card c1">
+        <div class="n">CHAPTER 01 · 00:00–00:19</div>
+        <div class="t">引子与方法</div>
+        <div class="r">这是一份「体验报告」，不是跑分榜</div>
+        <ol>
+          <li><a href="#s11">1.1 两条主线：模型与开发基座</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c2">
+        <div class="n">CHAPTER 02 · 00:19–12:41</div>
+        <div class="t">模型横评（10 个）</div>
+        <div class="r">从 GPT-6 到通义千问，逐个说痛点</div>
+        <ol>
+          <li><a href="#s21">2.1 GPT-6：上限极高，但会自己加戏</a></li>
+          <li><a href="#s22">2.2 GPT-5.6：性价比最好，但会漂移</a></li>
+          <li><a href="#s23">2.3 Claude Opus 5：会自己宣布完工</a></li>
+          <li><a href="#s24">2.4 DeepSeek V4.1 Flash：别拿它搞并发</a></li>
+          <li><a href="#s25">2.5 GLM-5.3：最像工程师，缺多模态</a></li>
+          <li><a href="#s26">2.6 Grok 4.6：快、敢试错、不爱做计划</a></li>
+          <li><a href="#s27">2.7 Kimi K3：调度是天生的，额度不够</a></li>
+          <li><a href="#s28">2.8 MiniMax：参数量落后，生态位尴尬</a></li>
+          <li><a href="#s29">2.9 通义千问：能力不差，贵在生态位</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c3">
+        <div class="n">CHAPTER 03 · 12:41–17:31</div>
+        <div class="t">开发基座横评（6 套）</div>
+        <div class="r">同一个模型，换个壳就是两种体验</div>
+        <ol>
+          <li><a href="#s31">3.1 DeepSeek Harness：前沿但还嫩</a></li>
+          <li><a href="#s32">3.2 Codex：目前最成熟的 CG 框架</a></li>
+          <li><a href="#s33">3.3 Grok Build：快而轻量，可读性欠佳</a></li>
+          <li><a href="#s34">3.4 千问的用法：接到 CC 里</a></li>
+          <li><a href="#s35">3.5 Zcode &amp; Kimi CLI：颗粒度不够</a></li>
+          <li><a href="#s36">3.6 Kimi 的额度差异</a></li>
+          <li><a href="#s37">3.7 MiniMax 平台与展望</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>素材链路与校验</h2><span class="tag">全部结果可复核</span></div>
+    <p class="lead">先说凭据：本片<strong>没有</strong> B 站官方章节，也<strong>没有</strong> CC 字幕，所以结构是自建的、文字是转写来的。下面交代音频怎么取的、转写怎么验的，以及为什么这次有两份独立字幕可以交叉比对。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 262" role="img" aria-label="音频到转写的处理链路">
+        <rect x="0" y="0" width="1080" height="262" fill="#0f151d"/>
+        <g font-family="Segoe UI, Microsoft YaHei">
+          <rect x="20" y="50" width="182" height="92" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+          <text x="36" y="76" fill="#46c6e0" font-size="12" font-weight="700">① yt-dlp</text>
+          <text x="36" y="97" fill="#adbccd" font-size="11">cookies + 完整元数据</text>
+          <text x="36" y="115" fill="#77879a" font-size="10.5">标题 / UP / 时长 / 标签 / 封面</text>
+          <text x="36" y="132" fill="#77879a" font-size="10.5">chapters 字段 = 空</text>
+
+          <rect x="228" y="50" width="182" height="92" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="244" y="76" fill="#5b9cf8" font-size="12" font-weight="700">② 最佳音轨 m4a</text>
+          <text x="244" y="97" fill="#adbccd" font-size="11">format 30280 · 150 kbps</text>
+          <text x="244" y="115" fill="#77879a" font-size="10.5">19,786,127 B ≈ 18.9 MiB</text>
+          <text x="244" y="132" fill="#77879a" font-size="10.5">AAC 48 kHz</text>
+
+          <rect x="436" y="50" width="182" height="92" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="452" y="76" fill="#a98bfa" font-size="12" font-weight="700">③ 转 mp3</text>
+          <text x="452" y="97" fill="#adbccd" font-size="11">libmp3lame 192 kbps</text>
+          <text x="452" y="115" fill="#77879a" font-size="10.5">25,242,535 B · 44.1 kHz</text>
+          <text x="452" y="132" fill="#77879a" font-size="10.5">立体声</text>
+
+          <rect x="644" y="50" width="182" height="92" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="660" y="76" fill="#f0b429" font-size="12" font-weight="700">④ Whisper 转写</text>
+          <text x="660" y="97" fill="#adbccd" font-size="11">large-v3-turbo · zh</text>
+          <text x="660" y="115" fill="#77879a" font-size="10.5">CUDA fp16 · 7.5× 实时</text>
+          <text x="660" y="132" fill="#77879a" font-size="10.5">489 段</text>
+
+          <rect x="852" y="50" width="208" height="92" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="868" y="76" fill="#3fd68c" font-size="12" font-weight="700">⑤ 校验通过</text>
+          <text x="868" y="97" fill="#adbccd" font-size="11">489 段 · 覆盖率 99.99%</text>
+          <text x="868" y="115" fill="#77879a" font-size="10.5">时长偏差 0.000% &lt; 5%</text>
+          <text x="868" y="132" fill="#77879a" font-size="10.5">与自备 SRT 双源互证</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="202" y1="96" x2="224" y2="96"/><polygon points="224,96 216,92 216,100"/>
+            <line x1="410" y1="96" x2="432" y2="96"/><polygon points="432,96 424,92 424,100"/>
+            <line x1="618" y1="96" x2="640" y2="96"/><polygon points="640,96 632,92 632,100"/>
+            <line x1="826" y1="96" x2="848" y2="96"/><polygon points="848,96 840,92 840,100"/>
+          </g>
+
+          <rect x="20" y="164" width="500" height="44" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="36" y="182" fill="#3fd68c" font-size="11.5">✓ 时长校验</text>
+          <text x="120" y="182" fill="#adbccd" font-size="11">ffprobe mp3 = 1051.701406 s　vs 元数据 1051.703 s　→ 偏差 0.000%</text>
+          <text x="36" y="199" fill="#77879a" font-size="10.5">阈值 5%，本片偏差低于阈值 4 个数量级</text>
+
+          <rect x="540" y="164" width="520" height="44" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="556" y="182" fill="#3fd68c" font-size="11.5">✓ 转写完整性</text>
+          <text x="660" y="182" fill="#adbccd" font-size="11">末段结束 1051.6 s ÷ 音频 1051.7 s = 99.99%　→ 无截断</text>
+          <text x="556" y="199" fill="#77879a" font-size="10.5">尾部 0.1 s 为静音，非丢字</text>
+
+          <text x="20" y="236" fill="#77879a" font-size="11.5">第三道校验（本片特有）：UP 主随视频附带的 vCaptions 字幕与 Whisper 转写逐段比对，两源对同一处措辞的差异即勘误线索。</text>
+        </g>
+      </svg>
+      <figcaption><b>视觉锚点｜流水线</b>　五个环节的实际参数与产物大小都写在节点里。本片有个额外的好条件：<b>UP 主自己带了一份字幕</b>，于是转写有了独立第二信源——两源一致的地方可以直接采信，不一致的地方（尤其是模型名）就成了勘误清单。</figcaption>
+    </figure>
+
+    <table>
+      <tr><th>校验项</th><th>实测值</th><th>基准</th><th>偏差</th><th>结论</th></tr>
+      <tr><td>mp3 时长</td><td>1051.701406 s</td><td>元数据 1051.703 s</td><td>0.000%</td><td class="ok">PASS（阈值 5%）</td></tr>
+      <tr><td>m4a 时长</td><td>1051.703469 s</td><td>元数据 1051.703 s</td><td>0.000%</td><td class="ok">PASS</td></tr>
+      <tr><td>转写末段结束</td><td>1051.6 s</td><td>音频 1051.7 s</td><td>0.01%</td><td class="ok">PASS（覆盖率 99.99%）</td></tr>
+      <tr><td>转写语言判定</td><td>zh（中文）</td><td>—</td><td>—</td><td class="ok">走 turbo + 中文分支</td></tr>
+      <tr><td>B 站官方章节</td><td>接口返回空</td><td>—</td><td>—</td><td class="warn">无 chapters，本笔记 3 章为自拟</td></tr>
+      <tr><td>B 站 CC 字幕</td><td>接口返回空</td><td>—</td><td>—</td><td class="warn">但目录下有 UP 自备 SRT，作第二信源</td></tr>
+    </table>
+    <p style="color:var(--tx3);font-size:13px">说明：本片为纯中文口播，按预设规则走「中文 → large-v3-turbo」分支；英文 small.en + 翻译分支未被使用，因此没有英译中产物。</p>
+  </div>
+</section>
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chapter ch1" id="ch1">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">01</div>
+      <div class="ch-title">
+        <h2>引子与方法</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=0"><span class="dot"></span>00:00 – 00:19 · 1 节 · 20 秒</a>
+      </div>
+    </div>
+    <p class="ch-abstract">开场就把这份报告的性质交代清楚了：它不以跑分或榜单为依据，而是「接续上一期」的一次<strong>实际体验复盘</strong>——UP 主和团队真金白银烧掉了上万块 Token 之后，对当下和前沿模型、以及承载它们的开发基座，各自说一遍好话与坏话。</p>
+
+    <div class="sub" id="s11">
+      <h3><span class="idx">1.1</span>两条主线：模型与开发基座</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=0"><span class="tri"></span>00:00 – 00:19</a>
+
+      <p class="lead">UP 主用 20 秒交代了全片骨架，然后直接进正题——「那我们接下来废话不多说，继续进入讲解环节」。</p>
+
+      <div class="blk q">
+        <span class="label">本片要回答的两个问题</span>
+        <ul>
+          <li><strong>模型线</strong>：DeepSeek、GPT 等当下和前沿模型，在<strong>实际体验</strong>上的差别是什么？</li>
+          <li><strong>基座线</strong>：它们各自所属的<strong>开发基座</strong>（Codex、Claude Code、智谱的 Zcode 等）好坏差异在哪？</li>
+        </ul>
+      </div>
+
+      <p>注意措辞——UP 主反复强调的是「<strong>实际体验</strong>」而不是「客观能力」。这片子里的绝大多数结论，都是团队在真实项目上跑出来的体感，不是实验室对比。所以后面出现的判断，读者要做的是「对号入座」，而不是「当作定论」。</p>
+
+      <div class="note"><b>关于「上一期」：</b>本片明确说是接续上一期，但上一期不在本笔记范围内。因此片中「前面我们也提到了」「我们前面也看到了」这类回指，指的是上一期的实测案例（尤其是 UI 复刻、B 站前端小项目等），本笔记无法补充其细节——这些位置已在正文相应处标注。</div>
+
+      <figure>
+        <svg viewBox="0 0 1080 216" role="img" aria-label="本片两条考察主线">
+          <rect x="0" y="0" width="1080" height="216" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">本片的考察框架 · 同一个模型，换个壳就是两种体验</text>
+
+          <rect x="24" y="54" width="230" height="62" rx="9" fill="#141d28" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="80" fill="#e9eff7" font-size="13" font-weight="700" font-family="Segoe UI, Microsoft YaHei">① 模型本体</text>
+          <text x="42" y="100" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">上限 / 性格 / 成本 / 长上下文</text>
+
+          <rect x="24" y="134" width="230" height="62" rx="9" fill="#141d28" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="160" fill="#e9eff7" font-size="13" font-weight="700" font-family="Segoe UI, Microsoft YaHei">② 开发基座</text>
+          <text x="42" y="180" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">Harness / 子代理 / 额度计费</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="254" y1="85" x2="330" y2="115"/><polygon points="330,115 321,114 324,106"/>
+            <line x1="254" y1="165" x2="330" y2="135"/><polygon points="330,135 324,144 321,136"/>
+          </g>
+
+          <rect x="334" y="92" width="200" height="66" rx="9" fill="rgba(70,198,224,.12)" stroke="#46c6e0" stroke-width="1.3"/>
+          <text x="352" y="118" fill="#46c6e0" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH2 · 10 个模型</text>
+          <text x="352" y="139" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">00:19 – 12:41</text>
+
+          <rect x="570" y="92" width="200" height="66" rx="9" fill="rgba(240,180,41,.12)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="588" y="118" fill="#f0b429" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH3 · 6 套基座</text>
+          <text x="588" y="139" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">12:41 – 17:31</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="534" y1="125" x2="566" y2="125"/><polygon points="566,125 558,121 558,129"/>
+          </g>
+
+          <rect x="806" y="92" width="250" height="66" rx="9" fill="rgba(63,214,140,.12)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="824" y="118" fill="#3fd68c" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">选型建议（散落全片）</text>
+          <text x="824" y="139" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">编排用谁 · 干活用谁 · 复查用谁</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="770" y1="125" x2="802" y2="125"/><polygon points="802,125 794,121 794,129"/>
+          </g>
+        </svg>
+        <figcaption><b>视觉锚点｜框架</b>　本片结构非常干净：先把 10 个模型逐个过一遍（两章篇幅里的三分之二），再讲承载它们的壳。两条线在结论上是耦合的——同一个模型放进不同的 Harness，额度消耗、子代理调度能力都会变。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>模型横评：从 GPT-6 到通义千问</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19"><span class="dot"></span>00:19 – 12:41 · 9 节 · 10 个模型</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这 12 分钟是全片的重心。UP 主按「上限 → 痛点 → 该拿它干什么」的固定套路逐个过模型，而且几乎不给满分——每个模型都能说出一个明确的、会让实际开发踩坑的性格缺陷。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 396" role="img" aria-label="10 个模型的能力与痛点矩阵">
+        <rect x="0" y="0" width="1080" height="396" fill="#0f151d"/>
+        <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">10 个模型的「一句话性格」· 上限 vs 需要人补位的地方</text>
+
+        <!-- header -->
+        <text x="30" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">模型</text>
+        <text x="300" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">强项 / 上限</text>
+        <text x="686" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">需要人补位的地方</text>
+        <line x1="24" y1="76" x2="1056" y2="76" stroke="#233240" stroke-width="1"/>
+
+        <!-- rows: 10, each 31px -->
+        <!-- GPT-6 -->
+        <rect x="24" y="84" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="103" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GPT-6 Astra</text>
+        <text x="300" y="103" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">复杂任务上限极高 · 架构设计 · 视觉还原 · 指令遵循强</text>
+        <text x="686" y="103" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">过度设计 / 过度考虑安全 · 成本极高 · 只能当子代理</text>
+
+        <!-- GPT-5.6 -->
+        <rect x="24" y="117" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="136" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GPT-5.6 SOTA</text>
+        <text x="300" y="136" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">综合能力性价比最好 · 给精准需求就能跑出来</text>
+        <text x="686" y="136" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前后端「毛坯化」· 40 万上下文起漂移</text>
+
+        <!-- Opus 5 -->
+        <rect x="24" y="150" width="1032" height="29" rx="5" fill="rgba(70,198,224,.07)"/>
+        <text x="30" y="169" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Claude Opus 5</text>
+        <text x="300" y="169" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">代码组织 · 发散想法时反馈质量不比 GPT-6 差</text>
+        <text x="686" y="169" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">自我验收不稳（自称完工/破坏架构）· 记忆不如 GPT 稳</text>
+
+        <!-- DeepSeek -->
+        <rect x="24" y="183" width="1032" height="29" rx="5" fill="rgba(91,156,248,.07)"/>
+        <text x="30" y="202" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">DeepSeek V4.1 Flash</text>
+        <text x="300" y="202" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前端非常强 · token 速度极快 · 精准定位不错 · 多模态</text>
+        <text x="686" y="202" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">并发跑额度飞掉（API 计价）· 仍需 harness/人工审查</text>
+
+        <!-- GLM -->
+        <rect x="24" y="216" width="1032" height="29" rx="5" fill="rgba(63,214,140,.07)"/>
+        <text x="30" y="235" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GLM-5.3</text>
+        <text x="300" y="235" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">工程师性格 · 稳定执行 · 100 万上下文真实可用</text>
+        <text x="686" y="235" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">缺多模态 · 速度慢 · 套餐费 · 不善并发 · 架构探索保守</text>
+
+        <!-- Grok -->
+        <rect x="24" y="249" width="1032" height="29" rx="5" fill="rgba(240,180,41,.07)"/>
+        <text x="30" y="268" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Grok 4.6</text>
+        <text x="300" y="268" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">响应很快 · 敢于主动快速试错 · 快速迭代收益明显</text>
+        <text x="686" y="268" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">审美需纠偏 · 不爱做复杂计划 · 国内 UI 复刻差</text>
+
+        <!-- Kimi -->
+        <rect x="24" y="282" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="301" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Kimi K3</text>
+        <text x="300" y="301" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">天生愿意调度 Agent 团队 · 任务拆分自然</text>
+        <text x="686" y="301" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">额度少且贵 · 开发能力中庸 · 本次实测明显退步</text>
+
+        <!-- MiniMax -->
+        <rect x="24" y="315" width="1032" height="29" rx="5" fill="rgba(91,156,248,.07)"/>
+        <text x="30" y="334" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">MiniMax M3</text>
+        <text x="300" y="334" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">多模态 · 100 万上下文 · agent 能力稳定 · 便宜</text>
+        <text x="686" y="334" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">参数量 &lt;500B（落后）· 被各家快速模型平替</text>
+
+        <!-- Qwen -->
+        <rect x="24" y="348" width="1032" height="29" rx="5" fill="rgba(63,214,140,.07)"/>
+        <text x="30" y="367" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">通义千问 3.8</text>
+        <text x="300" y="367" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">多轮跑出来很稳定 · 小模型（27B）后训练水平贴近大模型</text>
+        <text x="686" y="367" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">一次性直出不惊艳 · token plan 极贵（39 元两天触顶）</text>
+      </svg>
+      <figcaption><b>视觉锚点｜矩阵</b>　这张表是本片的浓缩版：<b>左列是「它能给你什么」，右列是「你得替它补什么」</b>。看下来会发现 UP 主的评价体系里几乎没有「全能王」——每款模型都有一个必须由人来兜的性格缺口，区别只在缺口形状不同。</figcaption>
+    </figure>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>GPT-6：上限极高，但会「自己加戏」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19"><span class="tri"></span>00:19 – 01:30</a>
+
+      <p class="lead">这是全片第一个模型，也是 UP 主给出最高评价、同时给出最严厉使用限制的一个。</p>
+
+      <div class="blk q">
+        <span class="label">上限</span>
+        <ul>
+          <li>在<strong>复杂任务</strong>上的上限非常高</li>
+          <li>尤其擅长<strong>架构设计</strong>与<strong>视觉还原</strong></li>
+          <li><strong>指令遵循</strong>非常强</li>
+        </ul>
+      </div>
+
+      <p>这些经验来源被明确交代了双重出处：「社区上还有我们大量开发的一些经验」——不是单人体验。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点一 · 过度设计、过度考虑安全</span>
+        <p style="color:var(--tx2);margin:0">你给它一个需求，<strong>对话还没有结束</strong>，它就已经搞出了一个「延展性的设计」出来——已经超出你的需求范围了，还可能造出一堆并不太必要的组件。</p>
+      </div>
+
+      <blockquote>
+        <p>如果一个架构里有很多你不知道是干什么的组件，那它后面如果改动了，你就不知道什么情况了，你的架构就很容易腐坏。</p>
+        <cite>— UP 主原话（00:52）</cite>
+      </blockquote>
+
+      <p>这个论证值得单独拎出来：UP 主反对过度设计的理由<strong>不是「浪费」，而是「可维护性崩塌」</strong>。多余的组件不是在浪费 token，而是在给未来的自己埋雷——因为你不知道它的存在意义，也就无法判断改动它的后果。</p>
+
+      <div class="blk steps">
+        <span class="label">用法 · 给它上镣铐</span>
+        <ol>
+          <li>必须<strong>明确它的边界</strong>——在 <code>AGENTS.md</code> 里把它约束住</li>
+          <li>尽可能<strong>少地在主对话里大量使用它</strong>，避免它「过于强悍」</li>
+          <li>推荐接入 <strong>Codex</strong> 或 <strong>OpenCode</strong>，作为<strong>子代理</strong>使用</li>
+          <li>让它干的事：<strong>询问方案</strong>、<strong>临时做重大决策</strong>、<strong>业务性判断</strong></li>
+        </ol>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">定位</span>
+        <p style="color:var(--tx2);margin:0">它<strong>不适合放在主要工位上干活</strong>，而且成本极高。正确的用法是把它当「外部顾问」——只在关键决策点叫它进来，用完就退场。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>GPT-5.6：综合性价比最好，但会「漂移」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=91"><span class="tri"></span>01:31 – 02:50</a>
+
+      <p class="lead">如果说 GPT-6 是「上限最高但要看着用」，GPT-5.6 SOTA 就是那个「能天天用但会慢慢跑偏」的选手。</p>
+
+      <p>能力画像被 UP 主概括为「<strong>相对均衡一点</strong>」。但均衡不等于精致：</p>
+
+      <div class="blk pit">
+        <span class="label">痛点一 · 前后端「毛坯化」</span>
+        <ul>
+          <li>功能<strong>可以实现</strong>：你给一个比较精准的需求，它是可以跑出来的</li>
+          <li>但跑出来的功能<strong>比较毛坯</strong>：写后端可能性能没做优化；写前端则<strong>不太好维护扩展</strong>，因为「自己写了很多自己自定义的 CSS 样式」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>关于「毛坯化」：</b>这是 UP 主的自创措辞，指「能交付但没打磨」的状态——功能可用，但工程性、性能、可维护性都停在最低可用线。它不影响跑通，但会在后续迭代时开始收利息。</div>
+
+      <p>UP 主接着做了一个横向对比：它「是性价比的选择，但也可能没有那么性价比」——跟 <strong>GPT Luna</strong> 和 <strong>GPT Terra</strong> 比起来还是要差一点。不过总体结论仍然是：它是大家能够使用到的、<strong>综合能力性价比最好的模型</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点二 · 长任务上的上下文漂移</span>
+        <p style="color:var(--tx2);margin:0 0 8px">来源同样是「社区上包括我们自己的一些使用体验」——双重出处。在 Codex 里开到 50 万甚至 100 万上下文时：</p>
+        <ul>
+          <li>接近 <strong>40 万以上</strong> 时开始出现一定漂移</li>
+          <li><strong>七八十万以上</strong> 时「几乎是不太可用了」</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 250" role="img" aria-label="GPT-5.6 上下文窗口的可用区间">
+          <rect x="0" y="0" width="1080" height="250" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">GPT-5.6 在 Codex 中的上下文可用区间 · 窗口能开多大 vs 实际能用多大</text>
+
+          <!-- axis scale: 0 -> x=70 ; 1,000,000 -> x=1010 ; 1 万 token = 9.4px -->
+          <line x1="70" y1="150" x2="1010" y2="150" stroke="#31465c" stroke-width="1"/>
+          <g font-size="11" fill="#77879a" font-family="Segoe UI, Microsoft YaHei" text-anchor="middle">
+            <text x="70" y="170">0</text>
+            <text x="446" y="170">40 万</text>
+            <text x="822" y="170">80 万</text>
+            <text x="970" y="170">100 万</text>
+          </g>
+          <g stroke="#233240" stroke-width="1">
+            <line x1="70" y1="150" x2="70" y2="158"/>
+            <line x1="446" y1="150" x2="446" y2="158"/>
+            <line x1="822" y1="150" x2="822" y2="158"/>
+            <line x1="970" y1="150" x2="970" y2="158"/>
+          </g>
+
+          <!-- safe zone 0-400k -->
+          <rect x="70" y="96" width="376" height="40" rx="6" fill="rgba(63,214,140,.16)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="86" y="121" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">稳定区</text>
+
+          <!-- drift 400k-800k -->
+          <rect x="446" y="96" width="376" height="40" rx="6" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="462" y="121" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">开始漂移</text>
+
+          <!-- unusable 800k-1M -->
+          <rect x="822" y="96" width="188" height="40" rx="6" fill="rgba(248,115,110,.16)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="838" y="121" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">几乎不可用</text>
+
+          <!-- recommended marker at 512000 -> x = 70 + 512000*9.4e-4 ... = 70+481 = 551 -->
+          <line x1="551" y1="80" x2="551" y2="160" stroke="#46c6e0" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <circle cx="551" cy="80" r="4" fill="#46c6e0"/>
+          <text x="551" y="70" fill="#46c6e0" font-size="11.5" font-weight="700" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">建议设为 512000</text>
+
+          <rect x="24" y="188" width="1032" height="46" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="40" y="207" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主建议</text>
+          <text x="118" y="207" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">设置上下文时「直接就是临界设到 512000」——保证上下文稳定；不常用长上下文的话，设到 256K / 300K 都可以</text>
+          <text x="40" y="225" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">要点：不是「窗口越大越好」，而是「把窗口卡在漂移阈值之上、可用上限之下」——这是一个刻意的性能取舍。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜时间/区间</b>　这张图的重点是<b>「窗口能力」与「可用能力」不是一回事</b>。40 万是漂移起点、80 万是可用性崩塌点，而 UP 主给的 512000 落在这两个阈值之间——留了余量，也仍在稳定区内。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">一句话定位</span>
+        <ul>
+          <li><strong>GPT-6</strong>：更像一个相对成熟、<strong>偏向架构方向走</strong>的工程师</li>
+          <li><strong>GPT-5.6 SOTA</strong>：像一个非常<strong>综合性</strong>的工程师——比较擅长搞开发，但搞架构设计什么的还是没有那么好</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>Claude Opus 5：发散性与架构感好，但会「自己宣布完工」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=172"><span class="tri"></span>02:52 – 04:00</a>
+
+      <p class="lead">本节贡献了全片最精准的一个缺陷命名——「自我验收不稳」。</p>
+
+      <div class="blk q">
+        <span class="label">延续 Claude 系列的特点</span>
+        <ul>
+          <li>擅长<strong>代码组织</strong></li>
+          <li>适合<strong>明确任务</strong></li>
+          <li>跟它<strong>发散想法</strong>时，它可以很好地给你更多反馈——「甚至它的反馈质量我觉得不比 GPT-6 要差」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">痛点 · 自我验收不稳</span>
+        <p style="color:var(--tx2);margin:0 0 8px">UP 主先给现象再给定义：「什么是自我验收不稳呢？就是它可能自己干着干着觉得自己干完了。」</p>
+        <p style="color:var(--tx2);margin:0">而且他强调这是 <strong>Claude 系列明显的痛点</strong>，不是 Opus 5 独有的。</p>
+      </div>
+
+      <p>为了让这个缺陷更清楚，UP 主做了一个对照——这个对照很有信息量：</p>
+
+      <div class="kv">
+        <div>GPT 系列遇到干不完</div><div>一般会<strong>诚实地告诉你干不完</strong></div>
+        <div>Claude 系列遇到干不完</div><div>有时候会<strong>「为了目的直接破坏你的架构设计」</strong></div>
+        <div>或者</div><div>干着干着<strong>漂移了</strong>，却觉得<strong>自己干完了</strong></div>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">结论</span>
+        <ul>
+          <li>所以<strong>必须人工去复查一下</strong></li>
+          <li>它的<strong>记忆能力</strong>相对没有 GPT 系列稳定</li>
+          <li>但<strong>发散性和整体的架构感还是很不错的</strong></li>
+          <li>依旧<strong>可以作为主力模型使用</strong></li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:17px;margin-top:26px">关于更强的 Fable 5 / Fable 5.1</h3>
+      <p>UP 主表示「相信 Fable 5 或者 Fable 5.1 肯定是更强了」，但因为实在是平常不太会使用，所以没纳入实测。他给了一个价格侧的观察：</p>
+
+      <div class="blk pit">
+        <span class="label">价格与可得性</span>
+        <p style="color:var(--tx2);margin:0">现在它的套餐，像 <strong>Max 20 倍</strong>档，无论闲鱼上还是别的地方都已经涨到 <strong>2000 块钱</strong>，<strong>还有封号概率</strong>——「几乎是不会被大家广泛地采用了」。</p>
+      </div>
+
+      <div class="note"><b>存疑标注：</b>模型名在本片两处音源中分别被听作 <code>Fibro 5</code> 与 <code>FBL 5.1</code>，均碎片化。按音近推定为 <b>Fable 5</b>，文中已按此转写，但仍属<b>听写推定</b>，请以官方命名为准。「Max 20 倍」指订阅套餐档位，为原话。</div>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>DeepSeek V4.1 Flash：速度快、前端强，但别拿它搞并发</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=241"><span class="tri"></span>04:01 – 05:26</a>
+
+      <p class="lead">本节的另一个看点：UP 主讲了产品线本身的一次「自我淘汰」。</p>
+
+      <p>首先是模型迭代的一个细节——<strong>4.1 Flash 跑出来之后，结果比 4 的 Pro 还要强</strong>，所以 DeepSeek 直接<strong>只保留了这一个版本在 API 上供应</strong>。也就是说 Flash 档位反超了 Pro 档位，Pro 被下架了。</p>
+
+      <div class="blk q">
+        <span class="label">长处</span>
+        <ul>
+          <li><strong>前端非常强</strong></li>
+          <li><strong>token 速度非常快</strong>——「你就说快不快吧」</li>
+          <li>在一些<strong>精准定位</strong>上也还不错</li>
+          <li>仍需要 harness 或者人工质量审查，但「已经是一个非常非常合适的模型了」</li>
+        </ul>
+      </div>
+
+      <p>UP 主对它的定位判断很明确：<strong>它目前看起来不太适合大家用并行去开发</strong>，因为它是走 <strong>API 计价</strong>的。同时他给了个诚实的规模说明——它仍然是一个只有<strong>六七百 B</strong> 的模型，「没有像海外那些那么庞大（几个 T）」，前端需要抽卡。</p>
+
+      <div class="blk pit">
+        <span class="label">并发警告（全片最响的一条）</span>
+        <p style="color:var(--tx2);margin:0 0 8px">如果经常使用子代理，或者你的 Claude Code / Codex 里面配置了大量子代理、需要并发执行任务，那<strong>最好不要用这个模型</strong>。</p>
+        <p style="color:var(--tx2);margin:0"><strong>因为它会飞快地跑掉你的额度。</strong></p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 268" role="img" aria-label="DeepSeek V4.1 Flash 的单会话与并发消耗对比">
+          <rect x="0" y="0" width="1080" height="268" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">为什么「单会话便宜」却「并发烧钱」· 同一个模型，两种消耗曲线</text>
+
+          <!-- left: single session -->
+          <rect x="24" y="52" width="500" height="188" rx="10" fill="#141d28" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="44" y="78" fill="#3fd68c" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">单个会话（推荐）</text>
+          <text x="44" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 缓存量很多 → 命中率高 → 单价低</text>
+          <text x="44" y="128" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 临时任务、单窗口内没有太多验证</text>
+          <text x="44" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 临时设计一些 UI 也可以</text>
+          <text x="44" y="172" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 支持多模态</text>
+          <rect x="44" y="190" width="456" height="32" rx="6" fill="rgba(63,214,140,.14)" stroke="#3fd68c" stroke-width="1"/>
+          <text x="60" y="211" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">结论：还是比较便宜的，性能效果确实不错</text>
+
+          <!-- right: parallel -->
+          <rect x="556" y="52" width="500" height="188" rx="10" fill="#141d28" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="576" y="78" fill="#f8736e" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">并发子代理（避开）</text>
+          <text x="576" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 3 个项目 × 每个 3 并发 = 9 路 token 齐飞</text>
+          <text x="576" y="128" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 本来 token 速度就快 → 消耗更是飞快</text>
+          <text x="576" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 走 API 计价，没有包月兜底</text>
+          <text x="576" y="172" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 走量之后成本迅速失控</text>
+          <rect x="576" y="190" width="456" height="32" rx="6" fill="rgba(248,115,110,.14)" stroke="#f8736e" stroke-width="1"/>
+          <text x="592" y="211" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">结论：一天跑个大几百、一两百块钱是没问题的</text>
+
+          <text x="24" y="260" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">UP 主称之为「血与泪的教训」——同一个模型，单窗口用是「真香」，铺开并发就是「真烧」。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左边的绿色区间和右边的红色区间是<b>同一个模型</b>。差别只在「怎么用它」——单会话下 KV cache 命中多、单价低，并发铺开后 token 速度这个「优点」反而变成烧钱的加速器。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">结尾的态度</span>
+        <p style="color:var(--tx2);margin:0">尽管如此，「我们仍然非常喜欢这款模型了」——批评的是用法，不是模型。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>GLM-5.3：最像「工程师」的模型，缺多模态</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=327"><span class="tri"></span>05:27 – 07:01</a>
+
+      <p class="lead">GLM-5.3 是 UP 主团队「在大量使用」的模型，起用它有一个很现实的原因。</p>
+
+      <p>使用场景被交代得很直白：<strong>当 GPT 额度不够了、Claude 额度不够了</strong>，很多时候就不得不使用 GLM 的 <strong>Coding Plan</strong>。也就是说，它是团队在主力额度耗尽时的「接盘选手」。</p>
+
+      <div class="blk q">
+        <span class="label">让人喜欢的地方</span>
+        <ul>
+          <li>一个非常强的<strong>工程师性格</strong></li>
+          <li>规模：大概 <strong>700 多 B</strong>，是做了很好的<strong>后训练</strong>的模型——相当于在 GLM-5.2 的基础上进一步强化了 <strong>coding 能力和 agent 能力</strong></li>
+          <li>开发 benchmark 号称可以达到跟 <strong>5.6 SOTA 不相上下</strong>，「体感上来说确实如此」</li>
+          <li>可以<strong>非常稳定地执行任务</strong></li>
+          <li><strong>100 万上下文不是假的</strong>——「它真的可以记住，几乎在五六十万的上下文时还能保持稳定」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">短板（三条 + 一条架构层面的）</span>
+        <ul>
+          <li><strong>套餐蛮贵的</strong>：有 5 小时限制，还有 7 天限制，「蛮多」</li>
+          <li><strong>速度相对慢</strong>：可能跟它的服务负载有关系</li>
+          <li><strong>套餐消耗相当快</strong></li>
+          <li><strong>缺乏多模态理解能力</strong>：在刚测试的项目中，GLM-5.3 有明显的视觉和一些设计方面的短板</li>
+          <li><strong>自由探索架构设计上的能力相对保守</strong>，没有那么好</li>
+        </ul>
+      </div>
+
+      <div class="blk steps">
+        <span class="label">UP 主给的用法 · 「编排—执行」分层</span>
+        <ol>
+          <li>用 <strong>Kimi</strong> 或者 <strong>Claude</strong> 去做<strong>编排</strong></li>
+          <li>在 <strong>OpenCode</strong> 或 <strong>Zcode</strong> 里把 GLM-5.3 作为<strong>子代理</strong>去调用</li>
+          <li>不要让它当主代理去做单流程执行——它有点不太擅长<strong>并发执行任务</strong></li>
+        </ol>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">定位</span>
+        <p style="color:var(--tx2);margin:0">它更像一款<strong>适合干活的模型</strong>，也是一个非常好的、<strong>工程师化的模型</strong>。UP 主对它的评价结构很清晰：强在「执行稳定性 + 长上下文真实性」，弱在「多模态 + 并发 + 架构探索」。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>Grok 4.6：快、敢试错、不爱做计划</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=422"><span class="tri"></span>07:02 – 08:13</a>
+
+      <p class="lead">UP 主对 Grok 4.6 的开场评语是「它的生态会很奇怪」——因为它的口碑走势是反的。</p>
+
+      <p>刚出来的时候大家没太当回事，<strong>但测了测发现好像没有像那个「美国大豆包」那么蠢</strong>，开发能力还是很不错的。</p>
+
+      <div class="note"><b>保留原文：</b>「美国大豆包」是 UP 主对某海外模型的戏称（自备字幕作「美国大豆包煎饼袋」），两源一致，属<b>作者式玩笑</b>。按本笔记的整理原则，<b>不「改正」作者的故意措辞</b>，保留原样。</div>
+
+      <div class="blk q">
+        <span class="label">三个特点（UP 主明确编号）</span>
+        <ul>
+          <li><strong>第一，比较快</strong>——响应速度很快，敢于主动快速试错；在快速迭代中的效果提升比较明显</li>
+          <li><strong>第二，能力还不错</strong></li>
+          <li><strong>第三，它不喜欢做太复杂的计划</strong></li>
+        </ul>
+      </div>
+
+      <p>第三条是本节的核心对比：</p>
+
+      <div class="kv">
+        <div>GLM-5.3、GPT 系列</div><div>都很喜欢做<strong>很长很长的思考</strong>，然后才去做东西</div>
+        <div>Grok 4.6</div><div>适合<strong>「上来咣咣咣就开始干」</strong>，干完之后跑出来一个东西，然后迅速去迭代的人</div>
+      </div>
+
+      <p>UP 主还指出它的生态位跟 <strong>DeepSeek V4.1 Flash</strong> 有点像——都属于「快、敢试、别指望它深思熟虑」那一挂。至于为什么当时它口碑起来：毕竟这是刚出来的，<strong>当时它效果是最好的，最起码当时它「暴打」了 Gemini 系列</strong>。而现在 Gemini 虽然快，但没有那么好用，「3.8 也只能查查文档、简单干点活」。</p>
+
+      <div class="blk pit">
+        <span class="label">保留 · 审美需要纠偏</span>
+        <p style="color:var(--tx2);margin:0">Grok 4.6 还有个问题，就是它的<strong>审美需要一定的纠偏</strong>——没有那么稳定。它对国内的一些 UI 设计，甚至复刻一些已经有的界面，<strong>效果并不是很好</strong>。UP 主此处没有展开，只说「这个我们就不再多提」。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>Kimi K3：Agent 调度是天生的，但额度不够、偏贵</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=494"><span class="tri"></span>08:14 – 09:25</a>
+
+      <p class="lead">这是全片态度落差最大的一个模型——UP 主先讲了一个「退步」的观察，再讲它天生的优势，最后落到性价比判断。</p>
+
+      <div class="blk pit">
+        <span class="label">观察 · 效果明显不如印象</span>
+        <p style="color:var(--tx2);margin:0">「我们今天用的这个效果，可能是比我们印象中要差很多。」Kimi K3 刚出的时候，团队用它去做官网、做界面，「甚至它的原型设计都是非常精美的」，但<strong>今天的效果真的差强人意</strong>。</p>
+      </div>
+
+      <div class="blk q">
+        <span class="label">天生优势 · 预训练时就强化了 Agent 能力</span>
+        <ul>
+          <li>Kimi 那边<strong>本来就预训练的</strong>——训练时特地强化了它的 Agent 能力</li>
+          <li>它可以<strong>天然地愿意去调度 Agent 的团队</strong></li>
+          <li><strong>任务拆分也更自然一点</strong></li>
+          <li>「所以它在这个方面的能力是比较强的」</li>
+        </ul>
+      </div>
+
+      <p>但开发能力本身，UP 主的判断偏保守：它的开发风格<strong>在社区的评价中是比较中庸的</strong>。这里他给了一条很值得记住的判据——</p>
+
+      <blockquote>
+        <p>刚出来的时候很牛，不代表现在也很牛。</p>
+        <cite>— UP 主原话（08:47）</cite>
+      </blockquote>
+
+      <p>所以结论是：它的开发能力<strong>比较靠中间一点</strong>，<strong>比较适合中小型的应用</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点 · 额度不够用，且偏贵</span>
+        <p style="color:var(--tx2);margin:0 0 8px">「它的额度不是很多，这也是一个重点。」Kimi 现在偏贵，原因链条是：<strong>模型尺寸太大 → 算力消耗太大 → 平台订阅太贵</strong>。</p>
+        <p style="color:var(--tx2);margin:0">就算买最贵的那一档套餐，如果负责的项目比较重、规模比较大、<strong>需要循环迭代</strong>，额度也不够用。</p>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">三种用法叠加，额度直接见底</span>
+        <ul>
+          <li>想用<strong>网页端</strong></li>
+          <li>又想用<strong>开发侧</strong></li>
+          <li>有时候还想搞一个什么「<strong>龙虾</strong>」之类的玩一玩</li>
+        </ul>
+        <p style="color:var(--tx2);margin:8px 0 0">「那基本上就不够用了。」</p>
+      </div>
+
+      <div class="note"><b>保留原文：</b>「龙虾」两源一致，但所指不明——可能是某工具或玩法的昵称，本笔记无法确定，<b>保留原话并加注</b>。</div>
+
+      <div class="blk concl">
+        <span class="label">结论</span>
+        <p style="color:var(--tx2);margin:0">「所以说它现在的性价比不是很好。」而且——<strong>如果现在还有「降智」的情况，就没有那么再推荐给大家了</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>MiniMax：参数量落后，生态位尴尬</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=566"><span class="tri"></span>09:26 – 10:39</a>
+
+      <p class="lead">这一节的关键词是「尴尬」，而且 UP 主给出了一个可量化的根因。</p>
+
+      <p>事实上，MiniMax 系列<strong>已经很久没有更新新模型了</strong>，UP 主也不很清楚下一款的情况。然后他给了一个行业尺度的对比：</p>
+
+      <div class="blk pit">
+        <span class="label">根因 · 参数量掉队</span>
+        <p style="color:var(--tx2);margin:0 0 8px">目前这些主流模型的尺寸<strong>基本都已经涨到 500B 以上</strong>了，而 MiniMax 现在还处于 <strong>500B 以下</strong>——「就已经非常的尴尬了」。</p>
+        <p style="color:var(--tx2);margin:0">在开发的<strong>后训练</strong>方面，以及它<strong>原生知识的复杂性</strong>上，<strong>参数量太小这个痛点是没办法根治的</strong>。</p>
+      </div>
+
+      <div class="blk q">
+        <span class="label">仍然保留的优点</span>
+        <ul>
+          <li>支持<strong>多模态</strong></li>
+          <li>有 <strong>100 万上下文</strong></li>
+          <li><strong>agent 能力还不错</strong>，还相对稳定</li>
+        </ul>
+      </div>
+
+      <p>UP 主特别提到 MiniMax 也做了自己的 code 平台，但认为<strong>急需推出一款更强大的模型</strong>。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 250" role="img" aria-label="MiniMax 被多款快速模型平替">
+          <rect x="0" y="0" width="1080" height="250" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">MiniMax M3 的生态位被挤压 · 同一价位上已有 4 个更强的「快速模型」</text>
+
+          <rect x="420" y="92" width="240" height="70" rx="10" fill="rgba(248,115,110,.12)" stroke="#f8736e" stroke-width="1.4"/>
+          <text x="540" y="120" fill="#f8736e" font-size="13.5" font-weight="700" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">MiniMax M3</text>
+          <text x="540" y="142" fill="#adbccd" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">多模态 · 100 万上下文 · 便宜</text>
+
+          <g font-family="Segoe UI, Microsoft YaHei" font-size="11.5">
+            <rect x="40" y="44" width="290" height="40" rx="8" fill="#141d28" stroke="#5b9cf8" stroke-width="1.2"/>
+            <text x="58" y="69" fill="#5b9cf8">DeepSeek V4.1 Flash</text>
+            <text x="222" y="69" fill="#77879a" font-size="10.5">前端强 · 速度快</text>
+
+            <rect x="40" y="96" width="290" height="40" rx="8" fill="#141d28" stroke="#a98bfa" stroke-width="1.2"/>
+            <text x="58" y="121" fill="#a98bfa">Gemini 3.8 Flash</text>
+            <text x="222" y="121" fill="#77879a" font-size="10.5">快 · 但仅够查文档</text>
+
+            <rect x="40" y="148" width="290" height="40" rx="8" fill="#141d28" stroke="#3fd68c" stroke-width="1.2"/>
+            <text x="58" y="173" fill="#3fd68c">GLM-5.3 Flash</text>
+            <text x="222" y="173" fill="#77879a" font-size="10.5">快速档位</text>
+
+            <rect x="40" y="200" width="290" height="40" rx="8" fill="#141d28" stroke="#f0b429" stroke-width="1.2"/>
+            <text x="58" y="225" fill="#f0b429">Antigravity 里的 Gemini 3.8</text>
+            <text x="252" y="225" fill="#77879a" font-size="10.5">也比它强</text>
+          </g>
+
+          <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+            <line x1="330" y1="64" x2="412" y2="110"/><polygon points="412,110 403,109 406,101"/>
+            <line x1="330" y1="116" x2="412" y2="122"/><polygon points="412,122 404,118 404,126"/>
+            <line x1="330" y1="168" x2="412" y2="134"/><polygon points="412,134 405,141 402,133"/>
+            <line x1="330" y1="220" x2="412" y2="146"/><polygon points="412,146 403,152 401,144"/>
+          </g>
+
+          <rect x="700" y="92" width="356" height="70" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.2"/>
+          <text x="718" y="116" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">还剩什么位置？</text>
+          <text x="718" y="137" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">· 拿来做一些脚本</text>
+          <text x="718" y="154" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">· 便宜 → 新手拿来开发一些 UI（「老旗舰」）</text>
+
+          <line x1="660" y1="127" x2="696" y2="127" stroke="#31465c" stroke-width="1.5"/>
+          <polygon points="696,127 688,123 688,131" fill="#31465c"/>
+
+          <text x="24" y="242" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">UP 主的比喻：UI 效果「在当年那一代模型里面」相当于买手机时的「老旗舰」，还算可以。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜被夹击</b>　这张图讲的是<b>生态位</b>而不是绝对能力：MiniMax M3 的硬伤（参数量）单看不算致命，致命的是「它所在的快速档位上，已经有四个更强的替代品」。这就是 UP 主反复用「尴尬」这个词的原因。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">现状定位</span>
+        <ul>
+          <li>拿来做一些<strong>脚本</strong></li>
+          <li>因为<strong>很便宜</strong>，现在还占着便宜的优势——<strong>一些新手拿来开发 UI</strong></li>
+          <li>它的 UI 效果「在当年那一代模型里面」相当于大家买手机时的<strong>「老旗舰」，还算可以的</strong></li>
+          <li>所以拿来作为<strong>初学者用一用，很便宜</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s29">
+      <h3><span class="idx">2.9</span>通义千问：能力不差，贵在生态位</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=640"><span class="tri"></span>10:40 – 12:40</a>
+
+      <p class="lead">本章最后一节，也是信息量最密的一节——UP 主在这里给了一个「不惊艳但稳定」的反直觉评价，并用一笔真实账单说明了问题出在哪。</p>
+
+      <p>开头的判断就很清楚：「千问系列大家现在应该不太会用来做开发了」，但——</p>
+
+      <blockquote>
+        <p>它最根本的问题不在于能力不行。</p>
+        <cite>— UP 主原话（10:45）</cite>
+      </blockquote>
+
+      <div class="blk q">
+        <span class="label">不惊艳，但稳定</span>
+        <p style="color:var(--tx2);margin:0 0 8px">从今天的测试可以发现，千问这两个模型<strong>确实不惊艳</strong>——它做出来的 UI，达不到那种「一眼看上去就能达到 GPT 或者 DeepSeek 抽卡抽出来的效果」。</p>
+        <p style="color:var(--tx2);margin:0"><strong>但它多轮跑出来的东西还是很稳定的</strong>，这是一个很大的优势：「它跑出来的东西怎么看，好歹是像那么回事」。</p>
+      </div>
+
+      <p>UP 主在这里下了一个很关键的反转判断：</p>
+
+      <blockquote>
+        <p>这两个模型并不是不可用，甚至某种意义上在某些场景下可能更好用——你拿它多轮迭代，如果很稳定的话，那不就是很好用吗？</p>
+        <cite>— UP 主原话（11:12）</cite>
+      </blockquote>
+
+      <p>也就是说，<strong>「一次直出好看」和「多轮迭代不崩」是两种不同的能力</strong>，而千问属于后者。这一点在后面的选型逻辑里很重要。</p>
+
+      <div class="blk pit">
+        <span class="label">但问题出在「贵」· 一笔真实账单</span>
+        <ul>
+          <li>本次测试买了 <strong>39 块钱的 token plan</strong></li>
+          <li>只测了一个「做 B 站前端」这样的小项目——「甚至算不上一个正儿八经的大项目」</li>
+          <li>只是一人测了<strong>一次</strong>：一次「<strong>一次性指令直出</strong>」，一次「<strong>对抗审查</strong>」</li>
+          <li>结果：<strong>直接把 39 块钱的额度触顶了，差点没跑完，基本干到 98%</strong></li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="39 元 token plan 的消耗推演">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">一笔 39 元账单的推演 · 从「小项目测两次」到「大项目要买多贵的套餐」</text>
+
+          <!-- step 1 -->
+          <rect x="24" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="42" y="76" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">① 投入</text>
+          <text x="42" y="100" fill="#e9eff7" font-size="15" font-weight="700" font-family="Segoe UI, Microsoft YaHei">39 元 token plan</text>
+          <text x="42" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">按周限制 / 按月限制</text>
+          <text x="42" y="142" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">本次测试实际购买的档位</text>
+
+          <!-- step 2 -->
+          <rect x="300" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="318" y="76" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">② 任务</text>
+          <text x="318" y="100" fill="#e9eff7" font-size="13.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">B 站前端小项目</text>
+          <text x="318" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">算不上正儿八经的大项目</text>
+          <text x="318" y="142" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">一人只测了一次</text>
+
+          <!-- step 3 -->
+          <rect x="576" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="594" y="76" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">③ 两次调用</text>
+          <text x="594" y="100" fill="#e9eff7" font-size="13.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">直出 + 对抗审查</text>
+          <text x="594" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">一次性指令直出 ×1</text>
+          <text x="594" y="142" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">对抗审查 ×1</text>
+
+          <!-- step 4 -->
+          <rect x="852" y="52" width="204" height="112" rx="10" fill="rgba(248,115,110,.12)" stroke="#f8736e" stroke-width="1.4"/>
+          <text x="870" y="76" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">④ 结果</text>
+          <text x="870" y="112" fill="#f8736e" font-size="19" font-weight="800" font-family="Segoe UI, Microsoft YaHei">98%</text>
+          <text x="946" y="112" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">额度触顶</text>
+          <text x="870" y="136" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">差点没跑完</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="272" y1="108" x2="296" y2="108"/><polygon points="296,108 288,104 288,112"/>
+            <line x1="548" y1="108" x2="572" y2="108"/><polygon points="572,108 564,104 564,112"/>
+            <line x1="824" y1="108" x2="848" y2="108"/><polygon points="848,108 840,104 840,112"/>
+          </g>
+
+          <!-- implication -->
+          <rect x="24" y="188" width="1032" height="94" rx="10" fill="#141d28" stroke="#233240"/>
+          <text x="44" y="212" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主的推演</text>
+          <text x="44" y="236" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 小项目测两次就触顶 → 那正式的大型项目（十几万行、二十几万行代码）准备买多贵的套餐？</text>
+          <text x="44" y="256" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 它是直接按周限制、按月限制算的 → 你基本上很快就会干掉一周的限额</text>
+          <text x="44" y="276" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">· 如果真要用到跟 GPT 一样的量，两者花的钱可能差不太多 → 「那为什么不去买 GPT 呢？」</text>
+        </svg>
+        <figcaption><b>视觉锚点｜链路</b>　这张图的价值不在数字本身，而在<b>推演方法</b>：UP 主没有引用任何官方定价，只用一笔真实的 39 元账单，就把「单位成本」外推到了大型项目的量级上。<b>它证明的是性价比结构有问题，而不是某个绝对值贵。</b></figcaption>
+      </figure>
+
+      <p>UP 主还补了一个当时的市场状况：「当然现在 GPT 20 倍是被禁用了。」</p>
+
+      <div class="note"><b>保留原文：</b>「GPT 20 倍」指订阅套餐档位，原话如此保留。</div>
+
+      <div class="blk concl">
+        <span class="label">一个重要的例外 · 小模型</span>
+        <p style="color:var(--tx2);margin:0 0 8px">虽然大的千问生态位尴尬，但<strong>它的小模型仍然是非常有优势的</strong>——UP 主举例的千问 3.8 小参数版本：</p>
+        <ul>
+          <li>大模型这个能力「没有什么特别惊艳的地方」</li>
+          <li>但<strong>蒸馏出的小模型能跟大的保持差不多的后训练水平</strong>，coding 水平也差不太多</li>
+          <li>「那就很离谱了」——毕竟很朴素，某种时候在小参数上那是非常强的</li>
+          <li>UP 主的四字总结：<strong>朴素且稳定</strong></li>
+        </ul>
+      </div>
+
+      <div class="note"><b>存疑标注：</b>该小模型参数量的听写在本片两处音源中不一致（Whisper 作 <code>27B</code>，UP 自备字幕作 <code>2107B</code>）。本笔记按 27B 转写，<b>标注为存疑</b>，不据此下结论。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>开发基座横评：Harness 层的胜负手</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761"><span class="dot"></span>12:41 – 17:31 · 7 节 · 6 套基座</a>
+      </div>
+    </div>
+    <p class="ch-abstract">UP 主说这是「最后的一个部分」，也把全片的技术判断上了一个台阶：模型选谁只是一半，另一半是<strong>用什么壳去承载它</strong>。这一章反复出现同一个判据——主代理对子代理的<strong>操控颗粒度</strong>。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 300" role="img" aria-label="六套开发基座的成熟度与特点">
+        <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+        <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">6 套开发基座 · 成熟度 vs 关键判据（子代理操控颗粒度）</text>
+
+        <text x="30" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">基座</text>
+        <text x="286" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">子代理调度</text>
+        <text x="560" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">UP 主评价</text>
+        <line x1="24" y1="74" x2="1056" y2="74" stroke="#233240" stroke-width="1"/>
+
+        <rect x="24" y="82" width="1032" height="32" rx="5" fill="rgba(63,214,140,.09)"/>
+        <text x="30" y="103" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Codex（GPT）</text>
+        <text x="286" y="103" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✓ 最强 · 可组织 3–4 个</text>
+        <text x="560" y="103" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「现在最最最成熟的 Coding Agent 框架」</text>
+
+        <rect x="24" y="118" width="1032" height="32" rx="5" fill="rgba(240,180,41,.09)"/>
+        <text x="30" y="139" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Claude Code</text>
+        <text x="286" y="139" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">可完成，但面板受限</text>
+        <text x="560" y="139" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">Desktop 面板「非常让人尴尬」，对国内开发者不友好</text>
+
+        <rect x="24" y="154" width="1032" height="32" rx="5" fill="rgba(91,156,248,.09)"/>
+        <text x="30" y="175" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Grok Build</text>
+        <text x="286" y="175" fill="#5b9cf8" font-size="11.5">未展开</text>
+        <text x="560" y="175" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">速度非常快，但可读性不好、有遮挡性问题；轻量可用</text>
+
+        <rect x="24" y="190" width="1032" height="32" rx="5" fill="rgba(248,115,110,.09)"/>
+        <text x="30" y="211" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Zcode / Kimi CLI</text>
+        <text x="286" y="211" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✗ 不支持补送/提前结束</text>
+        <text x="560" y="211" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「既好用又不好用」· 好看、缓存命中率好，但调度会阻塞</text>
+
+        <rect x="24" y="226" width="1032" height="32" rx="5" fill="rgba(169,139,250,.09)"/>
+        <text x="30" y="247" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">DeepSeek Harness</text>
+        <text x="286" y="247" fill="#a98bfa" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">插件化，但尚不稳定</text>
+        <text x="560" y="247" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前沿但非新手友好；适合想精调 harness 的开发者</text>
+
+        <rect x="24" y="262" width="1032" height="32" rx="5" fill="rgba(70,198,224,.09)"/>
+        <text x="30" y="283" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">通义千问 Coder</text>
+        <text x="286" y="283" fill="#46c6e0" font-size="11.5">—</text>
+        <text x="560" y="283" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">团队不太用 Coder，一般是接到 CC（Claude Code）里用</text>
+      </svg>
+      <figcaption><b>视觉锚点｜矩阵</b>　把它和上一章的模型表并排看：<b>Codex 一行是唯一的绿色调度标记</b>。UP 主把「主代理能不能在子代理运行中补送消息、能不能提前结束它们」当作区分成熟与不成熟的分水岭——这条判据贯穿整章。</figcaption>
+    </figure>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>DeepSeek Harness：前沿但还嫩，适合折腾的人</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761"><span class="tri"></span>12:41 – 13:44</a>
+
+      <p class="lead">第一个讲的是 DeepSeek 系的框架，UP 主的结论是「现在先别用」——但理由不是它差，而是它太新。</p>
+
+      <p>构成交代得很清楚：DeepSeek 现在做的是<strong>基于插件化的 DeepSeek Harness</strong>，<strong>在浏览器里使用</strong>。团队简单用了一阵子，发现这个框架<strong>目前还不是很稳定</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">为什么不建议现在用 · 四条</span>
+        <ul>
+          <li><strong>还不稳定</strong></li>
+          <li>在<strong>频繁地高速迭代</strong>，里面在增加各种各样的功能</li>
+          <li>设计比较<strong>前沿化</strong>——比如它试图把 Harness 里面的各个组件<strong>全部插件化</strong>，所以对刚入门的或者新手来说并不是很好理解，<strong>并不是一个新手友好的框架</strong></li>
+          <li>还在频繁迭代，<strong>发布有时候会有各种细微的小 bug</strong></li>
+        </ul>
+      </div>
+
+      <p>UP 主给出的适用判断也很干脆：</p>
+
+      <div class="kv">
+        <div>想直接用一个稳定的</div><div>那就<strong>不要用它</strong></div>
+        <div>想自己去搞一个 App</div><div>如果你懒得自己封装，推荐现在最好还是<strong>先不要使用 DeepSeek Harness</strong></div>
+      </div>
+
+      <div class="blk q">
+        <span class="label">但有一类人应该用 · 开发者</span>
+        <p style="color:var(--tx2);margin:0 0 8px">对于<strong>非常想精调 harness 的开发者</strong>来说，因为它这种基于插件模式的设计：</p>
+        <ul>
+          <li>你可以把自己的很多 harness 理念<strong>植入进去</strong></li>
+          <li>或者尝试<strong>做自己的一套框架</strong>出来</li>
+          <li>「那它就是一个很好用的东西」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>读法提示：</b>「不稳定」和「不值得用」是两件事。UP 主这一节的结构其实是<b>按角色分流</b>——普通用户等它稳定，开发者反而该趁它可塑的时候进场。</div>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>Codex（GPT）：目前最成熟的 Coding Agent 框架</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=825"><span class="tri"></span>13:45 – 14:52</a>
+
+      <p class="lead">这是全片对基座的最高评价，理由浓缩成一个词——<strong>子代理</strong>。</p>
+
+      <blockquote>
+        <p>Codex 我们目前是认为它是现在最最最成熟的一个 Coding Agent 的框架。</p>
+        <cite>— UP 主原话（13:48）</cite>
+      </blockquote>
+
+      <div class="blk q">
+        <span class="label">为什么 · 子代理通信流畅</span>
+        <ul>
+          <li>它的<strong>子代理非常有特点</strong>，和子代理<strong>通信的时候是非常流畅的</strong></li>
+          <li>如果你的<strong>主代理能力比较不错</strong>，它可以非常顺利地<strong>组织 3～4 个子代理</strong>来完成工作</li>
+          <li>「这个就是我们现在觉得非常不错的点」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">对照 · Claude Code 的短板在哪</span>
+        <p style="color:var(--tx2);margin:0 0 8px">Claude Code 其实<strong>也能完成这个任务</strong>，但它的 <strong>Desktop 面板非常让人尴尬</strong>：</p>
+        <ul>
+          <li>比如你配置了<strong>基于 GLM 的一个 Claude Code</strong>，那你在它的 <strong>Claude Desktop 里面是没法进入 Code 界面的</strong></li>
+          <li>而且<strong>要充会员</strong></li>
+          <li>所以它对于国内开发者<strong>很不友好</strong></li>
+        </ul>
+      </div>
+
+      <p>注意这里的批评对象是<strong>桌面端的产品策略</strong>，不是模型或 CLI 能力。这也是本片一个隐含的观察角度：同一个 CLI 工具，它的客户端面板可能会成为你根本用不下去的原因。</p>
+
+      <div class="blk concl">
+        <span class="label">Codex 的加分项</span>
+        <ul>
+          <li>对比之下 <strong>Codex 就好得多</strong></li>
+          <li>那些子代理<strong>也都支持自定义提示词</strong></li>
+          <li>可以做<strong>并发</strong>，可以自己写这些</li>
+          <li><strong>指令遵循也不错</strong></li>
+        </ul>
+      </div>
+
+      <div class="blk q">
+        <span class="label">生态信号 · 别家都在适配它</span>
+        <p style="color:var(--tx2);margin:0">可以看到像 <strong>DeepSeek</strong>、还有像 <strong>GLM</strong> 他们的 <strong>Coding Plan</strong>，也都在积极地去适配 <strong>Responses API</strong> 这种 Codex 的专属端点——「这个都是蛮不错的」。</p>
+      </div>
+
+      <p>这条信号值得单独标注：<strong>当竞争对手主动来适配你的接口，就说明你的框架事实上成了标准</strong>。UP 主把它作为「Codex 现在是最好的框架」的旁证。</p>
+    </div>
+
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>Grok Build：快、轻量，但可读性欠佳</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=893"><span class="tri"></span>14:53 – 15:16</a>
+
+      <p class="lead">最短的一节，评价结构也最简单：优点一个、缺点一个、结论一句。</p>
+
+      <div class="kv">
+        <div>优点</div><div>速度<strong>非常快</strong>，非常擅长直接跑出来任务</div>
+        <div>缺点</div><div><strong>可读性不是很好</strong>——东西发上去之后，去理解那个界面或者阅读一些东西时，会有一些<strong>遮挡性的问题</strong></div>
+        <div>结论</div><div>整体来说<strong>还是可用的</strong>；处于一种没有 Codex 和 Claude Code 这种「老东西」成熟的阶段，但<strong>相对快、相对轻量可用</strong></div>
+      </div>
+    </div>
+
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>千问的基座：不单独用，接到 CC 里</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=917"><span class="tri"></span>15:17 – 15:22</a>
+
+      <p>一句话带过：「千问的话我们就不提了。」原因也给了——<strong>UP 主不太用 Coder</strong>，所以一般就是把它<strong>接到 CC（Claude Code）里面来用</strong>，这里就不多讲了。</p>
+
+      <div class="note"><b>补充：</b>这也解释了为什么本片的「基座」章节没有单独评测千问自家的 CLI——它在这份报告里的角色是<b>模型供应商</b>，而不是基座供应商。</div>
+    </div>
+
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>Zcode 与 Kimi CLI：好看，但主代理操控子代理的颗粒度不够</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=923"><span class="tri"></span>15:23 – 16:30</a>
+
+      <p class="lead">本节是全片技术含量最高的一段，UP 主提出了一个明确的、可验证的框架缺陷机制。</p>
+
+      <p>开场先说清楚：GLM 的 Zcode「跟现在的一些其他框架是有明显的一个重大问题的」。然后立刻补上肯定——Zcode 还有 Kimi CLI <strong>其实现在做得都蛮漂亮</strong>，<strong>可用性对于一个新手来说是可以的</strong>。</p>
+
+      <p>但接下来是判据：</p>
+
+      <blockquote>
+        <p>在我们去调度一些 Agent 的团队来做事情的时候，这些团队之间的异步通信、主代理对于子代理的一个操控的颗粒度是非常重要的。</p>
+        <cite>— UP 主原话（15:40）</cite>
+      </blockquote>
+
+      <div class="blk pit">
+        <span class="label">缺陷 · 不支持运行中干预</span>
+        <p style="color:var(--tx2);margin:0 0 8px">现在在 Kimi CLI 还有 GLM 的 Zcode 中（UP 主加了限定：「如果我使用的版本没什么问题的话，如果是最新版本的话」）：</p>
+        <ul>
+          <li><strong>不支持主代理在子代理运行过程中给它们补送消息</strong></li>
+          <li>或者说<strong>提前结束它们</strong></li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 340" role="img" aria-label="子代理运行中无法干预导致的阻塞与丢失">
+          <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">失效链 · 为什么「不能补送消息」会毁掉一次调度</text>
+
+          <!-- timeline -->
+          <text x="30" y="98" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">主代理</text>
+          <text x="30" y="212" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">子代理</text>
+
+          <!-- main agent lane -->
+          <line x1="110" y1="92" x2="1030" y2="92" stroke="#233240" stroke-width="1"/>
+          <!-- sub agent lane -->
+          <line x1="110" y1="206" x2="1030" y2="206" stroke="#233240" stroke-width="1"/>
+
+          <!-- step1: main injects task -->
+          <circle cx="150" cy="92" r="6" fill="#46c6e0"/>
+          <text x="150" y="76" fill="#46c6e0" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">① 植入任务</text>
+          <line x1="150" y1="98" x2="150" y2="200" stroke="#31465c" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <polygon points="150,200 146,192 154,192" fill="#31465c"/>
+
+          <!-- step2: sub starts working -->
+          <circle cx="270" cy="206" r="6" fill="#a98bfa"/>
+          <text x="270" y="190" fill="#a98bfa" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">② 子代理开干</text>
+          <rect x="270" y="214" width="160" height="20" rx="4" fill="rgba(169,139,250,.16)" stroke="#a98bfa" stroke-width="1"/>
+          <text x="350" y="228" fill="#a98bfa" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">已分派工作 · 正在跑</text>
+
+          <!-- step3: new task to main -> blocked -->
+          <circle cx="500" cy="92" r="6" fill="#f0b429"/>
+          <text x="500" y="76" fill="#f0b429" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">③ 又给主代理一个任务</text>
+          <rect x="440" y="100" width="200" height="22" rx="4" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1"/>
+          <text x="540" y="115" fill="#f0b429" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">一直阻塞在那里 · 没法补送</text>
+
+          <!-- cannot stop -->
+          <circle cx="760" cy="206" r="6" fill="#f8736e"/>
+          <text x="760" y="190" fill="#f8736e" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">④ 想停也停不了</text>
+          <rect x="660" y="214" width="230" height="20" rx="4" fill="rgba(248,115,110,.16)" stroke="#f8736e" stroke-width="1"/>
+          <text x="775" y="228" fill="#f8736e" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">不支持「提前结束」</text>
+
+          <!-- result: work lost -->
+          <rect x="110" y="254" width="920" height="66" rx="10" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="132" y="276" fill="#f8736e" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">后果 · 两难</text>
+          <text x="132" y="297" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 停掉当前任务 → 前面那些子代理干的活儿「直接就丢失了」，你也不知道它造了什么东西出来</text>
+          <text x="132" y="314" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 不停 → 一直阻塞。而且如果代码库本来就挺「屎山」的，那就非常崩溃了</text>
+        </svg>
+        <figcaption><b>视觉锚点｜流程失效链</b>　顺着 ①②③④ 走一遍就明白 UP 主为什么把「操控颗粒度」当作分水岭：<b>缺的不是某个功能，而是「中断/纠正」这个让 Agent 协作可恢复的能力</b>。没有它，一次误判就会让你在「丢工作」和「干等」之间二选一。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">两面的评价（UP 主自己也说得很矛盾）</span>
+        <ul>
+          <li><strong>既好用又不好用</strong></li>
+          <li><strong>挺好看的</strong></li>
+          <li>也<strong>知道它在尽力做</strong></li>
+          <li>而且能看到它们的<strong>缓存命中率都挺好的</strong></li>
+        </ul>
+      </div>
+
+      <div class="note"><b>版本限定：</b>UP 主两次加上前提——「如果我使用的版本没什么问题的话，如果是最新版本的话」。这类框架迭代很快，<b>结论有时效性</b>，引用时请一并带上这个限定。</div>
+    </div>
+
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>Kimi 的额度差异：同一个模型，换个壳消耗差很多</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=991"><span class="tri"></span>16:31 – 16:59</a>
+
+      <p class="lead">本节是全片唯一一处直接点出「基座会反过来影响额度」的观察。</p>
+
+      <div class="blk q">
+        <span class="label">Kimi 速度可以，但有个问题</span>
+        <p style="color:var(--tx2);margin:0 0 8px">它的<strong>额度消耗在不同的 agent 工具里面是不太一样的</strong>：</p>
+        <ul>
+          <li>像 Kimi K3，它在 <strong>Claude Code</strong> 里面的消耗<strong>非常快</strong>——「不知道是不是 Claude Code 有什么负优化」</li>
+          <li>但 Kimi K3 在自己的 <strong>Kimi CLI（也就是 Kimi Code）</strong>里面用的话，速度还挺好的，UI 做得也还不错，<strong>写任务的时候都比较明确</strong></li>
+        </ul>
+      </div>
+
+      <p>UP 主给这个差异留了一个问号，没有下定论——这与他在别处（比如 GLM 的速度慢「可能跟它的服务负载有关系」）的处理方式一致：<strong>现象说清楚，归因保留</strong>。</p>
+    </div>
+
+    <div class="sub" id="s37">
+      <h3><span class="idx">3.7</span>MiniMax 的 code 平台与展望</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1020"><span class="tri"></span>17:00 – 17:23</a>
+
+      <p>收尾前最后一个：MiniMax M3 也做了自己的 code 平台。</p>
+
+      <div class="blk concl">
+        <span class="label">UP 主的评价与展望</span>
+        <ul>
+          <li>先给肯定：虽然在它自己当年那个年代的模型基础上，<strong>已经尽可能做得很好了</strong></li>
+          <li>但急需发展出一款新模型——<strong>规格上或者重新预训练</strong>的，可能是 <strong>MiniMax M4</strong> 或者怎么样</li>
+          <li>最好能达到一个新的水平，<strong>加上它的平台，那就能发挥出更好的能力了</strong></li>
+          <li>「现在来看的话已经明显地拉开差距了」</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:17px;margin-top:26px">收尾</h3>
+      <p>「好的，那么本期视频我们就主要是到这里。谢谢大家，制作视频不易，希望大家能够一键三连支持一下。」</p>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>ASR 明显误识别修正表</h4>
+        <ul>
+          <li>「圣图城的小诺」→ <strong>圣徒城的小诺</strong>（UP 名）</li>
+          <li>「ZVT6 / GBT6 / GBT6ASRA」→ <strong>GPT-6 / GPT-6 Astra</strong></li>
+          <li>「GPT5.6SO」→ <strong>GPT-5.6 SOTA</strong>；「GPTLUNA / TARA」→ <strong>GPT Luna / GPT Terra</strong></li>
+          <li>「Cloud Ops 5」→ <strong>Claude Opus 5</strong>；「Cloud 系列」→ <strong>Claude 系列</strong></li>
+          <li>「Fibro 5 / FBL5.1」→ <strong>Claude Fable 5 / Fable 5.1</strong>（音近转写，存疑）</li>
+          <li>「GAM5.3 / G1 5.2 / 加盟5.3」→ <strong>GLM-5.3 / GLM-5.2</strong></li>
+          <li>「Glock 4.6 / GROUCK / Grog Build」→ <strong>Grok 4.6 / Grok Build</strong></li>
+          <li>「CM3.8 Flash / 詹密奈」→ <strong>Gemini 3.8 Flash</strong></li>
+          <li>「DS V4.1 Flash 的 Sentime」→ <strong>生态位</strong>；「Sentime」为误识别</li>
+          <li>「主绘画」→ <strong>主对话</strong>；「伤害纹」→ <strong>上下文</strong></li>
+          <li>「子弹里 / 纸代理 / AZEN / A整」→ <strong>子代理 / Agent</strong></li>
+          <li>「指令秩序 / 指令咨询」→ <strong>指令遵循</strong></li>
+          <li>「千言化」→ <strong>前沿化</strong>；「插线化」→ <strong>插件化</strong></li>
+          <li>「Response 这种专属端点」→ <strong>Responses API</strong></li>
+          <li>「多摩汉 / 多么太 / 多么太爱」→ <strong>多模态</strong></li>
+          <li>「学一类的教训」→ <strong>血与泪的教训</strong>；「屏替」→ <strong>平替</strong></li>
+          <li>「情话 / 青蛙」→ <strong>生态位</strong>；「降制」→ <strong>降智</strong></li>
+          <li>「六七百币 / 700 多币」→ <strong>600–700B / 700 多 B</strong>（参数量）</li>
+          <li>「浮腹的还有关系」→ <strong>服务负载有关系</strong></li>
+          <li>「擦枪人意」→ <strong>差强人意</strong>；「不经验」→ <strong>不惊艳</strong></li>
+          <li>「制作视频补义」→ <strong>制作视频不易</strong>；「闲雨上」→ <strong>闲鱼上</strong></li>
+          <li>「史山」→ <strong>屎山</strong>（代码库）</li>
+          <li>「分拍拍工作」→ <strong>分派工作</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h4>保留原文（未「改正」）</h4>
+        <ul>
+          <li>「美国大豆包」（SRT 作「美国大豆包煎饼袋」）——UP 主对某海外模型的戏称，两源一致，属作者式玩笑</li>
+          <li>「龙虾」——两源一致但所指不明，可能是某工具/玩法的昵称，保留原话</li>
+          <li>「抽卡」——本片的核心比喻之一，指一次性直出、靠运气出好效果</li>
+          <li>「毛坯化」「自我验收不稳」「屎山」——UP 主自创/口语化措辞，保留其表达力</li>
+          <li>「GPT 20 倍」「Max 20 倍」——指订阅套餐档位，原话如此</li>
+        </ul>
+        <h4 style="margin-top:16px">存疑项（已加注，未下定论）</h4>
+        <ul>
+          <li><strong>Fable 5 / Fable 5.1</strong>：两源分别听作 <code>fib5</code> / <code>FBL5.1</code>，按音近推定为 Fable</li>
+          <li><strong>千问 3.8 小模型参数量</strong>：Whisper 作 27B，自备字幕作 2107B，文中按 27B 并标注</li>
+          <li><strong>GPT-6 Astra</strong>：两源一致，按原文保留</li>
+        </ul>
+        <h4 style="margin-top:16px">来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV1PKh86zEhX">BV1PKh86zEhX</a>　·　UP：圣徒城的小诺</li>
+          <li>下载：yt-dlp（Firefox 提取 cookies）</li>
+          <li>转码：ffmpeg + ffprobe（BtbN build）</li>
+          <li>转写：faster-whisper 1.2.1 / CTranslate2 4.8.2 · large-v3-turbo · CUDA fp16</li>
+          <li>渲染：Chrome headless（Playwright driver）</li>
+        </ul>
+        <h4 style="margin-top:16px">笔记性质</h4>
+        <ul>
+          <li>内容为对公开视频的听写整理与结构化，<strong>不含整理者的模型评测结论</strong>；所有优劣判断均属 UP 主及其团队</li>
+          <li>「模型名 / 价格 / 榜单」具强时效性，请以各厂官方当前信息为准</li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

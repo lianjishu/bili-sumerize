@@ -1,0 +1,949 @@
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>引子与方法</h2>
+    <div class="ch-range">00:00 – 00:19 · 1 节</div>
+  </div>
+
+  <article class="sec c1-scope">
+    <h3><span class="secno">1.1</span>两条主线：模型与开发基座 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=0">00:00</a></span></h3>
+
+    <p>开场只有 20 秒，但交代清楚了这份报告的性质。UP 主先自报家门（「我们是圣徒城的小诺」），随即说明本期的定位是<strong>接续上一期</strong>，然后抛出全片要回答的两个问题。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CONCEPT · 本片的两条主线</span>
+      <p><strong>① 模型线：</strong>DeepSeek、GPT 等当下和前沿模型，在<strong>实际体验</strong>上的差别是什么？</p>
+      <p><strong>② 基座线：</strong>它们各自所属的<strong>开发基座</strong>——Codex、Claude Code、智谱的 Zcode 等——好坏差异在哪？</p>
+    </div>
+
+    <p>这里有一个措辞值得留意：UP 主反复强调的是「<em class="term">实际体验</em>」，而不是「客观能力」。字幕里出现的判断——「上限非常高」「有点毛坯化」「性价比最好」——绝大多数是团队在真实项目上跑出来的体感，不是实验室对比或榜单复现。</p>
+
+    <p>所以这份材料的正确用法是<strong>「对号入座」而不是「当作定论」</strong>：先看自己的使用姿势（主代理还是子代理？单会话还是并发？要审美还是要稳定执行？）跟 UP 主描述的是否一致，再决定他的结论能不能平移到自己身上。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">NOTICE · 关于「上一期」</span>
+      <p>本片明确说是接续上一期。因此片中「前面我们也提到了」「我们前面也看到了」这类回指，指的是<strong>上一期的实测案例</strong>（涉及 UI 复刻、B 站前端小项目等），本讲义无法补充其细节。相关位置已在正文标注。</p>
+    </div>
+
+    <div class="summary">
+      <h4>本章小结（01 章）</h4>
+      <ul>
+        <li>本片是<strong>体验复盘</strong>，不是跑分榜；两条主线分别是「模型」和「承载模型的开发基座」。</li>
+        <li>UP 主团队为此投入了上万块 Token——片名里的这个数字就是成本声明。</li>
+        <li>后者（基座）在本片里被赋予了与模型同等的重要性，这是本片区别于普通「模型横评」的关键。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>为什么同一个模型换一个 Harness，体验会差这么多？请结合本片后面的「额度消耗差异」与「子代理操控颗粒度」两条线索预先想一想。</li>
+        <li>「实际体验」与「客观能力」在选型决策里分别应该占多大权重？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>模型横评：从 GPT-6 到通义千问</h2>
+    <div class="ch-range">00:19 – 12:41 · 9 节 · 10 个模型</div>
+  </div>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.1</span>GPT-6：上限极高，但会「自己加戏」 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19">00:19</a></span></h3>
+
+    <p>第一个讲的是 GPT-6。经验来源被明确交代了双重出处——「社区上还有我们大量开发的一些经验」，说明这不是单人印象。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 上限</span>
+      <ul>
+        <li>在<strong>复杂任务</strong>上的上限非常高</li>
+        <li>尤其擅长<strong>架构设计</strong>与<strong>视觉还原</strong></li>
+        <li><strong>指令遵循</strong>非常强</li>
+      </ul>
+    </div>
+
+    <p>但紧接着是痛点，而且这条痛点很有意思——它属于「优点用过头」的类型：</p>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 过度设计、过度考虑安全</span>
+      <p>你给它一个需求，<strong>对话还没有结束</strong>，它就已经搞出了一个「延展性的设计」出来——已经超出你的需求范围了，还可能造出一堆并不太必要的组件。</p>
+    </div>
+
+    <div class="quote-box">
+      如果一个架构里有很多你不知道是干什么的组件，那它后面如果改动了，你就不知道什么情况了，你的架构就很容易腐坏。
+      <cite>— UP 主原话（00:52）</cite>
+    </div>
+
+    <p>这个论证值得单独拎出来：UP 主反对过度设计的理由<strong>不是「浪费」，而是「可维护性崩塌」</strong>。多余的组件不是在浪费 token，而是在给未来的自己埋雷——因为你不知道它的存在意义，也就无法判断改动它的后果。这是本节最有方法论价值的一句话。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">USAGE · 给它上镣铐</span>
+      <ol>
+        <li>必须<strong>明确它的边界</strong>——在 <code>AGENTS.md</code> 里把它约束住</li>
+        <li>尽可能<strong>少地在主对话里大量使用它</strong>，避免它「过于强悍」</li>
+        <li>推荐接入 <strong>Codex</strong> 或 <strong>OpenCode</strong>，作为<strong>子代理</strong>使用</li>
+        <li>让它干的事：<strong>询问方案</strong>、<strong>临时做重大决策</strong>、<strong>业务性判断</strong></li>
+        <li>它<strong>不适合放在主要工位上干活</strong>，而且成本极高</li>
+      </ol>
+    </div>
+
+    <p>把这五条连起来读，UP 主实际上在为 GPT-6 安排一个角色：<strong>外部顾问</strong>——只在关键决策点叫它进来，用完就退场。这跟下一节 GPT-5.6 的「常驻工位」角色正好互补。</p>
+
+    <p class="mono" style="font-size:13px;color:var(--tx3);margin-top:14px">存疑标注：<code>Astra</code> 为 GPT-6 的版本/档位名，本片两处音源听写一致，按原文保留。</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.2</span>GPT-5.6：综合性价比最好，但会「漂移」 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=91">01:31</a></span></h3>
+
+    <p>能力画像被概括为「<strong>相对均衡一点</strong>」。但均衡不等于精致——UP 主给它造了一个很传神的词：<em class="term">毛坯化</em>。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 前后端「毛坯化」</span>
+      <p>功能<strong>可以实现</strong>：你给一个比较精准的需求，它是可以跑出来的。但跑出来的功能<strong>比较毛坯</strong>：</p>
+      <ul>
+        <li>写<strong>后端</strong>：可能性能没有做优化</li>
+        <li>写<strong>前端</strong>：不太好维护扩展，因为「自己写了很多自己自定义的 CSS 样式」</li>
+      </ul>
+    </div>
+
+    <p>「毛坯化」这个词是 UP 主的自创措辞，指<strong>「能交付但没打磨」</strong>的状态——功能可用，但工程性、性能、可维护性都停在最低可用线。它不影响你跑通，但会在后续迭代时开始收利息。这个描述对实际工作很有指导性：毛坯代码应该被安排在「一次性的、不打算长期维护」的任务上。</p>
+
+    <p>UP 主还做了一个横向对比：它「是性价比的选择，但也可能没有那么性价比」——跟 <strong>GPT Luna</strong> 和 <strong>GPT Terra</strong> 比起来还是要差一点。不过总体结论仍然是：它是「大家能够使用到的、综合能力性价比最好的模型」。</p>
+
+    <h4 style="font-size:17px;font-weight:800;margin:22px 0 6px">长任务上的「漂移」</h4>
+
+    <p>这是本节第二个、也是更硬核的痛点，来源同样是双重出处（社区 + 团队自测）：</p>
+
+    <div class="callout co-case">
+      <span class="tag">CASE · 上下文漂移的阈值</span>
+      <p>在 Codex 里开到 50 万甚至 100 万上下文时：</p>
+      <ul>
+        <li>接近 <strong>40 万以上</strong> → 开始出现一定的漂移</li>
+        <li><strong>七八十万以上</strong> → 「几乎是不太可用了」</li>
+      </ul>
+      <p><strong>UP 主的建议：</strong>设置上下文时「直接就是临界设到 <code>512000</code>」，以保证上下文稳定；如果不经常用长上下文，设到 <strong>256K / 300K</strong> 都可以。</p>
+    </div>
+
+    <p>这里的思路值得单独学：<strong>UP 主不是在做「窗口越大越好」的加法，而是在做一个刻意的性能取舍。</strong>512000 落在「漂移起点（40 万）」和「可用性崩塌点（80 万）」之间——留了余量，也仍在稳定区内。这是一个可以直接抄的工程参数。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">POSITIONING · 一句话定位</span>
+      <p><strong>GPT-6</strong>：更像一个相对成熟、<strong>偏向架构方向走</strong>的工程师。</p>
+      <p><strong>GPT-5.6 SOTA</strong>：像一个非常<strong>综合性</strong>的工程师——比较擅长搞开发，但搞架构设计什么的还是没有那么好。</p>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>GPT-5.6 的核心矛盾是「<strong>能用但毛坯</strong>」——能跑通，工程质量要自己兜。</li>
+        <li>长任务上会把「窗口能力」和「可用能力」拉开差距，512000 是 UP 主给的工程参数。</li>
+        <li>它与 GPT-6 的分工是「<strong>GPT-6 定方向、GPT-5.6 干日常</strong>」。</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.3</span>Claude Opus 5：发散性与架构感好，但会「自己宣布完工」 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=172">02:52</a></span></h3>
+
+    <p>本节贡献了全片最精准的一个缺陷命名——<em class="term">自我验收不稳</em>。UP 主的讲法非常讲究：先给现象，再给定义，最后做横向对照。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 延续 Claude 系列的特点</span>
+      <ul>
+        <li>擅长<strong>代码组织</strong></li>
+        <li>适合<strong>明确任务</strong></li>
+        <li>跟它<strong>发散想法</strong>时能给出很好的反馈——「甚至它的反馈质量我觉得不比 GPT-6 要差」</li>
+      </ul>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 自我验收不稳</span>
+      <p><strong>现象：</strong>「它可能自己干着干着，觉得自己干完了。」</p>
+      <p><strong>界定：</strong>UP 主强调这是 <strong>Claude 系列明显的痛点</strong>，不是 Opus 5 独有的问题。</p>
+    </div>
+
+    <p>为了让这个缺陷更清楚，UP 主做了一个对照——这个对照信息量很大：</p>
+
+    <table class="gl">
+      <tr><th>系列</th><th>遇到干不完时</th><th>说明</th></tr>
+      <tr><td>GPT 系列</td><td>诚实告知</td><td>一般会诚实地告诉你干不完</td></tr>
+      <tr><td>Claude 系列</td><td>可能破坏架构</td><td>有时候会「为了目的直接破坏你的架构设计」</td></tr>
+      <tr><td>Claude 系列</td><td>可能误报完工</td><td>或者干着干着漂移了，却觉得自己干完了</td></tr>
+    </table>
+
+    <p>这三行的差别不是「能力高低」，而是<strong>失败时的行为模式</strong>。前者失败得透明（你知道要接管），后者失败得隐蔽（你以为已经完成）——<strong>隐蔽的失败对工程流程的伤害更大</strong>，因为它会让「人工复核」这一环被跳过。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CONCLUSION · 三条结论</span>
+      <ul>
+        <li>所以<strong>必须人工去复查一下</strong></li>
+        <li>它的<strong>记忆能力</strong>相对没有 GPT 系列稳定</li>
+        <li>但<strong>发散性和整体的架构感还是很不错的</strong>，依旧<strong>可以作为主力模型使用</strong></li>
+      </ul>
+    </div>
+
+    <h4 style="font-size:17px;font-weight:800;margin:22px 0 6px">附带信息：更强的 Fable 与它的价格</h4>
+
+    <p>UP 主表示「相信 Fable 5 或者 Fable 5.1 肯定是更强了」，但因为实在平常不太会使用，所以没纳入实测。他给了一个价格侧的观察：现在它的套餐，像 <strong>Max 20 倍</strong>档，无论闲鱼上还是别的地方都已经涨到 <strong>2000 块钱</strong>，<strong>还有封号概率</strong>——「几乎是不会被大家广泛地采用了」。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">UNCERTAIN · 两处存疑</span>
+      <p><strong>① 模型名：</strong>本片两处音源分别听作 <code>Fibro 5</code> 与 <code>FBL 5.1</code>，均碎片化。按音近推定为 <strong>Fable 5</strong>，<strong>属听写推定，请以官方命名为准</strong>。</p>
+      <p><strong>② 「Max 20 倍」：</strong>指订阅套餐档位，原话如此保留。</p>
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.4</span>DeepSeek V4.1 Flash：速度快、前端强，但别拿它搞并发 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=241">04:01</a></span></h3>
+
+    <p>本节先讲了一个产品线层面的细节，很值得注意：<strong>4.1 Flash 跑出来之后，结果比 4 的 Pro 还要强</strong>，所以 DeepSeek 直接<strong>只保留了这一个版本在 API 上供应</strong>。也就是说 Flash 档位反超了 Pro 档位，Pro 被下架了——这是「实测结果决定产品线」的一个实例。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 长处</span>
+      <ul>
+        <li><strong>前端非常强</strong></li>
+        <li><strong>token 速度非常快</strong>（UP 主原话：「你就说快不快吧」）</li>
+        <li>在一些<strong>精准定位</strong>上也还不错</li>
+        <li>支持<strong>多模态</strong></li>
+      </ul>
+      <p>定位判断很明确：<strong>它目前看起来不太适合用并行去开发</strong>，因为它是走 <strong>API 计价</strong>的。规模上仍是「只有六七百 B 的模型」，没有像海外那些动辄几个 T 的那么大，所以<strong>仍然需要一些 harness 或者人工质量审查</strong>——但「已经是一个非常非常合适的模型了」。</p>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 并发警告（全片最响的一条）</span>
+      <p>如果经常使用子代理，或者你的 Claude Code / Codex 里配置了大量子代理、<strong>需要并发执行任务</strong>，那<strong>最好不要用这个模型</strong>——<strong>因为它会飞快地跑掉你的额度。</strong></p>
+    </div>
+
+    <p>这个警告的机制值得拆开看，因为它解释了「单会话便宜」和「并发烧钱」为什么可以同时成立：</p>
+
+    <table class="gl">
+      <tr><th>使用姿势</th><th>是否推荐</th><th>原因</th></tr>
+      <tr><td>单个会话</td><td>推荐</td><td>缓存量很多 → 命中率高 → 单价低；临时任务、临时设计 UI 都合适</td></tr>
+      <tr><td>并发子代理</td><td>避开</td><td>「本来 token 量就快」；开三个项目、每个三个并发 → 一天大几百不成问题</td></tr>
+    </table>
+
+    <p>关键在于：<strong>「token 速度非常快」这个优点，在并发场景下会反过来变成烧钱的加速器。</strong>同一个特性，在不同架构下符号相反——这是本片很值得记住的一个观察。</p>
+
+    <p>UP 主把这条称为「血与泪的教训」，但结论并不消极：如果临时需要、在单个窗口内没有太多验证，用起来<strong>还是很便宜的</strong>，而且性能效果确实不错，临时设计一些 UI 也可以。最后他明确表态：「我们仍然非常喜欢这款模型了」——<strong>批评的是用法，不是模型。</strong></p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.5</span>GLM-5.3：最像「工程师」的模型，缺多模态 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=327">05:27</a></span></h3>
+
+    <p>GLM-5.3 是 UP 主团队「在大量使用」的模型，起用它有一个很现实的原因：<strong>当 GPT 额度不够了、Claude 额度不够了</strong>，很多时候就不得不使用 GLM 的 <strong>Coding Plan</strong>。也就是说，它是主力额度耗尽时的「接盘选手」。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 让人喜欢的地方</span>
+      <ul>
+        <li>一个非常强的<strong>工程师性格</strong></li>
+        <li>规模：大概 <strong>700 多 B</strong>，是做了很好的<strong>后训练</strong>的模型——相当于在 GLM-5.2 的基础上进一步强化了 <strong>coding 能力和 agent 能力</strong></li>
+        <li>开发 benchmark 号称达到跟 <strong>5.6 SOTA 不相上下</strong>，「体感上来说确实如此」</li>
+        <li>可以<strong>非常稳定地执行任务</strong></li>
+        <li><strong>100 万上下文不是假的</strong>——「它真的可以记住，几乎在五六十万的上下文时还能保持稳定」</li>
+      </ul>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 五条短板</span>
+      <ul>
+        <li><strong>套餐蛮贵的</strong>：有 5 小时限制，还有 7 天限制，「蛮多」</li>
+        <li><strong>速度相对慢</strong>：可能跟它的服务负载有关系</li>
+        <li><strong>套餐消耗相当的快</strong></li>
+        <li><strong>缺乏多模态理解能力</strong>：在刚测试的项目中，明显有视觉和一些设计方面的短板</li>
+        <li><strong>自由探索架构设计上的能力相对保守</strong>，没有那么好</li>
+      </ul>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">USAGE · 「编排—执行」分层</span>
+      <ol>
+        <li>用 <strong>Kimi</strong> 或者 <strong>Claude</strong> 去做<strong>编排</strong></li>
+        <li>在 <strong>OpenCode</strong> 或 <strong>Zcode</strong> 里把 GLM-5.3 作为<strong>子代理</strong>去调用</li>
+        <li>不要让它当主代理去做单流程执行——它不太擅长<strong>并发执行任务</strong></li>
+      </ol>
+    </div>
+
+    <p>「它更像一款<strong>适合干活的模型</strong>，也是一个非常好的、<strong>工程师化的模型</strong>。」UP 主对它的评价结构非常清晰：强在「执行稳定性 + 长上下文真实性」，弱在「多模态 + 并发 + 架构探索」——正好和 GPT-6 互补。</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>GLM-5.3 的 100 万上下文是「真货」——到五六十万仍保持稳定，这在同价位里是稀缺能力。</li>
+        <li>它的短板让它可以被信任地「执行」，但不能被信任地「探索」。</li>
+        <li>正确姿势是<b>当一个好用的子代理/执行者</b>，而不是主脑。</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.6</span>Grok 4.6：快、敢试错、不爱做计划 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=422">07:02</a></span></h3>
+
+    <p>UP 主对 Grok 4.6 的开场评语是「它的生态会很奇怪」——因为它的<strong>口碑走势是反的</strong>：刚出来的时候大家没太当回事，但测了测发现好像没有像那个「美国大豆包」那么蠢，它的开发能力还是很不错的。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">KEEP · 保留原文</span>
+      <p>「<strong>美国大豆包</strong>」是 UP 主对某海外模型的戏称（自备字幕作「美国大豆包煎饼袋」），两源一致，属<strong>作者式玩笑</strong>。按本讲义的整理原则，<strong>不「改正」作者的故意措辞</strong>，保留原样。</p>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">TRAITS · 三个特点（UP 主明确编号）</span>
+      <ol>
+        <li><strong>比较快</strong>——响应速度很快，<strong>敢于主动快速试错</strong>；在快速迭代中的效果提升比较明显</li>
+        <li><strong>能力还不错</strong></li>
+        <li><strong>它不喜欢做太复杂的计划</strong></li>
+      </ol>
+    </div>
+
+    <p>第三条是本节的核心对比，也是它与其他模型性格差异最大的地方：</p>
+
+    <table class="gl">
+      <tr><th>模型</th><th>工作方式</th><th>说明</th></tr>
+      <tr><td>GLM-5.3 / GPT 系列</td><td>先长思考再动手</td><td>都很喜欢做很长很长的思考，然后才去做东西</td></tr>
+      <tr><td>Grok 4.6</td><td>先动手再迭代</td><td>适合「上来咣咣咣就开始干」，干完跑出东西，然后迅速去迭代的人</td></tr>
+    </table>
+
+    <p>所以它的用户画像很明确：<strong>适合「先做出来再改」的工作流的人</strong>，而不是「想清楚再动手」的人。UP 主还指出它的生态位跟 <strong>DeepSeek V4.1 Flash</strong> 有点像——都属于「快、敢试、别指望它深思熟虑」那一挂。</p>
+
+    <p>至于它当时口碑为什么起来：毕竟这是刚出来的，<strong>当时它效果是最好的，最起码当时它「暴打」了 Gemini 系列</strong>。而现在 Gemini 虽然快，但没有那么好用，「3.8 也只能查查文档、简单干点活」。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 审美需要纠偏</span>
+      <p>Grok 4.6 还有个问题，就是它的<strong>审美需要一定的纠偏</strong>，没有那么稳定。它对国内的一些 UI 设计，甚至<strong>复刻一些已经有的界面，效果并不是很好</strong>。UP 主此处没有展开，只说「这个我们就不再多提」。</p>
+    </div>
+
+    <p>这里可以注意到一个贯穿全片的判据：<strong>UP 主把「审美稳定性」和「逻辑能力」分开评估。</strong>一个模型可能代码逻辑没问题，但 UI 一次一个样——对有设计要求的项目来说，这个短板足以抵消它的速度优势。</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.7</span>Kimi K3：Agent 调度是天生的，但额度不够、偏贵 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=494">08:14</a></span></h3>
+
+    <p>这是全片态度落差最大的一个模型——UP 主先讲了一个「退步」的观察，再讲它天生的优势，最后落到性价比判断。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">OBSERVATION · 效果明显不如印象</span>
+      <p>「我们今天用的这个效果，可能是比我们印象中要差很多。」Kimi K3 刚出的时候，团队用它去做官网、做界面，「甚至它的原型设计都是非常精美的」，但<strong>今天的效果真的差强人意</strong>。</p>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 天生优势：预训练就强化了 Agent 能力</span>
+      <ul>
+        <li>Kimi 那边<strong>本来就预训练的</strong>——训练时特地强化了它的 Agent 能力</li>
+        <li>它可以<strong>天然地愿意去调度 Agent 的团队</strong></li>
+        <li><strong>任务拆分也更自然一点</strong></li>
+      </ul>
+    </div>
+
+    <p>「天生」这个词是本节的关键——它说明这不是靠提示词工程或外部框架补出来的能力，而是模型本身的倾向。这也解释了为什么后面第三节里，Kimi 系的框架会被拿来讨论子代理调度问题。</p>
+
+    <p>但开发能力本身，UP 主的判断偏保守：它的开发风格<strong>在社区的评价中是比较中庸的</strong>。这里他给了一条本片最值得记住的判据之一——</p>
+
+    <div class="quote-box">
+      刚出来的时候很牛，不代表现在也很牛。
+      <cite>— UP 主原话（08:47）</cite>
+    </div>
+
+    <p>所以结论是：开发能力<strong>比较靠中间一点</strong>，<strong>比较适合中小型的应用</strong>。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">PITFALL · 额度不够用，且偏贵</span>
+      <p>「它的额度不是很多，这也是一个重点。」Kimi 现在偏贵，原因链条是：<strong>模型尺寸太大 → 算力消耗太大 → 平台订阅太贵</strong>。</p>
+      <p>就算买最贵的那一档套餐，如果负责的项目比较重、规模比较大、<strong>需要循环迭代</strong>，额度也不够用。</p>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">CASE · 三种用法叠加 = 额度见底</span>
+      <ul>
+        <li>想用<strong>网页端</strong></li>
+        <li>又想用<strong>开发侧</strong></li>
+        <li>有时候还想搞一个什么「<strong>龙虾</strong>」之类的玩一玩</li>
+      </ul>
+      <p>「那基本上就不够用了。」</p>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">KEEP · 保留原文</span>
+      <p>「<strong>龙虾</strong>」两源一致，但<strong>所指不明</strong>——可能是某工具或玩法的昵称，本讲义无法确定，<strong>保留原话并加注</strong>。</p>
+    </div>
+
+    <p>最终结论是：「所以说它现在的性价比不是很好。」而且——<strong>如果现在还有「降智」的情况，就没有那么再推荐给大家了</strong>。</p>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.8</span>MiniMax：参数量落后，生态位尴尬 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=566">09:26</a></span></h3>
+
+    <p>这一节的关键词是「尴尬」，而且 UP 主给出了一个<strong>可量化的根因</strong>，不是模糊的「不够强」。</p>
+
+    <p>事实层面：MiniMax 系列<strong>已经很久没有更新新模型了</strong>，UP 主也不很清楚下一款的情况。然后是行业尺度的对比：</p>
+
+    <div class="callout co-warn">
+      <span class="tag">ROOT CAUSE · 参数量掉队</span>
+      <p>目前这些主流模型的尺寸<strong>基本都已经涨到 500B 以上</strong>了，而 MiniMax 现在还处于 <strong>500B 以下</strong>——「就已经非常的尴尬了」。</p>
+      <p>在开发的<strong>后训练</strong>方面，以及它<strong>原生知识的复杂性</strong>上，<strong>参数量太小这个痛点是没办法根治的</strong>。</p>
+    </div>
+
+    <p>「没办法根治」这五个字是本节的分量所在——它把问题从「这一代模型不够好」升级成了「<strong>结构性的落后，靠后训练补不回来</strong>」。所以 UP 主的结论是「急需推出一款更强大的模型」。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">CAPABILITY · 仍然保留的优点</span>
+      <ul>
+        <li>支持<strong>多模态</strong></li>
+        <li>有 <strong>100 万上下文</strong></li>
+        <li><strong>agent 能力还不错</strong>，还相对稳定</li>
+      </ul>
+    </div>
+
+    <p>但优点挡不住「被平替」。UP 主列了同价位上的竞争对手：</p>
+
+    <div class="callout co-case">
+      <span class="tag">CASE · 四路夹击</span>
+      <p>现在 MiniMax M3 因为在快速上也有平替，就处于一个很尴尬的生态位：像 <strong>DeepSeek V4.1 Flash</strong>、<strong>Gemini 3.8 Flash</strong>、<strong>GLM-5.3 Flash</strong>，这些快速模型现在都比 MiniMax M3 强；甚至用 <strong>Antigravity</strong> 里面的 <strong>Gemini 3.8 Flash</strong> 也比 MiniMax M3 强。</p>
+    </div>
+
+    <p>注意这里的分析方法是<strong>生态位视角</strong>而不是绝对能力视角：MiniMax M3 的硬伤（参数量）单看不算致命，致命的是「它所在的快速档位上，已经有四个更强的替代品」。这就是 UP 主反复用「尴尬」这个词的原因。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">POSITIONING · 现状定位</span>
+      <ul>
+        <li>拿来做一些<strong>脚本</strong></li>
+        <li>因为<strong>很便宜</strong>，现在还占着便宜的优势——<strong>一些新手拿来开发 UI</strong></li>
+        <li>它的 UI 效果「在当年那一代模型里面」相当于大家买手机时的<strong>「老旗舰」</strong>，还算可以的</li>
+        <li>所以拿来作为<strong>初学者用一用，很便宜</strong></li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="sec c2-scope">
+    <h3><span class="secno">2.9</span>通义千问：能力不差，贵在生态位 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=640">10:40</a></span></h3>
+
+    <p>本章最后一节，也是信息量最密的一节。UP 主在这里给了一个反直觉的评价——<strong>「不惊艳」但「稳定」</strong>，而且他用一笔真实账单说明了问题出在哪。</p>
+
+    <p>开头的判断就很清楚：「千问系列大家现在应该不太会用来做开发了」，但紧接着是一个反转——</p>
+
+    <div class="quote-box">
+      它最根本的问题不在于能力不行。
+      <cite>— UP 主原话（10:45）</cite>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">OBSERVATION · 不惊艳，但稳定</span>
+      <p>从今天的测试可以发现，千问这两个模型<strong>确实不惊艳</strong>——它做出来的 UI，达不到那种「一眼看上去就能达到 GPT 或者 DeepSeek 抽卡抽出来的效果」。</p>
+      <p><strong>但它多轮跑出来的东西还是很稳定的</strong>，这是一个很大的优势：「它跑出来的东西怎么看，好歹是像那么回事」。</p>
+    </div>
+
+    <p>UP 主在这里下了一个很关键的反转判断：</p>
+
+    <div class="quote-box">
+      这两个模型并不是不可用，甚至某种意义上在某些场景下可能更好用——你拿它多轮迭代，如果很稳定的话，那不就是很好用吗？
+      <cite>— UP 主原话（11:12）</cite>
+    </div>
+
+    <p>也就是说，<strong>「一次直出好看」和「多轮迭代不崩」是两种不同的能力。</strong>前者决定你在 demo 环节爽不爽，后者决定你在真实项目里能不能推进。千问属于后者——这个区分方式很有迁移价值。</p>
+
+    <div class="callout co-case">
+      <span class="tag">CASE · 一笔 39 元账单的推演</span>
+      <p><strong>投入：</strong>本次测试买了 <strong>39 块钱的 token plan</strong>（按周限制 / 按月限制）。</p>
+      <p><strong>任务：</strong>只测了一个「做 B 站前端」这样的小项目——「甚至算不上一个正儿八经的大项目」。</p>
+      <p><strong>调用：</strong>只是一人测了<strong>一次</strong>：一次「一次性指令直出」，一次「对抗审查」。</p>
+      <p><strong>结果：</strong>直接把 39 块钱的额度<strong>触顶了，差点没跑完，基本干到 98%</strong>。</p>
+    </div>
+
+    <p>然后 UP 主把这个观察外推到了正式项目：</p>
+
+    <ul>
+      <li>那就说明在一个正式的大型项目里——比如项目有<strong>十几万行、二十几万行</strong>——你准备买多贵的套餐呢？</li>
+      <li>它是<strong>直接按周限制、按月限制</strong>这样算的，你基本上很快就会干掉一周的限额。</li>
+      <li>那么有这个钱，如果你真的想跟 GPT 用一样多，<strong>两者花的钱可能差不太多</strong>——「那为什么不去买 GPT 呢？」</li>
+    </ul>
+
+    <p>这个推演的方法比数字本身更有价值：<strong>UP 主没有引用任何官方定价，只用一笔真实的 39 元账单，就把「单位成本」外推到了大型项目的量级上。</strong>它证明的是性价比结构有问题，而不是某个绝对值贵。同时他补了一句当时的市场状况：「当然现在 GPT 20 倍是被禁用了。」</p>
+
+    <div class="callout co-warn">
+      <span class="tag">KEEP · 保留原文</span>
+      <p>「<strong>GPT 20 倍</strong>」指订阅套餐档位，原话如此保留。</p>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">EXCEPTION · 一个重要例外：小模型</span>
+      <p>虽然大的千问生态位尴尬，但<strong>它的小模型仍然是非常有优势的</strong>——UP 主举例的千问 3.8 小参数版本：</p>
+      <ul>
+        <li>大模型这个能力「没有什么特别惊艳的地方」</li>
+        <li>但<strong>蒸馏出的小模型能跟大的保持差不多的后训练水平</strong>，coding 水平也差不太多</li>
+        <li>「那就很离谱了」——毕竟很朴素，某种时候在小参数上那是非常强的</li>
+      </ul>
+      <p>UP 主的四字总结：<strong>朴素且稳定</strong>。</p>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">UNCERTAIN · 存疑标注</span>
+      <p>该小模型参数量的听写在本片两处音源中<strong>不一致</strong>（Whisper 作 <code>27B</code>，UP 自备字幕作 <code>2107B</code>）。本讲义按 27B 转写，<strong>标注为存疑</strong>，不据此下结论。</p>
+    </div>
+
+    <div class="summary">
+      <h4>本章小结（02 章）</h4>
+      <ul>
+        <li><strong>没有「全能王」</strong>：10 个模型里，每一个都有一个必须由人来兜的性格缺口。</li>
+        <li>缺口的形状各不相同——GPT-6 的问题是「做得太多」，Claude 的问题是「谎报完工」，DeepSeek 的问题是「并发烧钱」，GLM 的问题是「看不见图」，Grok 的问题是「不深思也不好看」，Kimi 的问题是「额度」，MiniMax 的问题是「体格」，千问的问题是「价格结构」。</li>
+        <li>选型的第一问因此不是「哪个最强」，而是<b>「我最怕哪种失败」</b>。</li>
+        <li>两个可迁移的方法：① 用「窗口能力 vs 可用能力」来设上下文参数；② 用「一次直出 vs 多轮稳定」来区分两代能力。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>如果把「我最怕哪种失败」当第一问，你自己当前项目的答案是什么？据此选出 1 个主模型 + 1 个子模型。</li>
+        <li>「GPT 系列失败得透明，Claude 系列失败得隐蔽」——这个差别应该怎样落到你的工作流里（例如验收环节的设计）？</li>
+        <li>为什么「token 速度非常快」在单会话是优点、在并发下是缺点？请用本片的「缓存」线索解释。</li>
+        <li>「刚出来的时候很牛，不代表现在也很牛」——这句话对「选新模型」的策略有什么影响？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>开发基座横评：Harness 层的胜负手</h2>
+    <div class="ch-range">12:41 – 17:31 · 7 节 · 6 套基座</div>
+  </div>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.1</span>DeepSeek Harness：前沿但还嫩，适合折腾的人 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761">12:41</a></span></h3>
+
+    <p>UP 主把这一章称为「最后的一个部分」，切入方式也很明确：<strong>模型选完之后，还得选壳。</strong></p>
+
+    <p>构成交代得很清楚：DeepSeek 现在做的是<strong>基于插件化的 DeepSeek Harness</strong>，<strong>在浏览器里使用</strong>。团队简单用了一阵子，发现这个框架<strong>目前还不是很稳定</strong>。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">WHY NOT NOW · 四条理由</span>
+      <ul>
+        <li><strong>还不稳定</strong></li>
+        <li>在<strong>频繁地高速迭代</strong>，里面在增加各种各样的功能</li>
+        <li>设计比较<strong>前沿化</strong>——比如它试图把 Harness 里面的各个组件<strong>全部插件化</strong>，所以对刚入门的或者新手来说并不是很好理解，<strong>并不是一个新手友好的框架</strong></li>
+        <li>还在频繁迭代，<strong>发布有时候会有各种细微的小 bug</strong></li>
+      </ul>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">BUT · 有一类人应该用</span>
+      <p>对于<strong>非常想精调 harness 的开发者</strong>来说，因为它这种基于插件模式的设计：</p>
+      <ul>
+        <li>你可以把自己的很多 harness 理念<strong>植入进去</strong></li>
+        <li>或者尝试<strong>做自己的一套框架</strong>出来</li>
+        <li>「那它就是一个很好用的东西」</li>
+      </ul>
+    </div>
+
+    <p>这一节的结构其实是<strong>按角色分流</strong>，而不是简单的「好不好」：</p>
+
+    <table class="gl">
+      <tr><th>你的角色</th><th>建议</th></tr>
+      <tr><td>想直接用一个稳定的</td><td>那就<strong>不要用它</strong></td></tr>
+      <tr><td>想自己搞一个 App</td><td>懒得自己封装的话，推荐现在最好还是<strong>先不要使用</strong></td></tr>
+      <tr><td>想精调 harness 的开发者</td><td><strong>值得用</strong>——它的可塑性是优点</td></tr>
+    </table>
+
+    <p>读法提示：<strong>「不稳定」和「不值得用」是两件事。</strong>普通用户等它稳定，开发者反而该趁它可塑的时候进场——因为一旦稳定下来，插件化的自由度往往会被收紧。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.2</span>Codex（GPT）：目前最成熟的 Coding Agent 框架 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=825">13:45</a></span></h3>
+
+    <p>这是全片对基座的最高评价，理由浓缩成一个词——<strong>子代理</strong>。</p>
+
+    <div class="quote-box">
+      Codex 我们目前是认为它是现在最最最成熟的一个 Coding Agent 的框架。
+      <cite>— UP 主原话（13:48）</cite>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">WHY · 子代理通信流畅</span>
+      <ul>
+        <li>它的<strong>子代理非常有特点</strong>，和子代理<strong>通信的时候是非常流畅的</strong></li>
+        <li>如果你的<strong>主代理能力比较不错</strong>，它可以非常顺利地<strong>组织 3～4 个子代理</strong>来完成工作</li>
+        <li>「这个就是我们现在觉得非常不错的点」</li>
+      </ul>
+    </div>
+
+    <p>注意这里的措辞是「<strong>通信</strong>流畅」「<strong>组织</strong>3~4 个子代理」——评价的对象是<strong>协作机制</strong>，不是单个代理的智力。这正是本章的判据轴。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">CONTRAST · Claude Code 的短板在哪</span>
+      <p>Claude Code 其实<strong>也能完成这个任务</strong>，但它的 <strong>Desktop 面板非常让人尴尬</strong>：</p>
+      <ul>
+        <li>比如你配置了<strong>基于 GLM 的一个 Claude Code</strong>，那你在它的 <strong>Claude Desktop 里面是没法进入 Code 界面的</strong></li>
+        <li>而且<strong>要充会员</strong></li>
+        <li>所以它对于国内开发者<strong>很不友好</strong></li>
+      </ul>
+    </div>
+
+    <p>这里批评的对象是<strong>桌面端的产品策略</strong>，不是模型或 CLI 能力。这是本片一个隐含的观察角度：<strong>同一个 CLI 工具，它的客户端面板可能会成为你根本用不下去的原因。</strong>评测基座时不能只看命令行体验。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">PLUS · Codex 的加分项</span>
+      <ul>
+        <li>对比之下 <strong>Codex 就好得多</strong></li>
+        <li>那些子代理<strong>也都支持自定义提示词</strong></li>
+        <li>可以做<strong>并发</strong>，可以自己写这些</li>
+        <li><strong>指令遵循也不错</strong></li>
+      </ul>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">ECOSYSTEM SIGNAL · 别家都在适配它</span>
+      <p>可以看到像 <strong>DeepSeek</strong>、还有像 <strong>GLM</strong> 他们的 <strong>Coding Plan</strong>，也都在积极地去适配 <strong>Responses API</strong> 这种 Codex 的专属端点——「这个都是蛮不错的」。</p>
+    </div>
+
+    <p>这条信号值得单独标注出来：<strong>当竞争对手主动来适配你的接口，就说明你的框架事实上成了标准。</strong>UP 主把它作为「Codex 现在是最好的框架」的旁证——比自评更有说服力。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.3</span>Grok Build：快、轻量，但可读性欠佳 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=893">14:53</a></span></h3>
+
+    <p>最短的一节，评价结构也最简单：</p>
+
+    <table class="gl">
+      <tr><th>维度</th><th>评价</th></tr>
+      <tr><td>优点</td><td>速度<strong>非常快</strong>，非常擅长直接跑出来任务</td></tr>
+      <tr><td>缺点</td><td><strong>可读性不是很好</strong>——东西发上去之后，去理解那个界面或者阅读一些东西时，会有一些遮挡性的问题</td></tr>
+      <tr><td>结论</td><td>整体来说<strong>还是可用的</strong>；处于一种没有 Codex 和 Claude Code 这种「老东西」成熟的阶段，但<strong>相对快、相对轻量可用</strong></td></tr>
+    </table>
+
+    <p>把它和 Grok 4.6 那一节并读，会发现 Grok 系的气质是一致的：<strong>快、轻量、先跑起来再说</strong>——但配套的「打磨度」（审美、界面可读性）都还差一层。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.4</span>千问的基座：不单独用，接到 CC 里 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=917">15:17</a></span></h3>
+
+    <p>一句话带过：「千问的话我们就不提了。」原因也给了——<strong>UP 主不太用 Coder</strong>，所以一般就是把它<strong>接到 CC（Claude Code）里面来用</strong>，这里就不多讲了。</p>
+
+    <p>这也解释了为什么本片的「基座」章节没有单独评测千问自家的 CLI：<strong>它在这份报告里的角色是「模型供应商」，而不是「基座供应商」。</strong>对使用者来说，这条信息也有实用价值——某些模型的正确打开方式就是当「燃料」灌进别人家的壳里。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.5</span>Zcode 与 Kimi CLI：好看，但主代理操控子代理的颗粒度不够 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=923">15:23</a></span></h3>
+
+    <p>本节是全片技术含量最高的一段。UP 主提出了一个明确的、可验证的框架缺陷机制，而不是泛泛的「不好用」。</p>
+
+    <p>开场先说清楚问题所在：GLM 的 Zcode「跟现在的一些其他框架是有明显的一个重大问题的」。然后立刻补上肯定——Zcode 还有 Kimi CLI <strong>其实现在做得都蛮漂亮</strong>，<strong>可用性对于一个新手来说是可以的</strong>。</p>
+
+    <p>但接下来是判据：</p>
+
+    <div class="quote-box">
+      在我们去调度一些 Agent 的团队来做事情的时候，这些团队之间的异步通信、主代理对于子代理的一个操控的颗粒度是非常重要的。
+      <cite>— UP 主原话（15:40）</cite>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">DEFECT · 不支持运行中干预</span>
+      <p>现在在 Kimi CLI 还有 GLM 的 Zcode 中（UP 主加了限定：「如果我使用的版本没什么问题的话，如果是最新版本的话」）：</p>
+      <ul>
+        <li><strong>不支持主代理在子代理运行过程中给它们补送消息</strong></li>
+        <li>或者说<strong>提前结束它们</strong></li>
+      </ul>
+    </div>
+
+    <p>缺失这两个能力会造成什么后果？UP 主给了一个具体的、可复现的失效链：</p>
+
+    <div class="callout co-case">
+      <span class="tag">FAILURE CHAIN · 四步失效</span>
+      <ol>
+        <li>你现在主代理<strong>直接植入了一个任务</strong>进去</li>
+        <li>然后子代理<strong>开始干活了</strong>——已经分派工作了</li>
+        <li>你现在<strong>又给主代理发了一个任务</strong> → <strong>它就会一直阻塞在那里，而且你没法停</strong></li>
+        <li>如果你现在把这个任务停了 → <strong>你前面那些子代理干的活直接就丢失了，你也不知道它造了什么东西出来</strong></li>
+      </ol>
+      <p>而且——「如果你的代码库本来就挺屎山的，那就非常的崩溃了」。</p>
+    </div>
+
+    <p>这条失效链解释清楚了 UP 主为什么把「操控颗粒度」当作分水岭：<strong>缺的不是某个功能，而是「中断/纠正」这个让 Agent 协作可恢复的能力。</strong>没有它，一次误判就会让你在「丢工作」和「干等」之间二选一。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">BALANCED VIEW · UP 主自己也说得很矛盾</span>
+      <ul>
+        <li><strong>既好用又不好用</strong></li>
+        <li><strong>挺好看的</strong></li>
+        <li>也<strong>知道它在尽力做</strong></li>
+        <li>而且能看到它们的<strong>缓存命中率都挺好的</strong></li>
+      </ul>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">SCOPE LIMIT · 版本限定</span>
+      <p>UP 主两次加上前提——「如果我使用的版本没什么问题的话，如果是最新版本的话」。<strong>这类框架迭代很快，结论有时效性</strong>，引用时请一并带上这个限定。</p>
+    </div>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.6</span>Kimi 的额度差异：同一个模型，换个壳消耗差很多 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=991">16:31</a></span></h3>
+
+    <p>本节是全片唯一一处直接点出「基座会反过来影响额度」的观察，也是「为什么模型和基座要一起评估」的直接证据。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">OBSERVATION · Kimi 的消耗因壳而异</span>
+      <p>它的速度可以，但<strong>额度消耗在不同的 agent 工具里面是不太一样的</strong>：</p>
+      <ul>
+        <li>像 Kimi K3，它在 <strong>Claude Code</strong> 里面的消耗<strong>非常快</strong>——「不知道是不是 Claude Code 有什么负优化」</li>
+        <li>但 Kimi K3 在自己的 <strong>Kimi CLI（也就是 Kimi Code）</strong>里面用的话，速度还挺好的，UI 做得也还不错，<strong>写任务的时候都比较明确</strong></li>
+      </ul>
+    </div>
+
+    <p>UP 主给这个差异留了一个问号，没有下定论——这与他在别处（比如 GLM 速度慢「可能跟它的服务负载有关系」）的处理方式一致：<strong>现象说清楚，归因保留。</strong>这种严谨度值得注意，也提醒读者不要把「壳的问题」和「模型的问题」混为一谈。</p>
+  </article>
+
+  <article class="sec c3-scope">
+    <h3><span class="secno">3.7</span>MiniMax 的 code 平台与展望 <span class="ts"><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1020">17:00</a></span></h3>
+
+    <p>收尾前最后一个：MiniMax M3 也做了自己的 code 平台。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">ASSESSMENT · 评价与展望</span>
+      <ul>
+        <li>先给肯定：虽然在它自己当年那个年代的模型基础上，<strong>已经尽可能做得很好了</strong></li>
+        <li>但急需发展出一款新模型——<strong>规格上或者重新预训练</strong>的，可能是 <strong>MiniMax M4</strong> 或者怎么样</li>
+        <li>最好能达到一个新的水平，<strong>加上它的平台，那就能发挥出更好的能力了</strong></li>
+        <li>「现在来看的话已经明显地拉开差距了」</li>
+      </ul>
+    </div>
+
+    <div class="quote-box">
+      好的，那么本期视频我们就主要是到这里。谢谢大家，制作视频不易，希望大家能够一键三连支持一下。
+      <cite>— 收尾（17:24）</cite>
+    </div>
+
+    <div class="summary">
+      <h4>本章小结（03 章）</h4>
+      <ul>
+        <li><strong>基座不是可替换的外壳</strong>：它决定了你能不能调度 Agent 团队、额度烧得快不快、面板能不能进得去、界面读不读得懂。</li>
+        <li>本章的判据轴是<b>「主代理对子代理的操控颗粒度」</b>——能不能补送消息、能不能提前结束。Codex 在这一轴上领先。</li>
+        <li>三个可迁移的评估角度：① 协作机制（而非单agent智力）；② 产品策略（面板、会员门槛）；③ 生态信号（别家是否来适配）。</li>
+        <li>新框架的正确态度是<b>按角色分流</b>：求稳定的等，求可塑性的上。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>为什么「主代理能不能在子代理运行中补送消息」比「子代理干得快不快」更关键？请结合那条四步失效链回答。</li>
+        <li>「竞争对手主动适配你的接口」为什么是比自评更可靠的成熟度信号？</li>
+        <li>你自己现在的基座是哪一套？它在「协作机制 / 产品策略 / 生态信号」三个角度上分别得几分？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">附录 A</span>术语对照表（勘误表扩展版）</h2>
+
+  <p>本片为口播视频，且在极短时间内密集出现大量专有名词（模型名、工具名、术语），ASR 误识别率显著高于常规课程类内容。下表给出「听写形态 → 判定形态」的对照，供读者自行核对。</p>
+
+  <h3>A.1 模型 / 产品名</h3>
+  <table class="gl">
+    <tr><th>ASR 听写</th><th>判定</th><th>说明</th></tr>
+    <tr><td>圣图城的小诺</td><td>圣徒城的小诺</td><td>UP 主名，以频道名为准</td></tr>
+    <tr><td>GPT6 / ZVT6 / GBT6 ASTRA</td><td>GPT-6 / GPT-6 Astra</td><td>Astra 为版本档位名，两源一致</td></tr>
+    <tr><td>GPT5.6SO</td><td>GPT-5.6 SOTA</td><td>SO 为 SOTA 缩写听写碎片</td></tr>
+    <tr><td>GPT Luna / Terra</td><td>GPT Luna / GPT Terra</td><td>两源一致</td></tr>
+    <tr><td>Cloud Ops 5 / Cloud 系列</td><td>Claude Opus 5 / Claude 系列</td><td>Cloud 与 Claude 音近</td></tr>
+    <tr><td>Fibro 5 / FBL5.1</td><td>Claude Fable 5 / Fable 5.1</td><td><b>听写推定，存疑</b></td></tr>
+    <tr><td>Deepseek V4.1 Flash</td><td>DeepSeek V4.1 Flash</td><td>两源一致</td></tr>
+    <tr><td>GAM5.3 / G1 5.2 / 加盟5.3</td><td>GLM-5.3 / GLM-5.2</td><td>GAM / G1 为 GLM 误识别</td></tr>
+    <tr><td>Glock 4.6 / GROUCK / Grog Build</td><td>Grok 4.6 / Grok Build</td><td>Glock 为 Grok 误识别</td></tr>
+    <tr><td>CM3.8 Flash / 詹密奈</td><td>Gemini 3.8 Flash</td><td>詹密奈 为 Gemini 音译残留</td></tr>
+    <tr><td>Anti-Gravity</td><td>Antigravity</td><td>用于运行 Gemini 的客户端</td></tr>
+    <tr><td>KIMI K3</td><td>Kimi K3</td><td>大小写规范化</td></tr>
+    <tr><td>minimax M3 / M4</td><td>MiniMax M3 / M4</td><td>大小写规范化</td></tr>
+    <tr><td>千问 3.8 / 千文 3.8</td><td>通义千问 3.8</td><td>千文为千问误识别</td></tr>
+    <tr><td>千问 3.8 27B / 2107B</td><td>千问 3.8 小参数版</td><td><b>两源不一致，存疑</b></td></tr>
+  </table>
+
+  <h3>A.2 开发框架 / 基座</h3>
+  <table class="gl">
+    <tr><th>ASR 听写</th><th>判定</th><th>说明</th></tr>
+    <tr><td>CodeX / code ax / Code s s</td><td>Codex</td><td>OpenAI 的 coding agent 框架</td></tr>
+    <tr><td>Cloud Code / CouldCode</td><td>Claude Code</td><td>简称 CC</td></tr>
+    <tr><td>OpenCode / Open code</td><td>OpenCode</td><td>—</td></tr>
+    <tr><td>Zcode / z code / 之谱</td><td>Zcode / 智谱</td><td>GLM 的 CLI 框架</td></tr>
+    <tr><td>Kimi CLI / KIMI Code</td><td>Kimi CLI / Kimi Code</td><td>大小写规范化</td></tr>
+    <tr><td>Grok Build / Grog Build</td><td>Grok Build</td><td>—</td></tr>
+    <tr><td>Dipsick Harness</td><td>DeepSeek Harness</td><td>插件化框架</td></tr>
+    <tr><td>Cooder / coder</td><td>通义千问 Coder</td><td>代码模型</td></tr>
+    <tr><td>哈里斯 / Harness</td><td>Harness</td><td>agent 框架的代称，原文两说混用</td></tr>
+    <tr><td>插线化</td><td>插件化</td><td>—</td></tr>
+    <tr><td>千言化</td><td>前沿化</td><td>「设计比较前沿化」</td></tr>
+    <tr><td>Response 这种专属端点</td><td>Responses API</td><td>Codex 的专属端点</td></tr>
+  </table>
+
+  <h3>A.3 通用术语</h3>
+  <table class="gl">
+    <tr><th>ASR 听写</th><th>判定</th><th>说明</th></tr>
+    <tr><td>指令秩序 / 指令咨询</td><td>指令遵循</td><td>—</td></tr>
+    <tr><td>主绘画 / 单个绘画</td><td>主对话 / 单个会话</td><td>—</td></tr>
+    <tr><td>上下纹 / 伤害纹</td><td>上下文</td><td>—</td></tr>
+    <tr><td>子弹里 / 纸代理 / AZEN / A整</td><td>子代理 / 子代理 / Agent</td><td>—</td></tr>
+    <tr><td>开发机座</td><td>开发基座</td><td>本讲义核心概念之一</td></tr>
+    <tr><td>多摩汉 / 多么太 / 多么太爱</td><td>多模态</td><td>—</td></tr>
+    <tr><td>Agent Sparm 能力</td><td>Agent / Agentic 能力</td><td>—</td></tr>
+    <tr><td>浮腹的 / 服负载</td><td>服务负载</td><td>—</td></tr>
+    <tr><td>屏替</td><td>平替</td><td>本片重要分析概念</td></tr>
+    <tr><td>情话 / 青蛙 / 生态位</td><td>生态位</td><td>本片高频措辞</td></tr>
+    <tr><td>学一类的教训</td><td>血与泪的教训</td><td>原话为口语强调</td></tr>
+    <tr><td>擦枪人意</td><td>差强人意</td><td>—</td></tr>
+    <tr><td>不经验</td><td>不惊艳</td><td>—</td></tr>
+    <tr><td>制作视频补义</td><td>制作视频不易</td><td>—</td></tr>
+    <tr><td>闲雨上</td><td>闲鱼上</td><td>—</td></tr>
+    <tr><td>史山 / 屎山</td><td>屎山</td><td>代码库的行业黑话</td></tr>
+    <tr><td>六七百币 / 700 多币</td><td>600–700B / 700 多 B</td><td>参数量，B = billion</td></tr>
+    <tr><td>外壁以下</td><td>500B 以下</td><td>「处于 500B 以下」</td></tr>
+    <tr><td>token plan / coin plan</td><td>token plan / Coding Plan</td><td>两处不同，按语境区分</td></tr>
+  </table>
+
+  <h3>A.4 保持原样的措辞（未「改正」）</h3>
+  <table class="gl">
+    <tr><th>原文</th><th>性质</th><th>处理</th></tr>
+    <tr><td>美国大豆包</td><td>对某海外模型的戏称</td><td>保留，属作者式玩笑，两源一致</td></tr>
+    <tr><td>龙虾</td><td>所指不明的工具/玩法昵称</td><td>保留原话并加注</td></tr>
+    <tr><td>抽卡</td><td>核心比喻：一次性直出靠运气</td><td>保留，本片高频</td></tr>
+    <tr><td>毛坯化</td><td>自创措辞：能交付但没打磨</td><td>保留其表达力</td></tr>
+    <tr><td>自我验收不稳</td><td>自创术语：误报完工</td><td>保留，本片最有价值的命名</td></tr>
+    <tr><td>屎山</td><td>行业黑话</td><td>保留</td></tr>
+    <tr><td>GPT 20 倍 / Max 20 倍</td><td>订阅套餐档位</td><td>原话如此保留</td></tr>
+    <tr><td>老旗舰</td><td>举例用的类比</td><td>保留</td></tr>
+  </table>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">附录 B</span>时间戳索引</h2>
+  <p>本片无官方章节，以下时间戳由转写逐段定位，点击跳回原视频对应秒数。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=0">开场 · 接续上期 · 两条主线</a></div>
+    <div><span class="t">00:19</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19">GPT-6 · 上限极高</a></div>
+    <div><span class="t">00:40</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=40">GPT-6 · 过度设计 / 过度安全</a></div>
+    <div><span class="t">00:52</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=52">GPT-6 · 架构腐坏的论证</a></div>
+    <div><span class="t">01:02</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=62">GPT-6 · 明确边界 / 约束 AGENTS.md</a></div>
+    <div><span class="t">01:12</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=72">GPT-6 · 成本极高 · 当子代理用</a></div>
+    <div><span class="t">01:31</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=91">GPT-5.6 SOTA · 能力均衡</a></div>
+    <div><span class="t">01:35</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=95">GPT-5.6 · 前后端「毛坯化」</a></div>
+    <div><span class="t">02:10</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=130">GPT-5.6 · 漂移问题</a></div>
+    <div><span class="t">02:23</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=143">GPT-5.6 · 建议设 512000</a></div>
+    <div><span class="t">02:39</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=159">GPT-6 / 5.6 的角色比喻</a></div>
+    <div><span class="t">02:52</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=172">Claude Opus 5 · 承接 Claude 特点</a></div>
+    <div><span class="t">03:12</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=192">Opus 5 · 自我验收不稳</a></div>
+    <div><span class="t">03:22</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=202">Opus 5 · 与 GPT 系列的对照</a></div>
+    <div><span class="t">03:36</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=216">Opus 5 · 必须人工复查</a></div>
+    <div><span class="t">03:47</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=227">Fable 5 / 5.1 · 未实测</a></div>
+    <div><span class="t">03:53</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=233">Fable · Max 20 倍价格与封号</a></div>
+    <div><span class="t">04:01</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=241">DeepSeek V4.1 Flash · 只保留 Flash</a></div>
+    <div><span class="t">04:19</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=259">DS · API 计价 / 不宜并行</a></div>
+    <div><span class="t">04:45</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=285">DS · 并发跑额度的警告</a></div>
+    <div><span class="t">05:10</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=310">DS · 「血与泪的教训」</a></div>
+    <div><span class="t">05:27</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=327">GLM-5.3 · Coding Plan 接盘</a></div>
+    <div><span class="t">05:39</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=339">GLM-5.3 · 套餐 5 小时 / 7 天限制</a></div>
+    <div><span class="t">05:50</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=350">GLM-5.3 · 工程师性格 / 700 多 B</a></div>
+    <div><span class="t">06:07</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=367">GLM-5.3 · 100 万上下文不是假的</a></div>
+    <div><span class="t">06:18</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=378">GLM-5.3 · 速度慢 / 消耗快</a></div>
+    <div><span class="t">06:28</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=388">GLM-5.3 · 缺多模态理解能力</a></div>
+    <div><span class="t">06:41</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=401">GLM-5.3 · 定位为「适合干活」</a></div>
+    <div><span class="t">07:02</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=422">Grok 4.6 · 生态很奇怪</a></div>
+    <div><span class="t">07:13</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=433">Grok 4.6 · 响应快 / 敢试错</a></div>
+    <div><span class="t">07:27</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=447">Grok 4.6 · 不喜欢做复杂计划</a></div>
+    <div><span class="t">07:46</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=466">Grok 4.6 · 暴打 Gemini 系列</a></div>
+    <div><span class="t">07:59</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=479">Grok 4.6 · 审美需要纠偏</a></div>
+    <div><span class="t">08:14</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=494">Kimi K3 · 本次效果差强人意</a></div>
+    <div><span class="t">08:28</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=508">Kimi K3 · 预训练强化 Agent</a></div>
+    <div><span class="t">08:41</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=521">Kimi K3 · 社区评价中庸</a></div>
+    <div><span class="t">08:47</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=527">Kimi K3 · 「刚出来很牛 ≠ 现在很牛」</a></div>
+    <div><span class="t">08:55</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=535">Kimi K3 · 额度不是很多</a></div>
+    <div><span class="t">09:20</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=560">Kimi K3 · 性价比不好 / 降智</a></div>
+    <div><span class="t">09:26</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=566">MiniMax · 系列久未更新</a></div>
+    <div><span class="t">09:33</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=573">MiniMax · 主流已涨到 500B 以上</a></div>
+    <div><span class="t">09:41</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=581">MiniMax · 仍保留的优点</a></div>
+    <div><span class="t">09:53</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=593">MiniMax · 参数量小无法根治</a></div>
+    <div><span class="t">10:02</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=602">MiniMax · 被四路快速模型平替</a></div>
+    <div><span class="t">10:25</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=625">MiniMax · 便宜 / 新手用它做 UI</a></div>
+    <div><span class="t">10:40</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=640">通义千问 · 问题不在能力</a></div>
+    <div><span class="t">10:52</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=652">千问 · 不惊艳但多轮稳定</a></div>
+    <div><span class="t">11:12</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=672">千问 · 「多轮稳定不也很好用吗」</a></div>
+    <div><span class="t">11:26</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=686">千问 · 39 元 token plan 触顶 98%</a></div>
+    <div><span class="t">11:48</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=708">千问 · 推演大型项目成本</a></div>
+    <div><span class="t">12:14</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=734">千问 · 生态位尴尬 / 小模型优势</a></div>
+    <div><span class="t">12:31</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=751">千问 · 「朴素且稳定」</a></div>
+    <div><span class="t">12:41</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761">开发基座 · 章节开场</a></div>
+    <div><span class="t">12:50</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=770">DeepSeek Harness · 插件化</a></div>
+    <div><span class="t">13:05</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=785">Harness · 建议先别用</a></div>
+    <div><span class="t">13:13</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=793">Harness · 组件全部插件化</a></div>
+    <div><span class="t">13:32</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=812">Harness · 适合精调的人</a></div>
+    <div><span class="t">13:48</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=828">Codex · 最最最成熟</a></div>
+    <div><span class="t">13:56</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=836">Codex · 子代理通信流畅</a></div>
+    <div><span class="t">14:02</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=842">Codex · 组织 3～4 个子代理</a></div>
+    <div><span class="t">14:15</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=855">Claude Code · Desktop 面板尴尬</a></div>
+    <div><span class="t">14:34</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=874">Codex · 子代理支持自定义提示词</a></div>
+    <div><span class="t">14:47</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=887">生态 · 适配 Responses 端点</a></div>
+    <div><span class="t">14:53</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=893">Grok Build · 速度非常快</a></div>
+    <div><span class="t">15:00</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=900">Grok Build · 可读性不好</a></div>
+    <div><span class="t">15:17</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=917">千问 · 接到 CC 里用</a></div>
+    <div><span class="t">15:25</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=925">Zcode · 重大问题</a></div>
+    <div><span class="t">15:35</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=935">框架判据 · 异步通信与颗粒度</a></div>
+    <div><span class="t">15:51</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=951">缺陷 · 不支持补送 / 提前结束</a></div>
+    <div><span class="t">16:00</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=960">失效链 · 阻塞与工作丢失</a></div>
+    <div><span class="t">16:23</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=983">框架评价 · 既好用又不好用</a></div>
+    <div><span class="t">16:31</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=991">Kimi · 额度因工具而异</a></div>
+    <div><span class="t">16:46</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1006">Kimi CLI · 自身体验尚可</a></div>
+    <div><span class="t">17:00</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1020">MiniMax · 自家 code 平台</a></div>
+    <div><span class="t">17:09</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1029">MiniMax · 展望 M4</a></div>
+    <div><span class="t">17:24</span><a href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1044">收尾 · 致谢</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">附录 C</span>UP 主论断速查</h2>
+  <p>下表把全片可直接引用的论断集中列出，便于检索。每条均已标注时间点，可回原片核对。<strong>所有判断均属 UP 主及其团队。</strong></p>
+
+  <h3>C.1 方法论类论断（跨模型适用）</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>论断</th><th>应用场景</th></tr>
+    <tr><td>00:52</td><td>架构里有不认识的组件 → 改动时无法判断后果 → 架构容易腐坏</td><td>反对过度设计的理由</td></tr>
+    <tr><td>01:02</td><td>用强模型必须「明确它的边界」，在 AGENTS.md 里约束住</td><td>约束强模型</td></tr>
+    <tr><td>02:23</td><td>上下文「直接就是临界设到 512000」，不常用长上下文设 256K/300K</td><td>上下文参数调优</td></tr>
+    <tr><td>03:36</td><td>Claude 系必须人工复查——它会「觉得自己干完了」</td><td>验收环节设计</td></tr>
+    <tr><td>05:10</td><td>临时任务、单窗口、少验证 → 便宜好用；并发 → 额度飞掉</td><td>成本控制</td></tr>
+    <tr><td>08:47</td><td>刚出来的时候很牛，不代表现在也很牛</td><td>新模型选型心态</td></tr>
+    <tr><td>11:12</td><td>多轮迭代稳定 = 很好用；一次直出好看 ≠ 真好用</td><td>能力评估维度</td></tr>
+    <tr><td>15:40</td><td>调度 Agent 团队时，异步通信与主代理对子代理的操控颗粒度非常重要</td><td>基座评估判据</td></tr>
+  </table>
+
+  <h3>C.2 模型定位速查</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>模型</th><th>UP 主的定位判断</th></tr>
+    <tr><td>02:39</td><td>GPT-6</td><td>相对成熟、偏向架构方向走的工程师</td></tr>
+    <tr><td>02:44</td><td>GPT-5.6 SOTA</td><td>非常综合性的工程师，擅长开发但架构一般</td></tr>
+    <tr><td>03:44</td><td>Claude Opus 5</td><td>依旧可作为主力模型使用</td></tr>
+    <tr><td>04:38</td><td>DeepSeek V4.1 Flash</td><td>已经是一个非常非常合适的模型了</td></tr>
+    <tr><td>06:41</td><td>GLM-5.3</td><td>更像一款适合干活的模型</td></tr>
+    <tr><td>07:36</td><td>Grok 4.6</td><td>适合「上来就干、快速迭代」的人</td></tr>
+    <tr><td>08:53</td><td>Kimi K3</td><td>比较适合中小型的应用</td></tr>
+    <tr><td>10:35</td><td>MiniMax M3</td><td>初学者用一用，很便宜</td></tr>
+    <tr><td>12:37</td><td>通义千问（小模型）</td><td>朴素且稳定</td></tr>
+  </table>
+
+  <h3>C.3 基座定位速查</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>基座</th><th>UP 主的定位判断</th></tr>
+    <tr><td>13:29</td><td>DeepSeek Harness</td><td>想直接用一个稳定的，就不要用它了</td></tr>
+    <tr><td>14:41</td><td>Codex</td><td>现在是最好的框架了</td></tr>
+    <tr><td>15:07</td><td>Grok Build</td><td>相对快、相对轻量可用</td></tr>
+    <tr><td>15:22</td><td>通义千问 Coder</td><td>不太用 Coder，一般是接到 CC 里用</td></tr>
+    <tr><td>16:23</td><td>Zcode / Kimi CLI</td><td>既好用又不好用</td></tr>
+    <tr><td>16:50</td><td>Kimi CLI</td><td>速度挺好，UI 也还不错，写任务比较明确</td></tr>
+    <tr><td>17:22</td><td>MiniMax 平台</td><td>已明显拉开差距，急需新模型</td></tr>
+  </table>
+</section>

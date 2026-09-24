@@ -1,0 +1,3927 @@
+{
+ "model": "E:/Projects/VibeCoding/BiliSumerize/models/faster-whisper-large-v3-turbo",
+ "device": "cuda",
+ "compute_type": "float16",
+ "language": "zh",
+ "language_probability": 1,
+ "audio_duration": 1051.701,
+ "transcribe_seconds": 139.9,
+ "speedup": 7.52,
+ "segment_count": 489,
+ "last_segment_end": 1051.6,
+ "coverage_ratio": 0.9999,
+ "segments": [
+  {
+   "id": 0,
+   "start": 0.0,
+   "end": 19.22,
+   "text": "B站的各位小伙伴大家好,我们是圣图城的小诺。本期视频我们主要接续上一期,讲解DeepSeek、GPT等当下和新前研模型在实际体验上的差别,以及他们各自所属的开发机座的好坏差异,Codex、CloudCode以及之谱的Zcode等来为大家提供选择帮助。那我们接下来废话不多说,继续进入讲解环节。",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0922
+  },
+  {
+   "id": 1,
+   "start": 19.42,
+   "end": 29.76,
+   "text": "我们一个一个模型来讲,针对GPT6这个模型,我们总结了社区上还有我们大量开发的一些经验,就是它在复杂任务上面的上限是非常高的,尤其对于像,",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0922
+  },
+  {
+   "id": 2,
+   "start": 30.0,
+   "end": 31.54,
+   "text": "我们的一些架构设计啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 3,
+   "start": 31.54,
+   "end": 32.82,
+   "text": "还有些视觉还原啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 4,
+   "start": 32.82,
+   "end": 34.86,
+   "text": "还有它的指令秩序是非常强的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 5,
+   "start": 34.86,
+   "end": 36.92,
+   "text": "但是它有一些明显的痛点就是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 6,
+   "start": 36.92,
+   "end": 38.7,
+   "text": "第一个它非常容易去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 7,
+   "start": 38.7,
+   "end": 40.24,
+   "text": "完成一个过度的设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 8,
+   "start": 40.24,
+   "end": 41.52,
+   "text": "它过度的考虑安全",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 9,
+   "start": 41.52,
+   "end": 43.56,
+   "text": "比如说你想给它一个需求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 10,
+   "start": 43.56,
+   "end": 45.1,
+   "text": "然后你还没有跟它对号完成",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 11,
+   "start": 45.1,
+   "end": 47.16,
+   "text": "它就已经搞出了一个延展性的设计出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 12,
+   "start": 47.16,
+   "end": 48.94,
+   "text": "就已经超越你的需求范围了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 13,
+   "start": 48.94,
+   "end": 51.5,
+   "text": "它可能造出一堆可能并不会太必要的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 14,
+   "start": 51.5,
+   "end": 52.52,
+   "text": "那个组件来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 15,
+   "start": 52.52,
+   "end": 53.3,
+   "text": "大家都知道的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 16,
+   "start": 53.3,
+   "end": 54.58,
+   "text": "如果一个架构内有很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 17,
+   "start": 54.58,
+   "end": 55.86,
+   "text": "你不知道是干什么的组件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 18,
+   "start": 55.86,
+   "end": 57.4,
+   "text": "那它后面如果改动了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 19,
+   "start": 57.4,
+   "end": 58.42,
+   "text": "你就不知道什么情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 20,
+   "start": 58.42,
+   "end": 58.92,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1298
+  },
+  {
+   "id": 21,
+   "start": 58.92,
+   "end": 60.46,
+   "text": "你的架构就很容易腐坏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 22,
+   "start": 60.46,
+   "end": 62.76,
+   "text": "所以说你在使用GPT6 ASTRA的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 23,
+   "start": 62.76,
+   "end": 64.04,
+   "text": "你必须明确它的边界",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 24,
+   "start": 64.3,
+   "end": 66.6,
+   "text": "你必须约束它在你的AZEN MD里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 25,
+   "start": 66.6,
+   "end": 70.18,
+   "text": "或者说你尽可能少的去大量的在主绘画使用它",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 26,
+   "start": 70.44,
+   "end": 72.48,
+   "text": "避免它就是过于强悍了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 27,
+   "start": 72.48,
+   "end": 74.54,
+   "text": "对 而且它的成本是极高的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 28,
+   "start": 74.98,
+   "end": 76.5,
+   "text": "所以说目前推荐大家就是在",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 29,
+   "start": 76.76,
+   "end": 77.78,
+   "text": "比如在CodeX里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 30,
+   "start": 77.78,
+   "end": 79.84,
+   "text": "或者在OpenCode一些可以把它接进去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 31,
+   "start": 80.1,
+   "end": 81.88,
+   "text": "然后作为一个子代理的使用的情况下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 32,
+   "start": 81.88,
+   "end": 83.94,
+   "text": "把它作为一种可以向它去询问方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 33,
+   "start": 83.94,
+   "end": 86.24,
+   "text": "让它临时做一些重大决策业务性的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 34,
+   "start": 86.5,
+   "end": 87.52,
+   "text": "AZEN是比较好的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1575
+  },
+  {
+   "id": 35,
+   "start": 87.52,
+   "end": 89.82,
+   "text": "还不适合主要在一个主要的工位上来干",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 36,
+   "start": 90.34,
+   "end": 91.88,
+   "text": "然后针对GPT系列的呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 37,
+   "start": 91.88,
+   "end": 93.4,
+   "text": "GPT还有一个5.6送",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 38,
+   "start": 93.66,
+   "end": 95.72,
+   "text": "GPT5.6它的能力就相对均航一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 39,
+   "start": 95.72,
+   "end": 99.04,
+   "text": "但是它在做前端和后端项目上面有点毛坯化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 40,
+   "start": 99.3,
+   "end": 100.84,
+   "text": "就是它可以把功能实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 41,
+   "start": 100.84,
+   "end": 102.62,
+   "text": "你给一个比较精准它是可以跑出来的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 42,
+   "start": 102.88,
+   "end": 104.92,
+   "text": "但是跑出来的功能可能比较毛坯化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 43,
+   "start": 104.92,
+   "end": 107.24,
+   "text": "比如说写后端的话可能性能没有做优化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 44,
+   "start": 107.48,
+   "end": 109.8,
+   "text": "写前端的话可能它这个是不太好维护拓的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 45,
+   "start": 109.8,
+   "end": 112.36,
+   "text": "自己写了很多自己自定义的CSS样式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 46,
+   "start": 112.86,
+   "end": 114.92,
+   "text": "所以说它是性价比的选择",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 47,
+   "start": 115.16,
+   "end": 116.96,
+   "text": "但也可能没有那么性价比",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1353
+  },
+  {
+   "id": 48,
+   "start": 116.96,
+   "end": 119.52,
+   "text": "如果跟GPT Luna和Terra比起来还是要差一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 49,
+   "start": 119.52,
+   "end": 122.34,
+   "text": "但是总体上来说它是大家能够使用到的一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 50,
+   "start": 122.34,
+   "end": 124.38,
+   "text": "综合能力性价比最好的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 51,
+   "start": 124.38,
+   "end": 125.92,
+   "text": "然后在使用的过程中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 52,
+   "start": 125.92,
+   "end": 127.2,
+   "text": "在常任务上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 53,
+   "start": 127.2,
+   "end": 130.02,
+   "text": "就是社区上包括我们自己的一些使用体验上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 54,
+   "start": 130.02,
+   "end": 131.56,
+   "text": "它会出现漂移的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 55,
+   "start": 131.56,
+   "end": 133.34,
+   "text": "比如说你经常在Codex中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 56,
+   "start": 133.34,
+   "end": 134.36,
+   "text": "开到50万",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 57,
+   "start": 134.36,
+   "end": 135.64,
+   "text": "甚至100万上下文",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 58,
+   "start": 135.64,
+   "end": 138.98,
+   "text": "它差不多会在一个接近40万以上的时候开始有一定的漂移",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 59,
+   "start": 138.98,
+   "end": 141.28,
+   "text": "七八十万以上的时候几乎是不太可用了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 60,
+   "start": 141.28,
+   "end": 143.58,
+   "text": "所以说推荐大家设置上下文的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 61,
+   "start": 143.58,
+   "end": 146.14,
+   "text": "直接就是临界设到512000",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1393
+  },
+  {
+   "id": 62,
+   "start": 146.14,
+   "end": 150.24,
+   "text": "这样的话就可以保证它的一个上下纹稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 63,
+   "start": 150.24,
+   "end": 153.66,
+   "text": "如果不经常用长上下纹的设到256K 300K都是可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 64,
+   "start": 153.66,
+   "end": 157.36,
+   "text": "然后这样的话就可以最好的去使用它完成自己的目的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 65,
+   "start": 157.36,
+   "end": 159.18,
+   "text": "它就像一个怎么说呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 66,
+   "start": 159.18,
+   "end": 162.34,
+   "text": "GPT6更像一个相对成熟的偏向",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 67,
+   "start": 162.34,
+   "end": 164.44,
+   "text": "有点像架构方向走的一个工程师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 68,
+   "start": 164.44,
+   "end": 168.94,
+   "text": "然后GPT5.6SO就像一个非常综合性的一个工程师",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 69,
+   "start": 168.94,
+   "end": 170.5,
+   "text": "就是比较擅长搞开发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 70,
+   "start": 170.5,
+   "end": 172.8,
+   "text": "搞架构设计什么的还是没有那么好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 71,
+   "start": 172.8,
+   "end": 175.56,
+   "text": "然后第三个我们讲的是Cloud Ops 5",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1329
+  },
+  {
+   "id": 72,
+   "start": 175.56,
+   "end": 178.32,
+   "text": "Cloud Ops 5目前我们在指约过程中的发现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 73,
+   "start": 178.32,
+   "end": 182.98,
+   "text": "就是它确实依旧的去延续了Cloud系列的一个明显的特点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 74,
+   "start": 182.98,
+   "end": 184.76,
+   "text": "比如说它擅长去代码组织",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 75,
+   "start": 184.76,
+   "end": 186.8,
+   "text": "然后它适合去明确任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 76,
+   "start": 186.8,
+   "end": 188.24,
+   "text": "比如你跟它去发散一些想法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 77,
+   "start": 188.24,
+   "end": 189.88,
+   "text": "它可以很好的给你更多的反馈",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 78,
+   "start": 189.88,
+   "end": 192.56,
+   "text": "甚至它的反馈质量我觉得不比GPT6要差",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 79,
+   "start": 192.56,
+   "end": 196.82,
+   "text": "但是它在开发上面第一它有点自我验收不稳",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 80,
+   "start": 196.82,
+   "end": 198.4,
+   "text": "什么是自我验收不稳呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 81,
+   "start": 198.4,
+   "end": 200.4,
+   "text": "就是它可能自己干着干着觉得自己干完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 82,
+   "start": 200.4,
+   "end": 202.76,
+   "text": "这个其实是Cloud系列明显的一个痛点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 83,
+   "start": 202.76,
+   "end": 204.78,
+   "text": "比如GPT系列它干不完",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1218
+  },
+  {
+   "id": 84,
+   "start": 204.78,
+   "end": 206.4,
+   "text": "它一般会诚实的告诉你干不完",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 85,
+   "start": 206.4,
+   "end": 207.68,
+   "text": "但是Cloud呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 86,
+   "start": 207.68,
+   "end": 209.36,
+   "text": "它有时候会答案为了目的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 87,
+   "start": 209.36,
+   "end": 210.56,
+   "text": "直接破坏你的架构设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 88,
+   "start": 210.56,
+   "end": 211.86,
+   "text": "或者说干着干着",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 89,
+   "start": 211.86,
+   "end": 212.38,
+   "text": "飘移了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 90,
+   "start": 212.38,
+   "end": 213.16,
+   "text": "绝自己干完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 91,
+   "start": 213.16,
+   "end": 214.38,
+   "text": "对这是Cloud的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 92,
+   "start": 214.38,
+   "end": 215.68,
+   "text": "欧洲我们发现的一个问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 93,
+   "start": 215.68,
+   "end": 216.38,
+   "text": "所以说呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 94,
+   "start": 216.38,
+   "end": 217.96,
+   "text": "它必须人工去复查一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 95,
+   "start": 217.96,
+   "end": 219.3,
+   "text": "它的这种记忆能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 96,
+   "start": 219.3,
+   "end": 221.46,
+   "text": "要相对没有GBT系列稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 97,
+   "start": 221.46,
+   "end": 222.4,
+   "text": "但是它的发散性",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 98,
+   "start": 222.4,
+   "end": 223.64,
+   "text": "和整体的一个架构感",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 99,
+   "start": 223.64,
+   "end": 224.68,
+   "text": "还是很不错的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 100,
+   "start": 224.68,
+   "end": 226.4,
+   "text": "依旧可以作为主力模型使用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 101,
+   "start": 226.4,
+   "end": 227.4,
+   "text": "但我们相信呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 102,
+   "start": 227.4,
+   "end": 228.88,
+   "text": "Fibro 5或者Fibro 5.1",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 103,
+   "start": 228.88,
+   "end": 229.72,
+   "text": "肯定是更强了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 104,
+   "start": 229.72,
+   "end": 231.6,
+   "text": "但是因为我们实在是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 105,
+   "start": 231.6,
+   "end": 232.68,
+   "text": "平常不太会使用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 106,
+   "start": 232.68,
+   "end": 233.36,
+   "text": "现在它套餐",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1603
+  },
+  {
+   "id": 107,
+   "start": 233.36,
+   "end": 237.32,
+   "text": "像它max20倍就已经涨到在无论在闲雨上还是什么地方",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 108,
+   "start": 237.32,
+   "end": 239.4,
+   "text": "2000块钱还有封号概率",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 109,
+   "start": 239.4,
+   "end": 241.72,
+   "text": "几乎是不会被大家广泛的采用了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 110,
+   "start": 241.72,
+   "end": 245.06,
+   "text": "然后接下来我们来说的是这个Deepseek V4.1 Flash",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 111,
+   "start": 245.06,
+   "end": 247.36,
+   "text": "这个是我们Deepseek新出的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 112,
+   "start": 247.36,
+   "end": 250.18,
+   "text": "因为它4.1的Flash跑出来之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 113,
+   "start": 250.18,
+   "end": 251.74,
+   "text": "发现结果比4的Pro还要强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 114,
+   "start": 251.74,
+   "end": 254.94,
+   "text": "所以它直接就只保留了这一个版本在API上供应",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 115,
+   "start": 254.94,
+   "end": 259.22,
+   "text": "其实它目前看起来不太适合大家用并行去开发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 116,
+   "start": 259.22,
+   "end": 260.98,
+   "text": "因为它是走API计价的嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 117,
+   "start": 260.98,
+   "end": 262.02,
+   "text": "虽然说我们先测出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1373
+  },
+  {
+   "id": 118,
+   "start": 262.02,
+   "end": 264.3,
+   "text": "它确实在前端上非常的强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 119,
+   "start": 264.3,
+   "end": 266.4,
+   "text": "然后它的token速度非常的快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 120,
+   "start": 266.4,
+   "end": 268.12,
+   "text": "然后在一些精准定位上也还不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 121,
+   "start": 268.12,
+   "end": 269.72,
+   "text": "虽然说前端需要抽卡",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 122,
+   "start": 269.72,
+   "end": 270.54,
+   "text": "后端你需要",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 123,
+   "start": 270.54,
+   "end": 273.08,
+   "text": "因为它仍然是一个只有六七百币的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 124,
+   "start": 273.08,
+   "end": 275.78,
+   "text": "它没有像海外那些那么庞大大几个T的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 125,
+   "start": 275.78,
+   "end": 276.06,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 126,
+   "start": 276.06,
+   "end": 277.62,
+   "text": "它仍然需要一些harness",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 127,
+   "start": 277.62,
+   "end": 278.88,
+   "text": "或者一些人工质量审查",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 128,
+   "start": 278.88,
+   "end": 281.97,
+   "text": "但是它已经是一个非常非常合适的模型了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 129,
+   "start": 281.97,
+   "end": 283.09,
+   "text": "毕竟速度够快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 130,
+   "start": 283.09,
+   "end": 283.95,
+   "text": "你就说快不快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 131,
+   "start": 283.95,
+   "end": 284.79,
+   "text": "质量还不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 132,
+   "start": 284.79,
+   "end": 285.67,
+   "text": "那就是很好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 133,
+   "start": 285.67,
+   "end": 288.99,
+   "text": "但是如果大家经常的去使用一种子代理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 134,
+   "start": 288.99,
+   "end": 290.33,
+   "text": "或者说你的cloudcode",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 135,
+   "start": 290.33,
+   "end": 290.85,
+   "text": "codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1245
+  },
+  {
+   "id": 136,
+   "start": 290.85,
+   "end": 292.89,
+   "text": "stake code里面配置了大量的子弹里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 137,
+   "start": 292.89,
+   "end": 294.33,
+   "text": "需要并发去执行任务的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 138,
+   "start": 294.33,
+   "end": 295.87,
+   "text": "你最好不用用这个模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 139,
+   "start": 295.87,
+   "end": 298.21,
+   "text": "因为它会飞快地跑掉你的额度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 140,
+   "start": 298.21,
+   "end": 299.77,
+   "text": "本来token量就快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 141,
+   "start": 299.77,
+   "end": 301.55,
+   "text": "虽然说在单个绘画下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 142,
+   "start": 301.55,
+   "end": 303.17,
+   "text": "它的缓存量是很多的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 143,
+   "start": 303.17,
+   "end": 305.85,
+   "text": "但是你如果同时开三个项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 144,
+   "start": 305.85,
+   "end": 306.97,
+   "text": "每个里面开三个并发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 145,
+   "start": 306.97,
+   "end": 308.57,
+   "text": "你基本上一天跑个大几百",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 146,
+   "start": 308.57,
+   "end": 309.19,
+   "text": "是没问题的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 147,
+   "start": 309.19,
+   "end": 310.39,
+   "text": "一两百块钱是没问题的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 148,
+   "start": 310.39,
+   "end": 312.93,
+   "text": "所以说我们学一类的教训",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 149,
+   "start": 312.93,
+   "end": 314.59,
+   "text": "就是如果临时需要的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 150,
+   "start": 314.59,
+   "end": 315.39,
+   "text": "在单个窗口内",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 151,
+   "start": 315.39,
+   "end": 316.57,
+   "text": "没有什么太多 region的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 152,
+   "start": 316.57,
+   "end": 317.97,
+   "text": "用还是比较很便宜的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 153,
+   "start": 317.97,
+   "end": 319.47,
+   "text": "而且性能效果确实不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1357
+  },
+  {
+   "id": 154,
+   "start": 319.47,
+   "end": 321.47,
+   "text": "临时去设计一些UI也都可以",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 155,
+   "start": 321.47,
+   "end": 323.47,
+   "text": "毕竟还支持多摩汉的嘛 对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 156,
+   "start": 323.47,
+   "end": 325.47,
+   "text": "但是如果搞频发就不是很合适了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 157,
+   "start": 325.47,
+   "end": 327.47,
+   "text": "但是我们仍然非常喜欢这款模型了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 158,
+   "start": 327.47,
+   "end": 329.47,
+   "text": "然后GAM5.3呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 159,
+   "start": 329.47,
+   "end": 333.03,
+   "text": "这个其实也是我们团队在大量使用的一款模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 160,
+   "start": 333.03,
+   "end": 335.03,
+   "text": "因为当我们GPT额度不够了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 161,
+   "start": 335.03,
+   "end": 336.03,
+   "text": "Cloud的额度不够了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 162,
+   "start": 336.03,
+   "end": 339.03,
+   "text": "我们很多时候就不得不使用GLM的一个Coin Plan",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 163,
+   "start": 339.03,
+   "end": 341.03,
+   "text": "然后GAM5.3它目前一个特点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 164,
+   "start": 341.03,
+   "end": 342.03,
+   "text": "第一个它是蛮贵的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 165,
+   "start": 342.03,
+   "end": 346.03,
+   "text": "就是它的套餐第一五小时限制还有7天限制蛮多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1553
+  },
+  {
+   "id": 166,
+   "start": 346.03,
+   "end": 350.79,
+   "text": "然后这个模型还有一些比较让人爱的地方",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 167,
+   "start": 350.79,
+   "end": 353.57,
+   "text": "就是它是一个非常强的一个工程师性格",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 168,
+   "start": 353.57,
+   "end": 355.05,
+   "text": "它大概是一个700多币",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 169,
+   "start": 355.05,
+   "end": 356.85,
+   "text": "然后做了很好的后训练的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 170,
+   "start": 356.85,
+   "end": 359.17,
+   "text": "就是相当于在G1 5.2的基础上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 171,
+   "start": 359.17,
+   "end": 361.37,
+   "text": "进一步就强化了它的coding能力和agent的能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 172,
+   "start": 361.37,
+   "end": 363.43,
+   "text": "然后它开发的一个benchmark",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 173,
+   "start": 363.43,
+   "end": 365.57,
+   "text": "可以达到跟这个5.6所有步枪上下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 174,
+   "start": 365.57,
+   "end": 367.95,
+   "text": "体感上来说确实如此",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 175,
+   "start": 367.95,
+   "end": 369.79,
+   "text": "它可以非常稳定的执行任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 176,
+   "start": 369.79,
+   "end": 372.31,
+   "text": "它的那个100万上下文不是假的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1623
+  },
+  {
+   "id": 177,
+   "start": 372.31,
+   "end": 377.95,
+   "text": "它真的可以记住几乎在五六十万的伤害纹的时候还能保持稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 178,
+   "start": 378.19,
+   "end": 381.01,
+   "text": "但是第一个它的速度是相对慢的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 179,
+   "start": 381.77,
+   "end": 383.81,
+   "text": "可能是跟它的一个浮腹的还有关系",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 180,
+   "start": 384.07,
+   "end": 386.13,
+   "text": "第二个它的套餐消耗相当的快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 181,
+   "start": 386.67,
+   "end": 388.47,
+   "text": "对 所以说就是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 182,
+   "start": 388.99,
+   "end": 391.55,
+   "text": "没有那么那么好 而且它缺乏多么太理解能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 183,
+   "start": 391.79,
+   "end": 393.33,
+   "text": "像我们刚才测试的这个项目中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 184,
+   "start": 393.59,
+   "end": 396.67,
+   "text": "JM5.3就明显的在视觉和一些设计方面的短板",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 185,
+   "start": 397.17,
+   "end": 400.51,
+   "text": "然后它在一些自由探索架构设计上的能力也相对保守",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 186,
+   "start": 400.75,
+   "end": 401.79,
+   "text": "就没有那么的好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1633
+  },
+  {
+   "id": 187,
+   "start": 401.79,
+   "end": 405.37,
+   "text": "所以说我们认为Giamh 5.3它更像一款适合干活的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 188,
+   "start": 405.37,
+   "end": 408.19,
+   "text": "比如说你用Kimi去做编排 用Cloud什么去做编排",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 189,
+   "start": 408.45,
+   "end": 410.49,
+   "text": "然后在OpenCode或者Zcode什么地方",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 190,
+   "start": 410.75,
+   "end": 412.55,
+   "text": "就把它作为一种纸代理去调用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 191,
+   "start": 412.79,
+   "end": 415.61,
+   "text": "如果让它作为主代理去单流程的去执行的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 192,
+   "start": 415.61,
+   "end": 418.43,
+   "text": "它有点不太擅长去并发执行任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 193,
+   "start": 419.03,
+   "end": 421.59,
+   "text": "但是它是一个非常好的工程师化的一个模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 194,
+   "start": 422.09,
+   "end": 425.93,
+   "text": "Glock 4.6它是一个怎么说的 它的生态会很奇怪",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 195,
+   "start": 425.93,
+   "end": 427.71,
+   "text": "就是它刚出来的时候大家没太谈过事",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 196,
+   "start": 427.71,
+   "end": 430.79,
+   "text": "但是测了测发现好像没有像那个美国大豆包",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.204
+  },
+  {
+   "id": 197,
+   "start": 430.79,
+   "end": 431.69,
+   "text": "那么蠢是吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 198,
+   "start": 431.69,
+   "end": 433.25,
+   "text": "它的开放能力还是很不错的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 199,
+   "start": 433.25,
+   "end": 435.05,
+   "text": "所以说它的显像速的很快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 200,
+   "start": 435.05,
+   "end": 437.31,
+   "text": "然后它敢于主动快速试错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 201,
+   "start": 437.31,
+   "end": 439.27,
+   "text": "我可以看到像前面我们也提到了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 202,
+   "start": 439.27,
+   "end": 440.91,
+   "text": "它在一个快速迭代中的效果",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 203,
+   "start": 440.91,
+   "end": 442.03,
+   "text": "提升是比较明显的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 204,
+   "start": 442.03,
+   "end": 442.27,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 205,
+   "start": 442.27,
+   "end": 443.71,
+   "text": "跟前面系列是一样的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 206,
+   "start": 443.71,
+   "end": 445.07,
+   "text": "所以说这个模型呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 207,
+   "start": 445.07,
+   "end": 446.13,
+   "text": "第一是比较快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 208,
+   "start": 446.13,
+   "end": 447.09,
+   "text": "第二能力还不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 209,
+   "start": 447.09,
+   "end": 449.97,
+   "text": "第三它不喜欢做太复杂的计划",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 210,
+   "start": 449.97,
+   "end": 451.51,
+   "text": "我们像GAM5.3",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 211,
+   "start": 451.51,
+   "end": 453.47,
+   "text": "实际上还有像GPT系列",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 212,
+   "start": 453.47,
+   "end": 455.43,
+   "text": "他们都很喜欢做很长很长的思考",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 213,
+   "start": 455.43,
+   "end": 456.39,
+   "text": "然后去做东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 214,
+   "start": 456.39,
+   "end": 459.01,
+   "text": "但Glock的话就适合什么样的人呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1667
+  },
+  {
+   "id": 215,
+   "start": 459.01,
+   "end": 461.57,
+   "text": "就是你非常喜欢上来光光光就开始干",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 216,
+   "start": 461.57,
+   "end": 462.85,
+   "text": "然后干完之后跑出来一个东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 217,
+   "start": 462.85,
+   "end": 464.13,
+   "text": "然后迅速去迭代",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 218,
+   "start": 464.13,
+   "end": 466.95,
+   "text": "跟DS V4.1 Flash的Sentime有点像了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 219,
+   "start": 466.95,
+   "end": 468.49,
+   "text": "但是毕竟这是刚出来的嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 220,
+   "start": 468.49,
+   "end": 470.27,
+   "text": "当时就是它效果是最好的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 221,
+   "start": 470.27,
+   "end": 472.81,
+   "text": "最起码当时它暴打了那个Gemini",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 222,
+   "start": 472.81,
+   "end": 473.59,
+   "text": "Gemini系列什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 223,
+   "start": 473.59,
+   "end": 475.01,
+   "text": "Gemini现在也是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 224,
+   "start": 475.01,
+   "end": 476.79,
+   "text": "虽然快但是没有那么好用嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 225,
+   "start": 476.79,
+   "end": 478.33,
+   "text": "3.8也只能查证文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 226,
+   "start": 478.33,
+   "end": 479.61,
+   "text": "简单干点活的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 227,
+   "start": 479.61,
+   "end": 482.17,
+   "text": "然后Glock 4.6还有个问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 228,
+   "start": 482.17,
+   "end": 483.97,
+   "text": "就是它的审美需要一定的纠偏",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 229,
+   "start": 483.97,
+   "end": 485.75,
+   "text": "就是它没有那么的稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 230,
+   "start": 485.75,
+   "end": 488.31,
+   "text": "我们前面也看到了它对国内的一些UI设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2056
+  },
+  {
+   "id": 231,
+   "start": 488.31,
+   "end": 490.35,
+   "text": "甚至是复刻一些已经有的这种界面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 232,
+   "start": 490.35,
+   "end": 491.39,
+   "text": "它的效果并不是很好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 233,
+   "start": 491.63,
+   "end": 493.95,
+   "text": "这个就我们就不再多提啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 234,
+   "start": 494.45,
+   "end": 495.47,
+   "text": "然后KIMI K3的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 235,
+   "start": 496.74,
+   "end": 497.76,
+   "text": "我们这里面需要提一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 236,
+   "start": 497.76,
+   "end": 499.04,
+   "text": "我们今天用的这个效果",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 237,
+   "start": 499.3,
+   "end": 501.1,
+   "text": "可能是比我们印象中要差很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 238,
+   "start": 501.6,
+   "end": 502.38,
+   "text": "KIMI K3刚出的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 239,
+   "start": 502.38,
+   "end": 504.42,
+   "text": "我们去用它去做一些官网",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 240,
+   "start": 504.42,
+   "end": 505.18,
+   "text": "做一些界面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 241,
+   "start": 505.18,
+   "end": 506.98,
+   "text": "甚至它的原型设计都是非常精美的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 242,
+   "start": 506.98,
+   "end": 508.52,
+   "text": "但是今天的效果真的擦枪人意",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 243,
+   "start": 508.78,
+   "end": 510.06,
+   "text": "KIMI那边本来就预训练的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 244,
+   "start": 510.3,
+   "end": 513.12,
+   "text": "就是训练的时候特地强化它的这个Agent Sparm能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 245,
+   "start": 513.38,
+   "end": 515.68,
+   "text": "它可以天然的就愿意去掉落Agent的团队",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 246,
+   "start": 515.68,
+   "end": 517.22,
+   "text": "任务的拆身也更自然一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1858
+  },
+  {
+   "id": 247,
+   "start": 517.22,
+   "end": 521.58,
+   "text": "所以它的一个在这个方面的能力是比较强的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 248,
+   "start": 521.58,
+   "end": 525.16,
+   "text": "它的开发风格在社区的评价中是比较中庸的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 249,
+   "start": 525.16,
+   "end": 527.46,
+   "text": "因为现在也出了很多更新的模型了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 250,
+   "start": 527.46,
+   "end": 530.02,
+   "text": "刚出来的时候很牛 不代表现在也很牛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 251,
+   "start": 530.02,
+   "end": 533.37,
+   "text": "所以说它的开发能是比较靠中间一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 252,
+   "start": 533.37,
+   "end": 535.67,
+   "text": "比较适合中小型的应用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 253,
+   "start": 535.67,
+   "end": 538.75,
+   "text": "它的额度不是很多 这也是一个重点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 254,
+   "start": 538.75,
+   "end": 541.55,
+   "text": "Kimi现在就偏贵了 因为它的模型尺寸太大",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 255,
+   "start": 541.55,
+   "end": 544.11,
+   "text": "算力消耗太大 它的平台订阅太贵",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 256,
+   "start": 544.11,
+   "end": 546.93,
+   "text": "大家开发的话 你就算买最贵的那一档套餐",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1346
+  },
+  {
+   "id": 257,
+   "start": 546.93,
+   "end": 550.77,
+   "text": "如果你负责的项目比较重 规模比较大 需要循环的迭代的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 258,
+   "start": 550.77,
+   "end": 552.05,
+   "text": "它的额度也不够用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 259,
+   "start": 552.05,
+   "end": 555.13,
+   "text": "尤其你又想使用网页端 又想使用开发测",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 260,
+   "start": 555.13,
+   "end": 558.71,
+   "text": "然后有时候你又想搞一个什么龙虾之类的接下来玩",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 261,
+   "start": 558.71,
+   "end": 560.25,
+   "text": "那基本上就不够用了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 262,
+   "start": 560.25,
+   "end": 562.03,
+   "text": "所以说它现在的性价比不真好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 263,
+   "start": 562.03,
+   "end": 564.09,
+   "text": "然后现在看来如果还降制的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 264,
+   "start": 564.09,
+   "end": 566.13,
+   "text": "就是没有那么再推荐给大家了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 265,
+   "start": 566.13,
+   "end": 567.93,
+   "text": "然后是minimax系列",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 266,
+   "start": 567.93,
+   "end": 570.23,
+   "text": "minimax系列已经很久没有更新它的新模型了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 267,
+   "start": 570.23,
+   "end": 573.81,
+   "text": "我们也不是很知道它下一款模型的一个情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1352
+  },
+  {
+   "id": 268,
+   "start": 573.81,
+   "end": 576.11,
+   "text": "但是目前看起来这些主流模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 269,
+   "start": 576.11,
+   "end": 579.05,
+   "text": "它们的一个模型尺寸基本上都已经涨到500B以上了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 270,
+   "start": 579.05,
+   "end": 581.95,
+   "text": "minimax现在还处于外壁以下就已经非常的尴尬了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 271,
+   "start": 581.95,
+   "end": 585.01,
+   "text": "然后虽然说它仍然保持着几个优秀的特点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 272,
+   "start": 585.01,
+   "end": 587.21,
+   "text": "像知识多么太爱 有100万的上下文",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 273,
+   "start": 587.21,
+   "end": 589.37,
+   "text": "然后agent能力还不错 还相对稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 274,
+   "start": 589.37,
+   "end": 591.41,
+   "text": "但是在开发的后训练方面上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 275,
+   "start": 591.41,
+   "end": 593.91,
+   "text": "还有它原生的一个知识的一个复杂性上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 276,
+   "start": 593.91,
+   "end": 596.61,
+   "text": "参数量太小的这个痛点是没办法根治的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 277,
+   "start": 596.61,
+   "end": 599.67,
+   "text": "所以说minimax后面急需推出一款更强大的模型了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 278,
+   "start": 599.67,
+   "end": 602.57,
+   "text": "然后现在minimax M3更多的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1636
+  },
+  {
+   "id": 279,
+   "start": 602.57,
+   "end": 604.37,
+   "text": "因为它在快速上也有屏替",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 280,
+   "start": 604.37,
+   "end": 606.41,
+   "text": "就是处于一个很尴尬的生态位了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 281,
+   "start": 606.41,
+   "end": 607.95,
+   "text": "像Deepseek V4.1 Flash",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 282,
+   "start": 607.95,
+   "end": 609.23,
+   "text": "还有CM3.8 Flash",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 283,
+   "start": 609.23,
+   "end": 610.51,
+   "text": "GM5.3 Flash",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 284,
+   "start": 610.51,
+   "end": 613.33,
+   "text": "这些快速模型现在都比minimax M3强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 285,
+   "start": 613.33,
+   "end": 615.63,
+   "text": "甚至用Anti-Gravity里面的这个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 286,
+   "start": 615.63,
+   "end": 618.69,
+   "text": "Gemini 3.8 Flash也比这个minimax M3强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 287,
+   "start": 618.69,
+   "end": 620.23,
+   "text": "所以说它就很尴尬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 288,
+   "start": 620.23,
+   "end": 621.77,
+   "text": "现在就是拿来做一些脚本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 289,
+   "start": 621.77,
+   "end": 623.57,
+   "text": "或者说因为它很便宜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 290,
+   "start": 623.57,
+   "end": 625.35,
+   "text": "现在还是占着便宜的优势呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 291,
+   "start": 625.35,
+   "end": 628.41,
+   "text": "就是一些新手拿来开发一些UI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 292,
+   "start": 628.41,
+   "end": 630.71,
+   "text": "毕竟它的UI效果在当年那一代模型里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1851
+  },
+  {
+   "id": 293,
+   "start": 630.71,
+   "end": 633.79,
+   "text": "就相当于大家买手机里面的老旗舰",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 294,
+   "start": 633.79,
+   "end": 635.07,
+   "text": "还算可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 295,
+   "start": 635.07,
+   "end": 637.37,
+   "text": "所以拿来作为初学者用一用很便宜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 296,
+   "start": 637.37,
+   "end": 640.19,
+   "text": "对目前是处于这样一个情话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 297,
+   "start": 640.19,
+   "end": 642.7,
+   "text": "然后接下来我们说的是这个千问系列",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 298,
+   "start": 642.7,
+   "end": 645.52,
+   "text": "其实千问系列大家现在应该不太会用来做开发了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 299,
+   "start": 645.52,
+   "end": 647.82,
+   "text": "其实它最根本的问题不在于能力不行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 300,
+   "start": 647.82,
+   "end": 650.12,
+   "text": "其实我们今天测试中可以发现千问两个模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 301,
+   "start": 650.12,
+   "end": 651.66,
+   "text": "它确实不经验",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 302,
+   "start": 651.66,
+   "end": 652.42,
+   "text": "为什么不经验",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 303,
+   "start": 652.42,
+   "end": 653.96,
+   "text": "可以看到他们俩做出来的UI呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 304,
+   "start": 653.96,
+   "end": 655.5,
+   "text": "都没有说那种",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 305,
+   "start": 655.5,
+   "end": 657.04,
+   "text": "我可以简单过一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 306,
+   "start": 657.04,
+   "end": 659.84,
+   "text": "我可以看到千问3.8它一次性做出来的这个UI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1645
+  },
+  {
+   "id": 307,
+   "start": 659.84,
+   "end": 662.66,
+   "text": "都达不到那种就是我一眼看上去就能达到GPT",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 308,
+   "start": 662.92,
+   "end": 665.22,
+   "text": "好像DF那个抽卡兽类的效果对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 309,
+   "start": 665.48,
+   "end": 667.52,
+   "text": "但是他多轮跑出来的东西呢还是很稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 310,
+   "start": 667.78,
+   "end": 670.84,
+   "text": "这个是一个很大的优势就是他跑出来的东西怎么看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 311,
+   "start": 671.1,
+   "end": 672.38,
+   "text": "好歹是像那么回事的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 312,
+   "start": 672.64,
+   "end": 674.94,
+   "text": "所以说其实这两个模型并不是不可用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 313,
+   "start": 675.2,
+   "end": 676.74,
+   "text": "甚至某种意义上在",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 314,
+   "start": 677.0,
+   "end": 679.3,
+   "text": "某些场景下他可能更好用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 315,
+   "start": 679.56,
+   "end": 683.14,
+   "text": "因为你拿他多轮迭代如果很稳定的话那不就是很好用吗",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 316,
+   "start": 683.4,
+   "end": 685.44,
+   "text": "但是问题出在哪出在他很贵",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1758
+  },
+  {
+   "id": 317,
+   "start": 685.44,
+   "end": 686.72,
+   "text": "它的那个token plan",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 318,
+   "start": 686.72,
+   "end": 690.04,
+   "text": "我们本次测试过程中是买了39块钱的一个token plan",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 319,
+   "start": 690.04,
+   "end": 694.14,
+   "text": "它39块钱仅仅只是测了一个做B站前端的这样一个小项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 320,
+   "start": 694.14,
+   "end": 696.44,
+   "text": "甚至它算不上一个正式挖解的大项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 321,
+   "start": 696.44,
+   "end": 698.24,
+   "text": "只是一人测了一次",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 322,
+   "start": 698.24,
+   "end": 701.06,
+   "text": "然后测一次这个一次性指令值出",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 323,
+   "start": 701.06,
+   "end": 702.6,
+   "text": "还有测一次对抗审查",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 324,
+   "start": 702.6,
+   "end": 705.4,
+   "text": "就直接把39块钱的额度都直接触顶了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 325,
+   "start": 705.4,
+   "end": 706.44,
+   "text": "差点就没跑完",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 326,
+   "start": 706.44,
+   "end": 708.46,
+   "text": "基本上就干到98%了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 327,
+   "start": 708.46,
+   "end": 710.76,
+   "text": "那就说明在一个正式的大型项目中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 328,
+   "start": 710.76,
+   "end": 713.08,
+   "text": "比如说你的项目有十几万行 二十几万行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 329,
+   "start": 713.08,
+   "end": 715.38,
+   "text": "那你准备买套餐要买多贵的呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1542
+  },
+  {
+   "id": 330,
+   "start": 715.38,
+   "end": 717.36,
+   "text": "就它是直接按周限制",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 331,
+   "start": 717.36,
+   "end": 718.72,
+   "text": "按月限制这种算的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 332,
+   "start": 718.72,
+   "end": 721.78,
+   "text": "你基本上很快就会干掉一周的限额了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 333,
+   "start": 721.78,
+   "end": 722.88,
+   "text": "那么有这个钱",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 334,
+   "start": 722.88,
+   "end": 725.34,
+   "text": "它可能跟GPT的额",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 335,
+   "start": 725.34,
+   "end": 727.68,
+   "text": "如果你真的想跟GPT用一样多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 336,
+   "start": 727.68,
+   "end": 729.64,
+   "text": "可能两者的钱都差不太多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 337,
+   "start": 729.64,
+   "end": 731.26,
+   "text": "那可能为什么不去买GPT呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 338,
+   "start": 731.26,
+   "end": 734.52,
+   "text": "当然现在GPT20倍是被禁用了是吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 339,
+   "start": 734.52,
+   "end": 734.72,
+   "text": "对",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 340,
+   "start": 734.72,
+   "end": 736.62,
+   "text": "所以说千文的生态位置就比较尴尬",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 341,
+   "start": 736.62,
+   "end": 739.02,
+   "text": "但是它的小模型像千文3.8 27B",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 342,
+   "start": 739.02,
+   "end": 740.62,
+   "text": "仍然是非常优势的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 343,
+   "start": 740.62,
+   "end": 741.02,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 344,
+   "start": 741.02,
+   "end": 742.46,
+   "text": "虽然说我的这个能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 345,
+   "start": 742.46,
+   "end": 743.72,
+   "text": "没有什么特别惊艳的地方",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 346,
+   "start": 743.72,
+   "end": 745.0,
+   "text": "但是我蒸馏出的小模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1448
+  },
+  {
+   "id": 347,
+   "start": 745.0,
+   "end": 747.56,
+   "text": "还能跟我这个大的保持差不多的后圈线水平",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 348,
+   "start": 747.82,
+   "end": 749.86,
+   "text": "或者它的coding的水平差不太多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 349,
+   "start": 750.12,
+   "end": 751.4,
+   "text": "那就很离谱了对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 350,
+   "start": 751.66,
+   "end": 753.87,
+   "text": "毕竟很朴素",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 351,
+   "start": 754.13,
+   "end": 756.43,
+   "text": "某种时候在小参数上那是非常强的嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 352,
+   "start": 756.69,
+   "end": 757.47,
+   "text": "朴素且稳定嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 353,
+   "start": 758.49,
+   "end": 761.05,
+   "text": "所以说这个是我们的一个发现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 354,
+   "start": 761.31,
+   "end": 764.37,
+   "text": "然后接下来讲的是一些开发的基础",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 355,
+   "start": 764.63,
+   "end": 765.91,
+   "text": "那我们一个个来讲吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 356,
+   "start": 766.43,
+   "end": 768.21,
+   "text": "这也是我们最后的一个部分",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 357,
+   "start": 768.47,
+   "end": 769.75,
+   "text": "第一个是Deep Seek系列",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 358,
+   "start": 770.01,
+   "end": 773.07,
+   "text": "Deep Seek现在做的是基于插件化的Deep Seek Harness",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 359,
+   "start": 773.33,
+   "end": 775.39,
+   "text": "我们团队简单去用了一阵子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1886
+  },
+  {
+   "id": 360,
+   "start": 775.43,
+   "end": 777.79,
+   "text": "我们发现这个框架目前还不是很稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 361,
+   "start": 777.79,
+   "end": 780.03,
+   "text": "它是在外部里面 在浏览器里面去使用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 362,
+   "start": 780.29,
+   "end": 781.57,
+   "text": "如果大家更喜欢去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 363,
+   "start": 782.09,
+   "end": 783.37,
+   "text": "自己去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 364,
+   "start": 783.63,
+   "end": 784.91,
+   "text": "搞一个APP这种的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 365,
+   "start": 785.15,
+   "end": 788.75,
+   "text": "如果你懒得自己封装 我们推荐你现在最好还是先不要使用Dipsick Harness",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 366,
+   "start": 788.99,
+   "end": 790.53,
+   "text": "因为它第一还不稳定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 367,
+   "start": 790.79,
+   "end": 793.61,
+   "text": "在频繁的高速迭代 它里面在增加各种各样的功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 368,
+   "start": 793.87,
+   "end": 795.65,
+   "text": "而且它的设计是比较千言化的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 369,
+   "start": 795.91,
+   "end": 798.99,
+   "text": "比如说它试图去把Harness里面的各个组件全部都插线化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 370,
+   "start": 799.49,
+   "end": 803.07,
+   "text": "所以它对于一些刚入门的或者新手来说 它并不是很好理解的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 371,
+   "start": 803.33,
+   "end": 805.13,
+   "text": "并不是一个新手友好性的 而且它",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1399
+  },
+  {
+   "id": 372,
+   "start": 805.65,
+   "end": 806.93,
+   "text": "还在频繁的迭代",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 373,
+   "start": 806.93,
+   "end": 809.23,
+   "text": "然后它的发布有时候会有各种的细微的小bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 374,
+   "start": 809.49,
+   "end": 812.05,
+   "text": "所以说如果直接想用一个稳定那就不要用它了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 375,
+   "start": 812.05,
+   "end": 812.55,
+   "text": "但是呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 376,
+   "start": 812.55,
+   "end": 815.63,
+   "text": "对于开发者对于说非常想精调harness的人来说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 377,
+   "start": 815.89,
+   "end": 818.19,
+   "text": "因为它这种基于插线模式的一些设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 378,
+   "start": 818.45,
+   "end": 820.75,
+   "text": "你可以把自己的很多harness理念去植入进去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 379,
+   "start": 820.75,
+   "end": 822.79,
+   "text": "或者去尝试做自己的一套框架出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 380,
+   "start": 823.31,
+   "end": 825.09,
+   "text": "那它就是一个很好用的东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 381,
+   "start": 825.59,
+   "end": 826.87,
+   "text": "然后接下来讲是GBT",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 382,
+   "start": 827.13,
+   "end": 828.67,
+   "text": "GBT它是CodeX嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 383,
+   "start": 828.67,
+   "end": 832.77,
+   "text": "CodeX我们目前是认为它是现在最最最成熟的一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 384,
+   "start": 833.01,
+   "end": 834.05,
+   "text": "Coding Agent的框架",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 385,
+   "start": 834.05,
+   "end": 834.55,
+   "text": "为什么呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1472
+  },
+  {
+   "id": 386,
+   "start": 834.55,
+   "end": 836.35,
+   "text": "因为它的子代理非常有特点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 387,
+   "start": 836.35,
+   "end": 838.65,
+   "text": "它和子代理通信的时候是非常流畅的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 388,
+   "start": 838.65,
+   "end": 840.19,
+   "text": "它可以组织一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 389,
+   "start": 840.19,
+   "end": 842.75,
+   "text": "就是比如说你的主代理能力比较不错的情况下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 390,
+   "start": 842.75,
+   "end": 846.75,
+   "text": "它可以非常顺利去组织三到四个子代理来完成工作",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 391,
+   "start": 846.75,
+   "end": 849.65,
+   "text": "这个就是我们现在觉得非常不错的点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 392,
+   "start": 849.65,
+   "end": 852.99,
+   "text": "像Cloud Code其实它也能完成这个任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 393,
+   "start": 852.99,
+   "end": 855.09,
+   "text": "就是Cloud它虽然能完成这个任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 394,
+   "start": 855.09,
+   "end": 858.05,
+   "text": "但是它的Desktop面板是非常让人尴尬的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 395,
+   "start": 858.05,
+   "end": 860.35,
+   "text": "它那个面板是没法把",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 396,
+   "start": 860.35,
+   "end": 864.25,
+   "text": "比如说你配置了基于GLM的一个Cloud Code",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.132
+  },
+  {
+   "id": 397,
+   "start": 864.25,
+   "end": 866.89,
+   "text": "那么你在它的那个Cloud Desktop里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 398,
+   "start": 866.89,
+   "end": 868.53,
+   "text": "是没法进入到Code界面的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 399,
+   "start": 868.53,
+   "end": 869.35,
+   "text": "而且要充会员",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 400,
+   "start": 869.35,
+   "end": 872.37,
+   "text": "所以说它对于我们这些国内的开发者很不友好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 401,
+   "start": 872.37,
+   "end": 874.01,
+   "text": "但是GPT就好得多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 402,
+   "start": 874.01,
+   "end": 877.43,
+   "text": "而且GPT现在它那些子弹里也都支持自定义提示词",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 403,
+   "start": 877.43,
+   "end": 877.95,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 404,
+   "start": 877.95,
+   "end": 878.99,
+   "text": "可以做它的并发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 405,
+   "start": 878.99,
+   "end": 880.37,
+   "text": "可以自己去写这些",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 406,
+   "start": 880.37,
+   "end": 881.37,
+   "text": "而且指令信息也不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 407,
+   "start": 881.37,
+   "end": 884.21,
+   "text": "所以Codex现在是最好的框架了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 408,
+   "start": 884.21,
+   "end": 885.31,
+   "text": "也可以看到像Deep Seek",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 409,
+   "start": 885.31,
+   "end": 887.07,
+   "text": "还有像GLM他们的Coding Plan",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 410,
+   "start": 887.07,
+   "end": 891.15,
+   "text": "也都在积极地去适配像Response这种Codex的专属端点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 411,
+   "start": 891.15,
+   "end": 893.07,
+   "text": "这个都是蛮不错的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 412,
+   "start": 893.07,
+   "end": 894.13,
+   "text": "然后Glock Build呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1559
+  },
+  {
+   "id": 413,
+   "start": 894.13,
+   "end": 897.45,
+   "text": "然后Grog Build呢我们感觉就是它的速度非常的快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 414,
+   "start": 897.45,
+   "end": 900.01,
+   "text": "就是它非常擅长去直接跑出来的任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 415,
+   "start": 900.01,
+   "end": 901.29,
+   "text": "但是它的可读性不是很好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 416,
+   "start": 901.55,
+   "end": 902.83,
+   "text": "就是你把东西发送上去之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 417,
+   "start": 902.83,
+   "end": 905.39,
+   "text": "你感觉你理解那个界面或者阅读一些东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 418,
+   "start": 905.39,
+   "end": 906.67,
+   "text": "它会有一些遮挡性的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 419,
+   "start": 907.07,
+   "end": 908.35,
+   "text": "但是它整体来说还是可用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 420,
+   "start": 908.35,
+   "end": 912.19,
+   "text": "就是它处于一种没有Codex和Cloud这种",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 421,
+   "start": 912.19,
+   "end": 915.51,
+   "text": "Cloud Code这种老东西成熟的阶段",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 422,
+   "start": 915.51,
+   "end": 917.31,
+   "text": "但是是相对快相对轻量可用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 423,
+   "start": 917.57,
+   "end": 918.59,
+   "text": "千万的话我们就不提了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 424,
+   "start": 918.59,
+   "end": 919.87,
+   "text": "我们是不太用Cooder的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 425,
+   "start": 919.87,
+   "end": 922.43,
+   "text": "所以我们一般就是把它接到CC里面来用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 426,
+   "start": 922.43,
+   "end": 923.45,
+   "text": "这个我们就不多讲了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1862
+  },
+  {
+   "id": 427,
+   "start": 923.45,
+   "end": 925.17,
+   "text": "GLM的这个Zcode呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 428,
+   "start": 925.17,
+   "end": 929.98,
+   "text": "它跟现在的一些其他框架是有明显的一个重大问题的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 429,
+   "start": 929.98,
+   "end": 933.1,
+   "text": "Zcode还有Kimi CLI其实他们现在做的都蛮漂亮",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 430,
+   "start": 933.1,
+   "end": 935.66,
+   "text": "就是可用性对于一个新手来说是可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 431,
+   "start": 935.66,
+   "end": 940.14,
+   "text": "但是在我们去如果调度一些Agent的团队来做事性的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 432,
+   "start": 940.14,
+   "end": 942.08,
+   "text": "这些团队之间的一步通信",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 433,
+   "start": 942.08,
+   "end": 945.32,
+   "text": "主代理对于子代理的一个操控的颗粒度是非常重要的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 434,
+   "start": 945.32,
+   "end": 948.04,
+   "text": "现在在Kimi CLI还有GLM的Zcode中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 435,
+   "start": 948.04,
+   "end": 950.06,
+   "text": "如果我使用的版本没什么问题的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 436,
+   "start": 950.06,
+   "end": 951.22,
+   "text": "如果是最新版本的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1214
+  },
+  {
+   "id": 437,
+   "start": 951.22,
+   "end": 956.59,
+   "text": "他们现在是不支持主代理在子代理运行过程中给他们补送消息",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 438,
+   "start": 956.59,
+   "end": 958.61,
+   "text": "或者说提前结束他这些",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 439,
+   "start": 958.61,
+   "end": 960.15,
+   "text": "那这就会造成一个问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 440,
+   "start": 960.15,
+   "end": 963.35,
+   "text": "比如说你现在主规划执行执入了一个任务进去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 441,
+   "start": 963.35,
+   "end": 965.93,
+   "text": "然后你现在子代理开始干活了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 442,
+   "start": 965.93,
+   "end": 966.45,
+   "text": "对吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 443,
+   "start": 966.45,
+   "end": 967.43,
+   "text": "已经分拍拍工作了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 444,
+   "start": 967.43,
+   "end": 969.25,
+   "text": "你现在又给主代理发了一个任务",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 445,
+   "start": 969.25,
+   "end": 970.95,
+   "text": "他就会一直阻塞在那",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 446,
+   "start": 970.95,
+   "end": 972.21,
+   "text": "而且你没法停",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 447,
+   "start": 972.21,
+   "end": 974.55,
+   "text": "如果你把你现在把这个任务停了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 448,
+   "start": 974.55,
+   "end": 976.97,
+   "text": "那你前面那些子代理的干的活直接就丢失了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 449,
+   "start": 976.97,
+   "end": 978.97,
+   "text": "你也不知道他造了什么东西出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 450,
+   "start": 978.97,
+   "end": 981.03,
+   "text": "而且如果你代码库本来就挺史山的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1276
+  },
+  {
+   "id": 451,
+   "start": 981.03,
+   "end": 983.03,
+   "text": "那就非常的崩溃了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 452,
+   "start": 983.03,
+   "end": 985.03,
+   "text": "所以这种框架现在就处于一种",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 453,
+   "start": 985.03,
+   "end": 987.3,
+   "text": "既好用又不好用 挺好看的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 454,
+   "start": 987.3,
+   "end": 988.3,
+   "text": "也直到精力在做",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 455,
+   "start": 988.3,
+   "end": 991.3,
+   "text": "而且能看到他们的缓存命中率都挺好的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 456,
+   "start": 991.3,
+   "end": 993.3,
+   "text": "然后KIMI这一侧的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 457,
+   "start": 993.3,
+   "end": 994.3,
+   "text": "它的速度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 458,
+   "start": 994.3,
+   "end": 996.3,
+   "text": "KIMI的话还有一个问题就是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 459,
+   "start": 996.3,
+   "end": 1000.3,
+   "text": "它的额度消耗在不同的agent工具里面是不太一样的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 460,
+   "start": 1000.3,
+   "end": 1001.3,
+   "text": "像KIMI K3",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 461,
+   "start": 1001.3,
+   "end": 1003.3,
+   "text": "它在Cloud Code里面的消耗就非常的快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 462,
+   "start": 1003.3,
+   "end": 1005.3,
+   "text": "就不知道是不是Cloud Code",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 463,
+   "start": 1005.3,
+   "end": 1006.3,
+   "text": "它有什么负优化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 464,
+   "start": 1006.3,
+   "end": 1008.3,
+   "text": "但是KIMI K3在自己的KIMI CLI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 465,
+   "start": 1008.3,
+   "end": 1010.3,
+   "text": "就是KIMI Code里面来用的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1627
+  },
+  {
+   "id": 466,
+   "start": 1010.3,
+   "end": 1012.1,
+   "text": "用的话就是放在做的还挺好的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 467,
+   "start": 1012.1,
+   "end": 1015.06,
+   "text": "然后它的一个这个UI做的也还不错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 468,
+   "start": 1015.06,
+   "end": 1016.42,
+   "text": "写任务的时候都比较明确",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 469,
+   "start": 1016.42,
+   "end": 1017.98,
+   "text": "所以说目前来说的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 470,
+   "start": 1017.98,
+   "end": 1020.5,
+   "text": "就是这么一个大概的情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 471,
+   "start": 1020.5,
+   "end": 1021.88,
+   "text": "然后像minimax M3",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 472,
+   "start": 1021.88,
+   "end": 1023.76,
+   "text": "他们也做了自己的这个code平台",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 473,
+   "start": 1023.76,
+   "end": 1025.12,
+   "text": "但是我们目前觉得",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 474,
+   "start": 1025.12,
+   "end": 1026.58,
+   "text": "虽然说在它自己的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 475,
+   "start": 1026.58,
+   "end": 1028.64,
+   "text": "当年那个年代的模型的一个基础上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 476,
+   "start": 1028.64,
+   "end": 1029.78,
+   "text": "已经尽可能做得很好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 477,
+   "start": 1029.78,
+   "end": 1032.26,
+   "text": "但是我觉得急需发展出一款",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 478,
+   "start": 1032.26,
+   "end": 1033.8,
+   "text": "就是规模或者说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 479,
+   "start": 1033.8,
+   "end": 1035.62,
+   "text": "重新预训练的一款新模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 480,
+   "start": 1035.62,
+   "end": 1037.58,
+   "text": "可能是minimax M4或者说怎么样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 481,
+   "start": 1037.58,
+   "end": 1039.7,
+   "text": "最好能够达到一个新的水平",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1191
+  },
+  {
+   "id": 482,
+   "start": 1039.7,
+   "end": 1040.7,
+   "text": "加上它的一个平台",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 483,
+   "start": 1040.7,
+   "end": 1042.46,
+   "text": "那就能发挥上更好的能力了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 484,
+   "start": 1042.46,
+   "end": 1044.96,
+   "text": "现在来看的话已经明显的拉开差距了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 485,
+   "start": 1044.96,
+   "end": 1046.16,
+   "text": "好的那么本期视频呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 486,
+   "start": 1046.16,
+   "end": 1047.8,
+   "text": "我们就主要是到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 487,
+   "start": 1047.8,
+   "end": 1049.8,
+   "text": "然后谢谢大家制作视频补义",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  },
+  {
+   "id": 488,
+   "start": 1049.8,
+   "end": 1051.6,
+   "text": "希望大家能够一键三连支持一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.2515
+  }
+ ]
+}

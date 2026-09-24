@@ -1,0 +1,288 @@
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>开发基座横评：Harness 层的胜负手</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761"><span class="dot"></span>12:41 – 17:31 · 7 节 · 6 套基座</a>
+      </div>
+    </div>
+    <p class="ch-abstract">UP 主说这是「最后的一个部分」，也把全片的技术判断上了一个台阶：模型选谁只是一半，另一半是<strong>用什么壳去承载它</strong>。这一章反复出现同一个判据——主代理对子代理的<strong>操控颗粒度</strong>。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 300" role="img" aria-label="六套开发基座的成熟度与特点">
+        <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+        <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">6 套开发基座 · 成熟度 vs 关键判据（子代理操控颗粒度）</text>
+
+        <text x="30" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">基座</text>
+        <text x="286" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">子代理调度</text>
+        <text x="560" y="64" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">UP 主评价</text>
+        <line x1="24" y1="74" x2="1056" y2="74" stroke="#233240" stroke-width="1"/>
+
+        <rect x="24" y="82" width="1032" height="32" rx="5" fill="rgba(63,214,140,.09)"/>
+        <text x="30" y="103" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Codex（GPT）</text>
+        <text x="286" y="103" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✓ 最强 · 可组织 3–4 个</text>
+        <text x="560" y="103" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「现在最最最成熟的 Coding Agent 框架」</text>
+
+        <rect x="24" y="118" width="1032" height="32" rx="5" fill="rgba(240,180,41,.09)"/>
+        <text x="30" y="139" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Claude Code</text>
+        <text x="286" y="139" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">可完成，但面板受限</text>
+        <text x="560" y="139" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">Desktop 面板「非常让人尴尬」，对国内开发者不友好</text>
+
+        <rect x="24" y="154" width="1032" height="32" rx="5" fill="rgba(91,156,248,.09)"/>
+        <text x="30" y="175" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Grok Build</text>
+        <text x="286" y="175" fill="#5b9cf8" font-size="11.5">未展开</text>
+        <text x="560" y="175" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">速度非常快，但可读性不好、有遮挡性问题；轻量可用</text>
+
+        <rect x="24" y="190" width="1032" height="32" rx="5" fill="rgba(248,115,110,.09)"/>
+        <text x="30" y="211" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Zcode / Kimi CLI</text>
+        <text x="286" y="211" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✗ 不支持补送/提前结束</text>
+        <text x="560" y="211" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「既好用又不好用」· 好看、缓存命中率好，但调度会阻塞</text>
+
+        <rect x="24" y="226" width="1032" height="32" rx="5" fill="rgba(169,139,250,.09)"/>
+        <text x="30" y="247" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">DeepSeek Harness</text>
+        <text x="286" y="247" fill="#a98bfa" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">插件化，但尚不稳定</text>
+        <text x="560" y="247" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前沿但非新手友好；适合想精调 harness 的开发者</text>
+
+        <rect x="24" y="262" width="1032" height="32" rx="5" fill="rgba(70,198,224,.09)"/>
+        <text x="30" y="283" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">通义千问 Coder</text>
+        <text x="286" y="283" fill="#46c6e0" font-size="11.5">—</text>
+        <text x="560" y="283" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">团队不太用 Coder，一般是接到 CC（Claude Code）里用</text>
+      </svg>
+      <figcaption><b>视觉锚点｜矩阵</b>　把它和上一章的模型表并排看：<b>Codex 一行是唯一的绿色调度标记</b>。UP 主把「主代理能不能在子代理运行中补送消息、能不能提前结束它们」当作区分成熟与不成熟的分水岭——这条判据贯穿整章。</figcaption>
+    </figure>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>DeepSeek Harness：前沿但还嫩，适合折腾的人</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=761"><span class="tri"></span>12:41 – 13:44</a>
+
+      <p class="lead">第一个讲的是 DeepSeek 系的框架，UP 主的结论是「现在先别用」——但理由不是它差，而是它太新。</p>
+
+      <p>构成交代得很清楚：DeepSeek 现在做的是<strong>基于插件化的 DeepSeek Harness</strong>，<strong>在浏览器里使用</strong>。团队简单用了一阵子，发现这个框架<strong>目前还不是很稳定</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">为什么不建议现在用 · 四条</span>
+        <ul>
+          <li><strong>还不稳定</strong></li>
+          <li>在<strong>频繁地高速迭代</strong>，里面在增加各种各样的功能</li>
+          <li>设计比较<strong>前沿化</strong>——比如它试图把 Harness 里面的各个组件<strong>全部插件化</strong>，所以对刚入门的或者新手来说并不是很好理解，<strong>并不是一个新手友好的框架</strong></li>
+          <li>还在频繁迭代，<strong>发布有时候会有各种细微的小 bug</strong></li>
+        </ul>
+      </div>
+
+      <p>UP 主给出的适用判断也很干脆：</p>
+
+      <div class="kv">
+        <div>想直接用一个稳定的</div><div>那就<strong>不要用它</strong></div>
+        <div>想自己去搞一个 App</div><div>如果你懒得自己封装，推荐现在最好还是<strong>先不要使用 DeepSeek Harness</strong></div>
+      </div>
+
+      <div class="blk q">
+        <span class="label">但有一类人应该用 · 开发者</span>
+        <p style="color:var(--tx2);margin:0 0 8px">对于<strong>非常想精调 harness 的开发者</strong>来说，因为它这种基于插件模式的设计：</p>
+        <ul>
+          <li>你可以把自己的很多 harness 理念<strong>植入进去</strong></li>
+          <li>或者尝试<strong>做自己的一套框架</strong>出来</li>
+          <li>「那它就是一个很好用的东西」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>读法提示：</b>「不稳定」和「不值得用」是两件事。UP 主这一节的结构其实是<b>按角色分流</b>——普通用户等它稳定，开发者反而该趁它可塑的时候进场。</div>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>Codex（GPT）：目前最成熟的 Coding Agent 框架</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=825"><span class="tri"></span>13:45 – 14:52</a>
+
+      <p class="lead">这是全片对基座的最高评价，理由浓缩成一个词——<strong>子代理</strong>。</p>
+
+      <blockquote>
+        <p>Codex 我们目前是认为它是现在最最最成熟的一个 Coding Agent 的框架。</p>
+        <cite>— UP 主原话（13:48）</cite>
+      </blockquote>
+
+      <div class="blk q">
+        <span class="label">为什么 · 子代理通信流畅</span>
+        <ul>
+          <li>它的<strong>子代理非常有特点</strong>，和子代理<strong>通信的时候是非常流畅的</strong></li>
+          <li>如果你的<strong>主代理能力比较不错</strong>，它可以非常顺利地<strong>组织 3～4 个子代理</strong>来完成工作</li>
+          <li>「这个就是我们现在觉得非常不错的点」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">对照 · Claude Code 的短板在哪</span>
+        <p style="color:var(--tx2);margin:0 0 8px">Claude Code 其实<strong>也能完成这个任务</strong>，但它的 <strong>Desktop 面板非常让人尴尬</strong>：</p>
+        <ul>
+          <li>比如你配置了<strong>基于 GLM 的一个 Claude Code</strong>，那你在它的 <strong>Claude Desktop 里面是没法进入 Code 界面的</strong></li>
+          <li>而且<strong>要充会员</strong></li>
+          <li>所以它对于国内开发者<strong>很不友好</strong></li>
+        </ul>
+      </div>
+
+      <p>注意这里的批评对象是<strong>桌面端的产品策略</strong>，不是模型或 CLI 能力。这也是本片一个隐含的观察角度：同一个 CLI 工具，它的客户端面板可能会成为你根本用不下去的原因。</p>
+
+      <div class="blk concl">
+        <span class="label">Codex 的加分项</span>
+        <ul>
+          <li>对比之下 <strong>Codex 就好得多</strong></li>
+          <li>那些子代理<strong>也都支持自定义提示词</strong></li>
+          <li>可以做<strong>并发</strong>，可以自己写这些</li>
+          <li><strong>指令遵循也不错</strong></li>
+        </ul>
+      </div>
+
+      <div class="blk q">
+        <span class="label">生态信号 · 别家都在适配它</span>
+        <p style="color:var(--tx2);margin:0">可以看到像 <strong>DeepSeek</strong>、还有像 <strong>GLM</strong> 他们的 <strong>Coding Plan</strong>，也都在积极地去适配 <strong>Responses API</strong> 这种 Codex 的专属端点——「这个都是蛮不错的」。</p>
+      </div>
+
+      <p>这条信号值得单独标注：<strong>当竞争对手主动来适配你的接口，就说明你的框架事实上成了标准</strong>。UP 主把它作为「Codex 现在是最好的框架」的旁证。</p>
+    </div>
+
+    <div class="sub" id="s33">
+      <h3><span class="idx">3.3</span>Grok Build：快、轻量，但可读性欠佳</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=893"><span class="tri"></span>14:53 – 15:16</a>
+
+      <p class="lead">最短的一节，评价结构也最简单：优点一个、缺点一个、结论一句。</p>
+
+      <div class="kv">
+        <div>优点</div><div>速度<strong>非常快</strong>，非常擅长直接跑出来任务</div>
+        <div>缺点</div><div><strong>可读性不是很好</strong>——东西发上去之后，去理解那个界面或者阅读一些东西时，会有一些<strong>遮挡性的问题</strong></div>
+        <div>结论</div><div>整体来说<strong>还是可用的</strong>；处于一种没有 Codex 和 Claude Code 这种「老东西」成熟的阶段，但<strong>相对快、相对轻量可用</strong></div>
+      </div>
+    </div>
+
+    <div class="sub" id="s34">
+      <h3><span class="idx">3.4</span>千问的基座：不单独用，接到 CC 里</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=917"><span class="tri"></span>15:17 – 15:22</a>
+
+      <p>一句话带过：「千问的话我们就不提了。」原因也给了——<strong>UP 主不太用 Coder</strong>，所以一般就是把它<strong>接到 CC（Claude Code）里面来用</strong>，这里就不多讲了。</p>
+
+      <div class="note"><b>补充：</b>这也解释了为什么本片的「基座」章节没有单独评测千问自家的 CLI——它在这份报告里的角色是<b>模型供应商</b>，而不是基座供应商。</div>
+    </div>
+
+    <div class="sub" id="s35">
+      <h3><span class="idx">3.5</span>Zcode 与 Kimi CLI：好看，但主代理操控子代理的颗粒度不够</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=923"><span class="tri"></span>15:23 – 16:30</a>
+
+      <p class="lead">本节是全片技术含量最高的一段，UP 主提出了一个明确的、可验证的框架缺陷机制。</p>
+
+      <p>开场先说清楚：GLM 的 Zcode「跟现在的一些其他框架是有明显的一个重大问题的」。然后立刻补上肯定——Zcode 还有 Kimi CLI <strong>其实现在做得都蛮漂亮</strong>，<strong>可用性对于一个新手来说是可以的</strong>。</p>
+
+      <p>但接下来是判据：</p>
+
+      <blockquote>
+        <p>在我们去调度一些 Agent 的团队来做事情的时候，这些团队之间的异步通信、主代理对于子代理的一个操控的颗粒度是非常重要的。</p>
+        <cite>— UP 主原话（15:40）</cite>
+      </blockquote>
+
+      <div class="blk pit">
+        <span class="label">缺陷 · 不支持运行中干预</span>
+        <p style="color:var(--tx2);margin:0 0 8px">现在在 Kimi CLI 还有 GLM 的 Zcode 中（UP 主加了限定：「如果我使用的版本没什么问题的话，如果是最新版本的话」）：</p>
+        <ul>
+          <li><strong>不支持主代理在子代理运行过程中给它们补送消息</strong></li>
+          <li>或者说<strong>提前结束它们</strong></li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 340" role="img" aria-label="子代理运行中无法干预导致的阻塞与丢失">
+          <rect x="0" y="0" width="1080" height="340" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">失效链 · 为什么「不能补送消息」会毁掉一次调度</text>
+
+          <!-- timeline -->
+          <text x="30" y="98" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">主代理</text>
+          <text x="30" y="212" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">子代理</text>
+
+          <!-- main agent lane -->
+          <line x1="110" y1="92" x2="1030" y2="92" stroke="#233240" stroke-width="1"/>
+          <!-- sub agent lane -->
+          <line x1="110" y1="206" x2="1030" y2="206" stroke="#233240" stroke-width="1"/>
+
+          <!-- step1: main injects task -->
+          <circle cx="150" cy="92" r="6" fill="#46c6e0"/>
+          <text x="150" y="76" fill="#46c6e0" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">① 植入任务</text>
+          <line x1="150" y1="98" x2="150" y2="200" stroke="#31465c" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <polygon points="150,200 146,192 154,192" fill="#31465c"/>
+
+          <!-- step2: sub starts working -->
+          <circle cx="270" cy="206" r="6" fill="#a98bfa"/>
+          <text x="270" y="190" fill="#a98bfa" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">② 子代理开干</text>
+          <rect x="270" y="214" width="160" height="20" rx="4" fill="rgba(169,139,250,.16)" stroke="#a98bfa" stroke-width="1"/>
+          <text x="350" y="228" fill="#a98bfa" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">已分派工作 · 正在跑</text>
+
+          <!-- step3: new task to main -> blocked -->
+          <circle cx="500" cy="92" r="6" fill="#f0b429"/>
+          <text x="500" y="76" fill="#f0b429" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">③ 又给主代理一个任务</text>
+          <rect x="440" y="100" width="200" height="22" rx="4" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1"/>
+          <text x="540" y="115" fill="#f0b429" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">一直阻塞在那里 · 没法补送</text>
+
+          <!-- cannot stop -->
+          <circle cx="760" cy="206" r="6" fill="#f8736e"/>
+          <text x="760" y="190" fill="#f8736e" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">④ 想停也停不了</text>
+          <rect x="660" y="214" width="230" height="20" rx="4" fill="rgba(248,115,110,.16)" stroke="#f8736e" stroke-width="1"/>
+          <text x="775" y="228" fill="#f8736e" font-size="10.5" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">不支持「提前结束」</text>
+
+          <!-- result: work lost -->
+          <rect x="110" y="254" width="920" height="66" rx="10" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="132" y="276" fill="#f8736e" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">后果 · 两难</text>
+          <text x="132" y="297" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 停掉当前任务 → 前面那些子代理干的活儿「直接就丢失了」，你也不知道它造了什么东西出来</text>
+          <text x="132" y="314" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 不停 → 一直阻塞。而且如果代码库本来就挺「屎山」的，那就非常崩溃了</text>
+        </svg>
+        <figcaption><b>视觉锚点｜流程失效链</b>　顺着 ①②③④ 走一遍就明白 UP 主为什么把「操控颗粒度」当作分水岭：<b>缺的不是某个功能，而是「中断/纠正」这个让 Agent 协作可恢复的能力</b>。没有它，一次误判就会让你在「丢工作」和「干等」之间二选一。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">两面的评价（UP 主自己也说得很矛盾）</span>
+        <ul>
+          <li><strong>既好用又不好用</strong></li>
+          <li><strong>挺好看的</strong></li>
+          <li>也<strong>知道它在尽力做</strong></li>
+          <li>而且能看到它们的<strong>缓存命中率都挺好的</strong></li>
+        </ul>
+      </div>
+
+      <div class="note"><b>版本限定：</b>UP 主两次加上前提——「如果我使用的版本没什么问题的话，如果是最新版本的话」。这类框架迭代很快，<b>结论有时效性</b>，引用时请一并带上这个限定。</div>
+    </div>
+
+    <div class="sub" id="s36">
+      <h3><span class="idx">3.6</span>Kimi 的额度差异：同一个模型，换个壳消耗差很多</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=991"><span class="tri"></span>16:31 – 16:59</a>
+
+      <p class="lead">本节是全片唯一一处直接点出「基座会反过来影响额度」的观察。</p>
+
+      <div class="blk q">
+        <span class="label">Kimi 速度可以，但有个问题</span>
+        <p style="color:var(--tx2);margin:0 0 8px">它的<strong>额度消耗在不同的 agent 工具里面是不太一样的</strong>：</p>
+        <ul>
+          <li>像 Kimi K3，它在 <strong>Claude Code</strong> 里面的消耗<strong>非常快</strong>——「不知道是不是 Claude Code 有什么负优化」</li>
+          <li>但 Kimi K3 在自己的 <strong>Kimi CLI（也就是 Kimi Code）</strong>里面用的话，速度还挺好的，UI 做得也还不错，<strong>写任务的时候都比较明确</strong></li>
+        </ul>
+      </div>
+
+      <p>UP 主给这个差异留了一个问号，没有下定论——这与他在别处（比如 GLM 的速度慢「可能跟它的服务负载有关系」）的处理方式一致：<strong>现象说清楚，归因保留</strong>。</p>
+    </div>
+
+    <div class="sub" id="s37">
+      <h3><span class="idx">3.7</span>MiniMax 的 code 平台与展望</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=1020"><span class="tri"></span>17:00 – 17:23</a>
+
+      <p>收尾前最后一个：MiniMax M3 也做了自己的 code 平台。</p>
+
+      <div class="blk concl">
+        <span class="label">UP 主的评价与展望</span>
+        <ul>
+          <li>先给肯定：虽然在它自己当年那个年代的模型基础上，<strong>已经尽可能做得很好了</strong></li>
+          <li>但急需发展出一款新模型——<strong>规格上或者重新预训练</strong>的，可能是 <strong>MiniMax M4</strong> 或者怎么样</li>
+          <li>最好能达到一个新的水平，<strong>加上它的平台，那就能发挥出更好的能力了</strong></li>
+          <li>「现在来看的话已经明显地拉开差距了」</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:17px;margin-top:26px">收尾</h3>
+      <p>「好的，那么本期视频我们就主要是到这里。谢谢大家，制作视频不易，希望大家能够一键三连支持一下。」</p>
+    </div>
+  </div>
+</section>

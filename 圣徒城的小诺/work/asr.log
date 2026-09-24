@@ -1,0 +1,8 @@
+[init] model=E:/Projects/VibeCoding/BiliSumerize/models/faster-whisper-large-v3-turbo device=cuda compute=float16
+[init] loaded in 7.0s
+[seg] 200 ... t=435s
+[seg] 400 ... t=869s
+============================================================
+[done] segments=489 audio=1051.7s elapsed=139.9s speedup=7.5x
+[check] last_end=1051.6s coverage=99.99%
+[out] work/transcript.json

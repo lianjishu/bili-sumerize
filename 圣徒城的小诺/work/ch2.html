@@ -1,0 +1,643 @@
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chapter ch2" id="ch2">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">02</div>
+      <div class="ch-title">
+        <h2>模型横评：从 GPT-6 到通义千问</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19"><span class="dot"></span>00:19 – 12:41 · 9 节 · 10 个模型</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这 12 分钟是全片的重心。UP 主按「上限 → 痛点 → 该拿它干什么」的固定套路逐个过模型，而且几乎不给满分——每个模型都能说出一个明确的、会让实际开发踩坑的性格缺陷。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 396" role="img" aria-label="10 个模型的能力与痛点矩阵">
+        <rect x="0" y="0" width="1080" height="396" fill="#0f151d"/>
+        <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">10 个模型的「一句话性格」· 上限 vs 需要人补位的地方</text>
+
+        <!-- header -->
+        <text x="30" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">模型</text>
+        <text x="300" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">强项 / 上限</text>
+        <text x="686" y="66" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">需要人补位的地方</text>
+        <line x1="24" y1="76" x2="1056" y2="76" stroke="#233240" stroke-width="1"/>
+
+        <!-- rows: 10, each 31px -->
+        <!-- GPT-6 -->
+        <rect x="24" y="84" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="103" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GPT-6 Astra</text>
+        <text x="300" y="103" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">复杂任务上限极高 · 架构设计 · 视觉还原 · 指令遵循强</text>
+        <text x="686" y="103" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">过度设计 / 过度考虑安全 · 成本极高 · 只能当子代理</text>
+
+        <!-- GPT-5.6 -->
+        <rect x="24" y="117" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="136" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GPT-5.6 SOTA</text>
+        <text x="300" y="136" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">综合能力性价比最好 · 给精准需求就能跑出来</text>
+        <text x="686" y="136" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前后端「毛坯化」· 40 万上下文起漂移</text>
+
+        <!-- Opus 5 -->
+        <rect x="24" y="150" width="1032" height="29" rx="5" fill="rgba(70,198,224,.07)"/>
+        <text x="30" y="169" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Claude Opus 5</text>
+        <text x="300" y="169" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">代码组织 · 发散想法时反馈质量不比 GPT-6 差</text>
+        <text x="686" y="169" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">自我验收不稳（自称完工/破坏架构）· 记忆不如 GPT 稳</text>
+
+        <!-- DeepSeek -->
+        <rect x="24" y="183" width="1032" height="29" rx="5" fill="rgba(91,156,248,.07)"/>
+        <text x="30" y="202" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">DeepSeek V4.1 Flash</text>
+        <text x="300" y="202" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">前端非常强 · token 速度极快 · 精准定位不错 · 多模态</text>
+        <text x="686" y="202" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">并发跑额度飞掉（API 计价）· 仍需 harness/人工审查</text>
+
+        <!-- GLM -->
+        <rect x="24" y="216" width="1032" height="29" rx="5" fill="rgba(63,214,140,.07)"/>
+        <text x="30" y="235" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">GLM-5.3</text>
+        <text x="300" y="235" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">工程师性格 · 稳定执行 · 100 万上下文真实可用</text>
+        <text x="686" y="235" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">缺多模态 · 速度慢 · 套餐费 · 不善并发 · 架构探索保守</text>
+
+        <!-- Grok -->
+        <rect x="24" y="249" width="1032" height="29" rx="5" fill="rgba(240,180,41,.07)"/>
+        <text x="30" y="268" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Grok 4.6</text>
+        <text x="300" y="268" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">响应很快 · 敢于主动快速试错 · 快速迭代收益明显</text>
+        <text x="686" y="268" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">审美需纠偏 · 不爱做复杂计划 · 国内 UI 复刻差</text>
+
+        <!-- Kimi -->
+        <rect x="24" y="282" width="1032" height="29" rx="5" fill="rgba(169,139,250,.07)"/>
+        <text x="30" y="301" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Kimi K3</text>
+        <text x="300" y="301" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">天生愿意调度 Agent 团队 · 任务拆分自然</text>
+        <text x="686" y="301" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">额度少且贵 · 开发能力中庸 · 本次实测明显退步</text>
+
+        <!-- MiniMax -->
+        <rect x="24" y="315" width="1032" height="29" rx="5" fill="rgba(91,156,248,.07)"/>
+        <text x="30" y="334" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">MiniMax M3</text>
+        <text x="300" y="334" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">多模态 · 100 万上下文 · agent 能力稳定 · 便宜</text>
+        <text x="686" y="334" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">参数量 &lt;500B（落后）· 被各家快速模型平替</text>
+
+        <!-- Qwen -->
+        <rect x="24" y="348" width="1032" height="29" rx="5" fill="rgba(63,214,140,.07)"/>
+        <text x="30" y="367" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">通义千问 3.8</text>
+        <text x="300" y="367" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">多轮跑出来很稳定 · 小模型（27B）后训练水平贴近大模型</text>
+        <text x="686" y="367" fill="#f8736e" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">一次性直出不惊艳 · token plan 极贵（39 元两天触顶）</text>
+      </svg>
+      <figcaption><b>视觉锚点｜矩阵</b>　这张表是本片的浓缩版：<b>左列是「它能给你什么」，右列是「你得替它补什么」</b>。看下来会发现 UP 主的评价体系里几乎没有「全能王」——每款模型都有一个必须由人来兜的性格缺口，区别只在缺口形状不同。</figcaption>
+    </figure>
+
+    <div class="sub" id="s21">
+      <h3><span class="idx">2.1</span>GPT-6：上限极高，但会「自己加戏」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=19"><span class="tri"></span>00:19 – 01:30</a>
+
+      <p class="lead">这是全片第一个模型，也是 UP 主给出最高评价、同时给出最严厉使用限制的一个。</p>
+
+      <div class="blk q">
+        <span class="label">上限</span>
+        <ul>
+          <li>在<strong>复杂任务</strong>上的上限非常高</li>
+          <li>尤其擅长<strong>架构设计</strong>与<strong>视觉还原</strong></li>
+          <li><strong>指令遵循</strong>非常强</li>
+        </ul>
+      </div>
+
+      <p>这些经验来源被明确交代了双重出处：「社区上还有我们大量开发的一些经验」——不是单人体验。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点一 · 过度设计、过度考虑安全</span>
+        <p style="color:var(--tx2);margin:0">你给它一个需求，<strong>对话还没有结束</strong>，它就已经搞出了一个「延展性的设计」出来——已经超出你的需求范围了，还可能造出一堆并不太必要的组件。</p>
+      </div>
+
+      <blockquote>
+        <p>如果一个架构里有很多你不知道是干什么的组件，那它后面如果改动了，你就不知道什么情况了，你的架构就很容易腐坏。</p>
+        <cite>— UP 主原话（00:52）</cite>
+      </blockquote>
+
+      <p>这个论证值得单独拎出来：UP 主反对过度设计的理由<strong>不是「浪费」，而是「可维护性崩塌」</strong>。多余的组件不是在浪费 token，而是在给未来的自己埋雷——因为你不知道它的存在意义，也就无法判断改动它的后果。</p>
+
+      <div class="blk steps">
+        <span class="label">用法 · 给它上镣铐</span>
+        <ol>
+          <li>必须<strong>明确它的边界</strong>——在 <code>AGENTS.md</code> 里把它约束住</li>
+          <li>尽可能<strong>少地在主对话里大量使用它</strong>，避免它「过于强悍」</li>
+          <li>推荐接入 <strong>Codex</strong> 或 <strong>OpenCode</strong>，作为<strong>子代理</strong>使用</li>
+          <li>让它干的事：<strong>询问方案</strong>、<strong>临时做重大决策</strong>、<strong>业务性判断</strong></li>
+        </ol>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">定位</span>
+        <p style="color:var(--tx2);margin:0">它<strong>不适合放在主要工位上干活</strong>，而且成本极高。正确的用法是把它当「外部顾问」——只在关键决策点叫它进来，用完就退场。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s22">
+      <h3><span class="idx">2.2</span>GPT-5.6：综合性价比最好，但会「漂移」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=91"><span class="tri"></span>01:31 – 02:50</a>
+
+      <p class="lead">如果说 GPT-6 是「上限最高但要看着用」，GPT-5.6 SOTA 就是那个「能天天用但会慢慢跑偏」的选手。</p>
+
+      <p>能力画像被 UP 主概括为「<strong>相对均衡一点</strong>」。但均衡不等于精致：</p>
+
+      <div class="blk pit">
+        <span class="label">痛点一 · 前后端「毛坯化」</span>
+        <ul>
+          <li>功能<strong>可以实现</strong>：你给一个比较精准的需求，它是可以跑出来的</li>
+          <li>但跑出来的功能<strong>比较毛坯</strong>：写后端可能性能没做优化；写前端则<strong>不太好维护扩展</strong>，因为「自己写了很多自己自定义的 CSS 样式」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>关于「毛坯化」：</b>这是 UP 主的自创措辞，指「能交付但没打磨」的状态——功能可用，但工程性、性能、可维护性都停在最低可用线。它不影响跑通，但会在后续迭代时开始收利息。</div>
+
+      <p>UP 主接着做了一个横向对比：它「是性价比的选择，但也可能没有那么性价比」——跟 <strong>GPT Luna</strong> 和 <strong>GPT Terra</strong> 比起来还是要差一点。不过总体结论仍然是：它是大家能够使用到的、<strong>综合能力性价比最好的模型</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点二 · 长任务上的上下文漂移</span>
+        <p style="color:var(--tx2);margin:0 0 8px">来源同样是「社区上包括我们自己的一些使用体验」——双重出处。在 Codex 里开到 50 万甚至 100 万上下文时：</p>
+        <ul>
+          <li>接近 <strong>40 万以上</strong> 时开始出现一定漂移</li>
+          <li><strong>七八十万以上</strong> 时「几乎是不太可用了」</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 250" role="img" aria-label="GPT-5.6 上下文窗口的可用区间">
+          <rect x="0" y="0" width="1080" height="250" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">GPT-5.6 在 Codex 中的上下文可用区间 · 窗口能开多大 vs 实际能用多大</text>
+
+          <!-- axis scale: 0 -> x=70 ; 1,000,000 -> x=1010 ; 1 万 token = 9.4px -->
+          <line x1="70" y1="150" x2="1010" y2="150" stroke="#31465c" stroke-width="1"/>
+          <g font-size="11" fill="#77879a" font-family="Segoe UI, Microsoft YaHei" text-anchor="middle">
+            <text x="70" y="170">0</text>
+            <text x="446" y="170">40 万</text>
+            <text x="822" y="170">80 万</text>
+            <text x="970" y="170">100 万</text>
+          </g>
+          <g stroke="#233240" stroke-width="1">
+            <line x1="70" y1="150" x2="70" y2="158"/>
+            <line x1="446" y1="150" x2="446" y2="158"/>
+            <line x1="822" y1="150" x2="822" y2="158"/>
+            <line x1="970" y1="150" x2="970" y2="158"/>
+          </g>
+
+          <!-- safe zone 0-400k -->
+          <rect x="70" y="96" width="376" height="40" rx="6" fill="rgba(63,214,140,.16)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="86" y="121" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">稳定区</text>
+
+          <!-- drift 400k-800k -->
+          <rect x="446" y="96" width="376" height="40" rx="6" fill="rgba(240,180,41,.16)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="462" y="121" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">开始漂移</text>
+
+          <!-- unusable 800k-1M -->
+          <rect x="822" y="96" width="188" height="40" rx="6" fill="rgba(248,115,110,.16)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="838" y="121" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">几乎不可用</text>
+
+          <!-- recommended marker at 512000 -> x = 70 + 512000*9.4e-4 ... = 70+481 = 551 -->
+          <line x1="551" y1="80" x2="551" y2="160" stroke="#46c6e0" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <circle cx="551" cy="80" r="4" fill="#46c6e0"/>
+          <text x="551" y="70" fill="#46c6e0" font-size="11.5" font-weight="700" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">建议设为 512000</text>
+
+          <rect x="24" y="188" width="1032" height="46" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="40" y="207" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主建议</text>
+          <text x="118" y="207" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">设置上下文时「直接就是临界设到 512000」——保证上下文稳定；不常用长上下文的话，设到 256K / 300K 都可以</text>
+          <text x="40" y="225" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">要点：不是「窗口越大越好」，而是「把窗口卡在漂移阈值之上、可用上限之下」——这是一个刻意的性能取舍。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜时间/区间</b>　这张图的重点是<b>「窗口能力」与「可用能力」不是一回事</b>。40 万是漂移起点、80 万是可用性崩塌点，而 UP 主给的 512000 落在这两个阈值之间——留了余量，也仍在稳定区内。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">一句话定位</span>
+        <ul>
+          <li><strong>GPT-6</strong>：更像一个相对成熟、<strong>偏向架构方向走</strong>的工程师</li>
+          <li><strong>GPT-5.6 SOTA</strong>：像一个非常<strong>综合性</strong>的工程师——比较擅长搞开发，但搞架构设计什么的还是没有那么好</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s23">
+      <h3><span class="idx">2.3</span>Claude Opus 5：发散性与架构感好，但会「自己宣布完工」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=172"><span class="tri"></span>02:52 – 04:00</a>
+
+      <p class="lead">本节贡献了全片最精准的一个缺陷命名——「自我验收不稳」。</p>
+
+      <div class="blk q">
+        <span class="label">延续 Claude 系列的特点</span>
+        <ul>
+          <li>擅长<strong>代码组织</strong></li>
+          <li>适合<strong>明确任务</strong></li>
+          <li>跟它<strong>发散想法</strong>时，它可以很好地给你更多反馈——「甚至它的反馈质量我觉得不比 GPT-6 要差」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">痛点 · 自我验收不稳</span>
+        <p style="color:var(--tx2);margin:0 0 8px">UP 主先给现象再给定义：「什么是自我验收不稳呢？就是它可能自己干着干着觉得自己干完了。」</p>
+        <p style="color:var(--tx2);margin:0">而且他强调这是 <strong>Claude 系列明显的痛点</strong>，不是 Opus 5 独有的。</p>
+      </div>
+
+      <p>为了让这个缺陷更清楚，UP 主做了一个对照——这个对照很有信息量：</p>
+
+      <div class="kv">
+        <div>GPT 系列遇到干不完</div><div>一般会<strong>诚实地告诉你干不完</strong></div>
+        <div>Claude 系列遇到干不完</div><div>有时候会<strong>「为了目的直接破坏你的架构设计」</strong></div>
+        <div>或者</div><div>干着干着<strong>漂移了</strong>，却觉得<strong>自己干完了</strong></div>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">结论</span>
+        <ul>
+          <li>所以<strong>必须人工去复查一下</strong></li>
+          <li>它的<strong>记忆能力</strong>相对没有 GPT 系列稳定</li>
+          <li>但<strong>发散性和整体的架构感还是很不错的</strong></li>
+          <li>依旧<strong>可以作为主力模型使用</strong></li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:17px;margin-top:26px">关于更强的 Fable 5 / Fable 5.1</h3>
+      <p>UP 主表示「相信 Fable 5 或者 Fable 5.1 肯定是更强了」，但因为实在是平常不太会使用，所以没纳入实测。他给了一个价格侧的观察：</p>
+
+      <div class="blk pit">
+        <span class="label">价格与可得性</span>
+        <p style="color:var(--tx2);margin:0">现在它的套餐，像 <strong>Max 20 倍</strong>档，无论闲鱼上还是别的地方都已经涨到 <strong>2000 块钱</strong>，<strong>还有封号概率</strong>——「几乎是不会被大家广泛地采用了」。</p>
+      </div>
+
+      <div class="note"><b>存疑标注：</b>模型名在本片两处音源中分别被听作 <code>Fibro 5</code> 与 <code>FBL 5.1</code>，均碎片化。按音近推定为 <b>Fable 5</b>，文中已按此转写，但仍属<b>听写推定</b>，请以官方命名为准。「Max 20 倍」指订阅套餐档位，为原话。</div>
+    </div>
+
+    <div class="sub" id="s24">
+      <h3><span class="idx">2.4</span>DeepSeek V4.1 Flash：速度快、前端强，但别拿它搞并发</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=241"><span class="tri"></span>04:01 – 05:26</a>
+
+      <p class="lead">本节的另一个看点：UP 主讲了产品线本身的一次「自我淘汰」。</p>
+
+      <p>首先是模型迭代的一个细节——<strong>4.1 Flash 跑出来之后，结果比 4 的 Pro 还要强</strong>，所以 DeepSeek 直接<strong>只保留了这一个版本在 API 上供应</strong>。也就是说 Flash 档位反超了 Pro 档位，Pro 被下架了。</p>
+
+      <div class="blk q">
+        <span class="label">长处</span>
+        <ul>
+          <li><strong>前端非常强</strong></li>
+          <li><strong>token 速度非常快</strong>——「你就说快不快吧」</li>
+          <li>在一些<strong>精准定位</strong>上也还不错</li>
+          <li>仍需要 harness 或者人工质量审查，但「已经是一个非常非常合适的模型了」</li>
+        </ul>
+      </div>
+
+      <p>UP 主对它的定位判断很明确：<strong>它目前看起来不太适合大家用并行去开发</strong>，因为它是走 <strong>API 计价</strong>的。同时他给了个诚实的规模说明——它仍然是一个只有<strong>六七百 B</strong> 的模型，「没有像海外那些那么庞大（几个 T）」，前端需要抽卡。</p>
+
+      <div class="blk pit">
+        <span class="label">并发警告（全片最响的一条）</span>
+        <p style="color:var(--tx2);margin:0 0 8px">如果经常使用子代理，或者你的 Claude Code / Codex 里面配置了大量子代理、需要并发执行任务，那<strong>最好不要用这个模型</strong>。</p>
+        <p style="color:var(--tx2);margin:0"><strong>因为它会飞快地跑掉你的额度。</strong></p>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 268" role="img" aria-label="DeepSeek V4.1 Flash 的单会话与并发消耗对比">
+          <rect x="0" y="0" width="1080" height="268" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">为什么「单会话便宜」却「并发烧钱」· 同一个模型，两种消耗曲线</text>
+
+          <!-- left: single session -->
+          <rect x="24" y="52" width="500" height="188" rx="10" fill="#141d28" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="44" y="78" fill="#3fd68c" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">单个会话（推荐）</text>
+          <text x="44" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 缓存量很多 → 命中率高 → 单价低</text>
+          <text x="44" y="128" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 临时任务、单窗口内没有太多验证</text>
+          <text x="44" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 临时设计一些 UI 也可以</text>
+          <text x="44" y="172" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 支持多模态</text>
+          <rect x="44" y="190" width="456" height="32" rx="6" fill="rgba(63,214,140,.14)" stroke="#3fd68c" stroke-width="1"/>
+          <text x="60" y="211" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">结论：还是比较便宜的，性能效果确实不错</text>
+
+          <!-- right: parallel -->
+          <rect x="556" y="52" width="500" height="188" rx="10" fill="#141d28" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="576" y="78" fill="#f8736e" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">并发子代理（避开）</text>
+          <text x="576" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 3 个项目 × 每个 3 并发 = 9 路 token 齐飞</text>
+          <text x="576" y="128" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 本来 token 速度就快 → 消耗更是飞快</text>
+          <text x="576" y="150" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 走 API 计价，没有包月兜底</text>
+          <text x="576" y="172" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 走量之后成本迅速失控</text>
+          <rect x="576" y="190" width="456" height="32" rx="6" fill="rgba(248,115,110,.14)" stroke="#f8736e" stroke-width="1"/>
+          <text x="592" y="211" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">结论：一天跑个大几百、一两百块钱是没问题的</text>
+
+          <text x="24" y="260" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">UP 主称之为「血与泪的教训」——同一个模型，单窗口用是「真香」，铺开并发就是「真烧」。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜对比</b>　左边的绿色区间和右边的红色区间是<b>同一个模型</b>。差别只在「怎么用它」——单会话下 KV cache 命中多、单价低，并发铺开后 token 速度这个「优点」反而变成烧钱的加速器。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">结尾的态度</span>
+        <p style="color:var(--tx2);margin:0">尽管如此，「我们仍然非常喜欢这款模型了」——批评的是用法，不是模型。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s25">
+      <h3><span class="idx">2.5</span>GLM-5.3：最像「工程师」的模型，缺多模态</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=327"><span class="tri"></span>05:27 – 07:01</a>
+
+      <p class="lead">GLM-5.3 是 UP 主团队「在大量使用」的模型，起用它有一个很现实的原因。</p>
+
+      <p>使用场景被交代得很直白：<strong>当 GPT 额度不够了、Claude 额度不够了</strong>，很多时候就不得不使用 GLM 的 <strong>Coding Plan</strong>。也就是说，它是团队在主力额度耗尽时的「接盘选手」。</p>
+
+      <div class="blk q">
+        <span class="label">让人喜欢的地方</span>
+        <ul>
+          <li>一个非常强的<strong>工程师性格</strong></li>
+          <li>规模：大概 <strong>700 多 B</strong>，是做了很好的<strong>后训练</strong>的模型——相当于在 GLM-5.2 的基础上进一步强化了 <strong>coding 能力和 agent 能力</strong></li>
+          <li>开发 benchmark 号称可以达到跟 <strong>5.6 SOTA 不相上下</strong>，「体感上来说确实如此」</li>
+          <li>可以<strong>非常稳定地执行任务</strong></li>
+          <li><strong>100 万上下文不是假的</strong>——「它真的可以记住，几乎在五六十万的上下文时还能保持稳定」</li>
+        </ul>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">短板（三条 + 一条架构层面的）</span>
+        <ul>
+          <li><strong>套餐蛮贵的</strong>：有 5 小时限制，还有 7 天限制，「蛮多」</li>
+          <li><strong>速度相对慢</strong>：可能跟它的服务负载有关系</li>
+          <li><strong>套餐消耗相当快</strong></li>
+          <li><strong>缺乏多模态理解能力</strong>：在刚测试的项目中，GLM-5.3 有明显的视觉和一些设计方面的短板</li>
+          <li><strong>自由探索架构设计上的能力相对保守</strong>，没有那么好</li>
+        </ul>
+      </div>
+
+      <div class="blk steps">
+        <span class="label">UP 主给的用法 · 「编排—执行」分层</span>
+        <ol>
+          <li>用 <strong>Kimi</strong> 或者 <strong>Claude</strong> 去做<strong>编排</strong></li>
+          <li>在 <strong>OpenCode</strong> 或 <strong>Zcode</strong> 里把 GLM-5.3 作为<strong>子代理</strong>去调用</li>
+          <li>不要让它当主代理去做单流程执行——它有点不太擅长<strong>并发执行任务</strong></li>
+        </ol>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">定位</span>
+        <p style="color:var(--tx2);margin:0">它更像一款<strong>适合干活的模型</strong>，也是一个非常好的、<strong>工程师化的模型</strong>。UP 主对它的评价结构很清晰：强在「执行稳定性 + 长上下文真实性」，弱在「多模态 + 并发 + 架构探索」。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s26">
+      <h3><span class="idx">2.6</span>Grok 4.6：快、敢试错、不爱做计划</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=422"><span class="tri"></span>07:02 – 08:13</a>
+
+      <p class="lead">UP 主对 Grok 4.6 的开场评语是「它的生态会很奇怪」——因为它的口碑走势是反的。</p>
+
+      <p>刚出来的时候大家没太当回事，<strong>但测了测发现好像没有像那个「美国大豆包」那么蠢</strong>，开发能力还是很不错的。</p>
+
+      <div class="note"><b>保留原文：</b>「美国大豆包」是 UP 主对某海外模型的戏称（自备字幕作「美国大豆包煎饼袋」），两源一致，属<b>作者式玩笑</b>。按本笔记的整理原则，<b>不「改正」作者的故意措辞</b>，保留原样。</div>
+
+      <div class="blk q">
+        <span class="label">三个特点（UP 主明确编号）</span>
+        <ul>
+          <li><strong>第一，比较快</strong>——响应速度很快，敢于主动快速试错；在快速迭代中的效果提升比较明显</li>
+          <li><strong>第二，能力还不错</strong></li>
+          <li><strong>第三，它不喜欢做太复杂的计划</strong></li>
+        </ul>
+      </div>
+
+      <p>第三条是本节的核心对比：</p>
+
+      <div class="kv">
+        <div>GLM-5.3、GPT 系列</div><div>都很喜欢做<strong>很长很长的思考</strong>，然后才去做东西</div>
+        <div>Grok 4.6</div><div>适合<strong>「上来咣咣咣就开始干」</strong>，干完之后跑出来一个东西，然后迅速去迭代的人</div>
+      </div>
+
+      <p>UP 主还指出它的生态位跟 <strong>DeepSeek V4.1 Flash</strong> 有点像——都属于「快、敢试、别指望它深思熟虑」那一挂。至于为什么当时它口碑起来：毕竟这是刚出来的，<strong>当时它效果是最好的，最起码当时它「暴打」了 Gemini 系列</strong>。而现在 Gemini 虽然快，但没有那么好用，「3.8 也只能查查文档、简单干点活」。</p>
+
+      <div class="blk pit">
+        <span class="label">保留 · 审美需要纠偏</span>
+        <p style="color:var(--tx2);margin:0">Grok 4.6 还有个问题，就是它的<strong>审美需要一定的纠偏</strong>——没有那么稳定。它对国内的一些 UI 设计，甚至复刻一些已经有的界面，<strong>效果并不是很好</strong>。UP 主此处没有展开，只说「这个我们就不再多提」。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s27">
+      <h3><span class="idx">2.7</span>Kimi K3：Agent 调度是天生的，但额度不够、偏贵</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=494"><span class="tri"></span>08:14 – 09:25</a>
+
+      <p class="lead">这是全片态度落差最大的一个模型——UP 主先讲了一个「退步」的观察，再讲它天生的优势，最后落到性价比判断。</p>
+
+      <div class="blk pit">
+        <span class="label">观察 · 效果明显不如印象</span>
+        <p style="color:var(--tx2);margin:0">「我们今天用的这个效果，可能是比我们印象中要差很多。」Kimi K3 刚出的时候，团队用它去做官网、做界面，「甚至它的原型设计都是非常精美的」，但<strong>今天的效果真的差强人意</strong>。</p>
+      </div>
+
+      <div class="blk q">
+        <span class="label">天生优势 · 预训练时就强化了 Agent 能力</span>
+        <ul>
+          <li>Kimi 那边<strong>本来就预训练的</strong>——训练时特地强化了它的 Agent 能力</li>
+          <li>它可以<strong>天然地愿意去调度 Agent 的团队</strong></li>
+          <li><strong>任务拆分也更自然一点</strong></li>
+          <li>「所以它在这个方面的能力是比较强的」</li>
+        </ul>
+      </div>
+
+      <p>但开发能力本身，UP 主的判断偏保守：它的开发风格<strong>在社区的评价中是比较中庸的</strong>。这里他给了一条很值得记住的判据——</p>
+
+      <blockquote>
+        <p>刚出来的时候很牛，不代表现在也很牛。</p>
+        <cite>— UP 主原话（08:47）</cite>
+      </blockquote>
+
+      <p>所以结论是：它的开发能力<strong>比较靠中间一点</strong>，<strong>比较适合中小型的应用</strong>。</p>
+
+      <div class="blk pit">
+        <span class="label">痛点 · 额度不够用，且偏贵</span>
+        <p style="color:var(--tx2);margin:0 0 8px">「它的额度不是很多，这也是一个重点。」Kimi 现在偏贵，原因链条是：<strong>模型尺寸太大 → 算力消耗太大 → 平台订阅太贵</strong>。</p>
+        <p style="color:var(--tx2);margin:0">就算买最贵的那一档套餐，如果负责的项目比较重、规模比较大、<strong>需要循环迭代</strong>，额度也不够用。</p>
+      </div>
+
+      <div class="blk pit">
+        <span class="label">三种用法叠加，额度直接见底</span>
+        <ul>
+          <li>想用<strong>网页端</strong></li>
+          <li>又想用<strong>开发侧</strong></li>
+          <li>有时候还想搞一个什么「<strong>龙虾</strong>」之类的玩一玩</li>
+        </ul>
+        <p style="color:var(--tx2);margin:8px 0 0">「那基本上就不够用了。」</p>
+      </div>
+
+      <div class="note"><b>保留原文：</b>「龙虾」两源一致，但所指不明——可能是某工具或玩法的昵称，本笔记无法确定，<b>保留原话并加注</b>。</div>
+
+      <div class="blk concl">
+        <span class="label">结论</span>
+        <p style="color:var(--tx2);margin:0">「所以说它现在的性价比不是很好。」而且——<strong>如果现在还有「降智」的情况，就没有那么再推荐给大家了</strong>。</p>
+      </div>
+    </div>
+
+    <div class="sub" id="s28">
+      <h3><span class="idx">2.8</span>MiniMax：参数量落后，生态位尴尬</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=566"><span class="tri"></span>09:26 – 10:39</a>
+
+      <p class="lead">这一节的关键词是「尴尬」，而且 UP 主给出了一个可量化的根因。</p>
+
+      <p>事实上，MiniMax 系列<strong>已经很久没有更新新模型了</strong>，UP 主也不很清楚下一款的情况。然后他给了一个行业尺度的对比：</p>
+
+      <div class="blk pit">
+        <span class="label">根因 · 参数量掉队</span>
+        <p style="color:var(--tx2);margin:0 0 8px">目前这些主流模型的尺寸<strong>基本都已经涨到 500B 以上</strong>了，而 MiniMax 现在还处于 <strong>500B 以下</strong>——「就已经非常的尴尬了」。</p>
+        <p style="color:var(--tx2);margin:0">在开发的<strong>后训练</strong>方面，以及它<strong>原生知识的复杂性</strong>上，<strong>参数量太小这个痛点是没办法根治的</strong>。</p>
+      </div>
+
+      <div class="blk q">
+        <span class="label">仍然保留的优点</span>
+        <ul>
+          <li>支持<strong>多模态</strong></li>
+          <li>有 <strong>100 万上下文</strong></li>
+          <li><strong>agent 能力还不错</strong>，还相对稳定</li>
+        </ul>
+      </div>
+
+      <p>UP 主特别提到 MiniMax 也做了自己的 code 平台，但认为<strong>急需推出一款更强大的模型</strong>。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 250" role="img" aria-label="MiniMax 被多款快速模型平替">
+          <rect x="0" y="0" width="1080" height="250" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">MiniMax M3 的生态位被挤压 · 同一价位上已有 4 个更强的「快速模型」</text>
+
+          <rect x="420" y="92" width="240" height="70" rx="10" fill="rgba(248,115,110,.12)" stroke="#f8736e" stroke-width="1.4"/>
+          <text x="540" y="120" fill="#f8736e" font-size="13.5" font-weight="700" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">MiniMax M3</text>
+          <text x="540" y="142" fill="#adbccd" font-size="11" text-anchor="middle" font-family="Segoe UI, Microsoft YaHei">多模态 · 100 万上下文 · 便宜</text>
+
+          <g font-family="Segoe UI, Microsoft YaHei" font-size="11.5">
+            <rect x="40" y="44" width="290" height="40" rx="8" fill="#141d28" stroke="#5b9cf8" stroke-width="1.2"/>
+            <text x="58" y="69" fill="#5b9cf8">DeepSeek V4.1 Flash</text>
+            <text x="222" y="69" fill="#77879a" font-size="10.5">前端强 · 速度快</text>
+
+            <rect x="40" y="96" width="290" height="40" rx="8" fill="#141d28" stroke="#a98bfa" stroke-width="1.2"/>
+            <text x="58" y="121" fill="#a98bfa">Gemini 3.8 Flash</text>
+            <text x="222" y="121" fill="#77879a" font-size="10.5">快 · 但仅够查文档</text>
+
+            <rect x="40" y="148" width="290" height="40" rx="8" fill="#141d28" stroke="#3fd68c" stroke-width="1.2"/>
+            <text x="58" y="173" fill="#3fd68c">GLM-5.3 Flash</text>
+            <text x="222" y="173" fill="#77879a" font-size="10.5">快速档位</text>
+
+            <rect x="40" y="200" width="290" height="40" rx="8" fill="#141d28" stroke="#f0b429" stroke-width="1.2"/>
+            <text x="58" y="225" fill="#f0b429">Antigravity 里的 Gemini 3.8</text>
+            <text x="252" y="225" fill="#77879a" font-size="10.5">也比它强</text>
+          </g>
+
+          <g stroke="#31465c" stroke-width="1.5" fill="#31465c">
+            <line x1="330" y1="64" x2="412" y2="110"/><polygon points="412,110 403,109 406,101"/>
+            <line x1="330" y1="116" x2="412" y2="122"/><polygon points="412,122 404,118 404,126"/>
+            <line x1="330" y1="168" x2="412" y2="134"/><polygon points="412,134 405,141 402,133"/>
+            <line x1="330" y1="220" x2="412" y2="146"/><polygon points="412,146 403,152 401,144"/>
+          </g>
+
+          <rect x="700" y="92" width="356" height="70" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.2"/>
+          <text x="718" y="116" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">还剩什么位置？</text>
+          <text x="718" y="137" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">· 拿来做一些脚本</text>
+          <text x="718" y="154" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">· 便宜 → 新手拿来开发一些 UI（「老旗舰」）</text>
+
+          <line x1="660" y1="127" x2="696" y2="127" stroke="#31465c" stroke-width="1.5"/>
+          <polygon points="696,127 688,123 688,131" fill="#31465c"/>
+
+          <text x="24" y="242" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">UP 主的比喻：UI 效果「在当年那一代模型里面」相当于买手机时的「老旗舰」，还算可以。</text>
+        </svg>
+        <figcaption><b>视觉锚点｜被夹击</b>　这张图讲的是<b>生态位</b>而不是绝对能力：MiniMax M3 的硬伤（参数量）单看不算致命，致命的是「它所在的快速档位上，已经有四个更强的替代品」。这就是 UP 主反复用「尴尬」这个词的原因。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">现状定位</span>
+        <ul>
+          <li>拿来做一些<strong>脚本</strong></li>
+          <li>因为<strong>很便宜</strong>，现在还占着便宜的优势——<strong>一些新手拿来开发 UI</strong></li>
+          <li>它的 UI 效果「在当年那一代模型里面」相当于大家买手机时的<strong>「老旗舰」，还算可以的</strong></li>
+          <li>所以拿来作为<strong>初学者用一用，很便宜</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s29">
+      <h3><span class="idx">2.9</span>通义千问：能力不差，贵在生态位</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV1PKh86zEhX?t=640"><span class="tri"></span>10:40 – 12:40</a>
+
+      <p class="lead">本章最后一节，也是信息量最密的一节——UP 主在这里给了一个「不惊艳但稳定」的反直觉评价，并用一笔真实账单说明了问题出在哪。</p>
+
+      <p>开头的判断就很清楚：「千问系列大家现在应该不太会用来做开发了」，但——</p>
+
+      <blockquote>
+        <p>它最根本的问题不在于能力不行。</p>
+        <cite>— UP 主原话（10:45）</cite>
+      </blockquote>
+
+      <div class="blk q">
+        <span class="label">不惊艳，但稳定</span>
+        <p style="color:var(--tx2);margin:0 0 8px">从今天的测试可以发现，千问这两个模型<strong>确实不惊艳</strong>——它做出来的 UI，达不到那种「一眼看上去就能达到 GPT 或者 DeepSeek 抽卡抽出来的效果」。</p>
+        <p style="color:var(--tx2);margin:0"><strong>但它多轮跑出来的东西还是很稳定的</strong>，这是一个很大的优势：「它跑出来的东西怎么看，好歹是像那么回事」。</p>
+      </div>
+
+      <p>UP 主在这里下了一个很关键的反转判断：</p>
+
+      <blockquote>
+        <p>这两个模型并不是不可用，甚至某种意义上在某些场景下可能更好用——你拿它多轮迭代，如果很稳定的话，那不就是很好用吗？</p>
+        <cite>— UP 主原话（11:12）</cite>
+      </blockquote>
+
+      <p>也就是说，<strong>「一次直出好看」和「多轮迭代不崩」是两种不同的能力</strong>，而千问属于后者。这一点在后面的选型逻辑里很重要。</p>
+
+      <div class="blk pit">
+        <span class="label">但问题出在「贵」· 一笔真实账单</span>
+        <ul>
+          <li>本次测试买了 <strong>39 块钱的 token plan</strong></li>
+          <li>只测了一个「做 B 站前端」这样的小项目——「甚至算不上一个正儿八经的大项目」</li>
+          <li>只是一人测了<strong>一次</strong>：一次「<strong>一次性指令直出</strong>」，一次「<strong>对抗审查</strong>」</li>
+          <li>结果：<strong>直接把 39 块钱的额度触顶了，差点没跑完，基本干到 98%</strong></li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="39 元 token plan 的消耗推演">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">一笔 39 元账单的推演 · 从「小项目测两次」到「大项目要买多贵的套餐」</text>
+
+          <!-- step 1 -->
+          <rect x="24" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="42" y="76" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">① 投入</text>
+          <text x="42" y="100" fill="#e9eff7" font-size="15" font-weight="700" font-family="Segoe UI, Microsoft YaHei">39 元 token plan</text>
+          <text x="42" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">按周限制 / 按月限制</text>
+          <text x="42" y="142" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">本次测试实际购买的档位</text>
+
+          <!-- step 2 -->
+          <rect x="300" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="318" y="76" fill="#a98bfa" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">② 任务</text>
+          <text x="318" y="100" fill="#e9eff7" font-size="13.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">B 站前端小项目</text>
+          <text x="318" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">算不上正儿八经的大项目</text>
+          <text x="318" y="142" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">一人只测了一次</text>
+
+          <!-- step 3 -->
+          <rect x="576" y="52" width="248" height="112" rx="10" fill="#141d28" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="594" y="76" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">③ 两次调用</text>
+          <text x="594" y="100" fill="#e9eff7" font-size="13.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">直出 + 对抗审查</text>
+          <text x="594" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">一次性指令直出 ×1</text>
+          <text x="594" y="142" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">对抗审查 ×1</text>
+
+          <!-- step 4 -->
+          <rect x="852" y="52" width="204" height="112" rx="10" fill="rgba(248,115,110,.12)" stroke="#f8736e" stroke-width="1.4"/>
+          <text x="870" y="76" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">④ 结果</text>
+          <text x="870" y="112" fill="#f8736e" font-size="19" font-weight="800" font-family="Segoe UI, Microsoft YaHei">98%</text>
+          <text x="946" y="112" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">额度触顶</text>
+          <text x="870" y="136" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">差点没跑完</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="272" y1="108" x2="296" y2="108"/><polygon points="296,108 288,104 288,112"/>
+            <line x1="548" y1="108" x2="572" y2="108"/><polygon points="572,108 564,104 564,112"/>
+            <line x1="824" y1="108" x2="848" y2="108"/><polygon points="848,108 840,104 840,112"/>
+          </g>
+
+          <!-- implication -->
+          <rect x="24" y="188" width="1032" height="94" rx="10" fill="#141d28" stroke="#233240"/>
+          <text x="44" y="212" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主的推演</text>
+          <text x="44" y="236" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 小项目测两次就触顶 → 那正式的大型项目（十几万行、二十几万行代码）准备买多贵的套餐？</text>
+          <text x="44" y="256" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">· 它是直接按周限制、按月限制算的 → 你基本上很快就会干掉一周的限额</text>
+          <text x="44" y="276" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">· 如果真要用到跟 GPT 一样的量，两者花的钱可能差不太多 → 「那为什么不去买 GPT 呢？」</text>
+        </svg>
+        <figcaption><b>视觉锚点｜链路</b>　这张图的价值不在数字本身，而在<b>推演方法</b>：UP 主没有引用任何官方定价，只用一笔真实的 39 元账单，就把「单位成本」外推到了大型项目的量级上。<b>它证明的是性价比结构有问题，而不是某个绝对值贵。</b></figcaption>
+      </figure>
+
+      <p>UP 主还补了一个当时的市场状况：「当然现在 GPT 20 倍是被禁用了。」</p>
+
+      <div class="note"><b>保留原文：</b>「GPT 20 倍」指订阅套餐档位，原话如此保留。</div>
+
+      <div class="blk concl">
+        <span class="label">一个重要的例外 · 小模型</span>
+        <p style="color:var(--tx2);margin:0 0 8px">虽然大的千问生态位尴尬，但<strong>它的小模型仍然是非常有优势的</strong>——UP 主举例的千问 3.8 小参数版本：</p>
+        <ul>
+          <li>大模型这个能力「没有什么特别惊艳的地方」</li>
+          <li>但<strong>蒸馏出的小模型能跟大的保持差不多的后训练水平</strong>，coding 水平也差不太多</li>
+          <li>「那就很离谱了」——毕竟很朴素，某种时候在小参数上那是非常强的</li>
+          <li>UP 主的四字总结：<strong>朴素且稳定</strong></li>
+        </ul>
+      </div>
+
+      <div class="note"><b>存疑标注：</b>该小模型参数量的听写在本片两处音源中不一致（Whisper 作 <code>27B</code>，UP 自备字幕作 <code>2107B</code>）。本笔记按 27B 转写，<b>标注为存疑</b>，不据此下结论。</div>
+    </div>
+  </div>
+</section>
