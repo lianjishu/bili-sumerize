@@ -1,0 +1,122 @@
+<!-- ================= CHAPTER 5 ================= -->
+<section class="chapter ch5" id="ch5">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">05</div>
+      <div class="ch-title">
+        <h2>技术方案设计</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV154426xEha?t=883"><span class="dot"></span>14:43 – 17:17 · 2 节 · 2 分 34 秒</a>
+      </div>
+    </div>
+    <p class="ch-abstract">产品定了「做什么」，这一章定「用什么做」。UP 主的做法和上一章同构：<strong>先讨论方向，再落成文档</strong>。中间顺带回答了很多人关心的「上下文会不会越聊越坏」的问题。</p>
+
+    <div class="sub" id="s51">
+      <h3><span class="idx">5.1</span>技术栈讨论：Electron 与 Tauri</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=883"><span class="tri"></span>14:43 – 16:40</a>
+
+      <p class="lead">技术方案可以直接在当前会话后面继续追问，也可以创建一个新的会话——两种方式都可以。UP 主先讨论了「要不要新开会话」这个问题，因为它牵出一个常见顾虑。</p>
+
+      <div class="blk q">
+        <span class="label">上下文会不会越聊越坏？</span>
+        <ul>
+          <li><strong>顾虑：</strong>在当前会话继续追问，上下文越记越多，对大模型的效果可能就会有一定程度的影响。</li>
+          <li><strong>UP 主承认：</strong>「确实有这种可能性。」</li>
+          <li><strong>但他的实际体会是：</strong>现在的顶级模型对<strong>长上下文的驾驭能力越来越强</strong>了，再加上对应的<strong>上下文压缩机制</strong>，正常使用的话一般不用过于担心上下文的问题。</li>
+          <li><strong>他的实测：</strong>「我甚至经常在一个会话里面连续跑几个小时，都没有感觉到有什么太大的问题。」</li>
+          <li><strong>但他仍然选择新开：</strong>「不过为了稳妥一点，也为了让后面的技术方案讨论<strong>更为聚焦</strong>，我们这里还是新开一个会话，专门来做技术方案的设计。」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>这个选择本身很有信息量：</b>他不是因为「上下文一定会坏」才新开，而是因为<strong>新开会话能让话题更聚焦</strong>。也就是说，新开会话在 UP 主这里是一个「组织话题」的动作，而不是「防止模型退化」的补救措施。</div>
+
+      <p>和产品设计一样，技术方案也是<strong>先跟 AI 讨论可能的技术设计方向，让它给一些建议</strong>。UP 主给了一个很实用的场景：你可能听说 Electron 非常适合做这件事，但你对它没那么熟、拿不定主意——「这个时候你就可以把你的想法跟 AI 说一下，让它帮你看看 Electron 合不合适。」</p>
+
+      <div class="blk q">
+        <span class="label">讨论用的指令（原文）</span>
+        <p style="margin:6px 0 0">「在这个目录下面有一份产品设计文档，请你读一遍这个产品设计文档，然后告诉我用什么技术栈设计这个产品比较合适。不用给出过于详细的设计，我们就先探讨一下。我听说 Electron 还可以，你怎么看呢？」</p>
+      </div>
+
+      <p>注意这句指令的三个动作：<strong>指向已有文档（给它上下文）→ 要技术栈建议（要方向）→ 明确说不用太详细（控成本）→ 把自己的猜测抛出来让它评估（要判断而不是要列表）</strong>。和上一章「不用太详细」是同一套控本思路。</p>
+
+      <p>AI 的回答：Electron 非常合适、会优先采用，给出了建议的技术栈，同时也给出了 Electron 的缺点，以及另一个可能的选项 <strong>Tauri</strong>。最后总结出这套架构：</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="技术选型：Electron 与 Tauri，最终栈">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">技术方案设计 · 先讨论候选，再由 AI 收口成一套具体架构</text>
+
+          <rect x="24" y="56" width="230" height="60" rx="9" fill="#141d28" stroke="#31465c" stroke-width="1.3"/>
+          <text x="44" y="80" fill="#e9eff7" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">用什么技术栈？</text>
+          <text x="44" y="100" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">先读产品设计文档，再讨论</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="258" y1="74" x2="316" y2="74"/><polygon points="316,74 308,70 308,78"/>
+            <line x1="258" y1="100" x2="316" y2="158"/><polygon points="316,158 307,156 310,148"/>
+          </g>
+
+          <rect x="320" y="42" width="330" height="76" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.4"/>
+          <text x="340" y="66" fill="#3fd68c" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Electron　✓ 优先采用</text>
+          <text x="340" y="87" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">AI 判断：非常合适</text>
+          <text x="340" y="106" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">同时给出了它自己的缺点（未展开）</text>
+
+          <rect x="320" y="132" width="330" height="76" rx="10" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="340" y="156" fill="#a98bfa" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">Tauri　○ 另一个可能的选项</text>
+          <text x="340" y="177" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">AI 一并列出，未被采用</text>
+          <text x="340" y="196" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">UP 主对这块「也不是特别懂」</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="654" y1="125" x2="712" y2="125"/><polygon points="712,125 704,121 704,129"/>
+          </g>
+
+          <rect x="716" y="72" width="340" height="106" rx="10" fill="rgba(70,198,224,.12)" stroke="#46c6e0" stroke-width="1.4"/>
+          <text x="736" y="96" fill="#46c6e0" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">AI 收口出的最终架构</text>
+          <text x="736" y="122" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">Electron　+　React</text>
+          <text x="736" y="144" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">+　TypeScript</text>
+          <text x="736" y="166" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">+　Vite　+　Electron Forge</text>
+
+          <rect x="24" y="228" width="1032" height="52" rx="9" fill="#141d28" stroke="#233240"/>
+          <text x="44" y="249" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✓ 落档指令</text>
+          <text x="140" y="249" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「行就按你说的来，现在请你写一个技术方案，放在 docs 文件夹里面。」</text>
+          <text x="44" y="269" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">写完 UP 主大体现了一遍：「好像还行的样子，那就这样吧」——他不追求自己看懂每一处，只保证大体方向没问题</text>
+        </svg>
+        <figcaption><b>视觉锚点｜选型</b>　整条链路的形状值得记：<b>人抛出一个候选（Electron）→ AI 评估并主动补出备选（Tauri）→ AI 把讨论收口成一套可执行的组合</b>。UP 主在这里坦承「我也不是特别懂这块」，这恰好说明这一步要的不是技术判断力，而是<b>让 AI 把选项摆齐、再由人拍板</b>。</figcaption>
+      </figure>
+    </div>
+
+    <div class="sub" id="s52">
+      <h3><span class="idx">5.2</span>让 AI 落一份技术方案文档</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=1000"><span class="tri"></span>16:40 – 17:17</a>
+
+      <p class="lead">方向确认之后，和产品设计一样，让 AI 把结论落成一份文档。</p>
+
+      <div class="blk q">
+        <span class="label">指令（原文）</span>
+        <p style="margin:6px 0 0">「行就按你说的来，现在请你写一个技术方案，放在 docs 文件夹里面。」</p>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">为什么要这份文档</span>
+        <ul>
+          <li>「这样后面<strong>具体写代码的时候，就可以以这个文档作为参考</strong>。」</li>
+          <li>它和产品设计文档配对使用：产品文档回答「做什么」，技术文档回答「怎么搭」。</li>
+        </ul>
+      </div>
+
+      <p>写完，「大体看一下，好像还行的样子，那就这样吧」。UP 主在这里很坦率：</p>
+
+      <blockquote>
+        <p>「说实话我也不是特别懂这块，只要保证大体方向没问题就行。到这里技术方案的设计就算是完成了。」</p>
+        <cite>—— UP 主原话（17:07 前后）</cite>
+      </blockquote>
+
+      <div class="blk eye">
+        <span class="label">这句话的定位很重要</span>
+        <ul>
+          <li>它解释了本章为什么可以只花 2 分 34 秒：<strong>技术方案的目的是「方向不错、有个统一依据」，不是「人把每个细节都审一遍」。</strong></li>
+          <li>对照 CH4 的「不用太详细」，两章是同一条原则的两次应用：<strong>文档服务于后续的 AI 执行，不是服务于人的完备性焦虑。</strong></li>
+          <li>也正因为这样，CH7 才会说「技术设计要参与到什么程度，取决于你想保留多少掌控力」——它是可以整章跳过的环节。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

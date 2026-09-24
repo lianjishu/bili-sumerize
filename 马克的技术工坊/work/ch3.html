@@ -1,0 +1,124 @@
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chapter ch3" id="ch3">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">03</div>
+      <div class="ch-title">
+        <h2>环境搭建</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV154426xEha?t=144"><span class="dot"></span>02:24 – 06:26 · 2 节 · 4 分 02 秒</a>
+      </div>
+    </div>
+    <p class="ch-abstract">这一章 UP 主花了 4 分钟演示，但结论只有一句话：<strong>环境搭建总结下来就两件事——Git 和 AGENTS.md</strong>。前者保证「改坏了能退回去」，后者保证「AI 每次开工都记得该守什么规矩」。这两件事是全片唯一一次性的投入。</p>
+
+    <div class="sub" id="s31">
+      <h3><span class="idx">3.1</span>建目录 + 让 AI 初始化 Git 仓库</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=144"><span class="tri"></span>02:24 – 03:58</a>
+
+      <p class="lead">第一步是给产品建一个专门的文件夹，专门存放项目代码。UP 主要做的产品是电子书阅读器，就给它起名叫「马克阅读」，然后创建对应文件夹。</p>
+
+      <div class="blk steps">
+        <span class="label">在 Codex 里建项目</span>
+        <ol>
+          <li>打开 Codex，点里面的<strong>加号</strong>，创建一个新项目。</li>
+          <li>项目类型维持<strong>「本地」</strong>，点下一步。</li>
+          <li>把刚才创建好的「马克阅读」文件夹<strong>加进来</strong>，点创建项目。</li>
+          <li>发出指令：「<strong>帮我把当前的目录初始化为一个 Git 仓库</strong>」，然后提交。</li>
+        </ol>
+      </div>
+
+      <p>等 Codex 干活的时候，UP 主顺手给不了解 Git 的观众补了一段解释——这段解释的措辞很有意思，是他整片讲 Git 的基调：</p>
+
+      <div class="blk q">
+        <span class="label">Git 是什么（UP 主的原话解释）</span>
+        <ul>
+          <li>简单来说，Git 就是一个<strong>版本管理工具</strong>。</li>
+          <li>我们每做完一个新功能，就可以用 Git 把它<strong>保存为一个对应的版本</strong>。</li>
+          <li>这样即使哪天代码被搞乱了，也能够<strong>一键回退到之前的可用状态</strong>——非常高效，也非常好用。</li>
+          <li>实际上建议你<strong>所有的代码项目都拿 Git 来管理</strong>，甚至可以考虑把代码推送到 GitHub 上，这样即使本地代码丢了，也能从 GitHub 上把代码拉下来，防止之前的劳动成果付诸东流。</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>本片不演示 GitHub：</b>UP 主明确说「否则视频会有些冗长」，所以只演示 Git 本体的用法，GitHub 留给大家自己找材料看。但在 CH7 讲三条原则时，他把「同步到远端仓库」又提了一遍——说明在他心里这属于「条件允许就做」的加强项，而不是必选项。</div>
+
+      <p>Codex 做完之后，UP 主打开终端验证：进入「马克阅读」文件夹，执行 <code>git status</code> 命令。<strong>「可以看到正常返回了，也没有报错，这就代表当前目录确实已经被 Git 接管了。」</strong></p>
+
+      <div class="blk concl">
+        <span class="label">这一节的可复制要点</span>
+        <ul>
+          <li>不用自己敲 <code>git init</code>，<strong>让 AI 做</strong>，然后<strong>自己用 <code>git status</code> 验证</strong>——这就是全片「AI 干活 + 人验证」的最小示范，后面每一步都是这个模式的放大版。</li>
+          <li>「验证」这个动作从第一分钟就出现了，不是等到最后才做。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s32">
+      <h3><span class="idx">3.2</span>AGENTS.md：给 AI 的项目说明书，两条硬规矩</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=268"><span class="tri"></span>04:28 – 06:26</a>
+
+      <p class="lead">环境搭建的第二件事，也是整个流程里最关键的一步配置：创建一个 <strong>AGENTS.md</strong> 文件。</p>
+
+      <p>指令是：「<strong>创建一个 AGENTS.md 文件，写入下面这些内容，最后提交一个 commit</strong>」，然后把文件内容贴进对话框一起提交。</p>
+
+      <div class="blk q">
+        <span class="label">AGENTS.md 是干什么的</span>
+        <ul>
+          <li>AGENTS.md 相当于<strong>给 Codex 写的项目说明书</strong>。</li>
+          <li>每次你开启一轮新的<strong>会话</strong>，Codex 就会<strong>优先读取里面的内容</strong>，从而快速了解当前的项目背景和开发规范。</li>
+        </ul>
+      </div>
+
+      <p>UP 主在文件里写了两条必须遵守的规定。这两条是理解后文所有行为（尤其是 CH6 的「写完自测」）的钥匙：</p>
+
+      <div class="kv">
+        <div>规矩一</div><div>每次改动之后，都<strong>必须创建一个对应的 git commit</strong>，以便后续追踪和回滚</div>
+        <div>怎么理解</div><div>Codex 每完成一个功能，都要顺手帮我们<strong>保存一个版本快照</strong>；后面哪一步改出了问题，可以非常方便地找到之前正常的版本直接退回去，不用担心代码越改越乱</div>
+        <div>规矩二</div><div>每次改动之后都<strong>必须编写或更新相关的测试</strong>，并在交付给用户前<strong>确保所有的测试和验收全部通过</strong></div>
+        <div>为什么这样写</div><div>不希望 Codex 写完代码就直接交差，而是希望它<strong>自己先跑一遍、测一遍</strong>，发现问题就继续修，直到能确认当前改动基本没有问题，再来告诉我们「完成了」——这样就能提前帮我们挡掉不少比较明显的 bug，节省我们的时间</div>
+      </div>
+
+      <div class="blk eye">
+        <span class="label">这两条规矩的设计意图</span>
+        <ul>
+          <li>规矩一是<strong>给「改坏」买的保险</strong>——它不提高 AI 一次做对的概率，但保证做错时可以低成本撤销。</li>
+          <li>规矩二是<strong>把「自测」从人的习惯变成 AI 的义务</strong>——这是全片反复强调的「给 AI 自测能力」的规则来源。</li>
+          <li>两条都不是「让 AI 更聪明」，而是<strong>让 AI 的工作可回滚、可验证</strong>。这也正是 UP 主整片的方法论底色。</li>
+        </ul>
+      </div>
+
+      <p>验证方式同样朴素：回到<strong>访达</strong>（macOS 文件管理器）看一眼，「可以看到文件确实是创建好了，内容也跟我们要求的是一模一样的」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 348" role="img" aria-label="环境搭建的两件事：Git 与 AGENTS.md">
+          <rect x="0" y="0" width="1080" height="348" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">环境搭建 · 全片唯一一次性的投入 · 总结下来只有两件事</text>
+
+          <rect x="24" y="50" width="500" height="212" rx="10" fill="#141d28" stroke="#f0b429" stroke-width="1.4"/>
+          <text x="44" y="78" fill="#f0b429" font-size="13" font-weight="700" font-family="Segoe UI, Microsoft YaHei">① Git　版本管理工具</text>
+          <text x="44" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">做什么　把当前目录初始化为一个 Git 仓库</text>
+          <text x="44" y="128" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">为什么　每做完一个功能存一个版本快照</text>
+          <text x="44" y="150" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　代码被搞乱了，可一键回退到可用状态</text>
+          <text x="44" y="176" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">验证　　git status 正常返回、不报错</text>
+          <text x="44" y="198" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　→ 说明当前目录已被 Git 接管</text>
+          <text x="44" y="224" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">建议　　所有代码项目都拿 Git 管理，条件允许</text>
+          <text x="44" y="246" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　再推到 GitHub，防止劳动成果付诸东流</text>
+
+          <rect x="556" y="50" width="500" height="212" rx="10" fill="#141d28" stroke="#f0b429" stroke-width="1.4"/>
+          <text x="576" y="78" fill="#f0b429" font-size="13" font-weight="700" font-family="Segoe UI, Microsoft YaHei">② AGENTS.md　给 AI 的项目说明书</text>
+          <text x="576" y="106" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">作用　每开启一轮新会话，Codex 优先读取</text>
+          <text x="576" y="128" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　从而快速了解项目背景和开发规范</text>
+          <text x="576" y="156" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">规矩一　每次改动后必须创建 git commit</text>
+          <text x="576" y="178" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　＝ 每完成一个功能顺手存版本快照</text>
+          <text x="576" y="206" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">规矩二　每次改动后必须编写或更新测试</text>
+          <text x="576" y="228" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　交付前确保所有测试和验收全部通过</text>
+          <text x="576" y="252" fill="#77879a" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">　　　　→ 让它自己先跑一遍再来说「完成了」</text>
+
+          <rect x="24" y="282" width="1032" height="44" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="44" y="302" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">✓ 环境搭建完成</text>
+          <text x="172" y="302" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「其实总结下来也就两件事情：一个是 Git，另外一个是 AGENTS.md。」——至此可以正式进入产品设计环节</text>
+          <text x="44" y="319" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">两步的验证都是人做的：git status 看仓库是否就绪、打开访达看 AGENTS.md 内容是否与要求一致</text>
+        </svg>
+        <figcaption><b>视觉锚点｜两条规矩</b>　这一章表面上在教「怎么建项目」，实际上是把后面所有环节的两条保险线先铺好：<b>规矩一管「能不能退回去」，规矩二管「AI 会不会自己先验一遍」</b>。CH7 总结的「三条不能省的原则」，前两条就是从这里长出来的。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

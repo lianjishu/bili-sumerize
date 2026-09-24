@@ -1,0 +1,5759 @@
+{
+ "model": "../models/faster-whisper-large-v3-turbo",
+ "device": "cuda",
+ "compute_type": "float16",
+ "language": "zh",
+ "language_probability": 1,
+ "audio_duration": 1494.297,
+ "transcribe_seconds": 72.9,
+ "speedup": 20.49,
+ "segment_count": 718,
+ "last_segment_end": 1493.56,
+ "coverage_ratio": 0.9995,
+ "segments": [
+  {
+   "id": 0,
+   "start": 0.02,
+   "end": 30.57,
+   "text": "今天我们来讲讲如何使用AI写代码。你可能会想,这有什么好讲呢?装个Codex或者是Cloud Code,直接向AI发条指令不就行了吗?给我做个笔记软件,给我做个剪辑软件,给我做个电子书阅读器。这不是太简单了吗?还要你来教?我相信你给AI一个指令,它确实可以帮你把软件做出来。但我的疑问是,AI做出来的效果真的跟你预期的一样吗?有没有可能你脑子里面想的是一个东西,AI最后交付的却完全是另外一个东西呢?更不用说有些时候,",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0817
+  },
+  {
+   "id": 1,
+   "start": 30.57,
+   "end": 32.19,
+   "text": "AI做出来的产品还有很多bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 2,
+   "start": 32.19,
+   "end": 34.71,
+   "text": "跟自己想象的效果实在是相差甚远",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 3,
+   "start": 34.71,
+   "end": 37.37,
+   "text": "相信你多多少少都会遇到过这种情况吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 4,
+   "start": 37.37,
+   "end": 39.05,
+   "text": "那该怎么解决呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 5,
+   "start": 39.05,
+   "end": 41.89,
+   "text": "这个就是我这期视频想聊的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 6,
+   "start": 41.89,
+   "end": 45.89,
+   "text": "怎么才能够让AI交付一个真正让你满意的作品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 7,
+   "start": 45.89,
+   "end": 49.24,
+   "text": "接下来我会带你从头做一个电子书阅读器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 8,
+   "start": 49.24,
+   "end": 50.1,
+   "text": "你会发现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 9,
+   "start": 50.1,
+   "end": 52.48,
+   "text": "这不是给AI发条指令就完事了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 10,
+   "start": 52.48,
+   "end": 54.08,
+   "text": "中间要经历好几个步骤",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 11,
+   "start": 54.08,
+   "end": 56.32,
+   "text": "我不仅会带你把流程完整走一遍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 12,
+   "start": 56.32,
+   "end": 58.58,
+   "text": "还会告诉你每一步到底解决了什么问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 13,
+   "start": 58.58,
+   "end": 60.06,
+   "text": "哪些环节可以省",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0769
+  },
+  {
+   "id": 14,
+   "start": 60.06,
+   "end": 61.74,
+   "text": "哪些环节最好不要省",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 15,
+   "start": 61.74,
+   "end": 62.88,
+   "text": "理解了这些",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 16,
+   "start": 62.88,
+   "end": 65.5,
+   "text": "你就能把它调整成适合自己的AI工作流",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 17,
+   "start": 65.5,
+   "end": 66.84,
+   "text": "好 话不多说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 18,
+   "start": 66.84,
+   "end": 68.22,
+   "text": "让我们赶快开始吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 19,
+   "start": 68.22,
+   "end": 74.64,
+   "text": "首先我们需要选择一款适合自己的编程agents",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 20,
+   "start": 74.64,
+   "end": 77.4,
+   "text": "目前主流的选项有Codex和Cloud Code",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 21,
+   "start": 77.4,
+   "end": 80.34,
+   "text": "此外还有OpenCode、Pi、Cursor等等",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 22,
+   "start": 80.34,
+   "end": 82.36,
+   "text": "如果你没有特殊要求的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 23,
+   "start": 82.36,
+   "end": 83.96,
+   "text": "建议直接选择Codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 24,
+   "start": 83.96,
+   "end": 85.96,
+   "text": "它的功能相对来说比较完善",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 25,
+   "start": 85.96,
+   "end": 87.48,
+   "text": "几乎没有明显的短板",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 26,
+   "start": 87.48,
+   "end": 89.44,
+   "text": "作为OpenAI旗下的产品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 27,
+   "start": 89.44,
+   "end": 91.1,
+   "text": "你可以通过订阅XGPT",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 28,
+   "start": 91.1,
+   "end": 92.96,
+   "text": "在Codex里面调用GPT模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1042
+  },
+  {
+   "id": 29,
+   "start": 92.96,
+   "end": 94.58,
+   "text": "如果不方便订阅的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 30,
+   "start": 94.58,
+   "end": 98.48,
+   "text": "也可以将Deepseek,GLM,KIMI等国产模型介入进来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 31,
+   "start": 98.48,
+   "end": 101.22,
+   "text": "Codex算是一个通用的变成Agent",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 32,
+   "start": 101.22,
+   "end": 103.24,
+   "text": "它并不跟GPD模型强绑定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 33,
+   "start": 103.24,
+   "end": 106.38,
+   "text": "实际上大部分模型都能跟Codex配合使用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 34,
+   "start": 106.38,
+   "end": 108.4,
+   "text": "我之前发布过两期视频",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 35,
+   "start": 108.4,
+   "end": 110.5,
+   "text": "分别介绍了Codex的基础用法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 36,
+   "start": 110.5,
+   "end": 112.16,
+   "text": "以及如何介入国产的模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 37,
+   "start": 112.16,
+   "end": 114.1,
+   "text": "感兴趣的朋友可以去了解一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 38,
+   "start": 114.1,
+   "end": 115.72,
+   "text": "我发布的时间比较早",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 39,
+   "start": 115.72,
+   "end": 118.64,
+   "text": "当时Codex的界面跟现在稍微有些区别",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 40,
+   "start": 118.64,
+   "end": 120.74,
+   "text": "不过里面的功能都没有什么大的变化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 41,
+   "start": 120.74,
+   "end": 121.9,
+   "text": "所以不必担心",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 42,
+   "start": 121.9,
+   "end": 123.2,
+   "text": "后续的内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 43,
+   "start": 123.2,
+   "end": 124.98,
+   "text": "我将统一以Codex为例",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 44,
+   "start": 124.98,
+   "end": 127.4,
+   "text": "演示如何用AI实现你想做的产品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 45,
+   "start": 127.4,
+   "end": 128.5,
+   "text": "顺便提一句",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 46,
+   "start": 128.5,
+   "end": 130.2,
+   "text": "虽然演示用的是Codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 47,
+   "start": 130.2,
+   "end": 132.68,
+   "text": "但我会尽量避免使用它独有的功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 48,
+   "start": 132.68,
+   "end": 136.16,
+   "text": "这里设计的核心操作逻辑都是通用的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 49,
+   "start": 136.16,
+   "end": 137.12,
+   "text": "你用Cloud Code",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 50,
+   "start": 137.12,
+   "end": 138.8,
+   "text": "Pi或者说是其他的Agent",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 51,
+   "start": 138.8,
+   "end": 139.56,
+   "text": "同样可以完成",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 52,
+   "start": 139.56,
+   "end": 141.34,
+   "text": "挑选好了编程Agent之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 53,
+   "start": 141.34,
+   "end": 143.64,
+   "text": "下一步我们要做的就是环境搭建",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 54,
+   "start": 143.64,
+   "end": 148.22,
+   "text": "环境搭建的第一步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 55,
+   "start": 148.22,
+   "end": 150.7,
+   "text": "就是给我们的产品创建一个对应的文件夹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 56,
+   "start": 150.7,
+   "end": 152.08,
+   "text": "专门存放项目代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 57,
+   "start": 152.08,
+   "end": 153.96,
+   "text": "我这里要做的是电子输入器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0866
+  },
+  {
+   "id": 58,
+   "start": 153.96,
+   "end": 156.38,
+   "text": "我们就给这个电子书阅读器起个名字",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 59,
+   "start": 156.38,
+   "end": 158.06,
+   "text": "叫做马克阅读吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 60,
+   "start": 158.06,
+   "end": 160.72,
+   "text": "那下面我们就来创建一个对应的文件夹",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 61,
+   "start": 160.72,
+   "end": 167.38,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 62,
+   "start": 167.38,
+   "end": 168.34,
+   "text": "文件夹创建好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 63,
+   "start": 168.34,
+   "end": 169.88,
+   "text": "然后我们打开Codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 64,
+   "start": 169.88,
+   "end": 172.14,
+   "text": "点击这里面的加号",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 65,
+   "start": 172.14,
+   "end": 174.1,
+   "text": "创建一个新的项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 66,
+   "start": 174.1,
+   "end": 174.94,
+   "text": "项目类型呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 67,
+   "start": 174.94,
+   "end": 176.38,
+   "text": "我们就维持本地就好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 68,
+   "start": 176.38,
+   "end": 177.76,
+   "text": "然后点击下一步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 69,
+   "start": 177.76,
+   "end": 179.25,
+   "text": "下面呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 70,
+   "start": 179.25,
+   "end": 184.35,
+   "text": "我们把刚才创建好的这个叫做马克阅读的文件夹给加入进来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 71,
+   "start": 184.35,
+   "end": 186.65,
+   "text": "然后点击创建项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 72,
+   "start": 186.65,
+   "end": 186.87,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 73,
+   "start": 186.87,
+   "end": 187.61,
+   "text": "这样呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 74,
+   "start": 187.61,
+   "end": 188.65,
+   "text": "项目就创建好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1045
+  },
+  {
+   "id": 75,
+   "start": 188.65,
+   "end": 192.71,
+   "text": "然后我们来让Codex把当前的目录初始化为一个Gate仓库",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 76,
+   "start": 192.71,
+   "end": 194.25,
+   "text": "我们的指令很简单",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 77,
+   "start": 194.25,
+   "end": 199.22,
+   "text": "就是帮我把当前的目录初始化为一个Gate仓库",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 78,
+   "start": 199.22,
+   "end": 200.7,
+   "text": "然后我们提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 79,
+   "start": 200.7,
+   "end": 203.54,
+   "text": "好Codex开始干活了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 80,
+   "start": 203.54,
+   "end": 204.58,
+   "text": "在干活的间隙",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 81,
+   "start": 204.58,
+   "end": 208.06,
+   "text": "我来给不了解Gate的小伙伴稍微解释一下Gate到底是什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 82,
+   "start": 208.06,
+   "end": 210.76,
+   "text": "简单来说Gate就是一个版本管理工具",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 83,
+   "start": 210.76,
+   "end": 212.64,
+   "text": "我们每做完一个新功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 84,
+   "start": 212.64,
+   "end": 215.08,
+   "text": "就可以使用Gate把它保存为一个对应的版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 85,
+   "start": 215.08,
+   "end": 217.58,
+   "text": "这样即使哪天代码被搞乱了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 86,
+   "start": 217.58,
+   "end": 220.02,
+   "text": "也能够一键回推到之前的可用状态",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0748
+  },
+  {
+   "id": 87,
+   "start": 220.02,
+   "end": 220.94,
+   "text": "非常的高效",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 88,
+   "start": 220.94,
+   "end": 221.8,
+   "text": "也非常的好用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 89,
+   "start": 221.8,
+   "end": 224.1,
+   "text": "实际上我建议你所有的代码项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 90,
+   "start": 224.1,
+   "end": 225.18,
+   "text": "都拿Gate来管理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 91,
+   "start": 225.18,
+   "end": 228.2,
+   "text": "甚至可以考虑把代码推送到GateHub上",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 92,
+   "start": 228.2,
+   "end": 230.24,
+   "text": "这样即使本地代码丢了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 93,
+   "start": 230.24,
+   "end": 232.76,
+   "text": "我们也能从GateHub上面把代码拉下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 94,
+   "start": 232.76,
+   "end": 235.12,
+   "text": "防止之前的劳动成果复制东流",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 95,
+   "start": 235.12,
+   "end": 238.68,
+   "text": "不过我们这里就不演示GateHub的使用了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 96,
+   "start": 238.68,
+   "end": 240.2,
+   "text": "否则视频会有些冗长",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 97,
+   "start": 240.2,
+   "end": 241.86,
+   "text": "我们就演示一下Gate的使用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 98,
+   "start": 241.86,
+   "end": 244.7,
+   "text": "不了解Gate或者是GateHub的小伙伴",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 99,
+   "start": 244.7,
+   "end": 246.78,
+   "text": "可以自己去找相关材料看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 100,
+   "start": 246.78,
+   "end": 248.96,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 101,
+   "start": 248.96,
+   "end": 249.92,
+   "text": "Codex做完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0891
+  },
+  {
+   "id": 102,
+   "start": 249.92,
+   "end": 251.96,
+   "text": "我们打开终端来验证一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 103,
+   "start": 251.96,
+   "end": 255.83,
+   "text": "首先进入到这个马克阅读的文件夹里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 104,
+   "start": 255.83,
+   "end": 258.21,
+   "text": "然后执行Gate Status命令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 105,
+   "start": 258.21,
+   "end": 260.85,
+   "text": "可以看到正常返回了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 106,
+   "start": 260.85,
+   "end": 261.55,
+   "text": "也没有报错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 107,
+   "start": 261.55,
+   "end": 264.39,
+   "text": "这就代表当前目录确实已经被Gate脱管了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 108,
+   "start": 264.39,
+   "end": 266.41,
+   "text": "下面我们回到Codex这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 109,
+   "start": 266.41,
+   "end": 268.83,
+   "text": "然后再让它添加一个新的文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 110,
+   "start": 268.83,
+   "end": 273.13,
+   "text": "我们的指令是创建一个Agence.MD文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 111,
+   "start": 273.13,
+   "end": 274.83,
+   "text": "写入下面这些内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 112,
+   "start": 274.83,
+   "end": 276.71,
+   "text": "最后提交一个Commit",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 113,
+   "start": 276.71,
+   "end": 279.45,
+   "text": "然后我们把文件内容也贴进来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1367
+  },
+  {
+   "id": 114,
+   "start": 279.45,
+   "end": 282.02,
+   "text": "之后我们提交这个指令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 115,
+   "start": 282.02,
+   "end": 285.63,
+   "text": "下面我来给大家解释一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 116,
+   "start": 285.63,
+   "end": 286.95,
+   "text": "刚才我是在干什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 117,
+   "start": 286.95,
+   "end": 289.27,
+   "text": "我们刚才让Codex创建了一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 118,
+   "start": 289.27,
+   "end": 290.77,
+   "text": "叫做agents.md的文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 119,
+   "start": 290.77,
+   "end": 292.91,
+   "text": "agents.md就相当于是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 120,
+   "start": 292.91,
+   "end": 294.67,
+   "text": "给Codex写的项目说明书",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 121,
+   "start": 294.67,
+   "end": 297.11,
+   "text": "每次你开启一轮新的绘画",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 122,
+   "start": 297.11,
+   "end": 299.85,
+   "text": "Codex就会优先的读取里面的内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 123,
+   "start": 299.85,
+   "end": 302.15,
+   "text": "从而快速了解当前的项目背景",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 124,
+   "start": 302.15,
+   "end": 303.01,
+   "text": "和开发规范",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 125,
+   "start": 303.01,
+   "end": 305.61,
+   "text": "这里面我们是告诉Codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 126,
+   "start": 305.61,
+   "end": 307.19,
+   "text": "必须要遵守两个规定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 127,
+   "start": 307.19,
+   "end": 309.74,
+   "text": "第一个是每次改动之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 128,
+   "start": 309.74,
+   "end": 311.16,
+   "text": "都必须要创建一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.089
+  },
+  {
+   "id": 129,
+   "start": 311.16,
+   "end": 314.3,
+   "text": "对应的get commit以便后续追踪和回滚",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 130,
+   "start": 314.3,
+   "end": 315.82,
+   "text": "你可以大致理解为",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 131,
+   "start": 315.82,
+   "end": 317.26,
+   "text": "Codex每完成一个功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 132,
+   "start": 317.26,
+   "end": 319.78,
+   "text": "都要顺手帮我们保存一个版本快照",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 133,
+   "start": 319.78,
+   "end": 322.56,
+   "text": "这样后面如果哪一步改出了问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 134,
+   "start": 322.56,
+   "end": 326.04,
+   "text": "我们就可以非常方便的找到之前正常的版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 135,
+   "start": 326.04,
+   "end": 326.96,
+   "text": "直接退回去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 136,
+   "start": 326.96,
+   "end": 328.76,
+   "text": "不用担心代码越改越乱",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 137,
+   "start": 328.76,
+   "end": 330.6,
+   "text": "我们的第二点要求是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 138,
+   "start": 330.6,
+   "end": 333.48,
+   "text": "每次改动之后都必须要编写",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 139,
+   "start": 333.48,
+   "end": 335.38,
+   "text": "或者是更新相关的测试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 140,
+   "start": 335.38,
+   "end": 337.4,
+   "text": "并在交付给用户前",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 141,
+   "start": 337.4,
+   "end": 340.14,
+   "text": "确保所有的测试和验收全部通过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.114
+  },
+  {
+   "id": 142,
+   "start": 340.14,
+   "end": 342.8,
+   "text": "这个要求很好理解",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 143,
+   "start": 342.8,
+   "end": 345.04,
+   "text": "我们不希望Codex写完代码之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 144,
+   "start": 345.04,
+   "end": 346.06,
+   "text": "就直接交差",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 145,
+   "start": 346.06,
+   "end": 348.04,
+   "text": "而是希望它自己先跑一遍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 146,
+   "start": 348.04,
+   "end": 348.6,
+   "text": "测一遍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 147,
+   "start": 348.6,
+   "end": 350.68,
+   "text": "发现问题就继续修一修",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 148,
+   "start": 350.68,
+   "end": 352.76,
+   "text": "直到它能够确认当前的改动",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 149,
+   "start": 352.76,
+   "end": 353.66,
+   "text": "基本没有问题了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 150,
+   "start": 353.66,
+   "end": 354.84,
+   "text": "再来告诉我们完成了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 151,
+   "start": 354.84,
+   "end": 355.66,
+   "text": "这样的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 152,
+   "start": 355.66,
+   "end": 357.3,
+   "text": "就可以提前帮我们挡掉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 153,
+   "start": 357.3,
+   "end": 358.7,
+   "text": "不少比较明显的bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 154,
+   "start": 358.7,
+   "end": 359.7,
+   "text": "节省我们的时间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 155,
+   "start": 359.7,
+   "end": 360.77,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 156,
+   "start": 360.77,
+   "end": 363.35,
+   "text": "看起来Codex已经创建好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 157,
+   "start": 363.35,
+   "end": 364.81,
+   "text": "这个agents.md文件了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 158,
+   "start": 364.81,
+   "end": 365.97,
+   "text": "我们可以回到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 159,
+   "start": 365.97,
+   "end": 367.19,
+   "text": "网答这边看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 160,
+   "start": 367.19,
+   "end": 371.38,
+   "text": "可以看到文件确实是创建好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1107
+  },
+  {
+   "id": 161,
+   "start": 371.38,
+   "end": 374.52,
+   "text": "内容也跟我们要求的是一模一样的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 162,
+   "start": 374.52,
+   "end": 375.62,
+   "text": "到这里为止",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 163,
+   "start": 375.62,
+   "end": 377.72,
+   "text": "我们的环境就算是搭建完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 164,
+   "start": 377.72,
+   "end": 380.04,
+   "text": "其实总结下来也就两件事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 165,
+   "start": 380.04,
+   "end": 380.9,
+   "text": "一个是Gate",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 166,
+   "start": 380.9,
+   "end": 382.32,
+   "text": "另外一个是Agents.md",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 167,
+   "start": 382.32,
+   "end": 386.28,
+   "text": "接下来我们就可以正式进入到产品设计环节了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 168,
+   "start": 386.28,
+   "end": 392.04,
+   "text": "我们现在知道自己要做一个电子书阅读器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 169,
+   "start": 392.04,
+   "end": 394.54,
+   "text": "但是具体要做成什么样子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 170,
+   "start": 394.54,
+   "end": 398.2,
+   "text": "其实大家心里可能都还没有一个非常确切的答案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 171,
+   "start": 398.2,
+   "end": 399.52,
+   "text": "在这种情况下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 172,
+   "start": 399.52,
+   "end": 402.66,
+   "text": "我一般会先跟AI讨论一下产品的设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1037
+  },
+  {
+   "id": 173,
+   "start": 402.66,
+   "end": 404.96,
+   "text": "比如我们可以写这么一段要求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 174,
+   "start": 404.96,
+   "end": 406.98,
+   "text": "我想做一个电子书阅读器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 175,
+   "start": 406.98,
+   "end": 409.22,
+   "text": "打算先从MVP版本开始",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 176,
+   "start": 409.22,
+   "end": 411.86,
+   "text": "你觉得这一版做哪些功能比较合适呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 177,
+   "start": 411.86,
+   "end": 413.68,
+   "text": "有些小伙伴可能会问",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 178,
+   "start": 413.68,
+   "end": 414.94,
+   "text": "MVP是什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 179,
+   "start": 414.94,
+   "end": 416.68,
+   "text": "简单来说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 180,
+   "start": 416.68,
+   "end": 419.52,
+   "text": "MVP就是Minimal Viable Product的缩写",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 181,
+   "start": 419.52,
+   "end": 422.32,
+   "text": "中文一般是叫做最小可用产品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 182,
+   "start": 422.32,
+   "end": 423.38,
+   "text": "简单来说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 183,
+   "start": 423.38,
+   "end": 426.22,
+   "text": "就是第一版只做最核心最必要的功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 184,
+   "start": 426.22,
+   "end": 428.26,
+   "text": "先把产品的主流程跑通",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 185,
+   "start": 428.26,
+   "end": 430.3,
+   "text": "其他功能以后可以慢慢加",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 186,
+   "start": 430.3,
+   "end": 431.72,
+   "text": "这样做的好处是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 187,
+   "start": 431.72,
+   "end": 433.28,
+   "text": "可以用比较低的成本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 188,
+   "start": 433.28,
+   "end": 434.98,
+   "text": "快速验证产品方向",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 189,
+   "start": 434.98,
+   "end": 437.08,
+   "text": "你想如果一开始的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 190,
+   "start": 437.08,
+   "end": 438.6,
+   "text": "就把功能铺的太大",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 191,
+   "start": 438.6,
+   "end": 440.52,
+   "text": "后面发现方向不对的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 192,
+   "start": 440.52,
+   "end": 442.22,
+   "text": "很多工作可能就白做了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 193,
+   "start": 442.22,
+   "end": 444.92,
+   "text": "所以我们先把电子数学读器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 194,
+   "start": 444.92,
+   "end": 446.32,
+   "text": "最基本的体验做出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 195,
+   "start": 446.32,
+   "end": 447.46,
+   "text": "确定没问题后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 196,
+   "start": 447.46,
+   "end": 449.84,
+   "text": "再逐步往上加功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 197,
+   "start": 449.84,
+   "end": 451.68,
+   "text": "好让我们把指令发出去",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 198,
+   "start": 451.68,
+   "end": 453.6,
+   "text": "看看AI会给我们什么回复",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 199,
+   "start": 453.6,
+   "end": 459.18,
+   "text": "AI回答完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 200,
+   "start": 459.18,
+   "end": 460.32,
+   "text": "我们来仔细看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 201,
+   "start": 460.32,
+   "end": 461.91,
+   "text": "他先提到了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 202,
+   "start": 461.91,
+   "end": 464.47,
+   "text": "要支持导入本地的EPOB文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1396
+  },
+  {
+   "id": 203,
+   "start": 464.47,
+   "end": 468.35,
+   "text": "EPUB是一个非常常见的电子树格式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 204,
+   "start": 468.35,
+   "end": 470.95,
+   "text": "支持这种格式是没有什么问题的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 205,
+   "start": 470.95,
+   "end": 472.49,
+   "text": "不过我觉得这个格式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 206,
+   "start": 472.49,
+   "end": 474.47,
+   "text": "可能还是稍微有一些复杂度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 207,
+   "start": 474.47,
+   "end": 476.57,
+   "text": "既然要做最小可用版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 208,
+   "start": 476.57,
+   "end": 479.71,
+   "text": "那我希望一开始要做的功能就越简单越好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 209,
+   "start": 479.71,
+   "end": 483.29,
+   "text": "比如我们一开始就支持导入TXT文本文件就行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 210,
+   "start": 483.29,
+   "end": 486.39,
+   "text": "我们可以直接在下面的输入框里面输入我们的想法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 211,
+   "start": 486.39,
+   "end": 489.93,
+   "text": "我觉得EPUB也稍微有些复杂了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 212,
+   "start": 489.93,
+   "end": 494.57,
+   "text": "我们一开始是不是可以只支持最简单的TXT文本文件呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0964
+  },
+  {
+   "id": 213,
+   "start": 494.57,
+   "end": 496.88,
+   "text": "好这个时候不要着急提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 214,
+   "start": 496.88,
+   "end": 498.94,
+   "text": "因为我们还没有看完整个回答",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 215,
+   "start": 498.94,
+   "end": 499.92,
+   "text": "让我们继续看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 216,
+   "start": 499.92,
+   "end": 502.14,
+   "text": "有问题直接追加到输入框里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 217,
+   "start": 502.14,
+   "end": 503.32,
+   "text": "最后一起提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 218,
+   "start": 503.32,
+   "end": 509.12,
+   "text": "他这里提到了关于目录和章节的相关功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 219,
+   "start": 509.12,
+   "end": 511.58,
+   "text": "如果我们只支持TXT文本文件的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 220,
+   "start": 511.58,
+   "end": 515.12,
+   "text": "那基本上也就没有什么目录和章节可言了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 221,
+   "start": 515.12,
+   "end": 517.77,
+   "text": "纯本文件哪来的什么目录和章节呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 222,
+   "start": 517.77,
+   "end": 518.63,
+   "text": "即使有的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 223,
+   "start": 518.63,
+   "end": 521.61,
+   "text": "那也不是能够通过固定方法解析到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 224,
+   "start": 521.78,
+   "end": 524.1,
+   "text": "所以我们也可以把这部分功能去掉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 225,
+   "start": 524.1,
+   "end": 527.14,
+   "text": "让我们把这部分想法追加到输入框里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.092
+  },
+  {
+   "id": 226,
+   "start": 527.14,
+   "end": 528.92,
+   "text": "如果只做TXT的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 227,
+   "start": 528.92,
+   "end": 531.76,
+   "text": "那也就没有什么目录和章节可言了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 228,
+   "start": 531.76,
+   "end": 534.64,
+   "text": "毕竟TXT没有目录和章节的概念",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 229,
+   "start": 534.64,
+   "end": 536.06,
+   "text": "那这些也不用做了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 230,
+   "start": 536.06,
+   "end": 538.02,
+   "text": "好继续往下看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 231,
+   "start": 538.02,
+   "end": 541.6,
+   "text": "这里还提到了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 232,
+   "start": 541.6,
+   "end": 543.3,
+   "text": "要同时支持明亮",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 233,
+   "start": 543.3,
+   "end": 543.94,
+   "text": "护眼",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 234,
+   "start": 543.94,
+   "end": 544.5,
+   "text": "深色",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 235,
+   "start": 544.5,
+   "end": 545.3,
+   "text": "三种主题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 236,
+   "start": 545.3,
+   "end": 547.12,
+   "text": "我们一开始不用支持这么多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 237,
+   "start": 547.12,
+   "end": 548.66,
+   "text": "就先做明亮主题就好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 238,
+   "start": 548.66,
+   "end": 550.9,
+   "text": "让我们追加到输入框里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 239,
+   "start": 550.9,
+   "end": 552.42,
+   "text": "只做明亮主题就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 240,
+   "start": 552.42,
+   "end": 553.6,
+   "text": "护眼和深色",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 241,
+   "start": 553.6,
+   "end": 554.32,
+   "text": "可以先不做",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 242,
+   "start": 554.32,
+   "end": 557.17,
+   "text": "这里还提到了书签",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 243,
+   "start": 557.17,
+   "end": 558.11,
+   "text": "书签呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 244,
+   "start": 558.11,
+   "end": 559.49,
+   "text": "其实我们也不需要",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 245,
+   "start": 559.49,
+   "end": 561.03,
+   "text": "因为它们不是必要功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1163
+  },
+  {
+   "id": 246,
+   "start": 561.03,
+   "end": 562.79,
+   "text": "所以我们再加一句",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 247,
+   "start": 562.79,
+   "end": 564.19,
+   "text": "书签也可以先不做",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 248,
+   "start": 564.19,
+   "end": 569.55,
+   "text": "好后面应该没什么了吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 249,
+   "start": 569.55,
+   "end": 570.39,
+   "text": "就这些了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 250,
+   "start": 570.39,
+   "end": 571.61,
+   "text": "我们再追加一句",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 251,
+   "start": 571.61,
+   "end": 574.31,
+   "text": "总之我们先做最基本的功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 252,
+   "start": 574.31,
+   "end": 576.19,
+   "text": "其余的功能后面再迭代",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 253,
+   "start": 576.19,
+   "end": 577.99,
+   "text": "你觉得前面这些想法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 254,
+   "start": 577.99,
+   "end": 578.85,
+   "text": "有没有什么问题呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 255,
+   "start": 578.85,
+   "end": 580.38,
+   "text": "我们来提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 256,
+   "start": 580.38,
+   "end": 589.5,
+   "text": "Codex说我们的思路",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 257,
+   "start": 589.5,
+   "end": 590.38,
+   "text": "没有什么大问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 258,
+   "start": 590.38,
+   "end": 592.3,
+   "text": "不过提到了几个要注意的点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 259,
+   "start": 592.3,
+   "end": 593.92,
+   "text": "一个是文件编码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 260,
+   "start": 593.92,
+   "end": 595.18,
+   "text": "他建议我们第一版",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 261,
+   "start": 595.18,
+   "end": 596.76,
+   "text": "仅支持UTF8就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 262,
+   "start": 596.76,
+   "end": 598.9,
+   "text": "第二个是阅读方式",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 263,
+   "start": 598.9,
+   "end": 600.84,
+   "text": "第一版只支持纵向滚动",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 264,
+   "start": 600.84,
+   "end": 601.78,
+   "text": "先不做分页",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0979
+  },
+  {
+   "id": 265,
+   "start": 601.78,
+   "end": 605.32,
+   "text": "然后还有载入大文件需要给出一些提示",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 266,
+   "start": 605.32,
+   "end": 608.84,
+   "text": "最后他还给出了可以推迟的功能列表",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 267,
+   "start": 608.84,
+   "end": 609.54,
+   "text": "可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 268,
+   "start": 609.54,
+   "end": 610.68,
+   "text": "这些我都赞同",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 269,
+   "start": 610.68,
+   "end": 611.66,
+   "text": "到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 270,
+   "start": 611.66,
+   "end": 613.9,
+   "text": "其实我们对第一版要做什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 271,
+   "start": 613.9,
+   "end": 614.92,
+   "text": "暂时不做什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 272,
+   "start": 614.92,
+   "end": 616.92,
+   "text": "已经有了一个比较明确的共识",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 273,
+   "start": 616.92,
+   "end": 619.16,
+   "text": "接下来我们最好把这些内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 274,
+   "start": 619.16,
+   "end": 621.04,
+   "text": "整理成一份产品设计文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 275,
+   "start": 621.04,
+   "end": 623.28,
+   "text": "把它当成后续开发的一个提稿",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 276,
+   "start": 623.28,
+   "end": 625.8,
+   "text": "这样无论后面是做技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 277,
+   "start": 625.8,
+   "end": 627.2,
+   "text": "还是让AI写代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 278,
+   "start": 627.2,
+   "end": 628.82,
+   "text": "大家都有一个统一的依据",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 279,
+   "start": 628.82,
+   "end": 629.68,
+   "text": "简单来说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 280,
+   "start": 629.68,
+   "end": 632.32,
+   "text": "这份文档就是先把MVP的边界给定下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0668
+  },
+  {
+   "id": 281,
+   "start": 632.32,
+   "end": 634.0,
+   "text": "让我们给AI发一条指令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 282,
+   "start": 634.0,
+   "end": 636.2,
+   "text": "我同意你的建议",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 283,
+   "start": 636.2,
+   "end": 638.86,
+   "text": "接下来帮我整理一份产品设计文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 284,
+   "start": 638.86,
+   "end": 640.02,
+   "text": "不用太详细",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 285,
+   "start": 640.02,
+   "end": 642.64,
+   "text": "把整体方向和主要功能梳理出来就可以",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 286,
+   "start": 642.64,
+   "end": 644.12,
+   "text": "大家注意我的措辞",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 287,
+   "start": 644.12,
+   "end": 647.2,
+   "text": "我明确告诉Codex不用太详细",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 288,
+   "start": 647.2,
+   "end": 648.54,
+   "text": "否则字太多了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 289,
+   "start": 648.54,
+   "end": 649.32,
+   "text": "我们看起来也累",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 290,
+   "start": 649.32,
+   "end": 650.22,
+   "text": "差不多就行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 291,
+   "start": 650.22,
+   "end": 652.52,
+   "text": "我们只需要保证大体方向",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 292,
+   "start": 652.52,
+   "end": 653.6,
+   "text": "跟我们想的一致就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 293,
+   "start": 653.6,
+   "end": 655.26,
+   "text": "如果真的有什么细节",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 294,
+   "start": 655.26,
+   "end": 656.44,
+   "text": "跟我们预期的不太一样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 295,
+   "start": 656.44,
+   "end": 657.96,
+   "text": "后面再迭代就好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 296,
+   "start": 657.96,
+   "end": 659.52,
+   "text": "我觉得这样更方便一些",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 297,
+   "start": 659.52,
+   "end": 660.8,
+   "text": "接下来我们提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 298,
+   "start": 660.8,
+   "end": 668.71,
+   "text": "Codex写完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0828
+  },
+  {
+   "id": 299,
+   "start": 668.71,
+   "end": 670.07,
+   "text": "我们来大体看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 300,
+   "start": 670.07,
+   "end": 679.34,
+   "text": "好像是没什么问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 301,
+   "start": 679.34,
+   "end": 680.56,
+   "text": "那就这样吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 302,
+   "start": 680.56,
+   "end": 681.26,
+   "text": "到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 303,
+   "start": 681.26,
+   "end": 683.02,
+   "text": "我们这个产品的设计方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 304,
+   "start": 683.02,
+   "end": 684.4,
+   "text": "基本上就已经确认了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 305,
+   "start": 684.4,
+   "end": 685.38,
+   "text": "不过有些时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 306,
+   "start": 685.38,
+   "end": 686.72,
+   "text": "在产品设计的最后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 307,
+   "start": 686.72,
+   "end": 688.3,
+   "text": "我还会再多做一个环节",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 308,
+   "start": 688.3,
+   "end": 690.32,
+   "text": "那就是让AI画一个demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 309,
+   "start": 690.32,
+   "end": 690.88,
+   "text": "所谓demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 310,
+   "start": 690.88,
+   "end": 692.16,
+   "text": "你可以把它理解成一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 311,
+   "start": 692.16,
+   "end": 693.66,
+   "text": "可以实际操作的前端页面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 312,
+   "start": 693.66,
+   "end": 694.78,
+   "text": "这里说的前端",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 313,
+   "start": 694.78,
+   "end": 696.86,
+   "text": "就是指我们看得见点得到的界面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 314,
+   "start": 696.86,
+   "end": 698.88,
+   "text": "与前端相对应的词是后端",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 315,
+   "start": 698.88,
+   "end": 700.8,
+   "text": "它指的是背后真正处理数据",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 316,
+   "start": 700.8,
+   "end": 702.02,
+   "text": "执行功能的那些逻辑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 317,
+   "start": 702.02,
+   "end": 703.12,
+   "text": "做demo的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 318,
+   "start": 703.12,
+   "end": 705.04,
+   "text": "我们通常只会把前端做出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 319,
+   "start": 705.04,
+   "end": 706.12,
+   "text": "后端暂时不实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0803
+  },
+  {
+   "id": 320,
+   "start": 706.12,
+   "end": 708.24,
+   "text": "里面的数据一般也都是直接模拟的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 321,
+   "start": 708.24,
+   "end": 709.58,
+   "text": "比如我这里准备了一个",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 322,
+   "start": 709.58,
+   "end": 711.16,
+   "text": "个人知识库的demo给大家看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 323,
+   "start": 711.16,
+   "end": 712.86,
+   "text": "它跟我们现在正在做的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 324,
+   "start": 712.86,
+   "end": 714.12,
+   "text": "电子数据读器没什么关系",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 325,
+   "start": 714.12,
+   "end": 716.36,
+   "text": "我就是用这个文件来给大家解释一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 326,
+   "start": 716.36,
+   "end": 718.0,
+   "text": "一个demo大概是长什么样子的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 327,
+   "start": 718.0,
+   "end": 719.0,
+   "text": "大家可以看到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 328,
+   "start": 719.0,
+   "end": 720.84,
+   "text": "它其实就是一个html文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 329,
+   "start": 720.84,
+   "end": 722.44,
+   "text": "我们直接把它打开就行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 330,
+   "start": 722.44,
+   "end": 723.96,
+   "text": "打开之后你可以看到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 331,
+   "start": 723.96,
+   "end": 725.4,
+   "text": "左边是文档列表",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 332,
+   "start": 725.4,
+   "end": 727.48,
+   "text": "中间系统给出了一些推荐问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 333,
+   "start": 727.48,
+   "end": 728.92,
+   "text": "我们点击一个推荐问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 334,
+   "start": 728.92,
+   "end": 729.94,
+   "text": "它就开始回答了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 335,
+   "start": 729.94,
+   "end": 730.94,
+   "text": "回答完毕之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 336,
+   "start": 730.94,
+   "end": 732.0,
+   "text": "点击引用文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 337,
+   "start": 732.0,
+   "end": 734.26,
+   "text": "右边就会展示回答所有引用的原文",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 338,
+   "start": 734.26,
+   "end": 735.42,
+   "text": "大家注意啊",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0989
+  },
+  {
+   "id": 339,
+   "start": 735.42,
+   "end": 738.26,
+   "text": "这里面只有前台页面是真的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 340,
+   "start": 738.26,
+   "end": 741.0,
+   "text": "这个回答和相关的这些试试户文件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 341,
+   "start": 741.0,
+   "end": 742.06,
+   "text": "其实都是模拟的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 342,
+   "start": 742.06,
+   "end": 743.72,
+   "text": "因为后端逻辑还没有实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 343,
+   "start": 743.72,
+   "end": 746.6,
+   "text": "这个页面仅仅是包含前端逻辑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 344,
+   "start": 746.6,
+   "end": 748.9,
+   "text": "它的主要目的就是为了让用户体验一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 345,
+   "start": 748.9,
+   "end": 751.86,
+   "text": "整个界面的交互和操作流程到底顺不顺手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 346,
+   "start": 751.86,
+   "end": 752.9,
+   "text": "如果哪里感觉不对",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 347,
+   "start": 752.9,
+   "end": 754.8,
+   "text": "就可以继续让AI修改这个demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 348,
+   "start": 754.8,
+   "end": 757.36,
+   "text": "直到整体体验比较符合我们的预期为止",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 349,
+   "start": 757.36,
+   "end": 760.34,
+   "text": "我觉得做这种demo有两个好处",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 350,
+   "start": 760.34,
+   "end": 761.44,
+   "text": "第一个好处是",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 351,
+   "start": 761.44,
+   "end": 764.08,
+   "text": "它可以让我们提前验证一下产品设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0766
+  },
+  {
+   "id": 352,
+   "start": 764.08,
+   "end": 766.78,
+   "text": "很多东西光靠文字其实很难想象",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 353,
+   "start": 766.78,
+   "end": 768.38,
+   "text": "真正把页面画出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 354,
+   "start": 768.38,
+   "end": 769.52,
+   "text": "亲自操作一下之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 355,
+   "start": 769.52,
+   "end": 772.26,
+   "text": "你可能就会发现一些之前没有想到的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 356,
+   "start": 772.26,
+   "end": 773.94,
+   "text": "如果发现设计不合理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 357,
+   "start": 773.94,
+   "end": 775.34,
+   "text": "那就可以继续修改demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 358,
+   "start": 775.34,
+   "end": 778.0,
+   "text": "同时把对应的产品设计文档一起调整一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 359,
+   "start": 778.0,
+   "end": 781.48,
+   "text": "第二个好处是它可以让后面的产品实现更加精确",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 360,
+   "start": 781.48,
+   "end": 784.56,
+   "text": "你想demo可以非常直观地告诉AI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 361,
+   "start": 784.56,
+   "end": 787.5,
+   "text": "我最终想要的产品大概就是这个样子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 362,
+   "start": 787.5,
+   "end": 789.6,
+   "text": "这个是文字描述很难做到的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 363,
+   "start": 789.6,
+   "end": 791.04,
+   "text": "后面真正实现的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 364,
+   "start": 791.04,
+   "end": 793.66,
+   "text": "我们就可以把产品设计文档和demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0813
+  },
+  {
+   "id": 365,
+   "start": 793.66,
+   "end": 794.5,
+   "text": "一起交给AI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 366,
+   "start": 794.5,
+   "end": 796.66,
+   "text": "这样AI既知道要做哪些功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 367,
+   "start": 796.66,
+   "end": 798.82,
+   "text": "也知道界面和交互应该怎么还原",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 368,
+   "start": 798.82,
+   "end": 800.0,
+   "text": "最后做出来的东西",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 369,
+   "start": 800.0,
+   "end": 801.9,
+   "text": "一般会更加接近我们的预期",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 370,
+   "start": 801.9,
+   "end": 804.9,
+   "text": "当然并不是所有项目都有必要做demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 371,
+   "start": 804.9,
+   "end": 807.08,
+   "text": "那到底什么时候适合做demo呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 372,
+   "start": 807.08,
+   "end": 809.78,
+   "text": "我一般会看一个非常简单的因素",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 373,
+   "start": 809.78,
+   "end": 812.36,
+   "text": "那就是这个产品的后端实现成本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 374,
+   "start": 812.36,
+   "end": 814.38,
+   "text": "像刚才的这个个人知识库",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 375,
+   "start": 814.38,
+   "end": 816.52,
+   "text": "后端实现的成本还是挺高的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 376,
+   "start": 816.52,
+   "end": 818.68,
+   "text": "因为这里面会涉及到文档处理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 377,
+   "start": 818.68,
+   "end": 820.32,
+   "text": "搜索 检索策略",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 378,
+   "start": 820.32,
+   "end": 822.38,
+   "text": "模型demo等等很多的后端逻辑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0935
+  },
+  {
+   "id": 379,
+   "start": 822.38,
+   "end": 823.7,
+   "text": "在这种情况下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 380,
+   "start": 823.7,
+   "end": 825.14,
+   "text": "我更愿意先做一个demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 381,
+   "start": 825.14,
+   "end": 826.84,
+   "text": "把界面和交互确定下来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 382,
+   "start": 826.84,
+   "end": 828.4,
+   "text": "但我们现在要做的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 383,
+   "start": 828.4,
+   "end": 830.02,
+   "text": "这个电子输入器就不一样了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 384,
+   "start": 830.02,
+   "end": 831.92,
+   "text": "它的后端实现成本就很低了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 385,
+   "start": 831.92,
+   "end": 833.48,
+   "text": "毕竟就是一个看书软件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 386,
+   "start": 833.48,
+   "end": 835.32,
+   "text": "导入TXT文件就可以了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 387,
+   "start": 835.32,
+   "end": 836.66,
+   "text": "没有什么太复杂的逻辑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 388,
+   "start": 836.66,
+   "end": 838.96,
+   "text": "这个时候如果还专门做一遍demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 389,
+   "start": 838.96,
+   "end": 840.52,
+   "text": "可能反而有些重复劳动",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 390,
+   "start": 840.52,
+   "end": 842.2,
+   "text": "还不如直接把产品给做出来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 391,
+   "start": 842.2,
+   "end": 843.54,
+   "text": "等真正跑起来之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 392,
+   "start": 843.54,
+   "end": 844.3,
+   "text": "哪里不顺手",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 393,
+   "start": 844.3,
+   "end": 845.82,
+   "text": "我们直接在完整的产品上面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 394,
+   "start": 845.82,
+   "end": 846.82,
+   "text": "继续调整就可以了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 395,
+   "start": 846.82,
+   "end": 848.64,
+   "text": "如果说你觉得自己项目",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 396,
+   "start": 848.64,
+   "end": 849.66,
+   "text": "有必要做一个demo的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 397,
+   "start": 849.66,
+   "end": 851.5,
+   "text": "具体该怎么跟AI说呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0841
+  },
+  {
+   "id": 398,
+   "start": 851.76,
+   "end": 852.78,
+   "text": "其实指令很简单",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 399,
+   "start": 852.78,
+   "end": 853.54,
+   "text": "比如可以这样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 400,
+   "start": 854.06,
+   "end": 855.08,
+   "text": "帮我做一个demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 401,
+   "start": 855.08,
+   "end": 857.9,
+   "text": "不用实现真实的后端功能数据模拟一下就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 402,
+   "start": 858.16,
+   "end": 860.98,
+   "text": "我主要是想看看整体界面和操作流程是否合理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 403,
+   "start": 861.22,
+   "end": 862.26,
+   "text": "对就这么简单",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 404,
+   "start": 862.5,
+   "end": 864.04,
+   "text": "后面如果你觉得哪里不满意",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 405,
+   "start": 864.04,
+   "end": 865.32,
+   "text": "就继续让AI修改",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 406,
+   "start": 865.32,
+   "end": 867.38,
+   "text": "直到整体效果符合你的预期就可以了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 407,
+   "start": 867.89,
+   "end": 869.17,
+   "text": "不过就像前面所说的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 408,
+   "start": 869.17,
+   "end": 870.97,
+   "text": "我们这个电子数据读器比较简单",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 409,
+   "start": 871.23,
+   "end": 872.77,
+   "text": "没有太大必要专门做一遍demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 410,
+   "start": 873.01,
+   "end": 874.81,
+   "text": "所以这里我也就不发这条指令了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 411,
+   "start": 875.07,
+   "end": 876.35,
+   "text": "大家在自己的项目里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 412,
+   "start": 876.35,
+   "end": 878.39,
+   "text": "可以根据实际情况决定要不要加这一步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0819
+  },
+  {
+   "id": 413,
+   "start": 878.39,
+   "end": 881.01,
+   "text": "好 到这里产品设计环节就正式结束了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 414,
+   "start": 881.01,
+   "end": 882.89,
+   "text": "下面我们来设计对应的技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 415,
+   "start": 882.89,
+   "end": 889.51,
+   "text": "我们可以直接在当前这个绘画后面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 416,
+   "start": 889.51,
+   "end": 891.53,
+   "text": "继续追问技术方案相关的内容",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 417,
+   "start": 891.53,
+   "end": 894.17,
+   "text": "也可以创建一个新的绘画来做这件事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 418,
+   "start": 894.17,
+   "end": 896.17,
+   "text": "这两种方式都是可以的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 419,
+   "start": 896.17,
+   "end": 897.63,
+   "text": "有些小伙伴可能会想",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 420,
+   "start": 897.63,
+   "end": 899.91,
+   "text": "如果在当前绘画继续追问的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 421,
+   "start": 899.91,
+   "end": 901.43,
+   "text": "上下文越记越多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 422,
+   "start": 901.43,
+   "end": 902.99,
+   "text": "那对大模型的效果",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 423,
+   "start": 902.99,
+   "end": 904.69,
+   "text": "可能就会有一定程度的影响",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 424,
+   "start": 904.69,
+   "end": 906.49,
+   "text": "确实有这种可能性",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 425,
+   "start": 906.49,
+   "end": 908.83,
+   "text": "不过根据我个人的使用提案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 426,
+   "start": 908.83,
+   "end": 910.43,
+   "text": "现在的顶级模型",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 427,
+   "start": 910.43,
+   "end": 912.25,
+   "text": "对于长上下文的驾驭能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0835
+  },
+  {
+   "id": 428,
+   "start": 912.25,
+   "end": 913.27,
+   "text": "是越来越强了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 429,
+   "start": 913.27,
+   "end": 915.77,
+   "text": "再加上对应的上下纹压缩机制",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 430,
+   "start": 915.77,
+   "end": 917.13,
+   "text": "正常使用的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 431,
+   "start": 917.13,
+   "end": 919.17,
+   "text": "一般不用过于担心上下纹的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 432,
+   "start": 919.17,
+   "end": 921.23,
+   "text": "我甚至经常在一个绘画里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 433,
+   "start": 921.23,
+   "end": 922.47,
+   "text": "连续跑几个小时",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 434,
+   "start": 922.47,
+   "end": 924.25,
+   "text": "都没有感觉到有什么太大的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 435,
+   "start": 924.25,
+   "end": 925.89,
+   "text": "不过为了稳妥一点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 436,
+   "start": 925.89,
+   "end": 928.41,
+   "text": "也为了让后面的技术方案讨论更为聚焦",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 437,
+   "start": 928.41,
+   "end": 930.23,
+   "text": "我们这里还是新开一个绘画",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 438,
+   "start": 930.23,
+   "end": 931.69,
+   "text": "专门来做技术方案的设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 439,
+   "start": 931.69,
+   "end": 934.08,
+   "text": "这里我们还是照样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 440,
+   "start": 934.08,
+   "end": 936.84,
+   "text": "先跟AI讨论一下可能的技术设计方向",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 441,
+   "start": 936.84,
+   "end": 938.02,
+   "text": "让他给一些建议",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 442,
+   "start": 938.02,
+   "end": 939.3,
+   "text": "比如你可能会听说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 443,
+   "start": 939.3,
+   "end": 941.2,
+   "text": "Electron非常适合做这件事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0659
+  },
+  {
+   "id": 444,
+   "start": 941.72,
+   "end": 943.24,
+   "text": "只是你对Electron没有那么熟",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 445,
+   "start": 943.5,
+   "end": 944.28,
+   "text": "拿不定主意",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 446,
+   "start": 944.52,
+   "end": 946.84,
+   "text": "这个时候你就可以把你的想法跟AI说一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 447,
+   "start": 947.08,
+   "end": 948.88,
+   "text": "让他帮你看看Electron合不合适",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 448,
+   "start": 949.4,
+   "end": 950.42,
+   "text": "我们这么发指令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 449,
+   "start": 951.85,
+   "end": 954.65,
+   "text": "在这个目录下面有一份产品设计文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 450,
+   "start": 954.91,
+   "end": 956.45,
+   "text": "请你读一遍这个产品设计文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 451,
+   "start": 956.71,
+   "end": 960.03,
+   "text": "然后告诉我用什么技术站设计这个产品比较合适",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 452,
+   "start": 960.55,
+   "end": 962.09,
+   "text": "不用给出过于详细的设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 453,
+   "start": 962.33,
+   "end": 963.87,
+   "text": "我们就先探讨一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 454,
+   "start": 964.13,
+   "end": 965.41,
+   "text": "我听说Electron还可以",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 455,
+   "start": 965.67,
+   "end": 966.17,
+   "text": "你怎么看呢",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 456,
+   "start": 970.83,
+   "end": 972.11,
+   "text": "好Codex回答完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 457,
+   "start": 972.37,
+   "end": 973.91,
+   "text": "他说Electron非常合适",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 458,
+   "start": 974.17,
+   "end": 975.45,
+   "text": "他会优先采用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0905
+  },
+  {
+   "id": 459,
+   "start": 975.45,
+   "end": 978.48,
+   "text": "还给出了建议的技术战",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 460,
+   "start": 978.48,
+   "end": 983.23,
+   "text": "同时也给出了Electron的缺点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 461,
+   "start": 983.23,
+   "end": 987.08,
+   "text": "以及另外一个可能的学校就是Tori",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 462,
+   "start": 987.08,
+   "end": 989.62,
+   "text": "最后他总结了一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 463,
+   "start": 989.62,
+   "end": 992.47,
+   "text": "说是可以用Electron加React",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 464,
+   "start": 992.47,
+   "end": 994.27,
+   "text": "再加上TypeScript",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 465,
+   "start": 994.27,
+   "end": 995.27,
+   "text": "还有Vit",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 466,
+   "start": 995.27,
+   "end": 997.17,
+   "text": "还有ElectronForge这套架构",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 467,
+   "start": 997.17,
+   "end": 999.26,
+   "text": "看起来好像没有什么问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 468,
+   "start": 999.26,
+   "end": 1000.36,
+   "text": "还是跟之前一样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 469,
+   "start": 1000.36,
+   "end": 1002.76,
+   "text": "我们来让AI出一个技术方案文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 470,
+   "start": 1002.76,
+   "end": 1004.66,
+   "text": "这样后面具体写代码的时候",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 471,
+   "start": 1004.66,
+   "end": 1007.16,
+   "text": "就可以以这个文档作为参考",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 472,
+   "start": 1007.16,
+   "end": 1009.08,
+   "text": "我们来发条指令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 473,
+   "start": 1009.08,
+   "end": 1011.62,
+   "text": "行就按你说的来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 474,
+   "start": 1011.62,
+   "end": 1013.62,
+   "text": "现在请你写一个技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1459
+  },
+  {
+   "id": 475,
+   "start": 1013.62,
+   "end": 1015.08,
+   "text": "放在docs文件夹里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 476,
+   "start": 1015.08,
+   "end": 1021.81,
+   "text": "Codex写完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 477,
+   "start": 1021.81,
+   "end": 1022.91,
+   "text": "我们大体看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 478,
+   "start": 1022.91,
+   "end": 1026.17,
+   "text": "好像还行的样子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 479,
+   "start": 1026.17,
+   "end": 1027.09,
+   "text": "那就这样吧",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 480,
+   "start": 1027.09,
+   "end": 1029.05,
+   "text": "说实话我也不是特别懂这块",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 481,
+   "start": 1029.05,
+   "end": 1031.75,
+   "text": "只要是保证大体方向没问题就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 482,
+   "start": 1031.75,
+   "end": 1034.29,
+   "text": "到这里技术方案的设计就算是完成了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 483,
+   "start": 1034.29,
+   "end": 1037.01,
+   "text": "下一步就是真的要编写代码来实现了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 484,
+   "start": 1037.01,
+   "end": 1041.44,
+   "text": "在正式编写代码之前",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 485,
+   "start": 1041.44,
+   "end": 1042.38,
+   "text": "我先提一句",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 486,
+   "start": 1042.38,
+   "end": 1045.44,
+   "text": "我们最好让AI拥有自行验证结果的能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 487,
+   "start": 1045.44,
+   "end": 1046.9,
+   "text": "如果你用的是Codex",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 488,
+   "start": 1046.9,
+   "end": 1049.16,
+   "text": "那我建议至少安装两个插件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 489,
+   "start": 1049.16,
+   "end": 1050.48,
+   "text": "我来给大家看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 490,
+   "start": 1050.48,
+   "end": 1053.18,
+   "text": "第一个是叫做Computer Use",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1144
+  },
+  {
+   "id": 491,
+   "start": 1053.18,
+   "end": 1054.66,
+   "text": "它可以用来操作电脑",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 492,
+   "start": 1054.66,
+   "end": 1056.56,
+   "text": "第二个是叫做Chrome",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 493,
+   "start": 1056.56,
+   "end": 1058.42,
+   "text": "它可以用来查看Chrome面面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 494,
+   "start": 1058.42,
+   "end": 1059.82,
+   "text": "有了这两个插件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 495,
+   "start": 1059.82,
+   "end": 1062.64,
+   "text": "大部分的功能都是可以交给AI来验证的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 496,
+   "start": 1062.64,
+   "end": 1065.76,
+   "text": "包括我们现在做的这个电子书阅读器也是同样的道理",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 497,
+   "start": 1065.76,
+   "end": 1068.27,
+   "text": "如果你用的是别的变成agents",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 498,
+   "start": 1068.27,
+   "end": 1071.51,
+   "text": "那可以自行查找下对应的插件或者是skill",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 499,
+   "start": 1071.51,
+   "end": 1075.73,
+   "text": "给AI一个能够验证的环境是一个非常重要的事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 500,
+   "start": 1075.73,
+   "end": 1078.07,
+   "text": "否则AI很容易就会写出一对bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 501,
+   "start": 1078.07,
+   "end": 1079.77,
+   "text": "毕竟它没法验证嘛",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 502,
+   "start": 1079.77,
+   "end": 1082.0,
+   "text": "如果人写代码没法验证的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 503,
+   "start": 1082.0,
+   "end": 1083.54,
+   "text": "那估计也会有一对bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0957
+  },
+  {
+   "id": 504,
+   "start": 1083.54,
+   "end": 1086.48,
+   "text": "好这里我已经安装了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 505,
+   "start": 1086.48,
+   "end": 1088.28,
+   "text": "Computer Use和Chrome这两个插件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 506,
+   "start": 1088.28,
+   "end": 1090.82,
+   "text": "Codex应该已经具备了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 507,
+   "start": 1090.82,
+   "end": 1092.54,
+   "text": "验证功能完备性的能力了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 508,
+   "start": 1092.54,
+   "end": 1094.32,
+   "text": "下面我们就来新建一个绘画",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 509,
+   "start": 1094.32,
+   "end": 1096.26,
+   "text": "让Codex帮我们实现这个产品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 510,
+   "start": 1096.26,
+   "end": 1097.57,
+   "text": "让我们发条指令",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 511,
+   "start": 1097.57,
+   "end": 1100.42,
+   "text": "我们的指令是这样的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 512,
+   "start": 1100.42,
+   "end": 1101.84,
+   "text": "这个目录下面有两个文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 513,
+   "start": 1101.84,
+   "end": 1103.06,
+   "text": "一个是产品设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 514,
+   "start": 1103.06,
+   "end": 1105.02,
+   "text": "一个是对应的技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 515,
+   "start": 1105.02,
+   "end": 1106.7,
+   "text": "请你读一下这些文档",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 516,
+   "start": 1106.7,
+   "end": 1108.14,
+   "text": "然后根据里面的要求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 517,
+   "start": 1108.14,
+   "end": 1109.99,
+   "text": "实现这个产品提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 518,
+   "start": 1109.99,
+   "end": 1112.86,
+   "text": "接下来我们稍微等一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 519,
+   "start": 1112.86,
+   "end": 1114.76,
+   "text": "写代码估计要花不少时间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 520,
+   "start": 1114.76,
+   "end": 1116.76,
+   "text": "好终于写完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0833
+  },
+  {
+   "id": 521,
+   "start": 1116.76,
+   "end": 1119.12,
+   "text": "可以看到他不仅把产品做完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 522,
+   "start": 1119.12,
+   "end": 1120.6,
+   "text": "还完成了各种自测",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 523,
+   "start": 1120.6,
+   "end": 1122.32,
+   "text": "确保他写的代码没有问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 524,
+   "start": 1122.32,
+   "end": 1125.02,
+   "text": "这符合我们在agents.md里面的要求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 525,
+   "start": 1125.02,
+   "end": 1127.9,
+   "text": "你是不是都忘了我们在agents.md里面写了什么了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 526,
+   "start": 1127.9,
+   "end": 1128.58,
+   "text": "没关系",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 527,
+   "start": 1128.58,
+   "end": 1129.58,
+   "text": "我再给你看一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 528,
+   "start": 1129.58,
+   "end": 1131.04,
+   "text": "就是这里面的第二条",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 529,
+   "start": 1131.04,
+   "end": 1135.12,
+   "text": "每次改动后都必须要编写或者是更新相关的测试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 530,
+   "start": 1135.12,
+   "end": 1138.76,
+   "text": "并在交付给用户前确保所有的测试和验证全部通过",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 531,
+   "start": 1138.76,
+   "end": 1140.22,
+   "text": "对",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 532,
+   "start": 1140.22,
+   "end": 1142.64,
+   "text": "我们明确要求Codex写完就要测试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 533,
+   "start": 1142.64,
+   "end": 1144.2,
+   "text": "不过话说回来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 534,
+   "start": 1144.2,
+   "end": 1147.62,
+   "text": "这些测试只能尽可能提高代码的可靠性",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0812
+  },
+  {
+   "id": 535,
+   "start": 1147.62,
+   "end": 1149.88,
+   "text": "帮AI提前发现一些明显的问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 536,
+   "start": 1149.88,
+   "end": 1152.48,
+   "text": "并不能够保证最终交付出来的产品",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 537,
+   "start": 1152.48,
+   "end": 1153.32,
+   "text": "就一定没有bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 538,
+   "start": 1153.32,
+   "end": 1154.9,
+   "text": "真正用起来怎么样",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 539,
+   "start": 1154.9,
+   "end": 1157.48,
+   "text": "还是得我们自己亲自验证之后才知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 540,
+   "start": 1157.48,
+   "end": 1160.6,
+   "text": "所以接下来我们就来实际跑一遍来看看",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 541,
+   "start": 1160.6,
+   "end": 1163.21,
+   "text": "他最后提到",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 542,
+   "start": 1163.21,
+   "end": 1165.75,
+   "text": "执行NPM start命令就可以启动",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 543,
+   "start": 1165.75,
+   "end": 1169.27,
+   "text": "我们这就来试试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 544,
+   "start": 1169.27,
+   "end": 1170.93,
+   "text": "似乎上来就报了一个错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 545,
+   "start": 1170.93,
+   "end": 1173.99,
+   "text": "你看AI确实不是百分之百靠谱的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 546,
+   "start": 1173.99,
+   "end": 1175.33,
+   "text": "即使他自己能验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 547,
+   "start": 1175.33,
+   "end": 1176.41,
+   "text": "也未必完全可靠",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 548,
+   "start": 1176.41,
+   "end": 1178.13,
+   "text": "我们让Codex来修一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.109
+  },
+  {
+   "id": 549,
+   "start": 1178.13,
+   "end": 1183.63,
+   "text": "我们发出的指定是这样子的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 550,
+   "start": 1183.63,
+   "end": 1184.39,
+   "text": "打开之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 551,
+   "start": 1184.39,
+   "end": 1186.05,
+   "text": "直接显示了一个报错",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 552,
+   "start": 1186.05,
+   "end": 1186.77,
+   "text": "操作失败",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 553,
+   "start": 1186.77,
+   "end": 1187.61,
+   "text": "请稍后重视",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 554,
+   "start": 1187.61,
+   "end": 1189.46,
+   "text": "然后我们提交",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 555,
+   "start": 1189.46,
+   "end": 1190.44,
+   "text": "让Codex修一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 556,
+   "start": 1190.44,
+   "end": 1192.39,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 557,
+   "start": 1192.39,
+   "end": 1193.19,
+   "text": "Codex修好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 558,
+   "start": 1193.19,
+   "end": 1194.13,
+   "text": "我们再试试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 559,
+   "start": 1194.13,
+   "end": 1198.19,
+   "text": "可以了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 560,
+   "start": 1198.19,
+   "end": 1198.99,
+   "text": "错误消失了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 561,
+   "start": 1198.99,
+   "end": 1201.05,
+   "text": "我们导入一本TXT文件试试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 562,
+   "start": 1201.05,
+   "end": 1211.85,
+   "text": "看起来好像还可以的样子",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 563,
+   "start": 1211.85,
+   "end": 1212.05,
+   "text": "好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 564,
+   "start": 1212.05,
+   "end": 1212.59,
+   "text": "到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 565,
+   "start": 1212.59,
+   "end": 1214.05,
+   "text": "这个产品的MVP",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 566,
+   "start": 1214.05,
+   "end": 1215.37,
+   "text": "就算是彻底做完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 567,
+   "start": 1215.37,
+   "end": 1219.41,
+   "text": "到这里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 568,
+   "start": 1219.41,
+   "end": 1220.51,
+   "text": "我们的第一个需求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 569,
+   "start": 1220.51,
+   "end": 1221.31,
+   "text": "就彻底做完了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 570,
+   "start": 1221.31,
+   "end": 1222.85,
+   "text": "我们简单回顾一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 571,
+   "start": 1222.85,
+   "end": 1223.99,
+   "text": "刚才的整体流程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 572,
+   "start": 1223.99,
+   "end": 1225.43,
+   "text": "一共是分为五步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 573,
+   "start": 1225.43,
+   "end": 1226.25,
+   "text": "第一步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 574,
+   "start": 1226.25,
+   "end": 1227.07,
+   "text": "环境搭建",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.1
+  },
+  {
+   "id": 575,
+   "start": 1227.07,
+   "end": 1229.33,
+   "text": "比如说是初始化Gate版本控制",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 576,
+   "start": 1229.33,
+   "end": 1231.61,
+   "text": "写一个基本的agency.md等等",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 577,
+   "start": 1231.61,
+   "end": 1233.41,
+   "text": "第二个产品设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 578,
+   "start": 1233.41,
+   "end": 1235.65,
+   "text": "这一步主要是明确要做什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 579,
+   "start": 1235.65,
+   "end": 1236.35,
+   "text": "不做什么",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 580,
+   "start": 1236.35,
+   "end": 1238.79,
+   "text": "这里我们会跟AI探讨产品方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 581,
+   "start": 1238.79,
+   "end": 1240.89,
+   "text": "并在某些情况下出一份demo",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 582,
+   "start": 1240.89,
+   "end": 1242.45,
+   "text": "第三个技术设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 583,
+   "start": 1242.45,
+   "end": 1244.81,
+   "text": "这一块主要是确定技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 584,
+   "start": 1244.81,
+   "end": 1246.35,
+   "text": "尤其是技术战盒架构",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 585,
+   "start": 1246.35,
+   "end": 1248.17,
+   "text": "以便确保整体方向没有问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 586,
+   "start": 1248.17,
+   "end": 1249.81,
+   "text": "设计符合我们的要求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 587,
+   "start": 1249.81,
+   "end": 1251.69,
+   "text": "第四步产品实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 588,
+   "start": 1251.69,
+   "end": 1253.27,
+   "text": "在这个环节里面",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 589,
+   "start": 1253.27,
+   "end": 1255.15,
+   "text": "我们不仅让AI实现代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 590,
+   "start": 1255.15,
+   "end": 1256.73,
+   "text": "还要给AI自测的能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.083
+  },
+  {
+   "id": 591,
+   "start": 1256.73,
+   "end": 1259.17,
+   "text": "让它写完代码之后能够自己测试",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 592,
+   "start": 1259.17,
+   "end": 1260.79,
+   "text": "把明显的问题全部修掉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 593,
+   "start": 1260.79,
+   "end": 1263.41,
+   "text": "这一般需要我们安装类似Computer Use",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 594,
+   "start": 1263.41,
+   "end": 1264.51,
+   "text": "或者是Chrome的插件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 595,
+   "start": 1264.51,
+   "end": 1266.39,
+   "text": "第五步 人工验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 596,
+   "start": 1266.39,
+   "end": 1268.89,
+   "text": "这一步主要是我们亲自上手体验",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 597,
+   "start": 1268.89,
+   "end": 1270.43,
+   "text": "发现问题就让AI修改",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 598,
+   "start": 1270.43,
+   "end": 1272.47,
+   "text": "一直到完全符合预期为止",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 599,
+   "start": 1272.47,
+   "end": 1275.23,
+   "text": "你看这里面除了第一步环境搭建",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 600,
+   "start": 1275.23,
+   "end": 1276.09,
+   "text": "是一次性的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 601,
+   "start": 1276.09,
+   "end": 1278.35,
+   "text": "后面的四步其实就是我们开发",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 602,
+   "start": 1278.35,
+   "end": 1280.29,
+   "text": "每一个新功能时的标准流程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 603,
+   "start": 1280.29,
+   "end": 1282.65,
+   "text": "比如说后续你想给阅读器",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 604,
+   "start": 1282.65,
+   "end": 1284.25,
+   "text": "加一个全文搜索功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 605,
+   "start": 1284.25,
+   "end": 1285.67,
+   "text": "同样也是这个流程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0862
+  },
+  {
+   "id": 606,
+   "start": 1285.67,
+   "end": 1287.89,
+   "text": "我们需要先做产品设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 607,
+   "start": 1287.89,
+   "end": 1289.89,
+   "text": "确定搜索入口该放在哪里",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 608,
+   "start": 1289.89,
+   "end": 1290.99,
+   "text": "结果该怎么展示",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 609,
+   "start": 1290.99,
+   "end": 1292.71,
+   "text": "然后再出技术方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 610,
+   "start": 1292.71,
+   "end": 1295.33,
+   "text": "这一步主要是确定文本怎么索引",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 611,
+   "start": 1295.33,
+   "end": 1297.09,
+   "text": "最终的搜索是怎么实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 612,
+   "start": 1297.09,
+   "end": 1299.89,
+   "text": "接着我们让AI完成开发个自测",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 613,
+   "start": 1299.89,
+   "end": 1301.87,
+   "text": "然后我们再亲自验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 614,
+   "start": 1301.87,
+   "end": 1304.68,
+   "text": "当然这几个步骤并不是死板的流程",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 615,
+   "start": 1304.68,
+   "end": 1306.18,
+   "text": "具体要做到什么程度",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 616,
+   "start": 1306.18,
+   "end": 1308.96,
+   "text": "取决于你想对最终结果保留多少掌控力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 617,
+   "start": 1308.96,
+   "end": 1312.36,
+   "text": "比如如果你并不在意产品具体该怎么设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 618,
+   "start": 1312.36,
+   "end": 1313.98,
+   "text": "只要功能能用就行",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 619,
+   "start": 1313.98,
+   "end": 1315.36,
+   "text": "那产品设计这一步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0749
+  },
+  {
+   "id": 620,
+   "start": 1315.36,
+   "end": 1316.96,
+   "text": "我们就可以完全不用管",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 621,
+   "start": 1316.96,
+   "end": 1318.06,
+   "text": "交给AI就行了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 622,
+   "start": 1318.06,
+   "end": 1320.48,
+   "text": "如果你也不关心代码具体怎么实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 623,
+   "start": 1320.48,
+   "end": 1322.52,
+   "text": "技术方案同样也可以不用关心",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 624,
+   "start": 1322.52,
+   "end": 1323.6,
+   "text": "让AI自己决定",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 625,
+   "start": 1323.6,
+   "end": 1325.8,
+   "text": "这么做其实并没有什么太大问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 626,
+   "start": 1325.8,
+   "end": 1328.48,
+   "text": "只是意味着你把更多的决策权交给了AI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 627,
+   "start": 1328.48,
+   "end": 1331.82,
+   "text": "这样的话你对最终结果的掌控自然就会少一些",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 628,
+   "start": 1331.82,
+   "end": 1334.86,
+   "text": "做出来的东西可能也就没有那么贴合你的预期",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 629,
+   "start": 1334.86,
+   "end": 1337.28,
+   "text": "所以这里面其实就是一种取舍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 630,
+   "start": 1337.28,
+   "end": 1338.46,
+   "text": "你参与的越多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 631,
+   "start": 1338.46,
+   "end": 1340.52,
+   "text": "对最终结果的把控就会越强",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 632,
+   "start": 1340.52,
+   "end": 1342.84,
+   "text": "但需要投入的时间和精力也就越多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 633,
+   "start": 1342.84,
+   "end": 1343.92,
+   "text": "你参与的越少",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0735
+  },
+  {
+   "id": 634,
+   "start": 1343.92,
+   "end": 1345.62,
+   "text": "开发过程会更省事更快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 635,
+   "start": 1345.62,
+   "end": 1347.56,
+   "text": "但最终结果和你预期之间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 636,
+   "start": 1347.56,
+   "end": 1349.3,
+   "text": "出现偏差的可能性也会越高",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 637,
+   "start": 1349.3,
+   "end": 1352.26,
+   "text": "这个度其实没有一个特别固定的标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 638,
+   "start": 1352.26,
+   "end": 1355.36,
+   "text": "我一般会根据需求的复杂度和重要性来判断",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 639,
+   "start": 1355.36,
+   "end": 1357.6,
+   "text": "比如我们可以用两种情况来举例",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 640,
+   "start": 1357.6,
+   "end": 1359.94,
+   "text": "一种是简单且不重要的需求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 641,
+   "start": 1359.94,
+   "end": 1362.2,
+   "text": "另外一种是复杂且重要的需求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 642,
+   "start": 1362.2,
+   "end": 1363.26,
+   "text": "对于第一种情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 643,
+   "start": 1363.26,
+   "end": 1366.6,
+   "text": "我一般会忽略产品设计和技术设计这两个环节",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 644,
+   "start": 1366.6,
+   "end": 1368.42,
+   "text": "搭好环境发出指令之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 645,
+   "start": 1368.42,
+   "end": 1369.96,
+   "text": "我会直接让AI实现",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 646,
+   "start": 1369.96,
+   "end": 1371.26,
+   "text": "实现完后我做验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 647,
+   "start": 1371.26,
+   "end": 1373.42,
+   "text": "验证完了之后这个需求就结束了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0598
+  },
+  {
+   "id": 648,
+   "start": 1373.42,
+   "end": 1374.68,
+   "text": "整个流程会非常快",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 649,
+   "start": 1374.68,
+   "end": 1377.36,
+   "text": "但如果是复杂而且重要的需求",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 650,
+   "start": 1377.36,
+   "end": 1380.38,
+   "text": "我则会参与到产品设计和技术设计的环节中来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 651,
+   "start": 1380.38,
+   "end": 1382.12,
+   "text": "走完这完整的五个环节",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 652,
+   "start": 1382.12,
+   "end": 1384.02,
+   "text": "尽可能的保证最终产品的质量",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 653,
+   "start": 1384.02,
+   "end": 1386.32,
+   "text": "所以这里并没有一个固定的标准",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 654,
+   "start": 1386.32,
+   "end": 1386.98,
+   "text": "说到底",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 655,
+   "start": 1386.98,
+   "end": 1390.02,
+   "text": "还是在开发效率和结果的可控性之间做取舍",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 656,
+   "start": 1390.02,
+   "end": 1391.42,
+   "text": "不过话说回来",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 657,
+   "start": 1391.42,
+   "end": 1393.78,
+   "text": "尽管流程可以根据需求灵活调整",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 658,
+   "start": 1393.78,
+   "end": 1394.88,
+   "text": "但有三个原则",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 659,
+   "start": 1394.88,
+   "end": 1396.44,
+   "text": "我建议大家尽量坚持",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 660,
+   "start": 1396.44,
+   "end": 1398.38,
+   "text": "第一必须有版本管理工具",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 661,
+   "start": 1398.38,
+   "end": 1401.02,
+   "text": "比如你可以用最流行的Gate来管理代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 662,
+   "start": 1401.02,
+   "end": 1403.74,
+   "text": "AI写代码不可能每次都完全正确",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.068
+  },
+  {
+   "id": 663,
+   "start": 1403.76,
+   "end": 1405.9,
+   "text": "有时候甚至会在修改的过程中",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 664,
+   "start": 1405.9,
+   "end": 1408.28,
+   "text": "把原本能够正常运行的功能改坏了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 665,
+   "start": 1408.28,
+   "end": 1409.32,
+   "text": "用了Gate之后",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 666,
+   "start": 1409.32,
+   "end": 1410.68,
+   "text": "我们每完成一个功能",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 667,
+   "start": 1410.68,
+   "end": 1412.52,
+   "text": "都可以保存一个对应的版本",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 668,
+   "start": 1412.52,
+   "end": 1413.9,
+   "text": "后面一旦出了问题",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 669,
+   "start": 1413.9,
+   "end": 1416.62,
+   "text": "就能很方便地回复到之前正常的状态",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 670,
+   "start": 1416.62,
+   "end": 1418.52,
+   "text": "另外如果条件允许的话",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 671,
+   "start": 1418.52,
+   "end": 1421.5,
+   "text": "我也建议把代码同步到Github之类的远端仓库",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 672,
+   "start": 1421.5,
+   "end": 1423.76,
+   "text": "这样即使本地代码不小心丢了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 673,
+   "start": 1423.76,
+   "end": 1425.22,
+   "text": "也能够从远端恢复",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 674,
+   "start": 1425.22,
+   "end": 1426.49,
+   "text": "第二点",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 675,
+   "start": 1426.49,
+   "end": 1428.51,
+   "text": "我们必须要给AI自测的能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 676,
+   "start": 1428.51,
+   "end": 1430.49,
+   "text": "很多人只是让AI写代码",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 677,
+   "start": 1430.49,
+   "end": 1431.89,
+   "text": "但不给它验证的环境",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 678,
+   "start": 1431.89,
+   "end": 1433.71,
+   "text": "结果自己就沦为了测试员",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.079
+  },
+  {
+   "id": 679,
+   "start": 1433.71,
+   "end": 1435.27,
+   "text": "来来会会帮AI找bug",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 680,
+   "start": 1435.27,
+   "end": 1436.33,
+   "text": "极其浪费时间",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 681,
+   "start": 1436.33,
+   "end": 1438.47,
+   "text": "我们应该把相关的工具和插件",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 682,
+   "start": 1438.47,
+   "end": 1439.19,
+   "text": "开放给AI",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 683,
+   "start": 1439.19,
+   "end": 1440.47,
+   "text": "让他自己写完自己测",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 684,
+   "start": 1440.47,
+   "end": 1441.95,
+   "text": "这样交付出来的代码质量",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 685,
+   "start": 1441.95,
+   "end": 1442.61,
+   "text": "就会高很多",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 686,
+   "start": 1442.61,
+   "end": 1444.93,
+   "text": "第三必须要进行人工验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 687,
+   "start": 1444.93,
+   "end": 1446.49,
+   "text": "AI自测再充分",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 688,
+   "start": 1446.49,
+   "end": 1448.39,
+   "text": "也不可能把所有的问题都覆盖倒",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 689,
+   "start": 1448.39,
+   "end": 1449.61,
+   "text": "像交付体验",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 690,
+   "start": 1449.61,
+   "end": 1451.79,
+   "text": "或者是一些不容易想到的边界情况",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 691,
+   "start": 1451.79,
+   "end": 1453.09,
+   "text": "就很容易被漏掉",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 692,
+   "start": 1453.09,
+   "end": 1455.07,
+   "text": "所以产品到底好不好用",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 693,
+   "start": 1455.07,
+   "end": 1456.41,
+   "text": "是不是我们真正想要的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 694,
+   "start": 1456.41,
+   "end": 1458.17,
+   "text": "最终还是要自己试一遍才知道",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 695,
+   "start": 1458.17,
+   "end": 1459.3,
+   "text": "总结一下",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 696,
+   "start": 1459.3,
+   "end": 1461.44,
+   "text": "真正不能省的就是这三件事情",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 697,
+   "start": 1461.44,
+   "end": 1463.06,
+   "text": "用Gate搭建好环境",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0864
+  },
+  {
+   "id": 698,
+   "start": 1463.06,
+   "end": 1464.66,
+   "text": "让AI具备自测能力",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 699,
+   "start": 1464.66,
+   "end": 1466.64,
+   "text": "最后还一定要人工验证",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 700,
+   "start": 1466.64,
+   "end": 1469.44,
+   "text": "至于这里面的产品设计和技术设计",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 701,
+   "start": 1469.44,
+   "end": 1470.18,
+   "text": "要做得多细",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 702,
+   "start": 1470.18,
+   "end": 1472.06,
+   "text": "大家看情况决定就好",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 703,
+   "start": 1472.06,
+   "end": 1472.98,
+   "text": "最后我想说",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 704,
+   "start": 1472.98,
+   "end": 1475.34,
+   "text": "这套流程只是我现阶段探索出来的",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 705,
+   "start": 1475.34,
+   "end": 1476.28,
+   "text": "比较合理的方法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 706,
+   "start": 1476.28,
+   "end": 1478.06,
+   "text": "但并不是唯一的标准答案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 707,
+   "start": 1478.06,
+   "end": 1480.22,
+   "text": "随着大模型能力的不断进化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 708,
+   "start": 1480.22,
+   "end": 1482.42,
+   "text": "AI变成的模式肯定还会发生变化",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 709,
+   "start": 1482.42,
+   "end": 1484.96,
+   "text": "我也会持续去尝试其他可行的方案",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 710,
+   "start": 1484.96,
+   "end": 1486.46,
+   "text": "如果大家有什么更好的想法",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 711,
+   "start": 1486.46,
+   "end": 1487.9,
+   "text": "欢迎在评论区里面留言",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 712,
+   "start": 1487.9,
+   "end": 1489.16,
+   "text": "我们一起交流进步",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 713,
+   "start": 1489.16,
+   "end": 1489.78,
+   "text": "好了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 714,
+   "start": 1489.78,
+   "end": 1491.32,
+   "text": "今天的视频就到这里了",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 715,
+   "start": 1491.32,
+   "end": 1492.04,
+   "text": "我是马克",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 716,
+   "start": 1492.04,
+   "end": 1493.04,
+   "text": "我们下期再见",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.0797
+  },
+  {
+   "id": 717,
+   "start": 1493.06,
+   "end": 1493.56,
+   "text": "拜拜",
+   "no_speech_prob": 0.0,
+   "avg_logprob": -0.4231
+  }
+ ]
+}

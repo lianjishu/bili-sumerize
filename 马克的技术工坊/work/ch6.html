@@ -1,0 +1,184 @@
+<!-- ================= CHAPTER 6 ================= -->
+<section class="chapter ch6" id="ch6">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">06</div>
+      <div class="ch-title">
+        <h2>产品实现</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV154426xEha?t=1037"><span class="dot"></span>17:17 – 20:15 · 3 节 · 2 分 58 秒</a>
+      </div>
+    </div>
+    <p class="ch-abstract">真正敲代码的一段，只占全片 12%。UP 主在这里插了一个「动手前必须做的配置」——<strong>先给 AI 一副能自己验证的眼睛</strong>，然后才让它实现。而最后那个「上来就报错」的插曲，恰好把整套流程的必要性演示了一遍。</p>
+
+    <div class="sub" id="s61">
+      <h3><span class="idx">6.1</span>装 Computer Use 与 Chrome 插件：先给 AI 眼睛</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=1042"><span class="tri"></span>17:22 – 18:12</a>
+
+      <p class="lead">「在正式编写代码之前，我先提一句——我们最好<strong>让 AI 拥有自行验证结果的能力</strong>。」这是 CH3 那条「规矩二」的落地条件：规矩要求它自测，那就得先给它能测的工具。</p>
+
+      <div class="blk steps">
+        <span class="label">用 Codex 的话，建议至少装两个插件</span>
+        <ol>
+          <li><strong>Computer Use</strong> —— 可以用来<strong>操作电脑</strong>。</li>
+          <li><strong>Chrome</strong> —— 可以用来<strong>查看 Chrome 页面</strong>。</li>
+        </ol>
+      </div>
+
+      <p>「有了这两个插件，大部分的功能都是可以交给 AI 来验证的，包括我们现在做的这个电子书阅读器也是同样的道理。」如果用别的编程 Agent，「那可以自行查找下对应的插件或者是 skill」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 268" role="img" aria-label="给 AI 自测能力：两个插件打通验证回路">
+          <rect x="0" y="0" width="1080" height="268" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">动手之前先补的一件事 · 把「验证」也交给 AI，而不只是把「写」交给 AI</text>
+
+          <rect x="24" y="56" width="230" height="72" rx="9" fill="#141d28" stroke="#31465c" stroke-width="1.3"/>
+          <text x="44" y="80" fill="#e9eff7" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">AI 只会写代码</text>
+          <text x="44" y="101" fill="#f8736e" font-size="11" font-family="Segoe UI, Microsoft YaHei">它没法验证 → 很容易写出一堆 bug</text>
+          <text x="44" y="119" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">人被迫当测试员</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="258" y1="92" x2="316" y2="92"/><polygon points="316,92 308,88 308,96"/>
+          </g>
+
+          <rect x="320" y="46" width="286" height="92" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.4"/>
+          <text x="340" y="70" fill="#3fd68c" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">加上两个插件</text>
+          <text x="340" y="92" fill="#e9eff7" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">① Computer Use → 操作电脑</text>
+          <text x="340" y="112" fill="#e9eff7" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">② Chrome　　　→ 查看页面</text>
+          <text x="340" y="131" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">其它 Agent：自找对应插件 / skill</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="610" y1="92" x2="668" y2="92"/><polygon points="668,92 660,88 660,96"/>
+          </g>
+
+          <rect x="672" y="46" width="384" height="92" rx="10" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.4"/>
+          <text x="692" y="70" fill="#46c6e0" font-size="12.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">大部分功能可交 AI 自行验证</text>
+          <text x="692" y="92" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">写完自己跑、自己看、自己修</text>
+          <text x="692" y="112" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">明显的问题在交付前就被挡掉</text>
+          <text x="692" y="131" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">对应 AGENTS.md 的「规矩二」</text>
+
+          <rect x="24" y="164" width="1032" height="76" rx="9" fill="rgba(248,115,110,.08)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="44" y="187" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主的原话</text>
+          <text x="44" y="209" fill="#e9eff7" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「给 AI 一个能够验证的环境是一个非常重要的事情，否则 AI 很容易就会写出一堆 bug——毕竟它没法验证嘛。」</text>
+          <text x="44" y="230" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">「如果人写代码没法验证的话，那估计也会有一堆 bug。」——这句话把人机放在同一把尺子上，是本片最锋利的类比之一</text>
+        </svg>
+        <figcaption><b>视觉锚点｜验证回路</b>　这一节把 CH3 的「规矩二」补上了执行条件：<b>要让 AI 自测，就得先把「能验证的环境」给它</b>。UP 主的论证方式也很干净——他不是说「AI 不靠谱所以要自测」，而是说「任何写代码的主体，没有验证手段都必然产 bug，人也不例外」。</figcaption>
+      </figure>
+
+      <div class="blk pit">
+        <span class="label">不给验证环境的后果</span>
+        <ul>
+          <li>AI 只会写、不会验 ——「<strong>很容易就会写出一堆 bug</strong>」，毕竟它没法验证。</li>
+          <li>人被迫下场当测试员：「<strong>来来回回帮 AI 找 bug，极其浪费时间</strong>」（这句在 CH7 原则二里被再次点名）。</li>
+          <li>所以这一步省下的时间，会在后面的来回沟通里成倍还回去。</li>
+        </ul>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">这一步的定位</span>
+        <ul>
+          <li>它不是「可选优化」，而是让 AGENTS.md 里那条测试要求<strong>真正能被执行</strong>的前提。</li>
+          <li>换句话说：<strong>规矩是写给人看的，插件是写给 AI 用的</strong>——两者缺一，自测都会退化成「AI 声称自己测过了」。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s62">
+      <h3><span class="idx">6.2</span>带着两份文档实现，并自己跑测试</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=1094"><span class="tri"></span>18:14 – 19:17</a>
+
+      <p class="lead">配置好之后，新建一个会话，让 AI 开始实现。指令的设计和前面一脉相承：<strong>不重复需求，只指路</strong>。</p>
+
+      <div class="blk q">
+        <span class="label">实现用的指令（原文）</span>
+        <p style="margin:6px 0 0">「这个目录下面有两个文档，一个是产品设计，一个是对应的技术方案，请你读一下这些文档，然后根据里面的要求实现这个产品。」</p>
+      </div>
+
+      <p>「接下来我们稍微等一下，写代码估计要花不少时间。」这里 UP 主没有在提示词里复述任何需求细节——因为细节都已经在前面两份文档里了。这正是 CH4、CH5 坚持要产出文档的直接回报。</p>
+
+      <div class="kv">
+        <div>结果</div><div>「可以看到他不仅把产品做完了，<strong>还完成了各种自测</strong>，确保他写的代码没有问题」</div>
+        <div>为什么会有自测</div><div>「这符合我们在 AGENTS.md 里面的要求」——即那条「每次改动后必须编写或更新相关测试，并在交付给用户前确保所有测试和验证全部通过」</div>
+        <div>UP 主的追问</div><div>「你是不是都忘了我们在 AGENTS.md 里面写了什么了？没关系，我再给你看一下」</div>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">自测能保证什么（UP 主特意划的边界）</span>
+        <ul>
+          <li>「这些测试只能<strong>尽可能提高代码的可靠性</strong>，帮 AI 提前发现一些明显的问题。」</li>
+          <li>「<strong>并不能够保证</strong>最终交付出来的产品就一定没有 bug。」</li>
+          <li>「真正用起来怎么样，还是得<strong>我们自己亲自验证</strong>之后才知道。」</li>
+        </ul>
+      </div>
+
+      <p>这段边界说明很关键：它提前把「有了自测就可以完全放手」这个念头掐掉了，也直接把叙事推到下一节——<strong>亲手跑一遍</strong>。</p>
+    </div>
+
+    <div class="sub" id="s63">
+      <h3><span class="idx">6.3</span>亲手跑一遍：第一个报错</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=1157"><span class="tri"></span>19:17 – 20:15</a>
+
+      <p class="lead">AI 最后提到「执行 <code>npm start</code> 命令就可以启动」。UP 主这就来试试——结果「似乎上来就报了一个错」。</p>
+
+      <figure>
+        <svg viewBox="0 0 1080 302" role="img" aria-label="第一次运行报错到修复的闭环">
+          <rect x="0" y="0" width="1080" height="302" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">人机闭环 · AI 自测通过 ≠ 产品可用，这个插曲把「人工验证」的必要性演示了一遍</text>
+
+          <rect x="24" y="56" width="180" height="66" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="42" y="80" fill="#5b9cf8" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">① 执行 npm start</text>
+          <text x="42" y="100" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">按 AI 的说明启动</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="208" y1="89" x2="252" y2="89"/><polygon points="252,89 244,85 244,93"/>
+          </g>
+
+          <rect x="256" y="56" width="180" height="66" rx="9" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="274" y="80" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">② 上来就报错</text>
+          <text x="274" y="100" fill="#adbccd" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">「操作失败，请稍后重试」</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="440" y1="89" x2="484" y2="89"/><polygon points="484,89 476,85 476,93"/>
+          </g>
+
+          <rect x="488" y="56" width="200" height="66" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="506" y="80" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">③ 把现象描述给 AI</text>
+          <text x="506" y="100" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">「打开之后直接显示了一个报错」</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="692" y1="89" x2="736" y2="89"/><polygon points="736,89 728,85 728,93"/>
+          </g>
+
+          <rect x="740" y="56" width="180" height="66" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="758" y="80" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">④ 修好了</text>
+          <text x="758" y="100" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">再跑一遍 → 错误消失</text>
+
+          <rect x="24" y="142" width="500" height="72" rx="9" fill="#141d28" stroke="#233240"/>
+          <text x="44" y="165" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">UP 主的评论</text>
+          <text x="44" y="186" fill="#e9eff7" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「你看，AI 确实不是百分之百靠谱的。</text>
+          <text x="44" y="206" fill="#e9eff7" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">即使他自己能验证，也未必完全可靠。」</text>
+
+          <rect x="556" y="142" width="500" height="72" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="576" y="165" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">然后导入一本 TXT 试试</text>
+          <text x="576" y="186" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">「看起来好像还可以的样子」</text>
+          <text x="576" y="206" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">到这里这产品的 MVP 就算彻底做完了</text>
+
+          <rect x="24" y="228" width="1032" height="54" rx="9" fill="#141d28" stroke="#233240"/>
+          <text x="44" y="250" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">示范价值</text>
+          <text x="124" y="250" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">报错不慌，也不用自己 debug —— 把「看到的画面」描述清楚，剩下的交给 AI，人只负责再跑一次</text>
+          <text x="44" y="271" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">注意这句文案（「操作失败，请稍后重试」）是产品自己弹的界面提示，不是终端异常——描述现象要连界面文案一起说</text>
+        </svg>
+        <figcaption><b>视觉锚点｜闭环</b>　这个插曲是全片最好的论据：<b>AI 自己测过、声称完成，人一跑仍然出错</b>。而修复成本极低——人只需要说清楚「我看到了什么」。这正好定义了人工验证的职责：<b>不是替 AI 找 bug，而是代替 AI 当最后一公里的用户</b>。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">本章小结</span>
+        <ul>
+          <li>动手前先配好<strong>验证环境</strong>（Computer Use + Chrome），让「自测」这条规矩可执行。</li>
+          <li>实现时<strong>只指路、不复述需求</strong>——回报来自前面两份文档。</li>
+          <li>AI 自测能挡掉明显问题，但<strong>挡不住全部</strong>；人亲手跑一遍是必需的最后一道。</li>
+          <li>遇到报错的处理姿势：<strong>描述现象 → 交给 AI → 再跑一遍验证</strong>，人不下场 debug。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

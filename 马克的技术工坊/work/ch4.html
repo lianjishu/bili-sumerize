@@ -1,0 +1,248 @@
+<!-- ================= CHAPTER 4 ================= -->
+<section class="chapter ch4" id="ch4">
+  <div class="wrap">
+    <div class="ch-head">
+      <div class="ch-num">04</div>
+      <div class="ch-title">
+        <h2>产品方案设计</h2>
+        <a class="ch-play" href="https://www.bilibili.com/video/BV154426xEha?t=386"><span class="dot"></span>06:26 – 14:43 · 4 节 · 8 分 17 秒</a>
+      </div>
+    </div>
+    <p class="ch-abstract">全片最长的一章，也是最「不写代码」的一章。UP 主在这里做的是三件事：<strong>跟 AI 对齐 MVP 边界</strong>、<strong>亲手把 AI 提的功能一条条砍掉</strong>、<strong>把共识固化成一份产品设计文档</strong>。最后还多讲了一步可选的 demo 环节，并给出「什么时候该做 demo」的判断标准。</p>
+
+    <div class="sub" id="s41">
+      <h3><span class="idx">4.1</span>先跟 AI 对齐 MVP 边界</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=386"><span class="tri"></span>06:26 – 08:03</a>
+
+      <p class="lead">现在知道要做一个电子书阅读器，但具体要做成什么样子，其实心里还没有一个非常确切的答案。UP 主的做法是：<strong>先跟 AI 讨论一下产品的设计</strong>。</p>
+
+      <div class="blk q">
+        <span class="label">第一句指令（原文）</span>
+        <p style="margin:6px 0 0">「我想做一个电子书阅读器，打算先从 MVP 版本开始，你觉得这一版做哪些功能比较合适呢？」</p>
+      </div>
+
+      <p>UP 主预判了观众会问「MVP 是什么」，顺手给出了定义和理由——这段解释把整章的思路交代得很清楚：</p>
+
+      <div class="kv">
+        <div>MVP 是什么</div><div>Minimal Viable Product 的缩写，中文一般叫<strong>最小可用产品</strong></div>
+        <div>具体含义</div><div>第一版只做<strong>最核心、最必要的功能</strong>，先把产品的主流程跑通，其他功能以后可以慢慢加</div>
+        <div>这样做的好处</div><div>可以用<strong>比较低的成本快速验证产品方向</strong>。如果一开始就把功能铺得太大，后面发现方向不对，很多工作可能就白做了</div>
+        <div>所以本片的做法</div><div>先把电子书阅读器<strong>最基本的体验做出来</strong>，确定没问题后，再逐步往上加功能</div>
+      </div>
+
+      <div class="note"><b>关于 MVP 的拼写：</b>UP 主口播为 Minimal Viable Product，通行写法是 <code>Minimum Viable Product</code>。这是口播习惯而非事实错误，本笔记保留原话。</div>
+
+      <p>AI 的回答里提了一批功能建议，UP 主逐条看下来，一场「砍需求」就开始了。</p>
+    </div>
+
+    <div class="sub" id="s42">
+      <h3><span class="idx">4.2</span>逐条砍需求：从 EPUB 一路砍到 TXT</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=486"><span class="tri"></span>08:06 – 10:19</a>
+
+      <p class="lead">这一节是全片信息密度最高的演示之一。UP 主的操作习惯很值得学：<strong>看完 AI 的回答再统一回复，不急着一条一条提交</strong>——「有问题直接追加到输入框里面，最后一起提交」。</p>
+
+      <div class="blk steps">
+        <span class="label">砍需求的五刀</span>
+        <ol>
+          <li><strong>导入格式：EPUB → TXT。</strong>「EPUB 是一个非常常见的电子书格式，支持这种格式是没有什么问题的。不过我觉得这个格式可能还是稍微有一些复杂度……一开始就支持导入 TXT 文本文件就行了。」</li>
+          <li><strong>目录与章节：直接去掉。</strong>「如果只做 TXT 的话，那基本上也就没有什么目录和章节可言了 […] 毕竟 TXT 没有目录和章节的概念，即使有的话，那也不是能够通过固定方法解析到的，那这些也不用做了。」</li>
+          <li><strong>主题：三种 → 一种。</strong>AI 建议同时支持明亮、护眼、深色三种主题。UP 主：「我们一开始不用支持这么多，就先做明亮主题就好了，护眼和深色可以先不做。」</li>
+          <li><strong>书签：不做。</strong>「书签其实我们也不需要，因为它们不是必要功能，所以书签也可以先不做。」</li>
+          <li><strong>收口。</strong>追加一句总纲：「总之我们先做最基本的功能，其余的功能后面再迭代」，并主动反问 AI：「你觉得前面这些想法有没有什么问题呢？」</li>
+        </ol>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 300" role="img" aria-label="MVP 需求砍枝：AI 建议六项，砍掉三项推迟、保留三项">
+          <rect x="0" y="0" width="1080" height="300" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">MVP 边界怎么定 · AI 提出的功能清单 → UP 主逐条裁决</text>
+
+          <rect x="24" y="52" width="216" height="34" rx="8" fill="#18232f" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="74" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">导入 EPUB 文件</text>
+          <rect x="24" y="94" width="216" height="34" rx="8" fill="#18232f" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="116" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">目录与章节导航</text>
+          <rect x="24" y="136" width="216" height="34" rx="8" fill="#18232f" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="158" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">三种主题</text>
+          <rect x="24" y="178" width="216" height="34" rx="8" fill="#18232f" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="200" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">书签</text>
+          <rect x="24" y="220" width="216" height="34" rx="8" fill="#18232f" stroke="#31465c" stroke-width="1.3"/>
+          <text x="42" y="242" fill="#adbccd" font-size="11.5" font-family="Segoe UI, Microsoft YaHei">其余功能</text>
+          <text x="24" y="280" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">AI 建议侧</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="244" y1="69" x2="336" y2="69"/><polygon points="336,69 328,65 328,73"/>
+            <line x1="244" y1="111" x2="336" y2="111"/><polygon points="336,111 328,107 328,115"/>
+            <line x1="244" y1="153" x2="336" y2="153"/><polygon points="336,153 328,149 328,157"/>
+            <line x1="244" y1="195" x2="336" y2="195"/><polygon points="336,195 328,191 328,199"/>
+            <line x1="244" y1="237" x2="336" y2="254"/><polygon points="336,254 327,252 330,244"/>
+          </g>
+
+          <rect x="340" y="52" width="300" height="160" rx="10" fill="rgba(248,115,110,.10)" stroke="#f8736e" stroke-width="1.3"/>
+          <text x="358" y="76" fill="#f8736e" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">砍掉 / 推迟</text>
+          <text x="358" y="100" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">EPUB → 只留最简 TXT（格式太复杂）</text>
+          <text x="358" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">目录章节 → 砍（TXT 没有这概念）</text>
+          <text x="358" y="144" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">护眼 / 深色 → 推迟（先只做明亮）</text>
+          <text x="358" y="166" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">书签 → 砍（不是必要功能）</text>
+          <text x="358" y="188" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">其余 → 后面再迭代</text>
+
+          <rect x="676" y="52" width="380" height="160" rx="10" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="694" y="76" fill="#3fd68c" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">MVP 保留（AI 补充后达成共识）</text>
+          <text x="694" y="100" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">导入 TXT　仅支持 UTF-8 编码</text>
+          <text x="694" y="122" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">阅读　　仅纵向滚动，先不做分页</text>
+          <text x="694" y="144" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">主题　　只做明亮主题</text>
+          <text x="694" y="166" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">提示　　载入大文件要给出提示</text>
+          <text x="694" y="188" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">＋ AI 另给了一份「可以推迟的功能列表」</text>
+
+          <text x="340" y="240" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">收口指令：「总之我们先做最基本的功能，其余的功能后面再迭代。你觉得前面这些想法有没有什么问题呢？」</text>
+          <text x="340" y="262" fill="#3fd68c" font-size="11" font-family="Segoe UI, Microsoft YaHei">→ 至此对「第一版做什么、暂时不做什么」有了明确共识</text>
+        </svg>
+        <figcaption><b>视觉锚点｜砍枝</b>　注意 UP 主的砍法不是「嫌多」，每条都给了<strong>具体理由</strong>：格式复杂、TXT 没有目录概念、不是必要功能。而且砍完之后他<strong>反问 AI 一句</strong>，把 AI 从「被指挥的执行者」拉回「能提异议的评审」——AI 随后补的三条（UTF-8、纵向滚动、大文件提示）全被采纳了。</figcaption>
+      </figure>
+
+      <p>砍完之后，AI 的回答里提了几个要注意的点，UP 主的反应是「可以的，这些我都赞同」：</p>
+
+      <div class="kv">
+        <div>文件编码</div><div>建议第一版<strong>仅支持 UTF-8</strong> 就行</div>
+        <div>阅读方式</div><div>第一版<strong>只支持纵向滚动</strong>，先不做分页</div>
+        <div>大文件</div><div>载入大文件需要<strong>给出一些提示</strong></div>
+        <div>额外产出</div><div>还给出了一个<strong>可以推迟的功能列表</strong></div>
+      </div>
+
+      <div class="blk concl">
+        <span class="label">这一节的方法论</span>
+        <ul>
+          <li><strong>批注式对话，而不是逐条往返：</strong>边看边把意见追加进输入框，最后一起提交 —— 省掉了大量往返轮次。</li>
+          <li><strong>AI 是提案方，人是裁决方：</strong>功能清单由 AI 起头，但「砍到多小」是人决定的。</li>
+          <li><strong>砍完要回问一句：</strong>既暴露了 AI 的判断，也顺手拿到了编码、滚动方式这些自己没想到的工程细节。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sub" id="s43">
+      <h3><span class="idx">4.3</span>出产品设计文档，但「不用太详细」</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=616"><span class="tri"></span>10:16 – 11:24</a>
+
+      <p class="lead">共识谈完，接下来要把它<strong>固化下来</strong>：整理成一份产品设计文档，当作后续开发的提纲。</p>
+
+      <div class="blk q">
+        <span class="label">为什么必须有这份文档</span>
+        <ul>
+          <li>「这样无论后面是做技术方案，还是让 AI 写代码，<strong>大家都有一个统一的依据</strong>。」</li>
+          <li>「简单来说，这份文档就是<strong>先把 MVP 的边界给定下来</strong>。」</li>
+        </ul>
+      </div>
+
+      <p>发指令的时候，UP 主特意停下来提醒大家注意他的措辞：</p>
+
+      <div class="blk eye">
+        <span class="label">措辞要点：明确说「不用太详细」</span>
+        <ul>
+          <li>指令原文：「我同意你的建议，接下来帮我整理一份产品设计文档，<strong>不用太详细</strong>，把整体方向和主要功能梳理出来就可以。」</li>
+          <li>他的理由：「否则字太多了，我们看起来也累，差不多就行了。」</li>
+          <li>底线：「我们只需要保证<strong>大体方向跟我们想的一致</strong>就行。如果真的有什么细节跟我们预期的不太一样，<strong>后面再迭代就好了</strong>。」</li>
+        </ul>
+      </div>
+
+      <div class="note"><b>这是一个反直觉的建议：</b>很多人以为文档要越细越好。UP 主的逻辑是——文档的读者首先是「接下来要读它的 AI 和你自己」，过细的文档既增加阅读成本，又容易让人误以为「写得这么细一定对」。所以他只要「方向 + 主要功能」，细节留给迭代。</div>
+
+      <p>文档写完，「好像是没什么问题，那就这样吧」——产品设计方案基本确认。</p>
+    </div>
+
+    <div class="sub" id="s44">
+      <h3><span class="idx">4.4</span>demo 要不要做：看后端实现成本</h3>
+      <a class="tslink" href="https://www.bilibili.com/video/BV154426xEha?t=686"><span class="tri"></span>11:26 – 14:43</a>
+
+      <p class="lead">产品设计的最后，有些时候 UP 主还会再做一个环节：<strong>让 AI 画一个 demo</strong>。这一节把 demo 是什么、有什么好处、以及「什么时候值得做」讲透了 —— 而这一期的电子书阅读器，他最后<strong>并没有做</strong>。</p>
+
+      <div class="kv">
+        <div>demo 是什么</div><div>可以把它理解成一个<strong>可以实际操作的前端页面</strong></div>
+        <div>前端</div><div>指我们<strong>看得见、点得到</strong>的界面</div>
+        <div>后端</div><div>与前端相对应，指背后真正<strong>处理数据、执行功能</strong>的那些逻辑</div>
+        <div>做 demo 时</div><div>通常<strong>只把前端做出来，后端暂时不实现</strong>，里面的数据一般也都是直接模拟的</div>
+      </div>
+
+      <p>UP 主用自己准备的一个「个人知识库」demo 做示范（他特意说明这个 demo 跟本期的阅读器没关系，只是拿来解释 demo 长什么样）：</p>
+
+      <div class="blk q">
+        <span class="label">这个 demo 的形态</span>
+        <ul>
+          <li>它其实就是一个 <strong>HTML 文件</strong>，直接打开就行。</li>
+          <li>左边是<strong>文档列表</strong>，中间系统给出了一些<strong>推荐问题</strong>。</li>
+          <li>点击一个推荐问题，它就开始回答；回答完毕之后点「<strong>引用文件</strong>」，右边就会展示回答所引用的原文。</li>
+          <li>但注意：「这里面<strong>只有前端页面是真的</strong>，这个回答和相关的这些示例文件，其实都是模拟的，因为后端逻辑还没有实现。」</li>
+        </ul>
+      </div>
+
+      <p>「这个页面仅仅是包含前端逻辑，它的主要目的就是<strong>为了让用户体验一下整个界面的交互和操作流程到底顺不顺手</strong>。如果哪里感觉不对，就可以继续让 AI 修改这个 demo，直到整体体验比较符合我们的预期为止。」</p>
+
+      <div class="blk steps">
+        <span class="label">做 demo 的两个好处</span>
+        <ol>
+          <li><strong>提前验证产品设计。</strong>「很多东西光靠文字其实很难想象。真正把页面画出来、亲自操作一下之后，你可能就会发现一些之前没有想到的问题。」发现设计不合理，就继续改 demo，同时把对应的产品设计文档一起调整。</li>
+          <li><strong>让后面的产品实现更精确。</strong>demo 可以非常直观地告诉 AI「我最终想要的产品大概就是这个样子」——「这个是文字描述很难做到的」。后面实现时把<strong>产品设计文档和 demo 一起交给 AI</strong>，它既知道要做哪些功能，也知道界面和交互应该怎么还原，做出来的东西一般会更加接近预期。</li>
+        </ol>
+      </div>
+
+      <p>那到底什么时候适合做 demo？UP 主给了一个非常干脆的判断标准：</p>
+
+      <div class="blk eye">
+        <span class="label">判断标准：这个产品的后端实现成本</span>
+        <ul>
+          <li>只看这一个因素，不看项目大小、不看技术难度。</li>
+        </ul>
+      </div>
+
+      <figure>
+        <svg viewBox="0 0 1080 296" role="img" aria-label="demo 决策：按后端实现成本高低分流">
+          <rect x="0" y="0" width="1080" height="296" fill="#0f151d"/>
+          <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">要不要做 demo · UP 主只看一个因素：这个产品的后端实现成本</text>
+
+          <rect x="24" y="58" width="200" height="56" rx="9" fill="#141d28" stroke="#31465c" stroke-width="1.3"/>
+          <text x="44" y="82" fill="#e9eff7" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">后端成本高？</text>
+          <text x="44" y="101" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">判断入口</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="228" y1="76" x2="292" y2="76"/>
+            <polygon points="292,76 284,72 284,80"/>
+            <line x1="228" y1="100" x2="292" y2="196"/>
+            <polygon points="292,196 283,194 286,186"/>
+          </g>
+
+          <rect x="296" y="46" width="340" height="108" rx="10" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="314" y="70" fill="#f0b429" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">高 → 先做 demo</text>
+          <text x="314" y="92" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">例：个人知识库</text>
+          <text x="314" y="112" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">后端涉及文档处理、搜索、检索策略、</text>
+          <text x="314" y="129" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">模型 demo 等很多逻辑 → 先把界面和交互定下来</text>
+          <text x="314" y="147" fill="#adbccd" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">值：避免后端白做</text>
+
+          <rect x="296" y="166" width="340" height="108" rx="10" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="314" y="190" fill="#5b9cf8" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">低 → 直接做产品</text>
+          <text x="314" y="212" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">例：本期的电子书阅读器</text>
+          <text x="314" y="232" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">就是个看书软件，导入 TXT 就行，</text>
+          <text x="314" y="249" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">没什么复杂逻辑 → 专门做 demo 反而重复劳动</text>
+          <text x="314" y="267" fill="#adbccd" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">值：跑起来哪不顺手，直接在成品上改</text>
+
+          <rect x="676" y="106" width="380" height="120" rx="10" fill="#141d28" stroke="#46c6e0" stroke-width="1.3"/>
+          <text x="694" y="130" fill="#46c6e0" font-size="12" font-weight="700" font-family="Segoe UI, Microsoft YaHei">要做 demo 时，指令模板</text>
+          <text x="694" y="154" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">「帮我做一个 demo，不用实现真实的后端功能，</text>
+          <text x="694" y="172" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">数据模拟一下就行。我主要是想看看整体界面</text>
+          <text x="694" y="190" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">和操作流程是否合理。」</text>
+          <text x="694" y="212" fill="#77879a" font-size="10.5" font-family="Segoe UI, Microsoft YaHei">不满意就继续让 AI 改，直到符合预期</text>
+
+          <text x="24" y="284" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">本期这个阅读器后端成本很低，所以 UP 主也</text>
+          <text x="272" y="284" fill="#3fd68c" font-size="11" font-weight="700" font-family="Segoe UI, Microsoft YaHei">没有发这条指令</text>
+          <text x="392" y="284" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">——「大家在自己的项目里面，可以根据实际情况决定要不要加这一步。」</text>
+        </svg>
+        <figcaption><b>视觉锚点｜决策分流</b>　这个决策树只有一个判断节点，但结论很实用：<b>demo 的价值 = 把「后端返工」的风险提前换成「前端页面」的低成本试错</b>。所以后端越贵、越该先做 demo；后端越便宜，做 demo 就越接近重复劳动。</figcaption>
+      </figure>
+
+      <div class="blk concl">
+        <span class="label">本章收束</span>
+        <ul>
+          <li>产品设计环节正式结束。产出物只有一个：<strong>一份「不用太详细」的产品设计文档</strong>，它的唯一职责是把 MVP 边界钉死。</li>
+          <li>demo 是可选加分项，判断标准是<strong>后端实现成本</strong>；本期不需要，所以跳过了。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

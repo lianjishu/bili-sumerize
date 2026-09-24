@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的 AI 编程全流程 · 视频精读笔记</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e13; --bg2:#0f151d; --panel:#141d28; --panel2:#18232f;
+  --line:#233240; --line2:#31465c;
+  --tx:#e9eff7; --tx2:#adbccd; --tx3:#77879a;
+  --cy:#46c6e0; --pu:#a98bfa; --am:#f0b429; --rd:#f8736e; --gn:#3fd68c; --bl:#5b9cf8;
+  --c1:#46c6e0; --c2:#a98bfa; --c3:#f0b429; --c4:#f8736e; --c5:#3fd68c; --c6:#5b9cf8; --c7:#46c6e0;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",system-ui,-apple-system,sans-serif;
+  font-size:15px; line-height:1.78; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1140px;margin:0 auto;padding:0 40px}
+a{color:var(--cy);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- hero ---------- */
+.hero{padding:56px 0 34px;border-bottom:1px solid var(--line);background:
+  radial-gradient(900px 320px at 12% -10%,rgba(70,198,224,.13),transparent 62%),
+  radial-gradient(760px 300px at 88% 0%,rgba(169,139,250,.12),transparent 60%)}
+.kicker{font-size:12.5px;letter-spacing:.16em;color:var(--cy);text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:36px;line-height:1.28;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+.hero h1 .sub{display:block;font-size:19px;color:var(--tx2);font-weight:400;margin-top:12px;letter-spacing:0}
+.hero-grid{display:grid;grid-template-columns:1fr 360px;gap:36px;align-items:start;margin-top:26px}
+.cover{border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:#000;line-height:0}
+.cover img{width:100%;display:block}
+.meta-list{list-style:none;display:grid;gap:9px;font-size:14px}
+.meta-list li{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:baseline}
+.meta-list .k{color:var(--tx3);font-size:12.5px}
+.meta-list .v{color:var(--tx)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.chip{font-size:12px;color:var(--tx2);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 11px}
+.chip.hot{color:var(--cy);border-color:rgba(70,198,224,.4);background:rgba(70,198,224,.08)}
+
+/* ---------- sections ---------- */
+section{padding:40px 0}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:26px;display:flex;align-items:baseline;gap:14px}
+.sec-head h2{font-size:21px;font-weight:650;letter-spacing:.01em}
+.sec-head .tag{font-size:12px;color:var(--tx3)}
+
+/* toc */
+.toc{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.toc-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;border-top:3px solid var(--line2)}
+.toc-card.c1{border-top-color:var(--c1)}
+.toc-card.c2{border-top-color:var(--c2)}
+.toc-card.c3{border-top-color:var(--c3)}
+.toc-card.c4{border-top-color:var(--c4)}
+.toc-card.c5{border-top-color:var(--c5)}
+.toc-card.c6{border-top-color:var(--c6)}
+.toc-card.c7{border-top-color:var(--c7)}
+.toc-card.wide{grid-column:1/-1}
+.toc-card.wide ol{display:grid;grid-template-columns:1fr 1fr;gap:6px 26px}
+.toc-card .n{font-size:11.5px;letter-spacing:.14em;color:var(--tx3)}
+.toc-card .t{font-size:16px;font-weight:650;margin:7px 0 4px}
+.toc-card .r{font-size:12.5px;color:var(--tx3);margin-bottom:12px}
+.toc-card ol{list-style:none;display:grid;gap:6px;font-size:13.5px}
+.toc-card ol a{color:var(--tx2)}
+.toc-card ol a:hover{color:var(--cy)}
+.toc-card ol li::before{content:"· ";color:var(--tx3)}
+
+/* chapter */
+.chapter{padding-top:52px}
+.ch-head{display:grid;grid-template-columns:104px 1fr;gap:24px;align-items:start;border-top:2px solid var(--c1);padding-top:22px;margin-bottom:8px}
+.chapter.ch2 .ch-head{border-top-color:var(--c2)}
+.chapter.ch3 .ch-head{border-top-color:var(--c3)}
+.chapter.ch4 .ch-head{border-top-color:var(--c4)}
+.chapter.ch5 .ch-head{border-top-color:var(--c5)}
+.chapter.ch6 .ch-head{border-top-color:var(--c6)}
+.chapter.ch7 .ch-head{border-top-color:var(--c7)}
+.ch-num{font-size:56px;font-weight:800;line-height:.9;color:var(--line2);letter-spacing:-.03em}
+.ch-title h2{font-size:27px;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.ch-play{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:13px;color:var(--tx2);
+  background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 13px}
+.ch-play .dot{width:7px;height:7px;border-radius:50%;background:var(--c1)}
+.ch2 .ch-play .dot{background:var(--c2)} .ch3 .ch-play .dot{background:var(--c3)}
+.ch4 .ch-play .dot{background:var(--c4)} .ch5 .ch-play .dot{background:var(--c5)}
+.ch6 .ch-play .dot{background:var(--c6)} .ch7 .ch-play .dot{background:var(--c7)}
+.ch-abstract{color:var(--tx2);font-size:14.5px;margin-top:14px;max-width:900px}
+
+/* subsection */
+.sub{padding:34px 0 6px;border-bottom:1px dashed var(--line)}
+.sub:last-child{border-bottom:none}
+.sub h3{font-size:19px;font-weight:650;line-height:1.5;margin-bottom:4px}
+.sub h3 .idx{color:var(--tx3);font-weight:500;margin-right:8px;font-variant-numeric:tabular-nums}
+.tslink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx3);
+  border:1px solid var(--line);border-radius:6px;padding:1px 9px;margin-bottom:14px;font-variant-numeric:tabular-nums}
+.tslink:hover{color:var(--cy);border-color:rgba(70,198,224,.45);text-decoration:none}
+.tri{width:0;height:0;border-left:7px solid currentColor;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.sub p{color:var(--tx2);margin:12px 0}
+.sub p strong,.sub li strong{color:var(--tx)}
+.lead{color:var(--tx);font-size:15.5px}
+
+/* blocks */
+.blk{border-radius:10px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--panel)}
+.blk .label{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;margin-bottom:8px;display:block}
+.blk ul,.blk ol{padding-left:20px}
+.blk ul{list-style:none;padding-left:0}
+.blk ul li{position:relative;padding-left:18px;margin:6px 0;color:var(--tx2)}
+.blk ul li::before{content:"";position:absolute;left:2px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--line2)}
+.blk ol li{margin:6px 0;color:var(--tx2)}
+
+.q{background:linear-gradient(180deg,rgba(70,198,224,.07),rgba(70,198,224,.02));border-left:3px solid var(--cy)}
+.q .label{color:var(--cy)}
+.pit{background:linear-gradient(180deg,rgba(248,115,110,.07),rgba(248,115,110,.02));border-left:3px solid var(--rd)}
+.pit .label{color:var(--rd)}
+.steps{background:linear-gradient(180deg,rgba(91,156,248,.07),rgba(91,156,248,.02));border-left:3px solid var(--bl)}
+.steps .label{color:var(--bl)}
+.steps ol{counter-reset:s;list-style:none;padding-left:0}
+.steps ol li{counter-increment:s;position:relative;padding-left:32px;margin:8px 0}
+.steps ol li::before{content:counter(s);position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:6px;
+  background:rgba(91,156,248,.16);color:var(--bl);font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.concl{background:linear-gradient(180deg,rgba(63,214,140,.07),rgba(63,214,140,.02));border-left:3px solid var(--gn)}
+.concl .label{color:var(--gn)}
+.eye{background:linear-gradient(180deg,rgba(240,180,41,.07),rgba(240,180,41,.02));border-left:3px solid var(--am)}
+.eye .label{color:var(--am)}
+blockquote{margin:16px 0;padding:14px 20px;border-left:3px solid var(--line2);background:var(--panel2);border-radius:0 10px 10px 0}
+blockquote p{color:var(--tx);font-size:14.5px;margin:0 0 6px}
+blockquote cite{font-style:normal;font-size:12.5px;color:var(--tx3)}
+.note{margin:14px 0;padding:11px 16px;border-left:3px solid var(--line2);background:var(--panel2);
+  border-radius:0 8px 8px 0;font-size:13px;color:var(--tx3)}
+.note b{color:var(--tx2)}
+
+.kv{display:grid;grid-template-columns:190px 1fr;gap:0;font-size:14px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.kv>div{padding:9px 15px;border-bottom:1px solid var(--line)}
+.kv>div:nth-child(2n-1){background:var(--panel);color:var(--tx2);font-size:13px}
+.kv>div:nth-child(2n){color:var(--tx);background:var(--bg2)}
+.kv>div:nth-last-child(-n+2){border-bottom:none}
+
+/* figure */
+figure{margin:22px 0;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:20px 20px 14px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:12.5px;color:var(--tx3);margin-top:12px;padding-top:11px;border-top:1px solid var(--line);line-height:1.65}
+figcaption b{color:var(--tx2);font-weight:600}
+
+/* verify table */
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{background:var(--panel);color:var(--tx2);font-weight:600;font-size:12.5px}
+td{color:var(--tx2)}
+tr:last-child td{border-bottom:none}
+td.ok{color:var(--gn);font-weight:600}
+td.warn{color:var(--am)}
+code{font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace;font-size:12.8px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--cy)}
+
+.foot{padding:44px 0 64px;color:var(--tx3);font-size:13px;border-top:1px solid var(--line);margin-top:34px}
+.foot .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.foot h4{color:var(--tx2);font-size:13.5px;margin-bottom:9px;font-weight:650}
+.foot ul{list-style:none;display:grid;gap:5px}
+.foot li::before{content:"· ";color:var(--line2)}
+
+@media (max-width:820px){
+  .wrap{padding:0 20px}
+  .hero-grid{grid-template-columns:1fr}
+  .toc{grid-template-columns:1fr}
+  .toc-card.wide ol{grid-template-columns:1fr}
+  .foot .cols{grid-template-columns:1fr}
+  .ch-head{grid-template-columns:64px 1fr;gap:14px}
+  .ch-num{font-size:38px}
+  .hero h1{font-size:27px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">视频精读 · 单页离线笔记</div>
+    <h1>我的 AI 编程全流程：如何使用 AI 稳定交付一个高质量的产品
+      <span class="sub">一次从零到 MVP 的完整实拍 · 5 个环节、3 条不能省的原则、1 个真实的报错</span>
+    </h1>
+
+    <div class="hero-grid">
+      <div>
+        <ul class="meta-list">
+          <li><span class="k">标题</span><span class="v">我的 AI 编程全流程：如何使用 AI 稳定交付一个高质量的产品</span></li>
+          <li><span class="k">UP 主</span><span class="v">马克的技术工作坊（视频里自称「马克」）</span></li>
+          <li><span class="k">结构</span><span class="v">单 P 视频，<strong>有 B 站官方章节 7 个</strong>（本笔记按官方章节拆 7 章 17 节）</span></li>
+          <li><span class="k">时长</span><span class="v">24 分 54 秒（1494.304 s）</span></li>
+          <li><span class="k">发布</span><span class="v">2026-08-29</span></li>
+          <li><span class="k">标签</span><span class="v">教学 · AI · 编程 · Cursor · ChatGPT · OpenCode · Codex · VibeCoding</span></li>
+          <li><span class="k">数据</span><span class="v">播放 225,174　点赞 9,142　评论 842</span></li>
+          <li><span class="k">演示物</span><span class="v">从零做一个电子书阅读器（UP 起名「马克阅读」），技术栈 Electron + React + TS</span></li>
+        </ul>
+        <div class="chips">
+          <span class="chip hot">MVP 边界</span>
+          <span class="chip hot">AGENTS.md</span>
+          <span class="chip hot">AI 自测能力</span>
+          <span class="chip hot">人工验证</span>
+          <span class="chip">Git 版本管理</span>
+          <span class="chip">demo</span>
+          <span class="chip">Electron / Tauri</span>
+          <span class="chip">参与度取舍</span>
+        </div>
+      </div>
+      <div class="cover"><img src="__COVER_B64__" alt="视频封面：AI 编程全流程"></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>全片地图</h2><span class="tag">7 个官方章节 · 17 个内容小节 · 章节条长 = 该章实际时长</span></div>
+
+    <figure>
+      <svg viewBox="0 0 1080 372" role="img" aria-label="全片七章时间轴与时长分布">
+        <rect x="0" y="0" width="1080" height="372" fill="#0f151d"/>
+        <text x="24" y="30" fill="#77879a" font-size="12.5" font-family="Segoe UI, Microsoft YaHei">全片 24:54 · B 站官方 7 章 · 上方轴为该章在片中的位置，下方横条为各章时长（同一水平比例尺）</text>
+
+        <!-- 轴：t=0 -> x=350 ; t=1494.304 -> x=950 ; s=0.401525 px/s -->
+        <line x1="350" y1="64" x2="950" y2="64" stroke="#31465c" stroke-width="1"/>
+        <g stroke="#233240" stroke-width="1">
+          <line x1="350" y1="58" x2="350" y2="70"/>
+          <line x1="377" y1="58" x2="377" y2="70"/>
+          <line x1="408" y1="58" x2="408" y2="70"/>
+          <line x1="505" y1="58" x2="505" y2="70"/>
+          <line x1="705" y1="58" x2="705" y2="70"/>
+          <line x1="766" y1="58" x2="766" y2="70"/>
+          <line x1="838" y1="58" x2="838" y2="70"/>
+          <line x1="950" y1="58" x2="950" y2="70"/>
+        </g>
+        <g font-size="11" fill="#77879a" font-family="Segoe UI, Microsoft YaHei">
+          <text x="350" y="50" text-anchor="middle">00:00</text>
+          <text x="377" y="86" text-anchor="middle">01:08</text>
+          <text x="408" y="50" text-anchor="middle">02:24</text>
+          <text x="505" y="86" text-anchor="middle">06:26</text>
+          <text x="705" y="50" text-anchor="middle">14:43</text>
+          <text x="766" y="86" text-anchor="middle">17:17</text>
+          <text x="838" y="50" text-anchor="middle">20:15</text>
+          <text x="950" y="86" text-anchor="end">24:54</text>
+        </g>
+
+        <!-- 表头 -->
+        <g font-size="10.5" fill="#77879a" font-family="Segoe UI, Microsoft YaHei">
+          <text x="40" y="108">章节</text>
+          <text x="250" y="108">时间区间</text>
+          <text x="958" y="108">时长</text>
+          <text x="1012" y="108">占比</text>
+        </g>
+
+        <!-- CH1 -->
+        <text x="40" y="130" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH1</text>
+        <text x="88" y="130" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">视频内容介绍</text>
+        <text x="250" y="130" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">00:00 – 01:08</text>
+        <rect x="350" y="118" width="27" height="15" rx="4" fill="rgba(70,198,224,.30)" stroke="#46c6e0" stroke-width="1.2"/>
+        <text x="958" y="130" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">1:08</text>
+        <text x="1012" y="130" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">4.6%</text>
+
+        <!-- CH2 -->
+        <text x="40" y="160" fill="#a98bfa" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH2</text>
+        <text x="88" y="160" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">挑选编程 Agent</text>
+        <text x="250" y="160" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">01:08 – 02:24</text>
+        <rect x="377" y="148" width="31" height="15" rx="4" fill="rgba(169,139,250,.30)" stroke="#a98bfa" stroke-width="1.2"/>
+        <text x="958" y="160" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">1:16</text>
+        <text x="1012" y="160" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">5.1%</text>
+
+        <!-- CH3 -->
+        <text x="40" y="190" fill="#f0b429" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH3</text>
+        <text x="88" y="190" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">环境搭建</text>
+        <text x="250" y="190" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">02:24 – 06:26</text>
+        <rect x="408" y="178" width="97" height="15" rx="4" fill="rgba(240,180,41,.30)" stroke="#f0b429" stroke-width="1.2"/>
+        <text x="958" y="190" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">4:02</text>
+        <text x="1012" y="190" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">16.2%</text>
+
+        <!-- CH4 -->
+        <text x="40" y="220" fill="#f8736e" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH4</text>
+        <text x="88" y="220" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">产品方案设计</text>
+        <text x="250" y="220" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">06:26 – 14:43</text>
+        <rect x="505" y="208" width="200" height="15" rx="4" fill="rgba(248,115,110,.30)" stroke="#f8736e" stroke-width="1.2"/>
+        <text x="958" y="220" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">8:17</text>
+        <text x="1012" y="220" fill="#f8736e" font-size="11" font-weight="700" font-family="Segoe UI, Microsoft YaHei">33.3%</text>
+
+        <!-- CH5 -->
+        <text x="40" y="250" fill="#3fd68c" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH5</text>
+        <text x="88" y="250" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">技术方案设计</text>
+        <text x="250" y="250" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">14:43 – 17:17</text>
+        <rect x="705" y="238" width="62" height="15" rx="4" fill="rgba(63,214,140,.30)" stroke="#3fd68c" stroke-width="1.2"/>
+        <text x="958" y="250" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">2:34</text>
+        <text x="1012" y="250" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">10.3%</text>
+
+        <!-- CH6 -->
+        <text x="40" y="280" fill="#5b9cf8" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH6</text>
+        <text x="88" y="280" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">产品实现</text>
+        <text x="250" y="280" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">17:17 – 20:15</text>
+        <rect x="766" y="268" width="72" height="15" rx="4" fill="rgba(91,156,248,.30)" stroke="#5b9cf8" stroke-width="1.2"/>
+        <text x="958" y="280" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">2:58</text>
+        <text x="1012" y="280" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">11.9%</text>
+
+        <!-- CH7 -->
+        <text x="40" y="310" fill="#46c6e0" font-size="11.5" font-weight="700" font-family="Segoe UI, Microsoft YaHei">CH7</text>
+        <text x="88" y="310" fill="#e9eff7" font-size="12" font-family="Segoe UI, Microsoft YaHei">整体流程回顾</text>
+        <text x="250" y="310" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">20:15 – 24:54</text>
+        <rect x="838" y="298" width="112" height="15" rx="4" fill="rgba(70,198,224,.30)" stroke="#46c6e0" stroke-width="1.2"/>
+        <text x="958" y="310" fill="#adbccd" font-size="11" font-family="Segoe UI, Microsoft YaHei">4:39</text>
+        <text x="1012" y="310" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">18.7%</text>
+
+        <!-- 分隔与注 -->
+        <line x1="40" y1="332" x2="1040" y2="332" stroke="#233240" stroke-width="1"/>
+        <text x="40" y="352" fill="#77879a" font-size="11" font-family="Segoe UI, Microsoft YaHei">注意 CH4 一条就占了三分之一（8 分 17 秒）——真正敲代码的 CH6 只有 2 分 58 秒。CH1 与 CH7 同为青色：首尾两章都是「全局视角」。</text>
+      </svg>
+      <figcaption><b>视觉锚点｜时间分配</b>　这张图本身就是本片最反直觉的一个信息：<b>「怎么想清楚」花掉的时间，是「怎么写代码」的近三倍</b>（产品设计 8:17 + 技术设计 2:34 + 环境搭建 4:02 = 14:53，而产品实现只有 2:58）。UP 主整期的论证重心，也正是压在前面那几步。</figcaption>
+    </figure>
+
+    <div class="toc">
+      <div class="toc-card c1">
+        <div class="n">CHAPTER 01 · 00:00–01:08</div>
+        <div class="t">视频内容介绍</div>
+        <div class="r">要解决的不是「能不能做出来」</div>
+        <ol>
+          <li><a href="#s11">1.1 真问题：做出来的是不是你要的</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c2">
+        <div class="n">CHAPTER 02 · 01:08–02:24</div>
+        <div class="t">挑选编程 Agent</div>
+        <div class="r">为什么推荐先选 Codex</div>
+        <ol>
+          <li><a href="#s21">2.1 主流选项与「操作逻辑通用」</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c3">
+        <div class="n">CHAPTER 03 · 02:24–06:26</div>
+        <div class="t">环境搭建</div>
+        <div class="r">总结下来只有两件事</div>
+        <ol>
+          <li><a href="#s31">3.1 建目录 + 让 AI 初始化 Git 仓库</a></li>
+          <li><a href="#s32">3.2 AGENTS.md：两条硬规矩</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c4">
+        <div class="n">CHAPTER 04 · 06:26–14:43</div>
+        <div class="t">产品方案设计</div>
+        <div class="r">全片最长的一章：把需求砍到最小</div>
+        <ol>
+          <li><a href="#s41">4.1 先跟 AI 对齐 MVP 边界</a></li>
+          <li><a href="#s42">4.2 逐条砍需求：砍到只剩 TXT</a></li>
+          <li><a href="#s43">4.3 出产品文档，但「不用太详细」</a></li>
+          <li><a href="#s44">4.4 demo 要不要做：看后端成本</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c5">
+        <div class="n">CHAPTER 05 · 14:43–17:17</div>
+        <div class="t">技术方案设计</div>
+        <div class="r">新开会话，先讨论再落文档</div>
+        <ol>
+          <li><a href="#s51">5.1 技术栈讨论：Electron 与 Tauri</a></li>
+          <li><a href="#s52">5.2 让 AI 落一份技术方案文档</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c6">
+        <div class="n">CHAPTER 06 · 17:17–20:15</div>
+        <div class="t">产品实现</div>
+        <div class="r">先给 AI「眼睛」，再让它动手</div>
+        <ol>
+          <li><a href="#s61">6.1 装 Computer Use 与 Chrome 插件</a></li>
+          <li><a href="#s62">6.2 带着两份文档实现并自测</a></li>
+          <li><a href="#s63">6.3 亲手跑一遍：第一个报错</a></li>
+        </ol>
+      </div>
+      <div class="toc-card c7 wide">
+        <div class="n">CHAPTER 07 · 20:15–24:54</div>
+        <div class="t">整体流程回顾</div>
+        <div class="r">五步流程 · 参与度取舍 · 三条不能省的原则</div>
+        <ol>
+          <li><a href="#s71">7.1 五步流程：第一步一次性，后四步可循环</a></li>
+          <li><a href="#s72">7.2 参与度取舍：简单不重要 vs 复杂重要</a></li>
+          <li><a href="#s73">7.3 三条不能省的原则</a></li>
+          <li><a href="#s74">7.4 收尾：这不是唯一的标准答案</a></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head"><h2>素材链路与校验</h2><span class="tag">全部结果可复核</span></div>
+    <p class="lead">先说凭据：本片有 B 站官方章节（7 章，已直接用作拆章骨架），但<strong>没有 CC 字幕</strong>，也没有随附件提供的字幕文件 —— 也就是说这一期只有 Whisper 单一信源。所以对专有名词额外做了一轮「换提示词定点复转」来交叉确认。</p>
+
+    <figure>
+      <svg viewBox="0 0 1080 268" role="img" aria-label="音频到转写的处理链路">
+        <rect x="0" y="0" width="1080" height="268" fill="#0f151d"/>
+        <g font-family="Segoe UI, Microsoft YaHei">
+          <rect x="20" y="48" width="182" height="92" rx="9" fill="rgba(70,198,224,.10)" stroke="#46c6e0" stroke-width="1.3"/>
+          <text x="36" y="74" fill="#46c6e0" font-size="12" font-weight="700">① yt-dlp</text>
+          <text x="36" y="95" fill="#adbccd" font-size="11">cookies + 完整元数据</text>
+          <text x="36" y="113" fill="#77879a" font-size="10.5">标题 / UP / 时长 / 标签 / 封面</text>
+          <text x="36" y="130" fill="#3fd68c" font-size="10.5">chapters 字段 = 7 章 ✓</text>
+
+          <rect x="228" y="48" width="182" height="92" rx="9" fill="rgba(91,156,248,.10)" stroke="#5b9cf8" stroke-width="1.3"/>
+          <text x="244" y="74" fill="#5b9cf8" font-size="12" font-weight="700">② 最佳音轨 m4a</text>
+          <text x="244" y="95" fill="#adbccd" font-size="11">format 30280 · 92.6 kbps</text>
+          <text x="244" y="113" fill="#77879a" font-size="10.5">17,306,533 B ≈ 16.5 MiB</text>
+          <text x="244" y="130" fill="#77879a" font-size="10.5">AAC</text>
+
+          <rect x="436" y="48" width="182" height="92" rx="9" fill="rgba(169,139,250,.10)" stroke="#a98bfa" stroke-width="1.3"/>
+          <text x="452" y="74" fill="#a98bfa" font-size="12" font-weight="700">③ 转 mp3</text>
+          <text x="452" y="95" fill="#adbccd" font-size="11">libmp3lame 192 kbps</text>
+          <text x="452" y="113" fill="#77879a" font-size="10.5">35,864,758 B · 44.1 kHz</text>
+          <text x="452" y="130" fill="#77879a" font-size="10.5">立体声</text>
+
+          <rect x="644" y="48" width="182" height="92" rx="9" fill="rgba(240,180,41,.10)" stroke="#f0b429" stroke-width="1.3"/>
+          <text x="660" y="74" fill="#f0b429" font-size="12" font-weight="700">④ Whisper 转写</text>
+          <text x="660" y="95" fill="#adbccd" font-size="11">large-v3-turbo · zh</text>
+          <text x="660" y="113" fill="#77879a" font-size="10.5">CUDA fp16 · 20.5× 实时</text>
+          <text x="660" y="130" fill="#77879a" font-size="10.5">718 段</text>
+
+          <rect x="852" y="48" width="208" height="92" rx="9" fill="rgba(63,214,140,.10)" stroke="#3fd68c" stroke-width="1.3"/>
+          <text x="868" y="74" fill="#3fd68c" font-size="12" font-weight="700">⑤ 校验通过</text>
+          <text x="868" y="95" fill="#adbccd" font-size="11">718 段 · 覆盖率 99.95%</text>
+          <text x="868" y="113" fill="#77879a" font-size="10.5">时长偏差 0.000% &lt; 5%</text>
+          <text x="868" y="130" fill="#77879a" font-size="10.5">专名另做定点复转</text>
+
+          <g stroke="#31465c" stroke-width="1.6" fill="#31465c">
+            <line x1="202" y1="94" x2="224" y2="94"/><polygon points="224,94 216,90 216,98"/>
+            <line x1="410" y1="94" x2="432" y2="94"/><polygon points="432,94 424,90 424,98"/>
+            <line x1="618" y1="94" x2="640" y2="94"/><polygon points="640,94 632,90 632,98"/>
+            <line x1="826" y1="94" x2="848" y2="94"/><polygon points="848,94 840,90 840,98"/>
+          </g>
+
+          <rect x="20" y="162" width="500" height="46" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="36" y="181" fill="#3fd68c" font-size="11.5">✓ 时长校验</text>
+          <text x="120" y="181" fill="#adbccd" font-size="11">ffprobe mp3 = 1494.296961 s　vs 元数据 1494.304 s　→ 偏差 0.000%</text>
+          <text x="36" y="199" fill="#77879a" font-size="10.5">阈值 5%，本片偏差低于阈值约 4 个数量级</text>
+
+          <rect x="540" y="162" width="520" height="46" rx="8" fill="#141d28" stroke="#233240"/>
+          <text x="556" y="181" fill="#3fd68c" font-size="11.5">✓ 转写完整性</text>
+          <text x="660" y="181" fill="#adbccd" font-size="11">末段结束 1493.6 s ÷ 音频 1494.3 s = 99.95%　→ 无截断</text>
+          <text x="556" y="199" fill="#77879a" font-size="10.5">尾部 0.7 s 为静音，非丢字</text>
+
+          <text x="20" y="238" fill="#77879a" font-size="11.5">第四道校验（本片无第二信源，故补做）：对 Agent 名单、工具名、术语等存疑处，用换过 initial_prompt 的定点复转再听一遍，两轮一致的才采信。</text>
+        </g>
+      </svg>
+      <figcaption><b>视觉锚点｜流水线</b>　五个环节的实际参数与产物大小都写在节点里。本片的好条件是<b>官方给出了章节结构</b>（7 章，直接当骨架用），坏条件是没有第二份字幕，所以专门补了一轮定点复转 —— 勘误表里标了「复转确认」的那几条就是这么定下来的。</figcaption>
+    </figure>
+
+    <table>
+      <tr><th>校验项</th><th>实测值</th><th>基准</th><th>偏差</th><th>结论</th></tr>
+      <tr><td>mp3 时长</td><td>1494.296961 s</td><td>元数据 1494.304 s</td><td>0.000%</td><td class="ok">PASS（阈值 5%）</td></tr>
+      <tr><td>转写末段结束</td><td>1493.6 s</td><td>音频 1494.3 s</td><td>0.05%</td><td class="ok">PASS（覆盖率 99.95%）</td></tr>
+      <tr><td>转写语言判定</td><td>zh（中文）</td><td>—</td><td>—</td><td class="ok">走 turbo + 中文分支</td></tr>
+      <tr><td>B 站官方章节</td><td>7 章（0–68–144–386–883–1037–1215–1494 s）</td><td>—</td><td>—</td><td class="ok">直接用作拆章骨架</td></tr>
+      <tr><td>B 站 CC 字幕</td><td>接口返回空</td><td>—</td><td>—</td><td class="warn">无第二信源 → 补做定点复转</td></tr>
+      <tr><td>专有名词复核</td><td>Agent 名单 / 工具名 / 术语共 4 次定点复转</td><td>—</td><td>—</td><td class="ok">结论已写入页脚勘误表</td></tr>
+    </table>
+    <p style="color:var(--tx3);font-size:13px">说明：本片为纯中文口播，按预设规则走「中文 → large-v3-turbo」分支；英文 small.en + 翻译分支未被使用，因此没有英译中产物。</p>
+  </div>
+</section>
+__CHAPTERS__
+<footer class="foot">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>ASR 明显误识别修正表</h4>
+        <ul>
+          <li>「Cloud Code」→ <strong>Claude Code</strong>（两轮听作 Cloud Code，上下文唯一指向 Claude Code）</li>
+          <li>「XGPT / ChairGPT」→ <strong>ChatGPT</strong>（结合 tags 与「订阅后调用 GPT 模型」的上下文）</li>
+          <li>「Deepseek / DeepSeq」→ <strong>DeepSeek</strong>；「GPD 模型」→ <strong>GPT 模型</strong>（复转确认）</li>
+          <li>「EPOB 文件」→ <strong>EPUB 文件</strong>；「电子树格式」→ <strong>电子书格式</strong></li>
+          <li>「Tori」→ <strong>Tauri</strong>；「Vit」→ <strong>Vite</strong>；「ElectronForge」→ <strong>Electron Forge</strong></li>
+          <li>「Gate」（约 20 处）→ <strong>Git</strong>；「GateHub」→ <strong>GitHub</strong></li>
+          <li>「Gate Status 命令」→ <strong>git status</strong>；「get commit」→ <strong>git commit</strong></li>
+          <li>「Agence.MD / agents.md / agency.md」→ <strong>AGENTS.md</strong>（三处三种拼写，已统一）</li>
+          <li>「变成 Agent / 变成的模式」→ <strong>编程 Agent / 编程的模式</strong>（复转确认）</li>
+          <li>「技术站 / 技术战 / 技术战盒架构」→ <strong>技术栈 / 技术栈和架构</strong></li>
+          <li>「绘画」（5 处）→ <strong>会话</strong>（「新开一个会话」「一个会话里连续跑几小时」）</li>
+          <li>「上下纹 / 上下纹压缩」→ <strong>上下文 / 上下文压缩</strong></li>
+          <li>「电子输入器 / 电子数学读器 / 电子数据读器」→ <strong>电子书阅读器</strong>（复转确认）</li>
+          <li>「提稿」→ <strong>提纲</strong>；「介入 / 进入国产模型」→ <strong>接入</strong></li>
+          <li>「试试户文件」→ <strong>示例文件</strong>；「前台页面」→ <strong>前端页面</strong></li>
+          <li>「另外一个可能的学校」→ <strong>另外一个可能的选项</strong></li>
+          <li>「被 Gate 脱管了」→ <strong>被 Git 接管了</strong>；「回推」→ <strong>回退</strong></li>
+          <li>「复制东流」→ <strong>付诸东流</strong>；「一对 bug」→ <strong>一堆 bug</strong></li>
+          <li>「请稍后重视」→ <strong>请稍后重试</strong>；「来来会会」→ <strong>来来回回</strong></li>
+          <li>「覆盖倒」→ <strong>覆盖到</strong>（复转确认）；「断板」→ <strong>短板</strong>（复转确认）</li>
+          <li>「交付体验」→ <strong>交互体验</strong>（复转确认）</li>
+        </ul>
+      </div>
+      <div>
+        <h4>保留原文（未「改正」）</h4>
+        <ul>
+          <li>「马克阅读」——UP 给自己演示产品起的名字，原话保留</li>
+          <li>「模型 demo」——原话如此，指演示用的模型部分，保留不加改</li>
+          <li>「Minimal Viable Product」——UP 口播如此（通行拼写为 Minimum Viable Product），保留原话并加注</li>
+        </ul>
+        <h4 style="margin-top:16px">存疑项（已加注，未下定论）</h4>
+        <ul>
+          <li><strong>「访达」</strong>：两轮分别听作「网答」「网达」，上下文是「回到它里面看一眼刚生成的文件」→ 按音近推定为 macOS 的访达（Finder）</li>
+          <li><strong>「使用体会」</strong>：原音听作「使用提案」，按音近推定</li>
+          <li><strong>「模型 demo」</strong>：列在「后端逻辑」清单里略显突兀，但两轮复转一致，按原样保留</li>
+        </ul>
+        <h4 style="margin-top:16px">来源与工具</h4>
+        <ul>
+          <li>视频：<a href="https://www.bilibili.com/video/BV154426xEha">BV154426xEha</a>　·　UP：马克的技术工作坊</li>
+          <li>下载：yt-dlp（Firefox 提取 cookies）</li>
+          <li>转码：ffmpeg + ffprobe（BtbN build）</li>
+          <li>转写：faster-whisper 1.2.1 / CTranslate2 4.8.2 · large-v3-turbo · CUDA fp16</li>
+          <li>渲染：Chrome headless（Playwright driver）</li>
+        </ul>
+        <h4 style="margin-top:16px">笔记性质</h4>
+        <ul>
+          <li>内容为对公开视频的听写整理与结构化，<strong>不含整理者的产品与工程判断</strong>；所有方法论、技术选型意见均属 UP 主</li>
+          <li>「模型名 / 工具名 / 价格 / 榜单」具强时效性，请以各官方当前信息为准</li>
+          <li>表格中「用户指定目录名」为 <code>马克的技术工坊</code>，B 站账号全名是 <code>马克的技术工作坊</code></li>
+          <li>所有时间戳链接均跳回原视频对应秒数，可自行核对</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 编程全流程 · 精读讲义 — 马克的技术工作坊</title>
+<style>
+  :root{
+    --bg:#f7f9fb; --paper:#ffffff; --tx:#1c2733; --tx2:#52616f; --tx3:#6b7a89;
+    --line:#dfe7ee; --panel:#f1f5f8;
+    --c1:#0b7285; --c2:#7048c8; --c3:#b7791f; --c4:#b03a30; --c5:#2e7d32; --c6:#1f5fa8; --c7:#0b7285;
+    --c1bg:#e6f4f7; --c2bg:#f1ecfa; --c3bg:#faf3e3; --c4bg:#fdeeed; --c5bg:#e9f4ec; --c6bg:#e8f0fa; --c7bg:#e6f4f7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--tx);font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",SimSun,Georgia,serif;font-size:17px;line-height:1.9;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 28px}
+  code,.mono{font-family:ui-monospace,Consolas,"JetBrains Mono",monospace}
+  code{background:var(--panel);padding:1px 6px;border-radius:4px;font-size:.86em}
+
+  header.hero{background:var(--paper);border-bottom:1px solid var(--line);padding:56px 0 40px}
+  .kicker{font-family:ui-monospace,Consolas,monospace;font-size:13px;letter-spacing:.18em;color:var(--c1);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:38px;font-weight:900;letter-spacing:-.01em;line-height:1.25}
+  .subtitle{margin-top:10px;font-size:19px;color:var(--tx2)}
+  .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+  .meta-row span{font-size:13.5px;color:var(--tx2);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:4px 14px}
+  .meta-row a{color:var(--c1);text-decoration:none}
+  .meta-row a:hover{text-decoration:underline}
+
+  nav.toc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 30px;margin:34px 0}
+  nav.toc h2{font-size:15px;font-family:ui-monospace,Consolas,monospace;letter-spacing:.14em;color:var(--tx3);margin-bottom:14px}
+  nav.toc ol{list-style:none}
+  nav.toc li{margin:7px 0;font-size:15.5px}
+  nav.toc a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  nav.toc a:hover{color:var(--c1);border-color:var(--c1)}
+  nav.toc .n{font-family:ui-monospace,monospace;color:var(--tx3);margin-right:10px;font-size:13px}
+  nav.toc .sub{margin-left:34px;color:var(--tx2);font-size:14px;display:block}
+
+  .usage{background:var(--c1bg);border:1px solid #c3e2ea;border-radius:12px;padding:20px 26px;margin:0 0 40px;font-size:15.5px;color:#12333a}
+  .usage strong{color:var(--c1)}
+
+  section.chap{margin:64px 0}
+  .ch-head{border-top:5px solid;padding:20px 0 8px}
+  .ch-head.c1{border-color:var(--c1)} .ch-head.c2{border-color:var(--c2)} .ch-head.c3{border-color:var(--c3)}
+  .ch-head.c4{border-color:var(--c4)} .ch-head.c5{border-color:var(--c5)} .ch-head.c6{border-color:var(--c6)}
+  .ch-head.c7{border-color:var(--c7)}
+  .ch-num{font-family:ui-monospace,Consolas,monospace;font-size:14px;letter-spacing:.22em;color:var(--tx3)}
+  .ch-head.c1 .ch-num{color:var(--c1)} .ch-head.c2 .ch-num{color:var(--c2)} .ch-head.c3 .ch-num{color:var(--c3)}
+  .ch-head.c4 .ch-num{color:var(--c4)} .ch-head.c5 .ch-num{color:var(--c5)} .ch-head.c6 .ch-num{color:var(--c6)}
+  .ch-head.c7 .ch-num{color:var(--c7)}
+  .ch-head h2{font-size:30px;font-weight:800;margin:4px 0 4px}
+  .ch-range{font-size:14px;color:var(--tx3);font-family:ui-monospace,monospace}
+
+  article.sec{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:30px 34px;margin:26px 0}
+  article.sec h3{font-size:21.5px;font-weight:800;line-height:1.5;margin-bottom:4px}
+  article.sec h3 .secno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  .ts{font-family:ui-monospace,monospace;font-size:12.5px;white-space:nowrap}
+  .ts a{color:var(--tx3);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .ts a:hover{color:var(--c1);border-color:var(--c1)}
+  article.sec p{margin:12px 0;text-align:justify}
+  article.sec p+p{margin-top:14px}
+  article.sec ul,article.sec ol{margin:12px 0 12px 26px}
+  article.sec li{margin:6px 0}
+  em.term{font-style:normal;font-weight:700;border-bottom:2px solid var(--c1);padding-bottom:1px}
+  .c2-scope em.term{border-color:var(--c2)} .c3-scope em.term{border-color:var(--c3)}
+  .c4-scope em.term{border-color:var(--c4)} .c5-scope em.term{border-color:var(--c5)}
+  .c6-scope em.term{border-color:var(--c6)} .c7-scope em.term{border-color:var(--c7)}
+
+  .callout{border-radius:10px;padding:16px 22px;margin:16px 0;font-size:15.5px;line-height:1.85}
+  .callout .tag{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.16em;display:block;margin-bottom:6px}
+  .co-concept{background:var(--c1bg);border:1px solid #c3e2ea}
+  .co-concept .tag{color:var(--c1)}
+  .co-case{background:var(--c3bg);border:1px solid #ecd9ad}
+  .co-case .tag{color:var(--c3)}
+  .co-warn{background:#fdeeed;border:1px solid #f2c7c3}
+  .co-warn .tag{color:#b03a30}
+
+  .quote-box{background:var(--panel);border-left:4px solid var(--tx3);border-radius:0 10px 10px 0;padding:14px 22px;margin:16px 0;font-size:16px;color:var(--tx)}
+  .quote-box cite{display:block;margin-top:8px;font-style:normal;font-size:13px;color:var(--tx3)}
+
+  .summary{background:var(--panel);border-left:4px solid var(--c1);border-radius:0 10px 10px 0;padding:18px 24px;margin:18px 0}
+  .c2-scope .summary{border-color:var(--c2)} .c3-scope .summary{border-color:var(--c3)}
+  .c4-scope .summary{border-color:var(--c4)} .c5-scope .summary{border-color:var(--c5)}
+  .c6-scope .summary{border-color:var(--c6)} .c7-scope .summary{border-color:var(--c7)}
+  .summary h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx2);margin-bottom:8px}
+  .summary li{margin:5px 0}
+  .quiz{margin:18px 0}
+  .quiz h4{font-size:14px;letter-spacing:.14em;font-family:ui-monospace,monospace;color:var(--tx3);margin-bottom:8px}
+  .quiz ol{margin-left:26px}
+  .quiz li{margin:7px 0;color:var(--tx2)}
+
+  table.gl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  table.gl th{font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.1em;color:var(--tx3);text-align:left;padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.gl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.gl td:first-child{white-space:nowrap;font-family:ui-monospace,monospace;font-size:13px;color:#8a4b3a}
+  table.gl td:nth-child(2){white-space:nowrap;font-weight:700}
+  table.gl td:last-child{color:var(--tx2)}
+
+  .tsindex{columns:2;column-gap:40px;font-size:14.5px;margin-top:10px}
+  .tsindex div{break-inside:avoid;margin:7px 0}
+  .tsindex a{color:var(--tx);text-decoration:none;border-bottom:1px dotted #b8c6d2}
+  .tsindex a:hover{color:var(--c1)}
+  .tsindex .t{font-family:ui-monospace,monospace;font-size:12px;color:var(--tx3);margin-right:8px}
+
+  section.appendix{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:34px 38px;margin:26px 0}
+  section.appendix h2{font-size:23px;font-weight:800;margin-bottom:14px}
+  section.appendix h2 .apno{color:var(--tx3);font-family:ui-monospace,monospace;font-size:15px;margin-right:12px}
+  section.appendix h3{font-size:17px;margin:22px 0 10px;color:var(--c1)}
+  section.appendix p{margin:10px 0;text-align:justify}
+
+  footer.foot{background:var(--paper);border-top:1px solid var(--line);margin-top:70px;padding:40px 0 60px;font-size:13.5px;color:var(--tx2)}
+  footer.foot h4{font-size:13px;letter-spacing:.12em;font-family:ui-monospace,monospace;color:var(--tx3);margin:18px 0 8px}
+  footer.foot ul{list-style:none}
+  footer.foot li{margin:5px 0}
+  footer.foot a{color:var(--c1);text-decoration:none}
+  footer.foot a:hover{text-decoration:underline}
+
+  @media print{
+    body{background:#fff;font-size:12.5pt}
+    article.sec,nav.toc,section.appendix{border:none;page-break-inside:avoid}
+    header.hero{padding-top:20px}
+  }
+  @media (max-width:640px){
+    h1{font-size:29px} article.sec{padding:22px 20px} .tsindex{columns:1}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Lecture Handout · AI Coding Workflow</div>
+    <h1>我的 AI 编程全流程<br>精读讲义</h1>
+    <p class="subtitle">马克的技术工作坊《我的 AI 编程全流程》· 24 分钟口播逐字稿精读整理</p>
+    <div class="meta-row">
+      <span>视频：<a href="https://www.bilibili.com/video/BV154426xEha">BV154426xEha</a></span>
+      <span>UP 主：马克的技术工作坊</span>
+      <span>时长：24:54</span>
+      <span>七章（对应 B 站官方章节）· 17 节 · 附录 3 篇</span>
+      <span>术语以<a href="#apx-a">勘误表</a>为准</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>CONTENTS · 目录</h2>
+  <ol>
+    <li><a href="#ch1"><span class="n">01</span>视频内容介绍</a>
+      <span class="sub">1.1 真问题：做出来的是不是你要的</span></li>
+    <li><a href="#ch2"><span class="n">02</span>挑选编程 Agent</a>
+      <span class="sub">2.1 主流选项与「操作逻辑通用」</span></li>
+    <li><a href="#ch3"><span class="n">03</span>环境搭建</a>
+      <span class="sub">3.1 建目录 + 让 AI 初始化 Git 仓库 · 3.2 AGENTS.md：两条硬规矩</span></li>
+    <li><a href="#ch4"><span class="n">04</span>产品方案设计</a>
+      <span class="sub">4.1 先跟 AI 对齐 MVP 边界 · 4.2 逐条砍需求 · 4.3 出产品文档但「不用太详细」 · 4.4 demo 要不要做</span></li>
+    <li><a href="#ch5"><span class="n">05</span>技术方案设计</a>
+      <span class="sub">5.1 技术栈讨论：Electron 与 Tauri · 5.2 让 AI 落一份技术方案文档</span></li>
+    <li><a href="#ch6"><span class="n">06</span>产品实现</a>
+      <span class="sub">6.1 装 Computer Use 与 Chrome 插件 · 6.2 带着两份文档实现并自测 · 6.3 亲手跑一遍：第一个报错</span></li>
+    <li><a href="#ch7"><span class="n">07</span>整体流程回顾</a>
+      <span class="sub">7.1 五步流程 · 7.2 参与度取舍 · 7.3 三条不能省的原则 · 7.4 收尾</span></li>
+    <li><a href="#apx-a"><span class="n">A</span>术语对照表（勘误表扩展版）</a></li>
+    <li><a href="#apx-b"><span class="n">B</span>时间戳索引</a></li>
+    <li><a href="#apx-c"><span class="n">C</span>UP 主论断速查</a></li>
+  </ol>
+</nav>
+
+<div class="usage">
+  <strong>这份讲义怎么用：</strong>它与同目录的可视化笔记（<a href="bili_summary_BV154426xEha.html">bili_summary_BV154426xEha.html</a>）互补——笔记是「看图回忆」，讲义是「从头读懂」。每个小节标题旁有时间戳，点击跳回原视频对应秒数核对。<em class="term">概念卡</em>解释本节涉及的术语，<em class="term">案例卡</em>记录 UP 主的具体操作与指令原文，<em class="term">提示卡</em>标注口播中的存疑与保留措辞；每章末有小结与思考题（思考题为整理者补充）。<br><br>
+  <strong>一句要紧的提醒：</strong>本片讲的是一套<strong>与工具无关的协作流程</strong>，而不是某个 Agent 的使用教程——UP 主明确说「我会尽量避免使用它（Codex）独有的功能，核心操作逻辑都是通用的」。但流程里的<strong>工具名、插件名、命令</strong>仍有时效性（如 AGENTS.md 的读取机制、Computer Use / Chrome 插件的可用性），请以各官方当前文档为准。<strong>所有方法论判断与经验值均属 UP 主</strong>，不含整理者的意见；引用时请连同时间点一起标注。
+</div>
+<!-- ================= CHAPTER 1 ================= -->
+<section class="chap c1-scope" id="ch1">
+  <div class="ch-head c1">
+    <div class="ch-num">CHAPTER 01</div>
+    <h2>视频内容介绍</h2>
+    <div class="ch-range">00:00 – 01:08　·　1 节　·　1 分 08 秒</div>
+  </div>
+
+  <article class="sec" id="s11">
+    <h3><span class="secno">1.1</span>真问题：做出来的是不是你要的</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=0">00:00</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=68">01:08</a></div>
+
+    <p>UP 主开场先替观众把最容易冒出来的质疑说出来：装个 Codex 或者 Claude Code，直接向 AI 发条指令不就行了？「给我做个笔记软件，给我做个剪辑软件，给我做个电子书阅读器」——这不是太简单了吗？还要你来教？</p>
+
+    <p>他先承认这个质疑成立：<strong>给 AI 一个指令，它确实可以帮你把软件做出来</strong>。然后才把问题往前推一步。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">本片要回答的问题</span>
+      <ul>
+        <li>AI 做出来的效果，<strong>真的跟你预期的一样吗</strong>？</li>
+        <li>有没有可能你脑子里想的是一个东西，AI 最后交付的<strong>完全是另外一个东西</strong>？</li>
+        <li>更不用说有些时候，AI 做出来的产品还有很多 bug，跟自己想象的效果相差甚远。</li>
+      </ul>
+    </div>
+
+    <p>「相信你多多少少都会遇到过这种情况吧」——UP 主用这句话把问题定位成普遍经验，然后给出本片的命题：<strong>怎么才能够让 AI 交付一个真正让你满意的作品</strong>。</p>
+
+    <p>示范方式是<em class="term">从头做一个电子书阅读器</em>，把完整流程走一遍。他给自己的产品起名叫「马克阅读」。他强调这不是「给 AI 发条指令就完事了」，中间要经历好几个步骤；而且要讲的不是流程图，是<strong>每一步到底解决了什么问题</strong>。</p>
+
+    <div class="quote-box">
+      「我不仅会带你把流程完整走一遍，还会告诉你每一步到底解决了什么问题。哪些环节可以省，哪些环节最好不要省。理解了这些，你就能把它调整成适合自己的 AI 工作流。」
+      <cite>—— UP 主原话（00:54 前后）</cite>
+    </div>
+
+    <p>最后那句「调整成适合自己的 AI 工作流」，是本片最该抓住的一句：它意味着后面给出的流程<strong>不是一套必须照搬的规程，而是一个可以被裁剪的模板</strong>——这也解释了为什么 CH7 会专门用一整节讲「参与度取舍」。</p>
+
+    <div class="summary">
+      <h4>本章小结</h4>
+      <ul>
+        <li>被解决的问题不是「AI 能不能做出软件」，而是「<strong>做出来的东西是不是你要的</strong>」。</li>
+        <li>全片以「从零做一个电子书阅读器」为示范载体，最终交付一个 MVP。</li>
+        <li>本片讲的是可裁剪的<strong>流程模板</strong>，不是固定规程；目标是让观众能改造成自己的工作流。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>回想一次「AI 交付的不是你要的」经历：当时的偏差出在<strong>需求没说清</strong>，还是出在<strong>没人验证</strong>？</li>
+        <li>如果把「让 AI 交付一个真正满意的作品」当成目标，你觉得最容易被跳过的是哪一步？为什么？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 2 ================= -->
+<section class="chap c2-scope" id="ch2">
+  <div class="ch-head c2">
+    <div class="ch-num">CHAPTER 02</div>
+    <h2>挑选编程 Agent</h2>
+    <div class="ch-range">01:08 – 02:24　·　1 节　·　1 分 16 秒</div>
+  </div>
+
+  <article class="sec" id="s21">
+    <h3><span class="secno">2.1</span>主流选项与「操作逻辑通用」</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=68">01:08</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=144">02:24</a></div>
+
+    <p>「首先我们需要选择一款适合自己的<em class="term">编程 Agent</em>。」UP 主列出当前主流选项并直接给出推荐。</p>
+
+    <table class="gl">
+      <tr><th>项目</th><th>内容</th><th>说明</th></tr>
+      <tr><td>主流选项</td><td>Codex / Claude Code</td><td>UP 主并列提出的两个首选</td></tr>
+      <tr><td>此外还有</td><td>OpenCode / Pi / Cursor</td><td>UP 主原话就举了这三个</td></tr>
+      <tr><td>推荐</td><td>Codex</td><td>「如果你没有特殊要求的话，建议直接选择 Codex」</td></tr>
+      <tr><td>理由</td><td>功能完善</td><td>「它的功能相对来说比较完善，几乎没有明显的短板」</td></tr>
+    </table>
+
+    <p>接着他解释了 Codex 的模型来源。这里有个容易被忽略的要点：<strong>Codex 不跟 GPT 模型强绑定</strong>。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">Codex 的模型接入方式</span>
+      <ul>
+        <li>作为 OpenAI 旗下的产品，可以通过<strong>订阅 ChatGPT</strong>，在 Codex 里调用 GPT 模型。</li>
+        <li>如果不方便订阅，也可以把 <strong>DeepSeek、GLM、Kimi 等国产模型接进来</strong>。</li>
+        <li>UP 主的判断：「Codex 算是一个通用的编程 Agent，它并不跟 GPT 模型强绑定，实际上大部分模型都能跟 Codex 配合使用。」</li>
+      </ul>
+    </div>
+
+    <p>他还提到自己之前发过两期视频，分别讲 Codex 的基础用法、以及如何接入国产模型。那两期发布时间较早，界面跟现在「稍微有些区别」，但功能没有大的变化，所以不影响本片。（这两期不在本讲义范围内。）</p>
+
+    <div class="callout co-warn">
+      <span class="tag">本片最重要的一句前提</span>
+      <ul>
+        <li>后续内容统一<strong>以 Codex 为例</strong>演示。</li>
+        <li>但「<strong>我会尽量避免使用它独有的功能</strong>」——这里设计的核心操作逻辑都是通用的。</li>
+        <li>也就是说，你用 Claude Code、Pi 或其它 Agent，<strong>同样可以完成</strong>本片的整个流程。</li>
+      </ul>
+    </div>
+
+    <p>理解这句话，才能看懂全片的定位：UP 主教的是<strong>一套与工具无关的协作流程</strong>——怎么对齐需求、怎么让 AI 能自测、什么时候必须自己上手——而不是 Codex 的使用教程。工具会换，流程不会。</p>
+
+    <div class="summary">
+      <h4>本章小结</h4>
+      <ul>
+        <li>工具选择的结论很干脆：没有特殊要求就选 Codex（功能完善、无短板），它是通用编程 Agent，不绑定 GPT。</li>
+        <li>本片的所有操作逻辑都是<strong>跨 Agent 通用</strong>的，Demo 用 Codex 只是举例。</li>
+        <li>「选工具」在本片里只占 1 分 16 秒——UP 主显然认为这不是重点。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>你现在的 Agent 是否能自由切换模型？如果不能，换工具的迁移成本会有多大？</li>
+        <li>「避免使用某工具独有的功能」这个自我约束，对教程的可复用性有什么影响？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 3 ================= -->
+<section class="chap c3-scope" id="ch3">
+  <div class="ch-head c3">
+    <div class="ch-num">CHAPTER 03</div>
+    <h2>环境搭建</h2>
+    <div class="ch-range">02:24 – 06:26　·　2 节　·　4 分 02 秒</div>
+  </div>
+
+  <article class="sec" id="s31">
+    <h3><span class="secno">3.1</span>建目录 + 让 AI 初始化 Git 仓库</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=144">02:24</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=238">03:58</a></div>
+
+    <p>环境搭建的第一步是给产品创建一个<strong>专门存放项目代码的文件夹</strong>。UP 主要做电子书阅读器，就给它起名叫「马克阅读」，然后创建对应文件夹。</p>
+
+    <p>接着在 Codex 里建项目：打开 Codex → 点里面的<strong>加号</strong>创建新项目 → 项目类型维持<strong>「本地」</strong> → 下一步 → 把「马克阅读」文件夹<strong>加进来</strong> → 点创建项目。然后在对话框里发第一条指令：</p>
+
+    <div class="quote-box">
+      「<strong>帮我把当前的目录初始化为一个 Git 仓库</strong>。」
+      <cite>—— 第 1 条指令（03:14 前后）</cite>
+    </div>
+
+    <p>等 Codex 干活的时候，他顺手给不了解 Git 的观众补了一段解释。这段解释的措辞值得原样记下来，因为它就是全片讲 Git 的基调：</p>
+
+    <div class="callout co-concept">
+      <span class="tag">Git 是什么（UP 主的原话解释）</span>
+      <ul>
+        <li>简单来说，Git 就是一个<strong>版本管理工具</strong>。</li>
+        <li>我们每做完一个新功能，就可以用 Git 把它<strong>保存为一个对应的版本</strong>。</li>
+        <li>这样即使哪天代码被搞乱了，也能够<strong>一键回退到之前的可用状态</strong>——非常高效，也非常好用。</li>
+        <li>实际上建议你<strong>所有的代码项目都拿 Git 来管理</strong>，甚至可以考虑把代码推送到 GitHub 上，这样即使本地代码丢了，也能从 GitHub 上把代码拉下来，防止之前的劳动成果付诸东流。</li>
+      </ul>
+    </div>
+
+    <p>他明确说本片不演示 GitHub 的使用，「否则视频会有些冗长」，让大家自己找材料看。但在 CH7 讲三条原则时，他把「同步到远端仓库」又提了一遍——说明在他心里这属于<strong>「条件允许就做」的加强项，不是必选项</strong>。</p>
+
+    <p>Codex 做完之后，UP 主打开终端验证：进入「马克阅读」文件夹，执行 <code>git status</code>。「可以看到正常返回了，也没有报错，<strong>这就代表当前目录确实已经被 Git 接管了</strong>。」</p>
+
+    <div class="callout co-case">
+      <span class="tag">这一节的可复制要点</span>
+      <ul>
+        <li>不用自己敲 <code>git init</code>，<strong>让 AI 做</strong>，然后<strong>自己用 <code>git status</code> 验证</strong>——这就是全片「AI 干活 + 人验证」的最小示范，后面每一步都是这个模式的放大版。</li>
+        <li>「验证」这个动作在第一分钟就出现了，不是等到最后才做。</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>建项目：专门目录 + Codex 本地项目。</li>
+        <li>第一条指令不是写代码，而是<strong>把目录纳入版本控制</strong>。</li>
+        <li>验证靠人：<code>git status</code> 无报错 = 目录已被 Git 接管。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>为什么 UP 主把「初始化 Git」放在写第一行代码之前？如果放到后面会损失什么？</li>
+        <li>你的项目里，除了 Git 之外还有别的「可回滚保障」吗？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s32">
+    <h3><span class="secno">3.2</span>AGENTS.md：给 AI 的项目说明书，两条硬规矩</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=268">04:28</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=386">06:26</a></div>
+
+    <p>环境搭建的第二件事，也是整个流程里最关键的一步配置：创建 <code>AGENTS.md</code> 文件。</p>
+
+    <div class="quote-box">
+      「<strong>创建一个 AGENTS.md 文件，写入下面这些内容，最后提交一个 commit。</strong>」
+      <cite>—— 第 2 条指令（04:28 前后）；文件内容也一起贴进对话框</cite>
+    </div>
+
+    <p>发完指令后，UP 主解释了<em class="term">AGENTS.md</em> 的作用：</p>
+
+    <div class="callout co-concept">
+      <span class="tag">AGENTS.md 是干什么的</span>
+      <ul>
+        <li>它相当于<strong>给 Codex 写的项目说明书</strong>。</li>
+        <li>每次你开启一轮新的<strong>会话</strong>，Codex 就会<strong>优先读取里面的内容</strong>，从而快速了解当前的项目背景和开发规范。</li>
+      </ul>
+    </div>
+
+    <p>他在文件里写了两条必须遵守的规定。这两条是理解后文所有行为的钥匙——尤其是 CH6 的「写完自测」。</p>
+
+    <table class="gl">
+      <tr><th>规矩</th><th>内容</th><th>UP 主的解释</th></tr>
+      <tr><td>规矩一</td><td>每次改动后必须创建 git commit</td><td>以便后续追踪和回滚。你可以大致理解为：Codex 每完成一个功能，都要顺手帮我们<strong>保存一个版本快照</strong>。后面如果哪一步改出了问题，就可以非常方便地找到之前正常的版本直接退回去，不用担心代码越改越乱。</td></tr>
+      <tr><td>规矩二</td><td>每次改动后必须编写或更新测试，并在交付给用户前确保所有测试和验收全部通过</td><td>我们不希望 Codex 写完代码就直接交差，而是希望它<strong>自己先跑一遍、测一遍</strong>，发现问题就继续修一修，直到它能够确认当前的改动基本没有问题了，再来告诉我们「完成了」。这样就能提前帮我们挡掉不少比较明显的 bug，节省我们的时间。</td></tr>
+    </table>
+
+    <div class="callout co-case">
+      <span class="tag">这两条规矩的设计意图</span>
+      <ul>
+        <li>规矩一是<strong>给「改坏」买的保险</strong>——它不提高 AI 一次做对的概率，但保证做错时可以低成本撤销。</li>
+        <li>规矩二是<strong>把「自测」从人的习惯变成 AI 的义务</strong>——这是全片反复强调的「给 AI 自测能力」的规则来源。</li>
+        <li>两条都不是「让 AI 更聪明」，而是<strong>让 AI 的工作可回滚、可验证</strong>。这正是 UP 主整片的方法论底色。</li>
+      </ul>
+    </div>
+
+    <p>验证方式同样朴素：回到<strong>访达</strong>（macOS 文件管理器）看一眼，「可以看到文件确实是创建好了，内容也跟我们要求的是一模一样的」。</p>
+
+    <p>至此环境搭建完成。UP 主的总结只有一句话：「其实总结下来也就两件事情：<strong>一个是 Git，另外一个是 AGENTS.md</strong>。」接下来就可以正式进入产品设计环节。</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li><code>AGENTS.md</code> = 每轮新会话优先读取的「项目说明书」，承载项目背景与开发规范。</li>
+        <li>两条规矩分别管<strong>可回滚</strong>（每次改动必 commit）与<strong>可验证</strong>（每次改动必更新测试并跑通）。</li>
+        <li>环境搭建 = Git + AGENTS.md，二者是全片唯一一次性的投入。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>如果只能在自己的 <code>AGENTS.md</code> 里写两条规矩，你会写哪两条？为什么？</li>
+        <li>规矩二要求「交付前确保所有测试和验收全部通过」——「验收」由谁定义？这会不会又回到「人来写测试」？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 4 ================= -->
+<section class="chap c4-scope" id="ch4">
+  <div class="ch-head c4">
+    <div class="ch-num">CHAPTER 04</div>
+    <h2>产品方案设计</h2>
+    <div class="ch-range">06:26 – 14:43　·　4 节　·　8 分 17 秒（全片最长）</div>
+  </div>
+
+  <article class="sec" id="s41">
+    <h3><span class="secno">4.1</span>先跟 AI 对齐 MVP 边界</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=386">06:26</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=486">08:06</a></div>
+
+    <p>知道自己要做一个电子书阅读器，但具体要做成什么样子，「其实大家心里可能都还没有一个非常确切的答案」。UP 主的做法是：先跟 AI 讨论产品的设计。</p>
+
+    <div class="quote-box">
+      「我想做一个电子书阅读器，打算先从 <strong>MVP</strong> 版本开始，你觉得这一版做哪些功能比较合适呢？」
+      <cite>—— 产品讨论的第 1 条指令（06:44 前后）</cite>
+    </div>
+
+    <p>他预判了观众会问「MVP 是什么」，顺手给出定义：<em class="term">MVP</em> 是 Minimal Viable Product 的缩写，中文一般叫做<strong>最小可用产品</strong>。含义是「第一版只做最核心、最必要的功能，先把产品的主流程跑通，其他功能以后可以慢慢加」。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">为什么先做 MVP</span>
+      <ul>
+        <li>好处是「可以用<strong>比较低的成本快速验证产品方向</strong>」。</li>
+        <li>反例：「你想如果一开始的时候，就把功能铺的太大，后面发现方向不对的话，很多工作可能就白做了。」</li>
+        <li>所以本片的路径是：先把最基本的体验做出来，确定没问题后，再逐步往上加功能。</li>
+      </ul>
+    </div>
+
+    <p>AI 随后给出一批功能建议（导入 EPUB、目录与章节、三种主题、书签等），一场「砍需求」就此开始。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">存疑标注</span>
+      UP 主口播为 <code>Minimal Viable Product</code>，通行拼写是 <code>Minimum Viable Product</code>。这是口播习惯而非事实错误，本讲义保留原话并在此加注。
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>产品设计从一句<strong>开放式提问</strong>开始，让 AI 先提案，而不是自己先写完需求再交给 AI。</li>
+        <li>MVP = 最小可用产品，目的是低成本验证方向，避免「功能铺太大」的返工。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>你的上一个项目，MVP 的边界是<strong>你定的</strong>还是<strong>AI 定的</strong>？结果如何？</li>
+        <li>「先把主流程跑通」——如果你现在做的产品就是主流程，你怎么判断它已经「跑通」？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s42">
+    <h3><span class="secno">4.2</span>逐条砍需求：从 EPUB 一路砍到 TXT</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=486">08:06</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=619">10:19</a></div>
+
+    <p>这一节是全片信息密度最高的演示之一。UP 主的操作习惯很值得学：<strong>看完 AI 的回答再统一回复，不急着一条一条提交</strong>——「好，这个时候不要着急提交，因为我们还没有看完整个回答 […] 有问题直接追加到输入框里面，最后一起提交」。</p>
+
+    <p>他砍了五刀，每一刀都给了具体理由：</p>
+
+    <table class="gl">
+      <tr><th>对象</th><th>裁决</th><th>UP 主的理由（大意）</th></tr>
+      <tr><td>导入格式</td><td>EPUB → TXT</td><td>EPUB 是很常见的电子书格式，支持它没问题，但「可能还是稍微有一些复杂度」。既然做最小可用版本，希望一开始越简单越好。</td></tr>
+      <tr><td>目录与章节</td><td>去掉</td><td>只做 TXT 的话「基本上也就没有什么目录和章节可言了 […] 即使有的话，那也不是能够通过固定方法解析到的」。</td></tr>
+      <tr><td>主题</td><td>三种 → 一种</td><td>「一开始不用支持这么多，就先做明亮主题就好了，护眼和深色可以先不做。」</td></tr>
+      <tr><td>书签</td><td>不做</td><td>「其实我们也不需要，因为它们不是必要功能。」</td></tr>
+      <tr><td>总纲</td><td>收口</td><td>「总之我们先做最基本的功能，其余的功能后面再迭代。」</td></tr>
+    </table>
+
+    <p>最后一刀最容易被忽略，但可能是最有用的：他砍完之后<strong>反问 AI 一句</strong>——「你觉得前面这些想法有没有什么问题呢？」AI 随即给出了几条补充，UP 主的反应是「可以的，这些我都赞同」：</p>
+
+    <table class="gl">
+      <tr><th>补充项</th><th>内容</th><th>说明</th></tr>
+      <tr><td>文件编码</td><td>仅支持 UTF-8</td><td>AI 建议第一版就只支持 UTF-8</td></tr>
+      <tr><td>阅读方式</td><td>仅纵向滚动</td><td>第一版先不做分页</td></tr>
+      <tr><td>大文件</td><td>给出提示</td><td>载入大文件需要给出一些提示</td></tr>
+      <tr><td>额外产出</td><td>推迟清单</td><td>AI 还给出了「可以推迟的功能列表」</td></tr>
+    </table>
+
+    <p>「到这里，其实我们对第一版要做什么、暂时不做什么，已经有了一个比较明确的共识。」</p>
+
+    <div class="callout co-case">
+      <span class="tag">这一节的方法论</span>
+      <ul>
+        <li><strong>批注式对话，而不是逐条往返：</strong>边看边把意见追加进输入框，最后一起提交——省掉了大量往返轮次。</li>
+        <li><strong>AI 是提案方，人是裁决方：</strong>功能清单由 AI 起头，但「砍到多小」是人决定的。</li>
+        <li><strong>砍完要回问一句：</strong>既让 AI 把异议说出来，也顺手拿到了编码、滚动方式这些自己没想到的工程细节。</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>砍需求不是「嫌多」，每一条都要有<strong>具体理由</strong>（太复杂 / 概念不存在 / 非必要）。</li>
+        <li>砍完之后主动反问，把 AI 从执行者拉回评审者——这一步换来了 UTF-8、纵向滚动、大文件提示三条真正的工程建议。</li>
+        <li>共识落地为一句可执行的边界：「只做最基本的功能，其余后面再迭代」。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>「砍掉 EPUB 只留 TXT」这个决定，牺牲了哪些可能性？换来了什么？</li>
+        <li>如果 AI 在第一步就把「编码、滚动方式、大文件提示」也提出来，你还会砍得这么干脆吗？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s43">
+    <h3><span class="secno">4.3</span>出产品设计文档，但「不用太详细」</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=616">10:16</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=686">11:26</a></div>
+
+    <p>共识谈完，接下来要把它<strong>固化下来</strong>：整理成一份产品设计文档，当作后续开发的提纲。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">为什么必须有这份文档</span>
+      <ul>
+        <li>「这样无论后面是做技术方案，还是让 AI 写代码，<strong>大家都有一个统一的依据</strong>。」</li>
+        <li>「简单来说，这份文档就是<strong>先把 MVP 的边界给定下来</strong>。」</li>
+      </ul>
+    </div>
+
+    <p>发指令的时候，UP 主特意停下来提醒大家注意他的措辞：</p>
+
+    <div class="quote-box">
+      「我同意你的建议，接下来帮我整理一份产品设计文档，<strong>不用太详细</strong>，把整体方向和主要功能梳理出来就可以。」
+      <cite>—— 出文档的指令（10:34 前后）</cite>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">为什么要说「不用太详细」</span>
+      <ul>
+        <li>他的理由很直接：「否则字太多了，我们看起来也累，差不多就行了。」</li>
+        <li>底线：「我们只需要保证<strong>大体方向跟我们想的一致</strong>就行。如果真的有什么细节跟我们预期的不太一样，<strong>后面再迭代就好了</strong>。」</li>
+        <li>「我觉得这样更方便一些。」</li>
+      </ul>
+    </div>
+
+    <p>这是一个反直觉的建议：很多人以为文档要越细越好。UP 主的逻辑是——这份文档的读者首先是「接下来要读它的 AI 和你自己」，过细的文档既增加阅读成本，又容易让人误以为「写得这么细一定对」。所以他只要「方向 + 主要功能」，细节留给迭代。</p>
+
+    <p>文档写完，「好像是没什么问题，那就这样吧」——产品设计方案基本确认。</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>产品设计文档的唯一职责是<strong>钉死 MVP 边界</strong>，为后续技术方案与编码提供统一依据。</li>
+        <li>刻意的「不用太详细」是一种<strong>成本控制</strong>：降低阅读负担，把细节留给迭代。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>你写过的需求文档里，有多少内容是 AI 根本不需要的？</li>
+        <li>「不用太详细」和「必须说清边界」如何共存？哪些内容属于「必须说清」的那一类？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s44">
+    <h3><span class="secno">4.4</span>demo 要不要做：看后端实现成本</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=686">11:26</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=883">14:43</a></div>
+
+    <p>产品设计的最后，有些时候 UP 主还会再做一个环节：让 AI 画一个 <em class="term">demo</em>。这一节把 demo 是什么、有什么好处、以及「什么时候值得做」讲透了——而这一期的电子书阅读器，他最后<strong>并没有做</strong>。</p>
+
+    <table class="gl">
+      <tr><th>概念</th><th>含义</th><th>说明</th></tr>
+      <tr><td>demo</td><td>可实际操作的前端页面</td><td>「你可以把它理解成一个可以实际操作的前端页面」</td></tr>
+      <tr><td>前端</td><td>看得见、点得到的界面</td><td>「就是指我们看得见点得到的界面」</td></tr>
+      <tr><td>后端</td><td>真正处理数据的逻辑</td><td>「它指的是背后真正处理数据、执行功能的那些逻辑」</td></tr>
+      <tr><td>做 demo 时</td><td>只做前端</td><td>后端暂时不实现，里面的数据一般也都是直接模拟的</td></tr>
+    </table>
+
+    <p>他用自己准备的一个「个人知识库」demo 做示范（特意说明这个 demo 跟本期的阅读器没关系，只是拿来解释 demo 长什么样）：</p>
+
+    <div class="callout co-case">
+      <span class="tag">这个 demo 的形态</span>
+      <ul>
+        <li>它其实就是一个 <strong>HTML 文件</strong>，直接打开就行。</li>
+        <li>左边是<strong>文档列表</strong>，中间系统给出了一些<strong>推荐问题</strong>。</li>
+        <li>点击一个推荐问题，它就开始回答；回答完毕之后点「<strong>引用文件</strong>」，右边就会展示回答所引用的原文。</li>
+        <li>但「这里面只有前端页面是真的，这个回答和相关的这些示例文件，其实都是模拟的，因为后端逻辑还没有实现」。</li>
+      </ul>
+    </div>
+
+    <p>「它的主要目的就是为了让用户体验一下整个界面的交互和操作流程到底顺不顺手。如果哪里感觉不对，就可以继续让 AI 修改这个 demo，直到整体体验比较符合我们的预期为止。」</p>
+
+    <p>做 demo 有两个好处：</p>
+
+    <ol>
+      <li><strong>提前验证产品设计。</strong>「很多东西光靠文字其实很难想象。真正把页面画出来、亲自操作一下之后，你可能就会发现一些之前没有想到的问题。」发现设计不合理，就继续修改 demo，同时把对应的产品设计文档一起调整。</li>
+      <li><strong>让后面的产品实现更精确。</strong>demo 可以非常直观地告诉 AI「我最终想要的产品大概就是这个样子」——「这个是文字描述很难做到的」。后面实现时把<strong>产品设计文档和 demo 一起交给 AI</strong>，它既知道要做哪些功能，也知道界面和交互应该怎么还原，做出来的东西一般会更加接近预期。</li>
+    </ol>
+
+    <p>那到底什么时候适合做 demo？UP 主给了一个非常干脆的判断标准：</p>
+
+    <div class="callout co-concept">
+      <span class="tag">判断标准：这个产品的后端实现成本</span>
+      <ul>
+        <li><strong>后端成本高 → 先做 demo。</strong>例：个人知识库。「因为这里面会涉及到文档处理、搜索、检索策略、模型 demo 等等很多的后端逻辑。在这种情况下，我更愿意先做一个 demo，把界面和交互确定下来。」</li>
+        <li><strong>后端成本低 → 直接做产品。</strong>例：本期的电子书阅读器。「毕竟就是一个看书软件，导入 TXT 文件就可以了，没有什么太复杂的逻辑。这个时候如果还专门做一遍 demo，可能反而有些重复劳动，还不如直接把产品给做出来。等真正跑起来之后，哪里不顺手，我们直接在完整的产品上面继续调整就可以了。」</li>
+      </ul>
+    </div>
+
+    <p>如果需要做 demo，指令也很简单：</p>
+
+    <div class="quote-box">
+      「帮我做一个 demo，不用实现真实的后端功能，数据模拟一下就行。我主要是想看看整体界面和操作流程是否合理。」
+      <cite>—— demo 指令模板（14:12 前后）；不满意就继续让 AI 改，直到符合预期</cite>
+    </div>
+
+    <p>「不过就像前面所说的，我们这个电子书阅读器比较简单，没有太大必要专门做一遍 demo，所以这里我也就不发这条指令了。大家在自己的项目里面，可以根据实际情况决定要不要加这一步。」</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>demo = 只有前端、数据模拟的「可操作原型」，用来验证界面与交互。</li>
+        <li>两个价值：<strong>提前暴露设计问题</strong>、<strong>给 AI 一个比文字更精确的目标</strong>。</li>
+        <li>判断标准只有一个：<strong>后端实现成本</strong>。贵 → 做；便宜 → 直接做产品，做 demo 反而重复劳动。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>用「后端实现成本」这个单一标准来判断，有什么盲区？（提示：考虑界面复杂度高但后端很简单的产品。）</li>
+        <li>如果决定做 demo，你会把 demo 和产品设计文档中的哪些部分保持同步？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 5 ================= -->
+<section class="chap c5-scope" id="ch5">
+  <div class="ch-head c5">
+    <div class="ch-num">CHAPTER 05</div>
+    <h2>技术方案设计</h2>
+    <div class="ch-range">14:43 – 17:17　·　2 节　·　2 分 34 秒</div>
+  </div>
+
+  <article class="sec" id="s51">
+    <h3><span class="secno">5.1</span>技术栈讨论：Electron 与 Tauri</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=883">14:43</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1000">16:40</a></div>
+
+    <p>技术方案可以直接在当前会话后面继续追问，也可以创建一个新的会话——「这两种方式都是可以的」。</p>
+
+    <p>UP 主先讨论了「要不要新开会话」，因为它牵出一个常见顾虑。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">上下文会不会越聊越坏？</span>
+      <ul>
+        <li><strong>顾虑：</strong>在当前会话继续追问，上下文越记越多，对大模型的效果可能就会有一定程度的影响。</li>
+        <li><strong>UP 主承认：</strong>「确实有这种可能性。」</li>
+        <li><strong>但他的体会是：</strong>现在的顶级模型对<strong>长上下文的驾驭能力越来越强</strong>了，再加上对应的<strong>上下文压缩机制</strong>，正常使用的话一般不用过于担心上下文的问题。</li>
+        <li><strong>他的实测：</strong>「我甚至经常在一个会话里面连续跑几个小时，都没有感觉到有什么太大的问题。」</li>
+        <li><strong>但他仍然选择新开：</strong>「不过为了稳妥一点，也为了让后面的技术方案讨论<strong>更为聚焦</strong>，我们这里还是新开一个会话。」</li>
+      </ul>
+    </div>
+
+    <p>这个选择本身很有信息量：他不是因为「上下文一定会坏」才新开，而是因为<strong>新开会话能让话题更聚焦</strong>。也就是说，在他这里新开会话是一个「组织话题」的动作，而不是「防止模型退化」的补救措施。</p>
+
+    <p>做法和产品设计同构：<strong>先跟 AI 讨论可能的技术设计方向，让它给建议</strong>。他给了一个很实用的场景——你可能听说 Electron 非常适合做这件事，但你对它没那么熟、拿不定主意，「这个时候你就可以把你的想法跟 AI 说一下，让它帮你看看 Electron 合不合适」。</p>
+
+    <div class="quote-box">
+      「在这个目录下面有一份产品设计文档，请你读一遍这个产品设计文档，然后告诉我用什么技术站设计这个产品比较合适。不用给出过于详细的设计，我们就先探讨一下。我听说 Electron 还可以，你怎么看呢？」
+      <cite>—— 技术栈讨论的指令（15:51 前后）</cite>
+    </div>
+
+    <p>这句指令里其实有四个动作，每一个都值得单独拎出来：</p>
+
+    <ol>
+      <li><strong>指向已有文档</strong>——把上下文交给它，而不是重述需求。</li>
+      <li><strong>要技术栈建议</strong>——要的是方向，不是完整设计。</li>
+      <li><strong>明确说「不用过于详细」</strong>——和 CH4 的措辞习惯一致，控成本。</li>
+      <li><strong>把自己的猜测抛出去让它评估</strong>——「我听说 Electron 还可以，你怎么看呢？」要的是判断，不是选项列表。</li>
+    </ol>
+
+    <p>AI 的回答：Electron 非常合适、会优先采用，给出了建议的技术栈，同时也给出了 Electron 的缺点，以及另外一个可能的选项 <strong>Tauri</strong>。最后收口出这套架构：<strong>Electron + React + TypeScript + Vite + Electron Forge</strong>。</p>
+
+    <div class="callout co-case">
+      <span class="tag">这条链路的形状值得记</span>
+      <ul>
+        <li><strong>人抛出一个候选 → AI 评估并主动补出备选 → AI 把讨论收口成一套可执行的组合。</strong></li>
+        <li>UP 主在这里坦承「我也不是特别懂这块」（说于 CH5.2）——这恰好说明这一步要的不是人的技术判断力，而是<strong>让 AI 把选项摆齐、再由人拍板</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">勘误提示</span>
+      转写把「技术栈」误识别为「技术站」，「Tauri」误识别为「Tori」。本讲义已按勘误表修正，详见<a href="#apx-a">附录 A</a>。
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>新开会话的理由是<strong>话题聚焦</strong>，不是「防止上下文退化」；UP 主认为顶级模型的长上下文能力已基本够用。</li>
+        <li>讨论技术栈的指令结构：给上下文 → 要方向 → 限详细度 → 抛出自己的猜测要评估。</li>
+        <li>最终技术栈：Electron + React + TypeScript + Vite + Electron Forge；备选 Tauri 未被采用。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>「我听说 Electron 还可以，你怎么看呢？」——如果换成「请列出各种技术栈的优缺点」，AI 的回答会有什么不同？</li>
+        <li>什么情况下你<strong>不应该</strong>把技术选型交给 AI 判断？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s52">
+    <h3><span class="secno">5.2</span>让 AI 落一份技术方案文档</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1000">16:40</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1037">17:17</a></div>
+
+    <p>方向确认之后，和产品设计一样，让 AI 把结论落成一份文档。</p>
+
+    <div class="quote-box">
+      「行就按你说的来，现在请你写一个技术方案，放在 <code>docs</code> 文件夹里面。」
+      <cite>—— 落档指令（16:49 前后）</cite>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">为什么要这份文档</span>
+      <ul>
+        <li>「这样后面<strong>具体写代码的时候，就可以以这个文档作为参考</strong>。」</li>
+        <li>它和产品设计文档配对使用：产品文档回答「做什么」，技术文档回答「怎么搭」。</li>
+      </ul>
+    </div>
+
+    <p>写完，「大体看一下，好像还行的样子，那就这样吧」。UP 主在这里很坦率：</p>
+
+    <div class="quote-box">
+      「说实话我也不是特别懂这块，只要保证大体方向没问题就行。到这里技术方案的设计就算是完成了。」
+      <cite>—— UP 主原话（17:07 前后）</cite>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">这句话的定位很重要</span>
+      <ul>
+        <li>它解释了本章为什么可以只花 2 分 34 秒：<strong>技术方案的目的是「方向不错、有个统一依据」，不是「人把每个细节都审一遍」。</strong></li>
+        <li>对照 CH4 的「不用太详细」，两章是同一条原则的两次应用：<strong>文档服务于后续的 AI 执行，不是服务于人的完备性焦虑。</strong></li>
+        <li>也正因为这样，CH7 才会说「技术设计要参与到什么程度，取决于你想保留多少掌控力」——它是一个可以被整章跳过的环节。</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>技术方案文档放在 <code>docs</code> 目录，与产品设计文档配对，作为编码阶段的参考。</li>
+        <li>人的审阅目标是「大体方向没问题」，而非逐项复核。</li>
+        <li>本节与 CH4.3 共同确立了一条原则：<strong>文档只要够用，不要够全。</strong></li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>「大体方向没问题就行」这个审阅标准，在什么类型的项目上会变得危险？</li>
+        <li>如果你对某块技术完全不懂，除了让 AI 写方案，还有什么成本可控的校验手段？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 6 ================= -->
+<section class="chap c6-scope" id="ch6">
+  <div class="ch-head c6">
+    <div class="ch-num">CHAPTER 06</div>
+    <h2>产品实现</h2>
+    <div class="ch-range">17:17 – 20:15　·　3 节　·　2 分 58 秒</div>
+  </div>
+
+  <article class="sec" id="s61">
+    <h3><span class="secno">6.1</span>装 Computer Use 与 Chrome 插件：先给 AI 眼睛</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1042">17:22</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1094">18:14</a></div>
+
+    <p>「在正式编写代码之前，我先提一句——我们最好<strong>让 AI 拥有自行验证结果的能力</strong>。」这是 CH3 那条「规矩二」的落地条件：规矩要求它自测，那就得先给它能测的工具。</p>
+
+    <p>如果用的是 Codex，他建议至少安装两个插件：</p>
+
+    <ol>
+      <li><strong>Computer Use</strong> —— 可以用来操作电脑。</li>
+      <li><strong>Chrome</strong> —— 可以用来查看 Chrome 页面。</li>
+    </ol>
+
+    <p>「有了这两个插件，大部分的功能都是可以交给 AI 来验证的，包括我们现在做的这个电子书阅读器也是同样的道理。」如果用别的编程 Agent，「那可以自行查找下对应的插件或者是 skill」。</p>
+
+    <div class="callout co-warn">
+      <span class="tag">不给验证环境的后果</span>
+      <ul>
+        <li>AI 只会写、不会验——「<strong>很容易就会写出一堆 bug</strong>」，毕竟它没法验证。</li>
+        <li>人被迫下场当测试员：「<strong>来来回回帮 AI 找 bug，极其浪费时间</strong>」（这句在 CH7 原则二里被再次点名）。</li>
+        <li>所以这一步省下的时间，会在后面的来回沟通里成倍还回去。</li>
+      </ul>
+    </div>
+
+    <div class="quote-box">
+      「给 AI 一个能够验证的环境是一个非常重要的事情，否则 AI 很容易就会写出一堆 bug——毕竟它没法验证嘛。如果人写代码没法验证的话，那估计也会有一堆 bug。」
+      <cite>—— UP 主原话（17:51 前后）</cite>
+    </div>
+
+    <p>最后那句把人机放在同一把尺子上，是本片最锋利的类比之一：问题不在于「AI 不靠谱」，而在于<strong>任何写代码的主体，没有验证手段都必然产 bug</strong>。</p>
+
+    <div class="callout co-case">
+      <span class="tag">这一步的定位</span>
+      <ul>
+        <li>它不是「可选优化」，而是让 AGENTS.md 里那条测试要求<strong>真正能被执行</strong>的前提。</li>
+        <li>换句话说：<strong>规矩是写给人看的，插件是写给 AI 用的</strong>——两者缺一，自测都会退化成「AI 声称自己测过了」。</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>动手前必做：把「验证」也交给 AI，而不只是把「写」交给 AI。</li>
+        <li>Codex 下用 Computer Use（操作电脑）+ Chrome（查看页面）；其它 Agent 找对应插件/skill。</li>
+        <li>论证方式：不是「AI 不靠谱所以要自测」，而是「<strong>没有验证手段的主体都必然产 bug，人也不例外</strong>」。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>你目前给 AI 的「验证手段」覆盖了哪些环节？哪些还完全靠自己手动测？</li>
+        <li>「让 AI 能操作电脑」和「让 AI 能看页面」，哪个对你当前项目的价值更大？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s62">
+    <h3><span class="secno">6.2</span>带着两份文档实现，并自己跑测试</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1094">18:14</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1157">19:17</a></div>
+
+    <p>配置好之后，新建一个会话让 AI 开始实现。指令的设计和前面一脉相承：<strong>不重复需求，只指路</strong>。</p>
+
+    <div class="quote-box">
+      「这个目录下面有两个文档，一个是产品设计，一个是对应的技术方案，请你读一下这些文档，然后根据里面的要求实现这个产品。」
+      <cite>—— 实现指令（18:20 前后）</cite>
+    </div>
+
+    <p>「接下来我们稍微等一下，写代码估计要花不少时间。」注意这条指令里<strong>没有复述任何需求细节</strong>——因为细节都已经在前面两份文档里了。这正是 CH4、CH5 坚持要产出文档的直接回报。</p>
+
+    <div class="callout co-case">
+      <span class="tag">结果与归因</span>
+      <ul>
+        <li>「可以看到他不仅把产品做完了，<strong>还完成了各种自测</strong>，确保他写的代码没有问题。」</li>
+        <li>UP 主的归因：「这符合我们在 AGENTS.md 里面的要求」——即那条「每次改动后必须编写或更新相关测试，并在交付给用户前确保所有测试和验证全部通过」。</li>
+        <li>他还打了个趣：「你是不是都忘了我们在 AGENTS.md 里面写了什么了？没关系，我再给你看一下。」</li>
+      </ul>
+    </div>
+
+    <p>但紧接着，UP 主特意给这个结果划了边界——这段是本节最该记住的：</p>
+
+    <div class="callout co-concept">
+      <span class="tag">自测能保证什么</span>
+      <ul>
+        <li>「这些测试只能<strong>尽可能提高代码的可靠性</strong>，帮 AI 提前发现一些明显的问题。」</li>
+        <li>「<strong>并不能够保证</strong>最终交付出来的产品就一定没有 bug。」</li>
+        <li>「真正用起来怎么样，还是得<strong>我们自己亲自验证</strong>之后才知道。」</li>
+      </ul>
+    </div>
+
+    <p>这段边界说明提前把「有了自测就可以完全放手」这个念头掐掉了，也直接把叙事推到下一节——亲手跑一遍。</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>实现阶段的指令<strong>只指路不复述需求</strong>，回报来自前面两份文档。</li>
+        <li>AI 会按 AGENTS.md 的规矩主动完成自测——这是把规矩写下来的直接收益。</li>
+        <li>但自测只提高可靠性、挡掉明显问题，<strong>不等于产品无 bug</strong>；人工验证不可替代。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>「只指路不复述需求」的前提是什么？如果文档质量不高，会发生什么？</li>
+        <li>怎么判断 AI 说的「已完成自测」是真的跑过，还是只是声称？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s63">
+    <h3><span class="secno">6.3</span>亲手跑一遍：第一个报错</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1157">19:17</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1215">20:15</a></div>
+
+    <p>AI 最后提到「执行 <code>npm start</code> 命令就可以启动」。UP 主这就来试试——结果「似乎上来就报了一个错」。</p>
+
+    <table class="gl">
+      <tr><th>步骤</th><th>动作</th><th>说明</th></tr>
+      <tr><td>①</td><td>执行 npm start</td><td>按 AI 的说明启动产品</td></tr>
+      <tr><td>②</td><td>上来就报错</td><td>界面提示「操作失败，请稍后重试」</td></tr>
+      <tr><td>③</td><td>把现象描述给 AI</td><td>「打开之后直接显示了一个报错：操作失败，请稍后重试」</td></tr>
+      <tr><td>④</td><td>修好了</td><td>再跑一遍 → 错误消失 → 导入一本 TXT 试试 →「看起来好像还可以的样子」</td></tr>
+    </table>
+
+    <p>UP 主对这一幕的评论，是全片最好的论据：</p>
+
+    <div class="quote-box">
+      「你看，AI 确实不是百分之百靠谱的。即使他自己能验证，也未必完全可靠。」
+      <cite>—— UP 主原话（19:30 前后）</cite>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">处理姿势：人不下场 debug</span>
+      <ul>
+        <li>报错不慌，也不用自己去读堆栈——把<strong>「看到的画面」描述清楚</strong>，剩下的交给 AI。</li>
+        <li>人只负责<strong>再跑一次验证</strong>。</li>
+        <li>这里有个细节：那句「操作失败，请稍后重试」是<strong>产品自己弹的界面提示</strong>，不是终端异常——所以描述现象时要连界面文案一起说。</li>
+      </ul>
+    </div>
+
+    <p>到这里，「这个产品的 MVP 就算是彻底做完了」。UP 主的定位是：「我们的第一个需求，就彻底做完了。」</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>AI 自测通过、声称完成，人一跑仍然出错——<strong>这正是人工验证不可省的原因</strong>。</li>
+        <li>但它同时说明人工验证的<strong>职责边界</strong>：不是替 AI 找 bug，而是代替 AI 当最后一个用户。</li>
+        <li>修复路径极短：描述现象 → 交给 AI → 再跑一遍。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>这个报错如果发生在你身上，你会先去看代码，还是先描述现象给 AI？两种做法的成本差别在哪？</li>
+        <li>「人当最后一个用户」和「人当测试员」的界线在哪里？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= CHAPTER 7 ================= -->
+<section class="chap c7-scope" id="ch7">
+  <div class="ch-head c7">
+    <div class="ch-num">CHAPTER 07</div>
+    <h2>整体流程回顾</h2>
+    <div class="ch-range">20:15 – 24:54　·　4 节　·　4 分 39 秒</div>
+  </div>
+
+  <article class="sec" id="s71">
+    <h3><span class="secno">7.1</span>五步流程：第一步一次性，后四步可循环</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1223">20:23</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1301">21:41</a></div>
+
+    <p>「我们简单回顾一下刚才的整体流程，一共是分为五步。」</p>
+
+    <table class="gl">
+      <tr><th>步骤</th><th>名称</th><th>UP 主的描述</th></tr>
+      <tr><td>第一步</td><td>环境搭建</td><td>比如初始化 Git 版本控制、写一个基本的 AGENTS.md 等等</td></tr>
+      <tr><td>第二步</td><td>产品设计</td><td>明确要做什么、不做什么。这里我们会跟 AI 探讨产品方案，并在某些情况下出一份 demo</td></tr>
+      <tr><td>第三步</td><td>技术设计</td><td>主要是确定技术方案，尤其是技术栈和架构，以便确保整体方向没有问题、设计符合我们的要求</td></tr>
+      <tr><td>第四步</td><td>产品实现</td><td>不仅让 AI 实现代码，还要给 AI 自测的能力，让它写完代码之后能够自己测试，把明显的问题全部修掉。这一般需要我们安装类似 Computer Use 或者是 Chrome 的插件</td></tr>
+      <tr><td>第五步</td><td>人工验证</td><td>主要是我们亲自上手体验，发现问题就让 AI 修改，一直到完全符合预期为止</td></tr>
+    </table>
+
+    <div class="callout co-concept">
+      <span class="tag">最关键的结构判断</span>
+      <ul>
+        <li>「你看，这里面<strong>除了第一步环境搭建是一次性的</strong>，<strong>后面的四步其实就是我们开发每一个新功能时的标准流程</strong>。」</li>
+        <li>举例：后续想给阅读器加一个<strong>全文搜索</strong>功能，同样走这个流程——先做产品设计（确定搜索入口该放在哪里、结果该怎么展示），再出技术方案（文本怎么索引、搜索怎么实现），接着让 AI 完成开发和自测，最后我们再亲自验证。</li>
+      </ul>
+    </div>
+
+    <p>这个「一次性 + 循环」的结构很重要：它说明了第五步里哪些是固定成本（①④⑤），哪些是可以裁剪的（②③）。这正好是下一节的铺垫。</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>五步：环境搭建 → 产品设计 → 技术设计 → 产品实现 → 人工验证。</li>
+        <li><strong>第一步只做一次</strong>；后四步是「每加一个新功能都要重跑」的循环。</li>
+        <li>这个结构直接决定了后面「哪些环节可以省」的答案。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>用这个五步框架复盘你最近的一个需求，实际走了哪几步？跳过了哪几步？</li>
+        <li>「环境搭建是一次性的」——如果团队换了工具或规范，这个前提还成立吗？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s72">
+    <h3><span class="secno">7.2</span>参与度取舍：简单不重要 vs 复杂重要</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1301">21:41</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1393">23:13</a></div>
+
+    <p>「当然这几个步骤并不是死板的流程。」UP 主接着给出全片最重要的一句判据：</p>
+
+    <div class="quote-box">
+      「具体要做到什么程度，取决于你想对最终结果保留多少掌控力。」
+      <cite>—— UP 主原话（21:44 前后）</cite>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">两个可以整章跳过的环节</span>
+      <ul>
+        <li>如果你<strong>并不在意产品具体该怎么设计</strong>，只要功能能用就行 → 产品设计这一步可以完全不用管，交给 AI 就行了。</li>
+        <li>如果你<strong>也不关心代码具体怎么实现</strong> → 技术方案同样也可以不用关心，让 AI 自己决定。</li>
+        <li>UP 主的评价：「这么做其实并没有什么太大问题。」</li>
+      </ul>
+    </div>
+
+    <div class="callout co-warn">
+      <span class="tag">代价是什么</span>
+      <ul>
+        <li>「只是意味着你把<strong>更多的决策权交给了 AI</strong>。」</li>
+        <li>「这样的话你对最终结果的<strong>掌控自然就会少一些</strong>，做出来的东西可能也就<strong>没有那么贴合你的预期</strong>。」</li>
+      </ul>
+    </div>
+
+    <p>所以这本质上是一种取舍，UP 主把它讲得非常对称：</p>
+
+    <table class="gl">
+      <tr><th>参与度</th><th>收益</th><th>代价</th></tr>
+      <tr><td>参与得多</td><td>对最终结果把控更强</td><td>需要投入的时间和精力也更多</td></tr>
+      <tr><td>参与得少</td><td>开发过程更省事更快</td><td>结果与预期出现偏差的可能性也更高</td></tr>
+    </table>
+
+    <p>怎么定这个度？「这个度其实没有一个特别固定的标准。我一般会根据<strong>需求的复杂度和重要性</strong>来判断。」他给了两种情况：</p>
+
+    <table class="gl">
+      <tr><th>情况</th><th>走法</th><th>说明</th></tr>
+      <tr><td>简单且不重要</td><td>跳过 ② ③</td><td>「我一般会忽略产品设计和技术设计这两个环节。搭好环境发出指令之后，我会直接让 AI 实现，实现完后我做验证，验证完了之后这个需求就结束了。整个流程会非常快。」</td></tr>
+      <tr><td>复杂而且重要</td><td>走完五步</td><td>「我则会参与到产品设计和技术设计的环节中来，走完这完整的五个环节，尽可能的保证最终产品的质量。」</td></tr>
+    </table>
+
+    <p>「所以这里并没有一个固定的标准。说到底，还是在<strong>开发效率和结果的可控性之间做取舍</strong>。」</p>
+
+    <div class="summary">
+      <h4>本节小结</h4>
+      <ul>
+        <li>可裁剪的只有 ② 产品设计与 ③ 技术设计；①④⑤ 在两种走法里都存在。</li>
+        <li>判据：<strong>需求的复杂度和重要性</strong>（等价于「你想保留多少掌控力」）。</li>
+        <li>本质是一场权衡：<strong>开发效率 ↔ 结果可控性</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>你手上的需求，「简单不重要 / 复杂重要」这个二分法够用吗？有没有第三类？</li>
+        <li>如果跳过 ③ 技术设计，风险会在什么阶段暴露？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s73">
+    <h3><span class="secno">7.3</span>三条不能省的原则</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1393">23:13</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1472">24:32</a></div>
+
+    <p>「尽管流程可以根据需求灵活调整，但有三个原则我建议大家尽量坚持。」这是全片最该抄下来的三句话。</p>
+
+    <div class="callout co-concept">
+      <span class="tag">原则一 · 必须有版本管理工具</span>
+      <ul>
+        <li>比如你可以用最流行的 <strong>Git</strong> 来管理代码。</li>
+        <li>「AI 写代码不可能每次都完全正确，有时候甚至会在修改的过程中<strong>把原本能够正常运行的功能改坏</strong>。」</li>
+        <li>用了 Git 之后，每完成一个功能都可以保存一个对应的版本，后面一旦出了问题，就能很方便地<strong>回到之前正常的状态</strong>。</li>
+        <li>另外如果条件允许，也建议把代码<strong>同步到 GitHub 之类的远端仓库</strong>——这样即使本地代码不小心丢了，也能够从远端恢复。</li>
+      </ul>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">原则二 · 必须给 AI 自测的能力</span>
+      <ul>
+        <li>「很多人只是让 AI 写代码，但<strong>不给它验证的环境</strong>。」</li>
+        <li>结果是「自己就<strong>沦为了测试员</strong>，来来回回帮 AI 找 bug，极其浪费时间」。</li>
+        <li>正确做法：「我们应该把相关的工具和插件<strong>开放给 AI</strong>，让它自己写完自己测，这样交付出来的代码质量就会高很多。」</li>
+      </ul>
+    </div>
+
+    <div class="callout co-concept">
+      <span class="tag">原则三 · 必须进行人工验证</span>
+      <ul>
+        <li>「AI 自测再充分，也不可能把所有的问题都覆盖到。」</li>
+        <li>容易被漏掉的是：「像<strong>交互体验</strong>，或者是一些<strong>不容易想到的边界情况</strong>。」</li>
+        <li>所以「产品到底好不好用、是不是我们真正想要的，<strong>最终还是要自己试一遍才知道</strong>」。</li>
+      </ul>
+    </div>
+
+    <div class="summary">
+      <h4>本节小结（全片核心）</h4>
+      <p style="margin:6px 0 8px">「真正不能省的就是这三件事情」：</p>
+      <ul>
+        <li><strong>用 Git 搭建好环境</strong></li>
+        <li><strong>让 AI 具备自测能力</strong></li>
+        <li><strong>最后还一定要人工验证</strong></li>
+        <li>至于产品设计和技术设计要做得多细，「大家看情况决定就好」。</li>
+      </ul>
+    </div>
+
+    <div class="callout co-case">
+      <span class="tag">与前文的对应关系</span>
+      <ul>
+        <li>原则一 = CH3 的<strong>规矩一</strong>（每次改动必须 commit）。</li>
+        <li>原则二 = CH3 的<strong>规矩二</strong> + CH6 的<strong>两个插件</strong>。</li>
+        <li>原则三 = CH6.3 那次<strong>「上来就报错」</strong>。</li>
+        <li>三条原则在前面的演示里都已经出现过一次——这一章只是把它们从操作里抽出来命名。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>三条原则里，你哪一条做得最差？具体差在哪个动作上？</li>
+        <li>如果团队协作，这三条原则里哪一条最需要变成<strong>硬性规范</strong>？</li>
+      </ol>
+    </div>
+  </article>
+
+  <article class="sec" id="s74">
+    <h3><span class="secno">7.4</span>收尾：这不是唯一的标准答案</h3>
+    <div class="ts"><a href="https://www.bilibili.com/video/BV154426xEha?t=1472">24:32</a> – <a href="https://www.bilibili.com/video/BV154426xEha?t=1494">24:54</a></div>
+
+    <p>UP 主用最后 22 秒给全片加了一个必要的护栏。</p>
+
+    <div class="quote-box">
+      「这套流程只是我现阶段探索出来的、比较合理的方法，但并不是唯一的标准答案。随着大模型能力的不断进化，AI 编程的模式肯定还会发生变化，我也会持续去尝试其他可行的方案。如果大家有什么更好的想法，欢迎在评论区里面留言，我们一起交流进步。」
+      <cite>—— UP 主原话（24:32 前后）</cite>
+    </div>
+
+    <p>「好了，今天的视频就到这里了。我是马克，我们下期再见。拜拜。」</p>
+
+    <div class="summary">
+      <h4>全片收束</h4>
+      <ul>
+        <li>这套流程是<strong>「现阶段」的方法</strong>，不是标准答案——模型能力一变，模式还会变。</li>
+        <li>对读者的实际用法：把五步流程当<strong>检查清单</strong>，把三条原则当<strong>底线</strong>，把 ② ③ 的参与度当<strong>可调旋钮</strong>。</li>
+      </ul>
+    </div>
+
+    <div class="quiz">
+      <h4>思考题（整理者补充）</h4>
+      <ol>
+        <li>如果明年模型能可靠自证正确，本片三条原则里哪一条会最先被动摇？</li>
+        <li>这套流程里，哪些部分是<strong>与模型能力无关</strong>的、可以长期沿用？</li>
+      </ol>
+    </div>
+  </article>
+</section>
+
+<!-- ================= APPENDIX A ================= -->
+<section class="appendix" id="apx-a">
+  <h2><span class="apno">APPENDIX A</span>术语对照表（勘误表扩展版）</h2>
+  <p>下表为转写底稿中出现的明显误识别与保留措辞。本片<strong>没有第二信源</strong>（B 站未提供 CC 字幕、UP 未附带字幕），因此对存疑专有名词另做了一轮「换 initial_prompt 定点复转」——标注「复转确认」的条目即经此复核。</p>
+
+  <h3>A.1 产品 / 模型名</h3>
+  <table class="gl">
+    <tr><th>ASR 原样</th><th>修正</th><th>说明</th></tr>
+    <tr><td>Cloud Code</td><td>Claude Code</td><td>两轮复转一致为 Cloud Code，但上下文（与 Codex 并列的主流编程 Agent）唯一指向 Claude Code</td></tr>
+    <tr><td>XGPT / ChairGPT</td><td>ChatGPT</td><td>一轮 XGPT、二轮 ChairGPT；结合 B 站 tags 含 <code>ChatGPT</code>、以及「订阅后在 Codex 里调用 GPT 模型」的上下文</td></tr>
+    <tr><td>Deepseek / DeepSeq</td><td>DeepSeek</td><td>复转一致</td></tr>
+    <tr><td>KIMI</td><td>Kimi</td><td>大小写规范化</td></tr>
+    <tr><td>GPD 模型</td><td>GPT 模型</td><td>复转确认（第二轮直接输出 GPT）</td></tr>
+    <tr><td>EPOB 文件</td><td>EPUB 文件</td><td>EPUB 是电子书格式</td></tr>
+    <tr><td>Tori</td><td>Tauri</td><td>与 Electron 对比的桌面框架</td></tr>
+    <tr><td>Vit</td><td>Vite</td><td>与 Electron + React + TS 同列</td></tr>
+    <tr><td>ElectronForge</td><td>Electron Forge</td><td>大小写规范化</td></tr>
+    <tr><td>OpenCode / Pi / Cursor</td><td>原样保留</td><td>均为真实产品；<code>Pi</code> 两轮复转稳定出现，已核实为 earendil-works 的极简终端编程 Agent（MIT 开源，read/bash/edit/write 四工具 + AGENTS.md）</td></tr>
+  </table>
+
+  <h3>A.2 框架 / 工具 / 命令</h3>
+  <table class="gl">
+    <tr><th>ASR 原样</th><th>修正</th><th>说明</th></tr>
+    <tr><td>Gate（约 20 处）</td><td>Git</td><td>全文统一误识别</td></tr>
+    <tr><td>GateHub</td><td>GitHub</td><td>—</td></tr>
+    <tr><td>Gate Status 命令</td><td>git status</td><td>—</td></tr>
+    <tr><td>get commit</td><td>git commit</td><td>—</td></tr>
+    <tr><td>Agence.MD / agents.md / agency.md</td><td>AGENTS.md</td><td>三处三种拼写，已统一</td></tr>
+    <tr><td>NPM start</td><td>npm start</td><td>—</td></tr>
+    <tr><td>UTF8</td><td>UTF-8</td><td>—</td></tr>
+    <tr><td>Computer Use / Chrome 插件</td><td>原样保留</td><td>Codex 的两个插件名</td></tr>
+    <tr><td>docs 文件夹</td><td>原样（小写 docs）</td><td>复转确认为 docs</td></tr>
+  </table>
+
+  <h3>A.3 通用术语</h3>
+  <table class="gl">
+    <tr><th>ASR 原样</th><th>修正</th><th>说明</th></tr>
+    <tr><td>变成 Agent / 变成的模式</td><td>编程 Agent / 编程的模式</td><td>两轮一致</td></tr>
+    <tr><td>技术站 / 技术战 / 技术战盒架构</td><td>技术栈 / 技术栈和架构</td><td>—</td></tr>
+    <tr><td>绘画（5 处）</td><td>会话</td><td>「新开一个会话」「一个会话里连续跑几个小时」</td></tr>
+    <tr><td>上下纹 / 上下纹压缩</td><td>上下文 / 上下文压缩</td><td>—</td></tr>
+    <tr><td>电子输入器 / 电子数学读器 / 电子数据读器</td><td>电子书阅读器</td><td>复转确认</td></tr>
+    <tr><td>电子树格式</td><td>电子书格式</td><td>—</td></tr>
+    <tr><td>提稿</td><td>提纲</td><td>—</td></tr>
+    <tr><td>介入 / 进入（国产模型）</td><td>接入</td><td>—</td></tr>
+    <tr><td>试试户文件</td><td>示例文件</td><td>—</td></tr>
+    <tr><td>前台页面</td><td>前端页面</td><td>—</td></tr>
+    <tr><td>「另外一个可能的学校」</td><td>「另外一个可能的选项」</td><td>—</td></tr>
+    <tr><td>被 Gate 脱管了</td><td>被 Git 接管了</td><td>—</td></tr>
+    <tr><td>回推</td><td>回退</td><td>—</td></tr>
+    <tr><td>复制东流</td><td>付诸东流</td><td>—</td></tr>
+    <tr><td>一对 bug（2 处）</td><td>一堆 bug</td><td>—</td></tr>
+    <tr><td>请稍后重视</td><td>请稍后重试</td><td>产品报错文案</td></tr>
+    <tr><td>来来会会</td><td>来来回回</td><td>—</td></tr>
+    <tr><td>覆盖倒</td><td>覆盖到</td><td>复转确认</td></tr>
+    <tr><td>断板</td><td>短板</td><td>复转确认</td></tr>
+    <tr><td>交付体验</td><td>交互体验</td><td>复转确认</td></tr>
+    <tr><td>使用提案</td><td>使用体会</td><td>音近推定</td></tr>
+    <tr><td>网答 / 网达</td><td>访达（macOS Finder）</td><td>两轮分别听作网答/网达；上下文为「回到它里面看一下刚创建的文件」→ 音近推定，<strong>存疑</strong></td></tr>
+  </table>
+
+  <h3>A.4 保留原文（未「改正」）</h3>
+  <ul>
+    <li><strong>「马克阅读」</strong>——UP 主给自己演示产品起的名字，原话保留。</li>
+    <li><strong>「模型 demo」</strong>（约 13:19）——「会涉及到文档处理、搜索、检索策略、模型 demo 等等很多的后端逻辑」。两轮复转一致为 demo，语义上指演示用的模型部分；列在后端逻辑里略显突兀，按原文保留，<strong>存疑</strong>。</li>
+    <li><strong>「Minimal Viable Product」</strong>——UP 主口播如此，通行拼写为 <code>Minimum Viable Product</code>。属口播习惯，保留原话并加注。</li>
+  </ul>
+</section>
+
+<!-- ================= APPENDIX B ================= -->
+<section class="appendix" id="apx-b">
+  <h2><span class="apno">APPENDIX B</span>时间戳索引</h2>
+  <p>按内容出现顺序排列，点击跳回原视频对应秒数。带 <code>◆</code> 的是本片的关键结论句。</p>
+  <div class="tsindex">
+    <div><span class="t">00:00</span><a href="https://www.bilibili.com/video/BV154426xEha?t=0">◆ 本片要解决的问题：做出来的是不是你要的</a></div>
+    <div><span class="t">00:45</span><a href="https://www.bilibili.com/video/BV154426xEha?t=45">示范载体：从零做一个电子书阅读器</a></div>
+    <div><span class="t">00:54</span><a href="https://www.bilibili.com/video/BV154426xEha?t=54">◆ 「每一步解决了什么问题」</a></div>
+    <div><span class="t">01:08</span><a href="https://www.bilibili.com/video/BV154426xEha?t=68">挑选编程 Agent：主流选项与推荐 Codex</a></div>
+    <div><span class="t">01:22</span><a href="https://www.bilibili.com/video/BV154426xEha?t=82">建议直接选择 Codex 及理由</a></div>
+    <div><span class="t">01:29</span><a href="https://www.bilibili.com/video/BV154426xEha?t=89">订阅 ChatGPT / 接入国产模型</a></div>
+    <div><span class="t">02:08</span><a href="https://www.bilibili.com/video/BV154426xEha?t=128">◆ 避免使用 Codex 独有功能，操作逻辑通用</a></div>
+    <div><span class="t">02:24</span><a href="https://www.bilibili.com/video/BV154426xEha?t=144">环境搭建：建专门的项目文件夹</a></div>
+    <div><span class="t">02:49</span><a href="https://www.bilibili.com/video/BV154426xEha?t=169">在 Codex 里创建本地项目</a></div>
+    <div><span class="t">03:14</span><a href="https://www.bilibili.com/video/BV154426xEha?t=194">◆ 指令：帮我把当前目录初始化为 Git 仓库</a></div>
+    <div><span class="t">03:28</span><a href="https://www.bilibili.com/video/BV154426xEha?t=208">Git 是什么：版本管理工具</a></div>
+    <div><span class="t">03:45</span><a href="https://www.bilibili.com/video/BV154426xEha?t=225">建议所有项目都用 Git，条件允许推到 GitHub</a></div>
+    <div><span class="t">04:15</span><a href="https://www.bilibili.com/video/BV154426xEha?t=255">验证：git status 正常返回 = 已被 Git 接管</a></div>
+    <div><span class="t">04:28</span><a href="https://www.bilibili.com/video/BV154426xEha?t=268">◆ 指令：创建 AGENTS.md 并提交 commit</a></div>
+    <div><span class="t">04:50</span><a href="https://www.bilibili.com/video/BV154426xEha?t=290">AGENTS.md 是给 AI 写的项目说明书</a></div>
+    <div><span class="t">05:07</span><a href="https://www.bilibili.com/video/BV154426xEha?t=307">◆ 规矩一：每次改动必须创建 git commit</a></div>
+    <div><span class="t">05:28</span><a href="https://www.bilibili.com/video/BV154426xEha?t=328">◆ 规矩二：每次改动必须更新测试并跑通</a></div>
+    <div><span class="t">06:17</span><a href="https://www.bilibili.com/video/BV154426xEha?t=377">环境搭建总结：Git + AGENTS.md 两件事</a></div>
+    <div><span class="t">06:26</span><a href="https://www.bilibili.com/video/BV154426xEha?t=386">产品设计开始：与 AI 讨论产品</a></div>
+    <div><span class="t">06:44</span><a href="https://www.bilibili.com/video/BV154426xEha?t=404">◆ 指令：我想做电子书阅读器，从 MVP 开始</a></div>
+    <div><span class="t">06:56</span><a href="https://www.bilibili.com/video/BV154426xEha?t=416">MVP = 最小可用产品，及其好处</a></div>
+    <div><span class="t">08:06</span><a href="https://www.bilibili.com/video/BV154426xEha?t=486">◆ 砍需求第一刀：EPUB → TXT</a></div>
+    <div><span class="t">08:14</span><a href="https://www.bilibili.com/video/BV154426xEha?t=494">◆ 操作习惯：不着急提交，意见先追加后统一发</a></div>
+    <div><span class="t">08:23</span><a href="https://www.bilibili.com/video/BV154426xEha?t=503">砍需求第二刀：目录与章节</a></div>
+    <div><span class="t">09:01</span><a href="https://www.bilibili.com/video/BV154426xEha?t=541">砍需求第三刀：主题只留明亮</a></div>
+    <div><span class="t">09:14</span><a href="https://www.bilibili.com/video/BV154426xEha?t=554">砍需求第四刀：书签不做</a></div>
+    <div><span class="t">09:31</span><a href="https://www.bilibili.com/video/BV154426xEha?t=571">◆ 收口并反问：你觉得这些想法有没有问题</a></div>
+    <div><span class="t">09:52</span><a href="https://www.bilibili.com/video/BV154426xEha?t=592">AI 补充：UTF-8 / 纵向滚动 / 大文件提示</a></div>
+    <div><span class="t">10:16</span><a href="https://www.bilibili.com/video/BV154426xEha?t=616">◆ 为什么要有产品设计文档</a></div>
+    <div><span class="t">10:38</span><a href="https://www.bilibili.com/video/BV154426xEha?t=638">◆ 关键措辞：不用太详细</a></div>
+    <div><span class="t">11:26</span><a href="https://www.bilibili.com/video/BV154426xEha?t=686">demo 环节：demo 是什么</a></div>
+    <div><span class="t">11:58</span><a href="https://www.bilibili.com/video/BV154426xEha?t=718">个人知识库 demo 形态演示</a></div>
+    <div><span class="t">12:15</span><a href="https://www.bilibili.com/video/BV154426xEha?t=735">◆ 只有前端页面是真的，回答与文件都是模拟的</a></div>
+    <div><span class="t">12:40</span><a href="https://www.bilibili.com/video/BV154426xEha?t=760">做 demo 的好处一：提前验证产品设计</a></div>
+    <div><span class="t">12:58</span><a href="https://www.bilibili.com/video/BV154426xEha?t=778">做 demo 的好处二：让实现更精确</a></div>
+    <div><span class="t">13:27</span><a href="https://www.bilibili.com/video/BV154426xEha?t=807">◆ 判断标准：后端实现成本</a></div>
+    <div><span class="t">13:48</span><a href="https://www.bilibili.com/video/BV154426xEha?t=828">本期后端成本低 → 不做 demo</a></div>
+    <div><span class="t">14:12</span><a href="https://www.bilibili.com/video/BV154426xEha?t=852">demo 指令模板</a></div>
+    <div><span class="t">14:43</span><a href="https://www.bilibili.com/video/BV154426xEha?t=883">技术方案设计开始</a></div>
+    <div><span class="t">14:57</span><a href="https://www.bilibili.com/video/BV154426xEha?t=897">上下文越聊越坏的顾虑与回答</a></div>
+    <div><span class="t">15:24</span><a href="https://www.bilibili.com/video/BV154426xEha?t=924">◆ 为新会话的理由：让讨论更聚焦</a></div>
+    <div><span class="t">15:39</span><a href="https://www.bilibili.com/video/BV154426xEha?t=939">先讨论方向：Electron 合不合适</a></div>
+    <div><span class="t">15:51</span><a href="https://www.bilibili.com/video/BV154426xEha?t=951">◆ 技术栈讨论的指令原文</a></div>
+    <div><span class="t">16:12</span><a href="https://www.bilibili.com/video/BV154426xEha?t=972">AI 回复：Electron 优先 + 缺点 + Tauri</a></div>
+    <div><span class="t">16:29</span><a href="https://www.bilibili.com/video/BV154426xEha?t=989">◆ 收口架构：Electron + React + TS + Vite</a></div>
+    <div><span class="t">16:49</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1009">◆ 指令：写技术方案放 docs 文件夹</a></div>
+    <div><span class="t">17:07</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1027">◆ 「我也不是特别懂这块，大体方向没问题就行」</a></div>
+    <div><span class="t">17:22</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1042">◆ 动手前：让 AI 拥有自行验证的能力</a></div>
+    <div><span class="t">17:30</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1050">两个插件：Computer Use 与 Chrome</a></div>
+    <div><span class="t">17:51</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1071">◆ 「没验证环境，人和 AI 都会有一堆 bug」</a></div>
+    <div><span class="t">18:12</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1092">新开会话开始实现</a></div>
+    <div><span class="t">18:20</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1100">◆ 实现指令：读两份文档并实现</a></div>
+    <div><span class="t">18:36</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1116">AI 完成实现并自测（符合 AGENTS.md 规矩二）</a></div>
+    <div><span class="t">19:02</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1142">◆ 自测的边界：不能保证没有 bug</a></div>
+    <div><span class="t">19:17</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1157">实际跑一遍：npm start</a></div>
+    <div><span class="t">19:29</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1169">◆ 第一个报错：操作失败，请稍后重试</a></div>
+    <div><span class="t">19:30</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1170">◆ 「AI 不是百分之百靠谱的」</a></div>
+    <div><span class="t">19:52</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1192">修好并验证；导入 TXT 测试</a></div>
+    <div><span class="t">20:12</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1212">MVP 彻底做完</a></div>
+    <div><span class="t">20:23</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1223">◆ 五步流程回顾</a></div>
+    <div><span class="t">21:12</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1272">◆ 第一步一次性，后四步是每个新功能的流程</a></div>
+    <div><span class="t">21:20</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1280">举例：加「全文搜索」功能</a></div>
+    <div><span class="t">21:41</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1301">◆ 参与度取决于你想保留多少掌控力</a></div>
+    <div><span class="t">22:14</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1334">◆ 取舍：参与越多越可控，投入也越多</a></div>
+    <div><span class="t">22:32</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1352">判断依据：需求的复杂度和重要性</a></div>
+    <div><span class="t">22:37</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1357">简单不重要：跳过产品与技术设计</a></div>
+    <div><span class="t">22:54</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1374">复杂重要：走完五个环节</a></div>
+    <div><span class="t">23:13</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1393">◆ 三个原则之一：必须有版本管理工具</a></div>
+    <div><span class="t">23:11</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1391">（原话开场）尽管流程可调，但这三个原则要坚持</a></div>
+    <div><span class="t">23:46</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1426">◆ 三个原则之二：必须给 AI 自测能力</a></div>
+    <div><span class="t">24:02</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1442">◆ 三个原则之三：必须人工验证</a></div>
+    <div><span class="t">24:19</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1459">◆ 总结：Git + 自测能力 + 人工验证</a></div>
+    <div><span class="t">24:32</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1472">◆ 收尾：不是唯一的标准答案</a></div>
+    <div><span class="t">24:51</span><a href="https://www.bilibili.com/video/BV154426xEha?t=1491">「我是马克，我们下期再见」</a></div>
+  </div>
+</section>
+
+<!-- ================= APPENDIX C ================= -->
+<section class="appendix" id="apx-c">
+  <h2><span class="apno">APPENDIX C</span>UP 主论断速查</h2>
+  <p>把 UP 主在片中给出的判断按用途归拢，便于复查与引用。<strong>所有判断均属 UP 主个人经验</strong>，不是普适结论。</p>
+
+  <h3>C.1 方法论类</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>论断</th><th>语境</th></tr>
+    <tr><td>00:39</td><td>真问题不是「能不能做出来」，而是「做出来的是不是你要的」</td><td>开场立论</td></tr>
+    <tr><td>07:10</td><td>先做 MVP：低成本快速验证方向，避免功能铺太大导致返工</td><td>产品设计起点</td></tr>
+    <tr><td>08:14</td><td>看完全部回答再统一回复，不要逐条提交</td><td>批注式对话习惯</td></tr>
+    <tr><td>08:48</td><td>砍需求要给具体理由，砍完再反问 AI 有无异议</td><td>需求裁决</td></tr>
+    <tr><td>10:47</td><td>文档要「不用太详细」，只要方向和主要功能</td><td>快速验证产品设计</td></tr>
+    <tr><td>13:29</td><td>要不要做 demo，只看后端实现成本</td><td>demo 判断标准</td></tr>
+    <tr><td>15:25</td><td>新开会话是为了让讨论更聚焦，不是为了防上下文退化</td><td>会话管理</td></tr>
+    <tr><td>21:46</td><td>流程做到什么程度，取决于你想保留多少掌控力</td><td>参与度取舍总纲</td></tr>
+    <tr><td>23:06</td><td>本质是开发效率与结果可控性之间的取舍</td><td>取舍收束</td></tr>
+  </table>
+
+  <h3>C.2 流程与环节定位</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>论断</th><th>语境</th></tr>
+    <tr><td>06:20</td><td>环境搭建就两件事：Git 和 AGENTS.md（唯一一次性投入）</td><td>CH3 收束</td></tr>
+    <tr><td>05:07</td><td>规矩一：每次改动必建 commit —— 给「改坏」买保险</td><td>AGENTS.md 内容</td></tr>
+    <tr><td>05:30</td><td>规矩二：每次改动必更新测试并跑通 —— 把自测变成 AI 的义务</td><td>AGENTS.md 内容</td></tr>
+    <tr><td>17:24</td><td>动手前先给 AI 自测能力（Computer Use + Chrome）</td><td>CH6 前置</td></tr>
+    <tr><td>19:04</td><td>自测只提高可靠性，不能保证无 bug</td><td>自测的边界</td></tr>
+    <tr><td>21:12</td><td>第一步一次性，后四步是每个新功能的标准流程</td><td>流程结构</td></tr>
+    <tr><td>22:43</td><td>简单不重要的需求可跳过产品设计与技术设计</td><td>简化路径</td></tr>
+    <tr><td>22:57</td><td>复杂重要的需求走完五个环节</td><td>完整路径</td></tr>
+    <tr><td>24:19</td><td>真正不能省的只有三件事：Git 环境、AI 自测能力、人工验证</td><td>全片总结</td></tr>
+  </table>
+
+  <h3>C.3 工具与操作</h3>
+  <table class="gl">
+    <tr><th>时间</th><th>论断</th><th>语境</th></tr>
+    <tr><td>01:14</td><td>主流选项是 Codex 与 Claude Code，另外还有 OpenCode、Pi、Cursor</td><td>工具选择</td></tr>
+    <tr><td>01:22</td><td>没有特殊要求就直接选 Codex（功能完善、无短板）</td><td>推荐</td></tr>
+    <tr><td>01:38</td><td>Codex 是通用编程 Agent，不跟 GPT 强绑定</td><td>模型接入</td></tr>
+    <tr><td>02:10</td><td>本片避免使用 Codex 独有功能，操作逻辑通用</td><td>可迁移性声明</td></tr>
+    <tr><td>03:41</td><td>所有代码项目都建议用 Git 管理</td><td>版本控制建议</td></tr>
+    <tr><td>03:45</td><td>条件允许就把代码推到 GitHub 之类的远端仓库</td><td>备份建议</td></tr>
+    <tr><td>16:29</td><td>采用 Electron + React + TypeScript + Vite + Electron Forge</td><td>技术栈结论</td></tr>
+    <tr><td>17:30</td><td>Computer Use 用来操作电脑，Chrome 用来查看页面</td><td>插件用途</td></tr>
+    <tr><td>23:21</td><td>Git 能应对「AI 在修改中把正常功能改坏」</td><td>原则一依据</td></tr>
+    <tr><td>23:48</td><td>不给 AI 验证环境 → 人沦为测试员，来来回回找 bug</td><td>原则二依据</td></tr>
+  </table>
+</section>
+
+</div>
+
+<footer class="foot">
+  <div class="wrap">
+    <h4>来源与工具</h4>
+    <ul>
+      <li>视频：<a href="https://www.bilibili.com/video/BV154426xEha">BV154426xEha</a>　·　UP 主：马克的技术工作坊　·　时长 24:54　·　发布 2026-08-29</li>
+      <li>转写底稿：faster-whisper 1.2.1 / CTranslate2 4.8.2 · large-v3-turbo · CUDA fp16 · 718 段 · 覆盖率 99.95%</li>
+      <li>第二信源：<strong>无</strong>（B 站未提供 CC 字幕，UP 未附带字幕文件）→ 对存疑专有名词另做 4 次换提示词定点复转</li>
+      <li>音频：yt-dlp 取 format 30280 最高音轨（17,306,533 B），ffmpeg 转 192 kbps mp3（35,864,758 B）</li>
+      <li>时长校验：mp3 1494.296961 s vs 元数据 1494.304 s → 偏差 0.000%（阈值 5%）</li>
+      <li>章节结构：B 站官方 chapters 字段给出 7 章，本讲义与可视化笔记均直接采用，未自拟</li>
+    </ul>
+    <h4>讲义性质</h4>
+    <ul>
+      <li>内容为对公开视频的听写整理与结构化，<strong>术语解释与「思考题」为整理者补充</strong>，非逐字稿出版物</li>
+      <li>观点只做书面润色，<strong>不增删 UP 主的任何判断</strong>；存疑处一律加注，不下断言</li>
+      <li>「马克阅读」（UP 主的演示产品名）、「模型 demo」等为 UP 主原话，按整理原则<strong>保留不「改正」</strong></li>
+      <li>目录名（用户指定）为 <code>马克的技术工坊</code>；B 站账号全名为 <code>马克的技术工作坊</code>，视频结尾自称「我是马克」</li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
