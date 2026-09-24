@@ -27,7 +27,9 @@ BiliSumerize/
 ├── jyy-generatice-se/ # jyy 系列：urllist.txt（集编号 = 行号）+ <编号>/ 每集一目录
 │   └── <编号>/        #   bili_summary_*.html / lecture_notes_*.html / screenshots/ / work/
 ├── hw-dong/           # hw-dong 系列：url.txt + transcript_*.html + work/
-└── 道草日记/           # 道草日记系列：<视频标题>/ 目录（url.txt + transcript_*.html + work/）
+├── 道草日记/           # 道草日记系列：<视频标题>/ 目录（url.txt + transcript_*.html + work/）
+├── 圣徒城的小诺/        # url.txt + bili_summary_*.html + lecture_notes_*.html + screenshots/ + work/
+└── 马克的技术工坊/      # 同上（url.txt + 总结 + 讲义）；首集 BV154426xEha 有官方 7 章
 ```
 
 - **编号/归档位置以索引文件为准**（jyy 集 = `urllist.txt` 行号），别用标题里的 `0X-Raw`
@@ -68,6 +70,26 @@ BiliSumerize/
 4. 交付前跑 `check_render.py`（无 SVG 时它只查横向溢出/空白块，仍然值得跑）。
 
 命名建议 `transcript_<BV号>.html`，与可视化笔记 `bili_summary_<BV号>.html` 区分。
+
+## 变体：「总结 + 讲义」双交付（2026-09-24 起，圣徒城的小诺 / 马克的技术工坊）
+
+用户说「**写一份总结和讲义**」时，产出两份、目录在系列根下：
+
+| 产物 | 文件 | 形态 |
+|---|---|---|
+| 可视化总结 | `bili_summary_<BV号>.html` | **深色**单页，内联 CSS + 动态 SVG + 封面 base64，走完整流程（含截图/切片） |
+| 文字讲义 | `lecture_notes_<BV号>.html` | **浅色**单页，衬线正文，无 SVG；走 `ln_shell.html` + `ln_body.html` 拼装 |
+
+讲义结构（与总结的章节 1:1 对应）：hero（含 meta-row）→ nav.toc → usage 使用说明 →
+每章 `section.chap` + 逐节 `article.sec` + 章末 `summary` 小结 + `quiz` 思考题 →
+附录 A 术语对照表（＝总结页脚勘误表的扩展版）/ B 时间戳索引 / C 论断速查 → footer。
+
+**称谓硬约定**：大学课程系列（jyy）用「**讲师**」；**其余 UP 主 / 播客类一律「UP 主」**，
+正文、讲义、图注全程不得出现「讲师」。交付前 `grep -c 讲师` 必须为 0。
+
+`lecture_notes_*` 的章节色同样受 6 色上限约束，超过 6 章按上面「末章复用第 1 章色」处理；
+讲义多出来的第 4~7 章需要在 CSS 里补 `--c4..--c7` 与 `--c4bg..--c7bg`
+（`.ch-head.c4{border-color:var(--c4)}`、`em.term` 的 border、`.summary` 的 border 三处都要带上）。
 
 ## 步骤
 
@@ -125,6 +147,38 @@ WHISPER_DEVICE=cuda WHISPER_CTYPE=float16 \
 - 98 分钟音频在 4060 上约 3.5 分钟（27.8× 实时）。
 - **完整性校验**：`last_segment_end / audio_duration` 应 ≥99.9%，否则说明尾部被截。
 
+### 3.5 无第二信源时的「定点复转」
+
+**先判断有没有第二信源**：① 元数据 `subtitles` / `automatic_captions` 是否非空；
+② 系列目录下有没有 UP 随附件给的字幕（如 `vCaptions-SRT/*.srt`）。
+有 → 逐段交叉比对，两源分歧处就是勘误线索（模型名密集的视频收益最大）。
+
+**两样都没有**（本机常见）→ 写一个窄窗复转脚本，对存疑专名做 2 轮**换提示词**重转：
+
+```python
+# work/recheck.py 要点
+segs, info = model.transcribe(
+    "work/audio.mp3", language="zh",
+    initial_prompt=os.environ["WHISPER_PROMPT"],   # 提示词从环境变量传，便于换词表复跑
+    condition_on_previous_text=False, vad_filter=True,
+    word_timestamps=True,
+    clip_timestamps=[start, start + dur],           # 只转这一小段
+)
+# 用法: WHISPER_PROMPT="...候选词表..." python recheck.py <start> <dur> <out.txt>
+```
+
+判定规则：
+- **两轮一致** → 采信（如 `ChairGPT` 两轮不同拼法，但结合 tags 与上下文定为 `ChatGPT`）
+- **两轮不同** → 结合上下文音近推定，正文加注「存疑」
+- **无法判定** → 保留原文并加注，不要硬改
+
+实测有效案例：`覆盖倒→覆盖到`、`断板→短板`、`交付体验→交互体验`（均改）；
+`网答/网达` 两轮各拼一次 → 音近推定为 **访达（macOS Finder）**，标存疑。
+提示词里塞「候选产品名清单」对 Agent 名单类段落特别有效（`Pi` 就是这样被确认下来的）。
+
+> 注意 `clip_timestamps` 有时会从窗口内**第一段有声语音**才开始输出，
+> 想要精确覆盖就开窄一点、必要时重跑一次。
+
 ### 4. 写页面
 
 - 结构：hero（标题/UP/时长/标签/封面）+ 时间线总览 + 素材链路与校验 + 逐章小节 + 页脚（ASR 修正表）。
@@ -141,6 +195,17 @@ HTML 解析器在 `<svg>` 内遇到 `b|code|span|div|br|p|em|strong|font|ul|ol|l
 会**强制弹出 SVG 命名空间**：该标签之后的整个 SVG 被丢弃，文字变成页面正文泄漏到图外。
 `<tspan>` / `<title>` / `<desc>` / `<a>` / `<image>` / `<style>` 是安全的。
 → 提交前必须跑 `scripts/svg_guard.py`（静态拦标签 + 源码/DOM `<text>` 数量比对）。
+
+**坑 3.5：SVG 里相邻两行的行距要 ≥20px（字号 11.5）。**
+`y=185 / y=196` 这种 11px 行距塞进 60px 高的框，人眼看着像两行、DOM 一量是重叠，
+`check_render.py` 必报 `SVG 文字重叠 area=400+`。
+正确做法：两行给 20~21px 行距（`y=186 / y=206`），并**把框高一起加到 72**，
+否则文字会贴到框底。修完务必重跑 check_render —— 这类重叠肉眼在缩略图上看不出来。
+
+**坑 3.6：正文（`<p>` / `.note` / 抽象段）里禁止写 `**加粗**`。**
+模板只把 `<strong>` 渲染成粗体，`**` 会**原样显示在页面上**（读起来像 Markdown 漏了渲染）。
+写正文一律用 `<strong>`；交付前可 `grep -c '\*\*'` 自查。
+（`grep -o '\*\*[^*]\{1,60\}\*\*'` 列出来最快。）
 
 ### 4.5 换配色（用户觉得丑时的正确做法）
 
@@ -180,6 +245,14 @@ HTML 解析器在 `<svg>` 内遇到 `b|code|span|div|br|p|em|strong|font|ul|ol|l
   （B 方案 #c8d1db → #a9b5c2），否则图里的连接箭头看不清。
 - 选定后写进构建流程：`build.py <work_dir> <out_html> --theme C`，
   源文件保持原色不变，配色只是构建参数，随时可换。
+- **章节数 > 6 时不要自造第 7 个 hex**：设计系统只有 6 个 accent（A1–A6），
+  多出来的章让**末章复用第 1 章的颜色**，并在图注里写明理由
+  （如「CH1 与 CH7 同为青色：首尾两章都是全局视角」）。
+  自造 hex 的后果是将来跑 `theme.py` 会漏映射、页面残留旧色。
+  实测：7 章（视频带官方 7 个 chapters）时采用此方案，构建后无残留色。
+- **TOC 卡片数不是 3 的倍数**时会剩一个孤立 card（如 7 张 → 3+3+1）。
+  给最后一张加 `.toc-card.wide{grid-column:1/-1}` 跨满整行，并把它的条目改成
+  2 列排布（`.toc-card.wide ol{grid-template-columns:1fr 1fr}`），视觉上收得干净。
 
 ### 5. 截图与切片**坑 4：超长页面的 `full_page=True` 一次性截图会产出错位图。**
 实测 24254px 高的页面：第 3 章章节头被下移 983px 且章节色丢失（章节头边框从琥珀变回青），
